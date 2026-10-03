@@ -2,8 +2,8 @@ import json
 
 import pytest
 
-from prior_art.config import path_of
-from prior_art.literature import Snapshot, SnapshotError
+from noesis_lab.config import path_of
+from noesis_lab.literature import Snapshot, SnapshotError
 
 
 def test_all_spans_verbatim():

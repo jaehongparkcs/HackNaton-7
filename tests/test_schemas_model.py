@@ -4,8 +4,8 @@ import pytest
 import torch
 from pydantic import ValidationError
 
-from prior_art.config import baseline_config, get_profile, load_config, path_of
-from prior_art.schemas import (
+from noesis_lab.config import baseline_config, get_profile, load_config, path_of
+from noesis_lab.schemas import (
     CriticPostOutput,
     CriticPreOutput,
     ExperimentConfig,
@@ -13,8 +13,8 @@ from prior_art.schemas import (
     ScientistOutput,
     apply_delta,
 )
-from prior_art.testbed.harness import load_dataset, train_one
-from prior_art.testbed.model import GPT
+from noesis_lab.testbed.harness import load_dataset, train_one
+from noesis_lab.testbed.model import GPT
 
 
 def test_delta_validation():

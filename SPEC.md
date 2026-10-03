@@ -1,4 +1,4 @@
-# SPEC — "Prior Art": an AI research lab that knows what's already been done
+# SPEC — "Noesis Lab": an AI research lab that knows what's already been done
 
 > **Today's hackathon scope is `BUILD_PLAN.md`; it wins any conflict.** This file is the full design, for the README's "where this goes next" and post-hackathon work.
 

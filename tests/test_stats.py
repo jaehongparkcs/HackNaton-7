@@ -1,7 +1,7 @@
 import pytest
 
-from prior_art import stats
-from prior_art.schemas import Claim, ExperimentConfig
+from noesis_lab import stats
+from noesis_lab.schemas import Claim, ExperimentConfig
 
 from .conftest import make_run
 

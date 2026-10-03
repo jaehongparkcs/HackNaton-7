@@ -1,4 +1,4 @@
-"""Command line: `python -m prior_art.cli <command>`; see the Makefile for the usual entry points."""
+"""Command line: `python -m noesis_lab.cli <command>`; see the Makefile for the usual entry points."""
 from __future__ import annotations
 
 import argparse
@@ -71,7 +71,7 @@ def cmd_timing(a) -> int:
 
 
 def main(argv=None) -> int:
-    ap = argparse.ArgumentParser(prog="prior_art")
+    ap = argparse.ArgumentParser(prog="noesis_lab")
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("session", help="run the golden path and write results/<session>")
     s.add_argument("--session", default="golden")

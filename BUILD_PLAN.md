@@ -1,4 +1,4 @@
-# PRIOR ART — 6-Hour Hackathon Build Plan
+# Noesis Lab — 6-Hour Hackathon Build Plan
 **Goal:** ship one complete, auditable agentic-science loop: literature → hypothesis → real experiment → measured decision.
 
 **Governing principle:** LLMs propose and interpret. Deterministic code measures, decides and records.

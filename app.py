@@ -13,12 +13,12 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
-from prior_art.store import Store
+from noesis_lab.store import Store
 
 ROOT = Path(__file__).resolve().parent
 BLUE, ORANGE, GRAY = "#2a78d6", "#eb6834", "#8a8a85"      # baseline / candidate / neutral
 
-st.set_page_config(page_title="Prior Art", page_icon="🔬", layout="wide")
+st.set_page_config(page_title="Noesis Lab", page_icon="🔬", layout="wide")
 
 
 # ----------------------------------------------------------------------------- source
@@ -31,7 +31,7 @@ def find_notebooks() -> dict[str, Path]:
 
 
 books = find_notebooks()
-env_nb = os.environ.get("PRIOR_ART_NOTEBOOK")
+env_nb = os.environ.get("NOESIS_NOTEBOOK")
 if env_nb:
     books = {env_nb: Path(env_nb), **books}
 if not books:
@@ -67,7 +67,7 @@ STATUS_LABEL = {
 }
 
 # ----------------------------------------------------------------------------- header
-st.title("Prior Art")
+st.title("Noesis Lab")
 st.caption("LLMs propose and interpret. Deterministic code measures, decides and records. "
            "An LLM mistake can waste compute or skip an idea; it cannot produce a measured result or a decision.")
 if meta.get("llm_mode") == "mock" or profile.get("name") == "smoke":

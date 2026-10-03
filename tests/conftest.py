@@ -2,8 +2,8 @@ import shutil
 
 import pytest
 
-from prior_art.config import ROOT
-from prior_art.schemas import CurvePoint, ExperimentConfig, RunResult
+from noesis_lab.config import ROOT
+from noesis_lab.schemas import CurvePoint, ExperimentConfig, RunResult
 
 
 def make_run(val: float, seed: int, tokens: int = 1000, cfg: ExperimentConfig | None = None,

@@ -2,11 +2,11 @@
 import pytest
 from pydantic import BaseModel
 
-from prior_art.agents import analysis_facts, number_violations, template_reading
-from prior_art.config import load_config
-from prior_art.llm import LLM, LLMError, ReplayMiss, request_key, strict_schema
-from prior_art.schemas import LiteratureOutput
-from prior_art.store import Store
+from noesis_lab.agents import analysis_facts, number_violations, template_reading
+from noesis_lab.config import load_config
+from noesis_lab.llm import LLM, LLMError, ReplayMiss, request_key, strict_schema
+from noesis_lab.schemas import LiteratureOutput
+from noesis_lab.store import Store
 
 from .test_stats import BASE, run
 

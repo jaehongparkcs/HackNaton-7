@@ -3,12 +3,12 @@ import json
 
 import pytest
 
-from prior_art.bundle import verify_manifest
-from prior_art.cli import main
-from prior_art.config import ROOT
-from prior_art.orchestrator import SessionOpts, run_session
-from prior_art.rederive import rederive
-from prior_art.store import Store
+from noesis_lab.bundle import verify_manifest
+from noesis_lab.cli import main
+from noesis_lab.config import ROOT
+from noesis_lab.orchestrator import SessionOpts, run_session
+from noesis_lab.rederive import rederive
+from noesis_lab.store import Store
 
 
 @pytest.fixture

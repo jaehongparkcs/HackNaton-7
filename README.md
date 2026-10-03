@@ -1,4 +1,4 @@
-# PRIOR ART
+# Noesis Lab
 
 > *Autoresearch with a literature memory and honest statistics: it refuses to spend compute on known ideas, tests what the literature hasn't, and never lets an LLM state a number or make a decision.*
 
@@ -44,7 +44,7 @@ make app
 
 Budgets (runs, wall-clock minutes, LLM spend) are in [config.yaml](config.yaml); the session stops cleanly and records `budget_exhausted` if one is hit.
 
-To run without `make`: `uv run python -m prior_art session --session golden --profile full --llm live` (also `replay`, `rederive`, `verify`, `timing`; `--help` lists them).
+To run without `make`: `uv run python -m noesis_lab session --session golden --profile full --llm live` (also `replay`, `rederive`, `verify`, `timing`; `--help` lists them).
 
 ## Verify our claims
 
@@ -97,10 +97,10 @@ fixtures ──► Literature Agent (Claude) ──► prior-art verdict + exact
 
 | Component | Type | Where |
 |---|---|---|
-| Literature, Scientist, Critic | LLM (one pinned model, three prompts, strict JSON) | [prior_art/literature.py](prior_art/literature.py), [prior_art/agents.py](prior_art/agents.py), [prompts/](prompts/) |
-| Orchestrator, Runner, Statistician, Decider | plain Python | [prior_art/orchestrator.py](prior_art/orchestrator.py), [prior_art/runner.py](prior_art/runner.py), [prior_art/stats.py](prior_art/stats.py) |
-| Testbed | tiny char-level GPT, TinyShakespeare (vendored + checksum) | [prior_art/testbed/](prior_art/testbed/) |
-| Evidence store | SQLite (WAL) | [prior_art/store.py](prior_art/store.py) |
+| Literature, Scientist, Critic | LLM (one pinned model, three prompts, strict JSON) | [noesis_lab/literature.py](noesis_lab/literature.py), [noesis_lab/agents.py](noesis_lab/agents.py), [prompts/](prompts/) |
+| Orchestrator, Runner, Statistician, Decider | plain Python | [noesis_lab/orchestrator.py](noesis_lab/orchestrator.py), [noesis_lab/runner.py](noesis_lab/runner.py), [noesis_lab/stats.py](noesis_lab/stats.py) |
+| Testbed | tiny char-level GPT, TinyShakespeare (vendored + checksum) | [noesis_lab/testbed/](noesis_lab/testbed/) |
+| Evidence store | SQLite (WAL) | [noesis_lab/store.py](noesis_lab/store.py) |
 | Dashboard | Streamlit | [app.py](app.py) |
 
 ### How the invariant is enforced (not just promised)
@@ -174,7 +174,7 @@ Citations and URLs are in [BUILD_PLAN.md](BUILD_PLAN.md) §0 and were taken from
 
 ```
 config.yaml  pyproject.toml  uv.lock  Makefile  app.py
-prior_art/   schemas.py llm.py literature.py agents.py orchestrator.py runner.py stats.py
+noesis_lab/   schemas.py llm.py literature.py agents.py orchestrator.py runner.py stats.py
              store.py bundle.py rederive.py cli.py mock_llm.py  testbed/{harness,model}.py
 prompts/     literature.md scientist.md critic_pre.md critic_post.md
 data/        tinyshakespeare.txt papers.json claims.json fixtures.json
