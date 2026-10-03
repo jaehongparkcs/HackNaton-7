@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/9J1Cb67vvlBdncDriZGcJog9qJA</id>
+  <title>arXiv Query: search_query=all:"squared ReLU" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:46:06Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22squared+ReLU%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2109.08668v2</id>
+    <title>Primer: Searching for Efficient Transformers for Language Modeling</title>
+    <updated>2022-01-24T23:36:29Z</updated>
+    <link href="https://arxiv.org/abs/2109.08668v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.08668v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Transformer models have been central to recent advances in natural language processing. The training and inference costs of these models, however, have grown rapidly and become prohibitively expensive. Here we aim to reduce the costs of Transformers by searching for a more efficient variant. Compared to previous approaches, our search is performed at a lower level, over the primitives that define a Transformer TensorFlow program. We identify an architecture, named Primer, that has a smaller training cost than the original Transformer and other variants for auto-regressive language modeling. Primer's improvements can be mostly attributed to two simple modifications: squaring ReLU activations and adding a depthwise convolution layer after each Q, K, and V projection in self-attention.
+  Experiments show Primer's gains over Transformer increase as compute scale grows and follow a power law with respect to quality at optimal model sizes. We also verify empirically that Primer can be dropped into different codebases to significantly speed up training without additional tuning. For example, at a 500M parameter size, Primer improves the original T5 architecture on C4 auto-regressive language modeling, reducing the training cost by 4X. Furthermore, the reduced training cost means Primer needs much less compute to reach a target one-shot performance. For instance, in a 1.9B parameter configuration similar to GPT-3 XL, Primer uses 1/3 of the training compute to achieve the same one-shot performance as Transformer. We open source our models and several comparisons in T5 to help with reproducibility.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-17T17:50:39Z</published>
+    <arxiv:comment>"Primer: Searching for Efficient Transformers for Language Modeling" NeurIPS camera ready. 34 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>David R. So</name>
+    </author>
+    <author>
+      <name>Wojciech Mańke</name>
+    </author>
+    <author>
+      <name>Hanxiao Liu</name>
+    </author>
+    <author>
+      <name>Zihang Dai</name>
+    </author>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+    <author>
+      <name>Quoc V. Le</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.16672v1</id>
+    <title>Accelerating Transformer Inference and Training with 2:4 Activation Sparsity</title>
+    <updated>2025-03-20T19:37:12Z</updated>
+    <link href="https://arxiv.org/abs/2503.16672v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.16672v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we demonstrate how to leverage 2:4 sparsity, a popular hardware-accelerated GPU sparsity pattern, to activations to accelerate large language model training and inference. Crucially we exploit the intrinsic sparsity found in Squared-ReLU activations to provide this acceleration with no accuracy loss. Our approach achieves up to 1.3x faster Feed Forward Network (FFNs) in both the forwards and backwards pass. This work highlights the potential for sparsity to play a key role in accelerating large language model training and inference.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-20T19:37:12Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Daniel Haziza</name>
+    </author>
+    <author>
+      <name>Timothy Chou</name>
+    </author>
+    <author>
+      <name>Dhruv Choudhary</name>
+    </author>
+    <author>
+      <name>Luca Wehrstedt</name>
+    </author>
+    <author>
+      <name>Francisco Massa</name>
+    </author>
+    <author>
+      <name>Jiecao Yu</name>
+    </author>
+    <author>
+      <name>Geonhwa Jeong</name>
+    </author>
+    <author>
+      <name>Supriya Rao</name>
+    </author>
+    <author>
+      <name>Patrick Labatut</name>
+    </author>
+    <author>
+      <name>Jesse Cai</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.13010v3</id>
+    <title>Deriving Activation Functions Using Integration</title>
+    <updated>2025-01-31T19:28:05Z</updated>
+    <link href="https://arxiv.org/abs/2411.13010v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.13010v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our work proposes a novel approach to designing activation functions by focusing on their gradients and deriving the corresponding activation functions using integration. We introduce the Expanded Integral of the Exponential Linear Unit (xIELU), a trainable piecewise activation function derived by integrating trainable affine transformations applied to the Exponential Linear Unit (ELU). xIELU combines two key properties for the gradient: (1) a trainable and linearly increasing gradient for positive inputs, similar to Squared ReLU (ReLU$^2$), and (2) a trainable gradient that can take negative values for negative inputs, inspired by Expanded SiLU (xSiLU). Conceptually, xIELU can be viewed as an extension of ReLU$^2$ to handle negative inputs. The trainable parameters in xIELU allow it to adaptively reduce its nonlinearity for higher-level representations deeper in the network. In experiments with 1.1B and 3B parameter Llama models trained on 125B tokens of FineWeb Edu, xIELU achieves lower perplexity compared to popular activation functions like ReLU$^2$ and SwiGLU when matched for the same compute cost and parameter count. A reference implementation is available at https://github.com/Anonymous5823/xielu.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-20T03:24:21Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Allen Hao Huang</name>
+    </author>
+    <author>
+      <name>Imanol Schlag</name>
+    </author>
+  </entry>
+</feed>

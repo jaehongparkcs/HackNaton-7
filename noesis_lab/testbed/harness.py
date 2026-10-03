@@ -85,6 +85,31 @@ def lr_multiplier(progress: float, c: ExperimentConfig) -> float:
     return 0.1 + 0.9 * 0.5 * (1.0 + math.cos(math.pi * min(decay, 1.0)))   # cosine to 10%
 
 
+class Lion(torch.optim.Optimizer):
+    """Lion (Chen et al., 2023): update = sign(β1·m + (1−β1)·g), decoupled weight decay,
+    m ← β2·m + (1−β2)·g. Run at the baseline's learning rate (no retune: a retune is a confound)."""
+
+    def __init__(self, params, lr: float, betas=(0.9, 0.99), weight_decay: float = 0.0):
+        super().__init__(params, dict(lr=lr, betas=betas, weight_decay=weight_decay))
+
+    @torch.no_grad()
+    def step(self, closure=None):
+        for group in self.param_groups:
+            b1, b2 = group["betas"]
+            for p in group["params"]:
+                if p.grad is None:
+                    continue
+                st = self.state[p]
+                if "m" not in st:
+                    st["m"] = torch.zeros_like(p)
+                m = st["m"]
+                update = (m * b1 + p.grad * (1 - b1)).sign_()
+                if group["weight_decay"]:
+                    p.mul_(1 - group["lr"] * group["weight_decay"])
+                p.add_(update, alpha=-group["lr"])
+                m.mul_(b2).add_(p.grad, alpha=1 - b2)
+
+
 def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
     decay = [p for p in model.parameters() if p.dim() >= 2]
     no_decay = [p for p in model.parameters() if p.dim() < 2]
@@ -92,6 +117,8 @@ def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
               {"params": no_decay, "weight_decay": 0.0}]
     if c.optimizer == "adamw":
         return torch.optim.AdamW(groups, lr=c.lr, betas=(0.9, 0.95))
+    if c.optimizer == "lion":
+        return Lion(groups, lr=c.lr)
     return torch.optim.SGD(groups, lr=c.lr, momentum=0.9)
 
 
@@ -179,7 +206,7 @@ def train_one(c: ExperimentConfig, seed: int, profile: Profile, data: Dataset,
             for _ in range(profile.prewarm_steps):
                 offs = torch.randint(0, len(data.train) - c.seq_len - 1, (c.batch_size,), generator=gw)
                 x, y = data.train[offs[:, None] + ar].to(device), data.train[offs[:, None] + ar + 1].to(device)
-                _, loss = warm_model(x, y)
+                loss = warm_model.train_loss(x, y)
                 loss.backward()
                 warm_opt.step()
                 warm_opt.zero_grad(set_to_none=True)
@@ -207,7 +234,7 @@ def train_one(c: ExperimentConfig, seed: int, profile: Profile, data: Dataset,
             x, y = batch()
             _sync(device)
             t0 = time.perf_counter()
-            _, loss = model(x, y)
+            loss = model.train_loss(x, y)
             loss.backward()
             if c.grad_clip > 0:
                 torch.nn.utils.clip_grad_norm_(model.parameters(), c.grad_clip)

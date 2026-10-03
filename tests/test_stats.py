@@ -218,3 +218,67 @@ def test_more_supporting_claims_rank_first_within_an_outcome_class():
               mk("c3", "dropout", "0.1", "context")]
     q = stats.candidate_queue(ExperimentConfig(), claims, [])
     assert [i.key for i in q] == ["dropout=0.1", "activation=swiglu"]       # 2 supporting beats 1
+
+
+# --------------------------------------------------------------------------- experiment language
+def test_delta_keys_roundtrip_and_are_canonical():
+    d = {"pos_encoding": "rope", "activation": "swiglu"}
+    assert stats.delta_key(d) == "activation=swiglu+pos_encoding=rope"
+    assert stats.parse_delta_key(stats.delta_key(d)) == d and stats.delta_key({"norm": "rmsnorm"}) == "norm=rmsnorm"
+
+
+def test_combination_validator():
+    assert stats.valid_delta({"norm": "rmsnorm"}) and stats.valid_delta({"norm": "rmsnorm", "activation": "swiglu"})
+    assert not stats.valid_delta({}) and not stats.valid_delta({"norm": "batchnorm"})            # not allowlisted
+    assert not stats.valid_delta({"norm": "rmsnorm", "lr": "0.01"})                              # pair outside the allowlist
+    assert not stats.valid_delta({"norm": "rmsnorm", "activation": "swiglu", "dropout": "0.1"})  # three fields
+    assert stats.combine("activation=swiglu", "pos_encoding=rope") == {"activation": "swiglu", "pos_encoding": "rope"}
+    assert stats.combine("activation=swiglu", "activation=relu2") is None                        # same field
+    assert stats.combine("activation=swiglu", "lr=0.01") is None
+
+
+def test_testability_levels():
+    assert stats.testability({"norm": "rmsnorm", "activation": "swiglu"}) == 1.0
+    assert stats.testability({"warmup_frac": "0.02"}) == 1.0 and stats.testability({"norm": "rmsnorm", "qk_norm": "true"}) == 1.0
+    assert stats.testability({"cosine_final_frac": "0.1"}) == 0.3            # a variant that is planned, not built
+    assert stats.testability({"warmup_frac": "0.03"}) == 0.0                 # a value outside the allowlist
+    assert stats.testability({"new_attention": "x"}) == 0.0 and stats.testability({}) == 0.0
+
+
+# --------------------------------------------------------------------------- contested topics
+def _lc(cid, outcome, coverage, tier="T3", covers=False):
+    return Claim(claim_id=cid, paper_id="p", dimension="d", method="m", setting="s", claim="c", source_span="x",
+                 expected_outcome=outcome, config_change={"activation": "swiglu"}, tier=tier,
+                 coverage=None if tier == "T1" else coverage, covers_our_setting=covers)
+
+
+KEY = "activation=swiglu"
+
+
+def test_disagreeing_claims_do_not_cover_a_topic_in_the_hypothesis_engine():
+    cs = [_lc("p", "improves", "partial"), _lc("n", "worse", "partial")]
+    assert stats.contested_claim_ids(cs) == ["n", "p"]
+    status, cov, note = stats.literature_status(KEY, cs, contested_open=True)
+    assert (status, cov) == ("open", []) and note.startswith("open (contested)")
+    # covers and partial are one bucket for the overlap question
+    mixed = [_lc("p", "improves", "covers"), _lc("n", "worse", "partial")]
+    assert stats.literature_status(KEY, mixed, contested_open=True)[0] == "open"
+    # the literature-ordered queue of earlier bundles keeps the old behavior
+    assert stats.literature_status(KEY, cs)[0] == "soft_rejected"
+
+
+def test_agreeing_or_curated_claims_still_cover():
+    agree = [_lc("a", "improves", "partial"), _lc("b", "improves", "covers")]
+    assert stats.contested_claim_ids(agree) == []
+    assert stats.literature_status(KEY, agree, contested_open=True)[0] == "soft_rejected"
+    weak = [_lc("a", "improves", "partial"), _lc("b", "no_worse", "partial")]          # "no worse" is not the opposite sign
+    assert stats.literature_status(KEY, weak, contested_open=True)[0] == "soft_rejected"
+    elsewhere = [_lc("a", "improves", "partial"), _lc("b", "worse", "none")]           # the disagreement is in another setting
+    assert stats.literature_status(KEY, elsewhere, contested_open=True) == (
+        "soft_rejected", ["a"], "covered by an auto-extracted / preprint claim; the PI may override")
+    curated = [_lc("t1", "improves", None, tier="T1", covers=True), _lc("n", "worse", "partial"), _lc("p", "improves", "partial")]
+    status, cov, _ = stats.literature_status(KEY, curated, contested_open=True)
+    assert (status, cov) == ("rejected_prior_art", ["t1"])                              # a curated claim is never contested away
+    held = stats.literature_status(KEY, [_lc("p", "improves", "partial"), _lc("n", "worse", "partial")],
+                                   held=[KEY], contested_open=True)
+    assert held[0] == "held"

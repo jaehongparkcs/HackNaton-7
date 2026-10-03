@@ -10,9 +10,9 @@ from __future__ import annotations
 import hashlib
 import json
 from enum import StrEnum
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_serializer, model_validator
 
 
 def canonical_json(obj: Any) -> str:
@@ -23,13 +23,27 @@ def sha256_hex(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+class _OmitEmpty(BaseModel):
+    """Fields added after bundles were recorded are left out of the dump while they are empty, so
+    a bundle recorded before the field existed still replays to the identical state digest."""
+    _omit_if_empty: tuple[str, ...] = ()
+
+    @model_serializer(mode="wrap")
+    def _ser(self, handler):
+        data = handler(self)
+        for k in self._omit_if_empty:
+            if k in data and (data[k] is None or data[k] is False or data[k] in ("", [], {})):
+                del data[k]
+        return data
+
+
 # --------------------------------------------------------------------------------------
 # Experiment language (typed, allowlisted). Every option is implemented in testbed/model.py.
 # --------------------------------------------------------------------------------------
 class ExperimentConfig(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
-    optimizer: Literal["adamw", "sgd_momentum"] = "adamw"
+    optimizer: Literal["adamw", "sgd_momentum", "lion"] = "adamw"
     lr: float = Field(2e-3, ge=1e-5, le=1e-1)
     weight_decay: float = Field(0.01, ge=0.0, le=0.5)
     grad_clip: float = Field(1.0, ge=0.0, le=10.0)
@@ -45,6 +59,24 @@ class ExperimentConfig(BaseModel):
     dropout: float = Field(0.0, ge=0.0, le=0.5)
     batch_size: int = Field(64, ge=4, le=256)
     seq_len: int = Field(128, ge=16, le=512)
+    # Building blocks added after the first bundles were recorded (FIXES2). At their default they
+    # are left out of the dump, so config hashes, run ids and prompts of older bundles are unchanged.
+    qk_norm: bool = False                              # L2-normalized queries/keys with a learned scale
+    weight_tying: bool = False                         # tie the output head to the input embedding
+    z_loss_coef: float = Field(0.0, ge=0.0, le=1e-2)   # training-only penalty on log Z of the output logits
+    label_smoothing: float = Field(0.0, ge=0.0, le=0.3)   # training-only; val_loss stays plain cross-entropy
+    init_scale: float = Field(1.0, ge=0.25, le=4.0)    # multiplies the initialization std
+
+    _LATER: ClassVar[dict[str, Any]] = {"qk_norm": False, "weight_tying": False, "z_loss_coef": 0.0,
+                                        "label_smoothing": 0.0, "init_scale": 1.0}
+
+    @model_serializer(mode="wrap")
+    def _ser(self, handler):
+        data = handler(self)
+        for k, default in self._LATER.items():
+            if data.get(k) == default:
+                del data[k]
+        return data
 
     @model_validator(mode="after")
     def _heads_divide(self) -> ExperimentConfig:
@@ -58,8 +90,7 @@ class ExperimentConfig(BaseModel):
         return sha256_hex(canonical_json(self.model_dump()))[:16]
 
     def diff(self, other: ExperimentConfig) -> dict[str, Any]:
-        a, b = self.model_dump(), other.model_dump()
-        return {k: b[k] for k in b if a[k] != b[k]}
+        return {k: getattr(other, k) for k in type(self).model_fields if getattr(self, k) != getattr(other, k)}
 
 
 def apply_delta(base: ExperimentConfig, delta: dict[str, Any]) -> ExperimentConfig:
@@ -91,7 +122,9 @@ class Profile(BaseModel):
 # --------------------------------------------------------------------------------------
 # Literature snapshot
 # --------------------------------------------------------------------------------------
-class Paper(BaseModel):
+class Paper(_OmitEmpty):
+    _omit_if_empty = ("directions",)
+
     paper_id: str
     title: str
     authors: list[str] = []
@@ -114,10 +147,34 @@ class RetrievedPaper(Paper):
     doi: str | None = None
     categories: list[str] = []
     queries: list[str] = []            # which queries returned it
+    directions: list[str] = []         # provenance: direction ids whose targeted search found it
     relevance: float | None = None
     relevance_components: dict[str, float] = {}
     tier: Tier = "T1"                  # paper-level: T4 = retrieved but no claim passed the quote check
     map_xy: list[float] | None = None  # TF-IDF -> PCA position (text similarity only)
+
+
+# The fixed mechanism vocabulary (human-written). Extraction picks one and quotes the supporting
+# text, so two methods that work "through the same thing" land on the same graph node. Free-text
+# reasons almost never merge by text similarity; a closed list guarantees shared nodes.
+MECHANISMS: dict[str, str] = {
+    "gradient_stability": "stabilizes gradients or their norm; avoids vanishing / exploding gradients; removes the need for warm-up",
+    "optimization_speed": "faster convergence; fewer steps or less compute to reach the same quality",
+    "loss_landscape_smoothness": "smoother or better-conditioned loss landscape; easier optimization geometry",
+    "implicit_regularization": "regularizes; reduces overfitting or co-adaptation; improves generalization from limited data",
+    "position_generalization": "better use of positional information; relative position; extrapolation to other lengths",
+    "long_range_dependency": "captures long-range or long-context dependencies",
+    "expressivity": "increases model capacity or expressive power; richer functions per parameter",
+    "representation_quality": "better internal representations; avoids rank or representation collapse",
+    "attention_behavior": "changes attention patterns: entropy, sparsity, focus, collapse",
+    "scale_invariance": "invariance to re-scaling or re-centering of weights or activations; implicit learning-rate adaptation",
+    "computational_efficiency": "cheaper per step: lower running time or memory",
+    "parameter_efficiency": "same quality with fewer parameters",
+}
+MechanismCategory = Literal[
+    "none", "gradient_stability", "optimization_speed", "loss_landscape_smoothness", "implicit_regularization",
+    "position_generalization", "long_range_dependency", "expressivity", "representation_quality",
+    "attention_behavior", "scale_invariance", "computational_efficiency", "parameter_efficiency"]
 
 
 class SettingFields(BaseModel):
@@ -130,7 +187,9 @@ class SettingFields(BaseModel):
     evidence: Literal["empirical", "theoretical", "survey"]
 
 
-class Claim(BaseModel):
+class Claim(_OmitEmpty):
+    _omit_if_empty = ("mechanism", "mechanism_category")
+
     claim_id: str
     paper_id: str
     dimension: str
@@ -155,6 +214,8 @@ class Claim(BaseModel):
     peer_reviewed: bool | None = None
     published: str = ""
     extraction_event: str = ""                    # request key of the recorded extraction call
+    mechanism: str = ""                           # verbatim quote of the stated reason ("" = none given)
+    mechanism_category: str = ""                  # one of MECHANISMS; kept only if the quote is verbatim
 
 
 class NicheSpec(BaseModel):
@@ -177,7 +238,7 @@ class NicheSpec(BaseModel):
 class Fixture(BaseModel):
     """A predefined test hypothesis (NOT a measurement). Labeled 'fixture' in the UI."""
     fixture_id: str
-    kind: Literal["known_in_corpus", "untested_setting", "generated"]
+    kind: Literal["known_in_corpus", "untested_setting", "generated", "gap"]
     title: str
     statement: str
     allowed_fields: list[str]         # the only config fields the Scientist may touch
@@ -185,11 +246,18 @@ class Fixture(BaseModel):
     origin: Literal["fixture", "generated"] = "fixture"   # generated = picked by code from the queue
     candidate_key: str | None = None  # "field=value" this hypothesis tests (excluded from the queue)
     queue_priority: list[Any] | None = None   # priority tuple that put it here (generated only)
+    # Gap hypotheses (kind == "gap"): the typed delta, label and explanation all come from code.
+    required_delta: dict[str, str] | None = None
+    novelty_type: str = ""            # transfer | combination | resolution (computed by code)
+    gap_ids: list[str] = []
+    gap: dict[str, Any] | None = None # best gap: type, score components, explanation path
     mock: dict[str, Any] = Field(default_factory=dict)   # used only by the offline mock LLM
 
 
-class QueueItem(BaseModel):
+class QueueItem(_OmitEmpty):
     """One candidate experiment, ordered by `stats.candidate_queue` (pure code, no LLM)."""
+    _omit_if_empty = ("delta", "gap_ids", "gap_score", "novelty_type")
+
     key: str                          # "field=value"
     field: str
     value: str
@@ -201,6 +269,11 @@ class QueueItem(BaseModel):
     status: Literal["open", "soft_rejected", "held", "rejected_prior_art"] = "open"
     covering_claim_ids: list[str] = []
     note: str = ""
+    # Gap queue (hypothesis engine): the delta may have two fields; order is by gap_score.
+    delta: dict[str, str] = {}
+    gap_ids: list[str] = []
+    gap_score: float | None = None
+    novelty_type: str = ""
 
 
 # --------------------------------------------------------------------------------------
@@ -234,6 +307,38 @@ class QueryPlan(BaseModel):
     dimensions: list[QueryDimension]
 
 
+class Direction(BaseModel):
+    """One research direction proposed by the scout. A search direction, never evidence: every
+    field is used only to build searches. `possibly_related_titles` are search hints."""
+    model_config = ConfigDict(extra="forbid")
+    title: str
+    idea: str
+    mechanism: str
+    search_terms: list[str]
+    possibly_related_titles: list[str]
+    building_blocks: list[str]         # block names it would touch; [] = outside the testbed
+
+
+class ScoutOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    directions: list[Direction]
+
+
+class DirectionRecord(BaseModel):
+    """A direction as frozen into the corpus: the scout's text plus what code did with it."""
+    direction_id: str                  # assigned by code
+    origin: Literal["scout", "deterministic"]
+    title: str
+    idea: str = ""
+    mechanism: str = ""
+    search_terms: list[str] = []
+    building_blocks: list[str] = []
+    dropped_blocks: list[str] = []     # names the scout gave that are not building blocks
+    queries: list[dict[str, Any]] = []         # [{q, n_results}]
+    title_hints: list[dict[str, Any]] = []     # [{title, status: found|not_found, paper_id}]
+    paper_ids: list[str] = []
+
+
 class ExtractedClaim(BaseModel):
     """What the LLM transcribes from ONE abstract. Code verifies the quote and maps the rest."""
     model_config = ConfigDict(extra="forbid")
@@ -244,11 +349,21 @@ class ExtractedClaim(BaseModel):
     source_span: str         # must be a verbatim substring of the abstract, else dropped by code
     direction: Literal["improves", "no_worse", "worse", "context"]
     setting: SettingFields
+    mechanism_category: MechanismCategory   # which listed mechanism the abstract gives as the reason; "none" if none
+    mechanism: str           # the abstract's own words for that reason, quoted verbatim; "" if none
 
 
 class ExtractionOutput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     claims: list[ExtractedClaim]
+
+
+class LiteratureOutputV2(BaseModel):
+    """Gate v2. The LLM lists EVERY retrieved claim that tests the same comparison; it does not
+    pick a "nearest" one. `stats.gate_decision` then chooses the verdict deterministically."""
+    model_config = ConfigDict(extra="forbid")
+    same_comparison_claim_ids: list[str]     # ids copied from the retrieved list; [] if none
+    rationale: str
 
 
 class ConfigChange(BaseModel):
@@ -264,6 +379,18 @@ class ScientistOutput(BaseModel):
     predicted_direction: Literal["lower_val_loss", "higher_val_loss", "no_change"]
     falsification_rule: str
     config_changes: list[ConfigChange]
+
+
+class GapScientistOutput(BaseModel):
+    """A hypothesis written for a graph gap. The delta, the gap type, its score and the novelty
+    label are code's; the LLM writes the text and names the claims it rests on."""
+    model_config = ConfigDict(extra="forbid")
+    statement: str
+    mechanism: str
+    predicted_direction: Literal["lower_val_loss", "higher_val_loss", "no_change"]
+    falsification_rule: str
+    config_changes: list[ConfigChange]
+    grounded_in: list[str]   # claim ids from the gap's explanation path (validated by code)
 
 
 class CriticPreOutput(BaseModel):
@@ -308,8 +435,10 @@ class RunResult(BaseModel):
     started_at: str = ""
 
 
-class PriorArtResult(BaseModel):
+class PriorArtResult(_OmitEmpty):
     """Verdict + the passage. The passage text comes from the snapshot, never from the LLM."""
+    _omit_if_empty = ("same_comparison_claim_ids", "contested")
+
     verdict: PriorArtVerdictKind
     claim_id: str | None
     paper_id: str | None
@@ -326,6 +455,10 @@ class PriorArtResult(BaseModel):
     coverage: Coverage | None = None
     tier: Tier | None = None                      # tier of the cited claim
     gate: Literal["reject", "soft_reject", "run"] = "run"   # derived by stats.gate_outcome
+    # Gate v2: every retrieved claim the LLM says tests the same comparison; code picked the one
+    # above (strongest first). `contested`: the only covering claims disagree in sign.
+    same_comparison_claim_ids: list[str] = []
+    contested: bool = False
 
 
 class NoiseFloor(BaseModel):

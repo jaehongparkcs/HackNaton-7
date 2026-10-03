@@ -13,4 +13,7 @@ For each claim:
   - scale: tiny (<10M params) | small (<100M) | medium (<1B) | large | unspecified
   - evidence: empirical | theoretical | survey
 
+- mechanism_category: the reason THE ABSTRACT gives for the claimed effect, as one name from the MECHANISMS list in the prompt, copied exactly. Use "none" if the abstract gives no reason or none of the listed mechanisms fits. Never pick one from your own knowledge of the method.
+- mechanism: the abstract's own words for that reason, copied character for character as a short phrase (e.g. "stabilizes the gradient norm"). It must be an exact substring of the abstract. Code drops the category if this quote is missing or not verbatim. Use "" when mechanism_category is "none".
+
 "unspecified" is always allowed and is the correct answer whenever the abstract does not say. Use "general" only when the abstract explicitly states the result across tasks or architectures. Do not infer scale from the model's name. If an abstract has no checkable claim, return nothing for it.

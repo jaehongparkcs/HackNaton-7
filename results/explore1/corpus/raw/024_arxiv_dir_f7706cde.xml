@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/9EEzxsai6GlGlwy+XOO/xSnwO0c</id>
+  <title>arXiv Query: search_query=all:"regularization" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:47:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22regularization%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>17914</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1712.06050v3</id>
+    <title>Wasserstein Distributionally Robust Optimization and Variation Regularization</title>
+    <updated>2020-10-30T17:56:21Z</updated>
+    <link href="https://arxiv.org/abs/1712.06050v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1712.06050v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Wasserstein distributionally robust optimization (DRO) has recently achieved empirical success for various applications in operations research and machine learning, owing partly to its regularization effect. Although connection between Wasserstein DRO and regularization has been established in several settings, existing results often require restrictive assumptions, such as smoothness or convexity, that are not satisfied for many problems. In this paper, we develop a general theory on the variation regularization effect of the Wasserstein DRO - a new form of regularization that generalizes total-variation regularization, Lipschitz regularization and gradient regularization. Our results cover possibly non-convex and non-smooth losses and losses on non-Euclidean spaces. Examples include multi-item newsvendor, portfolio selection, linear prediction, neural networks, manifold learning, and intensity estimation for Poisson processes, etc. As an application of our theory of variation regularization, we derive new generalization guarantees for adversarial robust learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-12-17T02:47:14Z</published>
+    <arxiv:comment>The paper is previously titled "Wasserstein Distributional Robustness and Regularization in Statistical Learning"</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Rui Gao</name>
+    </author>
+    <author>
+      <name>Xi Chen</name>
+    </author>
+    <author>
+      <name>Anton J. Kleywegt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.11186v1</id>
+    <title>A New Angle on L2 Regularization</title>
+    <updated>2018-06-28T20:57:40Z</updated>
+    <link href="https://arxiv.org/abs/1806.11186v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.11186v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Imagine two high-dimensional clusters and a hyperplane separating them. Consider in particular the angle between: the direction joining the two clusters' centroids and the normal to the hyperplane. In linear classification, this angle depends on the level of L2 regularization used. Can you explain why?</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-28T20:57:40Z</published>
+    <arxiv:comment>An explorable explanation on the phenomenon of adversarial examples in linear classification and its relation to L2 regularization. Interactive version available at: https://thomas-tanay.github.io/post--L2-regularization/</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Thomas Tanay</name>
+    </author>
+    <author>
+      <name>Lewis D Griffin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1806.02958v2</id>
+    <title>Efficient Full-Matrix Adaptive Regularization</title>
+    <updated>2020-11-17T20:47:18Z</updated>
+    <link href="https://arxiv.org/abs/1806.02958v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1806.02958v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adaptive regularization methods pre-multiply a descent direction by a preconditioning matrix. Due to the large number of parameters of machine learning problems, full-matrix preconditioning methods are prohibitively expensive. We show how to modify full-matrix adaptive regularization in order to make it practical and effective. We also provide a novel theoretical analysis for adaptive regularization in non-convex optimization settings. The core of our algorithm, termed GGT, consists of the efficient computation of the inverse square root of a low-rank matrix. Our preliminary experiments show improved iteration-wise convergence rates across synthetic tasks and standard deep learning benchmarks, and that the more carefully-preconditioned steps sometimes lead to a better solution.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-06-08T03:31:05Z</published>
+    <arxiv:comment>Updated to ICML 2019 camera-ready version. Title of preprint was "The Case for Full-Matrix Adaptive Regularization"</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Naman Agarwal</name>
+    </author>
+    <author>
+      <name>Brian Bullins</name>
+    </author>
+    <author>
+      <name>Xinyi Chen</name>
+    </author>
+    <author>
+      <name>Elad Hazan</name>
+    </author>
+    <author>
+      <name>Karan Singh</name>
+    </author>
+    <author>
+      <name>Cyril Zhang</name>
+    </author>
+    <author>
+      <name>Yi Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.03096v2</id>
+    <title>Weight-Sharing Regularization</title>
+    <updated>2024-03-11T02:47:47Z</updated>
+    <link href="https://arxiv.org/abs/2311.03096v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.03096v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Weight-sharing is ubiquitous in deep learning. Motivated by this, we propose a "weight-sharing regularization" penalty on the weights $w \in \mathbb{R}^d$ of a neural network, defined as $\mathcal{R}(w) = \frac{1}{d - 1}\sum_{i &gt; j}^d |w_i - w_j|$. We study the proximal mapping of $\mathcal{R}$ and provide an intuitive interpretation of it in terms of a physical system of interacting particles. We also parallelize existing algorithms for $\operatorname{prox}_\mathcal{R}$ (to run on GPU) and find that one of them is fast in practice but slow ($O(d)$) for worst-case inputs. Using the physical interpretation, we design a novel parallel algorithm which runs in $O(\log^3 d)$ when sufficient processors are available, thus guaranteeing fast training. Our experiments reveal that weight-sharing regularization enables fully connected networks to learn convolution-like filters even when pixels have been shuffled while convolutional neural networks fail in this setting. Our code is available on github.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-06T13:37:34Z</published>
+    <arxiv:comment>Our code is available at https://github.com/motahareh-sohrabi/weight-sharing-regularization</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mehran Shakerinava</name>
+    </author>
+    <author>
+      <name>Motahareh Sohrabi</name>
+    </author>
+    <author>
+      <name>Siamak Ravanbakhsh</name>
+    </author>
+    <author>
+      <name>Simon Lacoste-Julien</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.19256v4</id>
+    <title>Temporal Regularization Training: Unleashing the Potential of Spiking Neural Networks</title>
+    <updated>2026-01-10T04:40:09Z</updated>
+    <link href="https://arxiv.org/abs/2506.19256v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.19256v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spiking Neural Networks (SNNs) have received widespread attention due to their event-driven and low-power characteristics, making them particularly effective for processing neuromorphic data. Recent studies have shown that directly trained SNNs suffer from severe temporal gradient vanishing and overfitting issues, which fundamentally constrain their performance and generalizability. This paper unveils a temporal regularization training (TRT) memthod, designed to unleash the generalization and performance potential of SNNs through a time-decaying regularization mechanism that prioritizes early timesteps with stronger constraints. We perform theoretical analysis to reveal TRT's ability on mitigating the temporal gradient vanishment. To validate the effectiveness of TRT, we conduct experiments on both static image datasets and dynamic neuromorphic datasets, perform analysis of their results, demonstrating that TRT can effectively mitigate overfitting and help SNNs converge into flatter local minima with better generalizability. Furthermore, we establish a theoretical interpretation of TRT's temporal regularization mechanism by analyzing the temporal information dynamics inside SNNs. We track the Fisher information of SNNs during training process, showing that Fisher information progressively concentrates in early timesteps. The time-decaying regularization mechanism implemented in TRT effectively guides the network to learn robust features in early timesteps with rich information, thereby leading to significant improvements in model generalization.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-24T02:36:55Z</published>
+    <arxiv:comment>Submitted to Elsevier. Code is available at https://github.com/ZBX05/Temporal-Regularization-Training</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Boxuan Zhang</name>
+    </author>
+    <author>
+      <name>Zhen Xu</name>
+    </author>
+    <author>
+      <name>Kuan Tao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2201.12198v2</id>
+    <title>Limitation of Characterizing Implicit Regularization by Data-independent Functions</title>
+    <updated>2023-09-07T02:27:09Z</updated>
+    <link href="https://arxiv.org/abs/2201.12198v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2201.12198v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, understanding the implicit regularization of neural networks (NNs) has become a central task in deep learning theory. However, implicit regularization is itself not completely defined and well understood. In this work, we attempt to mathematically define and study implicit regularization. Importantly, we explore the limitations of a common approach to characterizing implicit regularization using data-independent functions. We propose two dynamical mechanisms, i.e., Two-point and One-point Overlapping mechanisms, based on which we provide two recipes for producing classes of one-hidden-neuron NNs that provably cannot be fully characterized by a type of or all data-independent functions. Following the previous works, our results further emphasize the profound data dependency of implicit regularization in general, inspiring us to study in detail the data dependency of NN implicit regularization in the future.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-28T15:53:30Z</published>
+    <arxiv:comment>Revised the structure of paper and added results about implicit regularization in training two-layer network or even more general "activation function-related" models</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Leyang Zhang</name>
+    </author>
+    <author>
+      <name>Zhi-Qin John Xu</name>
+    </author>
+    <author>
+      <name>Tao Luo</name>
+    </author>
+    <author>
+      <name>Yaoyu Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1902.00873v3</id>
+    <title>An Empirical Study on Regularization of Deep Neural Networks by Local Rademacher Complexity</title>
+    <updated>2019-11-16T16:02:23Z</updated>
+    <link href="https://arxiv.org/abs/1902.00873v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1902.00873v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Regularization of Deep Neural Networks (DNNs) for the sake of improving their generalization capability is important and challenging. The development in this line benefits theoretical foundation of DNNs and promotes their usability in different areas of artificial intelligence. In this paper, we investigate the role of Rademacher complexity in improving generalization of DNNs and propose a novel regularizer rooted in Local Rademacher Complexity (LRC). While Rademacher complexity is well known as a distribution-free complexity measure of function class that help boost generalization of statistical learning methods, extensive study shows that LRC, its counterpart focusing on a restricted function class, leads to sharper convergence rates and potential better generalization given finite training sample. Our LRC based regularizer is developed by estimating the complexity of the function class centered at the minimizer of the empirical loss of DNNs. Experiments on various types of network architecture demonstrate the effectiveness of LRC regularization in improving generalization. Moreover, our method features the state-of-the-art result on the CIFAR-$10$ dataset with network architecture found by neural architecture search.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-02-03T10:37:25Z</published>
+    <arxiv:comment>Updated the link to the open source PaddlePaddle code of LRC Regularization as well as the author list</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yingzhen Yang</name>
+    </author>
+    <author>
+      <name>Jiahui Yu</name>
+    </author>
+    <author>
+      <name>Xingjian Li</name>
+    </author>
+    <author>
+      <name>Jun Huan</name>
+    </author>
+    <author>
+      <name>Thomas S. Huang</name>
+    </author>
+  </entry>
+</feed>

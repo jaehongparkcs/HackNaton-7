@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/g1h6J/h3SvyqPwlaieOM+40kGLU</id>
+  <title>arXiv Query: search_query=all:"cosine schedule" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:48:14Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22cosine+schedule%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>30</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2508.04884v2</id>
+    <title>The Cosine Schedule is Fisher-Rao-Optimal for Masked Discrete Diffusion Models</title>
+    <updated>2025-10-05T17:30:12Z</updated>
+    <link href="https://arxiv.org/abs/2508.04884v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.04884v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we study the problem of choosing the discretisation schedule for sampling from masked discrete diffusion models in terms of the information geometry of the induced probability path. Specifically, we show that the optimal schedule under the Fisher-Rao geometry recovers the popularly-used cosine schedule.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-06T21:19:08Z</published>
+    <arxiv:comment>PreprintV2</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Leo Zhang</name>
+    </author>
+    <author>
+      <name>Saifuddin Syed</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.28562v1</id>
+    <title>SEAD: Competence-Aware On-Policy Distillation via Entropy-Guided Supervision</title>
+    <updated>2026-06-26T19:41:02Z</updated>
+    <link href="https://arxiv.org/abs/2606.28562v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.28562v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>On-policy distillation (OPD) has a property absent in offline distillation and RL: teacher supervision quality depends on student competence. Incoherent rollouts yield noisy gradients; already-mastered tokens yield redundant ones. This creates waste at three scales (tokens, training phases, and prompts) yet existing methods supervise uniformly. We introduce SEAD, which uses entropy as a unified probe of this competence-dependent degradation at three scales: (1) joint teacher-student entropy partitions tokens into zones receiving tailored divergences or zero gradient (approx. 50% skipped); (2) a cosine schedule anneals from forward to reverse KL as competence grows; (3) a competence-gated curriculum introduces prompts easy-to-hard. These components are symbiotically necessary: token selection requires coherent rollouts (curriculum), annealing requires monotonic improvement (also curriculum). On OLMo-3 (7B to 32B), SEAD achieves +4.8 avg accuracy over vanilla OPD across six math benchmarks, with ablations confirming super-additive interactions.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-26T19:41:02Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chia-Hsuan Lee</name>
+    </author>
+    <author>
+      <name>Zelei Cheng</name>
+    </author>
+    <author>
+      <name>Yu Wang</name>
+    </author>
+    <author>
+      <name>Renkun Ni</name>
+    </author>
+    <author>
+      <name>Sambit Sahu</name>
+    </author>
+    <author>
+      <name>Shi-Xiong Zhang</name>
+    </author>
+    <author>
+      <name>William Campbell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.18392v3</id>
+    <title>Scaling Laws and Compute-Optimal Training Beyond Fixed Training Durations</title>
+    <updated>2024-10-17T12:01:15Z</updated>
+    <link href="https://arxiv.org/abs/2405.18392v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.18392v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Scale has become a main ingredient in obtaining strong machine learning models. As a result, understanding a model's scaling properties is key to effectively designing both the right training setup as well as future generations of architectures. In this work, we argue that scale and training research has been needlessly complex due to reliance on the cosine schedule, which prevents training across different lengths for the same model size. We investigate the training behavior of a direct alternative -- constant learning rate and cooldowns -- and find that it scales predictably and reliably similar to cosine. Additionally, we show that stochastic weight averaging yields improved performance along the training trajectory, without additional training costs, across different scales. Importantly, with these findings we demonstrate that scaling experiments can be performed with significantly reduced compute and GPU hours by utilizing fewer but reusable training runs. Our code is available at \url{https://github.com/epfml/schedules-and-scaling/}.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-28T17:33:54Z</published>
+    <arxiv:comment>Spotlight at NeurIPS 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alexander Hägele</name>
+    </author>
+    <author>
+      <name>Elie Bakouch</name>
+    </author>
+    <author>
+      <name>Atli Kosson</name>
+    </author>
+    <author>
+      <name>Loubna Ben Allal</name>
+    </author>
+    <author>
+      <name>Leandro Von Werra</name>
+    </author>
+    <author>
+      <name>Martin Jaggi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.17673v1</id>
+    <title>Using Ornstein-Uhlenbeck Process to understand Denoising Diffusion Probabilistic Model and its Noise Schedules</title>
+    <updated>2023-11-29T14:36:33Z</updated>
+    <link href="https://arxiv.org/abs/2311.17673v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.17673v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The aim of this short note is to show that Denoising Diffusion Probabilistic Model DDPM, a non-homogeneous discrete-time Markov process, can be represented by a time-homogeneous continuous-time Markov process observed at non-uniformly sampled discrete times. Surprisingly, this continuous-time Markov process is the well-known and well-studied Ornstein-Ohlenbeck (OU) process, which was developed in 1930's for studying Brownian particles in Harmonic potentials. We establish the formal equivalence between DDPM and the OU process using its analytical solution. We further demonstrate that the design problem of the noise scheduler for non-homogeneous DDPM is equivalent to designing observation times for the OU process. We present several heuristic designs for observation times based on principled quantities such as auto-variance and Fisher Information and connect them to ad hoc noise schedules for DDPM. Interestingly, we show that the Fisher-Information-motivated schedule corresponds exactly the cosine schedule, which was developed without any theoretical foundation but is the current state-of-the-art noise schedule.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-29T14:36:33Z</published>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Javier E. Santos</name>
+    </author>
+    <author>
+      <name>Yen Ting Lin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.09411v2</id>
+    <title>Learning Rate Annealing Improves Tuning Robustness in Stochastic Optimization</title>
+    <updated>2026-02-16T18:47:51Z</updated>
+    <link href="https://arxiv.org/abs/2503.09411v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.09411v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The learning rate in stochastic gradient methods is a critical hyperparameter that is notoriously costly to tune via standard grid search, especially for training modern large-scale models with billions of parameters. We identify a theoretical advantage of learning rate annealing schemes that decay the learning rate to zero at a polynomial rate, such as the widely-used cosine schedule, by demonstrating their increased robustness to initial parameter misspecification due to a coarse grid search. We present an analysis in a stochastic convex optimization setup demonstrating that the convergence rate of stochastic gradient descent with annealed schedules depends sublinearly on the multiplicative misspecification factor $ρ$ (i.e., the grid resolution), achieving a rate of $O(ρ^{1/(2p+1)}/\sqrt{T})$ where $p$ is the degree of polynomial decay and $T$ is the number of steps. This is in contrast to the $O(ρ/\sqrt{T})$ rate obtained under the inverse-square-root and fixed stepsize schedules, which depend linearly on $ρ$. Experiments confirm the increased robustness compared to tuning with a fixed stepsize, that has significant implications for the computational overhead of hyperparameter search in practical training scenarios.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-12T14:06:34Z</published>
+    <arxiv:comment>23 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Amit Attia</name>
+    </author>
+    <author>
+      <name>Tomer Koren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.18069v1</id>
+    <title>Wasserstein bounds for denoising diffusion probabilistic models via the Föllmer process</title>
+    <updated>2026-05-18T08:52:09Z</updated>
+    <link href="https://arxiv.org/abs/2605.18069v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.18069v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper studies sampling error bounds for denoising diffusion probabilistic models (DDPMs) in the 2-Wasserstein distance. Our contributions are threefold. (i) Under general Lipschitz-type conditions on the score function and for a broad class of variance schedules, including the cosine schedule, we establish sharp upper bounds that are optimal in both the dimension and the number of steps, and recover several sharp error bounds previously obtained in the literature. (ii) We prove that the same Lipschitz-type conditions, which encompass those commonly imposed on the (learned) score, imply a logarithmic Sobolev inequality and hence a quadratic transportation cost inequality for the DDPM. As a consequence, in settings covered by existing work, an optimal Wasserstein bound, up to a logarithmic factor, follows from the recently obtained sharp error bound in the Kullback-Leibler divergence under geometric-type variance schedules. (iii) We show that for general log-concave target distributions, the optimal Wasserstein error bound remains attainable even without a quadratic transportation cost inequality for the target. Our analysis is based on viewing the DDPM sampler as a discretization of the Föllmer process rather than the conventional reverse Ornstein-Uhlenbeck process.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T08:52:09Z</published>
+    <arxiv:comment>45 pages</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Yuta Koike</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.03702v2</id>
+    <title>Anytime Pretraining: Horizon-Free Learning-Rate Schedules with Weight Averaging</title>
+    <updated>2026-08-25T01:44:43Z</updated>
+    <link href="https://arxiv.org/abs/2602.03702v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.03702v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models are increasingly trained in continual or open-ended settings, where the total training horizon is not known in advance. Despite this, most existing pretraining recipes are not anytime: they rely on horizon-dependent learning rate schedules and extensive tuning under a fixed compute budget. In this work, we provide a theoretical analysis demonstrating the existence of anytime learning schedules for overparameterized linear regression, and we highlight the central role of weight averaging - also known as model merging - in achieving the minimax convergence rates of stochastic gradient descent. We show that these anytime schedules polynomially decay with time, with the decay rate determined by the source and capacity conditions of the problem. Empirically, we evaluate 150M and 300M parameter language models trained for up to 32x Chinchilla scale, comparing constant and $1/\sqrt{t}$ schedules with weight averaging against a well-tuned cosine schedule. Across the full training range, the anytime schedules achieve comparable final loss to cosine decay. Taken together, our results suggest that weight averaging combined with simple, horizon-free step sizes offers a practical and effective anytime alternative to cosine learning rate schedules for large language model pretraining.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-03T16:24:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alexandru Meterez</name>
+    </author>
+    <author>
+      <name>Pranav Ajit Nair</name>
+    </author>
+    <author>
+      <name>Depen Morwani</name>
+    </author>
+    <author>
+      <name>Cengiz Pehlevan</name>
+    </author>
+    <author>
+      <name>Sham Kakade</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,260 @@
+{
+  "llm_calls": 27,
+  "llm_cost_usd": 1.1524,
+  "explore": {
+    "enabled": true,
+    "directions": 7,
+    "scout_directions": 0,
+    "title_hints_found": 0,
+    "title_hints_not_found": 0,
+    "papers_from_directions": 38,
+    "shared_mechanisms": {},
+    "claims_with_mechanism": 40
+  },
+  "mode": "live_search",
+  "label": "live search, 120 papers retrieved on 2026-10-03 for 19 queries",
+  "search_date": "2026-10-03",
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "normalization",
+      "n_results": 15
+    },
+    {
+      "q": "\"pre-layer normalization\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "normalization",
+      "n_results": 5
+    },
+    {
+      "q": "\"gated linear units\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "activation functions",
+      "n_results": 15
+    },
+    {
+      "q": "\"rotary position embedding\"",
+      "kind": "precise",
+      "dimension": "positional encoding",
+      "n_results": 15
+    },
+    {
+      "q": "\"learning rate warmup\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "optimizers and schedules",
+      "n_results": 8
+    },
+    {
+      "q": "\"character-level\" AND \"Transformer language model\"",
+      "kind": "precise",
+      "dimension": "small-scale training efficiency and regularization",
+      "n_results": 5
+    },
+    {
+      "q": "\"layer normalization\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "normalization",
+      "n_results": 1
+    },
+    {
+      "q": "\"activation functions\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "activation functions",
+      "n_results": 2
+    },
+    {
+      "q": "\"positional encoding\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "positional encoding",
+      "n_results": 9
+    },
+    {
+      "q": "\"optimizer\" AND \"learning-rate schedule\" AND \"language model\"",
+      "kind": "broad",
+      "dimension": "optimizers and schedules",
+      "n_results": 15
+    },
+    {
+      "q": "\"dropout\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "small-scale training efficiency and regularization",
+      "n_results": 0
+    },
+    {
+      "q": "\"squared ReLU\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "activation=relu2",
+      "n_results": 3
+    },
+    {
+      "q": "\"SwiGLU\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "activation=swiglu",
+      "n_results": 15
+    },
+    {
+      "q": "\"dropout\" AND \"Transformer\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "dropout=0.1",
+      "n_results": 15
+    },
+    {
+      "q": "\"RMSNorm\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "norm=rmsnorm",
+      "n_results": 15
+    },
+    {
+      "q": "\"Post-LN\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "norm_position=post",
+      "n_results": 12
+    },
+    {
+      "q": "\"SGD\" AND \"Adam\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "optimizer=sgd_momentum",
+      "n_results": 15
+    },
+    {
+      "q": "\"rotary position embedding\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "pos_encoding=rope",
+      "n_results": 15
+    },
+    {
+      "q": "\"learning rate schedule\" AND \"Transformer\" AND \"constant\"",
+      "kind": "deterministic",
+      "dimension": "schedule=constant",
+      "n_results": 3
+    }
+  ],
+  "degraded": [
+    "scout failed (LLMError: scout: invalid output after retry: 15 validation errors for ScoutOutput\ndirections.0.title\n  Field required [type=missing, input_value={'idea': 'Replace LayerNo...lding_blocks': ['norm']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndirecti); deterministic per-block directions only",
+    "thin mechanism graph: only 0 mechanism node(s) are linked to 2 or more runnable methods (want >= 3); ABC, combination and bridge gaps will be sparse. Fix before recording."
+  ],
+  "openalex": {
+    "enabled": true,
+    "matched": 189
+  },
+  "validation": {
+    "n": 9,
+    "config_mapping": 6,
+    "direction": 4,
+    "setting": 3,
+    "rows": [
+      {
+        "claim_id": "c02",
+        "config_mapping": true,
+        "direction": false,
+        "setting": false
+      },
+      {
+        "claim_id": "c03",
+        "config_mapping": false,
+        "direction": false,
+        "setting": false
+      },
+      {
+        "claim_id": "c04",
+        "config_mapping": true,
+        "direction": true,
+        "setting": false
+      },
+      {
+        "claim_id": "c05",
+        "config_mapping": true,
+        "direction": false,
+        "setting": false
+      },
+      {
+        "claim_id": "c06",
+        "config_mapping": false,
+        "direction": false,
+        "setting": false
+      },
+      {
+        "claim_id": "c09",
+        "config_mapping": true,
+        "direction": true,
+        "setting": true
+      },
+      {
+        "claim_id": "c10",
+        "config_mapping": true,
+        "direction": true,
+        "setting": true
+      },
+      {
+        "claim_id": "c12",
+        "config_mapping": true,
+        "direction": true,
+        "setting": true
+      },
+      {
+        "claim_id": "c13",
+        "config_mapping": false,
+        "direction": false,
+        "setting": false
+      }
+    ]
+  },
+  "counts": {
+    "retrieved": 238,
+    "duplicates": 0,
+    "excluded": 21,
+    "ranked_out": 102,
+    "kept": 120,
+    "curated": 10
+  },
+  "extraction": {
+    "papers": 110,
+    "claims_kept": 115,
+    "dropped_non_verbatim": 0,
+    "nulled_config_change": 0,
+    "papers_without_claims": 15
+  },
+  "niche": {
+    "title": "Training efficiency of tiny character-level Transformers",
+    "description": "Which architecture and optimization choices change the validation loss of a very small character-level Transformer language model trained for a short, fixed number of steps? We care about normalization, activation functions, positional encoding, optimizers, learning-rate schedules and regularization, as reported for Transformer language models.\n",
+    "include_terms": [
+      "layer normalization",
+      "activation functions",
+      "positional encoding",
+      "optimizer",
+      "learning-rate schedule",
+      "dropout",
+      "Transformer language model"
+    ],
+    "exclude_terms": [
+      "vision transformer",
+      "speech",
+      "reinforcement learning"
+    ],
+    "arxiv_categories": [
+      "cs.LG",
+      "cs.CL",
+      "cs.NE"
+    ],
+    "date_from": "2017-01-01",
+    "date_to": "",
+    "seed_papers": [
+      "2002.04745",
+      "1910.07467"
+    ],
+    "max_papers": 80,
+    "testbed": "tiny_char_lm",
+    "pi_overrides": [],
+    "pi_dismissed_holds": []
+  },
+  "papers": 120,
+  "claims": 128,
+  "tiers": {
+    "T1": 13,
+    "T2": 4,
+    "T3": 111,
+    "T4": 15
+  },
+  "coverage_rule": "Our setting: transformer, char_language_modeling, tiny, step-budgeted training.\ncovers: model_family ∈ {transformer, general} AND task ∈ {char_language_modeling, language_modeling, general} AND scale ∈ {tiny, small}.\npartially covers: same model_family and task condition AND scale ∈ {medium, large, unspecified}.\ndoes not cover: anything else.\nFor overlap / prior art, covers OR partially covers counts as covered (we avoid rediscovery). For evidence relations (agrees / contradicts), only covers counts.\nCurated (T1) claims carry a human covers / does-not-cover flag instead of extracted fields."
+}

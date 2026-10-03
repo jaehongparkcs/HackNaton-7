@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/G2aBoR/0rk6nQ7Qi38vU1pR6cvo</id>
+  <title>arXiv Query: search_query=all:"pre-layer normalization" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:45:36Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22pre-layer+normalization%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2207.06356v1</id>
+    <title>Deep Transformer Model with Pre-Layer Normalization for COVID-19 Growth Prediction</title>
+    <updated>2022-07-10T03:48:45Z</updated>
+    <link href="https://arxiv.org/abs/2207.06356v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.06356v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Coronavirus disease or COVID-19 is an infectious disease caused by the SARS-CoV-2 virus. The first confirmed case caused by this virus was found at the end of December 2019 in Wuhan City, China. This case then spread throughout the world, including Indonesia. Therefore, the COVID-19 case was designated as a global pandemic by WHO. The growth of COVID-19 cases, especially in Indonesia, can be predicted using several approaches, such as the Deep Neural Network (DNN). One of the DNN models that can be used is Deep Transformer which can predict time series. The model is trained with several test scenarios to get the best model. The evaluation is finding the best hyperparameters. Then, further evaluation was carried out using the best hyperparameters setting of the number of prediction days, the optimizer, the number of features, and comparison with the former models of the Long Short-Term Memory (LSTM) and Recurrent Neural Network (RNN). All evaluations used metric of the Mean Absolute Percentage Error (MAPE). Based on the results of the evaluations, Deep Transformer produces the best results when using the Pre-Layer Normalization and predicting one day ahead with a MAPE value of 18.83. Furthermore, the model trained with the Adamax optimizer obtains the best performance among other tested optimizers. The performance of the Deep Transformer also exceeds other test models, which are LSTM and RNN.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-10T03:48:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Rizki Ramadhan Fitra</name>
+    </author>
+    <author>
+      <name>Novanto Yudistira</name>
+    </author>
+    <author>
+      <name>Wayan Firdaus Mahmudy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.14802v1</id>
+    <title>ResiDual: Transformer with Dual Residual Connections</title>
+    <updated>2023-04-28T12:19:47Z</updated>
+    <link href="https://arxiv.org/abs/2304.14802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.14802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer networks have become the preferred architecture for many tasks due to their state-of-the-art performance. However, the optimal way to implement residual connections in Transformer, which are essential for effective training, is still debated. Two widely used variants are the Post-Layer-Normalization (Post-LN) and Pre-Layer-Normalization (Pre-LN) Transformers, which apply layer normalization after each residual block's output or before each residual block's input, respectively. While both variants enjoy their advantages, they also suffer from severe limitations: Post-LN causes gradient vanishing issue that hinders training deep Transformers, and Pre-LN causes representation collapse issue that limits model capacity. In this paper, we propose ResiDual, a novel Transformer architecture with Pre-Post-LN (PPLN), which fuses the connections in Post-LN and Pre-LN together and inherits their advantages while avoids their limitations. We conduct both theoretical analyses and empirical experiments to verify the effectiveness of ResiDual. Theoretically, we prove that ResiDual has a lower bound on the gradient to avoid the vanishing issue due to the residual connection from Pre-LN. Moreover, ResiDual also has diverse model representations to avoid the collapse issue due to the residual connection from Post-LN. Empirically, ResiDual outperforms both Post-LN and Pre-LN on several machine translation benchmarks across different network depths and data sizes. Thanks to the good theoretical and empirical performance, ResiDual Transformer can serve as a foundation architecture for different AI models (e.g., large language models). Our code is available at https://github.com/microsoft/ResiDual.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-28T12:19:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shufang Xie</name>
+    </author>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Junliang Guo</name>
+    </author>
+    <author>
+      <name>Xu Tan</name>
+    </author>
+    <author>
+      <name>Jiang Bian</name>
+    </author>
+    <author>
+      <name>Hany Hassan Awadalla</name>
+    </author>
+    <author>
+      <name>Arul Menezes</name>
+    </author>
+    <author>
+      <name>Tao Qin</name>
+    </author>
+    <author>
+      <name>Rui Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.05795v6</id>
+    <title>The Curse of Depth in Large Language Models</title>
+    <updated>2026-08-22T16:12:19Z</updated>
+    <link href="https://arxiv.org/abs/2502.05795v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.05795v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we introduce the Curse of Depth, a concept that highlights, explains, and addresses the recent observation in modern Large Language Models (LLMs) where nearly half of the layers are less effective than expected. We first confirm the wide existence of this phenomenon across the most popular families of LLMs such as Llama, Mistral, DeepSeek, and Qwen. Our analysis, theoretically and empirically, identifies that the underlying reason for the ineffectiveness of deep layers in LLMs is the widespread usage of Pre-Layer Normalization (Pre-LN). While Pre-LN stabilizes the training of Transformer LLMs, its output variance exponentially grows with the model depth, which undesirably causes the derivative of the deep Transformer blocks to be an identity matrix, and therefore barely contributes to the training. To resolve this training pitfall, we propose LayerNorm Scaling (LNS), which scales the variance of output of the layer normalization inversely by the square root of its depth. This simple modification mitigates the output variance explosion of deeper Transformer layers, improving their contribution. Across a wide range of model sizes (130M to 7B), our experiments show that LNS consistently outperforms previous normalization and scaling techniques in enhancing LLM pre-training performance. Moreover, this improvement seamlessly carries over to supervised fine-tuning. All these gains can be attributed to the fact that LayerNorm Scaling enables deeper layers to contribute more effectively during training. Our code is available at \href{https://github.com/lmsdss/LayerNorm-Scaling}{LayerNorm-Scaling}.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-09T07:03:36Z</published>
+    <arxiv:comment>Accepted by NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Wenfang Sun</name>
+    </author>
+    <author>
+      <name>Xinyuan Song</name>
+    </author>
+    <author>
+      <name>Pengxiang Li</name>
+    </author>
+    <author>
+      <name>Lu Yin</name>
+    </author>
+    <author>
+      <name>Yefeng Zheng</name>
+    </author>
+    <author>
+      <name>Shiwei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.19445v3</id>
+    <title>On Surjectivity of Neural Networks: Can you elicit any behavior from your model?</title>
+    <updated>2026-06-16T17:34:06Z</updated>
+    <link href="https://arxiv.org/abs/2508.19445v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.19445v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Given a trained neural network, can any specified output be generated by some input? Equivalently, does the network correspond to a function that is surjective? In generative models, surjectivity implies that any output, including harmful or undesirable content, can in principle be generated by the networks, raising concerns about model safety and jailbreak vulnerabilities. In this paper, we prove that many fundamental building blocks of modern neural architectures, such as networks with pre-layer normalization and linear-attention modules, are almost always surjective. As corollaries, widely used generative frameworks, including GPT-style transformers and diffusion models with deterministic ODE solvers, admit inverse mappings for arbitrary outputs. By studying surjectivity of these modern and commonly used neural architectures, we contribute a formalism that sheds light on their unavoidable vulnerability to a broad class of adversarial attacks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-26T21:36:45Z</published>
+    <arxiv:comment>Blog: https://astro-eric.github.io/blogs/surjective/</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Haozhe Jiang</name>
+    </author>
+    <author>
+      <name>Nika Haghtalab</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.00835v2</id>
+    <title>Scalable Message Passing Neural Networks: No Need for Attention in Large Graph Representation Learning</title>
+    <updated>2026-03-09T19:58:38Z</updated>
+    <link href="https://arxiv.org/abs/2411.00835v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.00835v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose Scalable Message Passing Neural Networks (SMPNNs) and demonstrate that, by integrating standard convolutional message passing into a Pre-Layer Normalization Transformer-style block instead of attention, we can produce high-performing deep message-passing-based Graph Neural Networks (GNNs). This modification yields results competitive with the state-of-the-art in large graph transductive learning, particularly outperforming the best Graph Transformers in the literature, without requiring the otherwise computationally and memory-expensive attention mechanism. Our architecture not only scales to large graphs but also makes it possible to construct deep message-passing networks, unlike simple GNNs, which have traditionally been constrained to shallow architectures due to oversmoothing. Moreover, we provide a new theoretical analysis of oversmoothing based on universal approximation which we use to motivate SMPNNs. We show that in the context of graph convolutions, residual connections are necessary for maintaining the universal approximation properties of downstream learners and that removing them can lead to a loss of universality.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-29T17:18:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Haitz Sáez de Ocáriz Borde</name>
+    </author>
+    <author>
+      <name>Artem Lukoianov</name>
+    </author>
+    <author>
+      <name>Anastasis Kratsios</name>
+    </author>
+    <author>
+      <name>Michael Bronstein</name>
+    </author>
+    <author>
+      <name>Xiaowen Dong</name>
+    </author>
+  </entry>
+</feed>

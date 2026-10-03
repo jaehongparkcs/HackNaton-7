@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from pathlib import Path
 
 from ..llm import LLM
-from ..schemas import Claim, ExtractedClaim, ExtractionOutput, RetrievedPaper
+from ..schemas import MECHANISMS, Claim, ExtractedClaim, ExtractionOutput, RetrievedPaper
 from ..stats import ALLOWED_CHANGES
 from .coverage import coverage_of, tier_of
 
@@ -18,6 +18,7 @@ MAX_PER_PAPER = 3
 
 def _prompt(batch: Sequence[RetrievedPaper]) -> str:
     return ("ALLOWED CONFIG CHANGES (field=value):\n" + "\n".join(f"- {k}" for k in ALLOWED_CHANGES)
+            + "\n\nMECHANISMS (pick one name, or none):\n" + "\n".join(f"- {k}: {v}" for k, v in MECHANISMS.items())
             + "\n\n" + "\n\n".join(f"### PAPER {p.paper_id}\nTitle: {p.title}\nAbstract: {p.abstract}"
                                    for p in batch) + "\n")
 
@@ -34,6 +35,16 @@ def to_claim(ec: ExtractedClaim, paper: RetrievedPaper, n: int, event: str,
         dropped.append({"paper_id": paper.paper_id, "title": paper.title,
                         "reason": f"config_change {change!r} not in the allowlist: set to null (claim kept as context)"})
         change = ""
+    mech, category = ec.mechanism.strip(), ec.mechanism_category
+    if mech and mech not in paper.abstract:          # same verbatim rule as the quote; the claim is kept
+        dropped.append({"paper_id": paper.paper_id, "title": paper.title,
+                        "reason": "non-verbatim mechanism: set to empty (claim kept)", "mechanism": mech})
+        mech = ""
+    if category == "none" or not mech:               # a category without a verbatim quote is not kept
+        if category != "none":
+            dropped.append({"paper_id": paper.paper_id, "title": paper.title,
+                            "reason": f"mechanism category {category!r} without a verbatim quote: dropped (claim kept)"})
+        category, mech = "", ""
     cov = coverage_of(ec.setting)
     s = ec.setting
     field, _, value = change.partition("=")
@@ -47,7 +58,7 @@ def to_claim(ec: ExtractedClaim, paper: RetrievedPaper, n: int, event: str,
         config_change={field: value} if change else None, tier=tier_of(
             curated=False, quote_verified=True, peer_reviewed=paper.peer_reviewed),
         coverage=cov, setting_fields=s, peer_reviewed=paper.peer_reviewed, published=paper.published,
-        extraction_event=event)
+        extraction_event=event, mechanism=mech, mechanism_category=category)
 
 
 def extract(llm: LLM, papers: Sequence[RetrievedPaper], *, role: str = "extract"

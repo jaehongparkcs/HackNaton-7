@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/qDdaTg0l1/UtGWGZJNw4rCni15k</id>
+  <title>arXiv Query: search_query=all:"optimizer" AND all:"learning-rate schedule" AND all:"language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:46:00Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22optimizer%22+AND+(all:%22learning-rate+schedule%22+AND+(all:%22language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>45</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2607.10959v1</id>
+    <title>WSqD: A Horizon-Free Learning Rate Schedule for Large Model Training</title>
+    <updated>2026-07-12T23:24:42Z</updated>
+    <link href="https://arxiv.org/abs/2607.10959v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.10959v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Standard learning rate schedules such as cosine annealing are tied to a fixed training horizon, limiting their ability to accommodate post hoc horizon extension. Warmup-stable-decay (WSD) partially addresses this issue by maintaining a long constant-rate phase before a short linear cooldown, allowing training to resume from a pre-decay checkpoint. However, its peak learning rate is still tuned based on the original training horizon and can become suboptimal when training is extended. Motivated by stochastic convex optimization, we propose WSqD (Warmup with Square-root base and linear Decay), a learning rate schedule that replaces WSD's constant stable phase with a shifted inverse-square-root base while retaining the final linear cooldown. In the stochastic convex setting, WSqD provably attains the minimax-optimal $O(1/\sqrt{T})$ last-iterate convergence rate. Importantly, its base learning rate schedule is horizon-independent, and the training horizon is needed only to determine when to begin the final cooldown. Empirically, on language-model pretraining using the SlimPajama corpus, WSqD matches or outperforms carefully tuned WSD and other baselines across multiple training horizons while reusing a single peak learning rate.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-12T23:24:42Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianhao Ma</name>
+    </author>
+    <author>
+      <name>Yuxin Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.10301v2</id>
+    <title>What do near-optimal learning rate schedules look like?</title>
+    <updated>2026-03-12T21:56:05Z</updated>
+    <link href="https://arxiv.org/abs/2603.10301v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.10301v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A basic unanswered question in neural network training is: what is the best learning rate schedule shape for a given workload? The choice of learning rate schedule is a key factor in the success or failure of the training process, but beyond having some kind of warmup and decay, there is no consensus on what makes a good schedule shape. To answer this question, we designed a search procedure to find the best shapes within a parameterized schedule family. Our approach factors out the schedule shape from the base learning rate, which otherwise would dominate cross-schedule comparisons. We applied our search procedure to a variety of schedule families on three workloads: linear regression, image classification on CIFAR-10, and small-scale language modeling on Wikitext103. We showed that our search procedure indeed generally found near-optimal schedules. We found that warmup and decay are robust features of good schedules, and that commonly used schedule families are not optimal on these workloads. Finally, we explored how the outputs of our shape search depend on other optimization hyperparameters, and found that weight decay can have a strong effect on the optimal schedule shape. To the best of our knowledge, our results represent the most comprehensive results on near-optimal schedule shapes for deep neural network training, to date.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-11T00:53:12Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hiroki Naganuma</name>
+    </author>
+    <author>
+      <name>Atish Agarwala</name>
+    </author>
+    <author>
+      <name>Priya Kasimbeg</name>
+    </author>
+    <author>
+      <name>George E. Dahl</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2408.13359v2</id>
+    <title>Power Scheduler: A Batch Size and Token Number Agnostic Learning Rate Scheduler</title>
+    <updated>2024-09-11T20:48:05Z</updated>
+    <link href="https://arxiv.org/abs/2408.13359v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2408.13359v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Finding the optimal learning rate for language model pretraining is a challenging task. This is not only because there is a complicated correlation between learning rate, batch size, number of training tokens, model size, and other hyperparameters but also because it is prohibitively expensive to perform a hyperparameter search for large language models with Billions or Trillions of parameters. Recent studies propose using small proxy models and small corpus to perform hyperparameter searches and transposing the optimal parameters to large models and large corpus. While the zero-shot transferability is theoretically and empirically proven for model size related hyperparameters, like depth and width, the zero-shot transfer from small corpus to large corpus is underexplored. In this paper, we study the correlation between optimal learning rate, batch size, and number of training tokens for the recently proposed WSD scheduler. After thousands of small experiments, we found a power-law relationship between variables and demonstrated its transferability across model sizes. Based on the observation, we propose a new learning rate scheduler, Power scheduler, that is agnostic about the number of training tokens and batch size. The experiment shows that combining the Power scheduler with Maximum Update Parameterization (muP) can consistently achieve impressive performance with one set of hyperparameters regardless of the number of training tokens, batch size, model size, and even model architecture. Our 3B dense and MoE models trained with the Power scheduler achieve comparable performance as state-of-the-art small language models. We open-source these pretrained models at https://ibm.biz/BdKhLa.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-08-23T20:22:20Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yikang Shen</name>
+    </author>
+    <author>
+      <name>Matthew Stallone</name>
+    </author>
+    <author>
+      <name>Mayank Mishra</name>
+    </author>
+    <author>
+      <name>Gaoyuan Zhang</name>
+    </author>
+    <author>
+      <name>Shawn Tan</name>
+    </author>
+    <author>
+      <name>Aditya Prasad</name>
+    </author>
+    <author>
+      <name>Adriana Meza Soria</name>
+    </author>
+    <author>
+      <name>David D. Cox</name>
+    </author>
+    <author>
+      <name>Rameswar Panda</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34681v1</id>
+    <title>SOLAR: A State-Driven Online Learning Rate Scheduler for LLM Pretraining</title>
+    <updated>2026-09-28T09:09:11Z</updated>
+    <link href="https://arxiv.org/abs/2609.34681v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.34681v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning-rate (LR) scheduling plays a central role in large language model (LLM) pretraining, yet current practice still relies heavily on hand-crafted heuristics such as Warmup-Cosine-Decay and Warmup-Stable-Decay. Because these schedules are fixed in advance, they cannot adapt to evolving optimization dynamics. Online learned scheduling within the Learning to Optimize (L2O) framework offers a dynamic alternative, but remains brittle at LLM scale due to noisy signals, delayed feedback, and the risk of catastrophic divergence. We propose SOLAR (State-driven Online Learning rAte scheduleR), a stabilized framework for reliable online LR adaptation. SOLAR uses a base schedule as a reference and learns bounded, state-dependent residual corrections for individual parameter groups. Each correction re-anchors to the base at every step, allowing the policy to adapt the LR without relearning the warmup-decay profile. A lightweight state representation and progress-aware reward guide online learning, while a Circuit-Breaker restores training after rare unsafe actions. Across autoregressive language-model pretraining, SOLAR improves final perplexity over tuned static schedules and automatic LR tuners for dense models from 60M to 1B, AdamW and Muon, and two MoE settings up to 3B. Matched 130M controls show that adding base anchoring and action bounds improves a global PPO controller from 27.09 to 23.74 final PPL, while group-wise control reaches 22.87 on the same two seeds. A residual policy trained on a 60M proxy can also be frozen and reused at larger dense scales without target PPO updates, remaining effective across a fourfold base-LR range. These results establish SOLAR as a practical learned LR controller for LLM pretraining.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T09:09:11Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Qiulin Shang</name>
+    </author>
+    <author>
+      <name>Binyu Wang</name>
+    </author>
+    <author>
+      <name>Yongqi Qiao</name>
+    </author>
+    <author>
+      <name>Songde Rao</name>
+    </author>
+    <author>
+      <name>Zhoutong Wu</name>
+    </author>
+    <author>
+      <name>Kun Yuan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.24275v4</id>
+    <title>GradPower: Powering Gradients for Faster Language Model Pre-Training</title>
+    <updated>2026-06-13T06:31:26Z</updated>
+    <link href="https://arxiv.org/abs/2505.24275v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.24275v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose GradPower, a lightweight gradient-transformation technique for accelerating language model pre-training. Given a gradient vector $g=(g_i)_i$, GradPower first applies the elementwise sign-power transformation: $\varphi_p(g)=({\rm sign}(g_i)|g_i|^p)_{i}$ for a fixed $p&gt;0$, and then feeds the transformed gradient into a base optimizer. Notably, GradPower requires only a single-line code change and no modifications to the base optimizer's internal logic, including the hyperparameters. When applied to Adam (termed AdamPower), GradPower consistently achieves lower terminal loss across diverse architectures (LLaMA, Qwen2MoE), parameter scales (66M to 2B), datasets (C4, OpenWebText), and learning-rate schedules (cosine, warmup-stable-decay). The most pronounced gains are observed when training modern mixture-of-experts models with warmup-stable-decay schedules. GradPower also integrates seamlessly with other state-of-the-art optimizers, such as Muon, yielding further improvements. Finally, we provide theoretical analyses that reveal the underlying mechanism of GradPower and highlight the influence of gradient noise.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-30T06:49:57Z</published>
+    <arxiv:comment>24 pages, accepted by ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jinbo Wang</name>
+    </author>
+    <author>
+      <name>Mingze Wang</name>
+    </author>
+    <author>
+      <name>Jiaqi Zhang</name>
+    </author>
+    <author>
+      <name>Wei Wang</name>
+    </author>
+    <author>
+      <name>Peng Pei</name>
+    </author>
+    <author>
+      <name>Xunliang Cai</name>
+    </author>
+    <author>
+      <name>Weinan E</name>
+    </author>
+    <author>
+      <name>Lei Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.13705v1</id>
+    <title>Scaling and Transferability of Annealing Strategies in Large Language Model Training</title>
+    <updated>2025-12-05T16:38:33Z</updated>
+    <link href="https://arxiv.org/abs/2512.13705v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.13705v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning rate scheduling is crucial for training large language models, yet understanding the optimal annealing strategies across different model configurations remains challenging. In this work, we investigate the transferability of annealing dynamics in large language model training and refine a generalized predictive framework for optimizing annealing strategies under the Warmup-Steady-Decay (WSD) scheduler. Our improved framework incorporates training steps, maximum learning rate, and annealing behavior, enabling more efficient optimization of learning rate schedules. Our work provides a practical guidance for selecting optimal annealing strategies without exhaustive hyperparameter searches, demonstrating that smaller models can serve as reliable proxies for optimizing the training dynamics of larger models. We validate our findings on extensive experiments using both Dense and Mixture-of-Experts (MoE) models, demonstrating that optimal annealing ratios follow consistent patterns and can be transferred across different training configurations.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-05T16:38:33Z</published>
+    <arxiv:comment>Accepted to AAAI 2026 (camera-ready version)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Siqi Wang</name>
+    </author>
+    <author>
+      <name>Zhengyu Chen</name>
+    </author>
+    <author>
+      <name>Teng Xiao</name>
+    </author>
+    <author>
+      <name>Zheqi Lv</name>
+    </author>
+    <author>
+      <name>Jinluan Yang</name>
+    </author>
+    <author>
+      <name>Xunliang Cai</name>
+    </author>
+    <author>
+      <name>Jingang Wang</name>
+    </author>
+    <author>
+      <name>Xiaomeng Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.23061v2</id>
+    <title>Anytime Training with Schedule-Free Spectral Optimization</title>
+    <updated>2026-09-25T21:31:01Z</updated>
+    <link href="https://arxiv.org/abs/2605.23061v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.23061v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Standard neural network training relies on learning-rate schedules tied to a fixed horizon, leading to strong path dependence and costly re-tuning as data availability changes. Schedule-Free (SF) methods address this by removing explicit schedules, yet SF-AdamW, the current state-of-the-art anytime optimizer, consistently underperforms well-tuned AdamW baselines. We propose SF-NorMuon, a schedule-free spectral optimizer that closes this gap: with a single hyperparameter configuration, SF-NorMuon matches or exceeds tuned AdamW on 125M and 772M parameter language models across $1$--$8\times$ Chinchilla horizons, and trails horizon-aware, cosine-scheduled NorMuon by only $\sim 0.03$ nats, substantially narrowing the gap between anytime and scheduled spectral optimizers. On the theoretical side, we prove a stationarity guarantee for schedule-free spectral dynamics and identify weight decay at the fast iterate as essential for long-horizon stability. SF-NorMuon enables practitioners to obtain high-quality checkpoints at any point during training without committing to a horizon in advance. Fully matching horizon-aware spectral optimizers without a schedule remains an open problem, which we highlight as a direction for future work. By closing the performance gap with tuned AdamW baselines, SF-NorMuon makes horizon-free optimization more practical, taking a step towards truly open-ended, continual learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-21T21:50:22Z</published>
+    <arxiv:comment>Updated version (with additional experiments on ViT Model)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Anuj Apte</name>
+    </author>
+    <author>
+      <name>Pranav Deshpande</name>
+    </author>
+    <author>
+      <name>Niraj Kumar</name>
+    </author>
+    <author>
+      <name>Shouvanik Chakrabarti</name>
+    </author>
+    <author>
+      <name>Junhyung Lyle Kim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.09792v1</id>
+    <title>Interim Report on Human-Guided Adaptive Hyperparameter Optimization with Multi-Fidelity Sprints</title>
+    <updated>2025-05-14T20:38:44Z</updated>
+    <link href="https://arxiv.org/abs/2505.09792v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.09792v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This case study applies a phased hyperparameter optimization process to compare multitask natural language model variants that utilize multiphase learning rate scheduling and optimizer parameter grouping. We employ short, Bayesian optimization sessions that leverage multi-fidelity, hyperparameter space pruning, progressive halving, and a degree of human guidance. We utilize the Optuna TPE sampler and Hyperband pruner, as well as the Scikit-Learn Gaussian process minimization. Initially, we use efficient low-fidelity sprints to prune the hyperparameter space. Subsequent sprints progressively increase their model fidelity and employ hyperband pruning for efficiency. A second aspect of our approach is using a meta-learner to tune threshold values to resolve classification probabilities during inference. We demonstrate our method on a collection of variants of the 2021 Joint Entity and Relation Extraction model proposed by Eberts and Ulges.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-14T20:38:44Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Michael Kamfonas</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.06211v1</id>
+    <title>Staged Training for Transformer Language Models</title>
+    <updated>2022-03-11T19:05:42Z</updated>
+    <link href="https://arxiv.org/abs/2203.06211v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.06211v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The current standard approach to scaling transformer language models trains each model size from a different random initialization. As an alternative, we consider a staged training setup that begins with a small model and incrementally increases the amount of compute used for training by applying a "growth operator" to increase the model depth and width. By initializing each stage with the output of the previous one, the training process effectively re-uses the compute from prior stages and becomes more efficient. Our growth operators each take as input the entire training state (including model parameters, optimizer state, learning rate schedule, etc.) and output a new training state from which training continues. We identify two important properties of these growth operators, namely that they preserve both the loss and the "training dynamics" after applying the operator. While the loss-preserving property has been discussed previously, to the best of our knowledge this work is the first to identify the importance of preserving the training dynamics (the rate of decrease of the loss during training). To find the optimal schedule for stages, we use the scaling laws from (Kaplan et al., 2020) to find a precise schedule that gives the most compute saving by starting a new stage when training efficiency starts decreasing. We empirically validate our growth operators and staged training for autoregressive language models, showing up to 22% compute savings compared to a strong baseline trained from scratch. Our code is available at https://github.com/allenai/staged-training.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-11T19:05:42Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sheng Shen</name>
+    </author>
+    <author>
+      <name>Pete Walsh</name>
+    </author>
+    <author>
+      <name>Kurt Keutzer</name>
+    </author>
+    <author>
+      <name>Jesse Dodge</name>
+    </author>
+    <author>
+      <name>Matthew Peters</name>
+    </author>
+    <author>
+      <name>Iz Beltagy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.21514v1</id>
+    <title>Towards Understanding the Power and Limits of the Muon Optimizer: A River-Valley Perspective</title>
+    <updated>2026-06-19T15:10:20Z</updated>
+    <link href="https://arxiv.org/abs/2606.21514v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.21514v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recently, Muon has gained substantial attention as an appealing alternative to Adam-like optimizers, with many works highlighting its advantages through spectral normalization and improved conditioning. Yet this positive theoretical narrative contrasts with its empirical performance in large language model (LLM) training, where Muon's gains over Adam/AdamW are often mixed, schedule-sensitive, and not uniformly superior. To address this gap, we develop a trajectory-level theory characterizing both the strengths and limitations of Muon. We introduce a mixed-spiked matrix sensing model whose sensing operator decomposes into signal, spike, and bulk components, capturing a mixture of anisotropic structure and long-tail information reminiscent of LLM training. On top of it, we adopted a river-valley perspective in which we view the landscape as composed of a river direction flowing to the desired solution and hill directions encoding nuisance or task-irrelevant information. In the momentum-free setting, we show that Muon moves faster along the information-bearing river direction during early optimization, but can converge much more slowly near the river bottom than gradient descent. We then extend the river-valley perspective to general nonconvex objectives with momentum by studying points on the spectral river. There, while Muon converges faster early on, its orthogonalized update removes residual scale information, making it prone to overshooting and oscillation near the target solution. Together, these results suggest that our characterizations extend beyond spiked matrix sensing and motivate switching to GD-like refinement optimizers in the final phase, rather than relying only on a fixed learning-rate schedule for Muon. We also provide preliminary evidence supporting this two-stage approach in language model training experiments.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-19T15:10:20Z</published>
+    <arxiv:comment>44 pages, 13 figures, 2 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianqi Shen</name>
+    </author>
+    <author>
+      <name>Jinji Yang</name>
+    </author>
+    <author>
+      <name>Runze Shi</name>
+    </author>
+    <author>
+      <name>Jianhao Ma</name>
+    </author>
+    <author>
+      <name>Jiaye Teng</name>
+    </author>
+    <author>
+      <name>Ziye Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.02617v1</id>
+    <title>Adaptive Fine-Tuning of Transformer-Based Language Models for Named Entity Recognition</title>
+    <updated>2022-02-05T19:20:03Z</updated>
+    <link href="https://arxiv.org/abs/2202.02617v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.02617v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The current standard approach for fine-tuning transformer-based language models includes a fixed number of training epochs and a linear learning rate schedule. In order to obtain a near-optimal model for the given downstream task, a search in optimization hyperparameter space is usually required. In particular, the number of training epochs needs to be adjusted to the dataset size. In this paper, we introduce adaptive fine-tuning, which is an alternative approach that uses early stopping and a custom learning rate schedule to dynamically adjust the number of training epochs to the dataset size. For the example use case of named entity recognition, we show that our approach not only makes hyperparameter search with respect to the number of training epochs redundant, but also leads to improved results in terms of performance, stability and efficiency. This holds true especially for small datasets, where we outperform the state-of-the-art fine-tuning method by a large margin.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-05T19:20:03Z</published>
+    <arxiv:comment>28 pages, 19 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Felix Stollenwerk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.05920v1</id>
+    <title>IDEA Prune: An Integrated Enlarge-and-Prune Pipeline in Generative Language Model Pretraining</title>
+    <updated>2025-03-07T20:35:31Z</updated>
+    <link href="https://arxiv.org/abs/2503.05920v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.05920v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advancements in large language models have intensified the need for efficient and deployable models within limited inference budgets. Structured pruning pipelines have shown promise in token efficiency compared to training target-size models from scratch. In this paper, we advocate incorporating enlarged model pretraining, which is often ignored in previous works, into pruning. We study the enlarge-and-prune pipeline as an integrated system to address two critical questions: whether it is worth pretraining an enlarged model even when the model is never deployed, and how to optimize the entire pipeline for better pruned models. We propose an integrated enlarge-and-prune pipeline, which combines enlarge model training, pruning, and recovery under a single cosine annealing learning rate schedule. This approach is further complemented by a novel iterative structured pruning method for gradual parameter removal. The proposed method helps to mitigate the knowledge loss caused by the rising learning rate in naive enlarge-and-prune pipelines and enable effective redistribution of model capacity among surviving neurons, facilitating smooth compression and enhanced performance. We conduct comprehensive experiments on compressing 2.8B models to 1.3B with up to 2T tokens in pretraining. It demonstrates the integrated approach not only provides insights into the token efficiency of enlarged model pretraining but also achieves superior performance of pruned models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-07T20:35:31Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yixiao Li</name>
+    </author>
+    <author>
+      <name>Xianzhi Du</name>
+    </author>
+    <author>
+      <name>Ajay Jaiswal</name>
+    </author>
+    <author>
+      <name>Tao Lei</name>
+    </author>
+    <author>
+      <name>Tuo Zhao</name>
+    </author>
+    <author>
+      <name>Chong Wang</name>
+    </author>
+    <author>
+      <name>Jianyu Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.12167v2</id>
+    <title>PLM: Efficient Peripheral Language Models Hardware-Co-Designed for Ubiquitous Computing</title>
+    <updated>2025-03-19T15:23:29Z</updated>
+    <link href="https://arxiv.org/abs/2503.12167v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.12167v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While scaling laws have been continuously validated in large language models (LLMs) with increasing model parameters, the inherent tension between the inference demands of LLMs and the limited resources of edge devices poses a critical challenge to the development of edge intelligence. Recently, numerous small language models have emerged, aiming to distill the capabilities of LLMs into smaller footprints. However, these models often retain the fundamental architectural principles of their larger counterparts, still imposing considerable strain on the storage and bandwidth capacities of edge devices. In this paper, we introduce the PLM, a Peripheral Language Model, developed through a co-design process that jointly optimizes model architecture and edge system constraints. The PLM utilizes a Multi-head Latent Attention mechanism and employs the squared ReLU activation function to encourage sparsity, thereby reducing peak memory footprint during inference. During training, we collect and reorganize open-source datasets, implement a multi-phase training strategy, and empirically investigate the Warmup-Stable-Decay-Constant (WSDC) learning rate scheduler. Additionally, we incorporate Reinforcement Learning from Human Feedback (RLHF) by adopting the ARIES preference learning approach. Following a two-phase SFT process, this method yields performance gains of 2% in general tasks, 9% in the GSM8K task, and 11% in coding tasks. In addition to its novel architecture, evaluation results demonstrate that PLM outperforms existing small language models trained on publicly available data while maintaining the lowest number of activated parameters. Furthermore, deployment across various edge devices, including consumer-grade GPUs, mobile phones, and Raspberry Pis, validates PLM's suitability for peripheral applications. The PLM series models are publicly available at https://github.com/plm-team/PLM.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-15T15:11:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Cheng Deng</name>
+    </author>
+    <author>
+      <name>Luoyang Sun</name>
+    </author>
+    <author>
+      <name>Jiwen Jiang</name>
+    </author>
+    <author>
+      <name>Yongcheng Zeng</name>
+    </author>
+    <author>
+      <name>Xinjian Wu</name>
+    </author>
+    <author>
+      <name>Wenxin Zhao</name>
+    </author>
+    <author>
+      <name>Qingfa Xiao</name>
+    </author>
+    <author>
+      <name>Jiachuan Wang</name>
+    </author>
+    <author>
+      <name>Haoyang Li</name>
+    </author>
+    <author>
+      <name>Lei Chen</name>
+    </author>
+    <author>
+      <name>Lionel M. Ni</name>
+    </author>
+    <author>
+      <name>Haifeng Zhang</name>
+    </author>
+    <author>
+      <name>Jun Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.06395v3</id>
+    <title>MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies</title>
+    <updated>2024-06-03T08:54:38Z</updated>
+    <link href="https://arxiv.org/abs/2404.06395v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.06395v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The burgeoning interest in developing Large Language Models (LLMs) with up to trillion parameters has been met with concerns regarding resource efficiency and practical expense, particularly given the immense cost of experimentation. This scenario underscores the importance of exploring the potential of Small Language Models (SLMs) as a resource-efficient alternative. In this context, we introduce MiniCPM, specifically the 1.2B and 2.4B non-embedding parameter variants, not only excel in their respective categories but also demonstrate capabilities on par with 7B-13B LLMs. While focusing on SLMs, our approach exhibits scalability in both model and data dimensions for future LLM research. Regarding model scaling, we employ extensive model wind tunnel experiments for stable and optimal scaling. For data scaling, we introduce a Warmup-Stable-Decay (WSD) learning rate scheduler (LRS), conducive to continuous training and domain adaptation. We present an in-depth analysis of the intriguing training dynamics that occurred in the WSD LRS. With WSD LRS, we are now able to efficiently study data-model scaling law without extensive retraining experiments on both axes of model and data, from which we derive the much higher compute optimal data-model ratio than Chinchilla Optimal. Additionally, we introduce MiniCPM family, including MiniCPM-DPO, MiniCPM-MoE and MiniCPM-128K, whose excellent performance further cementing MiniCPM's foundation in diverse SLM applications. MiniCPM models are available publicly at https://github.com/OpenBMB/MiniCPM .</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-09T15:36:50Z</published>
+    <arxiv:comment>revise according to peer review</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shengding Hu</name>
+    </author>
+    <author>
+      <name>Yuge Tu</name>
+    </author>
+    <author>
+      <name>Xu Han</name>
+    </author>
+    <author>
+      <name>Chaoqun He</name>
+    </author>
+    <author>
+      <name>Ganqu Cui</name>
+    </author>
+    <author>
+      <name>Xiang Long</name>
+    </author>
+    <author>
+      <name>Zhi Zheng</name>
+    </author>
+    <author>
+      <name>Yewei Fang</name>
+    </author>
+    <author>
+      <name>Yuxiang Huang</name>
+    </author>
+    <author>
+      <name>Weilin Zhao</name>
+    </author>
+    <author>
+      <name>Xinrong Zhang</name>
+    </author>
+    <author>
+      <name>Zheng Leng Thai</name>
+    </author>
+    <author>
+      <name>Kaihuo Zhang</name>
+    </author>
+    <author>
+      <name>Chongyi Wang</name>
+    </author>
+    <author>
+      <name>Yuan Yao</name>
+    </author>
+    <author>
+      <name>Chenyang Zhao</name>
+    </author>
+    <author>
+      <name>Jie Zhou</name>
+    </author>
+    <author>
+      <name>Jie Cai</name>
+    </author>
+    <author>
+      <name>Zhongwu Zhai</name>
+    </author>
+    <author>
+      <name>Ning Ding</name>
+    </author>
+    <author>
+      <name>Chao Jia</name>
+    </author>
+    <author>
+      <name>Guoyang Zeng</name>
+    </author>
+    <author>
+      <name>Dahai Li</name>
+    </author>
+    <author>
+      <name>Zhiyuan Liu</name>
+    </author>
+    <author>
+      <name>Maosong Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.25482v1</id>
+    <title>Terminal Shrinkage Averaging Reveals a Schedule-Estimator Interaction in LLM Pretraining</title>
+    <updated>2026-09-21T23:19:17Z</updated>
+    <link href="https://arxiv.org/abs/2609.25482v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.25482v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) pretraining conventionally returns the raw final iterate. This couples two design choices: the learning-rate schedule that generates the parameter trajectory and the estimator that constructs the deployed model (e.g. the raw final iterate or a checkpoint average). A schedule that promotes optimization progress may differ from one that minimizes variation in the raw final iterate. Separating these choices creates an opportunity to maintain progress late in training while reducing variation in the returned model. To this end, we propose \emph{Terminal Shrinkage Averaging (TSA)}, which interpolates between the raw final iterate and the average of recent checkpoints to balance recent progress against terminal variation. We analyze how TSA changes the preferred terminal learning-rate schedule under a local quadratic approximation and test this interaction through a sequence of controlled NanoChat experiments. Finally, we demonstrate that the resulting gains transfer to depth-22 NanoChat, where the combined schedule and estimator improve validation quality. A qualifying time-to-GPT-2 run also finishes faster than the public baseline used in our experiments, providing preliminary evidence of benchmark acceleration.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-21T23:19:17Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Adam Ousherovitch</name>
+    </author>
+    <author>
+      <name>Yixin Wang</name>
+    </author>
+  </entry>
+</feed>

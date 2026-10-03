@@ -20,7 +20,7 @@ from noesis_lab.schemas import (
     ExperimentConfig,
     ExtractedClaim,
     Fixture,
-    LiteratureOutput,
+    LiteratureOutputV2,
     NicheSpec,
     PriorArtVerdictKind,
     RetrievedPaper,
@@ -191,7 +191,7 @@ def test_raw_cache_retries_once_then_records_the_failure(tmp_path):
 # ------------------------------------------------------------------------------- extraction checks
 def _ec(**kw):
     base = dict(paper_id="p1", method="RMSNorm", config_change="norm=rmsnorm", claim="c",
-                source_span="RMSNorm lowers loss.", direction="improves",
+                source_span="RMSNorm lowers loss.", direction="improves", mechanism="", mechanism_category="none",
                 setting=dict(model_family="transformer", task="language_modeling", scale="tiny", evidence="empirical"))
     return ExtractedClaim(**{**base, **kw})
 
@@ -204,6 +204,29 @@ def test_non_verbatim_quote_is_dropped_and_logged():
     c = to_claim(_ec(), p, 1, "evt", dropped)
     assert c.source_span in p.abstract and c.tier == "T3" and c.coverage == "covers" and c.covers_our_setting
     assert c.config_change == {"norm": "rmsnorm"} and c.extraction_event == "evt"
+
+
+def test_mechanism_category_is_kept_only_with_a_verbatim_quote():
+    p = paper("p1", abstract="We show RMSNorm lowers loss. It works by stabilizing the gradient norm.")
+    dropped: list = []
+    ok = to_claim(_ec(mechanism_category="gradient_stability", mechanism="stabilizing the gradient norm"), p, 1, "evt", dropped)
+    assert (ok.mechanism_category, ok.mechanism) == ("gradient_stability", "stabilizing the gradient norm") and not dropped
+    bad = to_claim(_ec(mechanism_category="gradient_stability", mechanism="stabilizes gradients"), p, 2, "evt", dropped)
+    assert bad is not None and (bad.mechanism_category, bad.mechanism) == ("", "")           # paraphrase, not a quote
+    assert "non-verbatim mechanism" in dropped[0]["reason"] and "without a verbatim quote" in dropped[1]["reason"]
+    bare = to_claim(_ec(mechanism_category="expressivity", mechanism=""), p, 3, "evt", [])
+    assert bare.mechanism_category == ""                                                    # a category alone is not kept
+    none = to_claim(_ec(mechanism_category="none", mechanism="stabilizing the gradient norm"), p, 4, "evt", [])
+    assert (none.mechanism_category, none.mechanism) == ("", "")
+
+
+def test_extraction_prompt_lists_the_fixed_mechanism_vocabulary():
+    from noesis_lab.schemas import MECHANISMS, ExtractedClaim
+    from noesis_lab.search.extract import _prompt
+    text = _prompt([paper("p1")])
+    assert len(MECHANISMS) == 12 and all(f"- {k}:" in text for k in MECHANISMS)
+    allowed = set(ExtractedClaim.model_json_schema()["properties"]["mechanism_category"]["enum"])
+    assert allowed == set(MECHANISMS) | {"none"}                                           # the schema is closed
 
 
 def test_config_change_outside_the_allowlist_becomes_null():
@@ -219,7 +242,10 @@ def test_query_plan_is_capped_and_every_runnable_change_is_always_searched(tmp_p
     plan, queries, err = plan_queries(llm, load_niche(), max_queries=2)
     assert not err and plan is not None
     assert len([q for q in queries if q["kind"] != "deterministic"]) == 2      # cap enforced by code
-    assert {q["dimension"] for q in queries if q["kind"] == "deterministic"} == set(stats.ALLOWED_CHANGES)
+    served = {k for q in queries if q["kind"] == "deterministic" for k in q["dimension"].split(", ")}
+    assert served == set(stats.ALLOWED_CHANGES)                                 # every runnable change is searched
+    det = [q["q"] for q in queries if q["kind"] == "deterministic"]
+    assert len(det) == len(set(det)) < len(stats.ALLOWED_CHANGES)               # shared queries run once
 
     def broken(role, system, user, schema):
         raise RuntimeError("no LLM")
@@ -332,7 +358,7 @@ def test_gate_soft_rejects_on_an_auto_claim_and_the_pi_can_override(corpus):
                  allowed_fields=["activation"], cited_claim_ids=["x2402_00002_1"])
 
     def says_same(role, system, user, schema):
-        return LiteratureOutput(same_comparison=True, claim_id="x2402_00002_1", rationale="same change")
+        return LiteratureOutputV2(same_comparison_claim_ids=["x2402_00002_1"], rationale="same change")
 
     pa = LiteratureAgent(LLM("mock", CFG["llm"], mock_fn=says_same), snap).check(fx)
     assert (pa.verdict, pa.tier, pa.coverage, pa.gate) == (PriorArtVerdictKind.known, "T2", "partial", "soft_reject")
@@ -354,11 +380,11 @@ def test_session_with_live_search_replays_from_the_frozen_corpus_without_network
     queue = {q["key"]: q for q in st.get_meta("candidate_queue")}
     assert queue["activation=swiglu"]["status"] == "soft_rejected"       # covered by a recorded "preprint"
     assert queue["pos_encoding=rope"]["status"] == "soft_rejected"
-    assert queue["activation=relu2"]["status"] == "rejected_prior_art"
+    assert "activation=relu2" not in queue                               # curated claim covers it: not a gap at all
     soft = [x for x in st.decisions() if x["kind"] == "queue_soft_rejection"]
     assert {x["candidate_key"] for x in soft} == {"activation=swiglu", "pos_encoding=rope"}
     assert all(c["passage"] and c["tier"] in ("T2", "T3") for x in soft for c in x["covering"])
-    ran = [x["candidate_key"] for x in st.decisions() if x["kind"] == "followup_candidate"]
+    ran = [x["key"] for x in st.decisions() if x["kind"] == "exploration_result"]
     assert ran and not {"activation=swiglu", "pos_encoding=rope", "activation=relu2"} & set(ran)
     assert st.get_meta("corpus")["mode"] == "live_search" and st.get_meta("niche")["title"]
     st.close()

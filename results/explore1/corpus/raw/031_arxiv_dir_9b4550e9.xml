@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/LFVDR6KigMDVU1aGfKqBUE3sGY4</id>
+  <title>arXiv Query: search_query=all:"Adam optimizer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:48:02Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Adam+optimizer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>200</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2407.21078v1</id>
+    <title>Convergence rates for the Adam optimizer</title>
+    <updated>2024-07-29T22:49:04Z</updated>
+    <link href="https://arxiv.org/abs/2407.21078v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.21078v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Stochastic gradient descent (SGD) optimization methods are nowadays the method of choice for the training of deep neural networks (DNNs) in artificial intelligence systems. In practically relevant training problems, usually not the plain vanilla standard SGD method is the employed optimization scheme but instead suitably accelerated and adaptive SGD optimization methods are applied. As of today, maybe the most popular variant of such accelerated and adaptive SGD optimization methods is the famous Adam optimizer proposed by Kingma &amp; Ba in 2014. Despite the popularity of the Adam optimizer in implementations, it remained an open problem of research to provide a convergence analysis for the Adam optimizer even in the situation of simple quadratic stochastic optimization problems where the objective function (the function one intends to minimize) is strongly convex. In this work we solve this problem by establishing optimal convergence rates for the Adam optimizer for a large class of stochastic optimization problems, in particular, covering simple quadratic stochastic optimization problems. The key ingredient of our convergence analysis is a new vector field function which we propose to refer to as the Adam vector field. This Adam vector field accurately describes the macroscopic behaviour of the Adam optimization process but differs from the negative gradient of the objective function (the function we intend to minimize) of the considered stochastic optimization problem. In particular, our convergence analysis reveals that the Adam optimizer does typically not converge to critical points of the objective function (zeros of the gradient of the objective function) of the considered optimization problem but converges with rates to zeros of this Adam vector field.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-29T22:49:04Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Steffen Dereich</name>
+    </author>
+    <author>
+      <name>Arnulf Jentzen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.04244v1</id>
+    <title>WarpAdam: A new Adam optimizer based on Meta-Learning approach</title>
+    <updated>2024-09-06T12:51:10Z</updated>
+    <link href="https://arxiv.org/abs/2409.04244v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.04244v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Optimal selection of optimization algorithms is crucial for training deep learning models. The Adam optimizer has gained significant attention due to its efficiency and wide applicability. However, to enhance the adaptability of optimizers across diverse datasets, we propose an innovative optimization strategy by integrating the 'warped gradient descend'concept from Meta Learning into the Adam optimizer. In the conventional Adam optimizer, gradients are utilized to compute estimates of gradient mean and variance, subsequently updating model parameters. Our approach introduces a learnable distortion matrix, denoted as P, which is employed for linearly transforming gradients. This transformation slightly adjusts gradients during each iteration, enabling the optimizer to better adapt to distinct dataset characteristics. By learning an appropriate distortion matrix P, our method aims to adaptively adjust gradient information across different data distributions, thereby enhancing optimization performance. Our research showcases the potential of this novel approach through theoretical insights and empirical evaluations. Experimental results across various tasks and datasets validate the superiority of our optimizer that integrates the 'warped gradient descend' concept in terms of adaptability. Furthermore, we explore effective strategies for training the adaptation matrix P and identify scenarios where this method can yield optimal results. In summary, this study introduces an innovative approach that merges the 'warped gradient descend' concept from Meta Learning with the Adam optimizer. By introducing a learnable distortion matrix P within the optimizer, we aim to enhance the model's generalization capability across diverse data distributions, thus opening up new possibilities in the field of deep learning optimization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-06T12:51:10Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chengxi Pan</name>
+    </author>
+    <author>
+      <name>Junshang Chen</name>
+    </author>
+    <author>
+      <name>Jingrui Ye</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2111.08162v4</id>
+    <title>On a Conjecture Regarding the Adam Optimizer</title>
+    <updated>2022-09-08T18:11:33Z</updated>
+    <link href="https://arxiv.org/abs/2111.08162v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.08162v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Why does the Adam optimizer work so well in deep-learning applications? Adam's originators, Kingma and Ba, presented a mathematical argument that was meant to help explain its success, but Bock and colleagues have since reported that a key piece is missing from that argument $-$ an unproven lemma which we will call Bock's conjecture. Here we show that this conjecture is false, but we prove a modified version of it $-$ a generalization of a result of Reddi and colleagues $-$ which can take its place in analyses of Adam.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-16T00:51:22Z</published>
+    <arxiv:comment>Accepted to the Optimization Algorithms and Machine Learning (ICOAML) conference</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mohamed Akrout</name>
+    </author>
+    <author>
+      <name>Douglas Tweed</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.21433v1</id>
+    <title>Central limit theorem for the averaged Adam optimizer</title>
+    <updated>2026-06-19T13:49:42Z</updated>
+    <link href="https://arxiv.org/abs/2606.21433v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.21433v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this article, we analyse convergence of the averaged Adam optimizer to an attracting zero of the Adam vector field. We provide a central limit theorem that, in particular, quantifies exactly the speed of convergence. The order of convergence is $n^{-1/2}$ in the number of steps of the algorithm which coincides with the order observed for classical stochastic approximation algorithms. The covariance in the central limit theorem is given in terms of properties of the Adam algorithm in the state of the attractor.</summary>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-19T13:49:42Z</published>
+    <arxiv:comment>37 pages</arxiv:comment>
+    <arxiv:primary_category term="math.PR"/>
+    <author>
+      <name>Steffen Dereich</name>
+    </author>
+    <author>
+      <name>Arnulf Jentzen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.24216v1</id>
+    <title>CaAdam: Improving Adam optimizer using connection aware methods</title>
+    <updated>2024-10-31T17:59:46Z</updated>
+    <link href="https://arxiv.org/abs/2410.24216v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.24216v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce a new method inspired by Adam that enhances convergence speed and achieves better loss function minima. Traditional optimizers, including Adam, apply uniform or globally adjusted learning rates across neural networks without considering their architectural specifics. This architecture-agnostic approach is deeply embedded in most deep learning frameworks, where optimizers are implemented as standalone modules without direct access to the network's structural information. For instance, in popular frameworks like Keras or PyTorch, optimizers operate solely on gradients and parameters, without knowledge of layer connectivity or network topology. Our algorithm, CaAdam, explores this overlooked area by introducing connection-aware optimization through carefully designed proxies of architectural information. We propose multiple scaling methodologies that dynamically adjust learning rates based on easily accessible structural properties such as layer depth, connection counts, and gradient distributions. This approach enables more granular optimization while working within the constraints of current deep learning frameworks. Empirical evaluations on standard datasets (e.g., CIFAR-10, Fashion MNIST) show that our method consistently achieves faster convergence and higher accuracy compared to standard Adam optimizer, demonstrating the potential benefits of incorporating architectural awareness in optimization strategies.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-31T17:59:46Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Remi Genet</name>
+    </author>
+    <author>
+      <name>Hugo Inzirillo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.18911v2</id>
+    <title>A Langevin sampling algorithm inspired by the Adam optimizer</title>
+    <updated>2025-05-26T12:19:39Z</updated>
+    <link href="https://arxiv.org/abs/2504.18911v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.18911v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a framework for adaptive-stepsize MCMC sampling based on time-rescaled Langevin dynamics, in which the stepsize variation is dynamically driven by an additional degree of freedom. Our approach augments the phase space by an additional variable which in turn defines a time reparameterization. The use of an auxiliary relaxation equation allows accumulation of a moving average of a local monitor function and provides for precise control of the timestep while circumventing the need to modify the drift term in the physical system. Our algorithm is straightforward to implement and can be readily combined with any off-the-peg fixed-stepsize Langevin integrator. As a particular example, we consider control of the stepsize by monitoring the norm of the log-posterior gradient, which takes inspiration from the Adam optimizer, the stepsize being automatically reduced in regions of steep change of the log posterior and increased on plateaus, improving numerical stability and convergence speed. As in Adam, the stepsize variation depends on the recent history of the gradient norm, which enhances stability and improves accuracy compared to more immediate control approaches. We demonstrate the potential benefit of this method--both in accuracy and in stability--in numerical experiments including Neal's funnel and a Bayesian neural network for classification of MNIST data.</summary>
+    <category term="stat.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-26T12:57:57Z</published>
+    <arxiv:primary_category term="stat.CO"/>
+    <author>
+      <name>Benedict Leimkuhler</name>
+    </author>
+    <author>
+      <name>René Lohmann</name>
+    </author>
+    <author>
+      <name>Peter Whalley</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.16189v8</id>
+    <title>Stabilizing Backpropagation in 16-bit Neural Training with Modified Adam Optimizer</title>
+    <updated>2025-06-17T10:25:04Z</updated>
+    <link href="https://arxiv.org/abs/2307.16189v8" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.16189v8" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this research, we address critical concerns related to the numerical instability observed in 16-bit computations of machine learning models. Such instability, particularly when employing popular optimization algorithms like Adam, often leads to unstable training of deep neural networks. This not only disrupts the learning process but also poses significant challenges in deploying dependable models in real-world applications. Our investigation identifies the epsilon hyperparameter as the primary source of this instability. A nuanced exploration reveals that subtle adjustments to epsilon within 16-bit computations can enhance the numerical stability of Adam, enabling more stable training of 16-bit neural networks. We propose a novel, dependable approach that leverages updates from the Adam optimizer to bolster the stability of the learning process. Our contributions provide deeper insights into optimization challenges in low-precision computations and offer solutions to ensure the stability of deep neural network training, paving the way for their dependable use in various applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-30T10:03:36Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Juyoung Yun</name>
+    </author>
+  </entry>
+</feed>

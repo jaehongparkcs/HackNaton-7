@@ -16,17 +16,32 @@ def load_config(path: str | None = None) -> dict[str, Any]:
     return yaml.safe_load(Path(path or ROOT / "config.yaml").read_text())
 
 
+def bundle_config(bundle: Path) -> dict[str, Any]:
+    """The config a bundle was recorded with. Replay and rederive use it, so later edits to
+    config.yaml (budgets, rule version, engine settings) never change how an old bundle replays."""
+    snap = Path(bundle) / "config.snapshot.yaml"
+    return yaml.safe_load(snap.read_text()) if snap.exists() else load_config()
+
+
+def protocol(cfg: dict[str, Any]) -> dict[str, int]:
+    """Versions of the pre-registered rule and the prior-art gate. Bundles recorded before the
+    `protocol:` block existed are version 1 of both."""
+    p = cfg.get("protocol", {})
+    return {"rule_version": int(p.get("rule_version", 1)), "gate_version": int(p.get("gate_version", 1)),
+            "search_loop": bool(cfg.get("search_loop", {}).get("enabled", False))}
+
+
 def path_of(key: str) -> Path:
     return ROOT / load_config()["paths"][key]
 
 
-def get_profile(name: str) -> Profile:
-    profs = load_config()["profiles"]
+def get_profile(name: str, cfg: dict[str, Any] | None = None) -> Profile:
+    profs = (cfg or load_config())["profiles"]
     if name not in profs:
         raise KeyError(f"unknown profile {name!r}; have {sorted(profs)}")
     return Profile(name=name, **profs[name])
 
 
-def baseline_config(profile: Profile) -> ExperimentConfig:
-    base = ExperimentConfig.model_validate(load_config()["baseline"])
+def baseline_config(profile: Profile, cfg: dict[str, Any] | None = None) -> ExperimentConfig:
+    base = ExperimentConfig.model_validate((cfg or load_config())["baseline"])
     return apply_delta(base, profile.baseline_overrides) if profile.baseline_overrides else base

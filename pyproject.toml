@@ -12,6 +12,7 @@ dependencies = [
   "streamlit>=1.40",
   "pandas>=2.2",
   "python-dotenv>=1.0",
+  "networkx>=3.2",
 ]
 
 [dependency-groups]

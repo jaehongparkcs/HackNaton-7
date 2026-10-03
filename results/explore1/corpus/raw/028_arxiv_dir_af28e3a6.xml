@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/hZTL6nrtkw9ZgN3jsB7BE3Mb3eg</id>
+  <title>arXiv Query: search_query=all:"Post-LN" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=5</title>
+  <updated>2026-10-03T22:47:53Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Post-LN%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=5&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:totalResults>14</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2412.13795v2</id>
+    <title>Mix-LN: Unleashing the Power of Deeper Layers by Combining Pre-LN and Post-LN</title>
+    <updated>2025-08-04T10:49:54Z</updated>
+    <link href="https://arxiv.org/abs/2412.13795v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.13795v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have achieved remarkable success, yet recent findings reveal that their deeper layers often contribute minimally and can be pruned without affecting overall performance. While some view this as an opportunity for model compression, we identify it as a training shortfall rooted in the widespread use of Pre-Layer Normalization (Pre-LN). We demonstrate that Pre-LN, commonly employed in models like GPT and LLaMA, leads to diminished gradient norms in its deeper layers, reducing their effectiveness. In contrast, Post-Layer Normalization (Post-LN) preserves larger gradient norms in deeper layers but suffers from vanishing gradients in earlier layers. To address this, we introduce Mix-LN, a novel normalization technique that combines the strengths of Pre-LN and Post-LN within the same model. Mix-LN applies Post-LN to the earlier layers and Pre-LN to the deeper layers, ensuring more uniform gradients across layers. This allows all parts of the network--both shallow and deep layers--to contribute effectively to training. Extensive experiments with various model sizes from 70M to 7B demonstrate that Mix-LN consistently outperforms both Pre-LN and Post-LN, promoting more balanced, healthier gradient norms throughout the network, and enhancing the overall quality of LLM pre-training. Furthermore, we demonstrate that models pre-trained with Mix-LN learn better compared to those using Pre-LN or Post-LN during supervised fine-tuning (SFT) and reinforcement learning from human feedback (RLHF), highlighting the critical importance of high-quality deep layers. By effectively addressing the inefficiencies of deep layers in current LLMs, Mix-LN unlocks their potential, enhancing model capacity without increasing model size. Our code is available at https://github.com/pixeli99/MixLN.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-18T12:39:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Pengxiang Li</name>
+    </author>
+    <author>
+      <name>Lu Yin</name>
+    </author>
+    <author>
+      <name>Shiwei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.18849v2</id>
+    <title>Exact Attention Sensitivity and the Geometry of Transformer Stability</title>
+    <updated>2026-08-17T00:16:56Z</updated>
+    <link href="https://arxiv.org/abs/2602.18849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.18849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a sensitivity analysis for transformer attention in a geometry aligned with tokenwise computation. Our main result is the exact identity $\|J_τ(u)\|_{\infty\to1}=θ(p)/τ$ for the Jacobian $J_τ(u)$ of the tempered softmax $u\mapsto\mathrm{softmax}(u/τ)$, where $θ(p)=4\max_{S\subseteq[L]}p(S)(1-p(S))$ measures how evenly the attention distribution can be bisected rather than how concentrated it is. We combine this identity with a block-$\infty$/RMS norm under which row-stochastic attention mixing is nonexpansive. This yields a distribution-aware local Jacobian bound for multi-head attention and a sequence-length-independent Lipschitz bound on bounded input sets, with explicit dependence on width, input magnitude, temperature, and projection norms. We also identify a structural distinction between normalization placements: a pre-LN residual-sublayer Jacobian contains an additive identity term, whereas a post-LN residual-sublayer Jacobian does not. A LayerNorm projection lemma gives a sufficient condition under which the LayerNorm-only term in the post-LN expansion contracts geometrically; the condition is not tested by our experiments. Across three Pre-LN early-training runs of $774$M-parameter models, attention becomes substantially more concentrated while the median lower-bound certificate for $θ(p)$ remains near one at every sampled layer and checkpoint. This certifies near-maximal exact sensitivity for at least half of the sampled rows within each layer. A minority of rows enters a dominant-atom regime with lower exact sensitivity, consistent with the deterministic relationship between $p_{\max}$ and $θ(p)$.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-21T14:25:24Z</published>
+    <arxiv:comment>27 pages, 4 figures. v2: Major revision. Exact softmax sensitivity theorem unchanged. Removed an unsupported path-length scaling theorem and its DeepNorm derivation; corrected the uniform-attention parity case and the loss normalization/update accounting; reran the headline experiments; clarified the local vs. bounded-domain bounds and the conditional pre-LN/post-LN analysis</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Seyed Morteza Emadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.00330v2</id>
+    <title>B2T Connection: Serving Stability and Performance in Deep Transformers</title>
+    <updated>2023-05-26T09:16:22Z</updated>
+    <link href="https://arxiv.org/abs/2206.00330v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.00330v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>From the perspective of the layer normalization (LN) positions, the architectures of Transformers can be categorized into two types: Post-LN and Pre-LN. Recent Transformers tend to be Pre-LN because, in Post-LN with deep Transformers (e.g., those with ten or more layers), the training is often unstable, resulting in useless models. However, Post-LN has consistently achieved better performance than Pre-LN in relatively shallow Transformers (e.g., those with six or fewer layers). This study first investigates the reason for these discrepant observations empirically and theoretically and made the following discoveries: 1, the LN in Post-LN is the main source of the vanishing gradient problem that leads to unstable training, whereas Pre-LN prevents it, and 2, Post-LN tends to preserve larger gradient norms in higher layers during the back-propagation, which may lead to effective training. Exploiting the new findings, we propose a method that can provide both high stability and effective training by a simple modification of Post-LN. We conduct experiments on a wide range of text generation tasks. The experimental results demonstrate that our method outperforms Pre-LN, and enables stable training regardless of the shallow or deep layer settings. Our code is publicly available at https://github.com/takase/b2t_connection.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-01T08:43:20Z</published>
+    <arxiv:comment>Findings of ACL 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sho Takase</name>
+    </author>
+    <author>
+      <name>Shun Kiyono</name>
+    </author>
+    <author>
+      <name>Sosuke Kobayashi</name>
+    </author>
+    <author>
+      <name>Jun Suzuki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.14802v1</id>
+    <title>ResiDual: Transformer with Dual Residual Connections</title>
+    <updated>2023-04-28T12:19:47Z</updated>
+    <link href="https://arxiv.org/abs/2304.14802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.14802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer networks have become the preferred architecture for many tasks due to their state-of-the-art performance. However, the optimal way to implement residual connections in Transformer, which are essential for effective training, is still debated. Two widely used variants are the Post-Layer-Normalization (Post-LN) and Pre-Layer-Normalization (Pre-LN) Transformers, which apply layer normalization after each residual block's output or before each residual block's input, respectively. While both variants enjoy their advantages, they also suffer from severe limitations: Post-LN causes gradient vanishing issue that hinders training deep Transformers, and Pre-LN causes representation collapse issue that limits model capacity. In this paper, we propose ResiDual, a novel Transformer architecture with Pre-Post-LN (PPLN), which fuses the connections in Post-LN and Pre-LN together and inherits their advantages while avoids their limitations. We conduct both theoretical analyses and empirical experiments to verify the effectiveness of ResiDual. Theoretically, we prove that ResiDual has a lower bound on the gradient to avoid the vanishing issue due to the residual connection from Pre-LN. Moreover, ResiDual also has diverse model representations to avoid the collapse issue due to the residual connection from Post-LN. Empirically, ResiDual outperforms both Post-LN and Pre-LN on several machine translation benchmarks across different network depths and data sizes. Thanks to the good theoretical and empirical performance, ResiDual Transformer can serve as a foundation architecture for different AI models (e.g., large language models). Our code is available at https://github.com/microsoft/ResiDual.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-28T12:19:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shufang Xie</name>
+    </author>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Junliang Guo</name>
+    </author>
+    <author>
+      <name>Xu Tan</name>
+    </author>
+    <author>
+      <name>Jiang Bian</name>
+    </author>
+    <author>
+      <name>Hany Hassan Awadalla</name>
+    </author>
+    <author>
+      <name>Arul Menezes</name>
+    </author>
+    <author>
+      <name>Tao Qin</name>
+    </author>
+    <author>
+      <name>Rui Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.19895v2</id>
+    <title>Post-LayerNorm Is Back: Stable, ExpressivE, and Deep</title>
+    <updated>2026-01-30T03:44:40Z</updated>
+    <link href="https://arxiv.org/abs/2601.19895v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.19895v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) scaling is hitting a wall. Widening models yields diminishing returns, and extending context length does not improve fundamental expressivity. In contrast, depth scaling offers theoretically superior expressivity, yet current Transformer architectures struggle to train reliably at extreme depths. We revisit the Post-LayerNorm (Post-LN) formulation, whose instability at scale caused its replacement by Pre-LN in modern LLMs. We show that the central failure mode of Post-LN arises from the ResNet-style residual pathway, which introduces gradient vanishing in deep networks. We present Keel, a Post-LN Transformer that replaces this residual path with a Highway-style connection. This modification preserves the gradient flow through the residual branch, preventing signal vanishing from the top layers to the bottom. Unlike prior methods, Keel enables stable training at extreme depths without requiring specialized initialization or complex optimization tricks. Keel trains robustly at depths exceeding 1000 layers and consistently improves perplexity and depth-scaling characteristics over Pre-LN. These findings indicate that Post-LN, when paired with a Highway-style connection, provides a simple and effective foundation for building deeply scalable LLMs, opening the possibility for future infinite-depth architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-27T18:58:46Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chen Chen</name>
+    </author>
+    <author>
+      <name>Lai Wei</name>
+    </author>
+  </entry>
+</feed>

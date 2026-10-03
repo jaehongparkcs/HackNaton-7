@@ -1,0 +1,592 @@
+{
+  "fixture_id": "gap_optimizer_sgd_momentum",
+  "round": 0,
+  "delta": {
+    "optimizer": "sgd_momentum"
+  },
+  "queries": [
+    {
+      "q": "\"SGD with momentum\" AND \"language model\"",
+      "n_results": 10
+    },
+    {
+      "q": "\"SGD with momentum\" AND \"Transformer\"",
+      "n_results": 9
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [
+    {
+      "paper_id": "2506.12543",
+      "title": "Is your batch size the problem? Revisiting the Adam-SGD gap in language modeling",
+      "authors": [
+        "Teodora Srećković",
+        "Jonas Geiping",
+        "Antonio Orvieto"
+      ],
+      "published": "2025-06-14",
+      "url": "https://arxiv.org/abs/2506.12543",
+      "abstract": "Adam is known to perform significantly better than Stochastic Gradient Descent (SGD) in language models, a phenomenon for which a number of explanations have been proposed. In this work, we revisit this \"optimizer gap\" through a series of comprehensively tuned baseline training runs for language modeling with Transformers. We exhaustively study how momentum, gradient clipping, and batch size affect the gap between SGD and Adam. Our empirical findings show that SGD with momentum can actually perform similarly to Adam in small-batch settings, if tuned correctly. We revisit existing explanations for Adam's advantage, including heavy-tailed class imbalance, directional sharpness, and Hessian heterogeneity, which struggle to directly explain this phenomenon. Towards bridging this gap in our understanding, by analyzing our Transformer training runs and simple quadratic settings inspired by the literature, we provide new insights, driven by stochastic differential equation models, into the role of batch size on the training dynamics.",
+      "abstract_sha256": "d835dc01a5ba6682ffac68943f1afe58fe6e6369037387e5ac36cb0eaf053ff5",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "math.OC"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2309.01966",
+      "title": "AdaPlus: Integrating Nesterov Momentum and Precise Stepsize Adjustment on AdamW Basis",
+      "authors": [
+        "Lei Guan"
+      ],
+      "published": "2023-09-05",
+      "url": "https://arxiv.org/abs/2309.01966",
+      "abstract": "This paper proposes an efficient optimizer called AdaPlus which integrates Nesterov momentum and precise stepsize adjustment on AdamW basis. AdaPlus combines the advantages of AdamW, Nadam, and AdaBelief and, in particular, does not introduce any extra hyper-parameters. We perform extensive experimental evaluations on three machine learning tasks to validate the effectiveness of AdaPlus. The experiment results validate that AdaPlus (i) among all the evaluated adaptive methods, performs most comparable with (even slightly better than) SGD with momentum on image classification tasks and (ii) outperforms other state-of-the-art optimizers on language modeling tasks and illustrates pretty high stability when training GANs. The experiment code of AdaPlus will be accessible at: https://github.com/guanleics/AdaPlus.",
+      "abstract_sha256": "354ff42399c01ebf371655d4bb0e7175bb7d05b7c4d3a66554ca63b49ced6598",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2509.24320",
+      "title": "AuON: A Linear-time Alternative to Orthogonal Momentum Updates",
+      "authors": [
+        "Dipan Maity"
+      ],
+      "published": "2025-09-29",
+      "url": "https://arxiv.org/abs/2509.24320",
+      "abstract": "Orthogonal momentum gradient updates have emerged to overcome the limitations of vector-based optimizers like Adam. The vector-based optimizer Adam suffers from high memory costs and ill-conditioned momentum gradient updates. However, traditional Orthogonal momentum approaches, such as SVD/QR decomposition, suffer from high computational and memory costs and underperform compared to well-tuned SGD with momentum. Recent advances, such as Muon, improve efficiency by applying momentum before orthogonalization and approximate orthogonal matrices via Newton-Schulz iterations, which gives better GPU utilization, active high TFLOPS, and reduces memory usage by up to 3x. Nevertheless, Muon(Vanilla) suffers from exploding attention logits and has cubic computation complexity. In this paper, we deep dive into orthogonal momentum gradient updates to find the main properties that help Muon achieve remarkable performance. We propose AuON (Alternative Unit-norm momentum updates by Normalized nonlinear scaling), a linear-time optimizer that achieves strong performance without approximate orthogonal matrices, while preserving structural alignment and reconditioning ill-posed updates. AuON has an automatic \"emergency brake\" to handle exploding attention logits. We further introduce a hybrid variant, Hybrid-AuON, that applies the linear transformations with Newton-Schulz iterations, which outperforms Muon in the language modeling tasks. Code is available at: https://github.com/ryyzn9/AuON",
+      "abstract_sha256": "2df8f6f0d395349ca4f214b008e9f70e4dae383a18eeaa9d6d76b764a273090d",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2512.24695",
+      "title": "Nested Learning: The Illusion of Deep Learning Architectures",
+      "authors": [
+        "Ali Behrouz",
+        "Meisam Razaviyayn",
+        "Peilin Zhong",
+        "Vahab Mirrokni"
+      ],
+      "published": "2025-12-31",
+      "url": "https://arxiv.org/abs/2512.24695",
+      "abstract": "Despite the recent progresses, particularly in developing Language Models, there are fundamental challenges and unanswered questions about how such models can continually learn/memorize, self-improve, and find effective solutions. In this paper, we present a new learning paradigm, called Nested Learning (NL), that coherently represents a machine learning model with a set of nested, multi-level, and/or parallel optimization problems, each of which with its own context flow. Through the lenses of NL, existing deep learning methods learns from data through compressing their own context flow, and in-context learning naturally emerges in large models. NL suggests a philosophy to design more expressive learning algorithms with more levels, resulting in higher-order in-context learning and potentially unlocking effective continual learning capabilities. We advocate for NL by presenting three core contributions: (1) Expressive Optimizers: We show that known gradient-based optimizers, such as Adam, SGD with Momentum, etc., are in fact associative memory modules that aim to compress the gradients' information (by gradient descent). Building on this insight, we present other more expressive optimizers with deep memory and/or more powerful learning rules; (2) Self-Modifying Learning Module: Taking advantage of NL's insights on learning algorithms, we present a sequence model that learns how to modify itself by learning its own update algorithm; and (3) Continuum Memory System: We present a new formulation for memory system that generalizes the traditional viewpoint of long/short-term memory. Combining our self-modifying sequence model with the continuum memory system, we present a continual learning module, called Hope, showing promising results in language modeling, knowledge incorporation, and few-shot generalization tasks, continual learning, and long-context reasoning tasks.",
+      "abstract_sha256": "fe2ceda8fe6c32025272378c53df1161fdd4e084cee1983c46602495e7f50f66",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2511.07767",
+      "title": "Taking the Road Less Scheduled with Adaptive Polyak Steps",
+      "authors": [
+        "Dimitris Oikonomou",
+        "Matthew Buchholz",
+        "Yuen-Man Pun",
+        "Robert M. Gower",
+        "Nicolas Loizou"
+      ],
+      "published": "2025-11-11",
+      "url": "https://arxiv.org/abs/2511.07767",
+      "abstract": "Schedule-Free SGD, proposed in [Defazio et al., 2024], achieves optimal convergence rates without requiring the training horizon in advance, by replacing learning rate schedules with a principled form of iterate averaging. However, the method still requires tuning a base learning rate whose optimal value depends on unknown problem constants. In this work, we continue down this road by deriving Polyak-type step sizes for Schedule-Free SGD and Adam that compute the learning rate at each iteration from the sampled loss, gradient, and current iterates alone. We first propose an oracle variant that uses per-sample optimal function values and prove an $O(1/\\sqrt{t})$ anytime last-iterate rate for convex Lipschitz objectives. We then remove the oracle requirement with a safeguarded variant that replaces the unknown optimal values with any available lower bound, achieving the same rate up to a neighborhood that vanishes under interpolation. Both step sizes reduce to existing Polyak rules for standard SGD when momentum is set to zero, unifying standard and schedule-free Polyak methods. Numerical experiments on language modeling, including pretraining and distillation, show that the proposed methods match or surpass tuned Schedule-Free baselines while offering greater robustness to hyperparameter choices.",
+      "abstract_sha256": "2d7d5c0679ab300b84564be6949473ec93923c081719d34c0b72946dea9984e1",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2110.02861",
+      "title": "8-bit Optimizers via Block-wise Quantization",
+      "authors": [
+        "Tim Dettmers",
+        "Mike Lewis",
+        "Sam Shleifer",
+        "Luke Zettlemoyer"
+      ],
+      "published": "2021-10-06",
+      "url": "https://arxiv.org/abs/2110.02861",
+      "abstract": "Stateful optimizers maintain gradient statistics over time, e.g., the exponentially smoothed sum (SGD with momentum) or squared sum (Adam) of past gradient values. This state can be used to accelerate optimization compared to plain stochastic gradient descent but uses memory that might otherwise be allocated to model parameters, thereby limiting the maximum size of models trained in practice. In this paper, we develop the first optimizers that use 8-bit statistics while maintaining the performance levels of using 32-bit optimizer states. To overcome the resulting computational, quantization, and stability challenges, we develop block-wise dynamic quantization. Block-wise quantization divides input tensors into smaller blocks that are independently quantized. Each block is processed in parallel across cores, yielding faster optimization and high precision quantization. To maintain stability and performance, we combine block-wise quantization with two additional changes: (1) dynamic quantization, a form of non-linear optimization that is precise for both large and small magnitude values, and (2) a stable embedding layer to reduce gradient variance that comes from the highly non-uniform distribution of input tokens in language models. As a result, our 8-bit optimizers maintain 32-bit performance with a small fraction of the memory footprint on a range of tasks, including 1.5B parameter language modeling, GLUE finetuning, ImageNet classification, WMT'14 machine translation, MoCo v2 contrastive ImageNet pretraining+finetuning, and RoBERTa pretraining, without changes to the original optimizer hyperparameters. We open-source our 8-bit optimizers as a drop-in replacement that only requires a two-line code change.",
+      "abstract_sha256": "084745fa4770969a7fea98bc5d11e312393826523af77dce4a909a94ec54781d",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2010.07468",
+      "title": "AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients",
+      "authors": [
+        "Juntang Zhuang",
+        "Tommy Tang",
+        "Yifan Ding",
+        "Sekhar Tatikonda",
+        "Nicha Dvornek",
+        "Xenophon Papademetris",
+        "James S. Duncan"
+      ],
+      "published": "2020-10-15",
+      "url": "https://arxiv.org/abs/2010.07468",
+      "abstract": "Most popular optimizers for deep learning can be broadly categorized as adaptive methods (e.g. Adam) and accelerated schemes (e.g. stochastic gradient descent (SGD) with momentum). For many models such as convolutional neural networks (CNNs), adaptive methods typically converge faster but generalize worse compared to SGD; for complex settings such as generative adversarial networks (GANs), adaptive methods are typically the default because of their stability.We propose AdaBelief to simultaneously achieve three goals: fast convergence as in adaptive methods, good generalization as in SGD, and training stability. The intuition for AdaBelief is to adapt the stepsize according to the \"belief\" in the current gradient direction. Viewing the exponential moving average (EMA) of the noisy gradient as the prediction of the gradient at the next time step, if the observed gradient greatly deviates from the prediction, we distrust the current observation and take a small step; if the observed gradient is close to the prediction, we trust it and take a large step. We validate AdaBelief in extensive experiments, showing that it outperforms other methods with fast convergence and high accuracy on image classification and language modeling. Specifically, on ImageNet, AdaBelief achieves comparable accuracy to SGD. Furthermore, in the training of a GAN on Cifar10, AdaBelief demonstrates high stability and improves the quality of generated samples compared to a well-tuned Adam optimizer. Code is available at https://github.com/juntang-zhuang/Adabelief-Optimizer",
+      "abstract_sha256": "cb5f7b7773df9790a3c6248a7af3379a86e8e936a30260ce2b4830d4907f2f35",
+      "source": "arxiv",
+      "venue": "NeurIPS 2020",
+      "peer_reviewed": true,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.CV",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2002.01113",
+      "title": "Efficient Riemannian Optimization on the Stiefel Manifold via the Cayley Transform",
+      "authors": [
+        "Jun Li",
+        "Li Fuxin",
+        "Sinisa Todorovic"
+      ],
+      "published": "2020-02-04",
+      "url": "https://arxiv.org/abs/2002.01113",
+      "abstract": "Strictly enforcing orthonormality constraints on parameter matrices has been shown advantageous in deep learning. This amounts to Riemannian optimization on the Stiefel manifold, which, however, is computationally expensive. To address this challenge, we present two main contributions: (1) A new efficient retraction map based on an iterative Cayley transform for optimization updates, and (2) An implicit vector transport mechanism based on the combination of a projection of the momentum and the Cayley transform on the Stiefel manifold. We specify two new optimization algorithms: Cayley SGD with momentum, and Cayley ADAM on the Stiefel manifold. Convergence of Cayley SGD is theoretically analyzed. Our experiments for CNN training demonstrate that both algorithms: (a) Use less running time per iteration relative to existing approaches that enforce orthonormality of CNN parameters; and (b) Achieve faster convergence rates than the baseline SGD and ADAM algorithms without compromising the performance of the CNN. Cayley SGD and Cayley ADAM are also shown to reduce the training time for optimizing the unitary transition matrices in RNNs.",
+      "abstract_sha256": "35350b42a33459cf58df3ee4afe9de30f539bb562f84b7ce3e05503da6725196",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2402.06948",
+      "title": "Should I try multiple optimizers when fine-tuning pre-trained Transformers for NLP tasks? Should I tune their hyperparameters?",
+      "authors": [
+        "Nefeli Gkouti",
+        "Prodromos Malakasiotis",
+        "Stavros Toumpis",
+        "Ion Androutsopoulos"
+      ],
+      "published": "2024-02-10",
+      "url": "https://arxiv.org/abs/2402.06948",
+      "abstract": "NLP research has explored different neural model architectures and sizes, datasets, training objectives, and transfer learning techniques. However, the choice of optimizer during training has not been explored as extensively. Typically, some variant of Stochastic Gradient Descent (SGD) is employed, selected among numerous variants, using unclear criteria, often with minimal or no tuning of the optimizer's hyperparameters. Experimenting with five GLUE datasets, two models (DistilBERT and DistilRoBERTa), and seven popular optimizers (SGD, SGD with Momentum, Adam, AdaMax, Nadam, AdamW, and AdaBound), we find that when the hyperparameters of the optimizers are tuned, there is no substantial difference in test performance across the five more elaborate (adaptive) optimizers, despite differences in training loss. Furthermore, tuning just the learning rate is in most cases as good as tuning all the hyperparameters. Hence, we recommend picking any of the best-behaved adaptive optimizers (e.g., Adam) and tuning only its learning rate. When no hyperparameter can be tuned, SGD with Momentum is the best choice.",
+      "abstract_sha256": "14e8d1264aac8ca3bb310126c42002b4d9ebed1e0d37708f9b7e7ebe9b7005d5",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2010.10502",
+      "title": "Dual Averaging is Surprisingly Effective for Deep Learning Optimization",
+      "authors": [
+        "Samy Jelassi",
+        "Aaron Defazio"
+      ],
+      "published": "2020-10-20",
+      "url": "https://arxiv.org/abs/2010.10502",
+      "abstract": "First-order stochastic optimization methods are currently the most widely used class of methods for training deep neural networks. However, the choice of the optimizer has become an ad-hoc rule that can significantly affect the performance. For instance, SGD with momentum (SGD+M) is typically used in computer vision (CV) and Adam is used for training transformer models for Natural Language Processing (NLP). Using the wrong method can lead to significant performance degradation. Inspired by the dual averaging algorithm, we propose Modernized Dual Averaging (MDA), an optimizer that is able to perform as well as SGD+M in CV and as Adam in NLP. Our method is not adaptive and is significantly simpler than Adam. We show that MDA induces a decaying uncentered $L_2$-regularization compared to vanilla SGD+M and hypothesize that this may explain why it works on NLP problems where SGD+M fails.",
+      "abstract_sha256": "d2c504b121c7371a14980bf8de3760557b1cab680dc729976ba8bafdfd048beb",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "math.OC",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_optimizer_sgd_momentum: \"SGD with momentum\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2506_12543_1",
+      "paper_id": "2506.12543",
+      "dimension": "optimizer",
+      "method": "SGD with momentum vs Adam",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "SGD with momentum, if tuned correctly, can perform similarly to Adam for Transformer language modeling in small-batch settings.",
+      "source_span": "Our empirical findings show that SGD with momentum can actually perform similarly to Adam in small-batch settings, if tuned correctly.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": {
+        "optimizer": "sgd_momentum"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-06-14",
+      "extraction_event": "unrecorded-6837960b"
+    },
+    {
+      "claim_id": "x2309_01966_1",
+      "paper_id": "2309.01966",
+      "dimension": "outside_testbed",
+      "method": "AdaPlus optimizer",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "AdaPlus outperforms other state-of-the-art optimizers on language modeling tasks.",
+      "source_span": "outperforms other state-of-the-art optimizers on language modeling tasks",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-09-05",
+      "extraction_event": "unrecorded-6837960b"
+    },
+    {
+      "claim_id": "x2509_24320_1",
+      "paper_id": "2509.24320",
+      "dimension": "outside_testbed",
+      "method": "Hybrid-AuON optimizer",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Hybrid-AuON, applying linear transformations with Newton-Schulz iterations, outperforms Muon on language modeling tasks.",
+      "source_span": "which outperforms Muon in the language modeling tasks",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-09-29",
+      "extraction_event": "unrecorded-6837960b"
+    },
+    {
+      "claim_id": "x2511_07767_1",
+      "paper_id": "2511.07767",
+      "dimension": "outside_testbed",
+      "method": "Polyak step sizes for Schedule-Free SGD/Adam",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Polyak-type step sizes for Schedule-Free methods match or surpass tuned Schedule-Free baselines in language modeling with greater hyperparameter robustness.",
+      "source_span": "Numerical experiments on language modeling, including pretraining and distillation, show that the proposed methods match or surpass tuned Schedule-Free baselines while offering greater robustness to hyperparameter choices.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-11-11",
+      "extraction_event": "unrecorded-6837960b"
+    },
+    {
+      "claim_id": "x2110_02861_1",
+      "paper_id": "2110.02861",
+      "dimension": "outside_testbed",
+      "method": "8-bit block-wise quantized optimizers",
+      "setting": "unspecified, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "8-bit optimizers maintain 32-bit performance with a small fraction of the memory footprint across tasks including 1.5B language modeling.",
+      "source_span": "our 8-bit optimizers maintain 32-bit performance with a small fraction of the memory footprint on a range of tasks",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2021-10-06",
+      "extraction_event": "unrecorded-f89faf48",
+      "mechanism": "a small fraction of the memory footprint",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2010_07468_1",
+      "paper_id": "2010.07468",
+      "dimension": "outside_testbed",
+      "method": "AdaBelief optimizer",
+      "setting": "unspecified, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "AdaBelief outperforms other methods with fast convergence and high accuracy on image classification and language modeling.",
+      "source_span": "showing that it outperforms other methods with fast convergence and high accuracy on image classification and language modeling",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T2",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": true,
+      "published": "2020-10-15",
+      "extraction_event": "unrecorded-f89faf48"
+    },
+    {
+      "claim_id": "x2002_01113_1",
+      "paper_id": "2002.01113",
+      "dimension": "outside_testbed",
+      "method": "Cayley SGD with momentum / Cayley ADAM",
+      "setting": "cnn, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Cayley SGD and Cayley ADAM achieve faster convergence than baseline SGD and ADAM without compromising CNN performance.",
+      "source_span": "Achieve faster convergence rates than the baseline SGD and ADAM algorithms without compromising the performance of the CNN",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "cnn",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2020-02-04",
+      "extraction_event": "unrecorded-f89faf48",
+      "mechanism": "faster convergence rates",
+      "mechanism_category": "optimization_speed"
+    },
+    {
+      "claim_id": "x2402_06948_1",
+      "paper_id": "2402.06948",
+      "dimension": "optimizer",
+      "method": "SGD with Momentum when no hyperparameter tuning",
+      "setting": "transformer, classification, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "When no hyperparameters can be tuned, SGD with Momentum is the best choice for fine-tuning pretrained Transformers on GLUE.",
+      "source_span": "When no hyperparameter can be tuned, SGD with Momentum is the best choice.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": {
+        "optimizer": "sgd_momentum"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "classification",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-02-10",
+      "extraction_event": "unrecorded-f89faf48"
+    },
+    {
+      "claim_id": "x2402_06948_2",
+      "paper_id": "2402.06948",
+      "dimension": "outside_testbed",
+      "method": "tuned adaptive optimizers",
+      "setting": "transformer, classification, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "With tuned hyperparameters, there is no substantial test performance difference among the five adaptive optimizers.",
+      "source_span": "there is no substantial difference in test performance across the five more elaborate (adaptive) optimizers",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "classification",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-02-10",
+      "extraction_event": "unrecorded-f89faf48"
+    },
+    {
+      "claim_id": "x2010_10502_1",
+      "paper_id": "2010.10502",
+      "dimension": "outside_testbed",
+      "method": "Modernized Dual Averaging (MDA)",
+      "setting": "unspecified, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "MDA performs as well as SGD+M in CV and as Adam in NLP.",
+      "source_span": "an optimizer that is able to perform as well as SGD+M in CV and as Adam in NLP",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2020-10-20",
+      "extraction_event": "unrecorded-f89faf48",
+      "mechanism": "induces a decaying uncentered $L_2$-regularization",
+      "mechanism_category": "implicit_regularization"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "1905.11286",
+      "title": "Stochastic Gradient Methods with Layer-wise Adaptive Moments for Training of Deep Networks",
+      "reason": "exclude_term: speech"
+    },
+    {
+      "paper_id": "2505.16363",
+      "title": "AdamS: Momentum Itself Can Be A Normalizer for LLM Pretraining and Post-training",
+      "reason": "exclude_term: reinforcement learning"
+    },
+    {
+      "paper_id": "2011.11985",
+      "title": "Adam$^+$: A Stochastic Method with Adaptive Variance Reduction",
+      "reason": "exclude_term: speech"
+    }
+  ],
+  "degraded": []
+}

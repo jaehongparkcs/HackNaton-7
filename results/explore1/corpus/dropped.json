@@ -1,0 +1,740 @@
+[
+  {
+    "paper_id": "2512.10938",
+    "title": "Stronger Normalization-Free Transformers",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2312.01324",
+    "title": "MABViT -- Modified Attention Block Enhances Vision Transformers",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2507.18009",
+    "title": "GRR-CoCa: Leveraging LLM Mechanisms in Multimodal Model Architectures",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2405.03952",
+    "title": "HAFFormer: A Hierarchical Attention-Free Framework for Alzheimer's Disease Detection From Spontaneous Speech",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2403.13298",
+    "title": "Rotary Position Embedding for Vision Transformer",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2509.11084",
+    "title": "Length-Aware Rotary Position Embedding for Text-Speech Alignment",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2107.05907",
+    "title": "Conformer-based End-to-end Speech Recognition With Rotary Position Embedding",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2304.09856",
+    "title": "LipsFormer: Introducing Lipschitz Continuity to Vision Transformers",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2406.09723",
+    "title": "When Will Gradient Regularization Be Harmful?",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "1905.04226",
+    "title": "Language Modeling with Deep Transformers",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2503.12167",
+    "title": "PLM: Efficient Peripheral Language Models Hardware-Co-Designed for Ubiquitous Computing",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2409.13440",
+    "title": "Differentially Private Multimodal Laplacian Dropout (DP-MLD) for EEG Representative Learning",
+    "reason": "exclude_term: vision transformer",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2403.09635",
+    "title": "Transformers Get Stable: An End-to-End Signal Propagation Theory for Language Models",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2602.07729",
+    "title": "Do We Need Adam? Surprisingly Strong and Sparse Reinforcement Learning with SGD in LLMs",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2505.16363",
+    "title": "AdamS: Momentum Itself Can Be A Normalizer for LLM Pretraining and Post-training",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2407.01800",
+    "title": "Normalization and effective learning rates in reinforcement learning",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "1710.05941",
+    "title": "Searching for Activation Functions",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2110.02034",
+    "title": "Dropout Q-Functions for Doubly Efficient Reinforcement Learning",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "1707.06065",
+    "title": "Dynamic Layer Normalization for Adaptive Neural Acoustic Modeling in Speech Recognition",
+    "reason": "exclude_term: speech",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2412.13795",
+    "title": "Mix-LN: Unleashing the Power of Deeper Layers by Combining Pre-LN and Post-LN",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "1909.09712",
+    "title": "Learning an Adaptive Learning Rate Schedule",
+    "reason": "exclude_term: reinforcement learning",
+    "stage": "filter"
+  },
+  {
+    "paper_id": "2604.03190",
+    "title": "Gradient Boosting within a Single Attention Layer",
+    "reason": "ranked below max_papers (120); relevance 0.229061",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.02266",
+    "title": "Parameter-Efficient Transformer Embeddings",
+    "reason": "ranked below max_papers (120); relevance 0.228966",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2503.01660",
+    "title": "Non-convergence to the optimal risk for Adam and stochastic gradient descent optimization in the training of deep neural networks",
+    "reason": "ranked below max_papers (120); relevance 0.228553",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2102.08098",
+    "title": "GradInit: Learning to Initialize Neural Networks for Stable and Efficient Training",
+    "reason": "ranked below max_papers (120); relevance 0.228435",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2510.22026",
+    "title": "Normalization in Attention Dynamics",
+    "reason": "ranked below max_papers (120); relevance 0.228318",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2510.25262",
+    "title": "IBNorm: Information-Bottleneck Inspired Normalization for Representation Learning",
+    "reason": "ranked below max_papers (120); relevance 0.228286",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2410.24216",
+    "title": "CaAdam: Improving Adam optimizer using connection aware methods",
+    "reason": "ranked below max_papers (120); relevance 0.227636",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2609.02373",
+    "title": "Percolation Dynamics in Optimization: Variance Cascades and Nested Symmetry",
+    "reason": "ranked below max_papers (120); relevance 0.227544",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2604.18128",
+    "title": "Depth Registers Unlock W4A4 on SwiGLU: A Reader/Generator Decomposition",
+    "reason": "ranked below max_papers (120); relevance 0.227537",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2605.02317",
+    "title": "Anon: Extrapolating Adaptivity Beyond SGD and Adam",
+    "reason": "ranked below max_papers (120); relevance 0.227218",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2601.18702",
+    "title": "From Fuzzy to Exact: The Halo Architecture for Infinite-Depth Reasoning via Rational Arithmetic",
+    "reason": "ranked below max_papers (120); relevance 0.226981",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2502.00213",
+    "title": "Gradient Heterogeneity Complements Hessian Heterogeneity in Transformer Optimization",
+    "reason": "ranked below max_papers (120); relevance 0.226127",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2506.12543",
+    "title": "Is your batch size the problem? Revisiting the Adam-SGD gap in language modeling",
+    "reason": "ranked below max_papers (120); relevance 0.226124",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2501.00659",
+    "title": "Why Are Positional Encodings Nonessential for Deep Autoregressive Transformers? Revisiting a Petroglyph",
+    "reason": "ranked below max_papers (120); relevance 0.22604",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2506.19697",
+    "title": "Outlier-Safe Pre-Training for Robust 4-Bit Quantization of Large Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.225881",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2605.13989",
+    "title": "VectraYX-Nano: A 42M-Parameter Spanish Cybersecurity Language Model with Curriculum Learning and Native Tool Use",
+    "reason": "ranked below max_papers (120); relevance 0.225846",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2407.17406",
+    "title": "Dependency Transformer Grammars: Integrating Dependency Structures into Transformer Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.225642",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2604.09742",
+    "title": "Efficient Matrix Implementation for Rotary Position Embedding",
+    "reason": "ranked below max_papers (120); relevance 0.225152",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2308.09565",
+    "title": "Understanding the Role of Layer Normalization in Label-Skewed Federated Learning",
+    "reason": "ranked below max_papers (120); relevance 0.225107",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2003.03977",
+    "title": "Wide-minima Density Hypothesis and the Explore-Exploit Learning Rate Schedule",
+    "reason": "ranked below max_papers (120); relevance 0.22501",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2004.13271",
+    "title": "Trainable Activation Function in Image Classification",
+    "reason": "ranked below max_papers (120); relevance 0.224673",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.21364",
+    "title": "Towards Interpretability Without Sacrifice: Faithful Dense Layer Decomposition with Mixture of Decoders",
+    "reason": "ranked below max_papers (120); relevance 0.224021",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2604.14430",
+    "title": "Three-Phase Transformer",
+    "reason": "ranked below max_papers (120); relevance 0.223969",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2509.19563",
+    "title": "Uncertainty in Semantic Language Modeling with PIXELS",
+    "reason": "ranked below max_papers (120); relevance 0.223962",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2602.18849",
+    "title": "Exact Attention Sensitivity and the Geometry of Transformer Stability",
+    "reason": "ranked below max_papers (120); relevance 0.223745",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2606.31963",
+    "title": "Signed-Permutation Coordinate Transport for RMSNorm Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.22318",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2502.02732",
+    "title": "Peri-LN: Revisiting Normalization Layer in the Transformer Architecture",
+    "reason": "ranked below max_papers (120); relevance 0.223148",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2606.24898",
+    "title": "Dense Supervision Is Not Enough: The Readout Blind Spot in Looped Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.222413",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2511.10850",
+    "title": "Leveraging Parameter Space Symmetries for Reasoning Skill Transfer in LLMs",
+    "reason": "ranked below max_papers (120); relevance 0.222302",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2608.14689",
+    "title": "A Reproducibility Study of Partial Residual Ablations in Pre-LN Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.221936",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2504.18911",
+    "title": "A Langevin sampling algorithm inspired by the Adam optimizer",
+    "reason": "ranked below max_papers (120); relevance 0.2219",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2607.10137",
+    "title": "RDQ: Residual Distribution Quantization for Large Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.221361",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2407.09577",
+    "title": "FlashNorm: Fast Normalization for Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.220923",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2508.04884",
+    "title": "The Cosine Schedule is Fisher-Rao-Optimal for Masked Discrete Diffusion Models",
+    "reason": "ranked below max_papers (120); relevance 0.220918",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2508.19445",
+    "title": "On Surjectivity of Neural Networks: Can you elicit any behavior from your model?",
+    "reason": "ranked below max_papers (120); relevance 0.220849",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2501.18187",
+    "title": "On the Role of Transformer Feed-Forward Layers in Nonlinear In-Context Learning",
+    "reason": "ranked below max_papers (120); relevance 0.220644",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2210.11672",
+    "title": "Stochastic Adaptive Activation Function",
+    "reason": "ranked below max_papers (120); relevance 0.220184",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2605.18933",
+    "title": "A Geometric Analysis of Sign-Magnitude Asymmetry in a ReLU + RMSNorm Block under Ternary Quantization",
+    "reason": "ranked below max_papers (120); relevance 0.219913",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2601.22181",
+    "title": "MrRoPE: Mixed-radix Rotary Position Embedding",
+    "reason": "ranked below max_papers (120); relevance 0.219661",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2009.12991",
+    "title": "Long-Tailed Classification by Keeping the Good and Removing the Bad Momentum Causal Effect",
+    "reason": "ranked below max_papers (120); relevance 0.219529",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.08823",
+    "title": "An Extra RMSNorm is All You Need for Fine Tuning to 1.58 Bits",
+    "reason": "ranked below max_papers (120); relevance 0.219206",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2503.16672",
+    "title": "Accelerating Transformer Inference and Training with 2:4 Activation Sparsity",
+    "reason": "ranked below max_papers (120); relevance 0.219184",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2602.11169",
+    "title": "Disentangling Direction and Magnitude in Transformer Representations: A Double Dissociation Through L2-Matched Perturbation Analysis",
+    "reason": "ranked below max_papers (120); relevance 0.217302",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2503.10217",
+    "title": "Efficient Federated Fine-Tuning of Large Language Models with Layer Dropout",
+    "reason": "ranked below max_papers (120); relevance 0.216994",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2511.17388",
+    "title": "Selective Rotary Position Embedding",
+    "reason": "ranked below max_papers (120); relevance 0.216898",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2601.19895",
+    "title": "Post-LayerNorm Is Back: Stable, ExpressivE, and Deep",
+    "reason": "ranked below max_papers (120); relevance 0.216197",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2207.02763",
+    "title": "BFE and AdaBFE: A New Approach in Learning Rate Automation for Stochastic Optimization",
+    "reason": "ranked below max_papers (120); relevance 0.214753",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2304.13960",
+    "title": "Noise Is Not the Main Factor Behind the Gap Between SGD and Adam on Transformers, but Sign Descent Might Be",
+    "reason": "ranked below max_papers (120); relevance 0.214541",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2605.18898",
+    "title": "A Two-Parameter Weibull Framework for Diagnosing Transformer Weight Distributions",
+    "reason": "ranked below max_papers (120); relevance 0.214101",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.21829",
+    "title": "In Search of Adam's Secret Sauce",
+    "reason": "ranked below max_papers (120); relevance 0.212782",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.13142",
+    "title": "Parallel Layer Normalization for Universal Approximation",
+    "reason": "ranked below max_papers (120); relevance 0.212283",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2506.19256",
+    "title": "Temporal Regularization Training: Unleashing the Potential of Spiking Neural Networks",
+    "reason": "ranked below max_papers (120); relevance 0.211467",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2403.00946",
+    "title": "Fine-tuning with Very Large Dropout",
+    "reason": "ranked below max_papers (120); relevance 0.210717",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2501.07774",
+    "title": "Transforming Indoor Localization: Advanced Transformer Architecture for NLOS Dominated Wireless Environments with Distributed Sensors",
+    "reason": "ranked below max_papers (120); relevance 0.210178",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2603.17771",
+    "title": "Attention Sinks Induce Gradient Sinks: Massive Activations as Gradient Regulators in Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.209212",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2511.03952",
+    "title": "High-dimensional limit theorems for SGD: Momentum and Adaptive Step-sizes",
+    "reason": "ranked below max_papers (120); relevance 0.208717",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2502.01032",
+    "title": "Converting MLPs into Polynomials in Closed Form",
+    "reason": "ranked below max_papers (120); relevance 0.2083",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2405.17849",
+    "title": "I-LLM: Efficient Integer-Only Inference for Fully-Quantized Low-Bit Large Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.208037",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2501.10967",
+    "title": "Advancing General Multimodal Capability of Vision-language Models with Pyramid-descent Visual Position Encoding",
+    "reason": "ranked below max_papers (120); relevance 0.20792",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2510.15541",
+    "title": "An Empirical Study on Variance-based MC Dropout Uncertainty-Error Correlation in 2D Brain Tumor Segmentation",
+    "reason": "ranked below max_papers (120); relevance 0.207734",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2209.08898",
+    "title": "Batch Layer Normalization, A new normalization layer for CNNs and RNN",
+    "reason": "ranked below max_papers (120); relevance 0.207557",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2311.17673",
+    "title": "Using Ornstein-Uhlenbeck Process to understand Denoising Diffusion Probabilistic Model and its Noise Schedules",
+    "reason": "ranked below max_papers (120); relevance 0.206568",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2606.28562",
+    "title": "SEAD: Competence-Aware On-Policy Distillation via Entropy-Guided Supervision",
+    "reason": "ranked below max_papers (120); relevance 0.206473",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2402.16788",
+    "title": "Why Transformers Need Adam: A Hessian Perspective",
+    "reason": "ranked below max_papers (120); relevance 0.206031",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.21465",
+    "title": "ID-Align: RoPE-Conscious Position Remapping for Dynamic High-Resolution Adaptation in Vision-Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.205724",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2603.00812",
+    "title": "Wave-Attractor-Tree: A Hierarchical Binary Tree Reduction Architecture for Efficient Sequence Modeling",
+    "reason": "ranked below max_papers (120); relevance 0.203327",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2501.11258",
+    "title": "Enhancing Uncertainty Estimation in Semantic Segmentation via Monte-Carlo Frequency Dropout",
+    "reason": "ranked below max_papers (120); relevance 0.200914",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2508.17310",
+    "title": "Handling Students Dropouts in an LLM-driven Interactive Online Course Using Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.200639",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2411.00835",
+    "title": "Scalable Message Passing Neural Networks: No Need for Attention in Large Graph Representation Learning",
+    "reason": "ranked below max_papers (120); relevance 0.200477",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2307.16189",
+    "title": "Stabilizing Backpropagation in 16-bit Neural Training with Modified Adam Optimizer",
+    "reason": "ranked below max_papers (120); relevance 0.200269",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2602.11808",
+    "title": "Deep Kernel Fusion for Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.20006",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2103.01338",
+    "title": "Acceleration via Fractal Learning Rate Schedules",
+    "reason": "ranked below max_papers (120); relevance 0.19995",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2505.11329",
+    "title": "TokenWeave: Efficient Compute-Communication Overlap for Distributed LLM Inference",
+    "reason": "ranked below max_papers (120); relevance 0.198861",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2302.01029",
+    "title": "On Suppressing Range of Adaptive Stepsizes of Adam to Improve Generalisation Performance",
+    "reason": "ranked below max_papers (120); relevance 0.195417",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2507.00022",
+    "title": "GLU Attention Improve Transformer",
+    "reason": "ranked below max_papers (120); relevance 0.193866",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2207.06356",
+    "title": "Deep Transformer Model with Pre-Layer Normalization for COVID-19 Growth Prediction",
+    "reason": "ranked below max_papers (120); relevance 0.192711",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2409.12951",
+    "title": "Geometric Interpretation of Layer Normalization and a Comparative Analysis with RMSNorm",
+    "reason": "ranked below max_papers (120); relevance 0.192545",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2502.12665",
+    "title": "A$^2$ATS: Retrieval-Based KV Cache Reduction via Windowed Rotary Position Embedding and Query-Aware Vector Quantization",
+    "reason": "ranked below max_papers (120); relevance 0.191747",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2502.11276",
+    "title": "The Rotary Position Embedding May Cause Dimension Inefficiency in Attention Heads for Long-Distance Retrieval",
+    "reason": "ranked below max_papers (120); relevance 0.18933",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2304.14802",
+    "title": "ResiDual: Transformer with Dual Residual Connections",
+    "reason": "ranked below max_papers (120); relevance 0.188328",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2403.00071",
+    "title": "Resonance RoPE: Improving Context Length Generalization of Large Language Models",
+    "reason": "ranked below max_papers (120); relevance 0.187266",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2405.06985",
+    "title": "RoTHP: Rotary Position Embedding-based Transformer Hawkes Process",
+    "reason": "ranked below max_papers (120); relevance 0.184743",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2410.19964",
+    "title": "Understanding Adam Requires Better Rotation Dependent Assumptions",
+    "reason": "ranked below max_papers (120); relevance 0.183843",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2201.12198",
+    "title": "Limitation of Characterizing Implicit Regularization by Data-independent Functions",
+    "reason": "ranked below max_papers (120); relevance 0.181726",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2202.00004",
+    "title": "On Polynomial Approximation of Activation Function",
+    "reason": "ranked below max_papers (120); relevance 0.180054",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2105.11627",
+    "title": "Least-Squares ReLU Neural Network (LSNN) Method For Scalar Nonlinear Hyperbolic Conservation Law",
+    "reason": "ranked below max_papers (120); relevance 0.177059",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1711.03440",
+    "title": "Learning Non-overlapping Convolutional Neural Networks with Multiple Kernels",
+    "reason": "ranked below max_papers (120); relevance 0.176415",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2311.03096",
+    "title": "Weight-Sharing Regularization",
+    "reason": "ranked below max_papers (120); relevance 0.174973",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2101.01761",
+    "title": "AutoDropout: Learning Dropout Patterns to Regularize Deep Networks",
+    "reason": "ranked below max_papers (120); relevance 0.172261",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1806.02958",
+    "title": "Efficient Full-Matrix Adaptive Regularization",
+    "reason": "ranked below max_papers (120); relevance 0.171438",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2111.08162",
+    "title": "On a Conjecture Regarding the Adam Optimizer",
+    "reason": "ranked below max_papers (120); relevance 0.171354",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1712.06050",
+    "title": "Wasserstein Distributionally Robust Optimization and Variation Regularization",
+    "reason": "ranked below max_papers (120); relevance 0.166271",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2010.09697",
+    "title": "Effects of Parameter Norm Growth During Transformer Training: Inductive Bias from Gradient Descent",
+    "reason": "ranked below max_papers (120); relevance 0.155869",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1711.00066",
+    "title": "Fraternal Dropout",
+    "reason": "ranked below max_papers (120); relevance 0.152173",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2106.06749",
+    "title": "A decreasing scaling transition scheme from Adam to SGD",
+    "reason": "ranked below max_papers (120); relevance 0.15105",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1907.07063",
+    "title": "SGD momentum optimizer with step estimation by online parabola model",
+    "reason": "ranked below max_papers (120); relevance 0.149844",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2206.00330",
+    "title": "B2T Connection: Serving Stability and Performance in Deep Transformers",
+    "reason": "ranked below max_papers (120); relevance 0.149265",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "2105.11632",
+    "title": "Least-Squares ReLU Neural Network (LSNN) Method For Linear Advection-Reaction Equation",
+    "reason": "ranked below max_papers (120); relevance 0.134024",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1802.02987",
+    "title": "A Generalization Method of Partitioned Activation Function for Complex Number",
+    "reason": "ranked below max_papers (120); relevance 0.13239",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1902.00873",
+    "title": "An Empirical Study on Regularization of Deep Neural Networks by Local Rademacher Complexity",
+    "reason": "ranked below max_papers (120); relevance 0.113689",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1806.11186",
+    "title": "A New Angle on L2 Regularization",
+    "reason": "ranked below max_papers (120); relevance 0.106072",
+    "stage": "rank"
+  },
+  {
+    "paper_id": "1804.00247",
+    "title": "Training Tips for the Transformer Model",
+    "reason": "ranked below max_papers (120); relevance 0.087864",
+    "stage": "rank"
+  }
+]

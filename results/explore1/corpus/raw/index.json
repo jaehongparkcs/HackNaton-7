@@ -1,0 +1,212 @@
+[
+  {
+    "kind": "arxiv_seeds",
+    "url": "https://export.arxiv.org/api/query?id_list=2002.04745%2C1910.07467&max_results=2",
+    "file": "000_arxiv_seeds_f19f0239.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "001_arxiv_9ddc1092.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22pre-layer+normalization%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "002_arxiv_fc181d9c.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22gated+linear+units%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "003_arxiv_9d437844.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "004_arxiv_cf590a56.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+warmup%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "005_arxiv_f5240972.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22character-level%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "006_arxiv_ac33c72a.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22layer+normalization%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "007_arxiv_c9fb2e54.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22activation+functions%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "008_arxiv_a689d138.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22positional+encoding%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "009_arxiv_c8c1f48b.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22optimizer%22+AND+all%3A%22learning-rate+schedule%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "010_arxiv_9af5a1c5.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "011_arxiv_6be95865.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "012_arxiv_2c739f82.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SwiGLU%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "013_arxiv_252e9b3c.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+all%3A%22Transformer%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "014_arxiv_814e2bd1.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "015_arxiv_27532ca6.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Post-LN%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "016_arxiv_0181d8de.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD%22+AND+all%3A%22Adam%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "017_arxiv_c7942f55.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "018_arxiv_3b6251cc.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+schedule%22+AND+all%3A%22Transformer%22+AND+all%3A%22constant%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "019_arxiv_3fde6344.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22activation+function%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "020_arxiv_dir_a126ab54.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SwiGLU%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "021_arxiv_dir_00f04aa3.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "022_arxiv_dir_a462b726.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "023_arxiv_dir_770d6c10.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22regularization%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "024_arxiv_dir_f7706cde.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "025_arxiv_dir_a2bf8810.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22layer+normalization%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "026_arxiv_dir_7ef932b4.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Pre-LN%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "027_arxiv_dir_53d96e12.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Post-LN%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "028_arxiv_dir_af28e3a6.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22normalization+placement%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=5&sortBy=relevance&sortOrder=descending",
+    "file": "029_arxiv_dir_d4f8e790.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD+momentum%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "030_arxiv_dir_eba53173.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Adam+optimizer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "031_arxiv_dir_9b4550e9.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "032_arxiv_dir_8f18e20f.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22positional+encoding%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "033_arxiv_dir_a1423073.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+schedule%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "034_arxiv_dir_7d535acc.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22cosine+schedule%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=7&sortBy=relevance&sortOrder=descending",
+    "file": "035_arxiv_dir_649cd945.xml"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2305.14858%7C10.48550%2Farxiv.2604.14430%7C10.48550%2Farxiv.2606.31963%7C10.48550%2Farxiv.2605.18933%7C10.48550%2Farxiv.2511.17864%7C10.48550%2Farxiv.2407.09577%7C10.48550%2Farxiv.2507.15773%7C10.48550%2Farxiv.2608.23582%7C10.48550%2Farxiv.2607.04819%7C10.48550%2Farxiv.2603.17771%7C10.48550%2Farxiv.2601.18702%7C10.48550%2Farxiv.2606.04405%7C10.48550%2Farxiv.2607.17146%7C10.48550%2Farxiv.2602.11169%7C10.48550%2Farxiv.2207.06356%7C10.48550%2Farxiv.2304.14802%7C10.48550%2Farxiv.2502.05795%7C10.48550%2Farxiv.2508.19445%7C10.48550%2Farxiv.2411.00835%7C10.48550%2Farxiv.2501.18187%7C10.48550%2Farxiv.2605.09403%7C10.48550%2Farxiv.2501.07774%7C10.48550%2Farxiv.2603.13347%7C10.48550%2Farxiv.2507.00022%7C10.48550%2Farxiv.2405.20768%7C10.48550%2Farxiv.2312.17482%7C10.48550%2Farxiv.2505.21364%7C10.48550%2Farxiv.2502.01032%7C10.48550%2Farxiv.2603.00812%7C10.48550%2Farxiv.2608.14604%7C10.48550%2Farxiv.2511.09146%7C10.48550%2Farxiv.2601.22181%7C10.48550%2Farxiv.2608.29715%7C10.48550%2Farxiv.2604.09742%7C10.48550%2Farxiv.2507.23083%7C10.48550%2Farxiv.2511.17388%7C10.48550%2Farxiv.2502.11276%7C10.48550%2Farxiv.2506.09507%7C10.48550%2Farxiv.2609.30576%7C10.48550%2Farxiv.2502.12665&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "036_openalex_b8c16aa1.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2405.06985%7C10.48550%2Farxiv.2505.21910%7C10.48550%2Farxiv.2604.27077%7C10.48550%2Farxiv.2410.10986%7C10.48550%2Farxiv.1804.00247%7C10.48550%2Farxiv.2102.08098%7C10.48550%2Farxiv.2608.14691%7C10.48550%2Farxiv.2108.00391%7C10.48550%2Farxiv.2305.03819%7C10.48550%2Farxiv.2603.19261%7C10.48550%2Farxiv.2603.28534%7C10.48550%2Farxiv.2507.07955%7C10.48550%2Farxiv.1909.08053%7C10.48550%2Farxiv.2602.23826%7C10.48550%2Farxiv.2010.09697%7C10.48550%2Farxiv.2203.16634%7C10.48550%2Farxiv.2407.17406%7C10.48550%2Farxiv.2501.00659%7C10.48550%2Farxiv.2606.05346%7C10.48550%2Farxiv.2603.09616%7C10.48550%2Farxiv.2505.23623%7C10.48550%2Farxiv.2606.08562%7C10.48550%2Farxiv.2607.25507%7C10.48550%2Farxiv.2607.10959%7C10.48550%2Farxiv.2603.10301%7C10.48550%2Farxiv.2408.13359%7C10.48550%2Farxiv.2609.34681%7C10.48550%2Farxiv.2505.24275%7C10.48550%2Farxiv.2512.13705%7C10.48550%2Farxiv.2605.23061%7C10.48550%2Farxiv.2505.09792%7C10.48550%2Farxiv.2203.06211%7C10.48550%2Farxiv.2606.21514%7C10.48550%2Farxiv.2202.02617%7C10.48550%2Farxiv.2503.05920%7C10.48550%2Farxiv.2404.06395%7C10.48550%2Farxiv.2609.25482%7C10.48550%2Farxiv.2503.16672%7C10.48550%2Farxiv.2411.13010%7C10.48550%2Farxiv.2606.00761&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "037_openalex_27224996.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2604.09130%7C10.48550%2Farxiv.2608.09417%7C10.48550%2Farxiv.2605.18898%7C10.48550%2Farxiv.2609.31956%7C10.48550%2Farxiv.2604.14174%7C10.48550%2Farxiv.2607.15525%7C10.48550%2Farxiv.2602.11808%7C10.48550%2Farxiv.2511.10850%7C10.48550%2Farxiv.2606.11585%7C10.48550%2Farxiv.2402.16361%7C10.48550%2Farxiv.2603.17811%7C10.48550%2Farxiv.2506.14793%7C10.48550%2Farxiv.1909.11556%7C10.48550%2Farxiv.2609.34218%7C10.48550%2Farxiv.2101.01761%7C10.48550%2Farxiv.2106.14448%7C10.48550%2Farxiv.2403.00812%7C10.48550%2Farxiv.2508.17310%7C10.48550%2Farxiv.2503.10217%7C10.48550%2Farxiv.2206.00826%7C10.48550%2Farxiv.2509.19563%7C10.48550%2Farxiv.2505.02266%7C10.48550%2Farxiv.2105.01735%7C10.48550%2Farxiv.2605.13989%7C10.48550%2Farxiv.2605.08504%7C10.48550%2Farxiv.2601.09719%7C10.48550%2Farxiv.2606.24898%7C10.48550%2Farxiv.2503.10251%7C10.48550%2Farxiv.2506.19697%7C10.48550%2Farxiv.2607.10137%7C10.48550%2Farxiv.2405.17849%7C10.48550%2Farxiv.2510.22777%7C10.48550%2Farxiv.2605.10504%7C10.48550%2Farxiv.2505.08823%7C10.48550%2Farxiv.2510.25262%7C10.48550%2Farxiv.2505.11329%7C10.48550%2Farxiv.2602.18849%7C10.48550%2Farxiv.2206.00330%7C10.48550%2Farxiv.2502.00213%7C10.48550%2Farxiv.2607.13491&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "038_openalex_47cc1c4a.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2203.00555%7C10.48550%2Farxiv.2502.02732%7C10.48550%2Farxiv.2601.19895%7C10.48550%2Farxiv.2510.22026%7C10.48550%2Farxiv.2604.03190%7C10.48550%2Farxiv.2306.00204%7C10.48550%2Farxiv.2304.13960%7C10.48550%2Farxiv.2106.06749%7C10.48550%2Farxiv.2506.12543%7C10.48550%2Farxiv.2605.02317%7C10.48550%2Farxiv.2402.16788%7C10.48550%2Farxiv.2505.21829%7C10.48550%2Farxiv.2606.09658%7C10.48550%2Farxiv.2302.01029%7C10.48550%2Farxiv.2410.19964%7C10.48550%2Farxiv.2608.25990%7C10.48550%2Farxiv.2609.02373%7C10.48550%2Farxiv.2512.07525%7C10.48550%2Farxiv.2507.11273%7C10.48550%2Farxiv.2608.10021%7C10.48550%2Farxiv.2602.10959%7C10.48550%2Farxiv.2403.00071%7C10.48550%2Farxiv.2505.21465%7C10.48550%2Farxiv.2501.10967%7C10.48550%2Farxiv.2602.04774%7C10.48550%2Farxiv.2603.25687%7C10.48550%2Farxiv.1802.02987%7C10.48550%2Farxiv.2202.00004%7C10.48550%2Farxiv.2004.13271%7C10.48550%2Farxiv.2210.11672%7C10.48550%2Farxiv.2608.07323%7C10.48550%2Farxiv.2604.18128%7C10.48550%2Farxiv.2605.18106%7C10.48550%2Farxiv.2607.02521%7C10.48550%2Farxiv.2105.11632%7C10.48550%2Farxiv.2105.11627%7C10.48550%2Farxiv.2605.03667%7C10.48550%2Farxiv.1711.03440%7C10.48550%2Farxiv.2002.12915%7C10.48550%2Farxiv.1711.00066&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "039_openalex_6898653a.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2501.11258%7C10.48550%2Farxiv.2002.02247%7C10.48550%2Farxiv.2403.00946%7C10.48550%2Farxiv.2510.15541%7C10.48550%2Farxiv.1712.06050%7C10.48550%2Farxiv.1806.11186%7C10.48550%2Farxiv.1806.02958%7C10.48550%2Farxiv.2311.03096%7C10.48550%2Farxiv.2506.19256%7C10.48550%2Farxiv.2201.12198%7C10.48550%2Farxiv.1902.00873%7C10.48550%2Farxiv.2409.12951%7C10.48550%2Farxiv.2605.14521%7C10.48550%2Farxiv.2510.09904%7C10.48550%2Farxiv.2209.08898%7C10.48550%2Farxiv.2308.09565%7C10.48550%2Farxiv.2505.13142%7C10.48550%2Farxiv.2608.14689%7C10.48550%2Farxiv.2607.14018%7C10.48550%2Farxiv.1907.07063%7C10.48550%2Farxiv.2511.20725%7C10.48550%2Farxiv.2207.02763%7C10.48550%2Farxiv.2503.01660%7C10.48550%2Farxiv.2511.03952%7C10.48550%2Farxiv.2112.09442%7C10.48550%2Farxiv.2009.12991%7C10.48550%2Farxiv.2407.21078%7C10.48550%2Farxiv.2409.04244%7C10.48550%2Farxiv.2111.08162%7C10.48550%2Farxiv.2606.21433%7C10.48550%2Farxiv.2410.24216%7C10.48550%2Farxiv.2504.18911%7C10.48550%2Farxiv.2307.16189%7C10.48550%2Farxiv.2307.09270%7C10.48550%2Farxiv.2107.02561%7C10.48550%2Farxiv.2402.00236%7C10.48550%2Farxiv.2604.24167%7C10.48550%2Farxiv.2405.14722%7C10.48550%2Farxiv.2405.09061%7C10.48550%2Farxiv.2506.08309&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "040_openalex_8eb4e4db.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2003.03977%7C10.48550%2Farxiv.2103.01338%7C10.48550%2Farxiv.2303.15634%7C10.48550%2Farxiv.2208.11873%7C10.48550%2Farxiv.2503.02844%7C10.48550%2Farxiv.2508.04884%7C10.48550%2Farxiv.2606.28562%7C10.48550%2Farxiv.2405.18392%7C10.48550%2Farxiv.2311.17673%7C10.48550%2Farxiv.2503.09411%7C10.48550%2Farxiv.2605.18069%7C10.48550%2Farxiv.2602.03702&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "041_openalex_22911ab0.json"
+  }
+]

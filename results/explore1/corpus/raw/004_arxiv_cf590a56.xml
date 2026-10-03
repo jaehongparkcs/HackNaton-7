@@ -1,0 +1,430 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/FECGmj0zNke02B5bmwTKxVcO2i8</id>
+  <title>arXiv Query: search_query=all:"rotary position embedding" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:45:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22rotary+position+embedding%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>191</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2511.09146v2</id>
+    <title>DoPE: Denoising Rotary Position Embedding</title>
+    <updated>2026-01-06T14:02:29Z</updated>
+    <link href="https://arxiv.org/abs/2511.09146v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.09146v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Positional encoding is essential for large language models (LLMs) to represent sequence order, yet recent studies show that Rotary Position Embedding (RoPE) can induce massive activation. We investigate the source of these instabilities via a spectral analysis of RoPE, and show that its low-frequency components concentrate structured energy, producing low-rank, over-aligned attention patterns. We theoretically reveal that this low-frequency alignment manifests as activation noise, degrading stability during long-context extrapolation. To mitigate this effect, we introduce Denoising Rotary Position Embedding (DoPE), a training-free method that identifies and suppresses noisy attention heads using truncated matrix entropy, then reparameterizes their attention maps with an isotropic Gaussian distribution. Across a range of settings, DoPE improves length extrapolation performance without fine-tuning, increases robustness to perturbations, and boosts both needle-in-a-haystack and many-shot in-context learning tasks. These results suggest that selective positional encoding is key to robust extrapolation. Our project page is Project: https://The-physical-picture-of-LLMs.github.io</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-12T09:32:35Z</published>
+    <arxiv:comment>Technical Report</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jing Xiong</name>
+    </author>
+    <author>
+      <name>Liyang Fan</name>
+    </author>
+    <author>
+      <name>Hui Shen</name>
+    </author>
+    <author>
+      <name>Zunhai Su</name>
+    </author>
+    <author>
+      <name>Min Yang</name>
+    </author>
+    <author>
+      <name>Lingpeng Kong</name>
+    </author>
+    <author>
+      <name>Ngai Wong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.22181v1</id>
+    <title>MrRoPE: Mixed-radix Rotary Position Embedding</title>
+    <updated>2026-01-28T05:09:54Z</updated>
+    <link href="https://arxiv.org/abs/2601.22181v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.22181v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rotary Position Embedding (RoPE)-extension refers to modifying or generalizing the Rotary Position Embedding scheme to handle longer sequences than those encountered during pre-training. However, current extension strategies are highly diverse and lack a unified theoretical foundation. In this paper, we propose MrRoPE (Mixed-radix RoPE), a generalized encoding formulation based on a radix system conversion perspective, which elegantly unifies various RoPE-extension approaches as distinct radix conversion strategies. Based on this theory, we introduce two training-free extensions, MrRoPE-Uni and MrRoPE-Pro, which leverage uniform and progressive radix conversion strategies, respectively, to achieve 'train short, test long' generalization. Without fine-tuning, MrRoPE-Pro sustains over 85% recall in the 128K-context Needle-in-a-Haystack test and achieves more than double YaRN's accuracy on Infinite-Bench retrieval and dialogue subsets. Theoretical analysis confirms that MrRoPE-Pro effectively raises the upper bound of RoPE's attainable encoding length, which further validates the reliability and utility of our theory and methodology.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-28T05:09:54Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Qingyuan Tian</name>
+    </author>
+    <author>
+      <name>Wenhong Zhu</name>
+    </author>
+    <author>
+      <name>Xiaoran Liu</name>
+    </author>
+    <author>
+      <name>Xiaofeng Wang</name>
+    </author>
+    <author>
+      <name>Rui Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.09864v5</id>
+    <title>RoFormer: Enhanced Transformer with Rotary Position Embedding</title>
+    <updated>2023-11-08T13:36:32Z</updated>
+    <link href="https://arxiv.org/abs/2104.09864v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.09864v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Position encoding recently has shown effective in the transformer architecture. It enables valuable supervision for dependency modeling between elements at different positions of the sequence. In this paper, we first investigate various methods to integrate positional information into the learning process of transformer-based language models. Then, we propose a novel method named Rotary Position Embedding(RoPE) to effectively leverage the positional information. Specifically, the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation. Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding. Finally, we evaluate the enhanced transformer with rotary position embedding, also called RoFormer, on various long text classification benchmark datasets. Our experiments show that it consistently overcomes its alternatives. Furthermore, we provide a theoretical analysis to explain some experimental results. RoFormer is already integrated into Huggingface: \url{https://huggingface.co/docs/transformers/model_doc/roformer}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-20T09:54:06Z</published>
+    <arxiv:comment>fixed some typos</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jianlin Su</name>
+    </author>
+    <author>
+      <name>Yu Lu</name>
+    </author>
+    <author>
+      <name>Shengfeng Pan</name>
+    </author>
+    <author>
+      <name>Ahmed Murtadha</name>
+    </author>
+    <author>
+      <name>Bo Wen</name>
+    </author>
+    <author>
+      <name>Yunfeng Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.29715v1</id>
+    <title>Higher-Dimensional Rotary Position Embedding</title>
+    <updated>2026-08-30T10:46:24Z</updated>
+    <link href="https://arxiv.org/abs/2608.29715v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.29715v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers rely on position embedding mechanisms in long context modeling in most cases. Rotary Position Embedding (RoPE) embeds positional information with independent 2D rotations, forming relative position terms in self-attention. However, its pairwise, block-based, and decoupled structure limits deep mixing and robustness across channels. We propose HD-RoPE, which extends RoPE from independent 2D rotations to higher-dimensional rotations and introduces a Paley-I orthogonal basis to obtain balanced, isotropic, and dense phase mixing within each rotation subspace. This significantly enhances channel coupling and rotational degrees of freedom while maintaining orthogonal stability and the relative position closure property. Furthermore, HD-RoPE is easily optimized for engineering efficiency without introducing additional trainable parameters. We have conducted extensive evaluation results demonstrating that HD-RoPE achieves significant performance improvements over standard RoPE across various popular benchmarks and in both long and short contexts.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-30T10:46:24Z</published>
+    <arxiv:comment>Accepted to EMNLP 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yixing Li</name>
+    </author>
+    <author>
+      <name>Ruobing Xie</name>
+    </author>
+    <author>
+      <name>Yudong Zhang</name>
+    </author>
+    <author>
+      <name>Yushi Bai</name>
+    </author>
+    <author>
+      <name>Samm Sun</name>
+    </author>
+    <author>
+      <name>Yu Cheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.13298v2</id>
+    <title>Rotary Position Embedding for Vision Transformer</title>
+    <updated>2024-07-16T04:54:56Z</updated>
+    <link href="https://arxiv.org/abs/2403.13298v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.13298v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rotary Position Embedding (RoPE) performs remarkably on language models, especially for length extrapolation of Transformers. However, the impacts of RoPE on computer vision domains have been underexplored, even though RoPE appears capable of enhancing Vision Transformer (ViT) performance in a way similar to the language domain. This study provides a comprehensive analysis of RoPE when applied to ViTs, utilizing practical implementations of RoPE for 2D vision data. The analysis reveals that RoPE demonstrates impressive extrapolation performance, i.e., maintaining precision while increasing image resolution at inference. It eventually leads to performance improvement for ImageNet-1k, COCO detection, and ADE-20k segmentation. We believe this study provides thorough guidelines to apply RoPE into ViT, promising improved backbone performance with minimal extra computational overhead. Our code and pre-trained models are available at https://github.com/naver-ai/rope-vit</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-20T04:47:13Z</published>
+    <arxiv:comment>Accepted to ECCV 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Byeongho Heo</name>
+    </author>
+    <author>
+      <name>Song Park</name>
+    </author>
+    <author>
+      <name>Dongyoon Han</name>
+    </author>
+    <author>
+      <name>Sangdoo Yun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.09742v1</id>
+    <title>Efficient Matrix Implementation for Rotary Position Embedding</title>
+    <updated>2026-04-10T00:17:47Z</updated>
+    <link href="https://arxiv.org/abs/2604.09742v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.09742v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Rotary Position Embedding (RoPE) has become a core component of modern Transformer architectures across language, vision, and 3D domains. However, existing implementations rely on vector-level split and merge operations that introduce non-negligible computational overhead, often overlooked in attention optimization. The problem is further amplified in multi-dimensional settings (e.g., 2D and 3D RoPE), where additional vector operations and uneven feature partitions degrade hardware utilization. To overcome these limitations, we propose RoME (Rotary Matrix position Embedding), a mathematically equivalent yet computationally efficient reformulation of RoPE that replaces vector operations with unified matrix transformations. RoME eliminates dimension-specific operations, simplifies implementation, and enables fused parallel execution across Cube and Vector units on modern NPUs. Experiments show that RoME delivers substantial acceleration at both the operator and full-model levels. The implementation is available at https://gitcode.com/cann/ops-transformer/blob/master/experimental/posembedding/rope_matrix/README.md.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-10T00:17:47Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chen Minqi</name>
+    </author>
+    <author>
+      <name>Zhongqi Yue</name>
+    </author>
+    <author>
+      <name>Shihao Zhang</name>
+    </author>
+    <author>
+      <name>Yun Xu</name>
+    </author>
+    <author>
+      <name>Peng Wu</name>
+    </author>
+    <author>
+      <name>kaixiang Xu</name>
+    </author>
+    <author>
+      <name>Zeyi Huang</name>
+    </author>
+    <author>
+      <name>Hanwang Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.23083v1</id>
+    <title>Context-aware Rotary Position Embedding</title>
+    <updated>2025-07-30T20:32:19Z</updated>
+    <link href="https://arxiv.org/abs/2507.23083v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.23083v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Positional encoding is a vital component of Transformer architectures, enabling models to incorporate sequence order into self-attention mechanisms. Rotary Positional Embeddings (RoPE) have become a widely adopted solution due to their compatibility with relative position encoding and computational efficiency. However, RoPE relies on static, input-independent sinusoidal frequency patterns, limiting its ability to model context-sensitive relationships. In this work, we propose CARoPE (Context-Aware Rotary Positional Embedding), a novel generalization of RoPE that dynamically generates head-specific frequency patterns conditioned on token embeddings. This design introduces token- and context-sensitive positional representations while preserving RoPE efficiency and architectural simplicity. CARoPE computes input-dependent phase shifts using a bounded transformation of token embeddings and integrates them into the rotary mechanism across attention heads. We evaluate CARoPE on the FineWeb-Edu-10B dataset using GPT-2 variants trained on next-token prediction tasks. Experimental results show that CARoPE consistently outperforms RoPE and other common positional encoding baselines, achieving significantly lower perplexity, even at longer context lengths. Additionally, CARoPE enables faster training throughput without sacrificing model stability. These findings demonstrate that CARoPE offers a scalable, expressive, and efficient upgrade to existing positional encoding strategies in Transformer models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-30T20:32:19Z</published>
+    <arxiv:comment>4 pages, 1 table</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ali Veisi</name>
+    </author>
+    <author>
+      <name>Delaram Fartoot</name>
+    </author>
+    <author>
+      <name>Hamidreza Amirzadeh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.11084v1</id>
+    <title>Length-Aware Rotary Position Embedding for Text-Speech Alignment</title>
+    <updated>2025-09-14T04:25:13Z</updated>
+    <link href="https://arxiv.org/abs/2509.11084v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.11084v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Many recent text-to-speech (TTS) systems are built on transformer architectures and employ cross-attention mechanisms for text-speech alignment. Within these systems, rotary position embedding (RoPE) is commonly used to encode positional information in text and speech representations. In this work, we introduce length-aware RoPE (LARoPE), a simple yet effective extension of RoPE that improves text-speech alignment. Unlike RoPE, which relies on absolute indices, LARoPE computes relative distances between query and key positions using length-normalized indices. Experimental results show that LARoPE consistently outperforms RoPE, offering faster loss convergence, more accurate text-speech alignment, and higher overall TTS quality. Furthermore, LARoPE demonstrates greater resilience to variations in utterance duration and maintains stable performance in extended speech generation up to 30 seconds, whereas RoPE suffers from notable degradation. Notably, our method achieves a state-of-the-art word error rate on a standard zero-shot TTS benchmark.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-14T04:25:13Z</published>
+    <arxiv:comment>5 pages, 3 figures, preprint</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Hyeongju Kim</name>
+    </author>
+    <author>
+      <name>Juheon Lee</name>
+    </author>
+    <author>
+      <name>Jinhyeok Yang</name>
+    </author>
+    <author>
+      <name>Jacob Morton</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.17388v3</id>
+    <title>Selective Rotary Position Embedding</title>
+    <updated>2026-06-23T17:12:17Z</updated>
+    <link href="https://arxiv.org/abs/2511.17388v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.17388v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Position information is essential for language modeling. In softmax transformers, Rotary Position Embeddings (\textit{RoPE}) encode positions through \textit{fixed-angle} rotations, while in linear transformers, order is handled via input-dependent (selective) gating that decays past key-value associations. Selectivity has generally been shown to improve language-related tasks. Inspired by this, we introduce \textit{Selective RoPE}, an \textit{input-dependent} rotary embedding mechanism, that generalizes \textit{RoPE}, and enables rotation in \textit{arbitrary angles} for both linear and softmax transformers. We show that softmax attention already performs a hidden form of these rotations on query-key pairs, uncovering an implicit positional structure. We further show that in state-space models and gated linear transformers, the real part manages forgetting while the imaginary part encodes positions through rotations. We validate our method by equipping gated transformers with \textit{Selective RoPE}, demonstrating that its input-dependent rotations improve performance in language modeling and on difficult sequence tasks like copying, state tracking, and retrieval.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-21T16:50:00Z</published>
+    <arxiv:comment>ICLR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sajad Movahedi</name>
+    </author>
+    <author>
+      <name>Timur Carstensen</name>
+    </author>
+    <author>
+      <name>Arshia Afzal</name>
+    </author>
+    <author>
+      <name>Frank Hutter</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+    <author>
+      <name>Volkan Cevher</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.11276v1</id>
+    <title>The Rotary Position Embedding May Cause Dimension Inefficiency in Attention Heads for Long-Distance Retrieval</title>
+    <updated>2025-02-16T21:32:29Z</updated>
+    <link href="https://arxiv.org/abs/2502.11276v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.11276v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Rotary Position Embedding (RoPE) is widely used in the attention heads of many large language models (LLM). It rotates dimensions in the query and the key vectors by different angles according to their positions in the input sequence. For long context modeling, the range of positions may vary a lot, and thus RoPE rotates some dimensions by a great range of angles. We hypothesize that the wide range of rotation angles may prevent LLMs from utilizing those dimensions. To validate this hypothesis, we present a controlled experiment showing that applying RoPE causes low utility of certain dimensions. Our analyses on three LLMs also indicate that these dimensions do not help LLMs do long-context question answering.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-16T21:32:29Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Ting-Rui Chiang</name>
+    </author>
+    <author>
+      <name>Dani Yogatama</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.09507v3</id>
+    <title>TransXSSM: A Hybrid Transformer State Space Model with Unified Rotary Position Embedding</title>
+    <updated>2025-06-18T05:38:44Z</updated>
+    <link href="https://arxiv.org/abs/2506.09507v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.09507v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers exhibit proficiency in capturing long-range dependencies, whereas State Space Models (SSMs) facilitate linear-time sequence modeling. Notwithstanding their synergistic potential, the integration of these architectures presents a significant challenge, primarily attributable to a fundamental incongr inuity their respective positional encoding mechanisms: Transformers rely on explicit Rotary Position Embeddings (RoPE), while SSMs leverage implicit positional representations via convolutions. This divergence often precipitates discontinuities and suboptimal performance.To address this impediment, we propose a unified rotary position embedding (Unified RoPE) methodology, thereby establishing a consistent positional encoding framework for both self-attention and state-space components. Using this Unified RoPE, we introduce TransXSSM, a hybrid architecture that coherently integrates the Transformer and SSM layers under this unified positional encoding scheme. At a 4 sequenceK length, TransXSSM exhibits training and inference speeds that are 42.3% and 29.5% faster, respectively, relative to standard Transformer models. It also delivers higher accuracy: under comparable settings, it surpasses a Transformer baseline by over 4% on language modeling benchmarks.TransXSSM furthermore scales more effectively: TransXSSM-1.3B gains 7.22% in average accuracy over its 320M version (versus about 6% gains for equivalent Transformers or SSMs). Our results show that unified positional encoding resolves positional incompatibility in hybrid models, enabling efficient, high-performance long-context modeling.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-11T08:26:51Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Bingheng Wu</name>
+    </author>
+    <author>
+      <name>Jingze Shi</name>
+    </author>
+    <author>
+      <name>Yifan Wu</name>
+    </author>
+    <author>
+      <name>Nan Tang</name>
+    </author>
+    <author>
+      <name>Yuyu Luo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2107.05907v1</id>
+    <title>Conformer-based End-to-end Speech Recognition With Rotary Position Embedding</title>
+    <updated>2021-07-13T08:07:22Z</updated>
+    <link href="https://arxiv.org/abs/2107.05907v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.05907v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based end-to-end speech recognition models have received considerable attention in recent years due to their high training speed and ability to model a long-range global context. Position embedding in the transformer architecture is indispensable because it provides supervision for dependency modeling between elements at different positions in the input sequence. To make use of the time order of the input sequence, many works inject some information about the relative or absolute position of the element into the input sequence. In this work, we investigate various position embedding methods in the convolution-augmented transformer (conformer) and adopt a novel implementation named rotary position embedding (RoPE). RoPE encodes absolute positional information into the input sequence by a rotation matrix, and then naturally incorporates explicit relative position information into a self-attention module. To evaluate the effectiveness of the RoPE method, we conducted experiments on AISHELL-1 and LibriSpeech corpora. Results show that the conformer enhanced with RoPE achieves superior performance in the speech recognition task. Specifically, our model achieves a relative word error rate reduction of 8.70% and 7.27% over the conformer on test-clean and test-other sets of the LibriSpeech corpus respectively.</summary>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-13T08:07:22Z</published>
+    <arxiv:comment>5 pages, 3 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.SD"/>
+    <author>
+      <name>Shengqiang Li</name>
+    </author>
+    <author>
+      <name>Menglong Xu</name>
+    </author>
+    <author>
+      <name>Xiao-Lei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.30576v1</id>
+    <title>T-RoPE: Time-Aware Rotary Position Embedding for Sequential Recommendation</title>
+    <updated>2026-09-24T21:39:12Z</updated>
+    <link href="https://arxiv.org/abs/2609.30576v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.30576v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large-scale recommenders increasingly adopt the sequential generative recipe behind large language models, bringing the Transformer into recommendation along with design choices made for text, including Rotary Position Embedding (RoPE). In language models, RoPE encodes token indices for relative position reasoning, but in recommendation, an interaction index records only event order, saying nothing about elapsed time, behavioral cycles across scales, or calendar phase. We revisit this choice and propose T-RoPE, a time-aware RoPE for sequential generative recommendation that replaces index-only rotation with timestamp-based angles, learnable temporal coefficients, multiscale frequency banks, shifted query alignment, and non-stationary key rotation. We prove that standard RoPE, even on timestamps, remains time-translation invariant and cannot distinguish seasonal contexts, and that T-RoPE breaks this invariance while preserving the RoPE interface. Across five public benchmarks, T-RoPE achieves the best result on every metric on every dataset, improving over the strongest baseline by 78--130\% in HR@10 on the sparse PixelRec data and 8--12\% across metrics on Amazon Books. On an industrial-scale e-commerce dataset with more than 6B interactions, it improves every metric over the HSTU + Time RAB backbone by 13--82\%, with ablations attributing the largest gains to multiscale frequencies ($+56\%$ NDCG@50) and non-stationary keys ($+4\%$). An online A/B test in the Shop app yields positive lifts in conversion rate ($+0.33\%$) and order count ($+0.63\%$). We also provide forward and backward algorithms whose added cost is linear in sequence length and head dimension, keeping time-aware RoPE practical for large generative recommenders.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-24T21:39:12Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+    <author>
+      <name>Noel Loo</name>
+    </author>
+    <author>
+      <name>Ali Khanafer</name>
+    </author>
+    <author>
+      <name>Shuying Sun</name>
+    </author>
+    <author>
+      <name>Akshay Soni</name>
+    </author>
+    <author>
+      <name>Zhong Wu</name>
+    </author>
+    <author>
+      <name>Linjun Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.12665v2</id>
+    <title>A$^2$ATS: Retrieval-Based KV Cache Reduction via Windowed Rotary Position Embedding and Query-Aware Vector Quantization</title>
+    <updated>2025-06-03T17:18:23Z</updated>
+    <link href="https://arxiv.org/abs/2502.12665v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.12665v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Long context large language models (LLMs) pose significant challenges for efficient serving due to the large memory footprint and high access overhead of KV cache. Retrieval-based KV cache reduction methods can mitigate these challenges, typically by offloading the complete KV cache to CPU and retrieving necessary tokens on demand during inference. However, these methods still suffer from unsatisfactory accuracy degradation and extra retrieval overhead. To address these limitations, this paper proposes A$^2$ATS, a novel retrieval-based KV cache reduction method. A$^2$ATS aims to obtain an accurate approximation of attention scores by applying the vector quantization technique to key states, thereby enabling efficient and precise retrieval of the top-K tokens. First, we propose Windowed Rotary Position Embedding, which decouples the positional dependency from query and key states after position embedding. Then, we propose query-aware vector quantization that optimizes the objective of attention score approximation directly. Finally, we design the heterogeneous inference architecture for KV cache offloading, enabling long context serving with larger batch sizes. Experimental results demonstrate that A$^2$ATS can achieve a lower performance degradation with similar or lower overhead compared to existing methods, thereby increasing long context serving throughput by up to $2.7 \times$.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-18T09:11:51Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Junhui He</name>
+    </author>
+    <author>
+      <name>Junna Xing</name>
+    </author>
+    <author>
+      <name>Nan Wang</name>
+    </author>
+    <author>
+      <name>Rui Xu</name>
+    </author>
+    <author>
+      <name>Shangyu Wu</name>
+    </author>
+    <author>
+      <name>Peng Zhou</name>
+    </author>
+    <author>
+      <name>Qiang Liu</name>
+    </author>
+    <author>
+      <name>Chun Jason Xue</name>
+    </author>
+    <author>
+      <name>Qingan Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.06985v1</id>
+    <title>RoTHP: Rotary Position Embedding-based Transformer Hawkes Process</title>
+    <updated>2024-05-11T10:59:09Z</updated>
+    <link href="https://arxiv.org/abs/2405.06985v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.06985v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Temporal Point Processes (TPPs), especially Hawkes Process are commonly used for modeling asynchronous event sequences data such as financial transactions and user behaviors in social networks. Due to the strong fitting ability of neural networks, various neural Temporal Point Processes are proposed, among which the Neural Hawkes Processes based on self-attention such as Transformer Hawkes Process (THP) achieve distinct performance improvement. Although the THP has gained increasing studies, it still suffers from the {sequence prediction issue}, i.e., training on history sequences and inferencing about the future, which is a prevalent paradigm in realistic sequence analysis tasks. What's more, conventional THP and its variants simply adopt initial sinusoid embedding in transformers, which shows performance sensitivity to temporal change or noise in sequence data analysis by our empirical study. To deal with the problems, we propose a new Rotary Position Embedding-based THP (RoTHP) architecture in this paper. Notably, we show the translation invariance property and {sequence prediction flexibility} of our RoTHP induced by the {relative time embeddings} when coupled with Hawkes process theoretically. Furthermore, we demonstrate empirically that our RoTHP can be better generalized in sequence data scenarios with timestamp translations and in sequence prediction tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-11T10:59:09Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Anningzhe Gao</name>
+    </author>
+    <author>
+      <name>Shan Dai</name>
+    </author>
+  </entry>
+</feed>

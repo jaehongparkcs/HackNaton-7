@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/RIZXakgWLprfPEog8reCiN07inE</id>
+  <title>arXiv Query: search_query=all:"learning rate schedule" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:48:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22learning+rate+schedule%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>328</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1909.09712v1</id>
+    <title>Learning an Adaptive Learning Rate Schedule</title>
+    <updated>2019-09-20T20:45:31Z</updated>
+    <link href="https://arxiv.org/abs/1909.09712v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.09712v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The learning rate is one of the most important hyper-parameters for model training and generalization. However, current hand-designed parametric learning rate schedules offer limited flexibility and the predefined schedule may not match the training dynamics of high dimensional and non-convex optimization problems. In this paper, we propose a reinforcement learning based framework that can automatically learn an adaptive learning rate schedule by leveraging the information from past training histories. The learning rate dynamically changes based on the current training dynamics. To validate this framework, we conduct experiments with different neural network architectures on the Fashion MINIST and CIFAR10 datasets. Experimental results show that the auto-learned learning rate controller can achieve better test results. In addition, the trained controller network is generalizable -- able to be trained on one data set and transferred to new problems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-20T20:45:31Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhen Xu</name>
+    </author>
+    <author>
+      <name>Andrew M. Dai</name>
+    </author>
+    <author>
+      <name>Jonas Kemp</name>
+    </author>
+    <author>
+      <name>Luke Metz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.10959v1</id>
+    <title>WSqD: A Horizon-Free Learning Rate Schedule for Large Model Training</title>
+    <updated>2026-07-12T23:24:42Z</updated>
+    <link href="https://arxiv.org/abs/2607.10959v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.10959v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Standard learning rate schedules such as cosine annealing are tied to a fixed training horizon, limiting their ability to accommodate post hoc horizon extension. Warmup-stable-decay (WSD) partially addresses this issue by maintaining a long constant-rate phase before a short linear cooldown, allowing training to resume from a pre-decay checkpoint. However, its peak learning rate is still tuned based on the original training horizon and can become suboptimal when training is extended. Motivated by stochastic convex optimization, we propose WSqD (Warmup with Square-root base and linear Decay), a learning rate schedule that replaces WSD's constant stable phase with a shifted inverse-square-root base while retaining the final linear cooldown. In the stochastic convex setting, WSqD provably attains the minimax-optimal $O(1/\sqrt{T})$ last-iterate convergence rate. Importantly, its base learning rate schedule is horizon-independent, and the training horizon is needed only to determine when to begin the final cooldown. Empirically, on language-model pretraining using the SlimPajama corpus, WSqD matches or outperforms carefully tuned WSD and other baselines across multiple training horizons while reusing a single peak learning rate.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-12T23:24:42Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianhao Ma</name>
+    </author>
+    <author>
+      <name>Yuxin Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.03977v5</id>
+    <title>Wide-minima Density Hypothesis and the Explore-Exploit Learning Rate Schedule</title>
+    <updated>2021-06-01T05:48:04Z</updated>
+    <link href="https://arxiv.org/abs/2003.03977v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.03977v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Several papers argue that wide minima generalize better than narrow minima. In this paper, through detailed experiments that not only corroborate the generalization properties of wide minima, we also provide empirical evidence for a new hypothesis that the density of wide minima is likely lower than the density of narrow minima. Further, motivated by this hypothesis, we design a novel explore-exploit learning rate schedule. On a variety of image and natural language datasets, compared to their original hand-tuned learning rate baselines, we show that our explore-exploit schedule can result in either up to 0.84% higher absolute accuracy using the original training budget or up to 57% reduced training time while achieving the original reported accuracy. For example, we achieve state-of-the-art (SOTA) accuracy for IWSLT'14 (DE-EN) dataset by just modifying the learning rate schedule of a high performing model.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-09T09:01:53Z</published>
+    <arxiv:comment>34 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nikhil Iyer</name>
+    </author>
+    <author>
+      <name>V Thejas</name>
+    </author>
+    <author>
+      <name>Nipun Kwatra</name>
+    </author>
+    <author>
+      <name>Ramachandran Ramjee</name>
+    </author>
+    <author>
+      <name>Muthian Sivathanu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.01338v2</id>
+    <title>Acceleration via Fractal Learning Rate Schedules</title>
+    <updated>2021-06-11T21:57:09Z</updated>
+    <link href="https://arxiv.org/abs/2103.01338v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.01338v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In practical applications of iterative first-order optimization, the learning rate schedule remains notoriously difficult to understand and expensive to tune. We demonstrate the presence of these subtleties even in the innocuous case when the objective is a convex quadratic. We reinterpret an iterative algorithm from the numerical analysis literature as what we call the Chebyshev learning rate schedule for accelerating vanilla gradient descent, and show that the problem of mitigating instability leads to a fractal ordering of step sizes. We provide some experiments to challenge conventional beliefs about stable learning rates in deep learning: the fractal schedule enables training to converge with locally unstable updates which make negative progress on the objective.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-01T22:52:13Z</published>
+    <arxiv:comment>v2: revisions for ICML 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Naman Agarwal</name>
+    </author>
+    <author>
+      <name>Surbhi Goel</name>
+    </author>
+    <author>
+      <name>Cyril Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.15634v2</id>
+    <title>Learning Rate Schedules in the Presence of Distribution Shift</title>
+    <updated>2023-08-20T15:57:07Z</updated>
+    <link href="https://arxiv.org/abs/2303.15634v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.15634v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We design learning rate schedules that minimize regret for SGD-based online learning in the presence of a changing data distribution. We fully characterize the optimal learning rate schedule for online linear regression via a novel analysis with stochastic differential equations. For general convex loss functions, we propose new learning rate schedules that are robust to distribution shift and we give upper and lower bounds for the regret that only differ by constants. For non-convex loss functions, we define a notion of regret based on the gradient norm of the estimated models and propose a learning schedule that minimizes an upper bound on the total expected regret. Intuitively, one expects changing loss landscapes to require more exploration, and we confirm that optimal learning rate schedules typically increase in the presence of distribution shift. Finally, we provide experiments for high-dimensional regression models and neural networks to illustrate these learning rate schedules and their cumulative regret.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-27T23:29:02Z</published>
+    <arxiv:comment>33 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of the 40th International Conference on Machine Learning (ICML 2023) 9523-9546</arxiv:journal_ref>
+    <author>
+      <name>Matthew Fahrbach</name>
+    </author>
+    <author>
+      <name>Adel Javanmard</name>
+    </author>
+    <author>
+      <name>Vahab Mirrokni</name>
+    </author>
+    <author>
+      <name>Pratik Worah</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2208.11873v1</id>
+    <title>Learning Rate Perturbation: A Generic Plugin of Learning Rate Schedule towards Flatter Local Minima</title>
+    <updated>2022-08-25T05:05:18Z</updated>
+    <link href="https://arxiv.org/abs/2208.11873v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.11873v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning rate is one of the most important hyper-parameters that has a significant influence on neural network training. Learning rate schedules are widely used in real practice to adjust the learning rate according to pre-defined schedules for fast convergence and good generalization. However, existing learning rate schedules are all heuristic algorithms and lack theoretical support. Therefore, people usually choose the learning rate schedules through multiple ad-hoc trials, and the obtained learning rate schedules are sub-optimal. To boost the performance of the obtained sub-optimal learning rate schedule, we propose a generic learning rate schedule plugin, called LEArning Rate Perturbation (LEAP), which can be applied to various learning rate schedules to improve the model training by introducing a certain perturbation to the learning rate. We found that, with such a simple yet effective strategy, training processing exponentially favors flat minima rather than sharp minima with guaranteed convergence, which leads to better generalization ability. In addition, we conduct extensive experiments which show that training with LEAP can improve the performance of various deep learning models on diverse datasets using various learning rate schedules (including constant learning rate).</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-25T05:05:18Z</published>
+    <arxiv:comment>7 pages, Accepted by CIKM'22</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hengyu Liu</name>
+    </author>
+    <author>
+      <name>Qiang Fu</name>
+    </author>
+    <author>
+      <name>Lun Du</name>
+    </author>
+    <author>
+      <name>Tiancheng Zhang</name>
+    </author>
+    <author>
+      <name>Ge Yu</name>
+    </author>
+    <author>
+      <name>Shi Han</name>
+    </author>
+    <author>
+      <name>Dongmei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.02844v3</id>
+    <title>Beyond Cosine Decay: On the effectiveness of Infinite Learning Rate Schedule for Continual Pre-training</title>
+    <updated>2025-09-09T23:04:20Z</updated>
+    <link href="https://arxiv.org/abs/2503.02844v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.02844v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The ever-growing availability of unlabeled data presents both opportunities and challenges for training artificial intelligence systems. While self-supervised learning (SSL) has emerged as a powerful paradigm for extracting meaningful representations from vast amounts of unlabeled data, existing methods still struggle to adapt to the non-stationary, non-IID nature of real-world data streams without forgetting previously learned knowledge. Recent works have adopted a repeated cosine annealing schedule for large-scale continual pre-training; however, these schedules (1) inherently cause forgetting during the re-warming phase and (2) have not been systematically compared to existing continual SSL methods. In this work, we systematically compare the widely used cosine schedule with the recently proposed infinite learning rate schedule and empirically find the latter to be a more effective alternative. Our extensive empirical evaluation across diverse image and language datasets demonstrates that the infinite learning rate schedule consistently enhances continual pre-training performance compared to a repeated cosine decay without being restricted to a fixed iteration budget. For instance, in a small-scale MAE pre-training setup, it outperforms several strong baselines from the literature. We then scale up our experiments to larger MAE pre-training and autoregressive language model pre-training. Our results show that the infinite learning rate schedule remains effective at scale, surpassing repeated cosine decay for both MAE pre-training and zero-shot LM benchmarks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-04T18:15:57Z</published>
+    <arxiv:comment>Accepted (oral) at Fourth Conference on Lifelong Learning Agents - CoLLAs 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Vaibhav Singh</name>
+    </author>
+    <author>
+      <name>Paul Janson</name>
+    </author>
+    <author>
+      <name>Paria Mehrbod</name>
+    </author>
+    <author>
+      <name>Adam Ibrahim</name>
+    </author>
+    <author>
+      <name>Irina Rish</name>
+    </author>
+    <author>
+      <name>Eugene Belilovsky</name>
+    </author>
+    <author>
+      <name>Benjamin Thérien</name>
+    </author>
+  </entry>
+</feed>

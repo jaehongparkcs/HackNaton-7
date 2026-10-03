@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/d+yNmYTQVkBfzvXWilHoJvnhf6c</id>
+  <title>arXiv Query: search_query=all:"RMSNorm" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:47:44Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22RMSNorm%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>68</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14858v2</id>
+    <title>Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers</title>
+    <updated>2023-10-26T04:32:49Z</updated>
+    <link href="https://arxiv.org/abs/2305.14858v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14858v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have achieved great success in machine learning applications. Normalization techniques, such as Layer Normalization (LayerNorm, LN) and Root Mean Square Normalization (RMSNorm), play a critical role in accelerating and stabilizing the training of Transformers. While LayerNorm recenters and rescales input vectors, RMSNorm only rescales the vectors by their RMS value. Despite being more computationally efficient, RMSNorm may compromise the representation ability of Transformers. There is currently no consensus regarding the preferred normalization technique, as some models employ LayerNorm while others utilize RMSNorm, especially in recent large language models. It is challenging to convert Transformers with one normalization to the other type. While there is an ongoing disagreement between the two normalization types, we propose a solution to unify two mainstream Transformer architectures, Pre-LN and Pre-RMSNorm Transformers. By removing the inherent redundant mean information in the main branch of Pre-LN Transformers, we can reduce LayerNorm to RMSNorm, achieving higher efficiency. We further propose the Compressed RMSNorm (CRMSNorm) and Pre-CRMSNorm Transformer based on a lossless compression of the zero-mean vectors. We formally establish the equivalence of Pre-LN, Pre-RMSNorm, and Pre-CRMSNorm Transformer variants in both training and inference. It implies that Pre-LN Transformers can be substituted with Pre-(C)RMSNorm counterparts at almost no cost, offering the same arithmetic functionality along with free efficiency improvement. Experiments demonstrate that we can reduce the training and inference time of Pre-LN Transformers by 1% - 10%.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T08:08:26Z</published>
+    <arxiv:comment>NeurIPS 2023 spotlight. Code is available at https://github.com/ZixuanJiang/pre-rmsnorm-transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zixuan Jiang</name>
+    </author>
+    <author>
+      <name>Jiaqi Gu</name>
+    </author>
+    <author>
+      <name>Hanqing Zhu</name>
+    </author>
+    <author>
+      <name>David Z. Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2409.12951v2</id>
+    <title>Geometric Interpretation of Layer Normalization and a Comparative Analysis with RMSNorm</title>
+    <updated>2025-02-01T06:06:36Z</updated>
+    <link href="https://arxiv.org/abs/2409.12951v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2409.12951v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a novel geometric interpretation of LayerNorm and explores how LayerNorm influences the norm and orientation of hidden vectors in the representation space. With these geometric insights, we prepare the foundation for comparing LayerNorm with RMSNorm. We show that the definition of LayerNorm is innately linked to the uniform vector, defined as $\boldsymbol{1} = [1, 1, 1, 1, \cdots, 1]^T \in \mathbb{R}^d$. We then show that the standardization step in LayerNorm can be understood in three simple steps: (i) remove the component of a vector along the uniform vector, (ii) normalize the remaining vector, and (iii) scale the resultant vector by $\sqrt{d}$, where $d$ is the dimensionality of the representation space. We also provide additional insights into how LayerNorm operates at inference time. Finally, we compare the hidden representations of LayerNorm-based LLMs with models trained using RMSNorm and show that all LLMs naturally operate orthogonal to the uniform vector at inference time, that is, on average they do not have a component along the uniform vector during inference. This presents the first mechanistic evidence that removing the component along the uniform vector in LayerNorm is a redundant step. These results advocate for using RMSNorm over LayerNorm which is also more computationally efficient.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-09-19T17:58:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Akshat Gupta</name>
+    </author>
+    <author>
+      <name>Atahan Ozdemir</name>
+    </author>
+    <author>
+      <name>Gopala Anumanchipalli</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.14521v1</id>
+    <title>Enjoy Your Layer Normalization with the Computational Efficiency of RMSNorm</title>
+    <updated>2026-05-14T08:05:39Z</updated>
+    <link href="https://arxiv.org/abs/2605.14521v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.14521v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Layer normalization (LN) is a fundamental component in modern deep learning, but its per-sample centering and scaling introduce non-negligible inference overhead. RMSNorm improves efficiency by removing the centering operation, yet this may discard benefits associated with centering. This paper propose a framework to determine whether an LN in an arbitrary DNN can be replaced by RMSNorm without changing the model function. The key idea is to fold LN's centering operation into upstream general linear layers by enforcing zero-mean outputs through the column-centered constraint (CCC) and column-based weight centering (CBWC). We extend the analysis to arbitrary DNNs, define such LNs as foldable LNs, and develop a graph-based detection algorithm. Our analysis shows that many LNs in widely used architectures are foldable, enabling exact inference-time conversion and end-to-end acceleration of 2% to 12% without changing model predictions. Experiments across multiple task families further show that, when exact equivalence is partially broken in practical training settings, our method remains competitive with vanilla LN while improving efficiency.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-14T08:05:39Z</published>
+    <arxiv:comment>33 pages, 21 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yuxin Guo</name>
+    </author>
+    <author>
+      <name>Yihao Yue</name>
+    </author>
+    <author>
+      <name>Yunhao Ni</name>
+    </author>
+    <author>
+      <name>Yizhou Ruan</name>
+    </author>
+    <author>
+      <name>Jie Luo</name>
+    </author>
+    <author>
+      <name>Wenjun Wu</name>
+    </author>
+    <author>
+      <name>Lei Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.18933v1</id>
+    <title>A Geometric Analysis of Sign-Magnitude Asymmetry in a ReLU + RMSNorm Block under Ternary Quantization</title>
+    <updated>2026-05-18T15:36:33Z</updated>
+    <link href="https://arxiv.org/abs/2605.18933v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.18933v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pre-norm Transformers with RMSNorm tolerate ternary {-1,0,+1} weight quantization with surprisingly small loss (Ma et al., 2024). We give a geometric explanation via sign-magnitude decomposition of weight perturbations. In a two-layer ReLU + RMSNorm model with i.i.d. Gaussian weights, sign-flips produce $π/(π-2) \approx 2.75$ times more transverse output energy than sign-preserving magnitude perturbations of equal Frobenius norm, as the flip rate $p \to 0$ (Theorem 3). The mechanism: ReLU creates a hidden-space directional asymmetry between the two perturbation types, which RMSNorm's transverse-projection Fréchet derivative selectively exposes. Sign-quantization error is itself a sign-preserving perturbation with angular alignment $\cos^2 \to 2/π$ (Theorem 4); its post-ReLU radial fraction ($0.365$) matches the pre-ReLU value $1-2/π$ within $0.4\%$, so ReLU is approximately transparent to ternary error. Multi-layer compounding of the $2.75\times$ factor is not experimentally supported; the gap to real-model sign sensitivity arises from outlier features violating delocalization. For an input dimension with amplitude $α$, a single sign-flip produces post-ReLU energy amplified by $R \approx nα^2$ relative to a delocalized entry. On TinyLlama-1.1B, at linear response ($p \leq 0.5\%$), count-matched NLL leverage stabilizes at $\sim 10\times \approx n\mathbb{E}[α^2]$, matching the per-entry theory; the all-column NLL ratio of $5.0\times$ falls within $R_{\mathrm{col}} \leq 19$ ($67\times$ PPL gap reflects metric nonlinearity). Measured outlier $α$ at layer 12 (median $0.024$, max $0.26$) confirms heavy-tailed concentration. The Bussgang constant $2/π$, RMSNorm geometry, and ReLU half-space structure together explain sign-magnitude asymmetry in pre-norm models, with $R \propto nα^2$ accounting for real-model deviations.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T15:36:33Z</published>
+    <arxiv:comment>53 pages, 2 figures, 21 tables, 7 appendices</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Lei Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.31963v1</id>
+    <title>Signed-Permutation Coordinate Transport for RMSNorm Transformers</title>
+    <updated>2026-06-30T17:02:33Z</updated>
+    <link href="https://arxiv.org/abs/2606.31963v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.31963v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern LLM workflows move coordinate-indexed objects across checkpoints: steering vectors, sparse autoencoders, top-$k$ neuron sets, attribution lists, and merge alignments. This is only well posed after fixing the model's residual-stream gauge, which we show is architecture-dependent: LayerNorm residual charts have permutation gauge $S_d$ (up to a global sign flip), while RMSNorm charts with generic per-channel gain have signed-permutation gauge $B_d = S_d \ltimes \{\pm 1\}^d$. Permutation-only alignment is therefore symmetry-incomplete for RMSNorm models. We introduce sign-marginalized Hungarian matching and prove a sharp failure mode: with decorrelated coordinates, raw signed-correlation matching has a structural permutation-accuracy ceiling at the positive-sign fraction of the true gauge, which sign-marginalization removes. We then make coordinate-preserving transport, not function-level merging, the primary object: composing saved-checkpoint local $B_d$ gauges along same-base fine-tuning trajectories recovers 91.1% of cross-run coordinates at 1500 steps versus 60.3% for endpoint matching, and the gain is not explained by merely routing through the base. The recovered gauge transfers tools that permutation-only alignment breaks: TinyLlama SAE reconstruction has NMSE 0.004 under $B_d$ versus 1.08 under $S_d$; Qwen sentiment steering preserves 95.8% of its effect versus 17.2%; refusal steering reverses sign under $S_d$; coordinate-preserving merges behave the same way. The same covariance governs stateful training: signed transport of AdamW state preserves the resumed trajectory, while permutation-only state follows a different one from a functionally identical checkpoint. Finally, gauge-sweep audits show index-level interpretability claims are reproducible only relative to an explicit gauge.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-30T17:02:33Z</published>
+    <arxiv:comment>31 pages, 2 figures, 26 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>John Sweeney</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.07467v1</id>
+    <title>Root Mean Square Layer Normalization</title>
+    <updated>2019-10-16T16:44:22Z</updated>
+    <link href="https://arxiv.org/abs/1910.07467v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.07467v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Layer normalization (LayerNorm) has been successfully applied to various deep neural networks to help stabilize training and boost model convergence because of its capability in handling re-centering and re-scaling of both inputs and weight matrix. However, the computational overhead introduced by LayerNorm makes these improvements expensive and significantly slows the underlying network, e.g. RNN in particular. In this paper, we hypothesize that re-centering invariance in LayerNorm is dispensable and propose root mean square layer normalization, or RMSNorm. RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability. RMSNorm is computationally simpler and thus more efficient than LayerNorm. We also present partial RMSNorm, or pRMSNorm where the RMS is estimated from p% of the summed inputs without breaking the above properties. Extensive experiments on several tasks using diverse network architectures show that RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%~64% on different models. Source code is available at https://github.com/bzhangGo/rmsnorm.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-16T16:44:22Z</published>
+    <arxiv:comment>NeurIPS 2019</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Biao Zhang</name>
+    </author>
+    <author>
+      <name>Rico Sennrich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09577v5</id>
+    <title>FlashNorm: Fast Normalization for Transformers</title>
+    <updated>2026-04-24T18:51:15Z</updated>
+    <link href="https://arxiv.org/abs/2407.09577v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09577v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Normalization layers are ubiquitous in large language models (LLMs) yet represent a compute bottleneck: on hardware with distinct vector and matrix execution units, the RMS calculation blocks the subsequent matrix multiplication, preventing parallel execution.
+  We present FlashNorm, an exact reformulation of RMSNorm followed by a linear layer that (i) eliminates the normalization weights by folding them into the subsequent linear layer, and (ii) defers the scalar RMS normalization to the output of the matrix multiplication, enabling the two operations to execute in parallel.
+  Additionally, by the scale invariance of RMS, an RMSNorm followed by a linear layer followed by another RMSNorm allows the first RMSNorm to be eliminated entirely -- a mathematically identical simplification that removes the pre-attention RMSNorm in models using QKV-normalization (e.g., Gemma~4) and in MLA-models with latent normalization (e.g., DeepSeek-V2, Mistral Small 4, and OpenMythos).
+  The same techniques extend to LayerNorm, Dynamic Tanh (DyT), feed-forward networks with GLU variants, and RoPE-based attention.
+  On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale. We verify zero-loss weight folding on three models. Beyond inference speed, FlashNorm simplifies model implementations by reducing parameter tensor count.
+  Watch our explainer video https://youtu.be/GEuJv34_XgU?si and see https://github.com/OpenMachine-ai/transformer-tricks for code.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T00:37:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nils Graef</name>
+    </author>
+    <author>
+      <name>Filip Makraduli</name>
+    </author>
+    <author>
+      <name>Andrew Wasielewski</name>
+    </author>
+    <author>
+      <name>Matthew Clapp</name>
+    </author>
+  </entry>
+</feed>

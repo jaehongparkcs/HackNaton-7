@@ -22,11 +22,27 @@ CHANGE_QUERIES = {
     "schedule=constant": '"learning rate schedule" AND "Transformer" AND "constant"',
     "optimizer=sgd_momentum": '"SGD" AND "Adam" AND "Transformer"',
     "dropout=0.1": '"dropout" AND "Transformer" AND "language model"',
+    "qk_norm=true": '"QK normalization" AND "Transformer"',
+    "weight_tying=true": '"weight tying" AND "language model"',
+    "z_loss_coef=0.0001": '"z-loss" AND "Transformer"',
+    "label_smoothing=0.1": '"label smoothing" AND "Transformer"',
+    "warmup_frac=0": '"warmup" AND "Transformer" AND "learning rate"',
+    "warmup_frac=0.02": '"warmup" AND "Transformer" AND "learning rate"',
+    "warmup_frac=0.1": '"warmup" AND "Transformer" AND "learning rate"',
+    "grad_clip=0": '"gradient clipping" AND "Transformer"',
+    "init_scale=0.5": '"initialization" AND "Transformer" AND "scale"',
+    "init_scale=2.0": '"initialization" AND "Transformer" AND "scale"',
+    "optimizer=lion": '"Lion" AND "optimizer" AND "Transformer"',
 }
 
 
 def deterministic_queries() -> list[dict]:
-    return [{"q": CHANGE_QUERIES[k], "kind": "deterministic", "dimension": k} for k in ALLOWED_CHANGES]
+    """One query per runnable change. Changes that share a query (the warm-up lengths, the two
+    initialization scales) are searched once; the entry names every change it serves."""
+    by_q: dict[str, list[str]] = {}
+    for k in ALLOWED_CHANGES:
+        by_q.setdefault(CHANGE_QUERIES[k], []).append(k)
+    return [{"q": q, "kind": "deterministic", "dimension": ", ".join(ks)} for q, ks in by_q.items()]
 
 
 def plan_queries(llm: LLM, niche: NicheSpec, max_queries: int = MAX_LLM_QUERIES

@@ -1,0 +1,251 @@
+{
+  "directions": [
+    {
+      "direction_id": "dir_01",
+      "origin": "deterministic",
+      "title": "activation (building block not mentioned by the scout)",
+      "idea": "Change the testbed's activation setting.",
+      "mechanism": "",
+      "search_terms": [
+        "activation function",
+        "SwiGLU",
+        "squared ReLU"
+      ],
+      "building_blocks": [
+        "activation"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"activation function\"",
+          "n_results": 5
+        },
+        {
+          "q": "\"SwiGLU\"",
+          "n_results": 5
+        },
+        {
+          "q": "\"squared ReLU\"",
+          "n_results": 5
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2411.13010",
+        "2605.03667",
+        "2605.18106",
+        "2606.00761",
+        "2607.02521",
+        "2608.07323"
+      ]
+    },
+    {
+      "direction_id": "dir_02",
+      "origin": "deterministic",
+      "title": "dropout (building block not mentioned by the scout)",
+      "idea": "Change the testbed's dropout setting.",
+      "mechanism": "",
+      "search_terms": [
+        "dropout",
+        "regularization"
+      ],
+      "building_blocks": [
+        "dropout"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"dropout\"",
+          "n_results": 7
+        },
+        {
+          "q": "\"regularization\"",
+          "n_results": 7
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2002.02247",
+        "2002.12915"
+      ]
+    },
+    {
+      "direction_id": "dir_03",
+      "origin": "deterministic",
+      "title": "norm (building block not mentioned by the scout)",
+      "idea": "Change the testbed's norm setting.",
+      "mechanism": "",
+      "search_terms": [
+        "RMSNorm",
+        "layer normalization"
+      ],
+      "building_blocks": [
+        "norm"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"RMSNorm\"",
+          "n_results": 7
+        },
+        {
+          "q": "\"layer normalization\"",
+          "n_results": 7
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "1910.07467",
+        "2002.04745",
+        "2305.14858",
+        "2510.09904",
+        "2605.14521"
+      ]
+    },
+    {
+      "direction_id": "dir_04",
+      "origin": "deterministic",
+      "title": "norm_position (building block not mentioned by the scout)",
+      "idea": "Change the testbed's norm_position setting.",
+      "mechanism": "",
+      "search_terms": [
+        "Pre-LN",
+        "Post-LN",
+        "normalization placement"
+      ],
+      "building_blocks": [
+        "norm_position"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"Pre-LN\"",
+          "n_results": 5
+        },
+        {
+          "q": "\"Post-LN\"",
+          "n_results": 5
+        },
+        {
+          "q": "\"normalization placement\"",
+          "n_results": 3
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2305.14858",
+        "2510.09904",
+        "2607.14018"
+      ]
+    },
+    {
+      "direction_id": "dir_05",
+      "origin": "deterministic",
+      "title": "optimizer (building block not mentioned by the scout)",
+      "idea": "Change the testbed's optimizer setting.",
+      "mechanism": "",
+      "search_terms": [
+        "SGD momentum",
+        "Adam optimizer"
+      ],
+      "building_blocks": [
+        "optimizer"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"SGD momentum\"",
+          "n_results": 7
+        },
+        {
+          "q": "\"Adam optimizer\"",
+          "n_results": 7
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2112.09442",
+        "2407.21078",
+        "2409.04244",
+        "2511.20725",
+        "2606.21433"
+      ]
+    },
+    {
+      "direction_id": "dir_06",
+      "origin": "deterministic",
+      "title": "pos_encoding (building block not mentioned by the scout)",
+      "idea": "Change the testbed's pos_encoding setting.",
+      "mechanism": "",
+      "search_terms": [
+        "rotary position embedding",
+        "positional encoding"
+      ],
+      "building_blocks": [
+        "pos_encoding"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"rotary position embedding\"",
+          "n_results": 7
+        },
+        {
+          "q": "\"positional encoding\"",
+          "n_results": 7
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2104.09864",
+        "2107.02561",
+        "2307.09270",
+        "2402.00236",
+        "2405.09061",
+        "2405.14722",
+        "2506.08309",
+        "2507.23083",
+        "2511.09146",
+        "2604.24167",
+        "2608.29715"
+      ]
+    },
+    {
+      "direction_id": "dir_07",
+      "origin": "deterministic",
+      "title": "schedule (building block not mentioned by the scout)",
+      "idea": "Change the testbed's schedule setting.",
+      "mechanism": "",
+      "search_terms": [
+        "learning rate schedule",
+        "cosine schedule"
+      ],
+      "building_blocks": [
+        "schedule"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"learning rate schedule\"",
+          "n_results": 7
+        },
+        {
+          "q": "\"cosine schedule\"",
+          "n_results": 7
+        }
+      ],
+      "title_hints": [],
+      "paper_ids": [
+        "2208.11873",
+        "2303.15634",
+        "2405.18392",
+        "2503.02844",
+        "2503.09411",
+        "2602.03702",
+        "2605.18069",
+        "2607.10959"
+      ]
+    }
+  ],
+  "error": "LLMError: scout: invalid output after retry: 15 validation errors for ScoutOutput\ndirections.0.title\n  Field required [type=missing, input_value={'idea': 'Replace LayerNo...lding_blocks': ['norm']}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing\ndirecti"
+}

@@ -37,11 +37,16 @@ class Attention(nn.Module):
         self.proj = nn.Linear(c.n_embd, c.n_embd, bias=False)
         self.p = c.dropout
         self.resid = nn.Dropout(c.dropout)
+        # QK-norm: unit-norm queries and keys, with one learned logit scale (keeps attention logits bounded)
+        self.qk_scale = nn.Parameter(torch.tensor(10.0)) if c.qk_norm else None
 
     def forward(self, x, cos=None, sin=None):
         B, T, C = x.shape
         q, k, v = self.qkv(x).split(C, dim=2)
         q, k, v = (t.view(B, T, self.n_head, self.hd).transpose(1, 2) for t in (q, k, v))
+        if self.qk_scale is not None:      # sdpa divides by sqrt(hd); undo it so logits = scale * cos(q, k)
+            q = F.normalize(q, dim=-1) * (self.qk_scale * math.sqrt(self.hd))
+            k = F.normalize(k, dim=-1)
         if self.rope:
             q, k = apply_rope(q, cos, sin), apply_rope(k, cos, sin)
         y = F.scaled_dot_product_attention(q, k, v, is_causal=True,
@@ -100,16 +105,30 @@ class GPT(nn.Module):
         self.blocks = nn.ModuleList(Block(c) for _ in range(c.n_layer))
         self.final = make_norm(c.norm, c.n_embd) if c.norm_position == "pre" else nn.Identity()
         self.head = nn.Linear(c.n_embd, vocab_size, bias=False)
+        self.std = 0.02 * c.init_scale
         self.apply(self._init)
         for n, p in self.named_parameters():   # GPT-2 style residual scaling
             if n.endswith("proj.weight") or n.endswith("w_down.weight"):
-                nn.init.normal_(p, mean=0.0, std=0.02 / math.sqrt(2 * c.n_layer))
+                nn.init.normal_(p, mean=0.0, std=self.std / math.sqrt(2 * c.n_layer))
+        if c.weight_tying:                      # one matrix for input embedding and output head
+            self.head.weight = self.tok.weight
         self._rope_cache: dict = {}
 
-    @staticmethod
-    def _init(m):
+    def _init(self, m):
         if isinstance(m, (nn.Linear, nn.Embedding)):
-            nn.init.normal_(m.weight, mean=0.0, std=0.02)
+            nn.init.normal_(m.weight, mean=0.0, std=self.std)
+
+    def train_loss(self, idx, targets):
+        """The loss that is optimized. Label smoothing and z-loss apply here only: the reported
+        val_loss is always the plain cross-entropy from `forward`, so candidates stay comparable."""
+        logits, ce = self(idx, targets)
+        if self.c.label_smoothing == 0.0 and self.c.z_loss_coef == 0.0:
+            return ce
+        flat = logits.view(-1, logits.size(-1))
+        loss = F.cross_entropy(flat, targets.reshape(-1), label_smoothing=self.c.label_smoothing)
+        if self.c.z_loss_coef > 0.0:
+            loss = loss + self.c.z_loss_coef * torch.logsumexp(flat, dim=-1).pow(2).mean()
+        return loss
 
     def n_params(self) -> int:
         return sum(p.numel() for p in self.parameters())

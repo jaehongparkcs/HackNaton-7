@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/XOwnokhCWfhBKjwrD2X4tKNiFtk</id>
+  <title>arXiv Query: search_query=all:"SGD" AND all:"Adam" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:46:21Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22SGD%22+AND+(all:%22Adam%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>51</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2306.00204v1</id>
+    <title>Toward Understanding Why Adam Converges Faster Than SGD for Transformers</title>
+    <updated>2023-05-31T21:49:44Z</updated>
+    <link href="https://arxiv.org/abs/2306.00204v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2306.00204v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While stochastic gradient descent (SGD) is still the most popular optimization algorithm in deep learning, adaptive algorithms such as Adam have established empirical advantages over SGD in some deep learning applications such as training transformers. However, it remains a question that why Adam converges significantly faster than SGD in these scenarios. In this paper, we propose one explanation of why Adam converges faster than SGD using a new concept directional sharpness. We argue that the performance of optimization algorithms is closely related to the directional sharpness of the update steps, and show SGD has much worse directional sharpness compared to adaptive algorithms. We further observe that only a small fraction of the coordinates causes the bad sharpness and slow convergence of SGD, and propose to use coordinate-wise clipping as a solution to SGD and other optimization algorithms. We demonstrate the effect of coordinate-wise clipping on sharpness reduction and speeding up the convergence of optimization algorithms under various settings. We show that coordinate-wise clipping improves the local loss reduction when only a small fraction of the coordinates has bad sharpness. We conclude that the sharpness reduction effect of adaptive coordinate-wise scaling is the reason for Adam's success in practice and suggest the use of coordinate-wise clipping as a universal technique to speed up deep learning optimization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-31T21:49:44Z</published>
+    <arxiv:comment>37 pages, 16 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yan Pan</name>
+    </author>
+    <author>
+      <name>Yuanzhi Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.13960v1</id>
+    <title>Noise Is Not the Main Factor Behind the Gap Between SGD and Adam on Transformers, but Sign Descent Might Be</title>
+    <updated>2023-04-27T05:41:13Z</updated>
+    <link href="https://arxiv.org/abs/2304.13960v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.13960v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The success of the Adam optimizer on a wide array of architectures has made it the default in settings where stochastic gradient descent (SGD) performs poorly. However, our theoretical understanding of this discrepancy is lagging, preventing the development of significant improvements on either algorithm. Recent work advances the hypothesis that Adam and other heuristics like gradient clipping outperform SGD on language tasks because the distribution of the error induced by sampling has heavy tails. This suggests that Adam outperform SGD because it uses a more robust gradient estimate. We evaluate this hypothesis by varying the batch size, up to the entire dataset, to control for stochasticity. We present evidence that stochasticity and heavy-tailed noise are not major factors in the performance gap between SGD and Adam. Rather, Adam performs better as the batch size increases, while SGD is less effective at taking advantage of the reduction in noise. This raises the question as to why Adam outperforms SGD in the full-batch setting. Through further investigation of simpler variants of SGD, we find that the behavior of Adam with large batches is similar to sign descent with momentum.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-27T05:41:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Frederik Kunstner</name>
+    </author>
+    <author>
+      <name>Jacques Chen</name>
+    </author>
+    <author>
+      <name>Jonathan Wilder Lavington</name>
+    </author>
+    <author>
+      <name>Mark Schmidt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2106.06749v2</id>
+    <title>A decreasing scaling transition scheme from Adam to SGD</title>
+    <updated>2021-09-12T11:46:42Z</updated>
+    <link href="https://arxiv.org/abs/2106.06749v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2106.06749v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adaptive gradient algorithm (AdaGrad) and its variants, such as RMSProp, Adam, AMSGrad, etc, have been widely used in deep learning. Although these algorithms are faster in the early phase of training, their generalization performance is often not as good as stochastic gradient descent (SGD). Hence, a trade-off method of transforming Adam to SGD after a certain iteration to gain the merits of both algorithms is theoretically and practically significant. To that end, we propose a decreasing scaling transition scheme to achieve a smooth and stable transition from Adam to SGD, which is called DSTAdam. The convergence of the proposed DSTAdam is also proved in an online convex setting. Finally, the effectiveness of the DSTAdam is verified on the CIFAR-10/100 datasets. Our implementation is available at: https://github.com/kunzeng/DSTAdam.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-06-12T11:28:58Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kun Zeng</name>
+    </author>
+    <author>
+      <name>Jinlan Liu</name>
+    </author>
+    <author>
+      <name>Zhixia Jiang</name>
+    </author>
+    <author>
+      <name>Dongpo Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.12543v1</id>
+    <title>Is your batch size the problem? Revisiting the Adam-SGD gap in language modeling</title>
+    <updated>2025-06-14T15:37:31Z</updated>
+    <link href="https://arxiv.org/abs/2506.12543v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.12543v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adam is known to perform significantly better than Stochastic Gradient Descent (SGD) in language models, a phenomenon for which a number of explanations have been proposed. In this work, we revisit this "optimizer gap" through a series of comprehensively tuned baseline training runs for language modeling with Transformers. We exhaustively study how momentum, gradient clipping, and batch size affect the gap between SGD and Adam. Our empirical findings show that SGD with momentum can actually perform similarly to Adam in small-batch settings, if tuned correctly. We revisit existing explanations for Adam's advantage, including heavy-tailed class imbalance, directional sharpness, and Hessian heterogeneity, which struggle to directly explain this phenomenon. Towards bridging this gap in our understanding, by analyzing our Transformer training runs and simple quadratic settings inspired by the literature, we provide new insights, driven by stochastic differential equation models, into the role of batch size on the training dynamics.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-14T15:37:31Z</published>
+    <arxiv:comment>Short version accepted at the 2025 HiLD Workshop at ICML</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Teodora Srećković</name>
+    </author>
+    <author>
+      <name>Jonas Geiping</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.02317v3</id>
+    <title>Anon: Extrapolating Adaptivity Beyond SGD and Adam</title>
+    <updated>2026-09-23T03:15:47Z</updated>
+    <link href="https://arxiv.org/abs/2605.02317v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.02317v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adaptive optimizers such as Adam and non-adaptive methods like SGD exhibit distinct generalization capabilities across different architectures. Prior tunable optimizers attempt to bridge this gap by strictly interpolating between SGD and Adam, effectively confining adaptivity within the 0-to-1 bound. However, this restricted interpolation is fundamentally insufficient: we reveal that optimal adaptivity often requires extrapolation, such as negative adaptivity for classical CNNs and adaptivity of at least one ($γ\geq 1$) for Transformers. Extrapolating adaptivity theoretically violates the strict non-decreasing pre-conditioner assumption, often leading to divergence in existing methods. To break this barrier, we propose Anon, an optimizer that achieves fully continuous adaptivity extrapolation across the entire real-number spectrum. To guarantee provable stability in these out-of-bound regimes, we introduce Incremental Delay Update (IDU), a novel mechanism that bypasses hard max-tracking strategies. We theoretically establish Anon's convergence in both convex and non-convex settings. Empirically, by exploring previously unreachable adaptivity landscapes, Anon demonstrates highly competitive and scalable performance among state-of-the-art element-wise optimizers on representative image classification, diffusion, and large language modeling tasks.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-04T08:14:51Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Yiheng Zhang</name>
+    </author>
+    <author>
+      <name>Kaiyan Zhao</name>
+    </author>
+    <author>
+      <name>Shaowu Wu</name>
+    </author>
+    <author>
+      <name>Yiming Wang</name>
+    </author>
+    <author>
+      <name>Jiajun Wu</name>
+    </author>
+    <author>
+      <name>Leong Hou U</name>
+    </author>
+    <author>
+      <name>Steve Drew</name>
+    </author>
+    <author>
+      <name>Xiaoguang Niu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.16788v4</id>
+    <title>Why Transformers Need Adam: A Hessian Perspective</title>
+    <updated>2024-10-21T08:27:23Z</updated>
+    <link href="https://arxiv.org/abs/2402.16788v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.16788v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>SGD performs worse than Adam by a significant margin on Transformers, but the reason remains unclear. In this work, we provide an explanation through the lens of Hessian: (i) Transformers are "heterogeneous": the Hessian spectrum across parameter blocks vary dramatically, a phenomenon we call "block heterogeneity"; (ii) Heterogeneity hampers SGD: SGD performs worse than Adam on problems with block heterogeneity. To validate (i) and (ii), we check various Transformers, CNNs, MLPs, and quadratic problems, and find that SGD can perform on par with Adam on problems without block heterogeneity, but performs worse than Adam when the heterogeneity exists. Our initial theoretical analysis indicates that SGD performs worse because it applies one single learning rate to all blocks, which cannot handle the heterogeneity among blocks. This limitation could be ameliorated if we use coordinate-wise learning rates, as designed in Adam.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-26T18:01:41Z</published>
+    <arxiv:comment>Advances in Neural Information Processing Systems, 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yushun Zhang</name>
+    </author>
+    <author>
+      <name>Congliang Chen</name>
+    </author>
+    <author>
+      <name>Tian Ding</name>
+    </author>
+    <author>
+      <name>Ziniu Li</name>
+    </author>
+    <author>
+      <name>Ruoyu Sun</name>
+    </author>
+    <author>
+      <name>Zhi-Quan Luo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.07729v2</id>
+    <title>Do We Need Adam? Surprisingly Strong and Sparse Reinforcement Learning with SGD in LLMs</title>
+    <updated>2026-02-24T15:43:09Z</updated>
+    <link href="https://arxiv.org/abs/2602.07729v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.07729v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Reinforcement learning (RL), particularly RL from verifiable reward (RLVR), has become a crucial phase of training large language models (LLMs) and a key focus of current scaling efforts. However, optimization practices in RL largely follow those of next-token prediction stages (e.g., pretraining and supervised fine-tuning), despite fundamental differences between RL and these stages highlighted by recent work. One such practice is the use of the AdamW optimizer, which is widely adopted for training large-scale transformers despite its high memory overhead. Our analysis shows that both momentum and adaptive learning rates in AdamW are less influential in RL than in SFT, leading us to hypothesize that RL benefits less from Adam-style per-parameter adaptive learning rates and momentum. Confirming this hypothesis, our experiments demonstrate that the substantially more memory-efficient SGD, which is known to perform poorly in supervised learning of large-scale transformers, matches or even outperforms AdamW in RL for LLMs. Remarkably, full fine-tuning with SGD updates fewer than 0.02% of model parameters without any sparsity-promoting regularization, more than 1000 times fewer than AdamW. Our analysis offers potential reasons for this update sparsity. These findings provide new insights into the optimization dynamics of RL in LLMs and show that RL can be substantially more parameter-efficient than previously recognized.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-07T23:25:26Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sagnik Mukherjee</name>
+    </author>
+    <author>
+      <name>Lifan Yuan</name>
+    </author>
+    <author>
+      <name>Pavan Jayasinha</name>
+    </author>
+    <author>
+      <name>Dilek Hakkani-Tür</name>
+    </author>
+    <author>
+      <name>Hao Peng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.21829v2</id>
+    <title>In Search of Adam's Secret Sauce</title>
+    <updated>2025-12-01T01:28:44Z</updated>
+    <link href="https://arxiv.org/abs/2505.21829v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.21829v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Understanding the remarkable efficacy of Adam when training transformer-based language models has become a central research topic within the optimization community. To gain deeper insights, several simplifications of Adam have been proposed, such as the signed gradient and signed momentum methods. In this work, we conduct an extensive empirical study - training over 1500 language models across different data configurations and scales - comparing Adam to several known simplified variants. We find that signed momentum methods are faster than SGD, but consistently underperform relative to Adam, even after careful tuning of momentum, clipping setting and learning rates. However, our analysis reveals a compelling option that preserves near-optimal performance while allowing for new insightful reformulations: constraining the Adam momentum parameters to be equal, beta1 = beta2. Beyond robust performance, this choice affords new theoretical insights, highlights the "secret sauce" on top of signed momentum, and grants a precise statistical interpretation: we show that Adam in this setting implements a natural online algorithm for estimating the mean and variance of gradients-one that arises from a mean-field Gaussian variational inference perspective.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-27T23:30:18Z</published>
+    <arxiv:comment>Accepted at NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+    <author>
+      <name>Robert M. Gower</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.09658v1</id>
+    <title>Muon Learns More Robust and Transferable Features than Adam</title>
+    <updated>2026-06-08T15:42:54Z</updated>
+    <link href="https://arxiv.org/abs/2606.09658v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.09658v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Muon has recently emerged as a state-of-the-art optimizer for pretraining Large Language Models (LLMs) and vision classifiers. Despite its efficiency advantage over Adam and SGD, the feature-learning advantage of Muon remains unclear. This paper investigates Muon's feature-learning advantage through the lens of robustness and transferability. First, by evaluating pretrained models on corrupted images and texts, we show that features learned by Muon are consistently more robust than those learned by Adam and SGD across different architectures, including transformers and Convolutional Neural Networks (CNNs). Using trained layer-wise probes, we further show that this robustness advantage is reflected in larger logit margins across layers. Second, by training linear classifiers or fine-tuning full models from pretrained parameters on downstream tasks, we demonstrate that Muon-learned features transfer more effectively than those learned by Adam and SGD. This transferability advantage is further supported by the diversity of hidden states across layers, as measured by effective rank. Finally, in a representative classification problem with multi-component features, we prove that Muon attains larger margins and higher effective rank than Adam and SGD, providing theoretical support for our empirical findings.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-08T15:42:54Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianyu Ruan</name>
+    </author>
+    <author>
+      <name>Fengzhuo Zhang</name>
+    </author>
+    <author>
+      <name>Shuche Wang</name>
+    </author>
+    <author>
+      <name>Shihua Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.01029v3</id>
+    <title>On Suppressing Range of Adaptive Stepsizes of Adam to Improve Generalisation Performance</title>
+    <updated>2024-07-12T09:46:14Z</updated>
+    <link href="https://arxiv.org/abs/2302.01029v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.01029v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A number of recent adaptive optimizers improve the generalisation performance of Adam by essentially reducing the variance of adaptive stepsizes to get closer to SGD with momentum. Following the above motivation, we suppress the range of the adaptive stepsizes of Adam by exploiting the layerwise gradient statistics. In particular, at each iteration, we propose to perform three consecutive operations on the second momentum v_t before using it to update a DNN model: (1): down-scaling, (2): epsilon-embedding, and (3): down-translating. The resulting algorithm is referred to as SET-Adam, where SET is a brief notation of the three operations. The down-scaling operation on v_t is performed layerwise by making use of the angles between the layerwise subvectors of v_t and the corresponding all-one subvectors. Extensive experimental results show that SET-Adam outperforms eight adaptive optimizers when training transformers and LSTMs for NLP, and VGG and ResNet for image classification over CIAF10 and CIFAR100 while matching the best performance of the eight adaptive methods when training WGAN-GP models for image generation tasks. Furthermore, SET-Adam produces higher validation accuracies than Adam and AdaBelief for training ResNet18 over ImageNet.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-02T11:46:23Z</published>
+    <arxiv:comment>Accepted by ECML 2024. arXiv admin note: substantial text overlap with arXiv:2203.13273</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Guoqiang Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.19964v3</id>
+    <title>Understanding Adam Requires Better Rotation Dependent Assumptions</title>
+    <updated>2025-11-06T16:25:27Z</updated>
+    <link href="https://arxiv.org/abs/2410.19964v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.19964v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite its widespread adoption, Adam's advantage over Stochastic Gradient Descent (SGD) lacks a comprehensive theoretical explanation. This paper investigates Adam's sensitivity to rotations of the parameter space. We observe that Adam's performance in training transformers degrades under random rotations of the parameter space, indicating a crucial sensitivity to the choice of basis in practice. This reveals that conventional rotation-invariant assumptions are insufficient to capture Adam's advantages theoretically. To better understand the rotation-dependent properties that benefit Adam, we also identify structured rotations that preserve or even enhance its empirical performance. We then examine the rotation-dependent assumptions in the literature and find that they fall short in explaining Adam's behaviour across various rotation types. In contrast, we verify the orthogonality of the update as a promising indicator of Adam's basis sensitivity, suggesting it may be the key quantity for developing rotation-dependent theoretical frameworks that better explain its empirical success.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-25T20:53:03Z</published>
+    <arxiv:comment>Published at NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianyue H. Zhang</name>
+    </author>
+    <author>
+      <name>Lucas Maes</name>
+    </author>
+    <author>
+      <name>Alan Milligan</name>
+    </author>
+    <author>
+      <name>Alexia Jolicoeur-Martineau</name>
+    </author>
+    <author>
+      <name>Ioannis Mitliagkas</name>
+    </author>
+    <author>
+      <name>Damien Scieur</name>
+    </author>
+    <author>
+      <name>Simon Lacoste-Julien</name>
+    </author>
+    <author>
+      <name>Charles Guille-Escuret</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.00213v5</id>
+    <title>Gradient Heterogeneity Complements Hessian Heterogeneity in Transformer Optimization</title>
+    <updated>2026-08-17T21:08:01Z</updated>
+    <link href="https://arxiv.org/abs/2502.00213v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.00213v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers are difficult to optimize with stochastic gradient descent (SGD) and largely rely on adaptive optimizers such as Adam. Despite extensive efforts, the mechanisms behind Adam's advantage over SGD in Transformer optimization are still not fully understood. In this study, we analyze the optimization of Transformer models in the fine-tuning setting through the lens of gradient heterogeneity, defined as the variation in gradient norms across parameter blocks. We provide a theoretical analysis showing that gradient heterogeneity, together with Hessian heterogeneity, degrades the convergence of gradient-based methods such as SGD, while sign-based methods are substantially less sensitive to this effect. Adam and SignSGD both perform coordinate-wise updates and are less sensitive to the scale of individual gradient coordinates than SGD. This motivates our use of SignSGD as an analytically tractable proxy for Adam-like behavior. Our analysis uses the fact that SGD and SignSGD follow steepest descent directions under different norms, and derives upper bounds on the iteration complexity with implications for learning-rate scaling for SignSGD. We further investigate the origin of gradient heterogeneity in Transformer architectures and show that it is strongly influenced by the placement of layer normalization, with Post-LN architectures exhibiting particularly pronounced heterogeneity. Experimental results from fine-tuning Transformers in both NLP and vision domains validate our theoretical analysis.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-31T23:05:52Z</published>
+    <arxiv:comment>TMLR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Akiyoshi Tomihari</name>
+    </author>
+    <author>
+      <name>Issei Sato</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.16363v1</id>
+    <title>AdamS: Momentum Itself Can Be A Normalizer for LLM Pretraining and Post-training</title>
+    <updated>2025-05-22T08:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2505.16363v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.16363v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce AdamS, a simple yet effective alternative to Adam for large language model (LLM) pretraining and post-training. By leveraging a novel denominator, i.e., the root of weighted sum of squares of the momentum and the current gradient, AdamS eliminates the need for second-moment estimates. Hence, AdamS is efficient, matching the memory and compute footprint of SGD with momentum while delivering superior optimization performance. Moreover, AdamS is easy to adopt: it can directly inherit hyperparameters of AdamW, and is entirely model-agnostic, integrating seamlessly into existing pipelines without modifications to optimizer APIs or architectures. The motivation behind AdamS stems from the observed $(L_0, L_1)$ smoothness properties in transformer objectives, where local smoothness is governed by gradient magnitudes that can be further approximated by momentum magnitudes. We establish rigorous theoretical convergence guarantees and provide practical guidelines for hyperparameter selection. Empirically, AdamS demonstrates strong performance in various tasks, including pre-training runs on GPT-2 and Llama2 (up to 13B parameters) and reinforcement learning in post-training regimes. With its efficiency, simplicity, and theoretical grounding, AdamS stands as a compelling alternative to existing optimizers.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-22T08:16:48Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Bohan Wang</name>
+    </author>
+    <author>
+      <name>Luoxin Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.25990v1</id>
+    <title>Spectral Allocation: Why Muon Outperforms Adam, and How to Improve Muon</title>
+    <updated>2026-08-26T16:41:12Z</updated>
+    <link href="https://arxiv.org/abs/2608.25990v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.25990v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Orthogonal optimisers such as Muon can substantially accelerate large language model pretraining relative to Adam, yet the mechanism remains incompletely understood. We investigate this through an out-of-sample spectral probing analysis of Transformer loss landscapes. At checkpoints along real training trajectories, we decompose each momentum buffer into its singular directions and estimate the loss-optimal step size along each direction on held-out data. The resulting spectral profile is anisotropic yet stable across batches and training stages, and consistent across the optimisers and model scales: a volatile head operating at the Edge-of-Stability supports a much smaller step size than the tolerant bulk, which permits substantially larger steps. This profile provides a unified spectral allocation account of why Muon outperforms Adam, which outperforms SGD. It also exposes a limitation of Muon's uniform scaling: it still underutilises the bulk. Guided by this finding, we introduce Spectral-Aware Muon (SAMuon), which holds the head at the Muon scale and amplifies the bulk using a static spectral prior. We provide two variants: the complete SAMuon follows the measured profile using a low-rank randomised SVD and the simplified SAMuon-lite uses a two-level approximation via rank-one power iteration. Neither method adds persistent optimiser state or notable extra FLOPs beyond Muon at scale, and the idealised exact-whitening versions of both retain Muon's asymptotic convergence rate under standard assumptions. Across "modded-nanogpt" models from 124M to 1B parameters, both variants outperform tuned AdamW and Muon (Scion implementation) baselines in all evaluated model-scale and batch-size configurations. SAMuon requires 13.3% to 24.0% fewer training tokens to reach the same validation loss as Muon, while SAMuon-lite retains most of this gain with near-zero wall-clock overhead.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-26T16:41:12Z</published>
+    <arxiv:comment>34 pages, 13 figures, 7 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiaodong Wu</name>
+    </author>
+    <author>
+      <name>Wenyi Yu</name>
+    </author>
+    <author>
+      <name>Chao Zhang</name>
+    </author>
+    <author>
+      <name>Philip Woodland</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.02373v2</id>
+    <title>Percolation Dynamics in Optimization: Variance Cascades and Nested Symmetry</title>
+    <updated>2026-09-27T07:21:42Z</updated>
+    <link href="https://arxiv.org/abs/2609.02373v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.02373v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the dynamics of Stochastic Gradient Descent (SGD), which is known to steer deep neural networks toward invariant sets that correspond to simpler subnetworks. How this steering unfolds over time remains poorly understood. We answer this by modeling the stochastic gradient flow (SGF) as a percolation process, in which nested architectural symmetries force subnetworks to merge in discrete blocks rather than by single-edge attachment. These structural transitions register as variance spikes in a macroscopic order parameter echoing physical phase transitions. We further state sufficient conditions under which the trapping argument carries over to Adam and AdamW under heavy-tailed gradient noise and measure them on a trained Transformer.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.stat-mech" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-02T09:44:47Z</published>
+    <arxiv:comment>49 pages, 9 in the main text, v2 corrected theoretical results for Adam with verified additional experiments in the appendix</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sai Niranjan Ramachandran</name>
+    </author>
+    <author>
+      <name>Suvrit Sra</name>
+    </author>
+  </entry>
+</feed>

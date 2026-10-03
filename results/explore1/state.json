@@ -1,0 +1,21 @@
+{
+  "corpus": "live search, 120 papers retrieved on 2026-10-03 for 19 queries",
+  "counts": {
+    "analyses": 2,
+    "decisions": 16,
+    "events": 13,
+    "hypotheses": 4,
+    "runs": 11
+  },
+  "llm_calls": 13,
+  "llm_cost_usd": 0.1912,
+  "llm_mode": "live",
+  "model": "claude-opus-5-5",
+  "profile": "full",
+  "runs_avoided": 3,
+  "runs_executed": 11,
+  "search_llm_cost_usd": 1.1524,
+  "session": "explore1",
+  "state_digest": "b14b8eccf56a74c0b97e460b82b0f6b2747dc38d557cd126e44a52c36bb71e67",
+  "status": "complete"
+}

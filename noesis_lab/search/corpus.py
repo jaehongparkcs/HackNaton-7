@@ -20,6 +20,7 @@ from .extract import agreement_with_curated, extract
 from .http import RawCache, urllib_fetch
 from .plan import plan_queries
 from .rank import dedupe, filter_excluded, rank
+from .scout import run_scout, search_directions
 from .textsim import pca_2d
 
 CURATED_ONLY = "curated snapshot only"
@@ -38,7 +39,7 @@ def _curated() -> tuple[list[RetrievedPaper], list[Claim], dict]:
 
 def _write(out: Path, niche: NicheSpec, papers: list[RetrievedPaper], claims: list[Claim],
            dropped: list[dict], meta: dict, *, source: str, fetched: str,
-           query_plan: dict | None = None) -> dict:
+           query_plan: dict | None = None, scout: dict | None = None) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     xy = pca_2d([f"{p.title} {p.abstract}" for p in papers])
     for p, pos in zip(papers, xy, strict=True):
@@ -57,6 +58,8 @@ def _write(out: Path, niche: NicheSpec, papers: list[RetrievedPaper], claims: li
         {"note": "T1 = human-curated. T2/T3 = auto-extracted: quote verified verbatim by code, coverage "
                  "computed by the written rule. Tiers and coverage are never set by an LLM.",
          "claims": [c.model_dump() for c in claims]}, indent=2, ensure_ascii=False) + "\n")
+    (out / "scout.json").write_text(json.dumps(scout or {"directions": [], "error": ""}, indent=2,
+                                               ensure_ascii=False) + "\n")
     (out / "dropped.json").write_text(json.dumps(dropped, indent=2, ensure_ascii=False) + "\n")
     (out / "meta.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
     return meta
@@ -96,6 +99,16 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
         hits = arxiv.parse_feed(body, q["q"]) if body else []
         q["n_results"] = len(hits)
         found += hits
+    # Hybrid ideation: the scout's per-direction searches feed the same corpus as the niche search.
+    ecfg = load_config().get("explore", {})
+    recs, scout_err = [], ""
+    if ecfg.get("enabled"):
+        recs, scout_err = run_scout(llm, niche, ecfg["scout_directions"])
+        if scout_err:
+            degraded.append(f"scout failed ({scout_err}); deterministic per-block directions only")
+        found += search_directions(cache, niche, recs, date_to=date_to,
+                                   n_queries=ecfg["per_direction_queries"], cap=ecfg["per_direction_cap"],
+                                   block_cap=ecfg.get("per_block_direction_cap"))
     degraded += [f"{f['kind']} request failed after retry: {f['error']}" for f in cache.failures]
     plan_doc = {"plan": plan.model_dump() if plan else None, "queries": queries}
     n_retrieved = len({p.paper_id for p in found})
@@ -118,7 +131,17 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
         oa["matched"] = openalex.enrich(papers, cache)
         if len(cache.failures) > n_fail:
             degraded.append("OpenAlex request failed: review status unknown for some papers")
-    papers, ranked_out = rank(papers, niche, date_to=date_to)
+    papers, ranked_out = rank(papers, niche, date_to=date_to,
+                              max_papers=ecfg["max_total_papers"] if recs else None)
+    kept_ids = {p.paper_id for p in papers}
+    for r in recs:                      # provenance survives dedupe: read it back from the papers
+        r.paper_ids = sorted(p.paper_id for p in papers if r.direction_id in p.directions)
+    hints = [h for r in recs for h in r.title_hints]
+    explore = {"enabled": bool(recs), "directions": len(recs),
+               "scout_directions": sum(r.origin == "scout" for r in recs),
+               "title_hints_found": sum(h["status"] == "found" for h in hints),
+               "title_hints_not_found": sum(h["status"] == "not_found" for h in hints),
+               "papers_from_directions": sum(1 for p in papers if p.directions and p.paper_id in kept_ids)}
 
     auto = [p for p in papers if p.source != "curated"]
     claims, ext_dropped, errors = extract(llm, auto)
@@ -126,6 +149,17 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
     with_claims = {c.paper_id for c in claims}
     for p in auto:
         p.tier = ("T2" if p.peer_reviewed else "T3") if p.paper_id in with_claims else "T4"
+
+    if recs:      # health check of the graph the gap formulas will run on (ABC, link and bridge gaps
+        # need mechanism nodes shared by two or more runnable methods)
+        from .. import gaps
+        shared = gaps.shared_mechanisms(gaps.build_graph([*cur_claims, *claims]))
+        explore["shared_mechanisms"] = shared
+        explore["claims_with_mechanism"] = sum(1 for c in claims if c.mechanism_category)
+        if len(shared) < ecfg["min_shared_mechanisms"]:
+            degraded.append(f"thin mechanism graph: only {len(shared)} mechanism node(s) are linked to 2 or more "
+                            f"runnable methods (want >= {ecfg['min_shared_mechanisms']}); ABC, combination and "
+                            "bridge gaps will be sparse. Fix before recording.")
 
     validation = None
     if cfg.get("validate_extraction"):
@@ -136,7 +170,7 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
     dropped = ([{**d, "stage": "dedupe"} for d in dup] + [{**d, "stage": "filter"} for d in excl]
                + [{**d, "stage": "rank"} for d in ranked_out] + [{**d, "stage": "extract"} for d in ext_dropped])
     meta = stats_(
-        mode="live_search", label=f"live search, {len(papers)} papers retrieved on {today} for "
+        explore=explore, mode="live_search", label=f"live search, {len(papers)} papers retrieved on {today} for "
                                   f"{len(queries)} queries",
         search_date=today, queries=queries, degraded=degraded, openalex=oa, validation=validation,
         counts={"retrieved": n_retrieved, "duplicates": len(dup), "excluded": len(excl),
@@ -147,7 +181,8 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
                     "papers_without_claims": sum(1 for p in auto if p.tier == "T4")})
     return _write(out, niche, papers, [*cur_claims, *claims], dropped, meta,
                   source="curated snapshot + live arXiv search (abstracts only)", fetched=today,
-                  query_plan=plan_doc)
+                  query_plan=plan_doc,
+                  scout={"directions": [r.model_dump() for r in recs], "error": scout_err})
 
 
 def load_meta(corpus: Path) -> dict:

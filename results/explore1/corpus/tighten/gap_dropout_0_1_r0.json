@@ -1,0 +1,495 @@
+{
+  "fixture_id": "gap_dropout_0_1",
+  "round": 0,
+  "delta": {
+    "dropout": "0.1"
+  },
+  "queries": [
+    {
+      "q": "\"dropout\" AND \"language model\"",
+      "n_results": 0
+    },
+    {
+      "q": "\"dropout\" AND \"Transformer\"",
+      "n_results": 10
+    }
+  ],
+  "already_in_corpus": [
+    "1909.11556",
+    "2603.17811"
+  ],
+  "papers": [
+    {
+      "paper_id": "2403.00946",
+      "title": "Fine-tuning with Very Large Dropout",
+      "authors": [
+        "Jianyu Zhang",
+        "Léon Bottou"
+      ],
+      "published": "2024-03-01",
+      "url": "https://arxiv.org/abs/2403.00946",
+      "abstract": "It is impossible today to pretend that the practice of machine learning is always compatible with the idea that training and testing data follow the same distribution. Several authors have recently used ensemble techniques to show how scenarios involving multiple data distributions are best served by representations that are both richer than those obtained by regularizing for the best in-distribution performance, and richer than those obtained under the influence of the implicit sparsity bias of common stochastic gradient procedures. This contribution investigates the use of very high dropout rates instead of ensembles to obtain such rich representations. Although training a deep network from scratch using such dropout rates is virtually impossible, fine-tuning a large pre-trained model under such conditions is not only possible but also achieves out-of-distribution performances that exceed those of both ensembles and weight averaging methods such as model soups. This result has practical significance because the importance of the fine-tuning scenario has considerably grown in recent years. This result also provides interesting insights on the nature of rich representations and on the intrinsically linear nature of fine-tuning a large network using a comparatively small dataset.",
+      "abstract_sha256": "6888dcff9984292dd2ae4b1ee64d8881c0d874ee4263c4887627196be0e7d532",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2303.01610",
+      "title": "Sparse MoE as the New Dropout: Scaling Dense and Self-Slimmable Transformers",
+      "authors": [
+        "Tianlong Chen",
+        "Zhenyu Zhang",
+        "Ajay Jaiswal",
+        "Shiwei Liu",
+        "Zhangyang Wang"
+      ],
+      "published": "2023-03-02",
+      "url": "https://arxiv.org/abs/2303.01610",
+      "abstract": "Despite their remarkable achievement, gigantic transformers encounter significant drawbacks, including exorbitant computational and memory footprints during training, as well as severe collapse evidenced by a high degree of parameter redundancy. Sparsely-activated Mixture-of-Experts (SMoEs) have shown promise to mitigate the issue of training efficiency, yet they are prone to (1) redundant experts due to representational collapse; and (2) poor expert scalability for inference and downstream fine-tuning, primarily due to overfitting of the learned routing policy to the number of activated experts during training. As recent research efforts are predominantly focused on improving routing policies to encourage expert specializations, this work focuses on exploring the overlooked scalability bottleneck of SMoEs and leveraging it to effectively scale dense transformers. To this end, we propose a new plug-and-play training framework, SMoE-Dropout, to enable scaling transformers to better accuracy in their full capacity without collapse. Specifically, SMoE-Dropout consists of a randomly initialized and fixed router network to activate experts and gradually increases the activated expert number as training progresses over time. Transformers trained by SMoE-Dropout naturally exhibit a self-slimmable property subject to resource availability, offering smooth and consistent performance boosts with an increase in activated experts during inference or fine-tuning. Our extensive experiments demonstrate the superior performance and substantial computation savings of SMoE-Dropout, compared to dense training baselines with equivalent parameter counts. In particular, our trained BERT outperforms its densely trained counterpart with consistent improvements of {1.03%, 0.78%, 1.09%} on challenging reasoning tasks {ASDiv-A, MAWPS, SVAMP}, respectively.",
+      "abstract_sha256": "6925249e4609615b6856cf2118d61cba562147ae6921464997a079b295ba9ed9",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2411.03236",
+      "title": "Enhancing Transformer Training Efficiency with Dynamic Dropout",
+      "authors": [
+        "Hanrui Yan",
+        "Dan Shao"
+      ],
+      "published": "2024-11-05",
+      "url": "https://arxiv.org/abs/2411.03236",
+      "abstract": "We introduce Dynamic Dropout, a novel regularization technique designed to enhance the training efficiency of Transformer models by dynamically adjusting the dropout rate based on training epochs or validation loss improvements. This approach addresses the challenge of balancing regularization and model capacity, which is crucial for achieving fast convergence and high performance. Our method involves modifying the GPT model to accept a variable dropout rate and updating dropout layers during training using schedules such as linear decay, exponential decay, and validation loss-based adjustments. Extensive experiments on the Shakespeare\\_char dataset demonstrate that Dynamic Dropout significantly accelerates training and improves inference efficiency compared to a baseline model with a fixed dropout rate. The validation loss-based adjustment schedule provided the best overall performance, highlighting the potential of Dynamic Dropout as a valuable technique for training large-scale Transformer models.",
+      "abstract_sha256": "acb6013227146491559a3ea052819a4b747dae32ad74513145618633e34c85b7",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2601.17602",
+      "title": "Understanding Transformer Encoder-Decoder Representations through Bernoulli Dropout",
+      "authors": [
+        "Xuanzhou Chen"
+      ],
+      "published": "2026-01-24",
+      "url": "https://arxiv.org/abs/2601.17602",
+      "abstract": "We study Transformer overparameterization through the lens of angular similarity in high-dimensional encoder-decoder embeddings. We apply Bernoulli dropout between the encoder and the decoder, varying the keep probability $p$ to identify a sparsity-dependent threshold above which the Top-1 prediction is preserved. Theoretically, we prove that, if the effective sparsity embeddings is sufficiently large, and thus decoder performance, remain stable under moderate coordinate dropout. Empirically, we implement the Bernoulli dropout by constructing a new Transformer model augmented with Binary Erasure Channel (BEC) and test its performance on an English-French translation task. Experimental results visualize the trends for validation accuracies and BLEU scores, both decline sharply at some threshold.",
+      "abstract_sha256": "5f4af9d92523d5fefceff428ca3c99d653dc62724ea65c92fe230239c417865e",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2604.20505",
+      "title": "Explicit Dropout: Deterministic Regularization for Transformer Architectures",
+      "authors": [
+        "Vidhi Agrawal",
+        "Illia Oleksiienko",
+        "Alexandros Iosifidis"
+      ],
+      "published": "2026-04-22",
+      "url": "https://arxiv.org/abs/2604.20505",
+      "abstract": "Dropout is a widely used regularization technique in deep learning, but its effects are typically realized through stochastic masking rather than explicit optimization objectives. We propose a deterministic formulation that expresses dropout as an additive regularizer directly incorporated into the training loss. The framework derives explicit regularization terms for Transformer architectures, covering attention query, key, value, and feed-forward components with independently controllable strengths. This formulation removes reliance on stochastic perturbations while providing clearer and fine-grained control over regularization strength. Experiments across image classification, temporal action detection, and audio classification show that explicit dropout matches or outperforms conventional implicit methods, with consistent gains when applied to attention and feed-forward network layers. Ablation studies demonstrate stable performance and controllable regularization through regularization coefficients and dropout rates. Overall, explicit dropout offers a practical and interpretable alternative to stochastic regularization while maintaining architectural flexibility across diverse tasks.",
+      "abstract_sha256": "2c771fc98b5c74b1874b269ca9e302c3d91d479dfc6b339dc1823c2eae05d8c7",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2407.01290",
+      "title": "Hypformer: Exploring Efficient Transformer Fully in Hyperbolic Space",
+      "authors": [
+        "Menglin Yang",
+        "Harshit Verma",
+        "Delvin Ce Zhang",
+        "Jiahong Liu",
+        "Irwin King",
+        "Rex Ying"
+      ],
+      "published": "2024-07-01",
+      "url": "https://arxiv.org/abs/2407.01290",
+      "abstract": "Hyperbolic geometry have shown significant potential in modeling complex structured data, particularly those with underlying tree-like and hierarchical structures. Despite the impressive performance of various hyperbolic neural networks across numerous domains, research on adapting the Transformer to hyperbolic space remains limited. Previous attempts have mainly focused on modifying self-attention modules in the Transformer. However, these efforts have fallen short of developing a complete hyperbolic Transformer. This stems primarily from: (i) the absence of well-defined modules in hyperbolic space, including linear transformation layers, LayerNorm layers, activation functions, dropout operations, etc. (ii) the quadratic time complexity of the existing hyperbolic self-attention module w.r.t the number of input tokens, which hinders its scalability. To address these challenges, we propose, Hypformer, a novel hyperbolic Transformer based on the Lorentz model of hyperbolic geometry. In Hypformer, we introduce two foundational blocks that define the essential modules of the Transformer in hyperbolic space. Furthermore, we develop a linear self-attention mechanism in hyperbolic space, enabling hyperbolic Transformer to process billion-scale graph data and long-sequence inputs for the first time. Our experimental results confirm the effectiveness and efficiency of Hypformer across various datasets, demonstrating its potential as an effective and scalable solution for large-scale data representation and large models.",
+      "abstract_sha256": "c6e058a0f6b700efa06a6924d0582318beb42eaab382ba3de10be1c923749917",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2506.00662",
+      "title": "Uncertainty-Aware Genomic Classification of Alzheimer's Disease: A Transformer-Based Ensemble Approach with Monte Carlo Dropout",
+      "authors": [
+        "Taeho Jo",
+        "Eun Hye Lee",
+        "Alzheimer's Disease Sequencing Project"
+      ],
+      "published": "2025-05-31",
+      "url": "https://arxiv.org/abs/2506.00662",
+      "abstract": "INTRODUCTION: Alzheimer's disease (AD) is genetically complex, complicating robust classification from genomic data. METHODS: We developed a transformer-based ensemble model (TrUE-Net) using Monte Carlo Dropout for uncertainty estimation in AD classification from whole-genome sequencing (WGS). We combined a transformer that preserves single-nucleotide polymorphism (SNP) sequence structure with a concurrent random forest using flattened genotypes. An uncertainty threshold separated samples into an uncertain (high-variance) group and a more certain (low-variance) group. RESULTS: We analyzed 1050 individuals, holding out half for testing. Overall accuracy and area under the receiver operating characteristic (ROC) curve (AUC) were 0.6514 and 0.6636, respectively. Excluding the uncertain group improved accuracy from 0.6263 to 0.7287 (10.24% increase) and F1 from 0.5843 to 0.8205 (23.62% increase). DISCUSSION: Monte Carlo Dropout-driven uncertainty helps identify ambiguous cases that may require further clinical evaluation, thus improving reliability in AD genomic classification.",
+      "abstract_sha256": "80e60378a3ef04b8d859e72ec2c1936de7e68aaa09e3662644924cefb7c6efa2",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "q-bio.GN",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2205.14336",
+      "title": "Gating Dropout: Communication-efficient Regularization for Sparsely Activated Transformers",
+      "authors": [
+        "Rui Liu",
+        "Young Jin Kim",
+        "Alexandre Muzio",
+        "Hany Hassan Awadalla"
+      ],
+      "published": "2022-05-28",
+      "url": "https://arxiv.org/abs/2205.14336",
+      "abstract": "Sparsely activated transformers, such as Mixture of Experts (MoE), have received great interest due to their outrageous scaling capability which enables dramatical increases in model size without significant increases in computational cost. To achieve this, MoE models replace the feedforward sub-layer with Mixture-of-Experts sub-layer in transformers and use a gating network to route each token to its assigned experts. Since the common practice for efficient training of such models requires distributing experts and tokens across different machines, this routing strategy often incurs huge cross-machine communication cost because tokens and their assigned experts likely reside in different machines. In this paper, we propose \\emph{Gating Dropout}, which allows tokens to ignore the gating network and stay at their local machines, thus reducing the cross-machine communication. Similar to traditional dropout, we also show that Gating Dropout has a regularization effect during training, resulting in improved generalization performance. We validate the effectiveness of Gating Dropout on multilingual machine translation tasks. Our results demonstrate that Gating Dropout improves a state-of-the-art MoE model with faster wall-clock time convergence rates and better BLEU scores for a variety of model sizes and datasets.",
+      "abstract_sha256": "3ca7feb9734b5ce72f8e59259490736db5563cda560ec9229ef7e35b7ccacd75",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_dropout_0_1: \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2403_00946_1",
+      "paper_id": "2403.00946",
+      "dimension": "outside_testbed",
+      "method": "Fine-tuning with very high dropout rates",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Fine-tuning a large pre-trained model with very high dropout rates achieves out-of-distribution performance exceeding ensembles and model soups.",
+      "source_span": "fine-tuning a large pre-trained model under such conditions is not only possible but also achieves out-of-distribution performances that exceed those of both ensembles and weight averaging methods such as model soups",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-03-01",
+      "extraction_event": "unrecorded-d5c669b1",
+      "mechanism": "rich representations",
+      "mechanism_category": "representation_quality"
+    },
+    {
+      "claim_id": "x2403_00946_2",
+      "paper_id": "2403.00946",
+      "dimension": "outside_testbed",
+      "method": "Training from scratch with very high dropout",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Training a deep network from scratch with very high dropout rates is virtually impossible.",
+      "source_span": "training a deep network from scratch using such dropout rates is virtually impossible",
+      "expected_outcome": "worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-03-01",
+      "extraction_event": "unrecorded-d5c669b1"
+    },
+    {
+      "claim_id": "x2303_01610_1",
+      "paper_id": "2303.01610",
+      "dimension": "outside_testbed",
+      "method": "SMoE-Dropout (fixed random router, gradually increasing activated experts)",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "SMoE-Dropout yields better performance and substantial computation savings than dense training baselines with equal parameter counts.",
+      "source_span": "Our extensive experiments demonstrate the superior performance and substantial computation savings of SMoE-Dropout, compared to dense training baselines with equivalent parameter counts.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-03-02",
+      "extraction_event": "unrecorded-d5c669b1",
+      "mechanism": "without collapse",
+      "mechanism_category": "representation_quality"
+    },
+    {
+      "claim_id": "x2411_03236_1",
+      "paper_id": "2411.03236",
+      "dimension": "outside_testbed",
+      "method": "Dynamic Dropout (scheduled dropout rate)",
+      "setting": "transformer, char_language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Dynamically adjusting dropout rate accelerates training compared to a fixed dropout rate baseline on Shakespeare_char.",
+      "source_span": "Extensive experiments on the Shakespeare\\_char dataset demonstrate that Dynamic Dropout significantly accelerates training and improves inference efficiency compared to a baseline model with a fixed dropout rate.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "char_language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-11-05",
+      "extraction_event": "unrecorded-d5c669b1",
+      "mechanism": "significantly accelerates training",
+      "mechanism_category": "optimization_speed"
+    },
+    {
+      "claim_id": "x2601_17602_1",
+      "paper_id": "2601.17602",
+      "dimension": "outside_testbed",
+      "method": "Bernoulli dropout between encoder and decoder",
+      "setting": "transformer, translation, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Decoder performance remains stable under moderate coordinate dropout if effective sparsity is large, but accuracy and BLEU decline sharply past a threshold.",
+      "source_span": "Experimental results visualize the trends for validation accuracies and BLEU scores, both decline sharply at some threshold.",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "translation",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-01-24",
+      "extraction_event": "unrecorded-d5c669b1"
+    },
+    {
+      "claim_id": "x2604_20505_1",
+      "paper_id": "2604.20505",
+      "dimension": "outside_testbed",
+      "method": "Explicit (deterministic) dropout regularizer",
+      "setting": "transformer, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Explicit dropout matches or outperforms conventional stochastic dropout across image classification, temporal action detection, and audio classification.",
+      "source_span": "Experiments across image classification, temporal action detection, and audio classification show that explicit dropout matches or outperforms conventional implicit methods",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-04-22",
+      "extraction_event": "unrecorded-d5c669b1",
+      "mechanism": "controllable regularization",
+      "mechanism_category": "implicit_regularization"
+    },
+    {
+      "claim_id": "x2407_01290_1",
+      "paper_id": "2407.01290",
+      "dimension": "outside_testbed",
+      "method": "Hypformer linear self-attention in hyperbolic space",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "A linear self-attention mechanism in hyperbolic space lets hyperbolic Transformers process billion-scale graph data and long sequences.",
+      "source_span": "we develop a linear self-attention mechanism in hyperbolic space, enabling hyperbolic Transformer to process billion-scale graph data and long-sequence inputs for the first time",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-07-01",
+      "extraction_event": "unrecorded-0e7c331a",
+      "mechanism": "quadratic time complexity of the existing hyperbolic self-attention module",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2506_00662_1",
+      "paper_id": "2506.00662",
+      "dimension": "outside_testbed",
+      "method": "Monte Carlo Dropout uncertainty filtering in transformer ensemble",
+      "setting": "transformer, classification, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Excluding high-uncertainty samples identified via Monte Carlo Dropout improved accuracy and F1 in AD genomic classification.",
+      "source_span": "Excluding the uncertain group improved accuracy from 0.6263 to 0.7287 (10.24% increase) and F1 from 0.5843 to 0.8205 (23.62% increase).",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "classification",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-05-31",
+      "extraction_event": "unrecorded-0e7c331a"
+    },
+    {
+      "claim_id": "x2205_14336_1",
+      "paper_id": "2205.14336",
+      "dimension": "outside_testbed",
+      "method": "Gating Dropout for MoE transformers",
+      "setting": "transformer, translation, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Gating Dropout improves a state-of-the-art MoE model with faster wall-clock convergence and better BLEU on multilingual translation.",
+      "source_span": "Gating Dropout improves a state-of-the-art MoE model with faster wall-clock time convergence rates and better BLEU scores for a variety of model sizes and datasets",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "translation",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2022-05-28",
+      "extraction_event": "unrecorded-0e7c331a",
+      "mechanism": "Gating Dropout has a regularization effect during training, resulting in improved generalization performance",
+      "mechanism_category": "implicit_regularization"
+    }
+  ],
+  "dropped": [],
+  "degraded": [
+    "arxiv_tighten request failed after retry: HTTPError: HTTP Error 429: Unknown Error"
+  ]
+}

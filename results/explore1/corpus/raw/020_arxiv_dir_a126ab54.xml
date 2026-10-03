@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/0yEKjlUG14lBJt7S9iofDyi1IE4</id>
+  <title>arXiv Query: search_query=all:"activation function" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=5</title>
+  <updated>2026-10-03T22:47:29Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22activation+function%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=5&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:totalResults>2409</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1710.05941v2</id>
+    <title>Searching for Activation Functions</title>
+    <updated>2017-10-27T17:45:21Z</updated>
+    <link href="https://arxiv.org/abs/1710.05941v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1710.05941v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The choice of activation functions in deep networks has a significant effect on the training dynamics and task performance. Currently, the most successful and widely-used activation function is the Rectified Linear Unit (ReLU). Although various hand-designed alternatives to ReLU have been proposed, none have managed to replace it due to inconsistent gains. In this work, we propose to leverage automatic search techniques to discover new activation functions. Using a combination of exhaustive and reinforcement learning-based search, we discover multiple novel activation functions. We verify the effectiveness of the searches by conducting an empirical evaluation with the best discovered activation function. Our experiments show that the best discovered activation function, $f(x) = x \cdot \text{sigmoid}(βx)$, which we name Swish, tends to work better than ReLU on deeper models across a number of challenging datasets. For example, simply replacing ReLUs with Swish units improves top-1 classification accuracy on ImageNet by 0.9\% for Mobile NASNet-A and 0.6\% for Inception-ResNet-v2. The simplicity of Swish and its similarity to ReLU make it easy for practitioners to replace ReLUs with Swish units in any neural network.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-16T18:05:45Z</published>
+    <arxiv:comment>Updated version of "Swish: a Self-Gated Activation Function"</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Prajit Ramachandran</name>
+    </author>
+    <author>
+      <name>Barret Zoph</name>
+    </author>
+    <author>
+      <name>Quoc V. Le</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1802.02987v1</id>
+    <title>A Generalization Method of Partitioned Activation Function for Complex Number</title>
+    <updated>2018-02-08T17:57:58Z</updated>
+    <link href="https://arxiv.org/abs/1802.02987v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1802.02987v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A method to convert real number partitioned activation function into complex number one is provided. The method has 4em variations; 1 has potential to get holomorphic activation, 2 has potential to conserve complex angle, and the last 1 guarantees interaction between real and imaginary parts. The method has been applied to LReLU and SELU as examples. The complex number activation function is an building block of complex number ANN, which has potential to properly deal with complex number problems. But the complex activation is not well established yet. Therefore, we propose a way to extend the partitioned real activation to complex number.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-02-08T17:57:58Z</published>
+    <arxiv:comment>Complex Activation Function, Holomorphic, Phase-preserving, real-complex interaction</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>HyeonSeok Lee</name>
+    </author>
+    <author>
+      <name>Hyo Seon Park</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.00004v1</id>
+    <title>On Polynomial Approximation of Activation Function</title>
+    <updated>2022-01-29T12:40:32Z</updated>
+    <link href="https://arxiv.org/abs/2202.00004v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.00004v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we propose an interesting method that aims to approximate an activation function over some domain by polynomials of the presupposing low degree. The main idea behind this method can be seen as an extension of the ordinary least square method and includes the gradient of activation function into the cost function to minimize.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-01-29T12:40:32Z</published>
+    <arxiv:comment>In this work, we proposed an interesting method to approximate the activation function by a polynomial the degree of which is preset low. Our method to approximate the activation function is much more flexible compared to the least square method in the sense that the additional parameters could better control the shape of the resulting polynomial to approximate</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>John Chiang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2004.13271v2</id>
+    <title>Trainable Activation Function in Image Classification</title>
+    <updated>2020-06-05T09:05:35Z</updated>
+    <link href="https://arxiv.org/abs/2004.13271v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2004.13271v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the current research of neural networks, the activation function is manually specified by human and not able to change themselves during training. This paper focus on how to make the activation function trainable for deep neural networks. We use series and linear combination of different activation functions make activation functions continuously variable. Also, we test the performance of CNNs with Fourier series simulated activation(Fourier-CNN) and CNNs with linear combined activation function (LC-CNN) on Cifar-10 dataset. The result shows our trainable activation function reveals better performance than the most used ReLU activation function. Finally, we improves the performance of Fourier-CNN with Autoencoder, and test the performance of PSO algorithm in optimizing the parameters of networks</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-04-28T03:50:53Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zhaohe Liao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.11672v1</id>
+    <title>Stochastic Adaptive Activation Function</title>
+    <updated>2022-10-21T01:57:25Z</updated>
+    <link href="https://arxiv.org/abs/2210.11672v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.11672v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The simulation of human neurons and neurotransmission mechanisms has been realized in deep neural networks based on the theoretical implementations of activation functions. However, recent studies have reported that the threshold potential of neurons exhibits different values according to the locations and types of individual neurons, and that the activation functions have limitations in terms of representing this variability. Therefore, this study proposes a simple yet effective activation function that facilitates different thresholds and adaptive activations according to the positions of units and the contexts of inputs. Furthermore, the proposed activation function mathematically exhibits a more generalized form of Swish activation function, and thus we denoted it as Adaptive SwisH (ASH). ASH highlights informative features that exhibit large values in the top percentiles in an input, whereas it rectifies low values. Most importantly, ASH exhibits trainable, adaptive, and context-aware properties compared to other activation functions. Furthermore, ASH represents general formula of the previously studied activation function and provides a reasonable mathematical background for the superior performance. To validate the effectiveness and robustness of ASH, we implemented ASH into many deep learning models for various tasks, including classification, detection, segmentation, and image generation. Experimental analysis demonstrates that our activation function can provide the benefits of more accurate prediction and earlier convergence in many deep learning applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-21T01:57:25Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kyungsu Lee</name>
+    </author>
+    <author>
+      <name>Jaeseung Yang</name>
+    </author>
+    <author>
+      <name>Haeyun Lee</name>
+    </author>
+    <author>
+      <name>Jae Youn Hwang</name>
+    </author>
+  </entry>
+</feed>

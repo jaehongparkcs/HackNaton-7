@@ -8,10 +8,10 @@ llm:
   price_per_mtok: {input: 4.0, output: 20.0}   # for budget accounting only
 
 budget:                           # hard budgets (SPEC rule 4)
-  max_runs: 20
+  max_runs: 32                    # ~20 min at ~35 s/run
   max_wall_minutes: 45
   max_llm_cost_usd: 10.0
-  max_followup_candidates: 2
+  max_followup_candidates: 4
 
 lit_search:                       # live literature search (LIT_SEARCH.md). Runs only with --niche.
   max_queries: 12                 # LLM-proposed queries; one deterministic query per runnable change is added
@@ -23,10 +23,39 @@ lit_search:                       # live literature search (LIT_SEARCH.md). Runs
   validate_extraction: true       # also extract the curated papers and report agreement with the human labels
   max_llm_cost_usd: 3.0
 
+explore:                          # hypothesis engine (NEXT_VERSION.md). Runs with the live search (--niche).
+  enabled: true
+  scout_directions: [8, 15]
+  per_direction_queries: 3
+  per_direction_cap: 15
+  per_block_direction_cap: 30     # directions tied to a building block: search the runnable methods harder
+  max_total_papers: 160           # niche search + scout searches, after dedupe and ranking
+  link_threshold: 0.25            # claim<->direction TF-IDF, tune on curated set
+  min_shared_mechanisms: 3        # mechanism nodes linked to >= 2 runnable methods; fewer = thin graph, warn after the search
+  top_gaps_for_hypotheses: 8
+  tighten_queries: 2
+  tighten_cap: 10
+
+search_loop:                      # explore cheaply, confirm rigorously, promote (GRAPH_GAPS Part B)
+  enabled: true                   # only for sessions whose corpus has scout directions
+  explore_seed: 0                 # exploration reuses the incumbent's run on this seed
+  explore_k: 6                    # top open gap hypotheses explored per cycle, 1 seed each
+  finalists_per_cycle: 2          # best per mechanism cell, then top N by single-seed improvement
+  min_finalists: 1                # confirm at least this many even if no single-seed run improved
+  cycles: 3                       # the run budget usually stops the session first
+
 seeds:
   baseline: [0, 1, 2, 3, 4]       # noise floor
   paired: [0, 1, 2]               # candidate screening seeds (baseline runs are reused, never re-run)
   extra: [3, 4]                   # used if the pre-registered rule says "extra seeds"
+
+# Versions of the pre-registered rule and the prior-art gate. Recorded in every bundle; replay
+# and rederive use the bundle's own versions (bundles without this block are version 1 of both).
+#   rule 2 (2026-10-03): HARMFUL also requires every paired seed to be worse (symmetric with PROMISING).
+#   gate 2 (2026-10-03): the LLM lists ALL same-comparison claims; code picks the verdict, strongest first.
+protocol:
+  rule_version: 2
+  gate_version: 2
 
 # Pre-registered next-action rule thresholds (BUILD_PLAN s6). Written before the first run.
 rule:

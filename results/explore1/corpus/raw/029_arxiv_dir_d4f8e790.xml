@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/3kCgOk+P9/GD3ptuFl+FLv4n46Q</id>
+  <title>arXiv Query: search_query=all:"normalization placement" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=5</title>
+  <updated>2026-10-03T22:47:56Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22normalization+placement%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=5&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.09904v2</id>
+    <title>Stability of Transformers under Layer Normalization</title>
+    <updated>2026-08-07T08:18:09Z</updated>
+    <link href="https://arxiv.org/abs/2510.09904v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.09904v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite their widespread use, training deep Transformers can be unstable. Layer normalization, a standard component, improves training stability, but its placement has often been ad-hoc. In this paper, we conduct a principled study on the forward (hidden states) and backward (gradient) stability of Transformers under different layer normalization placements. Our theory provides key insights into the training dynamics: whether training drives Transformers toward regular solutions or pathological behaviors. For forward stability, we derive explicit bounds on the growth of hidden states in trained Transformers. For backward stability, we analyze how layer normalization affects the backpropagation of gradients, thereby explaining the training dynamics of each layer normalization placement. Our analysis also guides the scaling of residual steps in Transformer blocks, where appropriate choices can further improve stability and performance. Our numerical results corroborate our theoretical findings. Beyond these results, our framework provides a principled way to sanity-check the stability of Transformers under new architectural modifications, offering guidance for future designs.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-10T22:27:20Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kelvin Kan</name>
+    </author>
+    <author>
+      <name>Xingjian Li</name>
+    </author>
+    <author>
+      <name>Benjamin J. Zhang</name>
+    </author>
+    <author>
+      <name>Tuhin Sahai</name>
+    </author>
+    <author>
+      <name>Stanley Osher</name>
+    </author>
+    <author>
+      <name>Krishna Kumar</name>
+    </author>
+    <author>
+      <name>Markos A. Katsoulakis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.14018v1</id>
+    <title>Transforming Rank: How Architecture Navigates the Spectral Pathologies of Depth</title>
+    <updated>2026-07-15T16:50:43Z</updated>
+    <link href="https://arxiv.org/abs/2607.14018v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.14018v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate how each component of the Transformer feedforward block architecture design determines how much rank survives across depth at initialization. We reinterpret skip connections and normalization, long understood as controlling magnitude, as mechanisms for preserving gradient rank across depth, since the very matrix multiplications and nonlinear activations that make the network expressive also reduce the rank. We show that skip connections trade off rank collapse against ensemble-like behavior, controlled by the relative scales of the branch and the skip: skip connections route the gradient around the residual branch, where rank is lost, rather than along the long gradient paths that encourage the layers to compose. The placement of the normalization layer controls this same tradeoff by setting the branch-to-skip ratio across depth, unifying much of the normalization placement and depth scaling literature, in particular why rank collapses for Post-Norm but plateaus for Pre-Norm. Other aspects of the architecture, like the two-matrix structure that expands and contracts the width, use additional parameters to preserve the representation or branch Jacobian rank. The second matrix decorrelates a coherent mean spike that would grow across blocks with a single matrix and uncentered activation, preventing the residual representation from collapsing. The width expansion between the two matrices keeps the branch Jacobian full rank: applying the rank-reducing activation in this expanded space leaves enough directions to span the original, at a width that follows a Marchenko--Pastur law. The initialization rank of the input--output Jacobian predicts which networks train on CIFAR-10. Taken together, we recast architecture design for deep networks as navigating an intrinsic tradeoff among rank collapse, ensemble-like behavior, and parameter count.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-15T16:50:43Z</published>
+    <arxiv:comment>40 pages. Code: https://github.com/everettk/transforming-rank-paper</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Katie Everett</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.18849v2</id>
+    <title>Exact Attention Sensitivity and the Geometry of Transformer Stability</title>
+    <updated>2026-08-17T00:16:56Z</updated>
+    <link href="https://arxiv.org/abs/2602.18849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.18849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a sensitivity analysis for transformer attention in a geometry aligned with tokenwise computation. Our main result is the exact identity $\|J_τ(u)\|_{\infty\to1}=θ(p)/τ$ for the Jacobian $J_τ(u)$ of the tempered softmax $u\mapsto\mathrm{softmax}(u/τ)$, where $θ(p)=4\max_{S\subseteq[L]}p(S)(1-p(S))$ measures how evenly the attention distribution can be bisected rather than how concentrated it is. We combine this identity with a block-$\infty$/RMS norm under which row-stochastic attention mixing is nonexpansive. This yields a distribution-aware local Jacobian bound for multi-head attention and a sequence-length-independent Lipschitz bound on bounded input sets, with explicit dependence on width, input magnitude, temperature, and projection norms. We also identify a structural distinction between normalization placements: a pre-LN residual-sublayer Jacobian contains an additive identity term, whereas a post-LN residual-sublayer Jacobian does not. A LayerNorm projection lemma gives a sufficient condition under which the LayerNorm-only term in the post-LN expansion contracts geometrically; the condition is not tested by our experiments. Across three Pre-LN early-training runs of $774$M-parameter models, attention becomes substantially more concentrated while the median lower-bound certificate for $θ(p)$ remains near one at every sampled layer and checkpoint. This certifies near-maximal exact sensitivity for at least half of the sampled rows within each layer. A minority of rows enters a dominant-atom regime with lower exact sensitivity, consistent with the deterministic relationship between $p_{\max}$ and $θ(p)$.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-21T14:25:24Z</published>
+    <arxiv:comment>27 pages, 4 figures. v2: Major revision. Exact softmax sensitivity theorem unchanged. Removed an unsupported path-length scaling theorem and its DeepNorm derivation; corrected the uniform-attention parity case and the loss normalization/update accounting; reran the headline experiments; clarified the local vs. bounded-domain bounds and the conditional pre-LN/post-LN analysis</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Seyed Morteza Emadi</name>
+    </author>
+  </entry>
+</feed>

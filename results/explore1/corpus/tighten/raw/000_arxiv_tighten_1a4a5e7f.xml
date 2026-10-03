@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/51YIyVFK5MbPMcj++65M1L9TT4o</id>
+  <title>arXiv Query: search_query=all:"dropout" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-03T23:10:54Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22dropout%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>183</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2403.00946v3</id>
+    <title>Fine-tuning with Very Large Dropout</title>
+    <updated>2025-02-27T22:15:53Z</updated>
+    <link href="https://arxiv.org/abs/2403.00946v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.00946v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is impossible today to pretend that the practice of machine learning is always compatible with the idea that training and testing data follow the same distribution. Several authors have recently used ensemble techniques to show how scenarios involving multiple data distributions are best served by representations that are both richer than those obtained by regularizing for the best in-distribution performance, and richer than those obtained under the influence of the implicit sparsity bias of common stochastic gradient procedures.
+  This contribution investigates the use of very high dropout rates instead of ensembles to obtain such rich representations. Although training a deep network from scratch using such dropout rates is virtually impossible, fine-tuning a large pre-trained model under such conditions is not only possible but also achieves out-of-distribution performances that exceed those of both ensembles and weight averaging methods such as model soups.
+  This result has practical significance because the importance of the fine-tuning scenario has considerably grown in recent years. This result also provides interesting insights on the nature of rich representations and on the intrinsically linear nature of fine-tuning a large network using a comparatively small dataset.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-01T19:50:22Z</published>
+    <arxiv:comment>Fine-tuning with very large dropout outperforms weight-averaging and ensemble on ResNet and large vision transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianyu Zhang</name>
+    </author>
+    <author>
+      <name>Léon Bottou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.01610v1</id>
+    <title>Sparse MoE as the New Dropout: Scaling Dense and Self-Slimmable Transformers</title>
+    <updated>2023-03-02T22:12:51Z</updated>
+    <link href="https://arxiv.org/abs/2303.01610v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.01610v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite their remarkable achievement, gigantic transformers encounter significant drawbacks, including exorbitant computational and memory footprints during training, as well as severe collapse evidenced by a high degree of parameter redundancy. Sparsely-activated Mixture-of-Experts (SMoEs) have shown promise to mitigate the issue of training efficiency, yet they are prone to (1) redundant experts due to representational collapse; and (2) poor expert scalability for inference and downstream fine-tuning, primarily due to overfitting of the learned routing policy to the number of activated experts during training. As recent research efforts are predominantly focused on improving routing policies to encourage expert specializations, this work focuses on exploring the overlooked scalability bottleneck of SMoEs and leveraging it to effectively scale dense transformers. To this end, we propose a new plug-and-play training framework, SMoE-Dropout, to enable scaling transformers to better accuracy in their full capacity without collapse. Specifically, SMoE-Dropout consists of a randomly initialized and fixed router network to activate experts and gradually increases the activated expert number as training progresses over time. Transformers trained by SMoE-Dropout naturally exhibit a self-slimmable property subject to resource availability, offering smooth and consistent performance boosts with an increase in activated experts during inference or fine-tuning. Our extensive experiments demonstrate the superior performance and substantial computation savings of SMoE-Dropout, compared to dense training baselines with equivalent parameter counts. In particular, our trained BERT outperforms its densely trained counterpart with consistent improvements of {1.03%, 0.78%, 1.09%} on challenging reasoning tasks {ASDiv-A, MAWPS, SVAMP}, respectively.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-02T22:12:51Z</published>
+    <arxiv:comment>Codes and models are available in https://github.com/VITA-Group/Random-MoE-as-Dropout</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianlong Chen</name>
+    </author>
+    <author>
+      <name>Zhenyu Zhang</name>
+    </author>
+    <author>
+      <name>Ajay Jaiswal</name>
+    </author>
+    <author>
+      <name>Shiwei Liu</name>
+    </author>
+    <author>
+      <name>Zhangyang Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.03236v1</id>
+    <title>Enhancing Transformer Training Efficiency with Dynamic Dropout</title>
+    <updated>2024-11-05T16:36:07Z</updated>
+    <link href="https://arxiv.org/abs/2411.03236v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.03236v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce Dynamic Dropout, a novel regularization technique designed to enhance the training efficiency of Transformer models by dynamically adjusting the dropout rate based on training epochs or validation loss improvements. This approach addresses the challenge of balancing regularization and model capacity, which is crucial for achieving fast convergence and high performance. Our method involves modifying the GPT model to accept a variable dropout rate and updating dropout layers during training using schedules such as linear decay, exponential decay, and validation loss-based adjustments. Extensive experiments on the Shakespeare\_char dataset demonstrate that Dynamic Dropout significantly accelerates training and improves inference efficiency compared to a baseline model with a fixed dropout rate. The validation loss-based adjustment schedule provided the best overall performance, highlighting the potential of Dynamic Dropout as a valuable technique for training large-scale Transformer models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-05T16:36:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hanrui Yan</name>
+    </author>
+    <author>
+      <name>Dan Shao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.17602v1</id>
+    <title>Understanding Transformer Encoder-Decoder Representations through Bernoulli Dropout</title>
+    <updated>2026-01-24T21:35:02Z</updated>
+    <link href="https://arxiv.org/abs/2601.17602v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.17602v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study Transformer overparameterization through the lens of angular similarity in high-dimensional encoder-decoder embeddings. We apply Bernoulli dropout between the encoder and the decoder, varying the keep probability $p$ to identify a sparsity-dependent threshold above which the Top-1 prediction is preserved. Theoretically, we prove that, if the effective sparsity embeddings is sufficiently large, and thus decoder performance, remain stable under moderate coordinate dropout. Empirically, we implement the Bernoulli dropout by constructing a new Transformer model augmented with Binary Erasure Channel (BEC) and test its performance on an English-French translation task. Experimental results visualize the trends for validation accuracies and BLEU scores, both decline sharply at some threshold.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-24T21:35:02Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xuanzhou Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.20505v1</id>
+    <title>Explicit Dropout: Deterministic Regularization for Transformer Architectures</title>
+    <updated>2026-04-22T12:45:51Z</updated>
+    <link href="https://arxiv.org/abs/2604.20505v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.20505v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dropout is a widely used regularization technique in deep learning, but its effects are typically realized through stochastic masking rather than explicit optimization objectives. We propose a deterministic formulation that expresses dropout as an additive regularizer directly incorporated into the training loss. The framework derives explicit regularization terms for Transformer architectures, covering attention query, key, value, and feed-forward components with independently controllable strengths. This formulation removes reliance on stochastic perturbations while providing clearer and fine-grained control over regularization strength. Experiments across image classification, temporal action detection, and audio classification show that explicit dropout matches or outperforms conventional implicit methods, with consistent gains when applied to attention and feed-forward network layers. Ablation studies demonstrate stable performance and controllable regularization through regularization coefficients and dropout rates. Overall, explicit dropout offers a practical and interpretable alternative to stochastic regularization while maintaining architectural flexibility across diverse tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-22T12:45:51Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Vidhi Agrawal</name>
+    </author>
+    <author>
+      <name>Illia Oleksiienko</name>
+    </author>
+    <author>
+      <name>Alexandros Iosifidis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.17811v1</id>
+    <title>Dropout Robustness and Cognitive Profiling of Transformer Models via Stochastic Inference</title>
+    <updated>2026-03-18T15:04:26Z</updated>
+    <link href="https://arxiv.org/abs/2603.17811v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.17811v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based language models are widely deployed for reasoning, yet their behavior under inference-time stochasticity remains underexplored. While dropout is common during training, its inference-time effects via Monte Carlo sampling lack systematic evaluation across architectures, limiting understanding of model reliability in uncertainty-aware applications.
+  This work analyzes dropout-induced variability across 19 transformer models using MC Dropout with 100 stochastic forward passes per sample. Dropout robustness is defined as maintaining high accuracy and stable predictions under stochastic inference, measured by standard deviation of per-run accuracies. A cognitive decomposition framework disentangles performance into memory and reasoning components. Experiments span five dropout configurations yielding 95 unique evaluations on 1,000 samples.
+  Results reveal substantial architectural variation. Smaller models demonstrate perfect prediction stability while medium-sized models exhibit notable volatility. Mid-sized models achieve the best overall performance; larger models excel at memory tasks. Critically, 53% of models suffer severe accuracy degradation under baseline MC Dropout, with task-specialized models losing up to 24 percentage points, indicating unsuitability for uncertainty quantification in these architectures. Asymmetric effects emerge: high dropout reduces memory accuracy by 27 percentage points while reasoning degrades only 1 point, suggesting memory tasks rely on stable representations that dropout disrupts. 84% of models demonstrate memory-biased performance.
+  This provides the first comprehensive MC Dropout benchmark for transformers, revealing dropout robustness is architecture-dependent and uncorrelated with scale. The cognitive profiling framework offers actionable guidance for model selection in uncertainty-aware applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-18T15:04:26Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Antônio Junior Alves Caiado</name>
+    </author>
+    <author>
+      <name>Michael Hahsler</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.01290v2</id>
+    <title>Hypformer: Exploring Efficient Transformer Fully in Hyperbolic Space</title>
+    <updated>2025-08-24T12:17:27Z</updated>
+    <link href="https://arxiv.org/abs/2407.01290v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.01290v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hyperbolic geometry have shown significant potential in modeling complex structured data, particularly those with underlying tree-like and hierarchical structures. Despite the impressive performance of various hyperbolic neural networks across numerous domains, research on adapting the Transformer to hyperbolic space remains limited. Previous attempts have mainly focused on modifying self-attention modules in the Transformer. However, these efforts have fallen short of developing a complete hyperbolic Transformer. This stems primarily from: (i) the absence of well-defined modules in hyperbolic space, including linear transformation layers, LayerNorm layers, activation functions, dropout operations, etc. (ii) the quadratic time complexity of the existing hyperbolic self-attention module w.r.t the number of input tokens, which hinders its scalability. To address these challenges, we propose, Hypformer, a novel hyperbolic Transformer based on the Lorentz model of hyperbolic geometry. In Hypformer, we introduce two foundational blocks that define the essential modules of the Transformer in hyperbolic space. Furthermore, we develop a linear self-attention mechanism in hyperbolic space, enabling hyperbolic Transformer to process billion-scale graph data and long-sequence inputs for the first time. Our experimental results confirm the effectiveness and efficiency of Hypformer across various datasets, demonstrating its potential as an effective and scalable solution for large-scale data representation and large models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-01T13:44:38Z</published>
+    <arxiv:comment>KDD 2024; Code: https://github.com/Graph-and-Geometric-Learning/hyperbolic-transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Menglin Yang</name>
+    </author>
+    <author>
+      <name>Harshit Verma</name>
+    </author>
+    <author>
+      <name>Delvin Ce Zhang</name>
+    </author>
+    <author>
+      <name>Jiahong Liu</name>
+    </author>
+    <author>
+      <name>Irwin King</name>
+    </author>
+    <author>
+      <name>Rex Ying</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1909.11556v1</id>
+    <title>Reducing Transformer Depth on Demand with Structured Dropout</title>
+    <updated>2019-09-25T15:35:03Z</updated>
+    <link href="https://arxiv.org/abs/1909.11556v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1909.11556v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Overparameterized transformer networks have obtained state of the art results in various natural language processing tasks, such as machine translation, language modeling, and question answering. These models contain hundreds of millions of parameters, necessitating a large amount of computation and making them prone to overfitting. In this work, we explore LayerDrop, a form of structured dropout, which has a regularization effect during training and allows for efficient pruning at inference time. In particular, we show that it is possible to select sub-networks of any depth from one large network without having to finetune them and with limited impact on performance. We demonstrate the effectiveness of our approach by improving the state of the art on machine translation, language modeling, summarization, question answering, and language understanding benchmarks. Moreover, we show that our approach leads to small BERT-like models of higher quality compared to training from scratch or using distillation.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-09-25T15:35:03Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Angela Fan</name>
+    </author>
+    <author>
+      <name>Edouard Grave</name>
+    </author>
+    <author>
+      <name>Armand Joulin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.00662v1</id>
+    <title>Uncertainty-Aware Genomic Classification of Alzheimer's Disease: A Transformer-Based Ensemble Approach with Monte Carlo Dropout</title>
+    <updated>2025-05-31T18:20:49Z</updated>
+    <link href="https://arxiv.org/abs/2506.00662v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.00662v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>INTRODUCTION: Alzheimer's disease (AD) is genetically complex, complicating robust classification from genomic data. METHODS: We developed a transformer-based ensemble model (TrUE-Net) using Monte Carlo Dropout for uncertainty estimation in AD classification from whole-genome sequencing (WGS). We combined a transformer that preserves single-nucleotide polymorphism (SNP) sequence structure with a concurrent random forest using flattened genotypes. An uncertainty threshold separated samples into an uncertain (high-variance) group and a more certain (low-variance) group. RESULTS: We analyzed 1050 individuals, holding out half for testing. Overall accuracy and area under the receiver operating characteristic (ROC) curve (AUC) were 0.6514 and 0.6636, respectively. Excluding the uncertain group improved accuracy from 0.6263 to 0.7287 (10.24% increase) and F1 from 0.5843 to 0.8205 (23.62% increase). DISCUSSION: Monte Carlo Dropout-driven uncertainty helps identify ambiguous cases that may require further clinical evaluation, thus improving reliability in AD genomic classification.</summary>
+    <category term="q-bio.GN" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-31T18:20:49Z</published>
+    <arxiv:primary_category term="q-bio.GN"/>
+    <author>
+      <name>Taeho Jo</name>
+    </author>
+    <author>
+      <name>Eun Hye Lee</name>
+    </author>
+    <author>
+      <name>Alzheimer's Disease Sequencing Project</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.14336v2</id>
+    <title>Gating Dropout: Communication-efficient Regularization for Sparsely Activated Transformers</title>
+    <updated>2022-07-04T16:53:50Z</updated>
+    <link href="https://arxiv.org/abs/2205.14336v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.14336v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Sparsely activated transformers, such as Mixture of Experts (MoE), have received great interest due to their outrageous scaling capability which enables dramatical increases in model size without significant increases in computational cost. To achieve this, MoE models replace the feedforward sub-layer with Mixture-of-Experts sub-layer in transformers and use a gating network to route each token to its assigned experts. Since the common practice for efficient training of such models requires distributing experts and tokens across different machines, this routing strategy often incurs huge cross-machine communication cost because tokens and their assigned experts likely reside in different machines. In this paper, we propose \emph{Gating Dropout}, which allows tokens to ignore the gating network and stay at their local machines, thus reducing the cross-machine communication. Similar to traditional dropout, we also show that Gating Dropout has a regularization effect during training, resulting in improved generalization performance. We validate the effectiveness of Gating Dropout on multilingual machine translation tasks. Our results demonstrate that Gating Dropout improves a state-of-the-art MoE model with faster wall-clock time convergence rates and better BLEU scores for a variety of model sizes and datasets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-28T05:12:43Z</published>
+    <arxiv:comment>Accepted to ICML 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Rui Liu</name>
+    </author>
+    <author>
+      <name>Young Jin Kim</name>
+    </author>
+    <author>
+      <name>Alexandre Muzio</name>
+    </author>
+    <author>
+      <name>Hany Hassan Awadalla</name>
+    </author>
+  </entry>
+</feed>

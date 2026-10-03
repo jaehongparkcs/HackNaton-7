@@ -17,6 +17,20 @@ import yaml
 
 from noesis_lab import stats
 from noesis_lab.evidence_chain import chain_dot, evidence_grid
+from noesis_lab.gap_views import (
+    DIRECTION_WORD,
+    direction_map_dot,
+    direction_view_dot,
+    exploration_rows,
+    gap_card_dot,
+    gap_rows,
+    gap_type_summary,
+    our_results,
+    overview_dot,
+    prediction_counts,
+    prediction_rows,
+    shrinkage_rows,
+)
 from noesis_lab.schemas import ExperimentConfig, NicheSpec, RunResult
 from noesis_lab.search.grid import coverage_grid, quotes
 from noesis_lab.store import Store
@@ -59,7 +73,9 @@ def load(path: str, mtime: float):
                 snapshot=s.get_meta("snapshot"), objective=s.get_meta("objective"),
                 queue=s.get_meta("candidate_queue") or [], baseline=s.get_meta("baseline_config"),
                 niche=s.get_meta("niche") or {}, corpus=s.get_meta("corpus") or {},
-                holds=s.get_meta("t4_holds") or {})
+                holds=s.get_meta("t4_holds") or {}, gaps=s.get_meta("gaps") or [],
+                gap_graph=s.get_meta("gap_graph") or {}, directions=s.get_meta("directions") or [],
+                explore=s.get_meta("explore") or {})
 
 
 D = load(str(books[choice]), books[choice].stat().st_mtime)
@@ -67,6 +83,9 @@ analyses = {a["analysis_id"]: a for a in D["analyses"]}
 decisions = D["decisions"]
 STEPS = profile.get("budget_mode") == "steps"        # equal-token delta is redundant under a step budget
 
+BADGE_LABEL = {"coverage": "Coverage gap (missing cell)", "abc": "ABC closure (hidden connection)",
+               "link": "Combination (link prediction)", "contradiction": "Contradiction (signed edges)",
+               "bridge": "Structural hole (bridge between communities)"}
 STATUS_LABEL = {
     "rejected_prior_art": ("REJECTED: PRIOR ART", "🟥"),
     "rejected_critic": ("REJECTED BY CRITIC", "🟥"),
@@ -74,6 +93,8 @@ STATUS_LABEL = {
     "screened_no_improvement": ("SCREENED: NO IMPROVEMENT", "🟨"),
     "screened_harmful": ("SCREENED: HARMFUL", "🟧"),
     "run_failed": ("RUN FAILED", "⬛"),
+    "explored": ("EXPLORATION — NOT A RESULT (1 seed; not selected for paired confirmation)", "⬜"),
+    "held_pi_review": ("HELD FOR PI REVIEW: POSSIBLE OVERLAP WITH AN UNEXTRACTED PAPER", "🟫"),
     "soft_rejected_prior_art": ("SOFT-REJECTED: COVERED BY AUTO-EXTRACTED / PREPRINT CLAIM (PI MAY OVERRIDE)", "🟪"),
 }
 
@@ -230,6 +251,129 @@ if len(papers_xy) >= 3:
     st.caption("Positions show text similarity only (TF-IDF → PCA); use the coverage grid for decisions. "
                "★ = our candidates, at the centroid of their supporting claims' papers.")
 
+# ----------------------------------------------------------------------------- hypothesis engine
+if D["gaps"]:
+    st.header("Hypothesis engine: gaps in the literature graph")
+    st.caption("Code builds a graph from the frozen, quote-verified claims (methods, mechanisms, settings, outcome) and scores "
+               "where it is silent or disagrees for our setting. Scores are **structural hints, not probabilities**: the "
+               "prior-art gate and the measured result still decide. Hypotheses are transfer / combination / resolution "
+               f"questions “not found in {snap.get('papers', '?')} retrieved papers”, never “novel”.")
+    shared = D["gap_graph"].get("shared_mechanisms", {})
+    need = D["explore"].get("config", {}).get("min_shared_mechanisms", 3)
+    line = (f"Mechanism nodes linked to 2 or more runnable methods: **{len(shared)}**"
+            + (" — " + "; ".join(f"{k.replace('_', ' ')} ({', '.join(v)})" for k, v in shared.items()) if shared else ""))
+    if len(shared) < need:
+        st.warning(line + f". Thin graph (want ≥ {need}): ABC, combination and bridge gaps will be sparse; "
+                   "coverage and contradiction gaps do not depend on mechanisms.")
+    else:
+        st.caption(line)
+    with st.expander("How a gap is scored (code; shown verbatim)"):
+        st.text(D["explore"].get("gap_score_rule", ""))
+    rows = gap_rows(D["gaps"])
+    queued = {q["key"]: q for q in D["queue"]}
+    hyp_by_key = {h.get("candidate_key"): h for h in D["hyps"] if h.get("candidate_key")}
+    for r in rows:
+        key = r["config change"].replace(" + ", "+")
+        r["hypothesis"] = (STATUS_LABEL.get(hyp_by_key[key]["status"], (hyp_by_key[key]["status"],))[0] if key in hyp_by_key
+                           else queued[key]["status"].replace("_", " ") if key in queued else "below the top gaps")
+    for fam in gap_type_summary(D["gaps"], D["gap_graph"]):
+        if fam["gaps"]:
+            st.markdown(f"**{fam['family']}:** {fam['gaps']} gap(s)")
+        else:
+            st.info(f"**{fam['family']}:** {fam['note']}")
+    st.subheader("Gap list")
+    st.dataframe(pd.DataFrame(rows).drop(columns=["gap_id"]), use_container_width=True, hide_index=True,
+                 column_config={c: st.column_config.ProgressColumn(c, min_value=0.0, max_value=1.0, format="%.2f")
+                                for c in ("gap score", "plausibility", "1 − coverage", "testability", "evidence quality")})
+    st.subheader("Gap card")
+    gid = st.selectbox("Gap", [g["gap_id"] for g in D["gaps"]],
+                       format_func=lambda x: next(f"{r['rank']}. {r['type']} · {r['config change']} · score {r['gap score']:.2f}"
+                                                  for r in rows if r["gap_id"] == x))
+    gap = next(g for g in D["gaps"] if g["gap_id"] == gid)
+    g1, g2 = st.columns([3, 2])
+    g1.graphviz_chart(gap_card_dot(gap, D["claims"]), use_container_width=True)
+    with g2:
+        st.markdown(f"**{BADGE_LABEL.get(gap['gap_type'], gap['gap_type'])}** · label `{gap['novelty_type']}` (computed by code)")
+        st.write(f"gap score **{gap['score']:.3f}** = plausibility {gap['plausibility']:.2f} × (1 − coverage {gap['coverage']:.2f}) "
+                 f"× testability {gap['testability']:.1f} × evidence quality {gap['evidence_quality']:.2f}")
+        st.markdown(f"Predicted direction along the path (code, from the signs of the claims): "
+                    f"**{DIRECTION_WORD.get(gap.get('predicted_direction', ''), '?')}**")
+        measured = [r for r in our_results(D["hyps"], analyses) if r["delta_key"] == gap["delta_key"]]
+        for r in measured:
+            st.markdown(f"Measured ({r['seeds']} paired seeds): **{r['branch']}** ({r['sd']:+.2f}× noise SD)"
+                        + (f" → prediction **{r['outcome'].upper()}**" if r["outcome"] not in ("", "no_prediction") else ""))
+        if not measured:
+            st.caption("Not measured in this session.")
+        st.json(gap["detail"], expanded=False)
+        st.caption(f"Not found in {snap.get('papers', '?')} papers retrieved on {corpus.get('search_date', '?')} for "
+                   f"{len(corpus.get('queries', []))} niche queries plus {len(D['directions'])} direction searches.")
+    for cid in gap["claim_ids"]:
+        c = D["claims"].get(cid)
+        if c:
+            p = D["papers"].get(c["paper_id"], {})
+            st.markdown(f"`{cid}` · `{c.get('tier', 'T1')}` · {p.get('published', '')}  \n> “{c['source_span']}”  \n"
+                        f"> — [{p.get('title', '')}]({p.get('url', '')})"
+                        + (f"  \n> mechanism quoted: “{c['mechanism']}”" if c.get("mechanism") else ""))
+    ex_rows = exploration_rows(decisions)
+    if ex_rows:
+        st.subheader("Explore cheaply, confirm rigorously")
+        st.caption("Exploration runs ONE seed per hypothesis against the incumbent's run on the same seed. It is "
+                   "**EXPLORATION — NOT A RESULT**: it only decides which hypotheses earn a paired confirmation. "
+                   "Finalists are picked by code (best per mechanism cell, then top by single-seed improvement).")
+        st.dataframe(pd.DataFrame(ex_rows), use_container_width=True, hide_index=True)
+        sh = shrinkage_rows(decisions)
+        if sh:
+            st.markdown("**Shrinkage** — what a single run suggested vs what the paired protocol measured "
+                        "(positive = the one-run number was optimistic). This is the single-run-loop comparison, "
+                        "measured inside one session.")
+            st.dataframe(pd.DataFrame(sh), use_container_width=True, hide_index=True)
+        for d in [d for d in decisions if d["kind"] == "promotion"]:
+            st.success(f"Promotion (cycle {d['cycle']}): `{d['candidate_key']}` stayed promising on every seed "
+                       f"({d['improvement_in_noise_sd']:+.2f}× SD) and became the incumbent. Its own runs are the new noise "
+                       f"floor (SD {d['noise_sd']:.4f}); later candidates are deltas on it. Headline numbers stay relative "
+                       "to the original baseline.")
+        if not [d for d in decisions if d["kind"] == "promotion"]:
+            st.caption("No promotion in this session: no finalist stayed promising on every seed. The baseline is still the incumbent.")
+    st.subheader("How good were the gaps?")
+    prows = prediction_rows(D["hyps"], analyses)
+    if not prows:
+        st.info("No gap hypothesis has been screened in this session yet, so there is nothing to score.")
+    else:
+        st.caption("Each gap predicts a direction from the signs of the claims on its path. After screening, code compares it "
+                   "with the measured branch: hit = same sign, miss = opposite sign, null = no improvement. Counts, not "
+                   "percentages: the numbers are small. Misses are reported, not hidden.")
+        pc1, pc2 = st.columns(2)
+        pc1.dataframe(pd.DataFrame(prediction_counts(prows, "gap type")), use_container_width=True, hide_index=True)
+        pc2.dataframe(pd.DataFrame(prediction_counts(prows, "label")), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(prows), use_container_width=True, hide_index=True)
+    st.subheader("Overview map")
+    st.graphviz_chart(overview_dot(D["gap_graph"], D["gaps"], our_results(D["hyps"], analyses)), use_container_width=True)
+    st.caption("Boxes = runnable methods, ellipses = mechanisms quoted from abstracts, colors = graph communities. "
+               "Claim edges: green +, red −, grey 0 (×count). Thick edges = our measured results. Dashed orange = gaps with their score.")
+
+    st.subheader("Direction map")
+    st.graphviz_chart(direction_map_dot(D["directions"]), use_container_width=True)
+    st.caption("Directions colored by gap status: covered grey · partial amber · contested purple · open green · unexplored white · "
+               "dashed border = outside the testbed (shown, never run). Dots are papers; a shared paper connects two directions.")
+    with st.expander("Direction gap status rule (code; shown verbatim)"):
+        st.text(D["explore"].get("direction_status_rule", ""))
+    did_ = st.selectbox("Direction view", [d["direction_id"] for d in D["directions"]],
+                        format_func=lambda x: next(f"{d['direction_id']} · {d['title']} [{d['status']}]" for d in D["directions"]
+                                                   if d["direction_id"] == x))
+    dsel = next(d for d in D["directions"] if d["direction_id"] == did_)
+    st.graphviz_chart(direction_view_dot(dsel, D["claims"], D["papers"], D["hyps"], analyses), use_container_width=True)
+    with st.expander("Scout panel: the scout's directions are searches, never evidence"):
+        st.dataframe(pd.DataFrame([{
+            "id": d["direction_id"], "origin": "scout (LLM)" if d["origin"] == "scout" else "code (block not mentioned)",
+            "title": d["title"], "status (code)": d["status"] + (" · outside testbed" if d["outside_testbed"] else ""),
+            "building blocks": ", ".join(d["building_blocks"]) or "—",
+            "queries (papers returned)": "; ".join(f"{q['q']} ({q['n_results']})" for q in d["queries"]),
+            "papers kept": d["n_papers"], "claims linked": d["n_claims"],
+            "remembered titles": "; ".join(f"{h['title'][:40]} → {h['status']}" + (f" ({h['paper_id']})" if h["paper_id"] else "")
+                                           for h in d["title_hints"]) or "—"} for d in D["directions"]]),
+            use_container_width=True, hide_index=True)
+        st.caption("A remembered title is only a search: found → the paper enters with its real arXiv id; not found → logged and dropped.")
+
 # ----------------------------------------------------------------------------- noise floor
 st.header("1. Noise floor")
 n = D["noise"]
@@ -244,8 +388,12 @@ if n:
                  tooltip=["seed", "val_loss", "run_id"]))
     left, right = st.columns([2, 1])
     left.altair_chart(chart.properties(height=240), use_container_width=True)
+    iv = stats.sd_interval(n["val_losses"])
     right.markdown(f"**{n['n']} baseline seeds**\n\nmean {n['mean']:.4f}\n\n**seed-to-seed SD {n['sd']:.4f}**\n\n"
                    "Every later delta is shown against this band (shaded = ±1 SD).")
+    right.caption(f"The SD is itself an estimate from {n['n']} seeds"
+                  + (f": exhaustive-bootstrap 95% interval {iv[0]:.4f}–{iv[1]:.4f}" if iv else "")
+                  + ". It differs between sessions and machines; never pool it across sessions.")
 
 # ----------------------------------------------------------------------------- hypotheses
 st.header("2. Hypotheses")
@@ -254,7 +402,27 @@ for h in D["hyps"]:
     with st.container(border=True):
         st.markdown(f"#### {icon} {label}  ·  `{h.get('origin', 'FIXTURE')}` {h.get('title', h['fixture_id'])}")
         st.write(h.get("statement", ""))
-        if h.get("origin") == "GENERATED":
+        if h.get("kind") == "gap":
+            g = h.get("gap") or {}
+            st.markdown(f"**`{(h.get('novelty_type') or '?').upper()}`** · from gap `{', '.join(h.get('gap_ids', []))}` · gap score "
+                        f"**{g.get('score', 0):.2f}** (plausibility {g.get('plausibility', 0):.2f}, 1 − coverage {1 - g.get('coverage', 0):.2f}, "
+                        f"testability {g.get('testability', 0):.1f}, evidence quality {g.get('evidence_quality', 0):.2f}) — a structural hint, "
+                        "not a probability. Label and score computed by code.")
+            for cid in h.get("grounded_in", []):
+                c = D["claims"].get(cid)
+                if c:
+                    st.markdown(f"> grounded in `{cid}` (`{c.get('tier', 'T1')}`): “{c['source_span']}”")
+            t = h.get("tighten")
+            if t:
+                word = {"passed": "PASSED", "narrowed": "NARROWED after one revision", "rejected": "REJECTED",
+                        "held": "HELD for PI review"}[t["outcome"]]
+                st.markdown(f"**Tighten pass: {word}**")
+                for r in t["rounds"]:
+                    st.caption(f"round {r['round']} · `{r['delta_key']}` · searches: "
+                               + "; ".join(f"{q['q']} ({q['n_results']})" for q in r["queries"])
+                               + f" · {r['new_papers']} new papers, {r['new_claims']} new claims · gate: {r['gate']}"
+                               + (f" · overlap `{r['claim_id']}`: “{r['passage']}”" if r["gate"] != "run" and r.get("passage") else ""))
+        elif h.get("origin") == "GENERATED":
             st.caption(f"Chosen by code from the literature queue. Priority tuple {h.get('queue_priority')}; "
                        f"supporting claims {', '.join(h.get('supporting_claim_ids', []))}.")
         pa = h.get("prior_art")
@@ -351,6 +519,8 @@ if D["queue"]:
         for i, q in enumerate(D["queue"])]), use_container_width=True, hide_index=True)
 for d in decisions:
     if d["kind"] in ("next_action", "extra_seeds_result", "literature_check", "followup_candidate", "budget_exhausted",
+                     "cycle_start", "exploration_result", "finalists_selected", "confirmation", "promotion",
+                     "headline_vs_original_baseline",
                      "queue_rejection", "queue_soft_rejection", "pi_review_hold", "prior_art_soft_rejection",
                      "search_degraded"):
         with st.container(border=True):

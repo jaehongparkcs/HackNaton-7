@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/aBvadtttTPau+cSugYADhIRxuiI</id>
+  <title>arXiv Query: search_query=all:"RMSNorm" AND all:"language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:46:15Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22RMSNorm%22+AND+(all:%22language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>34</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14858v2</id>
+    <title>Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers</title>
+    <updated>2023-10-26T04:32:49Z</updated>
+    <link href="https://arxiv.org/abs/2305.14858v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14858v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have achieved great success in machine learning applications. Normalization techniques, such as Layer Normalization (LayerNorm, LN) and Root Mean Square Normalization (RMSNorm), play a critical role in accelerating and stabilizing the training of Transformers. While LayerNorm recenters and rescales input vectors, RMSNorm only rescales the vectors by their RMS value. Despite being more computationally efficient, RMSNorm may compromise the representation ability of Transformers. There is currently no consensus regarding the preferred normalization technique, as some models employ LayerNorm while others utilize RMSNorm, especially in recent large language models. It is challenging to convert Transformers with one normalization to the other type. While there is an ongoing disagreement between the two normalization types, we propose a solution to unify two mainstream Transformer architectures, Pre-LN and Pre-RMSNorm Transformers. By removing the inherent redundant mean information in the main branch of Pre-LN Transformers, we can reduce LayerNorm to RMSNorm, achieving higher efficiency. We further propose the Compressed RMSNorm (CRMSNorm) and Pre-CRMSNorm Transformer based on a lossless compression of the zero-mean vectors. We formally establish the equivalence of Pre-LN, Pre-RMSNorm, and Pre-CRMSNorm Transformer variants in both training and inference. It implies that Pre-LN Transformers can be substituted with Pre-(C)RMSNorm counterparts at almost no cost, offering the same arithmetic functionality along with free efficiency improvement. Experiments demonstrate that we can reduce the training and inference time of Pre-LN Transformers by 1% - 10%.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T08:08:26Z</published>
+    <arxiv:comment>NeurIPS 2023 spotlight. Code is available at https://github.com/ZixuanJiang/pre-rmsnorm-transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zixuan Jiang</name>
+    </author>
+    <author>
+      <name>Jiaqi Gu</name>
+    </author>
+    <author>
+      <name>Hanqing Zhu</name>
+    </author>
+    <author>
+      <name>David Z. Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.13989v3</id>
+    <title>VectraYX-Nano: A 42M-Parameter Spanish Cybersecurity Language Model with Curriculum Learning and Native Tool Use</title>
+    <updated>2026-05-21T13:59:18Z</updated>
+    <link href="https://arxiv.org/abs/2605.13989v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.13989v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present VectraYX-Nano, a 41.95M-parameter decoder-only language model trained from scratch in Spanish for cybersecurity, with a Latin-American regional focus and native tool invocation via the Model Context Protocol (MCP). The model has four contributions. (i) Corpus: VectraYX-Sec-ES, a 170M-token Spanish corpus assembled by an eight-VM distributed pipeline at ~$25 USD of cloud compute and split into three curriculum phases (conversational 42M, cybersecurity 118M, offensive tooling 10M). (ii) Architecture: a 42M Transformer decoder with GQA, QK-Norm, RMSNorm, SwiGLU, RoPE and z-loss, paired with a domain-balanced 16,384-token byte-fallback BPE. (iii) Curriculum with replay across the three phases yields a monotonic loss descent (9.80 -&gt; 3.17 -&gt; 3.00 -&gt; 2.16); after SFT (loss 1.74) the v2 bootstrap-ablation reference attains a conversational gate of 0.775 +/- 0.043 on B5 over N=4 seeds, and a controlled Phase-2 replay sweep over {0,5,10,25,50}% saturates B5 at &gt;=25% replay. (iv) Two empirical findings, both N=4. A controlled bootstrap-corpus ablation across v2 (OpenSubs), v4 (mC4-ES), and v6 (60/25/15 OpenSubs/mC4/Wiki) exposes a loss-versus-register inversion: lower-perplexity bootstraps yield measurably worse conversational behavior (v2 &gt; v4 &gt; v6 on B5 at every paired seed). The B4 (tool-selection) floor of 0.000 is a corpus-density artifact, not a capacity gate: rebalancing the SFT mixture to tool-use ratio 1:21 yields VectraYX-Nano v7, the released headline configuration, reaching B4 = 0.230 +/- 0.052 at 42M while retaining B1 = 0.332 +/- 0.005 and B5 = 0.725 +/- 0.130; a LoRA replication on a 260M from-scratch mid-tier reaches 0.445 +/- 0.201. The released GGUF is 96 MB in F16, runs sub-second TTFT on commodity hardware under llama.cpp, and is, to our knowledge, the first published Spanish-native cybersecurity LLM with end-to-end MCP integration.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-13T18:03:07Z</published>
+    <arxiv:comment>24 pages, 5 figures, 12 tables. v3: post-Chinchilla compute ablation (v8-v15), Globant affiliation finalized, EMNLP Findings 2026 submission. Released model: VectraYX-Nano v7 (42M params, GGUF Q4 ~20 MB, native MCP)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Juan S. Santillana</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.08504v2</id>
+    <title>A Single Layer to Explain Them All:Understanding Massive Activations in Large Language Models</title>
+    <updated>2026-05-12T18:33:07Z</updated>
+    <link href="https://arxiv.org/abs/2605.08504v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.08504v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the origins of massive activations in large language models (LLMs) and identify a specific layer named the \textbf{Massive Emergence Layer (ME Layer)}, that is consistently observed across model families, where massive activations first emerge and subsequently propagate to deeper layers through residual connections. We show that, within the ME Layer both the RMSNorm and the FFN parameters jointly contribute to the emergence of massive activations. Once formed, the massive activation token representation remains largely invariant across layers, reducing the diversity of hidden representations passed to the attention module. Motivated by this limitation, we propose a simple and effective method to reduce the rigidity of the massive activation token. Our approach consistently improves LLM performance across multiple tasks, including instruction following and math reasoning, in both training free and fine tuning settings. Moreover, we show that our method mitigates attention sinks by selectively weakening their influence, elucidating their origin at the hidden state level and shedding new light on principled mitigation strategies.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-08T21:37:27Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zeru Shi</name>
+    </author>
+    <author>
+      <name>Zhenting Wang</name>
+    </author>
+    <author>
+      <name>Fan Yang</name>
+    </author>
+    <author>
+      <name>Qifan Wang</name>
+    </author>
+    <author>
+      <name>Ruixiang Tang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.09719v3</id>
+    <title>Bounded Hyperbolic Tangent: A Stable and Efficient Alternative to Pre-Layer Normalization in Large Language Models</title>
+    <updated>2026-06-03T13:32:00Z</updated>
+    <link href="https://arxiv.org/abs/2601.09719v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.09719v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pre-Layer Normalization (Pre-LN) is the de facto choice for large language models (LLMs) and is crucial for stable pretraining and effective transfer learning. However, Pre-LN incurs repeated statistical-computation overhead and remains vulnerable to the curse of depth, where hidden-state magnitudes and variances grow as the number of layers increases, destabilizing training. Efficiency-oriented normalization-free methods such as Dynamic Tanh (DyT) improve throughput but remain fragile at depth. To jointly address stability and efficiency, we propose Bounded Hyperbolic Tanh (BHyT), a drop-in replacement for Pre-LN. BHyT combines a tanh nonlinearity with explicit, data-driven input bounding to keep activations within a non-saturating range. It prevents depth-wise growth in activation magnitude and variance and provides a theoretical stability guarantee. For efficiency, BHyT computes exact statistics once per block and replaces a second normalization with a lightweight variance approximation. Empirically, BHyT demonstrates improved stability and efficiency during pretraining, achieving an average of 1.6\% faster training and an average of 1.77\% higher token generation throughput compared to RMSNorm, while maintaining strong pretraining-only and post-SFT performance across language understanding and reasoning benchmarks\footnote{Code is available at: https://github.com/MLAI-Yonsei/BHyT}.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-26T06:22:13Z</published>
+    <arxiv:comment>Accepted to ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hoyoon Byun</name>
+    </author>
+    <author>
+      <name>Youngjun Choi</name>
+    </author>
+    <author>
+      <name>Taero Kim</name>
+    </author>
+    <author>
+      <name>Sungrae Park</name>
+    </author>
+    <author>
+      <name>Kyungwoo Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.24898v1</id>
+    <title>Dense Supervision Is Not Enough: The Readout Blind Spot in Looped Language Models</title>
+    <updated>2026-06-12T13:23:18Z</updated>
+    <link href="https://arxiv.org/abs/2606.24898v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.24898v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Looped language models turn hidden states into runtime state: each state is decoded for prediction and fed back into future computation. This creates a basic supervision question: which state variables does cross-entropy actually control? We show that dense per-loop cross-entropy controls the variables exposed by the readout, not every variable active in the recurrent transition. Hidden-state scale gives a concrete failure mode. Scale-invariant readouts such as RMSNorm and LayerNorm hide radial scale from the immediate cross-entropy loss, while pre-norm residual recurrence continues to carry and update that same scale. Thus per-loop loss can make early exits usable without controlling recurrent scale. In 44M and 129M looped transformers without inter-loop normalization, per-loop cross-entropy through RMSNorm readouts still drives final hidden-state norms into the thousands or tens of thousands. Scale-visible readouts and explicit norm penalties keep norms in the tens, and scale-removing recurrence is the complementary architectural fix. The resulting design rule is simple: dense supervision trains exits; recurrent scale control requires either making scale visible to a loss or removing it from the loop. Consistent with this rule, scale-controlled variants achieve lower perplexity at matched inference-depth operating points in our variable-depth benchmarks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-12T13:23:18Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Rituraj Sharma</name>
+    </author>
+    <author>
+      <name>Tu Vu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.10251v2</id>
+    <title>Numerical stability analysis of large language models</title>
+    <updated>2026-06-22T07:24:38Z</updated>
+    <link href="https://arxiv.org/abs/2503.10251v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.10251v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers are the state-of-the-art architecture for large language models, and a key to their scalability is the strategic usage of low-precision arithmetic. We develop a mixed-precision analysis of transformer inference, deriving bounds for the condition numbers and forward error of the architecture's constituent parts. Notably, we compare the numerical stability of LayerNorm and RMSNorm in the massive-outlier regime, tighten the error bound of softmax in the presence of attention sinks, and quantify the impact of its shifted evaluation on the sensitivity to perturbations. Furthermore, we derive novel sequence-length-independent bounds on the local Lipschitz constant of self-attention. Our worst-case error bound for transformer inference suggests that its numerical stability is determined by the interplay between weight magnitude and the growth of the residual stream. Crucially, and as validated by experiments with GPT-2, our analysis establishes that the scaling of residual-projection weights preserves the propagation of the relative rounding error unless it forces a qualitative transition in the dynamics of the residual stream.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-13T10:53:17Z</published>
+    <arxiv:comment>Major revision</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Stanislav Budzinskiy</name>
+    </author>
+    <author>
+      <name>Wenyi Fang</name>
+    </author>
+    <author>
+      <name>Longbin Zeng</name>
+    </author>
+    <author>
+      <name>Philipp Petersen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.19697v1</id>
+    <title>Outlier-Safe Pre-Training for Robust 4-Bit Quantization of Large Language Models</title>
+    <updated>2025-06-24T15:03:57Z</updated>
+    <link href="https://arxiv.org/abs/2506.19697v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.19697v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Extreme activation outliers in Large Language Models (LLMs) critically degrade quantization performance, hindering efficient on-device deployment. While channel-wise operations and adaptive gradient scaling are recognized causes, practical mitigation remains challenging. We introduce Outlier-Safe Pre-Training (OSP), a practical guideline that proactively prevents outlier formation rather than relying on post-hoc mitigation. OSP combines three key innovations: (1) the Muon optimizer, eliminating privileged bases while maintaining training efficiency; (2) Single-Scale RMSNorm, preventing channel-wise amplification; and (3) a learnable embedding projection, redistributing activation magnitudes originating from embedding matrices. We validate OSP by training a 1.4B-parameter model on 1 trillion tokens, which is the first production-scale LLM trained without such outliers. Under aggressive 4-bit quantization, our OSP model achieves a 35.7 average score across 10 benchmarks (compared to 26.5 for an Adam-trained model), with only a 2% training overhead. Remarkably, OSP models exhibit near-zero excess kurtosis (0.04) compared to extreme values (1818.56) in standard models, fundamentally altering LLM quantization behavior. Our work demonstrates that outliers are not inherent to LLMs but are consequences of training strategies, paving the way for more efficient LLM deployment. The source code and pretrained checkpoints are available at https://github.com/dmis-lab/Outlier-Safe-Pre-Training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-24T15:03:57Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jungwoo Park</name>
+    </author>
+    <author>
+      <name>Taewhoo Lee</name>
+    </author>
+    <author>
+      <name>Chanwoong Yoon</name>
+    </author>
+    <author>
+      <name>Hyeon Hwang</name>
+    </author>
+    <author>
+      <name>Jaewoo Kang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.10137v3</id>
+    <title>RDQ: Residual Distribution Quantization for Large Language Models</title>
+    <updated>2026-09-10T03:36:52Z</updated>
+    <link href="https://arxiv.org/abs/2607.10137v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.10137v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Post-training quantization (PTQ) of large language models degrades sharply below 4-bit precision. We identify the root cause as residual stream distributional drift: quantization noise injected at each transformer layer accumulates in the shared residual representation, causing KL divergence from the FP16 baseline to grow super-linearly with depth (Pearson r=0.999 with log-perplexity, p&lt;0.001, confirmed across all tested methods and bit-widths). We discover that 84% of LLaMA-3-8B layers exhibit non-Gaussian residual distributions (KS test, p&lt;=0.05), and that per-layer residual stream variance grows 6,548x across depth. We propose RDQ (Residual Distribution Quantization), a PTQ framework whose central contribution is Cascaded Error Compensation (CEC): a sequential calibration procedure that captures the actual drifted activations each layer receives (computed by running calibration data through already-quantized upstream layers) and fits per-channel AWQ-style scales against those drifted inputs, with scales folded into preceding RMSNorm weights for exact mathematical equivalence at zero inference overhead. RDQ achieves state-of-the-art results on all three tested architectures: LLaMA-3-8B: 7.55 / 5.62 PPL (W3/W4); Qwen-2.5-7B: 7.46 / 6.38 PPL; Mistral-7B: 6.88 / 5.73 PPL. RDQ beats the best published baseline (LeanQuant/SpinQuant) at every model and bit-width combination, with gains up to -46.4% vs. RTN at W3A16 on LLaMA-3-8B. All output is standard group-128 asymmetric quantization, deployable on Qualcomm AIMET, GGUF, and any standard inference stack at zero runtime overhead.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-11T05:54:00Z</published>
+    <arxiv:comment>I am withdrawing due to compliance issue of my organisation</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Prateek Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.17849v2</id>
+    <title>I-LLM: Efficient Integer-Only Inference for Fully-Quantized Low-Bit Large Language Models</title>
+    <updated>2024-06-05T15:26:58Z</updated>
+    <link href="https://arxiv.org/abs/2405.17849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.17849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Post-training quantization (PTQ) serves as a potent technique to accelerate the inference of large language models (LLMs). Nonetheless, existing works still necessitate a considerable number of floating-point (FP) operations during inference, including additional quantization and de-quantization, as well as non-linear operators such as RMSNorm and Softmax. This limitation hinders the deployment of LLMs on the edge and cloud devices. In this paper, we identify the primary obstacle to integer-only quantization for LLMs lies in the large fluctuation of activations across channels and tokens in both linear and non-linear operations. To address this issue, we propose I-LLM, a novel integer-only fully-quantized PTQ framework tailored for LLMs. Specifically, (1) we develop Fully-Smooth Block-Reconstruction (FSBR) to aggressively smooth inter-channel variations of all activations and weights. (2) to alleviate degradation caused by inter-token variations, we introduce a novel approach called Dynamic Integer-only MatMul (DI-MatMul). This method enables dynamic quantization in full-integer matrix multiplication by dynamically quantizing the input and outputs with integer-only operations. (3) we design DI-ClippedSoftmax, DI-Exp, and DI-Normalization, which utilize bit shift to execute non-linear operators efficiently while maintaining accuracy. The experiment shows that our I-LLM achieves comparable accuracy to the FP baseline and outperforms non-integer quantization methods. For example, I-LLM can operate at W4A4 with negligible loss of accuracy. To our knowledge, we are the first to bridge the gap between integer-only quantization and LLMs. We've published our code on anonymous.4open.science, aiming to contribute to the advancement of this field.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-28T05:56:11Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xing Hu</name>
+    </author>
+    <author>
+      <name>Yuan Cheng</name>
+    </author>
+    <author>
+      <name>Dawei Yang</name>
+    </author>
+    <author>
+      <name>Zhihang Yuan</name>
+    </author>
+    <author>
+      <name>Jiangyong Yu</name>
+    </author>
+    <author>
+      <name>Chen Xu</name>
+    </author>
+    <author>
+      <name>Sifan Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.22777v3</id>
+    <title>SeeDNorm: Self-Rescaled Dynamic Normalization</title>
+    <updated>2026-02-11T06:37:33Z</updated>
+    <link href="https://arxiv.org/abs/2510.22777v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.22777v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Normalization layer constitutes an essential component in neural networks. In transformers, the predominantly used RMSNorm constrains vectors to a unit hypersphere, followed by dimension-wise rescaling through a learnable scaling coefficient $γ$ to maintain the representational capacity of the model. However, RMSNorm discards the input norm information in forward pass and a static scaling factor $γ$ may be insufficient to accommodate the wide variability of input data and distributional shifts, thereby limiting further performance improvements, particularly in zero-shot scenarios that large language models routinely encounter. To address this limitation, we propose SeeDNorm, which enhances the representational capability of the model by dynamically adjusting the scaling coefficient based on the current input, thereby preserving the input norm information and enabling data-dependent, self-rescaled dynamic normalization. During backpropagation, SeeDNorm retains the ability of RMSNorm to dynamically adjust gradient according to the input norm. We provide a detailed analysis of the training optimization for SeedNorm and proposed corresponding solutions to address potential instability issues that may arise when applying SeeDNorm. We validate the effectiveness of SeeDNorm across models of varying sizes in large language model pre-training as well as supervised and unsupervised computer vision tasks. By introducing a minimal number of parameters and with neglligible impact on model efficiency, SeeDNorm achieves consistently superior performance compared to previously commonly used normalization layers such as RMSNorm and LayerNorm, as well as element-wise activation alternatives to normalization layers like DyT.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-26T18:01:32Z</published>
+    <arxiv:comment>Accepted to ICLR 2026, 32 pages, 14 figures, 18 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Wenrui Cai</name>
+    </author>
+    <author>
+      <name>Defa Zhu</name>
+    </author>
+    <author>
+      <name>Qingjie Liu</name>
+    </author>
+    <author>
+      <name>Qiyang Min</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.10504v1</id>
+    <title>Learning Less Is More: Premature Upper-Layer Attention Specialization Hurts Language Model Pretraining</title>
+    <updated>2026-05-11T13:01:12Z</updated>
+    <link href="https://arxiv.org/abs/2605.10504v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.10504v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A causal-decoder block is hierarchical: lower layers build the residual basis that upper layers attend over. We identify a failure mode in GPT pretraining: upper layers commit to sharp attention patterns before lower-layer features stabilize. We call this premature upper-layer attention specialization. Temporarily slowing only upper-layer Q/K projections during early training improves final perplexity and downstream accuracy without altering other parameters; it prevents upper attention from collapsing onto an immature residual basis. In LLaMA-style blocks, the same intervention is nearly unnecessary. Through ablations, we isolate multiplicative gated FFNs (not RMSNorm or bias removal) as the component that suppresses the upstream residual writes driving the failure. A pathwise analysis unifies both findings: the learning-rate intervention reduces a step-size factor, while gated FFNs reduce a residual-energy factor on the same growth pathway. Our results identify upper-layer Q/K timing as a concrete interaction point between decoder architecture and optimization.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-11T13:01:12Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jinchang Zhu</name>
+    </author>
+    <author>
+      <name>Jindong Li</name>
+    </author>
+    <author>
+      <name>Yuwen Hao</name>
+    </author>
+    <author>
+      <name>Chengyu Zou</name>
+    </author>
+    <author>
+      <name>Rong Fu</name>
+    </author>
+    <author>
+      <name>Menglin Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09577v5</id>
+    <title>FlashNorm: Fast Normalization for Transformers</title>
+    <updated>2026-04-24T18:51:15Z</updated>
+    <link href="https://arxiv.org/abs/2407.09577v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09577v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Normalization layers are ubiquitous in large language models (LLMs) yet represent a compute bottleneck: on hardware with distinct vector and matrix execution units, the RMS calculation blocks the subsequent matrix multiplication, preventing parallel execution.
+  We present FlashNorm, an exact reformulation of RMSNorm followed by a linear layer that (i) eliminates the normalization weights by folding them into the subsequent linear layer, and (ii) defers the scalar RMS normalization to the output of the matrix multiplication, enabling the two operations to execute in parallel.
+  Additionally, by the scale invariance of RMS, an RMSNorm followed by a linear layer followed by another RMSNorm allows the first RMSNorm to be eliminated entirely -- a mathematically identical simplification that removes the pre-attention RMSNorm in models using QKV-normalization (e.g., Gemma~4) and in MLA-models with latent normalization (e.g., DeepSeek-V2, Mistral Small 4, and OpenMythos).
+  The same techniques extend to LayerNorm, Dynamic Tanh (DyT), feed-forward networks with GLU variants, and RoPE-based attention.
+  On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale. We verify zero-loss weight folding on three models. Beyond inference speed, FlashNorm simplifies model implementations by reducing parameter tensor count.
+  Watch our explainer video https://youtu.be/GEuJv34_XgU?si and see https://github.com/OpenMachine-ai/transformer-tricks for code.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T00:37:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nils Graef</name>
+    </author>
+    <author>
+      <name>Filip Makraduli</name>
+    </author>
+    <author>
+      <name>Andrew Wasielewski</name>
+    </author>
+    <author>
+      <name>Matthew Clapp</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.08823v1</id>
+    <title>An Extra RMSNorm is All You Need for Fine Tuning to 1.58 Bits</title>
+    <updated>2025-05-12T21:14:29Z</updated>
+    <link href="https://arxiv.org/abs/2505.08823v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.08823v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) have transformed natural-language processing, yet their scale makes real-world deployment costly. Post-training quantization reduces memory and computation but often degrades accuracy, while quantization-aware training can recover performance at the cost of extra training. Pushing quantization to the ternary (2-bit) regime yields even larger savings but is notoriously unstable. Building on recent work showing that a bias-free, RMS-normalized Transformer with straight-through estimation can reach 1.58-bit precision, we demonstrate that simply inserting RMS normalization before every linear projection and applying a gradual, layer-wise quantization schedule stably fine-tunes full-precision checkpoints into ternary LLMs. Our approach matches or surpasses more elaborate knowledge-distillation pipelines on standard language-modeling benchmarks without adding model complexity. These results indicate that careful normalization alone can close much of the accuracy gap between ternary and full-precision LLMs, making ultra-low-bit inference practical.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-12T21:14:29Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Cody Steinmetz</name>
+    </author>
+    <author>
+      <name>Gavin Childress</name>
+    </author>
+    <author>
+      <name>Aaron Herbst</name>
+    </author>
+    <author>
+      <name>Gavin Jones</name>
+    </author>
+    <author>
+      <name>Jasdeep Singh</name>
+    </author>
+    <author>
+      <name>Eli Vang</name>
+    </author>
+    <author>
+      <name>Keagan Weinstock</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.25262v2</id>
+    <title>IBNorm: Information-Bottleneck Inspired Normalization for Representation Learning</title>
+    <updated>2026-01-29T13:26:41Z</updated>
+    <link href="https://arxiv.org/abs/2510.25262v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.25262v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Normalization is fundamental to deep learning, but existing approaches such as BatchNorm, LayerNorm, and RMSNorm are variance-centric by enforcing zero mean and unit variance, stabilizing training without controlling how representations capture task-relevant information. We propose IB-Inspired Normalization (IBNorm), a simple yet powerful family of methods grounded in the Information Bottleneck principle. IBNorm introduces bounded compression operations that encourage embeddings to preserve predictive information while suppressing nuisance variability, yielding more informative representations while retaining the stability and compatibility of standard normalization. Theoretically, we prove that IBNorm achieves a higher IB value and tighter generalization bounds than variance-centric methods. Empirically, IBNorm consistently outperforms BatchNorm, LayerNorm, and RMSNorm across large-scale language models (LLaMA, GPT-2) and vision models (ResNet, ViT), with mutual information analysis confirming superior information bottleneck behavior. Code will be released publicly.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-29T08:21:32Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiandong Zou</name>
+    </author>
+    <author>
+      <name>Jia Li</name>
+    </author>
+    <author>
+      <name>Xiaotong Yuan</name>
+    </author>
+    <author>
+      <name>Pan Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.11329v5</id>
+    <title>TokenWeave: Efficient Compute-Communication Overlap for Distributed LLM Inference</title>
+    <updated>2026-05-01T12:16:47Z</updated>
+    <link href="https://arxiv.org/abs/2505.11329v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.11329v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Distributed inference of large language models (LLMs) using tensor parallelism can introduce communication overheads of $20$% even over GPUs connected via NVLink, a high-speed GPU interconnect. Several techniques have been proposed to mitigate these overheads by decomposing computations into smaller tasks and overlapping communication with these subtasks. However, none of these techniques are turned on by default during tensor-parallel serving in systems like vLLM, SGLang and TensorRT-LLM. This is because the number of tokens processed per iteration is typically kept small to support low-latency serving, and decomposing such smaller workloads to enable communication overlap results in worse performance. Further, the communication itself uses many streaming multiprocessors (SMs) that would otherwise be available for computation, increasing overhead.
+  We present TokenWeave, the first system to enable efficient compute-communication overlap for tensor-parallel model inference for token lengths as small as 1024. TokenWeave identifies RMSNorm, a previously overlooked operation, as crucial and optimizes it along with communication by implementing a novel fused AllReduce--RMSNorm kernel. Further, this kernel leverages the NVSHARP/Multimem feature available on modern GPUs (e.g., Hopper, Blackwell) to jointly perform communication and RMSNorm efficiently using only $2-8$ streaming multiprocessors (SMs) on an $8\times$H100 DGX system. Our evaluations demonstrate up to $\boldsymbol{1.28\times}$ speedup in latency (baseline$÷$ours) and up to $\boldsymbol{1.19\times}$ higher throughput (ours$÷$baseline) across multiple models and workloads. In several settings, TokenWeave delivers better performance than an equivalent model with all communication removed. The source code is available at https://github.com/microsoft/tokenweave.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-16T14:53:50Z</published>
+    <arxiv:comment>Accepted at MLSys 2026. In Versions 1 and 2, Figure 6 erroneously reports Multimem-AllReduce bandwidth rather than Multimem Reduce-Scatter bandwidth. In Version 4, we corrected the x-axis tick labels in Figure 7</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Raja Gond</name>
+    </author>
+    <author>
+      <name>Nipun Kwatra</name>
+    </author>
+    <author>
+      <name>Ramachandran Ramjee</name>
+    </author>
+  </entry>
+</feed>

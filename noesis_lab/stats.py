@@ -7,6 +7,7 @@ from __future__ import annotations
 import math
 import statistics
 from collections.abc import Collection, Iterable, Sequence
+from typing import Any
 
 import numpy as np
 
@@ -47,6 +48,27 @@ RULE_TEXT = (
 )
 
 
+# Rule v2, written 2026-10-03 after the `explore1` session and before any v2 session was recorded.
+# v1 required every paired seed to agree for PROMISING but not for HARMFUL, so one seed could
+# decide "harmful" (explore1, RMSNorm: 1.07 SD worse with per-seed deltas -0.010 / +0.028 / +0.009).
+# v2 makes the agreement requirement symmetric. It is not applied retroactively: a bundle is
+# analysed with the version it was recorded under.
+RULE_V2_TEXT = (
+    "Rule version 2. Let SD = seed-to-seed standard deviation of the baseline (noise floor) and "
+    "improvement = baseline val_loss − candidate val_loss, averaged over the paired seeds.\n"
+    "1. HARMFUL: candidate is worse by more than 1×SD AND every paired seed is worse → record the "
+    "result against the cited claims; next action = targeted Literature Agent check.\n"
+    "2. PROMISING: improvement > 1×SD AND every paired seed improves → next action = extra seeds "
+    "for the same change (toward confirmation).\n"
+    "3. NO IMPROVEMENT: otherwise. A mean beyond 1×SD in either direction where the seeds disagree "
+    "in sign is NO IMPROVEMENT, flagged as seed disagreement → next action = the next candidate "
+    "in the code-generated queue.\n"
+    "The rule is applied to every screening result. Extra seeds run at most once per hypothesis.\n"
+    "The LLM never selects the branch."
+)
+RULE_TEXTS = {1: RULE_TEXT, 2: RULE_V2_TEXT}
+
+
 def _r(x: float) -> float:
     """Canonical rounding so recomputation is bit-identical across platforms."""
     return float(f"{x:.10g}")
@@ -76,13 +98,137 @@ def gate_outcome(verdict: PriorArtVerdictKind, tier: str | None, overridden: boo
 
 # --------------------------------------------------------------------------- candidate queue
 # Single-field changes the lab may propose. Pure retunes (lr, batch size) are excluded.
-QUEUE_FIELDS = ("norm", "norm_position", "activation", "pos_encoding", "schedule", "optimizer", "dropout")
+QUEUE_FIELDS = ("norm", "norm_position", "activation", "pos_encoding", "schedule", "optimizer", "dropout",
+                "qk_norm", "weight_tying", "z_loss_coef", "label_smoothing", "warmup_frac", "grad_clip",
+                "init_scale")
 OUTCOME_RANK = {"improves": 0, "no_worse": 1, "context": 2, "worse": 3}
 # The testbed's runnable single-field changes ("field=value"). Extraction may map a claim only
 # onto one of these; anything else is context.
-ALLOWED_CHANGES = ("activation=relu2", "activation=swiglu", "dropout=0.1", "norm=rmsnorm",
-                   "norm_position=post", "optimizer=sgd_momentum", "pos_encoding=rope",
-                   "schedule=constant")
+ALLOWED_CHANGES = (
+    "activation=relu2", "activation=swiglu", "dropout=0.1", "grad_clip=0", "init_scale=0.5", "init_scale=2.0",
+    "label_smoothing=0.1", "norm=rmsnorm", "norm_position=post", "optimizer=lion", "optimizer=sgd_momentum",
+    "pos_encoding=rope", "qk_norm=true", "schedule=constant", "warmup_frac=0", "warmup_frac=0.02",
+    "warmup_frac=0.1", "weight_tying=true", "z_loss_coef=0.0001")
+
+
+def gate_decision(same: Sequence[Claim], *, contested_ids: Collection[str] = (), overridden: bool = False
+                  ) -> tuple[PriorArtVerdictKind, Claim | None, str, bool]:
+    """Gate v2: (verdict, the claim that determined it, gate action, contested) from ALL claims the
+    LLM says test the same comparison. Strongest first, ties by lowest claim id:
+      1. a curated (T1) claim that covers our setting          → known, reject
+      2. an auto-extracted (T2/T3) covering claim, uncontested → known, soft-reject (run if the PI overrides)
+      2b. only contested covering claims (they disagree in sign) → known, run, contested
+      3. a same-comparison claim that does not cover us        → method known, setting untested, run
+      4. none                                                  → not found, run
+    Which claim the LLM happens to mention first can no longer flip the outcome."""
+    by_id = sorted(same, key=lambda c: c.claim_id)
+    covering = [c for c in by_id if counts_as_covered(c)]
+    t1 = [c for c in covering if c.tier == "T1"]
+    if t1:
+        return PriorArtVerdictKind.known, t1[0], "reject", False
+    auto = [c for c in covering if c.claim_id not in set(contested_ids)]
+    if auto:
+        return PriorArtVerdictKind.known, auto[0], "run" if overridden else "soft_reject", False
+    if covering:
+        return PriorArtVerdictKind.known, covering[0], "run", True
+    if by_id:
+        return PriorArtVerdictKind.setting_untested, by_id[0], "run", False
+    return PriorArtVerdictKind.not_found, None, "run", False
+
+
+PARAM_VARIANT_FIELDS = ("cosine_final_frac",)   # planned, not built yet
+
+
+def fmt_value(v: Any) -> str:
+    """A config value as it appears in a "field=value" key: true / false for booleans, and the
+    allowlist's own spelling for numbers (0, 0.02, 0.0001, 2.0)."""
+    if isinstance(v, bool):
+        return "true" if v else "false"
+    if isinstance(v, float):
+        for spelled in (f"{v:g}", f"{v}", f"{v:.4f}".rstrip("0")):
+            if any(k.split("=", 1)[1] == spelled for k in ALLOWED_CHANGES):
+                return spelled
+        return f"{v:g}"
+    return str(v)
+
+
+def delta_key(delta: dict[str, Any]) -> str:
+    """Canonical key of a config delta: "a=b" or "a=b+c=d" (fields sorted)."""
+    return "+".join(f"{f}={fmt_value(delta[f])}" for f in sorted(delta))
+
+
+def parse_delta_key(key: str) -> dict[str, str]:
+    return dict(part.split("=", 1) for part in key.split("+"))
+
+
+def valid_delta(delta: dict[str, Any]) -> bool:
+    """The experiment language: one allowlisted single change, or any two that touch different
+    fields. Same-field pairs and anything outside the allowlist are rejected."""
+    keys = [f"{f}={v}" for f, v in delta.items()]
+    return 1 <= len(keys) <= 2 and all(k in ALLOWED_CHANGES for k in keys)
+
+
+def combine(key_a: str, key_b: str) -> dict[str, str] | None:
+    """Two single changes as one delta, or None if they touch the same field / are not allowlisted."""
+    if key_a not in ALLOWED_CHANGES or key_b not in ALLOWED_CHANGES:
+        return None
+    (fa, va), (fb, vb) = key_a.split("=", 1), key_b.split("=", 1)
+    return None if fa == fb else {fa: va, fb: vb}
+
+
+def testability(delta: dict[str, Any]) -> float:
+    """1 = expressible as a typed delta (1-2 fields); 0.3 = needs a parameterized variant that is
+    not built yet; 0 = outside the testbed (shown on the map, never queued)."""
+    if valid_delta(delta):
+        return 1.0
+    if delta and all(f in PARAM_VARIANT_FIELDS or f"{f}={v}" in ALLOWED_CHANGES for f, v in delta.items()) \
+            and len(delta) <= 2:
+        return 0.3
+    return 0.0
+
+
+def contested_claim_ids(claims_for_key: Sequence[Claim]) -> list[str]:
+    """Auto-extracted claims that would count as covering our setting (`covers` or `partial`, one
+    bucket for the overlap question) but disagree in sign (improves vs worse). The literature is
+    contested there, not settled. Curated (T1) claims are never treated as contested."""
+    cell = [c for c in claims_for_key if c.tier != "T1" and counts_as_covered(c)
+            and c.expected_outcome in ("improves", "worse")]
+    if {"improves", "worse"} <= {c.expected_outcome for c in cell}:
+        return sorted(c.claim_id for c in cell)
+    return []
+
+
+def literature_status(key: str, claims_for_key: Sequence[Claim], soft_rejected: Collection[str] = (),
+                      held: Collection[str] = (), overrides: Collection[str] = (), *,
+                      contested_open: bool = False) -> tuple[str, list[str], str]:
+    """(status, covering claim ids, note) of one candidate from the frozen claims that map onto it.
+    Only directional claims cover (a context claim reports no result); `covers` and `partial` both
+    count (novelty errors lean toward "covered"). T1 → rejected; T2/T3 or a gate soft-reject →
+    soft_rejected unless the PI overrides; a T4 text-overlap hold → held.
+
+    `contested_open` (the hypothesis engine): auto-extracted claims that disagree in sign within
+    the covered setting bucket do not cover the topic. A disagreement is an open question, not prior art, so the
+    candidate is "open (contested)" unless some other, uncontested claim covers it. The
+    literature-ordered queue of earlier bundles keeps the old behavior (False)."""
+    contested = set(contested_claim_ids(claims_for_key)) if contested_open else set()
+    covering = sorted((c for c in claims_for_key if c.expected_outcome != "context" and counts_as_covered(c)
+                       and c.claim_id not in contested), key=lambda c: c.claim_id)
+    t1 = [c.claim_id for c in covering if c.tier == "T1"]
+    auto = [c.claim_id for c in covering if c.tier != "T1"]
+    if t1:
+        return "rejected_prior_art", t1, "covered by a curated (T1) claim"
+    if (auto or key in set(soft_rejected)) and key not in set(overrides):
+        return "soft_rejected", auto, "covered by an auto-extracted / preprint claim; the PI may override"
+    if key in set(held):
+        return "held", [], "possible overlap with an unextracted paper; waiting for PI review"
+    if auto or key in set(soft_rejected):
+        return "open", auto, "soft-reject overridden by the PI"
+    if contested:
+        return "open", [], "open (contested): the claims for this change disagree in sign in the same setting"
+    return "open", [], ""
+
+
+QUEUE_STATUS_ORDER = {"open": 0, "soft_rejected": 1, "held": 2, "rejected_prior_art": 3}
 
 
 def candidate_queue(baseline: ExperimentConfig, claims: Iterable[Claim], tested: Collection[str], *,
@@ -117,25 +263,11 @@ def candidate_queue(baseline: ExperimentConfig, claims: Iterable[Claim], tested:
         field, value = key.split("=", 1)
         ids = sorted(c.claim_id for c in cs)
         rank = min(OUTCOME_RANK[c.expected_outcome] for c in cs)
-        covering = sorted((c for c in cs if c.expected_outcome != "context" and counts_as_covered(c)),
-                          key=lambda c: c.claim_id)
-        t1 = [c.claim_id for c in covering if c.tier == "T1"]
-        auto = [c.claim_id for c in covering if c.tier != "T1"]
-        status, cov_ids, note = "open", [], ""
-        if t1:
-            status, cov_ids, note = "rejected_prior_art", t1, "covered by a curated (T1) claim"
-        elif (auto or key in set(soft_rejected)) and key not in set(overrides):
-            status, cov_ids = "soft_rejected", auto
-            note = "covered by an auto-extracted / preprint claim; the PI may override"
-        elif key in set(held):
-            status, note = "held", "possible overlap with an unextracted paper; waiting for PI review"
-        elif auto or key in set(soft_rejected):
-            cov_ids, note = auto, "soft-reject overridden by the PI"
+        status, cov_ids, note = literature_status(key, cs, soft_rejected, held, overrides)
         items.append(QueueItem(key=key, field=field, value=value, priority=[rank, -len(ids), key],
                                supporting_claim_ids=ids, status=status, covering_claim_ids=cov_ids,
                                note=note))
-    order = {"open": 0, "soft_rejected": 1, "held": 2, "rejected_prior_art": 3}
-    return sorted(items, key=lambda i: (order[i.status], *i.priority))
+    return sorted(items, key=lambda i: (QUEUE_STATUS_ORDER[i.status], *i.priority))
 
 
 def open_items(queue: Sequence[QueueItem]) -> list[QueueItem]:
@@ -237,7 +369,7 @@ def throughput_drift(runs: Sequence[RunResult], baseline_config_hash: str, *,
 # --------------------------------------------------------------------------- paired analysis
 def analyze(hypothesis_id: str, cand_runs: Sequence[RunResult], base_runs: Sequence[RunResult],
             noise: NoiseFloor, *, all_base_runs: Sequence[RunResult] | None = None,
-            promising_sd: float = 1.0, harmful_sd: float = 1.0) -> Analysis:
+            promising_sd: float = 1.0, harmful_sd: float = 1.0, rule_version: int = 1) -> Analysis:
     """Paired by seed: delta = candidate − baseline on the same seed (negative = better).
 
     `all_base_runs` (default: base_runs) is every baseline run available, used only for the
@@ -267,8 +399,11 @@ def analyze(hypothesis_id: str, cand_runs: Sequence[RunResult], base_runs: Seque
     all_imp, all_worse = all(d < 0 for d in deltas), all(d > 0 for d in deltas)
 
     seed_disagreement = False
-    if mean_delta > harmful_sd * sd and mean_delta > 0:
+    worse_beyond = mean_delta > harmful_sd * sd and mean_delta > 0
+    if worse_beyond and (rule_version < 2 or all_worse):      # v2: HARMFUL also needs every seed worse
         branch = "harmful"
+    elif worse_beyond:
+        branch, seed_disagreement = "no_improvement", True
     elif imp > promising_sd * sd and imp > 0 and all_imp:
         branch = "promising"
     else:
@@ -297,17 +432,19 @@ def analyze(hypothesis_id: str, cand_runs: Sequence[RunResult], base_runs: Seque
 
 
 # --------------------------------------------------------------------------- next action
-def next_action(a: Analysis, *, extra_seeds: Sequence[int], queue: Sequence[QueueItem]) -> NextAction:
+def next_action(a: Analysis, *, extra_seeds: Sequence[int], queue: Sequence[QueueItem],
+                rule_version: int = 1) -> NextAction:
+    rule_text = RULE_TEXTS[rule_version]
     if a.branch == "promising":
         return NextAction(
             branch="promising", action="extra_seeds", detail={"seeds": list(extra_seeds)},
-            rule_text=RULE_TEXT,
+            rule_text=rule_text,
             rationale=(f"mean improvement is {a.improvement_in_noise_sd:.2f}× the noise SD and all "
                        f"{len(a.pairs)} seeds improve → run extra seeds for the same change."))
     if a.branch == "harmful":
         return NextAction(
             branch="harmful", action="literature_check", detail={},
-            rule_text=RULE_TEXT,
+            rule_text=rule_text,
             rationale=(f"candidate is worse by {-a.improvement_in_noise_sd:.2f}× the noise SD → "
                        "record a contradiction and ask the Literature Agent whether the snapshot "
                        "already reports this."))
@@ -316,7 +453,7 @@ def next_action(a: Analysis, *, extra_seeds: Sequence[int], queue: Sequence[Queu
            else f"mean improvement is {a.improvement_in_noise_sd:.2f}× the noise SD (within ±1×)")
     return NextAction(
         branch="no_improvement", action="next_candidate", detail={"candidate": nxt},
-        rule_text=RULE_TEXT,
+        rule_text=rule_text,
         rationale=(f"{why} → next candidate in the generated queue: {nxt if nxt else 'none left'}."))
 
 
@@ -349,3 +486,81 @@ def relate_to_claim(a: Analysis, claim: Claim) -> DerivedEvidence:
     return DerivedEvidence(evidence_id="ev_" + sha256_hex(a.analysis_id + claim.claim_id)[:10],
                            claim_id=claim.claim_id, analysis_id=a.analysis_id, relation=rel,
                            note=note)
+
+
+# --------------------------------------------------------------------------- scoring the engine
+def prediction_outcome(predicted_direction: str, branch: str) -> str:
+    """Did a gap's predicted direction match the measured branch?
+      hit            the predicted sign matches ("+" and promising, "-" and harmful; "0" = no worse:
+                     anything but harmful)
+      miss           the measured branch has the opposite sign
+      null           no improvement: the measurement decided nothing
+      no_prediction  the gap predicts no direction (contradictions, combination hints)"""
+    if predicted_direction == "0":
+        return "miss" if branch == "harmful" else "hit"
+    if predicted_direction not in ("+", "-"):
+        return "no_prediction"
+    if branch == "no_improvement":
+        return "null"
+    return "hit" if (predicted_direction == "+") == (branch == "promising") else "miss"
+
+
+# --------------------------------------------------------------------------- explore cheaply, confirm rigorously
+EXPLORATION_LABEL = "EXPLORATION — NOT A RESULT"
+FINALIST_RULE_TEXT = (
+    "Exploration runs one seed per hypothesis and is never a result. Finalists (code): keep the best "
+    "single-seed improvement per mechanism cell, then take the top N by single-seed improvement among "
+    "those that improved. If fewer than the configured minimum improved, the best remaining cell is "
+    "confirmed anyway, so the session still measures how a single-seed estimate holds up. Ties: "
+    "alphabetical. Only the paired screening that follows can set a label, a branch or the incumbent."
+)
+
+
+def single_seed_estimate(cand: RunResult, base: RunResult, noise_sd: float) -> dict[str, float]:
+    """What a one-run keep/revert loop sees: candidate vs the incumbent on the SAME seed."""
+    delta = cand.val_loss - base.val_loss
+    imp_sd = (-delta / noise_sd) if noise_sd > 0 else 0.0
+    return {"delta": _r(delta), "improvement": _r(-delta), "improvement_in_noise_sd": _r(imp_sd)}
+
+
+def select_finalists(explored: Sequence[dict[str, Any]], top_n: int = 2, min_n: int = 1) -> list[str]:
+    """Keys of the hypotheses that go on to paired confirmation. `explored` rows carry `key`,
+    `cell` and `improvement_in_noise_sd`. See FINALIST_RULE_TEXT."""
+    best: dict[str, dict] = {}
+    for row in sorted(explored, key=lambda r: (-r["improvement_in_noise_sd"], r["key"])):
+        best.setdefault(row["cell"], row)
+    ranked = sorted(best.values(), key=lambda r: (-r["improvement_in_noise_sd"], r["key"]))
+    chosen = [r for r in ranked if r["improvement_in_noise_sd"] > 0][:top_n]
+    for r in ranked:
+        if len(chosen) >= min(min_n, len(ranked)):
+            break
+        if r not in chosen:
+            chosen.append(r)
+    return [r["key"] for r in chosen]
+
+
+def shrinkage(single_seed_sd: float, paired_sd: float) -> float:
+    """Single-seed estimate minus the paired estimate, in noise SDs. Positive = the one-run number
+    was optimistic. This is the autoresearch-vs-paired comparison, measured inside one session."""
+    return _r(single_seed_sd - paired_sd)
+
+
+def should_promote(a: Analysis, n_seeds_required: int) -> bool:
+    """A finalist becomes the incumbent only if it is still PROMISING on the full seed set and
+    every one of those seeds improves."""
+    return a.branch == "promising" and a.all_seeds_improve and len(a.pairs) >= n_seeds_required
+
+
+# --------------------------------------------------------------------------- the noise floor is an estimate
+def sd_interval(values: Sequence[float], level: float = 0.95) -> tuple[float, float] | None:
+    """Exhaustive bootstrap interval for the sample SD: every resample with replacement of the
+    n values (n^n of them, so no randomness), percentile interval. With 5 seeds the SD is itself a
+    rough estimate; this shows how rough. None for n < 3 or n > 6 (too many resamples)."""
+    import itertools
+    n = len(values)
+    if not 3 <= n <= 6:
+        return None
+    sds = sorted(statistics.stdev(c) for c in itertools.product(values, repeat=n))
+    lo = sds[int((1 - level) / 2 * (len(sds) - 1))]
+    hi = sds[int((1 + level) / 2 * (len(sds) - 1))]
+    return _r(lo), _r(hi)

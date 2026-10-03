@@ -14,14 +14,16 @@ from pathlib import Path
 from .llm import LLM
 from .schemas import (
     Claim,
+    DirectionRecord,
     Fixture,
     LiteratureOutput,
+    LiteratureOutputV2,
     PriorArtResult,
     PriorArtVerdictKind,
     RetrievedPaper,
 )
 from .search.coverage import claim_coverage, review_label
-from .stats import gate_outcome, prior_art_verdict
+from .stats import gate_decision, gate_outcome, prior_art_verdict
 
 PROMPTS = Path(__file__).resolve().parents[1] / "prompts"
 
@@ -51,6 +53,7 @@ class Snapshot:
         doc = json.loads(Path(papers_path).read_text())
         self.source, self.fetched = doc["source"], doc["fetched"]
         self.meta = meta or {"mode": "curated_only"}      # corpus/meta.json when frozen from a search
+        self.directions: list[DirectionRecord] = []       # scout + deterministic directions (scout.json)
         self.papers: dict[str, RetrievedPaper] = {p["paper_id"]: RetrievedPaper(**p) for p in doc["papers"]}
         self.claims: dict[str, Claim] = {}
         for raw in json.loads(Path(claims_path).read_text())["claims"]:
@@ -67,8 +70,22 @@ class Snapshot:
     def from_corpus(cls, corpus: Path) -> Snapshot:
         """A frozen session corpus (results/<session>/corpus). No network."""
         mp = Path(corpus) / "meta.json"
-        return cls(Path(corpus) / "papers.json", Path(corpus) / "claims.json",
+        snap = cls(Path(corpus) / "papers.json", Path(corpus) / "claims.json",
                    json.loads(mp.read_text()) if mp.exists() else None)
+        sp = Path(corpus) / "scout.json"
+        if sp.exists():
+            snap.directions = [DirectionRecord(**d) for d in json.loads(sp.read_text())["directions"]]
+        return snap
+
+    def add(self, papers: list[RetrievedPaper], claims: list[Claim]) -> None:
+        """Papers and claims found by a hypothesis's own targeted search join the session corpus."""
+        for p in papers:
+            self.papers.setdefault(p.paper_id, p)
+        for c in claims:
+            if c.source_span not in self.papers[c.paper_id].abstract:
+                raise SnapshotError(f"{c.claim_id}: source_span is not verbatim in {c.paper_id}'s abstract")
+            self.claims.setdefault(c.claim_id, c)
+        self._build_index()
 
     @property
     def size(self) -> int:
@@ -124,12 +141,16 @@ def _claims_block(hits: list[tuple[Claim, float]], snap: Snapshot) -> str:
 
 
 class LiteratureAgent:
-    def __init__(self, llm: LLM, snap: Snapshot, top_k: int = 5, overrides: tuple[str, ...] = ()):
-        self.llm, self.snap, self.top_k, self.overrides = llm, snap, top_k, set(overrides)
-        self.system = (PROMPTS / "literature.md").read_text()
+    def __init__(self, llm: LLM, snap: Snapshot, top_k: int = 5, overrides: tuple[str, ...] = (),
+                 version: int = 2):
+        """`version` 1 = the gate older bundles were recorded with (one nearest claim, kept for
+        replay); 2 = the LLM lists all same-comparison claims and code picks the verdict."""
+        self.llm, self.snap, self.top_k, self.overrides, self.version = llm, snap, top_k, set(overrides), version
+        self.system = (PROMPTS / ("literature_gate.md" if version >= 2 else "literature.md")).read_text()
 
     def check(self, fixture: Fixture, *, question: str | None = None,
-              role: str = "literature") -> PriorArtResult:
+              role: str = "literature", extra_claim_ids: tuple[str, ...] = (),
+              contested_ids: tuple[str, ...] = ()) -> PriorArtResult:
         """Prior-art verdict. `question` overrides the text checked (targeted post-hoc checks).
 
         The LLM judges one thing: does a retrieved claim test the same change? Setting coverage is
@@ -140,26 +161,44 @@ class LiteratureAgent:
         # the claims a candidate was generated from are always shown to the agent
         hits += [(self.snap.claims[cid], 0.0) for cid in fixture.cited_claim_ids
                  if cid not in have and cid in self.snap.claims and fixture.origin == "generated"]
+        have = {c.claim_id for c, _ in hits}        # claims found by this hypothesis's own targeted search
+        hits += [(self.snap.claims[cid], 0.0) for cid in extra_claim_ids
+                 if cid not in have and cid in self.snap.claims]
         valid_ids = {c.claim_id for c, _ in hits}
         user = (f"{TESTBED_DESCRIPTION}\n\nHypothesis id: {fixture.fixture_id}\n"
                 f"Text to check:\n{text}\n\n"
                 f"Curated snapshot: {self.snap.size} papers. Retrieved claims:\n"
                 f"{_claims_block(hits, self.snap)}\n")
 
-        def validate(o: LiteratureOutput) -> None:
-            if o.same_comparison and o.claim_id not in valid_ids:
-                raise ValueError(f"claim_id {o.claim_id!r} must be one of {sorted(valid_ids)} "
-                                 "when same_comparison is true")
-            if not o.same_comparison and o.claim_id:
-                raise ValueError("claim_id must be \"\" when same_comparison is false")
+        contested = False
+        if self.version >= 2:
+            def validate2(o: LiteratureOutputV2) -> None:
+                bad = sorted(set(o.same_comparison_claim_ids) - valid_ids)
+                if bad:
+                    raise ValueError(f"claim ids {bad} are not in the retrieved list {sorted(valid_ids)}")
 
-        out, eid = self.llm.call(role, self.system, user, LiteratureOutput, validate=validate)
-        claim = self.snap.claims.get(out.claim_id) if out.claim_id else None
+            out, eid = self.llm.call(role, self.system, user, LiteratureOutputV2, validate=validate2)
+            ids = sorted(set(out.same_comparison_claim_ids))
+            verdict, claim, gate, contested = gate_decision(
+                [self.snap.claims[i] for i in ids], contested_ids=contested_ids,
+                overridden=fixture.candidate_key in self.overrides)
+            same = bool(ids)
+        else:
+            def validate(o: LiteratureOutput) -> None:
+                if o.same_comparison and o.claim_id not in valid_ids:
+                    raise ValueError(f"claim_id {o.claim_id!r} must be one of {sorted(valid_ids)} "
+                                     "when same_comparison is true")
+                if not o.same_comparison and o.claim_id:
+                    raise ValueError("claim_id must be \"\" when same_comparison is false")
+
+            out, eid = self.llm.call(role, self.system, user, LiteratureOutput, validate=validate)
+            ids, same = [], out.same_comparison
+            claim = self.snap.claims.get(out.claim_id) if out.claim_id else None
+            verdict = prior_art_verdict(same, claim_coverage(claim) if claim else None)
+            gate = gate_outcome(verdict, claim.tier if claim else None,
+                                overridden=fixture.candidate_key in self.overrides)
         paper = self.snap.papers[claim.paper_id] if claim else None
         cov = claim_coverage(claim) if claim else None
-        verdict = prior_art_verdict(out.same_comparison, cov)
-        gate = gate_outcome(verdict, claim.tier if claim else None,
-                            overridden=fixture.candidate_key in self.overrides)
         n = self.snap.size
         where = "curated snapshot" if not self.snap.live else f"{n} retrieved papers"
         badge = (f"{claim.tier}, {review_label(paper.peer_reviewed) if claim.tier != 'T1' else 'curated'}, "
@@ -177,7 +216,8 @@ class LiteratureAgent:
             paper_url=paper.url if paper else None,
             passage=claim.source_span if claim else None,    # from the snapshot, never the LLM
             rationale=out.rationale, snapshot_size=n, label=label, event_id=eid,
-            same_comparison=out.same_comparison,
+            same_comparison=same,
             covers_our_setting=claim.covers_our_setting if claim else None,
             coverage_note=claim.coverage_note if claim else None,
-            coverage=cov, tier=claim.tier if claim else None, gate=gate)
+            coverage=cov, tier=claim.tier if claim else None, gate=gate,
+            same_comparison_claim_ids=ids, contested=contested)

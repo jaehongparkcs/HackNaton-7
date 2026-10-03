@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yp5W2fqOK019ni2QS2sm8K9AInc</id>
+  <title>arXiv Query: search_query=all:"SGD with momentum" AND all:"language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-03T23:13:31Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22SGD+with+momentum%22+AND+(all:%22language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>10</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2506.12543v1</id>
+    <title>Is your batch size the problem? Revisiting the Adam-SGD gap in language modeling</title>
+    <updated>2025-06-14T15:37:31Z</updated>
+    <link href="https://arxiv.org/abs/2506.12543v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.12543v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adam is known to perform significantly better than Stochastic Gradient Descent (SGD) in language models, a phenomenon for which a number of explanations have been proposed. In this work, we revisit this "optimizer gap" through a series of comprehensively tuned baseline training runs for language modeling with Transformers. We exhaustively study how momentum, gradient clipping, and batch size affect the gap between SGD and Adam. Our empirical findings show that SGD with momentum can actually perform similarly to Adam in small-batch settings, if tuned correctly. We revisit existing explanations for Adam's advantage, including heavy-tailed class imbalance, directional sharpness, and Hessian heterogeneity, which struggle to directly explain this phenomenon. Towards bridging this gap in our understanding, by analyzing our Transformer training runs and simple quadratic settings inspired by the literature, we provide new insights, driven by stochastic differential equation models, into the role of batch size on the training dynamics.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-14T15:37:31Z</published>
+    <arxiv:comment>Short version accepted at the 2025 HiLD Workshop at ICML</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Teodora Srećković</name>
+    </author>
+    <author>
+      <name>Jonas Geiping</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.11286v3</id>
+    <title>Stochastic Gradient Methods with Layer-wise Adaptive Moments for Training of Deep Networks</title>
+    <updated>2020-02-06T21:40:02Z</updated>
+    <link href="https://arxiv.org/abs/1905.11286v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.11286v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose NovoGrad, an adaptive stochastic gradient descent method with layer-wise gradient normalization and decoupled weight decay. In our experiments on neural networks for image classification, speech recognition, machine translation, and language modeling, it performs on par or better than well tuned SGD with momentum and Adam or AdamW. Additionally, NovoGrad (1) is robust to the choice of learning rate and weight initialization, (2) works well in a large batch setting, and (3) has two times smaller memory footprint than Adam.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-27T15:12:50Z</published>
+    <arxiv:comment>Preprint, under review</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Boris Ginsburg</name>
+    </author>
+    <author>
+      <name>Patrice Castonguay</name>
+    </author>
+    <author>
+      <name>Oleksii Hrinchuk</name>
+    </author>
+    <author>
+      <name>Oleksii Kuchaiev</name>
+    </author>
+    <author>
+      <name>Vitaly Lavrukhin</name>
+    </author>
+    <author>
+      <name>Ryan Leary</name>
+    </author>
+    <author>
+      <name>Jason Li</name>
+    </author>
+    <author>
+      <name>Huyen Nguyen</name>
+    </author>
+    <author>
+      <name>Yang Zhang</name>
+    </author>
+    <author>
+      <name>Jonathan M. Cohen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.01966v2</id>
+    <title>AdaPlus: Integrating Nesterov Momentum and Precise Stepsize Adjustment on AdamW Basis</title>
+    <updated>2023-12-24T11:54:08Z</updated>
+    <link href="https://arxiv.org/abs/2309.01966v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.01966v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes an efficient optimizer called AdaPlus which integrates Nesterov momentum and precise stepsize adjustment on AdamW basis. AdaPlus combines the advantages of AdamW, Nadam, and AdaBelief and, in particular, does not introduce any extra hyper-parameters. We perform extensive experimental evaluations on three machine learning tasks to validate the effectiveness of AdaPlus. The experiment results validate that AdaPlus (i) among all the evaluated adaptive methods, performs most comparable with (even slightly better than) SGD with momentum on image classification tasks and (ii) outperforms other state-of-the-art optimizers on language modeling tasks and illustrates pretty high stability when training GANs. The experiment code of AdaPlus will be accessible at: https://github.com/guanleics/AdaPlus.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-05T05:39:44Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Lei Guan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.16363v1</id>
+    <title>AdamS: Momentum Itself Can Be A Normalizer for LLM Pretraining and Post-training</title>
+    <updated>2025-05-22T08:16:48Z</updated>
+    <link href="https://arxiv.org/abs/2505.16363v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.16363v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce AdamS, a simple yet effective alternative to Adam for large language model (LLM) pretraining and post-training. By leveraging a novel denominator, i.e., the root of weighted sum of squares of the momentum and the current gradient, AdamS eliminates the need for second-moment estimates. Hence, AdamS is efficient, matching the memory and compute footprint of SGD with momentum while delivering superior optimization performance. Moreover, AdamS is easy to adopt: it can directly inherit hyperparameters of AdamW, and is entirely model-agnostic, integrating seamlessly into existing pipelines without modifications to optimizer APIs or architectures. The motivation behind AdamS stems from the observed $(L_0, L_1)$ smoothness properties in transformer objectives, where local smoothness is governed by gradient magnitudes that can be further approximated by momentum magnitudes. We establish rigorous theoretical convergence guarantees and provide practical guidelines for hyperparameter selection. Empirically, AdamS demonstrates strong performance in various tasks, including pre-training runs on GPT-2 and Llama2 (up to 13B parameters) and reinforcement learning in post-training regimes. With its efficiency, simplicity, and theoretical grounding, AdamS stands as a compelling alternative to existing optimizers.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-22T08:16:48Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Bohan Wang</name>
+    </author>
+    <author>
+      <name>Luoxin Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.24320v4</id>
+    <title>AuON: A Linear-time Alternative to Orthogonal Momentum Updates</title>
+    <updated>2025-12-18T13:16:55Z</updated>
+    <link href="https://arxiv.org/abs/2509.24320v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.24320v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Orthogonal momentum gradient updates have emerged to overcome the limitations of vector-based optimizers like Adam. The vector-based optimizer Adam suffers from high memory costs and ill-conditioned momentum gradient updates. However, traditional Orthogonal momentum approaches, such as SVD/QR decomposition, suffer from high computational and memory costs and underperform compared to well-tuned SGD with momentum. Recent advances, such as Muon, improve efficiency by applying momentum before orthogonalization and approximate orthogonal matrices via Newton-Schulz iterations, which gives better GPU utilization, active high TFLOPS, and reduces memory usage by up to 3x. Nevertheless, Muon(Vanilla) suffers from exploding attention logits and has cubic computation complexity. In this paper, we deep dive into orthogonal momentum gradient updates to find the main properties that help Muon achieve remarkable performance. We propose AuON (Alternative Unit-norm momentum updates by Normalized nonlinear scaling), a linear-time optimizer that achieves strong performance without approximate orthogonal matrices, while preserving structural alignment and reconditioning ill-posed updates. AuON has an automatic "emergency brake" to handle exploding attention logits. We further introduce a hybrid variant, Hybrid-AuON, that applies the linear transformations with Newton-Schulz iterations, which outperforms Muon in the language modeling tasks. Code is available at: https://github.com/ryyzn9/AuON</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-29T06:03:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dipan Maity</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.24695v1</id>
+    <title>Nested Learning: The Illusion of Deep Learning Architectures</title>
+    <updated>2025-12-31T07:59:43Z</updated>
+    <link href="https://arxiv.org/abs/2512.24695v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.24695v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite the recent progresses, particularly in developing Language Models, there are fundamental challenges and unanswered questions about how such models can continually learn/memorize, self-improve, and find effective solutions. In this paper, we present a new learning paradigm, called Nested Learning (NL), that coherently represents a machine learning model with a set of nested, multi-level, and/or parallel optimization problems, each of which with its own context flow. Through the lenses of NL, existing deep learning methods learns from data through compressing their own context flow, and in-context learning naturally emerges in large models. NL suggests a philosophy to design more expressive learning algorithms with more levels, resulting in higher-order in-context learning and potentially unlocking effective continual learning capabilities. We advocate for NL by presenting three core contributions: (1) Expressive Optimizers: We show that known gradient-based optimizers, such as Adam, SGD with Momentum, etc., are in fact associative memory modules that aim to compress the gradients' information (by gradient descent). Building on this insight, we present other more expressive optimizers with deep memory and/or more powerful learning rules; (2) Self-Modifying Learning Module: Taking advantage of NL's insights on learning algorithms, we present a sequence model that learns how to modify itself by learning its own update algorithm; and (3) Continuum Memory System: We present a new formulation for memory system that generalizes the traditional viewpoint of long/short-term memory. Combining our self-modifying sequence model with the continuum memory system, we present a continual learning module, called Hope, showing promising results in language modeling, knowledge incorporation, and few-shot generalization tasks, continual learning, and long-context reasoning tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-31T07:59:43Z</published>
+    <arxiv:comment>A version of this work is published at Neural Information Processing Systems (NeurIPS) 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ali Behrouz</name>
+    </author>
+    <author>
+      <name>Meisam Razaviyayn</name>
+    </author>
+    <author>
+      <name>Peilin Zhong</name>
+    </author>
+    <author>
+      <name>Vahab Mirrokni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.07767v2</id>
+    <title>Taking the Road Less Scheduled with Adaptive Polyak Steps</title>
+    <updated>2026-05-12T15:05:44Z</updated>
+    <link href="https://arxiv.org/abs/2511.07767v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.07767v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Schedule-Free SGD, proposed in [Defazio et al., 2024], achieves optimal convergence rates without requiring the training horizon in advance, by replacing learning rate schedules with a principled form of iterate averaging. However, the method still requires tuning a base learning rate whose optimal value depends on unknown problem constants. In this work, we continue down this road by deriving Polyak-type step sizes for Schedule-Free SGD and Adam that compute the learning rate at each iteration from the sampled loss, gradient, and current iterates alone. We first propose an oracle variant that uses per-sample optimal function values and prove an $O(1/\sqrt{t})$ anytime last-iterate rate for convex Lipschitz objectives. We then remove the oracle requirement with a safeguarded variant that replaces the unknown optimal values with any available lower bound, achieving the same rate up to a neighborhood that vanishes under interpolation. Both step sizes reduce to existing Polyak rules for standard SGD when momentum is set to zero, unifying standard and schedule-free Polyak methods. Numerical experiments on language modeling, including pretraining and distillation, show that the proposed methods match or surpass tuned Schedule-Free baselines while offering greater robustness to hyperparameter choices.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-11T02:33:24Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dimitris Oikonomou</name>
+    </author>
+    <author>
+      <name>Matthew Buchholz</name>
+    </author>
+    <author>
+      <name>Yuen-Man Pun</name>
+    </author>
+    <author>
+      <name>Robert M. Gower</name>
+    </author>
+    <author>
+      <name>Nicolas Loizou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2011.11985v1</id>
+    <title>Adam$^+$: A Stochastic Method with Adaptive Variance Reduction</title>
+    <updated>2020-11-24T09:28:53Z</updated>
+    <link href="https://arxiv.org/abs/2011.11985v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2011.11985v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adam is a widely used stochastic optimization method for deep learning applications. While practitioners prefer Adam because it requires less parameter tuning, its use is problematic from a theoretical point of view since it may not converge. Variants of Adam have been proposed with provable convergence guarantee, but they tend not be competitive with Adam on the practical performance. In this paper, we propose a new method named Adam$^+$ (pronounced as Adam-plus). Adam$^+$ retains some of the key components of Adam but it also has several noticeable differences: (i) it does not maintain the moving average of second moment estimate but instead computes the moving average of first moment estimate at extrapolated points; (ii) its adaptive step size is formed not by dividing the square root of second moment estimate but instead by dividing the root of the norm of first moment estimate. As a result, Adam$^+$ requires few parameter tuning, as Adam, but it enjoys a provable convergence guarantee. Our analysis further shows that Adam$^+$ enjoys adaptive variance reduction, i.e., the variance of the stochastic gradient estimator reduces as the algorithm converges, hence enjoying an adaptive convergence. We also propose a more general variant of Adam$^+$ with different adaptive step sizes and establish their fast convergence rate. Our empirical studies on various deep learning tasks, including image classification, language modeling, and automatic speech recognition, demonstrate that Adam$^+$ significantly outperforms Adam and achieves comparable performance with best-tuned SGD and momentum SGD.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-11-24T09:28:53Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingrui Liu</name>
+    </author>
+    <author>
+      <name>Wei Zhang</name>
+    </author>
+    <author>
+      <name>Francesco Orabona</name>
+    </author>
+    <author>
+      <name>Tianbao Yang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.02861v2</id>
+    <title>8-bit Optimizers via Block-wise Quantization</title>
+    <updated>2022-06-20T16:05:15Z</updated>
+    <link href="https://arxiv.org/abs/2110.02861v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.02861v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Stateful optimizers maintain gradient statistics over time, e.g., the exponentially smoothed sum (SGD with momentum) or squared sum (Adam) of past gradient values. This state can be used to accelerate optimization compared to plain stochastic gradient descent but uses memory that might otherwise be allocated to model parameters, thereby limiting the maximum size of models trained in practice. In this paper, we develop the first optimizers that use 8-bit statistics while maintaining the performance levels of using 32-bit optimizer states. To overcome the resulting computational, quantization, and stability challenges, we develop block-wise dynamic quantization. Block-wise quantization divides input tensors into smaller blocks that are independently quantized. Each block is processed in parallel across cores, yielding faster optimization and high precision quantization. To maintain stability and performance, we combine block-wise quantization with two additional changes: (1) dynamic quantization, a form of non-linear optimization that is precise for both large and small magnitude values, and (2) a stable embedding layer to reduce gradient variance that comes from the highly non-uniform distribution of input tokens in language models. As a result, our 8-bit optimizers maintain 32-bit performance with a small fraction of the memory footprint on a range of tasks, including 1.5B parameter language modeling, GLUE finetuning, ImageNet classification, WMT'14 machine translation, MoCo v2 contrastive ImageNet pretraining+finetuning, and RoBERTa pretraining, without changes to the original optimizer hyperparameters. We open-source our 8-bit optimizers as a drop-in replacement that only requires a two-line code change.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-06T15:43:20Z</published>
+    <arxiv:comment>ICLR2022 spotlight version</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tim Dettmers</name>
+    </author>
+    <author>
+      <name>Mike Lewis</name>
+    </author>
+    <author>
+      <name>Sam Shleifer</name>
+    </author>
+    <author>
+      <name>Luke Zettlemoyer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.07468v5</id>
+    <title>AdaBelief Optimizer: Adapting Stepsizes by the Belief in Observed Gradients</title>
+    <updated>2020-12-20T22:30:36Z</updated>
+    <link href="https://arxiv.org/abs/2010.07468v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.07468v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most popular optimizers for deep learning can be broadly categorized as adaptive methods (e.g. Adam) and accelerated schemes (e.g. stochastic gradient descent (SGD) with momentum). For many models such as convolutional neural networks (CNNs), adaptive methods typically converge faster but generalize worse compared to SGD; for complex settings such as generative adversarial networks (GANs), adaptive methods are typically the default because of their stability.We propose AdaBelief to simultaneously achieve three goals: fast convergence as in adaptive methods, good generalization as in SGD, and training stability. The intuition for AdaBelief is to adapt the stepsize according to the "belief" in the current gradient direction. Viewing the exponential moving average (EMA) of the noisy gradient as the prediction of the gradient at the next time step, if the observed gradient greatly deviates from the prediction, we distrust the current observation and take a small step; if the observed gradient is close to the prediction, we trust it and take a large step. We validate AdaBelief in extensive experiments, showing that it outperforms other methods with fast convergence and high accuracy on image classification and language modeling. Specifically, on ImageNet, AdaBelief achieves comparable accuracy to SGD. Furthermore, in the training of a GAN on Cifar10, AdaBelief demonstrates high stability and improves the quality of generated samples compared to a well-tuned Adam optimizer. Code is available at https://github.com/juntang-zhuang/Adabelief-Optimizer</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-15T01:46:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>NeurIPS 2020</arxiv:journal_ref>
+    <author>
+      <name>Juntang Zhuang</name>
+    </author>
+    <author>
+      <name>Tommy Tang</name>
+    </author>
+    <author>
+      <name>Yifan Ding</name>
+    </author>
+    <author>
+      <name>Sekhar Tatikonda</name>
+    </author>
+    <author>
+      <name>Nicha Dvornek</name>
+    </author>
+    <author>
+      <name>Xenophon Papademetris</name>
+    </author>
+    <author>
+      <name>James S. Duncan</name>
+    </author>
+  </entry>
+</feed>

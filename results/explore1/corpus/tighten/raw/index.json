@@ -1,0 +1,17 @@
+[
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "000_arxiv_tighten_1a4a5e7f.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD+with+momentum%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "001_arxiv_tighten_2d425db7.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD+with+momentum%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "002_arxiv_tighten_033816ac.xml"
+  }
+]

@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/1+SQzuuDH1eHQlb5/DsKhchXbsA</id>
+  <title>arXiv Query: search_query=all:"dropout" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:47:38Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22dropout%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>1835</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2002.12915v3</id>
+    <title>The Implicit and Explicit Regularization Effects of Dropout</title>
+    <updated>2020-10-15T07:44:22Z</updated>
+    <link href="https://arxiv.org/abs/2002.12915v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.12915v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dropout is a widely-used regularization technique, often required to obtain state-of-the-art for a number of architectures. This work demonstrates that dropout introduces two distinct but entangled regularization effects: an explicit effect (also studied in prior work) which occurs since dropout modifies the expected training objective, and, perhaps surprisingly, an additional implicit effect from the stochasticity in the dropout training update. This implicit regularization effect is analogous to the effect of stochasticity in small mini-batch stochastic gradient descent. We disentangle these two effects through controlled experiments. We then derive analytic simplifications which characterize each effect in terms of the derivatives of the model and the loss, for deep neural networks. We demonstrate these simplified, analytic regularizers accurately capture the important aspects of dropout, showing they faithfully replace dropout in practice.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-28T18:31:17Z</published>
+    <arxiv:comment>Published in ICML 2020. Code available at https://github.com/cwein3/dropout-analytical</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Colin Wei</name>
+    </author>
+    <author>
+      <name>Sham Kakade</name>
+    </author>
+    <author>
+      <name>Tengyu Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.00066v4</id>
+    <title>Fraternal Dropout</title>
+    <updated>2018-03-28T15:50:58Z</updated>
+    <link href="https://arxiv.org/abs/1711.00066v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.00066v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recurrent neural networks (RNNs) are important class of architectures among neural networks useful for language modeling and sequential prediction. However, optimizing RNNs is known to be harder compared to feed-forward neural networks. A number of techniques have been proposed in literature to address this problem. In this paper we propose a simple technique called fraternal dropout that takes advantage of dropout to achieve this goal. Specifically, we propose to train two identical copies of an RNN (that share parameters) with different dropout masks while minimizing the difference between their (pre-softmax) predictions. In this way our regularization encourages the representations of RNNs to be invariant to dropout mask, thus being robust. We show that our regularization term is upper bounded by the expectation-linear dropout objective which has been shown to address the gap due to the difference between the train and inference phases of dropout. We evaluate our model and achieve state-of-the-art results in sequence modeling tasks on two benchmark datasets - Penn Treebank and Wikitext-2. We also show that our approach leads to performance improvement by a significant margin in image captioning (Microsoft COCO) and semi-supervised (CIFAR-10) tasks.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-10-31T19:32:45Z</published>
+    <arxiv:comment>Accepted to ICLR 2018. Extended appendix. Added official GitHub code for replication: https://github.com/kondiz/fraternal-dropout . Added references. Corrected typos</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Konrad Zolna</name>
+    </author>
+    <author>
+      <name>Devansh Arpit</name>
+    </author>
+    <author>
+      <name>Dendi Suhubdy</name>
+    </author>
+    <author>
+      <name>Yoshua Bengio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.11258v1</id>
+    <title>Enhancing Uncertainty Estimation in Semantic Segmentation via Monte-Carlo Frequency Dropout</title>
+    <updated>2025-01-20T03:54:30Z</updated>
+    <link href="https://arxiv.org/abs/2501.11258v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.11258v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Monte-Carlo (MC) Dropout provides a practical solution for estimating predictive distributions in deterministic neural networks. Traditional dropout, applied within the signal space, may fail to account for frequency-related noise common in medical imaging, leading to biased predictive estimates. A novel approach extends Dropout to the frequency domain, allowing stochastic attenuation of signal frequencies during inference. This creates diverse global textural variations in feature maps while preserving structural integrity -- a factor we hypothesize and empirically show is contributing to accurately estimating uncertainties in semantic segmentation. We evaluated traditional MC-Dropout and the MC-frequency Dropout in three segmentation tasks involving different imaging modalities: (i) prostate zones in biparametric MRI, (ii) liver tumors in contrast-enhanced CT, and (iii) lungs in chest X-ray scans. Our results show that MC-Frequency Dropout improves calibration, convergence, and semantic uncertainty, thereby improving prediction scrutiny, boundary delineation, and has the potential to enhance medical decision-making.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-20T03:54:30Z</published>
+    <arxiv:comment>Accepted by IEEE ISBI 2025 4-page paper. Code for the implementation is available at https://github.com/talze/frequency-dropout</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Tal Zeevi</name>
+    </author>
+    <author>
+      <name>Lawrence H. Staib</name>
+    </author>
+    <author>
+      <name>John A. Onofrey</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.02247v2</id>
+    <title>Almost Sure Convergence of Dropout Algorithms for Neural Networks</title>
+    <updated>2023-03-23T15:13:14Z</updated>
+    <link href="https://arxiv.org/abs/2002.02247v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.02247v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the convergence and convergence rate of stochastic training algorithms for Neural Networks (NNs) that have been inspired by Dropout (Hinton et al., 2012). With the goal of avoiding overfitting during training of NNs, dropout algorithms consist in practice of multiplying the weight matrices of a NN componentwise by independently drawn random matrices with $\{0, 1 \}$-valued entries during each iteration of Stochastic Gradient Descent (SGD). This paper presents a probability theoretical proof that for fully-connected NNs with differentiable, polynomially bounded activation functions, if we project the weights onto a compact set when using a dropout algorithm, then the weights of the NN converge to a unique stationary point of a projected system of Ordinary Differential Equations (ODEs). After this general convergence guarantee, we go on to investigate the convergence rate of dropout. Firstly, we obtain generic sample complexity bounds for finding $ε$-stationary points of smooth nonconvex functions using SGD with dropout that explicitly depend on the dropout probability. Secondly, we obtain an upper bound on the rate of convergence of Gradient Descent (GD) on the limiting ODEs of dropout algorithms for NNs with the shape of arborescences of arbitrary depth and with linear activation functions. The latter bound shows that for an algorithm such as Dropout or Dropconnect (Wan et al., 2013), the convergence rate can be impaired exponentially by the depth of the arborescence. In contrast, we experimentally observe no such dependence for wide NNs with just a few dropout layers. We also provide a heuristic argument for this observation. Our results suggest that there is a change of scale of the effect of the dropout probability in the convergence rate that depends on the relative size of the width of the NN compared to its depth.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-06T13:25:26Z</published>
+    <arxiv:comment>52 pages, 3 figures. Added results pertaining to the convergence rate of Dropout SGD to $ε$-stationary points and numerical experiments. Updated the introduction, conclusion and appendix. Changed format to one-column text</arxiv:comment>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Albert Senen-Cerda</name>
+    </author>
+    <author>
+      <name>Jaron Sanders</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.00946v3</id>
+    <title>Fine-tuning with Very Large Dropout</title>
+    <updated>2025-02-27T22:15:53Z</updated>
+    <link href="https://arxiv.org/abs/2403.00946v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.00946v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is impossible today to pretend that the practice of machine learning is always compatible with the idea that training and testing data follow the same distribution. Several authors have recently used ensemble techniques to show how scenarios involving multiple data distributions are best served by representations that are both richer than those obtained by regularizing for the best in-distribution performance, and richer than those obtained under the influence of the implicit sparsity bias of common stochastic gradient procedures.
+  This contribution investigates the use of very high dropout rates instead of ensembles to obtain such rich representations. Although training a deep network from scratch using such dropout rates is virtually impossible, fine-tuning a large pre-trained model under such conditions is not only possible but also achieves out-of-distribution performances that exceed those of both ensembles and weight averaging methods such as model soups.
+  This result has practical significance because the importance of the fine-tuning scenario has considerably grown in recent years. This result also provides interesting insights on the nature of rich representations and on the intrinsically linear nature of fine-tuning a large network using a comparatively small dataset.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-01T19:50:22Z</published>
+    <arxiv:comment>Fine-tuning with very large dropout outperforms weight-averaging and ensemble on ResNet and large vision transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianyu Zhang</name>
+    </author>
+    <author>
+      <name>Léon Bottou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.15541v2</id>
+    <title>An Empirical Study on Variance-based MC Dropout Uncertainty-Error Correlation in 2D Brain Tumor Segmentation</title>
+    <updated>2026-05-27T06:10:51Z</updated>
+    <link href="https://arxiv.org/abs/2510.15541v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.15541v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate brain tumor segmentation from MRI is vital for diagnosis and treatment planning. Although Monte Carlo (MC) Dropout is widely used to estimate model uncertainty, the effectiveness of variance-based uncertainty - computed as pixel-wise variance across stochastic forward passes - in identifying segmentation errors, particularly near tumor boundaries, remains insufficiently studied. This study empirically examines the relationship between variance-based MC Dropout uncertainty and segmentation error in 2D brain tumor MRI segmentation using a U-Net trained under four augmentation settings: none, horizontal flip, rotation, and scaling. Uncertainty was estimated as the pixel-wise variance across 50 stochastic forward passes and correlated with pixel-wise errors using Pearson and Spearman coefficients. Results show weak global correlations (r ~ 0.30-0.38) and negligible boundary correlations (|r| &lt; 0.05). Although differences across augmentations were statistically significant (p &lt; 0.001), they lacked practical relevance. These findings suggest that variance-based MC Dropout uncertainty provides limited cues for global and boundary error localization, and that the choice of uncertainty representation critically affects the utility of MC Dropout in medical image segmentation. Alternative representations such as predictive entropy or mutual information may better capture segmentation errors, particularly at boundaries.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-17T11:19:44Z</published>
+    <arxiv:comment>v2: Updated title and framing to clarify that findings are specific to variance-based uncertainty estimation via MC Dropout, not MC Dropout broadly. Minor textual improvements throughout. Code and results available at https://github.com/Saumya4321/mcd-error-correlation</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Saumya B</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2110.02034v2</id>
+    <title>Dropout Q-Functions for Doubly Efficient Reinforcement Learning</title>
+    <updated>2022-03-16T13:38:46Z</updated>
+    <link href="https://arxiv.org/abs/2110.02034v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2110.02034v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Randomized ensembled double Q-learning (REDQ) (Chen et al., 2021b) has recently achieved state-of-the-art sample efficiency on continuous-action reinforcement learning benchmarks. This superior sample efficiency is made possible by using a large Q-function ensemble. However, REDQ is much less computationally efficient than non-ensemble counterparts such as Soft Actor-Critic (SAC) (Haarnoja et al., 2018a). To make REDQ more computationally efficient, we propose a method of improving computational efficiency called DroQ, which is a variant of REDQ that uses a small ensemble of dropout Q-functions. Our dropout Q-functions are simple Q-functions equipped with dropout connection and layer normalization. Despite its simplicity of implementation, our experimental results indicate that DroQ is doubly (sample and computationally) efficient. It achieved comparable sample efficiency with REDQ, much better computational efficiency than REDQ, and comparable computational efficiency with that of SAC.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-10-05T13:28:11Z</published>
+    <arxiv:comment>ICLR 2022. Source code: https://github.com/TakuyaHiraoka/Dropout-Q-Functions-for-Doubly-Efficient-Reinforcement-Learning Poster: https://drive.google.com/file/d/1_JSuwlUsMjzo6zRaAIcXXj3__AmOvu2t/view?usp=sharing Slides: https://drive.google.com/file/d/1ecq9SQ2KSNpfeblCkr6TYPz5gRk_Y4S8/view?usp=sharing</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Takuya Hiraoka</name>
+    </author>
+    <author>
+      <name>Takahisa Imagawa</name>
+    </author>
+    <author>
+      <name>Taisei Hashimoto</name>
+    </author>
+    <author>
+      <name>Takashi Onishi</name>
+    </author>
+    <author>
+      <name>Yoshimasa Tsuruoka</name>
+    </author>
+  </entry>
+</feed>

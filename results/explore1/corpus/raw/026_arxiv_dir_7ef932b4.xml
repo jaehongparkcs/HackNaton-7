@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/kMXmZgStYMJqUgBGueIhW8HIZrM</id>
+  <title>arXiv Query: search_query=all:"layer normalization" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:47:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22layer+normalization%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>255</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.09904v2</id>
+    <title>Stability of Transformers under Layer Normalization</title>
+    <updated>2026-08-07T08:18:09Z</updated>
+    <link href="https://arxiv.org/abs/2510.09904v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.09904v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite their widespread use, training deep Transformers can be unstable. Layer normalization, a standard component, improves training stability, but its placement has often been ad-hoc. In this paper, we conduct a principled study on the forward (hidden states) and backward (gradient) stability of Transformers under different layer normalization placements. Our theory provides key insights into the training dynamics: whether training drives Transformers toward regular solutions or pathological behaviors. For forward stability, we derive explicit bounds on the growth of hidden states in trained Transformers. For backward stability, we analyze how layer normalization affects the backpropagation of gradients, thereby explaining the training dynamics of each layer normalization placement. Our analysis also guides the scaling of residual steps in Transformer blocks, where appropriate choices can further improve stability and performance. Our numerical results corroborate our theoretical findings. Beyond these results, our framework provides a principled way to sanity-check the stability of Transformers under new architectural modifications, offering guidance for future designs.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-10T22:27:20Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kelvin Kan</name>
+    </author>
+    <author>
+      <name>Xingjian Li</name>
+    </author>
+    <author>
+      <name>Benjamin J. Zhang</name>
+    </author>
+    <author>
+      <name>Tuhin Sahai</name>
+    </author>
+    <author>
+      <name>Stanley Osher</name>
+    </author>
+    <author>
+      <name>Krishna Kumar</name>
+    </author>
+    <author>
+      <name>Markos A. Katsoulakis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1707.06065v1</id>
+    <title>Dynamic Layer Normalization for Adaptive Neural Acoustic Modeling in Speech Recognition</title>
+    <updated>2017-07-19T13:04:09Z</updated>
+    <link href="https://arxiv.org/abs/1707.06065v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1707.06065v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Layer normalization is a recently introduced technique for normalizing the activities of neurons in deep neural networks to improve the training speed and stability. In this paper, we introduce a new layer normalization technique called Dynamic Layer Normalization (DLN) for adaptive neural acoustic modeling in speech recognition. By dynamically generating the scaling and shifting parameters in layer normalization, DLN adapts neural acoustic models to the acoustic variability arising from various factors such as speakers, channel noises, and environments. Unlike other adaptive acoustic models, our proposed approach does not require additional adaptation data or speaker information such as i-vectors. Moreover, the model size is fixed as it dynamically generates adaptation parameters. We apply our proposed DLN to deep bidirectional LSTM acoustic models and evaluate them on two benchmark datasets for large vocabulary ASR experiments: WSJ and TED-LIUM release 2. The experimental results show that our DLN improves neural acoustic models in terms of transcription accuracy by dynamically adapting to various speakers and environments.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-07-19T13:04:09Z</published>
+    <arxiv:comment>INTERSPEECH 2017</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Taesup Kim</name>
+    </author>
+    <author>
+      <name>Inchul Song</name>
+    </author>
+    <author>
+      <name>Yoshua Bengio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.07467v1</id>
+    <title>Root Mean Square Layer Normalization</title>
+    <updated>2019-10-16T16:44:22Z</updated>
+    <link href="https://arxiv.org/abs/1910.07467v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.07467v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Layer normalization (LayerNorm) has been successfully applied to various deep neural networks to help stabilize training and boost model convergence because of its capability in handling re-centering and re-scaling of both inputs and weight matrix. However, the computational overhead introduced by LayerNorm makes these improvements expensive and significantly slows the underlying network, e.g. RNN in particular. In this paper, we hypothesize that re-centering invariance in LayerNorm is dispensable and propose root mean square layer normalization, or RMSNorm. RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability. RMSNorm is computationally simpler and thus more efficient than LayerNorm. We also present partial RMSNorm, or pRMSNorm where the RMS is estimated from p% of the summed inputs without breaking the above properties. Extensive experiments on several tasks using diverse network architectures show that RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%~64% on different models. Source code is available at https://github.com/bzhangGo/rmsnorm.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-16T16:44:22Z</published>
+    <arxiv:comment>NeurIPS 2019</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Biao Zhang</name>
+    </author>
+    <author>
+      <name>Rico Sennrich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.04745v2</id>
+    <title>On Layer Normalization in the Transformer Architecture</title>
+    <updated>2020-06-29T07:55:12Z</updated>
+    <link href="https://arxiv.org/abs/2002.04745v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.04745v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Transformer is widely used in natural language processing tasks. To train a Transformer however, one usually needs a carefully designed learning rate warm-up stage, which is shown to be crucial to the final performance but will slow down the optimization and bring more hyper-parameter tunings. In this paper, we first study theoretically why the learning rate warm-up stage is essential and show that the location of layer normalization matters. Specifically, we prove with mean field theory that at initialization, for the original-designed Post-LN Transformer, which places the layer normalization between the residual blocks, the expected gradients of the parameters near the output layer are large. Therefore, using a large learning rate on those gradients makes the training unstable. The warm-up stage is practically helpful for avoiding this problem. On the other hand, our theory also shows that if the layer normalization is put inside the residual blocks (recently proposed as Pre-LN Transformer), the gradients are well-behaved at initialization. This motivates us to remove the warm-up stage for the training of Pre-LN Transformers. We show in our experiments that Pre-LN Transformers without the warm-up stage can reach comparable results with baselines while requiring significantly less training time and hyper-parameter tuning on a wide range of applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-12T00:33:03Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Published on ICML 2020</arxiv:journal_ref>
+    <author>
+      <name>Ruibin Xiong</name>
+    </author>
+    <author>
+      <name>Yunchang Yang</name>
+    </author>
+    <author>
+      <name>Di He</name>
+    </author>
+    <author>
+      <name>Kai Zheng</name>
+    </author>
+    <author>
+      <name>Shuxin Zheng</name>
+    </author>
+    <author>
+      <name>Chen Xing</name>
+    </author>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Yanyan Lan</name>
+    </author>
+    <author>
+      <name>Liwei Wang</name>
+    </author>
+    <author>
+      <name>Tie-Yan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2209.08898v1</id>
+    <title>Batch Layer Normalization, A new normalization layer for CNNs and RNN</title>
+    <updated>2022-09-19T10:12:51Z</updated>
+    <link href="https://arxiv.org/abs/2209.08898v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2209.08898v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study introduces a new normalization layer termed Batch Layer Normalization (BLN) to reduce the problem of internal covariate shift in deep neural network layers. As a combined version of batch and layer normalization, BLN adaptively puts appropriate weight on mini-batch and feature normalization based on the inverse size of mini-batches to normalize the input to a layer during the learning process. It also performs the exact computation with a minor change at inference times, using either mini-batch statistics or population statistics. The decision process to either use statistics of mini-batch or population gives BLN the ability to play a comprehensive role in the hyper-parameter optimization process of models. The key advantage of BLN is the support of the theoretical analysis of being independent of the input data, and its statistical configuration heavily depends on the task performed, the amount of training data, and the size of batches. Test results indicate the application potential of BLN and its faster convergence than batch normalization and layer normalization in both Convolutional and Recurrent Neural Networks. The code of the experiments is publicly available online (https://github.com/A2Amir/Batch-Layer-Normalization).</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-09-19T10:12:51Z</published>
+    <arxiv:comment>Published in proceedings of the 6th international conference on Advances in Artificial Intelligence, ICAAI 2022, Birmingham, UK</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Amir Ziaee</name>
+    </author>
+    <author>
+      <name>Erion Çano</name>
+    </author>
+    <arxiv:doi>10.1145/3571560.3571566</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1145/3571560.3571566" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2308.09565v2</id>
+    <title>Understanding the Role of Layer Normalization in Label-Skewed Federated Learning</title>
+    <updated>2024-02-15T02:43:25Z</updated>
+    <link href="https://arxiv.org/abs/2308.09565v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.09565v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Layer normalization (LN) is a widely adopted deep learning technique especially in the era of foundation models. Recently, LN has been shown to be surprisingly effective in federated learning (FL) with non-i.i.d. data. However, exactly why and how it works remains mysterious. In this work, we reveal the profound connection between layer normalization and the label shift problem in federated learning. To understand layer normalization better in FL, we identify the key contributing mechanism of normalization methods in FL, called feature normalization (FN), which applies normalization to the latent feature representation before the classifier head. Although LN and FN do not improve expressive power, they control feature collapse and local overfitting to heavily skewed datasets, and thus accelerates global training. Empirically, we show that normalization leads to drastic improvements on standard benchmarks under extreme label shift. Moreover, we conduct extensive ablation studies to understand the critical factors of layer normalization in FL. Our results verify that FN is an essential ingredient inside LN to significantly improve the convergence of FL while remaining robust to learning rate choices, especially under extreme label shift where each client has access to few classes. Our code is available at \url{https://github.com/huawei-noah/Federated-Learning/tree/main/Layer_Normalization}.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-18T13:57:04Z</published>
+    <arxiv:comment>accepted at TMLR</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Guojun Zhang</name>
+    </author>
+    <author>
+      <name>Mahdi Beitollahi</name>
+    </author>
+    <author>
+      <name>Alex Bie</name>
+    </author>
+    <author>
+      <name>Xi Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.13142v2</id>
+    <title>Parallel Layer Normalization for Universal Approximation</title>
+    <updated>2026-02-09T16:09:13Z</updated>
+    <link href="https://arxiv.org/abs/2505.13142v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.13142v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper studies the approximation capabilities of neural networks that combine layer normalization (LN) with linear layers. We prove that networks consisting of two linear layers with parallel layer normalizations (PLNs) inserted between them (referred to as PLN-Nets) achieve universal approximation, whereas architectures that use only standard LN exhibit strictly limited expressive power.We further analyze approximation rates of shallow and deep PLN-Nets under the $L^\infty$ norm as well as in Sobolev norms. Our analysis extends beyond LN to RMSNorm, and from standard MLPs to position-wise feed-forward networks, the core building blocks used in RNNs and Transformers.Finally, we provide empirical experiments to explore other possible potentials of PLN-Nets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-19T14:10:23Z</published>
+    <arxiv:comment>45 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yunhao Ni</name>
+    </author>
+    <author>
+      <name>Yuxin Guo</name>
+    </author>
+    <author>
+      <name>Yuhe Liu</name>
+    </author>
+    <author>
+      <name>Wenxin Sun</name>
+    </author>
+    <author>
+      <name>Jie Luo</name>
+    </author>
+    <author>
+      <name>Wenjun Wu</name>
+    </author>
+    <author>
+      <name>Lei Huang</name>
+    </author>
+  </entry>
+</feed>

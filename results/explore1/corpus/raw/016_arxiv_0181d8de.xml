@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/2rFusVBkCSvz5t9j4B2svhuVVrM</id>
+  <title>arXiv Query: search_query=all:"Post-LN" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T22:46:18Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Post-LN%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>12</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.18849v2</id>
+    <title>Exact Attention Sensitivity and the Geometry of Transformer Stability</title>
+    <updated>2026-08-17T00:16:56Z</updated>
+    <link href="https://arxiv.org/abs/2602.18849v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.18849v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a sensitivity analysis for transformer attention in a geometry aligned with tokenwise computation. Our main result is the exact identity $\|J_τ(u)\|_{\infty\to1}=θ(p)/τ$ for the Jacobian $J_τ(u)$ of the tempered softmax $u\mapsto\mathrm{softmax}(u/τ)$, where $θ(p)=4\max_{S\subseteq[L]}p(S)(1-p(S))$ measures how evenly the attention distribution can be bisected rather than how concentrated it is. We combine this identity with a block-$\infty$/RMS norm under which row-stochastic attention mixing is nonexpansive. This yields a distribution-aware local Jacobian bound for multi-head attention and a sequence-length-independent Lipschitz bound on bounded input sets, with explicit dependence on width, input magnitude, temperature, and projection norms. We also identify a structural distinction between normalization placements: a pre-LN residual-sublayer Jacobian contains an additive identity term, whereas a post-LN residual-sublayer Jacobian does not. A LayerNorm projection lemma gives a sufficient condition under which the LayerNorm-only term in the post-LN expansion contracts geometrically; the condition is not tested by our experiments. Across three Pre-LN early-training runs of $774$M-parameter models, attention becomes substantially more concentrated while the median lower-bound certificate for $θ(p)$ remains near one at every sampled layer and checkpoint. This certifies near-maximal exact sensitivity for at least half of the sampled rows within each layer. A minority of rows enters a dominant-atom regime with lower exact sensitivity, consistent with the deterministic relationship between $p_{\max}$ and $θ(p)$.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-21T14:25:24Z</published>
+    <arxiv:comment>27 pages, 4 figures. v2: Major revision. Exact softmax sensitivity theorem unchanged. Removed an unsupported path-length scaling theorem and its DeepNorm derivation; corrected the uniform-attention parity case and the loss normalization/update accounting; reran the headline experiments; clarified the local vs. bounded-domain bounds and the conditional pre-LN/post-LN analysis</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Seyed Morteza Emadi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.14802v1</id>
+    <title>ResiDual: Transformer with Dual Residual Connections</title>
+    <updated>2023-04-28T12:19:47Z</updated>
+    <link href="https://arxiv.org/abs/2304.14802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.14802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer networks have become the preferred architecture for many tasks due to their state-of-the-art performance. However, the optimal way to implement residual connections in Transformer, which are essential for effective training, is still debated. Two widely used variants are the Post-Layer-Normalization (Post-LN) and Pre-Layer-Normalization (Pre-LN) Transformers, which apply layer normalization after each residual block's output or before each residual block's input, respectively. While both variants enjoy their advantages, they also suffer from severe limitations: Post-LN causes gradient vanishing issue that hinders training deep Transformers, and Pre-LN causes representation collapse issue that limits model capacity. In this paper, we propose ResiDual, a novel Transformer architecture with Pre-Post-LN (PPLN), which fuses the connections in Post-LN and Pre-LN together and inherits their advantages while avoids their limitations. We conduct both theoretical analyses and empirical experiments to verify the effectiveness of ResiDual. Theoretically, we prove that ResiDual has a lower bound on the gradient to avoid the vanishing issue due to the residual connection from Pre-LN. Moreover, ResiDual also has diverse model representations to avoid the collapse issue due to the residual connection from Post-LN. Empirically, ResiDual outperforms both Post-LN and Pre-LN on several machine translation benchmarks across different network depths and data sizes. Thanks to the good theoretical and empirical performance, ResiDual Transformer can serve as a foundation architecture for different AI models (e.g., large language models). Our code is available at https://github.com/microsoft/ResiDual.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-28T12:19:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shufang Xie</name>
+    </author>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Junliang Guo</name>
+    </author>
+    <author>
+      <name>Xu Tan</name>
+    </author>
+    <author>
+      <name>Jiang Bian</name>
+    </author>
+    <author>
+      <name>Hany Hassan Awadalla</name>
+    </author>
+    <author>
+      <name>Arul Menezes</name>
+    </author>
+    <author>
+      <name>Tao Qin</name>
+    </author>
+    <author>
+      <name>Rui Yan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.04745v2</id>
+    <title>On Layer Normalization in the Transformer Architecture</title>
+    <updated>2020-06-29T07:55:12Z</updated>
+    <link href="https://arxiv.org/abs/2002.04745v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.04745v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Transformer is widely used in natural language processing tasks. To train a Transformer however, one usually needs a carefully designed learning rate warm-up stage, which is shown to be crucial to the final performance but will slow down the optimization and bring more hyper-parameter tunings. In this paper, we first study theoretically why the learning rate warm-up stage is essential and show that the location of layer normalization matters. Specifically, we prove with mean field theory that at initialization, for the original-designed Post-LN Transformer, which places the layer normalization between the residual blocks, the expected gradients of the parameters near the output layer are large. Therefore, using a large learning rate on those gradients makes the training unstable. The warm-up stage is practically helpful for avoiding this problem. On the other hand, our theory also shows that if the layer normalization is put inside the residual blocks (recently proposed as Pre-LN Transformer), the gradients are well-behaved at initialization. This motivates us to remove the warm-up stage for the training of Pre-LN Transformers. We show in our experiments that Pre-LN Transformers without the warm-up stage can reach comparable results with baselines while requiring significantly less training time and hyper-parameter tuning on a wide range of applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-12T00:33:03Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Published on ICML 2020</arxiv:journal_ref>
+    <author>
+      <name>Ruibin Xiong</name>
+    </author>
+    <author>
+      <name>Yunchang Yang</name>
+    </author>
+    <author>
+      <name>Di He</name>
+    </author>
+    <author>
+      <name>Kai Zheng</name>
+    </author>
+    <author>
+      <name>Shuxin Zheng</name>
+    </author>
+    <author>
+      <name>Chen Xing</name>
+    </author>
+    <author>
+      <name>Huishuai Zhang</name>
+    </author>
+    <author>
+      <name>Yanyan Lan</name>
+    </author>
+    <author>
+      <name>Liwei Wang</name>
+    </author>
+    <author>
+      <name>Tie-Yan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2206.00330v2</id>
+    <title>B2T Connection: Serving Stability and Performance in Deep Transformers</title>
+    <updated>2023-05-26T09:16:22Z</updated>
+    <link href="https://arxiv.org/abs/2206.00330v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2206.00330v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>From the perspective of the layer normalization (LN) positions, the architectures of Transformers can be categorized into two types: Post-LN and Pre-LN. Recent Transformers tend to be Pre-LN because, in Post-LN with deep Transformers (e.g., those with ten or more layers), the training is often unstable, resulting in useless models. However, Post-LN has consistently achieved better performance than Pre-LN in relatively shallow Transformers (e.g., those with six or fewer layers). This study first investigates the reason for these discrepant observations empirically and theoretically and made the following discoveries: 1, the LN in Post-LN is the main source of the vanishing gradient problem that leads to unstable training, whereas Pre-LN prevents it, and 2, Post-LN tends to preserve larger gradient norms in higher layers during the back-propagation, which may lead to effective training. Exploiting the new findings, we propose a method that can provide both high stability and effective training by a simple modification of Post-LN. We conduct experiments on a wide range of text generation tasks. The experimental results demonstrate that our method outperforms Pre-LN, and enables stable training regardless of the shallow or deep layer settings. Our code is publicly available at https://github.com/takase/b2t_connection.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-01T08:43:20Z</published>
+    <arxiv:comment>Findings of ACL 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sho Takase</name>
+    </author>
+    <author>
+      <name>Shun Kiyono</name>
+    </author>
+    <author>
+      <name>Sosuke Kobayashi</name>
+    </author>
+    <author>
+      <name>Jun Suzuki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.00213v5</id>
+    <title>Gradient Heterogeneity Complements Hessian Heterogeneity in Transformer Optimization</title>
+    <updated>2026-08-17T21:08:01Z</updated>
+    <link href="https://arxiv.org/abs/2502.00213v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.00213v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers are difficult to optimize with stochastic gradient descent (SGD) and largely rely on adaptive optimizers such as Adam. Despite extensive efforts, the mechanisms behind Adam's advantage over SGD in Transformer optimization are still not fully understood. In this study, we analyze the optimization of Transformer models in the fine-tuning setting through the lens of gradient heterogeneity, defined as the variation in gradient norms across parameter blocks. We provide a theoretical analysis showing that gradient heterogeneity, together with Hessian heterogeneity, degrades the convergence of gradient-based methods such as SGD, while sign-based methods are substantially less sensitive to this effect. Adam and SignSGD both perform coordinate-wise updates and are less sensitive to the scale of individual gradient coordinates than SGD. This motivates our use of SignSGD as an analytically tractable proxy for Adam-like behavior. Our analysis uses the fact that SGD and SignSGD follow steepest descent directions under different norms, and derives upper bounds on the iteration complexity with implications for learning-rate scaling for SignSGD. We further investigate the origin of gradient heterogeneity in Transformer architectures and show that it is strongly influenced by the placement of layer normalization, with Post-LN architectures exhibiting particularly pronounced heterogeneity. Experimental results from fine-tuning Transformers in both NLP and vision domains validate our theoretical analysis.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-01-31T23:05:52Z</published>
+    <arxiv:comment>TMLR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Akiyoshi Tomihari</name>
+    </author>
+    <author>
+      <name>Issei Sato</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.09635v2</id>
+    <title>Transformers Get Stable: An End-to-End Signal Propagation Theory for Language Models</title>
+    <updated>2024-07-18T17:59:35Z</updated>
+    <link href="https://arxiv.org/abs/2403.09635v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.09635v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In spite of their huge success, transformer models remain difficult to scale in depth. In this work, we develop a unified signal propagation theory and provide formulae that govern the moments of the forward and backward signal through the transformer model. Our framework can be used to understand and mitigate vanishing/exploding gradients, rank collapse, and instability associated with high attention scores. We also propose DeepScaleLM, an initialization and scaling scheme that conserves unit output/gradient moments throughout the model, enabling the training of very deep models with 1000 layers. We find that transformer models could be much deeper - our deep models with fewer parameters outperform shallow models in Language Modeling, Speech Translation, and Image Classification, across encoder-only, decoder-only and encoder-decoder variants, for both Pre-LN and Post-LN transformers, for multiple datasets and model sizes. These improvements also translate into improved performance on downstream Question Answering tasks and improved robustness for Image Classification.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-14T17:59:14Z</published>
+    <arxiv:comment>Accepted at ICML 2024. Source code is available at https://github.com/akhilkedia/TranformersGetStable. Akhil Kedia, Mohd Abbas Zaidi, Sushil Khyalia equal contribution</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Akhil Kedia</name>
+    </author>
+    <author>
+      <name>Mohd Abbas Zaidi</name>
+    </author>
+    <author>
+      <name>Sushil Khyalia</name>
+    </author>
+    <author>
+      <name>Jungho Jung</name>
+    </author>
+    <author>
+      <name>Harshith Goka</name>
+    </author>
+    <author>
+      <name>Haejun Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.13491v2</id>
+    <title>DeepLoop: Depth Scaling for Looped Transformers</title>
+    <updated>2026-08-06T21:43:12Z</updated>
+    <link href="https://arxiv.org/abs/2607.13491v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.13491v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Looped Transformers scale sequential computation by applying a compact stack of physical blocks for multiple rounds, increasing unrolled depth without increasing stored parameters. This reuse changes the residual-scaling problem: in an untied Transformer, each residual branch receives and applies its own parameter update, whereas in a looped Transformer one shared update aggregates gradients from repeated visits and is read back by those same visits in the next linearized forward pass. We formalize this tied-depth effect through a first-order perturbation bound controlled by a visit-alignment coefficient $κ_R$. The bound recovers the DeepNorm exponent when visits decorrelate, but in the conservative aligned regime it requires the exponent to increase from $1/4$ to $1/2$ as loop count grows at fixed physical depth. The resulting method, \textbf{DeepLoop}, keeps the Post-LN DeepNorm architecture and sets $α=(2N)^{1/2}$ and $β=(8N)^{-1/2}$ for unrolled depth $N$. On GPT-style looped language models at GPT-2 small and GPT-2 medium scale, DeepLoop is neutral when no physical block is revisited and improves validation loss and downstream accuracy once recurrent depth is activated. These results show that stable recurrent depth requires residual scaling rules that account for parameter visits, not only nominal layer count.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-15T06:37:05Z</published>
+    <arxiv:comment>25 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shuzhen Li</name>
+    </author>
+    <author>
+      <name>Yifan Zhang</name>
+    </author>
+    <author>
+      <name>Jiacheng Guo</name>
+    </author>
+    <author>
+      <name>Quanquan Gu</name>
+    </author>
+    <author>
+      <name>Mengdi Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.00555v1</id>
+    <title>DeepNet: Scaling Transformers to 1,000 Layers</title>
+    <updated>2022-03-01T15:36:38Z</updated>
+    <link href="https://arxiv.org/abs/2203.00555v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.00555v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we propose a simple yet effective method to stabilize extremely deep Transformers. Specifically, we introduce a new normalization function (DeepNorm) to modify the residual connection in Transformer, accompanying with theoretically derived initialization. In-depth theoretical analysis shows that model updates can be bounded in a stable way. The proposed method combines the best of two worlds, i.e., good performance of Post-LN and stable training of Pre-LN, making DeepNorm a preferred alternative. We successfully scale Transformers up to 1,000 layers (i.e., 2,500 attention and feed-forward network sublayers) without difficulty, which is one order of magnitude deeper than previous deep Transformers. Remarkably, on a multilingual benchmark with 7,482 translation directions, our 200-layer model with 3.2B parameters significantly outperforms the 48-layer state-of-the-art model with 12B parameters by 5 BLEU points, which indicates a promising scaling direction.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-01T15:36:38Z</published>
+    <arxiv:comment>Work in progress</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Hongyu Wang</name>
+    </author>
+    <author>
+      <name>Shuming Ma</name>
+    </author>
+    <author>
+      <name>Li Dong</name>
+    </author>
+    <author>
+      <name>Shaohan Huang</name>
+    </author>
+    <author>
+      <name>Dongdong Zhang</name>
+    </author>
+    <author>
+      <name>Furu Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.02732v3</id>
+    <title>Peri-LN: Revisiting Normalization Layer in the Transformer Architecture</title>
+    <updated>2025-06-06T11:19:11Z</updated>
+    <link href="https://arxiv.org/abs/2502.02732v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.02732v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Selecting a layer normalization (LN) strategy that stabilizes training and speeds convergence in Transformers remains difficult, even for today's large language models (LLM). We present a comprehensive analytical foundation for understanding how different LN strategies influence training dynamics in large-scale Transformers. Until recently, Pre-LN and Post-LN have long dominated practices despite their limitations in large-scale training. However, several open-source models have recently begun silently adopting a third strategy without much explanation. This strategy places normalization layer peripherally around sublayers, a design we term Peri-LN. While Peri-LN has demonstrated promising performance, its precise mechanisms and benefits remain almost unexplored. Our in-depth analysis delineates the distinct behaviors of LN strategies, showing how each placement shapes activation variance and gradient propagation. To validate our theoretical insight, we conduct extensive experiments on Transformers up to $3.2$B parameters, showing that Peri-LN consistently achieves more balanced variance growth, steadier gradient flow, and convergence stability. Our results suggest that Peri-LN warrants broader consideration for large-scale Transformer architectures, providing renewed insights into the optimal placement of LN.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-04T21:29:47Z</published>
+    <arxiv:comment>ICML2025 Camera-ready version</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jeonghoon Kim</name>
+    </author>
+    <author>
+      <name>Byeongchan Lee</name>
+    </author>
+    <author>
+      <name>Cheonbok Park</name>
+    </author>
+    <author>
+      <name>Yeontaek Oh</name>
+    </author>
+    <author>
+      <name>Beomjun Kim</name>
+    </author>
+    <author>
+      <name>Taehwan Yoo</name>
+    </author>
+    <author>
+      <name>Seongjin Shin</name>
+    </author>
+    <author>
+      <name>Dongyoon Han</name>
+    </author>
+    <author>
+      <name>Jinwoo Shin</name>
+    </author>
+    <author>
+      <name>Kang Min Yoo</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.19895v2</id>
+    <title>Post-LayerNorm Is Back: Stable, ExpressivE, and Deep</title>
+    <updated>2026-01-30T03:44:40Z</updated>
+    <link href="https://arxiv.org/abs/2601.19895v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.19895v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language model (LLM) scaling is hitting a wall. Widening models yields diminishing returns, and extending context length does not improve fundamental expressivity. In contrast, depth scaling offers theoretically superior expressivity, yet current Transformer architectures struggle to train reliably at extreme depths. We revisit the Post-LayerNorm (Post-LN) formulation, whose instability at scale caused its replacement by Pre-LN in modern LLMs. We show that the central failure mode of Post-LN arises from the ResNet-style residual pathway, which introduces gradient vanishing in deep networks. We present Keel, a Post-LN Transformer that replaces this residual path with a Highway-style connection. This modification preserves the gradient flow through the residual branch, preventing signal vanishing from the top layers to the bottom. Unlike prior methods, Keel enables stable training at extreme depths without requiring specialized initialization or complex optimization tricks. Keel trains robustly at depths exceeding 1000 layers and consistently improves perplexity and depth-scaling characteristics over Pre-LN. These findings indicate that Post-LN, when paired with a Highway-style connection, provides a simple and effective foundation for building deeply scalable LLMs, opening the possibility for future infinite-depth architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-27T18:58:46Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Chen Chen</name>
+    </author>
+    <author>
+      <name>Lai Wei</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.22026v2</id>
+    <title>Normalization in Attention Dynamics</title>
+    <updated>2025-11-11T18:40:41Z</updated>
+    <link href="https://arxiv.org/abs/2510.22026v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.22026v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the effect of normalization schemes on token representations in deep transformers. Modeling their evolution as interacting particles on the sphere, we show that normalization acts as a form of speed regulation. This perspective enables a unified analysis of several schemes -- including Post-LN, Pre-LN, Mix-LN, Peri-LN, nGPT -- revealing how they influence clustering dynamics and representation collapse. Our framework clarifies how different schemes shape token representations across layers and provides a principled basis for comparing them, identifying Peri-LN as a particularly effective choice.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-24T21:10:16Z</published>
+    <arxiv:comment>39th Conference on Neural Information Processing Systems (NeurIPS 2025), 23 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nikita Karagodin</name>
+    </author>
+    <author>
+      <name>Shu Ge</name>
+    </author>
+    <author>
+      <name>Yury Polyanskiy</name>
+    </author>
+    <author>
+      <name>Philippe Rigollet</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.03190v2</id>
+    <title>Gradient Boosting within a Single Attention Layer</title>
+    <updated>2026-05-03T22:02:33Z</updated>
+    <link href="https://arxiv.org/abs/2604.03190v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.03190v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer attention computes a single softmax-weighted average over values -- a one-pass estimate that cannot correct its own errors. We introduce \emph{gradient-boosted attention}, which applies the principle of gradient boosting \emph{within} a single attention layer: a second attention pass, with its own learned projections, attends to the prediction error of the first and applies a gated correction. Under a squared reconstruction objective, the construction maps onto Friedman's gradient boosting machine, with each attention pass as a base learner and the per-dimension gate as the shrinkage parameter. We show that a single Hopfield-style update erases all query information orthogonal to the stored-pattern subspace, and that further iteration under local contraction can collapse distinct queries in the same region to the same fixed point. We also show that separate projections for the correction pass can recover residual information inaccessible to the shared-projection approach of Tukey's twicing. On 10M-token subsets of WikiText-103 and OpenWebText, gradient-boosted attention improves test perplexity by $6.0\%$ and $5.6\%$ over standard attention, outperforming both Twicing Attention and a parameter-matched wider baseline on both benchmarks, with two rounds capturing most of the benefit. We further show, both theoretically and empirically, that the mechanism requires the additive residual structure of Pre-LN transformers: under Post-LN, the same architecture degrades perplexity by $9.6\%$.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-03T17:06:08Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Saleh Sargolzaei</name>
+    </author>
+  </entry>
+</feed>

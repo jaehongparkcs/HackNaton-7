@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/lOjsUK1iQpnnnYvxTOUpPeSjFKY</id>
+  <title>arXiv Query: search_query=all:"positional encoding" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=7</title>
+  <updated>2026-10-03T22:48:08Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22positional+encoding%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=7&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>7</opensearch:itemsPerPage>
+  <opensearch:totalResults>878</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2307.09270v1</id>
+    <title>Linearized Relative Positional Encoding</title>
+    <updated>2023-07-18T13:56:43Z</updated>
+    <link href="https://arxiv.org/abs/2307.09270v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.09270v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Relative positional encoding is widely used in vanilla and linear transformers to represent positional information. However, existing encoding methods of a vanilla transformer are not always directly applicable to a linear transformer, because the latter requires a decomposition of the query and key representations into separate kernel functions. Nevertheless, principles for designing encoding methods suitable for linear transformers remain understudied. In this work, we put together a variety of existing linear relative positional encoding approaches under a canonical form and further propose a family of linear relative positional encoding algorithms via unitary transformation. Our formulation leads to a principled framework that can be used to develop new relative positional encoding methods that preserve linear space-time complexity. Equipped with different models, the proposed linearized relative positional encoding (LRPE) family derives effective encoding for various applications. Experiments show that compared with existing methods, LRPE achieves state-of-the-art performance in language modeling, text classification, and image classification. Meanwhile, it emphasizes a general paradigm for designing broadly more relative positional encoding methods that are applicable to linear transformers. The code is available at https://github.com/OpenNLPLab/Lrpe.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-18T13:56:43Z</published>
+    <arxiv:comment>Reviewed by TMLR, decision pending. Yiran Zhong is the corresponding author. Code is available at https://github.com/OpenNLPLab/Lrpe</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhen Qin</name>
+    </author>
+    <author>
+      <name>Weixuan Sun</name>
+    </author>
+    <author>
+      <name>Kaiyue Lu</name>
+    </author>
+    <author>
+      <name>Hui Deng</name>
+    </author>
+    <author>
+      <name>Dongxu Li</name>
+    </author>
+    <author>
+      <name>Xiaodong Han</name>
+    </author>
+    <author>
+      <name>Yuchao Dai</name>
+    </author>
+    <author>
+      <name>Lingpeng Kong</name>
+    </author>
+    <author>
+      <name>Yiran Zhong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2107.02561v3</id>
+    <title>Rethinking Positional Encoding</title>
+    <updated>2021-10-11T22:39:59Z</updated>
+    <link href="https://arxiv.org/abs/2107.02561v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.02561v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>It is well noted that coordinate based MLPs benefit -- in terms of preserving high-frequency information -- through the encoding of coordinate positions as an array of Fourier features. Hitherto, the rationale for the effectiveness of these positional encodings has been solely studied through a Fourier lens. In this paper, we strive to broaden this understanding by showing that alternative non-Fourier embedding functions can indeed be used for positional encoding. Moreover, we show that their performance is entirely determined by a trade-off between the stable rank of the embedded matrix and the distance preservation between embedded coordinates. We further establish that the now ubiquitous Fourier feature mapping of position is a special case that fulfills these conditions. Consequently, we present a more general theory to analyze positional encoding in terms of shifted basis functions. To this end, we develop the necessary theoretical formulae and empirically verify that our theoretical claims hold in practice. Codes available at https://github.com/osiriszjq/Rethinking-positional-encoding.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-06T12:04:04Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianqiao Zheng</name>
+    </author>
+    <author>
+      <name>Sameera Ramasinghe</name>
+    </author>
+    <author>
+      <name>Simon Lucey</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.00236v5</id>
+    <title>Positional Encoding Helps Recurrent Neural Networks Handle a Large Vocabulary</title>
+    <updated>2024-11-09T10:36:00Z</updated>
+    <link href="https://arxiv.org/abs/2402.00236v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.00236v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This study reports an unintuitive finding that positional encoding enhances learning of recurrent neural networks (RNNs). Positional encoding is a high-dimensional representation of time indices on input data. Most famously, positional encoding complements the capabilities of Transformer neural networks, which lack an inherent mechanism for representing the data order. By contrast, RNNs can encode the temporal information of data points on their own, rendering their use of positional encoding seemingly redundant/unnecessary. Nonetheless, investigations through synthetic benchmarks reveal an advantage of coupling positional encoding and RNNs, especially for handling a large vocabulary that yields low-frequency tokens. Further scrutinization unveils that these low-frequency tokens destabilizes the gradients of vanilla RNNs, and the positional encoding resolves this instability. These results shed a new light on the utility of positional encoding beyond its canonical role as a timekeeper for Transformers.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-31T23:32:20Z</published>
+    <arxiv:comment>Accepted in TMLR. Added a URL link to the official code and fixed a typo</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>TMLR (2024) PtnwXd13SF</arxiv:journal_ref>
+    <author>
+      <name>Takashi Morita</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.24167v1</id>
+    <title>PEPS: Positional Encoding Projected Sampling -- Extended</title>
+    <updated>2026-04-27T08:23:39Z</updated>
+    <link href="https://arxiv.org/abs/2604.24167v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.24167v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Implicit neural representations (INRs) are increasingly being used as tools to map coordinates to signals, encompassing applications from neural fields to texture compression, shape representations, and beyond. Most INR methods are based on using high-dimensional projections of the initial coordinates through encoders such as grid or positional encoding. Nevertheless, positional encoding is often insufficient and grids, as we show in this paper, require high resolution for being able to learn. In this paper, we demonstrate that positional encoding can be used not only as a high-dimensional embedding but also decomposed as a series of meaningful points. We propose the Positional Encoding Projected Sampling, where we treat the projection of the original coordinate at each frequency as a point of interest. We describe the motion of each point with respect to the frequencies and show that it follows a unique pattern. Finally, we use the unique motion of each point as a basis decomposition for doing learned positional encoding using grids. We prove, using three competitive applications; image representation, texture compression, and signed distance function; that the proposed approach outperforms the current state of the art methods, and often requires 25\% less parameters for equivalent reconstruction error or rendering.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-27T08:23:39Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Guillaume Perez</name>
+    </author>
+    <author>
+      <name>Janarbek Matai</name>
+    </author>
+    <author>
+      <name>Takahiro Harada</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14722v6</id>
+    <title>DAPE: Data-Adaptive Positional Encoding for Length Extrapolation</title>
+    <updated>2024-11-05T08:22:00Z</updated>
+    <link href="https://arxiv.org/abs/2405.14722v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14722v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Positional encoding plays a crucial role in transformers, significantly impacting model performance and length generalization. Prior research has introduced absolute positional encoding (APE) and relative positional encoding (RPE) to distinguish token positions in given sequences. However, both APE and RPE remain fixed after model training regardless of input data, limiting their adaptability and flexibility. Hence, we expect that the desired positional encoding should be data-adaptive and can be dynamically adjusted with the given attention. In this paper, we propose a Data-Adaptive Positional Encoding (DAPE) method, which dynamically and semantically adjusts based on input context and learned fixed priors. Experimental validation on real-world datasets (Arxiv, Books3, and CHE) demonstrates that DAPE enhances model performances in terms of trained length and length generalization, where the improvements are statistically significant. The model visualization suggests that our model can keep both local and anti-local information. Finally, we successfully train the model on sequence length 128 and achieve better performance at evaluation sequence length 8192, compared with other static positional encoding methods, revealing the benefit of the adaptive positional encoding method.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T15:51:24Z</published>
+    <arxiv:comment>Accepted to NeurIPS 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Chuanyang Zheng</name>
+    </author>
+    <author>
+      <name>Yihang Gao</name>
+    </author>
+    <author>
+      <name>Han Shi</name>
+    </author>
+    <author>
+      <name>Minbin Huang</name>
+    </author>
+    <author>
+      <name>Jingyao Li</name>
+    </author>
+    <author>
+      <name>Jing Xiong</name>
+    </author>
+    <author>
+      <name>Xiaozhe Ren</name>
+    </author>
+    <author>
+      <name>Michael Ng</name>
+    </author>
+    <author>
+      <name>Xin Jiang</name>
+    </author>
+    <author>
+      <name>Zhenguo Li</name>
+    </author>
+    <author>
+      <name>Yu Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.09061v2</id>
+    <title>Improving Transformers using Faithful Positional Encoding</title>
+    <updated>2024-05-16T06:26:43Z</updated>
+    <link href="https://arxiv.org/abs/2405.09061v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.09061v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose a new positional encoding method for a neural network architecture called the Transformer. Unlike the standard sinusoidal positional encoding, our approach is based on solid mathematical grounds and has a guarantee of not losing information about the positional order of the input sequence. We show that the new encoding approach systematically improves the prediction performance in the time-series classification task.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-15T03:17:30Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:2305.17149</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tsuyoshi Idé</name>
+    </author>
+    <author>
+      <name>Jokin Labaien</name>
+    </author>
+    <author>
+      <name>Pin-Yu Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.08309v2</id>
+    <title>Learnable Spatial-Temporal Positional Encoding for Link Prediction</title>
+    <updated>2025-06-11T03:31:52Z</updated>
+    <link href="https://arxiv.org/abs/2506.08309v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.08309v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate predictions rely on the expressiveness power of graph deep learning frameworks like graph neural networks and graph transformers, where a positional encoding mechanism has become much more indispensable in recent state-of-the-art works to record the canonical position information. However, the current positional encoding is limited in three aspects: (1) most positional encoding methods use pre-defined, and fixed functions, which are inadequate to adapt to the complex attributed graphs; (2) a few pioneering works proposed the learnable positional encoding but are still limited to the structural information, not considering the real-world time-evolving topological and feature information; (3) most positional encoding methods are equipped with transformers' attention mechanism to fully leverage their capabilities, where the dense or relational attention is often unaffordable on large-scale structured data. Hence, we aim to develop Learnable Spatial-Temporal Positional Encoding in an effective and efficient manner and propose a simple temporal link prediction model named L-STEP. Briefly, for L-STEP, we (1) prove the proposed positional learning scheme can preserve the graph property from the spatial-temporal spectral viewpoint, (2) verify that MLPs can fully exploit the expressiveness and reach transformers' performance on that encoding, (3) change different initial positional encoding inputs to show robustness, (4) analyze the theoretical complexity and obtain less empirical running time than SOTA, and (5) demonstrate its temporal link prediction out-performance on 13 classic datasets and with 10 algorithms in both transductive and inductive settings using 3 different sampling strategies. Also, L-STEP obtains the leading performance in the newest large-scale TGB benchmark. Our code is available at https://github.com/kthrn22/L-STEP.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-10T00:35:53Z</published>
+    <arxiv:comment>Accepted by ICML 2025. 28 pages, 1 figures, 22 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Katherine Tieu</name>
+    </author>
+    <author>
+      <name>Dongqi Fu</name>
+    </author>
+    <author>
+      <name>Zihao Li</name>
+    </author>
+    <author>
+      <name>Ross Maciejewski</name>
+    </author>
+    <author>
+      <name>Jingrui He</name>
+    </author>
+  </entry>
+</feed>

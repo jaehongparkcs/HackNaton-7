@@ -34,6 +34,13 @@ def search_url(q: str, niche: NicheSpec, date_to: str, max_results: int) -> str:
         "sortBy": "relevance", "sortOrder": "descending"})
 
 
+def title_url(title: str, max_results: int = 3) -> str:
+    """Title search for a scout title hint. No category/date filter: we only want that paper."""
+    clean = re.sub(r'[^\w\s-]', " ", title)
+    return API + "?" + urllib.parse.urlencode({
+        "search_query": f'ti:"{_ws(clean)}"', "start": 0, "max_results": max_results})
+
+
 def id_list_url(ids: list[str]) -> str:
     return API + "?" + urllib.parse.urlencode({"id_list": ",".join(ids), "max_results": len(ids)})
 

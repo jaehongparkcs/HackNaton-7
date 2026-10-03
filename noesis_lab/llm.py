@@ -39,10 +39,14 @@ class BudgetExceeded(RuntimeError):
 
 
 def strict_schema(model: type[BaseModel]) -> dict:
-    """Pydantic schema with additionalProperties:false on every object (structured outputs)."""
-    def walk(node: Any) -> Any:
+    """Pydantic schema with additionalProperties:false on every object (structured outputs).
+
+    Pydantic's `title` metadata is stripped from schema nodes, but never from a `properties`
+    (or `$defs`) dict, whose keys are field / model names: a field called `title` must survive."""
+    def walk(node: Any, names: bool = False) -> Any:
         if isinstance(node, dict):
-            node = {k: walk(v) for k, v in node.items() if k != "title"}
+            node = {k: walk(v, names=k in ("properties", "$defs")) for k, v in node.items()
+                    if names or k != "title"}
             if node.get("type") == "object":
                 node["additionalProperties"] = False
                 node.setdefault("properties", {})

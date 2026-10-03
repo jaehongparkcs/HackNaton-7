@@ -28,6 +28,7 @@ def dedupe(papers: Sequence[RetrievedPaper]) -> tuple[list[RetrievedPaper], list
         if hit:
             first = by_key[hit]
             first.queries.extend(q for q in p.queries if q not in first.queries)
+            first.directions.extend(d for d in p.directions if d not in first.directions)
             if p.paper_id != first.paper_id:
                 dropped.append({"paper_id": p.paper_id, "title": p.title,
                                 "reason": f"duplicate of {first.paper_id} by {hit[0]}"})
@@ -61,8 +62,8 @@ def _recency(published: str, date_from: str, date_to: str) -> float:
     return min(max((d - a).days / span, 0.0), 1.0) if span > 0 else 0.0
 
 
-def rank(papers: Sequence[RetrievedPaper], niche: NicheSpec, *, date_to: str
-         ) -> tuple[list[RetrievedPaper], list[dict]]:
+def rank(papers: Sequence[RetrievedPaper], niche: NicheSpec, *, date_to: str,
+         max_papers: int | None = None) -> tuple[list[RetrievedPaper], list[dict]]:
     """relevance = 0.6 × TF-IDF cosine(abstract, niche text) + 0.2 × normalized log-citations
     + 0.2 × recency. Keeps the top `max_papers` (curated and seed papers always kept). Ties are
     broken by arXiv id. The components are stored on each paper."""
@@ -80,9 +81,10 @@ def rank(papers: Sequence[RetrievedPaper], niche: NicheSpec, *, date_to: str
     pinned = [p for p in papers if p.source == "curated" or p.paper_id in niche.seed_papers]
     pin_ids = {p.paper_id for p in pinned}
     rest = sorted((p for p in papers if p.paper_id not in pin_ids), key=lambda p: (-p.relevance, p.paper_id))
-    room = max(niche.max_papers - len(pinned), 0)
+    cap = max_papers or niche.max_papers
+    room = max(cap - len(pinned), 0)
     dropped = [{"paper_id": p.paper_id, "title": p.title,
-                "reason": f"ranked below max_papers ({niche.max_papers}); relevance {p.relevance}"}
+                "reason": f"ranked below max_papers ({cap}); relevance {p.relevance}"}
                for p in rest[room:]]
     kept = pinned + rest[:room]
     return sorted(kept, key=lambda p: (-p.relevance, p.paper_id)), dropped

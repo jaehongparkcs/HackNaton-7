@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Htv2Ve31O6hxEfvOjEEBMis7gCw</id>
+  <title>arXiv Query: search_query=all:"squared ReLU" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=5</title>
+  <updated>2026-10-03T22:47:35Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22squared+ReLU%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=5&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:totalResults>12</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2105.11632v1</id>
+    <title>Least-Squares ReLU Neural Network (LSNN) Method For Linear Advection-Reaction Equation</title>
+    <updated>2021-05-25T03:13:15Z</updated>
+    <link href="https://arxiv.org/abs/2105.11632v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.11632v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper studies least-squares ReLU neural network method for solving the linear advection-reaction problem with discontinuous solution. The method is a discretization of an equivalent least-squares formulation in the set of neural network functions with the ReLU activation function. The method is capable of approximating the discontinuous interface of the underlying problem automatically through the free hyper-planes of the ReLU neural network and, hence, outperforms mesh-based numerical methods in terms of the number of degrees of freedom. Numerical results of some benchmark test problems show that the method can not only approximate the solution with the least number of parameters, but also avoid the common Gibbs phenomena along the discontinuous interface. Moreover, a three-layer ReLU neural network is necessary and sufficient in order to well approximate a discontinuous solution with an interface in $\mathbb{R}^2$ that is not a straight line.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-25T03:13:15Z</published>
+    <arxiv:comment>submitted to Journal of Computational Physics</arxiv:comment>
+    <arxiv:primary_category term="math.NA"/>
+    <author>
+      <name>Zhiqiang Cai</name>
+    </author>
+    <author>
+      <name>Jingshuang Chen</name>
+    </author>
+    <author>
+      <name>Min Liu</name>
+    </author>
+    <arxiv:doi>10.1016/j.jcp.2021.110514</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jcp.2021.110514" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.11627v4</id>
+    <title>Least-Squares ReLU Neural Network (LSNN) Method For Scalar Nonlinear Hyperbolic Conservation Law</title>
+    <updated>2022-01-25T04:18:45Z</updated>
+    <link href="https://arxiv.org/abs/2105.11627v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.11627v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduced the least-squares ReLU neural network (LSNN) method for solving the linear advection-reaction problem with discontinuous solution and showed that the method outperforms mesh-based numerical methods in terms of the number of degrees of freedom. This paper studies the LSNN method for scalar nonlinear hyperbolic conservation law. The method is a discretization of an equivalent least-squares (LS) formulation in the set of neural network functions with the ReLU activation function. Evaluation of the LS functional is done by using numerical integration and conservative finite volume scheme. Numerical results of some test problems show that the method is capable of approximating the discontinuous interface of the underlying problem automatically through the free breaking lines of the ReLU neural network. Moreover, the method does not exhibit the common Gibbs phenomena along the discontinuous interface.</summary>
+    <category term="math.NA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-25T02:59:48Z</published>
+    <arxiv:primary_category term="math.NA"/>
+    <arxiv:journal_ref>Published in Applied Numerical Mathematics. 2022</arxiv:journal_ref>
+    <author>
+      <name>Zhiqiang Cai</name>
+    </author>
+    <author>
+      <name>Jingshuang Chen</name>
+    </author>
+    <author>
+      <name>Min Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.03667v1</id>
+    <title>ELAS: Efficient Pre-Training of Low-Rank Large Language Models via 2:4 Activation Sparsity</title>
+    <updated>2026-05-05T12:04:51Z</updated>
+    <link href="https://arxiv.org/abs/2605.03667v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.03667v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have achieved remarkable capabilities, but their immense computational demands during training remain a critical bottleneck for widespread adoption. Low-rank training has received attention in recent years due to its ability to significantly reduce training memory usage. Meanwhile, applying 2:4 structured sparsity to weights and activations to leverage NVIDIA GPU support for 2:4 structured sparse format has become a promising direction. However, existing low-rank methods often leave activation matrices in full-rank, which dominates memory consumption and limits throughput during large-batch training. Furthermore, directly applying sparsity to weights often leads to non-negligible performance degradation. To achieve efficient pre-training of LLMs, this paper proposes ELAS: Efficient pre-training of Low-rank LLMs via 2:4 Activation Sparsity, a novel framework for low-rank models via 2:4 activation sparsity. ELAS applies squared ReLU activation functions to the feed-forward networks in low-rank models and implements 2:4 structured sparsity on the activations after the squared ReLU operation. We evaluated ELAS through pre-training experiments on LLaMA models ranging from 60M to 1B parameters. The results demonstrate that ELAS maintains performance with minimal degradation after applying 2:4 activation sparsity, while achieving training and inference acceleration. Moreover, ELAS reduces activation memory overhead, particularly with large batch sizes. Code is available at ELAS Repo.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-05T12:04:51Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiaxi Li</name>
+    </author>
+    <author>
+      <name>Lu Yin</name>
+    </author>
+    <author>
+      <name>Li Shen</name>
+    </author>
+    <author>
+      <name>Jinjin Xu</name>
+    </author>
+    <author>
+      <name>Yuhui Liu</name>
+    </author>
+    <author>
+      <name>Wenwu Wang</name>
+    </author>
+    <author>
+      <name>Shiwei Liu</name>
+    </author>
+    <author>
+      <name>Xilu Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.13010v3</id>
+    <title>Deriving Activation Functions Using Integration</title>
+    <updated>2025-01-31T19:28:05Z</updated>
+    <link href="https://arxiv.org/abs/2411.13010v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.13010v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Our work proposes a novel approach to designing activation functions by focusing on their gradients and deriving the corresponding activation functions using integration. We introduce the Expanded Integral of the Exponential Linear Unit (xIELU), a trainable piecewise activation function derived by integrating trainable affine transformations applied to the Exponential Linear Unit (ELU). xIELU combines two key properties for the gradient: (1) a trainable and linearly increasing gradient for positive inputs, similar to Squared ReLU (ReLU$^2$), and (2) a trainable gradient that can take negative values for negative inputs, inspired by Expanded SiLU (xSiLU). Conceptually, xIELU can be viewed as an extension of ReLU$^2$ to handle negative inputs. The trainable parameters in xIELU allow it to adaptively reduce its nonlinearity for higher-level representations deeper in the network. In experiments with 1.1B and 3B parameter Llama models trained on 125B tokens of FineWeb Edu, xIELU achieves lower perplexity compared to popular activation functions like ReLU$^2$ and SwiGLU when matched for the same compute cost and parameter count. A reference implementation is available at https://github.com/Anonymous5823/xielu.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-20T03:24:21Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Allen Hao Huang</name>
+    </author>
+    <author>
+      <name>Imanol Schlag</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.03440v1</id>
+    <title>Learning Non-overlapping Convolutional Neural Networks with Multiple Kernels</title>
+    <updated>2017-11-08T14:45:31Z</updated>
+    <link href="https://arxiv.org/abs/1711.03440v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.03440v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we consider parameter recovery for non-overlapping convolutional neural networks (CNNs) with multiple kernels. We show that when the inputs follow Gaussian distribution and the sample size is sufficiently large, the squared loss of such CNNs is $\mathit{~locally~strongly~convex}$ in a basin of attraction near the global optima for most popular activation functions, like ReLU, Leaky ReLU, Squared ReLU, Sigmoid and Tanh. The required sample complexity is proportional to the dimension of the input and polynomial in the number of kernels and a condition number of the parameters. We also show that tensor methods are able to initialize the parameters to the local strong convex region. Hence, for most smooth activations, gradient descent following tensor initialization is guaranteed to converge to the global optimal with time that is linear in input dimension, logarithmic in precision and polynomial in other factors. To the best of our knowledge, this is the first work that provides recovery guarantees for CNNs with multiple kernels under polynomial sample and computational complexities.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-11-08T14:45:31Z</published>
+    <arxiv:comment>arXiv admin note: text overlap with arXiv:1706.03175</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kai Zhong</name>
+    </author>
+    <author>
+      <name>Zhao Song</name>
+    </author>
+    <author>
+      <name>Inderjit S. Dhillon</name>
+    </author>
+  </entry>
+</feed>
