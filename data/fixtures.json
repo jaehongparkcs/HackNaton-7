@@ -1,0 +1,117 @@
+{
+  "note": "Predefined test hypotheses (fixtures), NOT measurements. 'mock' is used only by the offline mock LLM.",
+  "fixtures": [
+    {
+      "fixture_id": "fixture_a_preln_nowarmup",
+      "kind": "known_in_corpus",
+      "title": "Pre-LN trains without warm-up (known)",
+      "statement": "Placing the layer normalization inside the residual branch (Pre-LN) lets a Transformer train stably without a learning-rate warm-up stage and reach results comparable to the Post-LN baseline.",
+      "allowed_fields": [
+        "norm_position",
+        "warmup_frac"
+      ],
+      "cited_claim_ids": [
+        "c01",
+        "c02"
+      ],
+      "mock": {
+        "verdict": "known_in_corpus",
+        "claim_id": "c01",
+        "rationale": "Claim c01 reports exactly this comparison for Transformers."
+      }
+    },
+    {
+      "fixture_id": "fixture_b_rmsnorm",
+      "kind": "untested_setting",
+      "title": "RMSNorm vs LayerNorm, tiny char-level LM, 60 s budget",
+      "statement": "Replacing LayerNorm with RMSNorm lowers the validation loss of a tiny character-level Transformer language model trained for a fixed ~60 second wall-clock budget.",
+      "allowed_fields": [
+        "norm"
+      ],
+      "cited_claim_ids": [
+        "c04"
+      ],
+      "mock": {
+        "verdict": "method_known_setting_untested",
+        "claim_id": "c04",
+        "rationale": "RMSNorm is reported on other tasks and architectures; no tiny char-level fixed-time setting in the snapshot.",
+        "config_changes": [
+          {
+            "field": "norm",
+            "value": "rmsnorm"
+          }
+        ]
+      }
+    },
+    {
+      "fixture_id": "followup_swiglu",
+      "kind": "followup_candidate",
+      "title": "SwiGLU feed-forward, tiny char-level LM",
+      "statement": "Replacing the GELU feed-forward block with a SwiGLU block lowers the validation loss of a tiny character-level Transformer trained for a fixed ~60 second wall-clock budget.",
+      "allowed_fields": [
+        "activation"
+      ],
+      "cited_claim_ids": [
+        "c09"
+      ],
+      "mock": {
+        "verdict": "method_known_setting_untested",
+        "claim_id": "c09",
+        "rationale": "GLU variants are reported for seq2seq Transformers, not this regime.",
+        "config_changes": [
+          {
+            "field": "activation",
+            "value": "swiglu"
+          }
+        ]
+      }
+    },
+    {
+      "fixture_id": "followup_relu2",
+      "kind": "followup_candidate",
+      "title": "Squared ReLU, tiny char-level LM",
+      "statement": "Replacing GELU with squared ReLU in the feed-forward block lowers the validation loss of a tiny character-level Transformer trained for a fixed ~60 second wall-clock budget.",
+      "allowed_fields": [
+        "activation"
+      ],
+      "cited_claim_ids": [
+        "c10",
+        "c11"
+      ],
+      "mock": {
+        "verdict": "method_known_setting_untested",
+        "claim_id": "c10",
+        "rationale": "Reported at 500M-1.9B parameters, not this regime.",
+        "config_changes": [
+          {
+            "field": "activation",
+            "value": "relu2"
+          }
+        ]
+      }
+    },
+    {
+      "fixture_id": "followup_rope",
+      "kind": "followup_candidate",
+      "title": "RoPE vs learned positions, tiny char-level LM",
+      "statement": "Replacing learned absolute position embeddings with rotary position embeddings (RoPE) lowers the validation loss of a tiny character-level Transformer trained for a fixed ~60 second wall-clock budget.",
+      "allowed_fields": [
+        "pos_encoding"
+      ],
+      "cited_claim_ids": [
+        "c12"
+      ],
+      "mock": {
+        "verdict": "method_known_setting_untested",
+        "claim_id": "c12",
+        "rationale": "Reported on long text classification, not this regime.",
+        "config_changes": [
+          {
+            "field": "pos_encoding",
+            "value": "rope"
+          }
+        ]
+      }
+    }
+  ]
+}

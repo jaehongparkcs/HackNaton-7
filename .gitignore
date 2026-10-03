@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.ruff_cache/
+work/
+*.sqlite-wal
+*.sqlite-shm
+results/smoke/
+results/pytest-smoke/
+results/mps-mock/

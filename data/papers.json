@@ -1,0 +1,147 @@
+{
+  "source": "arXiv API (export.arxiv.org), abstracts only",
+  "fetched": "2026-10-03",
+  "papers": [
+    {
+      "paper_id": "2002.04745",
+      "title": "On Layer Normalization in the Transformer Architecture",
+      "authors": [
+        "Ruibin Xiong",
+        "Yunchang Yang",
+        "Di He",
+        "Kai Zheng",
+        "Shuxin Zheng",
+        "Chen Xing",
+        "Huishuai Zhang",
+        "Yanyan Lan",
+        "Liwei Wang",
+        "Tie-Yan Liu"
+      ],
+      "published": "2020-02-12",
+      "url": "https://arxiv.org/abs/2002.04745",
+      "abstract": "The Transformer is widely used in natural language processing tasks. To train a Transformer however, one usually needs a carefully designed learning rate warm-up stage, which is shown to be crucial to the final performance but will slow down the optimization and bring more hyper-parameter tunings. In this paper, we first study theoretically why the learning rate warm-up stage is essential and show that the location of layer normalization matters. Specifically, we prove with mean field theory that at initialization, for the original-designed Post-LN Transformer, which places the layer normalization between the residual blocks, the expected gradients of the parameters near the output layer are large. Therefore, using a large learning rate on those gradients makes the training unstable. The warm-up stage is practically helpful for avoiding this problem. On the other hand, our theory also shows that if the layer normalization is put inside the residual blocks (recently proposed as Pre-LN Transformer), the gradients are well-behaved at initialization. This motivates us to remove the warm-up stage for the training of Pre-LN Transformers. We show in our experiments that Pre-LN Transformers without the warm-up stage can reach comparable results with baselines while requiring significantly less training time and hyper-parameter tuning on a wide range of applications.",
+      "abstract_sha256": "d64bdaa99b7e18716cacd7ea2f21a50edaf22d02c72ee20cac8019f495bfb73c"
+    },
+    {
+      "paper_id": "2004.08249",
+      "title": "Understanding the Difficulty of Training Transformers",
+      "authors": [
+        "Liyuan Liu",
+        "Xiaodong Liu",
+        "Jianfeng Gao",
+        "Weizhu Chen",
+        "Jiawei Han"
+      ],
+      "published": "2020-04-17",
+      "url": "https://arxiv.org/abs/2004.08249",
+      "abstract": "Transformers have proved effective in many NLP tasks. However, their training requires non-trivial efforts regarding designing cutting-edge optimizers and learning rate schedulers carefully (e.g., conventional SGD fails to train Transformers effectively). Our objective here is to understand $\\textit{what complicates Transformer training}$ from both empirical and theoretical perspectives. Our analysis reveals that unbalanced gradients are not the root cause of the instability of training. Instead, we identify an amplification effect that influences training substantially -- for each layer in a multi-layer Transformer model, heavy dependency on its residual branch makes training unstable, since it amplifies small parameter perturbations (e.g., parameter updates) and results in significant disturbances in the model output. Yet we observe that a light dependency limits the model potential and leads to inferior trained models. Inspired by our analysis, we propose Admin ($\\textbf{Ad}$aptive $\\textbf{m}$odel $\\textbf{in}$itialization) to stabilize stabilize the early stage's training and unleash its full potential in the late stage. Extensive experiments show that Admin is more stable, converges faster, and leads to better performance. Implementations are released at: https://github.com/LiyuanLucasLiu/Transforemr-Clinic.",
+      "abstract_sha256": "afef94e8042ebc6b13bf1abacd5bda71ce164003fdd7f35789362e0fd63bbdcf"
+    },
+    {
+      "paper_id": "1910.07467",
+      "title": "Root Mean Square Layer Normalization",
+      "authors": [
+        "Biao Zhang",
+        "Rico Sennrich"
+      ],
+      "published": "2019-10-16",
+      "url": "https://arxiv.org/abs/1910.07467",
+      "abstract": "Layer normalization (LayerNorm) has been successfully applied to various deep neural networks to help stabilize training and boost model convergence because of its capability in handling re-centering and re-scaling of both inputs and weight matrix. However, the computational overhead introduced by LayerNorm makes these improvements expensive and significantly slows the underlying network, e.g. RNN in particular. In this paper, we hypothesize that re-centering invariance in LayerNorm is dispensable and propose root mean square layer normalization, or RMSNorm. RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability. RMSNorm is computationally simpler and thus more efficient than LayerNorm. We also present partial RMSNorm, or pRMSNorm where the RMS is estimated from p% of the summed inputs without breaking the above properties. Extensive experiments on several tasks using diverse network architectures show that RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%~64% on different models. Source code is available at https://github.com/bzhangGo/rmsnorm.",
+      "abstract_sha256": "26b519667041a5c0f732121c4d0b78d164f8acc07b198abb8d9bc24e3669eb32"
+    },
+    {
+      "paper_id": "1608.03983",
+      "title": "SGDR: Stochastic Gradient Descent with Warm Restarts",
+      "authors": [
+        "Ilya Loshchilov",
+        "Frank Hutter"
+      ],
+      "published": "2016-08-13",
+      "url": "https://arxiv.org/abs/1608.03983",
+      "abstract": "Restart techniques are common in gradient-free optimization to deal with multimodal functions. Partial warm restarts are also gaining popularity in gradient-based optimization to improve the rate of convergence in accelerated gradient schemes to deal with ill-conditioned functions. In this paper, we propose a simple warm restart technique for stochastic gradient descent to improve its anytime performance when training deep neural networks. We empirically study its performance on the CIFAR-10 and CIFAR-100 datasets, where we demonstrate new state-of-the-art results at 3.14% and 16.21%, respectively. We also demonstrate its advantages on a dataset of EEG recordings and on a downsampled version of the ImageNet dataset. Our source code is available at https://github.com/loshchil/SGDR",
+      "abstract_sha256": "242490fff0818178a0534eb4cc60595b2fdca3da9546b95dfb75f935057abd62"
+    },
+    {
+      "paper_id": "1711.05101",
+      "title": "Decoupled Weight Decay Regularization",
+      "authors": [
+        "Ilya Loshchilov",
+        "Frank Hutter"
+      ],
+      "published": "2017-11-14",
+      "url": "https://arxiv.org/abs/1711.05101",
+      "abstract": "L$_2$ regularization and weight decay regularization are equivalent for standard stochastic gradient descent (when rescaled by the learning rate), but as we demonstrate this is \\emph{not} the case for adaptive gradient algorithms, such as Adam. While common implementations of these algorithms employ L$_2$ regularization (often calling it \"weight decay\" in what may be misleading due to the inequivalence we expose), we propose a simple modification to recover the original formulation of weight decay regularization by \\emph{decoupling} the weight decay from the optimization steps taken w.r.t. the loss function. We provide empirical evidence that our proposed modification (i) decouples the optimal choice of weight decay factor from the setting of the learning rate for both standard SGD and Adam and (ii) substantially improves Adam's generalization performance, allowing it to compete with SGD with momentum on image classification datasets (on which it was previously typically outperformed by the latter). Our proposed decoupled weight decay has already been adopted by many researchers, and the community has implemented it in TensorFlow and PyTorch; the complete source code for our experiments is available at https://github.com/loshchil/AdamW-and-SGDW",
+      "abstract_sha256": "7105b7c806fec08edfed66213dcd2d0f1c58b2880fab06d9a7eccfa6d1016be1"
+    },
+    {
+      "paper_id": "1606.08415",
+      "title": "Gaussian Error Linear Units (GELUs)",
+      "authors": [
+        "Dan Hendrycks",
+        "Kevin Gimpel"
+      ],
+      "published": "2016-06-27",
+      "url": "https://arxiv.org/abs/1606.08415",
+      "abstract": "We propose the Gaussian Error Linear Unit (GELU), a high-performing neural network activation function. The GELU activation function is $xΦ(x)$, where $Φ(x)$ the standard Gaussian cumulative distribution function. The GELU nonlinearity weights inputs by their value, rather than gates inputs by their sign as in ReLUs ($x\\mathbf{1}_{x>0}$). We perform an empirical evaluation of the GELU nonlinearity against the ReLU and ELU activations and find performance improvements across all considered computer vision, natural language processing, and speech tasks.",
+      "abstract_sha256": "769b8a214e3c1dc5c34686f6a015bec9d7d7038685cc5dd7487ef5e26fb702b2"
+    },
+    {
+      "paper_id": "2002.05202",
+      "title": "GLU Variants Improve Transformer",
+      "authors": [
+        "Noam Shazeer"
+      ],
+      "published": "2020-02-12",
+      "url": "https://arxiv.org/abs/2002.05202",
+      "abstract": "Gated Linear Units (arXiv:1612.08083) consist of the component-wise product of two linear projections, one of which is first passed through a sigmoid function. Variations on GLU are possible, using different nonlinear (or even linear) functions in place of sigmoid. We test these variants in the feed-forward sublayers of the Transformer (arXiv:1706.03762) sequence-to-sequence model, and find that some of them yield quality improvements over the typically-used ReLU or GELU activations.",
+      "abstract_sha256": "174ad82ab80ee3c01c1fe3d757df2e77a03f566be7c7df04e65a216c381ceb05"
+    },
+    {
+      "paper_id": "2109.08668",
+      "title": "Primer: Searching for Efficient Transformers for Language Modeling",
+      "authors": [
+        "David R. So",
+        "Wojciech Mańke",
+        "Hanxiao Liu",
+        "Zihang Dai",
+        "Noam Shazeer",
+        "Quoc V. Le"
+      ],
+      "published": "2021-09-17",
+      "url": "https://arxiv.org/abs/2109.08668",
+      "abstract": "Large Transformer models have been central to recent advances in natural language processing. The training and inference costs of these models, however, have grown rapidly and become prohibitively expensive. Here we aim to reduce the costs of Transformers by searching for a more efficient variant. Compared to previous approaches, our search is performed at a lower level, over the primitives that define a Transformer TensorFlow program. We identify an architecture, named Primer, that has a smaller training cost than the original Transformer and other variants for auto-regressive language modeling. Primer's improvements can be mostly attributed to two simple modifications: squaring ReLU activations and adding a depthwise convolution layer after each Q, K, and V projection in self-attention. Experiments show Primer's gains over Transformer increase as compute scale grows and follow a power law with respect to quality at optimal model sizes. We also verify empirically that Primer can be dropped into different codebases to significantly speed up training without additional tuning. For example, at a 500M parameter size, Primer improves the original T5 architecture on C4 auto-regressive language modeling, reducing the training cost by 4X. Furthermore, the reduced training cost means Primer needs much less compute to reach a target one-shot performance. For instance, in a 1.9B parameter configuration similar to GPT-3 XL, Primer uses 1/3 of the training compute to achieve the same one-shot performance as Transformer. We open source our models and several comparisons in T5 to help with reproducibility.",
+      "abstract_sha256": "c07d1d7c2697fc347636bc1af9fc956bc0517c8cb75fda2cb1fba5e8720d770e"
+    },
+    {
+      "paper_id": "2104.09864",
+      "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+      "authors": [
+        "Jianlin Su",
+        "Yu Lu",
+        "Shengfeng Pan",
+        "Ahmed Murtadha",
+        "Bo Wen",
+        "Yunfeng Liu"
+      ],
+      "published": "2021-04-20",
+      "url": "https://arxiv.org/abs/2104.09864",
+      "abstract": "Position encoding recently has shown effective in the transformer architecture. It enables valuable supervision for dependency modeling between elements at different positions of the sequence. In this paper, we first investigate various methods to integrate positional information into the learning process of transformer-based language models. Then, we propose a novel method named Rotary Position Embedding(RoPE) to effectively leverage the positional information. Specifically, the proposed RoPE encodes the absolute position with a rotation matrix and meanwhile incorporates the explicit relative position dependency in self-attention formulation. Notably, RoPE enables valuable properties, including the flexibility of sequence length, decaying inter-token dependency with increasing relative distances, and the capability of equipping the linear self-attention with relative position encoding. Finally, we evaluate the enhanced transformer with rotary position embedding, also called RoFormer, on various long text classification benchmark datasets. Our experiments show that it consistently overcomes its alternatives. Furthermore, we provide a theoretical analysis to explain some experimental results. RoFormer is already integrated into Huggingface: \\url{https://huggingface.co/docs/transformers/model_doc/roformer}.",
+      "abstract_sha256": "89c754f8cdae8947e091711b7b33b372298edf2a1fe22a943646a9873c39ac9f"
+    },
+    {
+      "paper_id": "1207.0580",
+      "title": "Improving neural networks by preventing co-adaptation of feature detectors",
+      "authors": [
+        "Geoffrey E. Hinton",
+        "Nitish Srivastava",
+        "Alex Krizhevsky",
+        "Ilya Sutskever",
+        "Ruslan R. Salakhutdinov"
+      ],
+      "published": "2012-07-03",
+      "url": "https://arxiv.org/abs/1207.0580",
+      "abstract": "When a large feedforward neural network is trained on a small training set, it typically performs poorly on held-out test data. This \"overfitting\" is greatly reduced by randomly omitting half of the feature detectors on each training case. This prevents complex co-adaptations in which a feature detector is only helpful in the context of several other specific feature detectors. Instead, each neuron learns to detect a feature that is generally helpful for producing the correct answer given the combinatorially large variety of internal contexts in which it must operate. Random \"dropout\" gives big improvements on many benchmark tasks and sets new records for speech and object recognition.",
+      "abstract_sha256": "2136d2b41539d94710d94d87eea07e9492d719381d610893dd143c74f1e6578d"
+    }
+  ]
+}

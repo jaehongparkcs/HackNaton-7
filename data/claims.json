@@ -1,0 +1,135 @@
+{
+  "note": "Spans are verbatim substrings of data/papers.json abstracts; scripts/verify_snapshot.py enforces this. Settings are paraphrased from the abstract only. expected_outcome is human-curated.",
+  "claims": [
+    {
+      "claim_id": "c01",
+      "paper_id": "2002.04745",
+      "dimension": "norm_position",
+      "method": "Pre-LN Transformer trained without learning-rate warm-up",
+      "setting": "Transformers on a wide range of NLP applications (per abstract)",
+      "claim": "Pre-LN Transformers without the warm-up stage reach results comparable to baselines with less training time and tuning.",
+      "source_span": "We show in our experiments that Pre-LN Transformers without the warm-up stage can reach comparable results with baselines while requiring significantly less training time and hyper-parameter tuning on a wide range of applications.",
+      "expected_outcome": "no_worse"
+    },
+    {
+      "claim_id": "c02",
+      "paper_id": "2002.04745",
+      "dimension": "norm_position",
+      "method": "Post-LN Transformer needs learning-rate warm-up",
+      "setting": "Transformers (theory, mean field analysis at initialization)",
+      "claim": "At initialization Post-LN has large expected gradients near the output layer, which is why warm-up is needed.",
+      "source_span": "we prove with mean field theory that at initialization, for the original-designed Post-LN Transformer, which places the layer normalization between the residual blocks, the expected gradients of the parameters near the output layer are large",
+      "expected_outcome": "context"
+    },
+    {
+      "claim_id": "c03",
+      "paper_id": "2004.08249",
+      "dimension": "optimizer",
+      "method": "Optimizer / LR-scheduler sensitivity of Transformer training",
+      "setting": "Transformers on NLP tasks (per abstract)",
+      "claim": "Transformer training needs carefully designed optimizers and LR schedulers; conventional SGD fails to train Transformers effectively.",
+      "source_span": "their training requires non-trivial efforts regarding designing cutting-edge optimizers and learning rate schedulers carefully (e.g., conventional SGD fails to train Transformers effectively)",
+      "expected_outcome": "context"
+    },
+    {
+      "claim_id": "c04",
+      "paper_id": "1910.07467",
+      "dimension": "norm",
+      "method": "RMSNorm in place of LayerNorm",
+      "setting": "several tasks with diverse network architectures (per abstract; RNNs are discussed)",
+      "claim": "RMSNorm achieves performance comparable to LayerNorm while reducing running time by 7%~64% on different models.",
+      "source_span": "RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%~64% on different models",
+      "expected_outcome": "no_worse"
+    },
+    {
+      "claim_id": "c05",
+      "paper_id": "1910.07467",
+      "dimension": "norm",
+      "method": "RMSNorm computational cost",
+      "setting": "neural networks in general (per abstract)",
+      "claim": "RMSNorm is computationally simpler and more efficient than LayerNorm.",
+      "source_span": "RMSNorm is computationally simpler and thus more efficient than LayerNorm.",
+      "expected_outcome": "context"
+    },
+    {
+      "claim_id": "c06",
+      "paper_id": "1608.03983",
+      "dimension": "schedule",
+      "method": "Warm-restart learning-rate schedule (SGDR)",
+      "setting": "SGD on CIFAR-10/100, EEG recordings, downsampled ImageNet",
+      "claim": "Warm restarts improve the anytime performance of SGD when training deep networks.",
+      "source_span": "we propose a simple warm restart technique for stochastic gradient descent to improve its anytime performance when training deep neural networks",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c07",
+      "paper_id": "1711.05101",
+      "dimension": "optimizer",
+      "method": "Decoupled weight decay (AdamW)",
+      "setting": "Adam and SGD on image classification datasets",
+      "claim": "Decoupled weight decay substantially improves Adam's generalization performance.",
+      "source_span": "(ii) substantially improves Adam's generalization performance, allowing it to compete with SGD with momentum on image classification datasets",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c08",
+      "paper_id": "1606.08415",
+      "dimension": "activation",
+      "method": "GELU instead of ReLU/ELU",
+      "setting": "computer vision, NLP and speech tasks (per abstract)",
+      "claim": "GELU shows performance improvements over ReLU and ELU across all considered tasks.",
+      "source_span": "find performance improvements across all considered computer vision, natural language processing, and speech tasks",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c09",
+      "paper_id": "2002.05202",
+      "dimension": "activation",
+      "method": "GLU-variant feed-forward layers (e.g. SwiGLU family)",
+      "setting": "Transformer sequence-to-sequence feed-forward sublayers",
+      "claim": "Some GLU variants give quality improvements over ReLU or GELU in the Transformer feed-forward sublayer.",
+      "source_span": "find that some of them yield quality improvements over the typically-used ReLU or GELU activations",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c10",
+      "paper_id": "2109.08668",
+      "dimension": "activation",
+      "method": "Squared ReLU activation (Primer)",
+      "setting": "auto-regressive language modeling at 500M-1.9B parameters (T5/C4 per abstract)",
+      "claim": "Primer's gains are mostly attributed to squaring ReLU activations and adding depthwise convolutions to Q, K, V.",
+      "source_span": "Primer's improvements can be mostly attributed to two simple modifications: squaring ReLU activations and adding a depthwise convolution layer after each Q, K, and V projection in self-attention.",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c11",
+      "paper_id": "2109.08668",
+      "dimension": "scale",
+      "method": "Scale dependence of architecture gains",
+      "setting": "auto-regressive language modeling, compute scale grows (per abstract)",
+      "claim": "Primer's gains over the Transformer increase as compute scale grows.",
+      "source_span": "Experiments show Primer's gains over Transformer increase as compute scale grows and follow a power law with respect to quality at optimal model sizes.",
+      "expected_outcome": "context"
+    },
+    {
+      "claim_id": "c12",
+      "paper_id": "2104.09864",
+      "dimension": "pos_encoding",
+      "method": "Rotary Position Embedding (RoPE)",
+      "setting": "transformer-based language models; long text classification benchmarks (per abstract)",
+      "claim": "RoFormer with RoPE consistently outperforms its alternatives on the evaluated benchmarks.",
+      "source_span": "Our experiments show that it consistently overcomes its alternatives.",
+      "expected_outcome": "improves"
+    },
+    {
+      "claim_id": "c13",
+      "paper_id": "1207.0580",
+      "dimension": "dropout",
+      "method": "Dropout",
+      "setting": "large feedforward networks on small training sets; speech and object recognition",
+      "claim": "Random dropout gives big improvements on many benchmark tasks.",
+      "source_span": "Random \"dropout\" gives big improvements on many benchmark tasks and sets new records for speech and object recognition.",
+      "expected_outcome": "improves"
+    }
+  ]
+}

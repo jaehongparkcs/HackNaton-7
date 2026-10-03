@@ -1,0 +1,69 @@
+# One config schema for the whole project (BUILD_PLAN s10). Secrets only via .env.
+llm:
+  model: claude-opus-5-5          # pinned. Claude 5 IDs are complete as-is (no date suffix exists)
+  effort: medium                  # output_config.effort. NOTE: Opus 5.5 rejects temperature/top_p, so
+                                  # "temperature 0" from the plan is not expressible; recordings give determinism.
+  max_tokens: 16000
+  server_side_fallback: true      # refusal -> API re-runs on a fallback model (beta). Set false to disable.
+  price_per_mtok: {input: 4.0, output: 20.0}   # for budget accounting only
+
+budget:                           # hard budgets (SPEC rule 4)
+  max_runs: 20
+  max_wall_minutes: 45
+  max_llm_cost_usd: 10.0
+  max_followup_candidates: 2
+
+seeds:
+  baseline: [0, 1, 2, 3, 4]       # noise floor
+  paired: [0, 1, 2]               # candidate screening seeds (baseline runs are reused, never re-run)
+  extra: [3, 4]                   # used if the pre-registered rule says "extra seeds"
+
+# Pre-registered next-action rule thresholds (BUILD_PLAN s6). Written before the first run.
+rule:
+  promising_sd: 1.0
+  harmful_sd: 1.0
+
+# Fixed order of "literature priority" used by the no-improvement branch.
+candidate_order: [followup_swiglu, followup_relu2, followup_rope]
+
+baseline:                         # the immutable baseline ExperimentConfig (defaults live in schemas.py)
+  optimizer: adamw
+  lr: 0.002
+  schedule: cosine
+  warmup_frac: 0.05
+  norm: layernorm
+  norm_position: pre
+  activation: gelu
+  pos_encoding: learned
+
+profiles:
+  # full: the headline profile. ~60 s of *training* wall-clock per run; set after the timing run (make timing).
+  full:
+    device: auto
+    deterministic: false
+    budget_mode: time
+    train_seconds: 60
+    eval_every_s: 10
+    eval_batches: 20
+    eval_batch_size: 64
+    prewarm_steps: 2
+  # smoke: CPU, tiny, step-budgeted, bit-deterministic. Proves the pipeline; NEVER present as results.
+  smoke:
+    device: cpu
+    deterministic: true
+    budget_mode: steps
+    max_steps: 40
+    eval_every_steps: 20
+    eval_batches: 4
+    eval_batch_size: 16
+    prewarm_steps: 1
+    baseline_overrides: {n_layer: 2, n_head: 2, n_embd: 32, batch_size: 16, seq_len: 32}
+
+paths:
+  data: data/tinyshakespeare.txt
+  data_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  papers: data/papers.json
+  claims: data/claims.json
+  fixtures: data/fixtures.json
+  results: results
+  work: work
