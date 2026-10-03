@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/wJrehVlOihu+8Yj2c1CZEp8SqKw</id>
+  <title>arXiv Query: search_query=all:"positional encoding" AND all:"Transformer language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T20:15:34Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22positional+encoding%22+AND+(all:%22Transformer+language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2203.16634v2</id>
+    <title>Transformer Language Models without Positional Encodings Still Learn Positional Information</title>
+    <updated>2022-12-05T22:10:52Z</updated>
+    <link href="https://arxiv.org/abs/2203.16634v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.16634v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Causal transformer language models (LMs), such as GPT-3, typically require some form of positional encoding, such as positional embeddings. However, we show that LMs without any explicit positional encoding are still competitive with standard models, and that this phenomenon is robust across different datasets, model sizes, and sequence lengths. Probing experiments reveal that such models acquire an implicit notion of absolute positions throughout the network, effectively compensating for the missing information. We conjecture that causal attention enables the model to infer the number of predecessors that each token can attend to, thereby approximating its absolute position. Our findings indicate that causal LMs might derive positional awareness not only from the explicit positioning mechanism, but also from the effects of the causal mask.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-30T19:37:07Z</published>
+    <arxiv:comment>Findings of EMNLP 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Adi Haviv</name>
+    </author>
+    <author>
+      <name>Ori Ram</name>
+    </author>
+    <author>
+      <name>Ofir Press</name>
+    </author>
+    <author>
+      <name>Peter Izsak</name>
+    </author>
+    <author>
+      <name>Omer Levy</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.17406v1</id>
+    <title>Dependency Transformer Grammars: Integrating Dependency Structures into Transformer Language Models</title>
+    <updated>2024-07-24T16:38:38Z</updated>
+    <link href="https://arxiv.org/abs/2407.17406v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.17406v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Syntactic Transformer language models aim to achieve better generalization through simultaneously modeling syntax trees and sentences. While prior work has been focusing on adding constituency-based structures to Transformers, we introduce Dependency Transformer Grammars (DTGs), a new class of Transformer language model with explicit dependency-based inductive bias. DTGs simulate dependency transition systems with constrained attention patterns by modifying attention masks, incorporate the stack information through relative positional encoding, and augment dependency arc representation with a combination of token embeddings and operation embeddings. When trained on a dataset of sentences annotated with dependency trees, DTGs achieve better generalization while maintaining comparable perplexity with Transformer language model baselines. DTGs also outperform recent constituency-based models, showing that dependency can better guide Transformer language models. Our code is released at https://github.com/zhaoyd1/Dep_Transformer_Grammars.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-24T16:38:38Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yida Zhao</name>
+    </author>
+    <author>
+      <name>Chao Lou</name>
+    </author>
+    <author>
+      <name>Kewei Tu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2501.00659v2</id>
+    <title>Why Are Positional Encodings Nonessential for Deep Autoregressive Transformers? Revisiting a Petroglyph</title>
+    <updated>2025-05-30T21:12:49Z</updated>
+    <link href="https://arxiv.org/abs/2501.00659v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2501.00659v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Do autoregressive Transformer language models require explicit positional encodings (PEs)? The answer is 'no' provided they have more than one layer -- they can distinguish sequences with permuted tokens without the need for explicit PEs. This follows from the fact that a cascade of (permutation invariant) set processors can collectively exhibit sequence-sensitive behavior in the autoregressive setting. This property has been known since early efforts (contemporary with GPT-2) adopting the Transformer for language modeling. However, this result does not appear to have been well disseminated, leading to recent rediscoveries. This may be partially due to a sudden growth of the language modeling community after the advent of GPT-2/3, but perhaps also due to the lack of a clear explanation in prior work, despite being commonly understood by practitioners in the past. Here we review the long-forgotten explanation why explicit PEs are nonessential for multi-layer autoregressive Transformers (in contrast, one-layer models require PEs to discern order information of their inputs), as well as the origin of this result, and hope to re-establish it as a common knowledge.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-31T22:12:45Z</published>
+    <arxiv:comment>Accepted to ACL 2025 Findings, Short paper</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kazuki Irie</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.04226v2</id>
+    <title>Language Modeling with Deep Transformers</title>
+    <updated>2019-07-11T15:45:32Z</updated>
+    <link href="https://arxiv.org/abs/1905.04226v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.04226v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We explore deep autoregressive Transformer models in language modeling for speech recognition. We focus on two aspects. First, we revisit Transformer model configurations specifically for language modeling. We show that well configured Transformer models outperform our baseline models based on the shallow stack of LSTM recurrent neural network layers. We carry out experiments on the open-source LibriSpeech 960hr task, for both 200K vocabulary word-level and 10K byte-pair encoding subword-level language modeling. We apply our word-level models to conventional hybrid speech recognition by lattice rescoring, and the subword-level models to attention based encoder-decoder models by shallow fusion. Second, we show that deep Transformer language models do not require positional encoding. The positional encoding is an essential augmentation for the self-attention mechanism which is invariant to sequence ordering. However, in autoregressive setup, as is the case for language modeling, the amount of information increases along the position dimension, which is a positional signal by its own. The analysis of attention weights shows that deep autoregressive self-attention models can automatically make use of such positional information. We find that removing the positional encoding even slightly improves the performance of these models.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-10T15:50:00Z</published>
+    <arxiv:comment>To appear in the proceedings of INTERSPEECH 2019</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kazuki Irie</name>
+    </author>
+    <author>
+      <name>Albert Zeyer</name>
+    </author>
+    <author>
+      <name>Ralf Schlüter</name>
+    </author>
+    <author>
+      <name>Hermann Ney</name>
+    </author>
+    <arxiv:doi>10.21437/Interspeech.2019-2225</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21437/Interspeech.2019-2225" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.05346v1</id>
+    <title>Trajectory Dynamics in Language Model Hidden States Predict Human Processing Costs Beyond Surprisal</title>
+    <updated>2026-06-03T18:44:41Z</updated>
+    <link href="https://arxiv.org/abs/2606.05346v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.05346v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human language comprehension unfolds sequentially: each word is processed in the context of those that came before, and the interpretation builds incrementally over time. Surprisal, the negative log probability of a word given its context, has been the dominant predictor of incremental processing cost. But surprisal reduces rich sequential representations to a single scalar at each word, discarding information about the direction in which the interpretation has been evolving. Dynamical-systems approaches suggest that the trajectory of the evolving interpretive state, not just its position at each moment,should shape processing, and language itself may have local momentum, since speakers plan utterances a few words at a time. We introduce trajectory extrapolation error: at each word, we fit a linear trajectory to the preceding hidden states of a transformer language model and measure deviation from the extrapolated path. On the Natural Stories corpus, this measure is nearly orthogonal to surprisal (r = .044) and independently predicts self-paced reading times. The effect is especially pronounced in garden-path sentences, strengthens with model scale (GPT-2 Small to Large), and replicates across architectures with different positional encoding schemes (GPT-2 vs. Pythia/RoPE). A displacement control shows the effect is not reducible to representational change magnitude: displacement and extrapolation error predict in opposite directions. These findings reveal two dissociable components of processing cost: word-level prediction error (surprisal) and sensitivity to the local momentum of the unfolding interpretation (trajectory extrapolation error).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-03T18:44:41Z</published>
+    <arxiv:comment>17 pages, 3 figures, 6 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Elan Barenholtz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.09616v1</id>
+    <title>Surgical Repair of Collapsed Attention Heads in ALiBi Transformers</title>
+    <updated>2026-03-10T12:57:49Z</updated>
+    <link href="https://arxiv.org/abs/2603.09616v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.09616v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We identify a systematic attention collapse pathology in the BLOOM family of transformer language models, where ALiBi positional encoding causes 31-44% of attention heads to attend almost entirely to the beginning-of-sequence token. The collapse follows a predictable pattern across four model scales (560M to 7.1B parameters), concentrating in head indices where ALiBi's slope schedule imposes the steepest distance penalties. We introduce surgical reinitialization: targeted Q/K/V reinitialization with zeroed output projections and gradient-masked freezing of all non-surgical parameters. Applied to BLOOM-1b7 on a single consumer GPU, the technique recovers 98.7% operational head capacity (242 to 379 of 384 heads) in two passes. A controlled comparison with C4 training data confirms that reinitialization -- not corpus content -- drives recovery, and reveals two distinct post-surgical phenomena: early global functional redistribution that improves the model, and late local degradation that accumulates under noisy training signal. An extended experiment reinitializing mostly-healthy heads alongside collapsed ones produces a model that transiently outperforms stock BLOOM-1b7 by 25% on training perplexity (12.70 vs. 16.99), suggesting that pretrained attention configurations are suboptimal local minima. Code, checkpoints, and diagnostic tools are released as open-source software.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-10T12:57:49Z</published>
+    <arxiv:comment>15 pages, 7 figures, 2 supplementary figures. Code: https://github.com/Palmerschallon/bloom-head-surgery Checkpoints: https://huggingface.co/TheNexus42/bloom-1b7-head-surgery</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Palmer Schallon</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.23623v2</id>
+    <title>Characterizing the Expressivity of Fixed-Precision Transformer Language Models</title>
+    <updated>2025-12-02T23:22:50Z</updated>
+    <link href="https://arxiv.org/abs/2505.23623v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.23623v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based language models (LMs) have achieved widespread empirical success, but their theoretical expressive power remains only partially understood. In this work, we analyze a restricted idealization of fixed-precision transformers with strict future masking, soft attention, and no positional encodings. We establish that this class of models is exactly as expressive as a specific fragment of linear temporal logic that contains only a single temporal operator: the past operator. We further connect this fragment to established classes in formal language theory, automata theory, and algebra, yielding a unified framework for understanding transformer expressivity under this idealization. Finally, we present empirical results that align closely with our theory: transformers trained on languages within their characterized expressive capacity generalize reliably across sequence lengths, while they consistently fail to generalize on languages beyond it.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-29T16:30:30Z</published>
+    <arxiv:comment>NeurIPS 2025 (Spotlight)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jiaoda Li</name>
+    </author>
+    <author>
+      <name>Ryan Cotterell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.08562v2</id>
+    <title>Inside the LLM Word Factory</title>
+    <updated>2026-09-28T07:00:31Z</updated>
+    <link href="https://arxiv.org/abs/2606.08562v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.08562v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer language models process input provided as subword fragments, but natural language semantics usually rely on word-level concepts. Detokenization is the process where models reconcile these two facts, aggregating subwords into word-level representations through their computation. Prior work has found that this takes place mostly in early-to-middle layers, but so far the exact mechanics of the process have not been pinned down. We venture deep into detokenization using activation patching in controlled paired experiments that isolate the contribution of different model components, localizing English detokenization in Llama2-7B to a two-stage process at Layer 1. Attention transmits a token-specific signal from nonfinal subwords, using sequential relays if necessary, while the MLP composes it with the local embedding. This two-stage structure generalizes to twelve models from eight families, but the depth over which it takes place depends on the flavor of positional encoding: RoPE-based models detokenize over 1 to 5 layers, while learned-absolute models take 5 to 10. Finally, we provide a probe for determining the success of the detokenization process based on early-layer activations alone, performing at 0.94-0.97 AUROC depending on the amount of context.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-07T10:36:20Z</published>
+    <arxiv:comment>Accepted to Findings of EMNLP 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Benzi Busigin</name>
+    </author>
+    <author>
+      <name>Yuval Pinter</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.25507v2</id>
+    <title>Phase Structure in Rotary Attention: A Spectral Framework for Semantic Continuity and Execution-Boundary Governance</title>
+    <updated>2026-09-09T13:50:51Z</updated>
+    <link href="https://arxiv.org/abs/2607.25507v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.25507v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer language models are usually analyzed through vector geometry, yet ordered context and rotary position encoding introduce explicit phase structure into query-key interactions. This paper develops a bounded spectral framework for examining rotary phase alignment, hidden-state continuity, and semantic drift without treating language models as literal physical wave systems. It first identifies ordered hidden-state sequences, rather than vocabulary indices, as valid domains for spectral decomposition. It then derives the Rotary Position Embedding (RoPE) attention score as a sum of magnitude-weighted cosine terms and proves a local stability lemma: uniformly bounded phase displacement limits degradation of the corresponding pre-softmax score. To extend phase analysis beyond native RoPE coordinates, the paper defines complex modal coordinates over fixed orthonormal direction pairs and introduces a weighted coherence functional for hidden-state trajectories. These constructions support a strict distinction between representational continuity and execution-boundary admissibility. Internal coherence may describe preservation of task-relevant relations, but it cannot authorize a consequential transition. Positioned against existing geometric, spectral, phase-modulation, representation-analysis, and mechanistic-interpretability accounts, the framework contributes a theoretical and methodological program for determining when spectral structure explains continuity and when governance must remain an external predicate over execution.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-28T09:41:05Z</published>
+    <arxiv:comment>14 pages; theoretical framework and proposed experimental program</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abraham Chachamovits</name>
+    </author>
+  </entry>
+</feed>

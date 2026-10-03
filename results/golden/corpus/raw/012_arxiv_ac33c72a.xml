@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/w7SKrd6jNTIRFaPCyajRM+IFUik</id>
+  <title>arXiv Query: search_query=all:"character-level" AND all:"Transformer language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T20:15:40Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22character-level%22+AND+(all:%22Transformer+language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2108.00391v1</id>
+    <title>Learning to Look Inside: Augmenting Token-Based Encoders with Character-Level Information</title>
+    <updated>2021-08-01T08:09:26Z</updated>
+    <link href="https://arxiv.org/abs/2108.00391v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2108.00391v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Commonly-used transformer language models depend on a tokenization schema which sets an unchangeable subword vocabulary prior to pre-training, destined to be applied to all downstream tasks regardless of domain shift, novel word formations, or other sources of vocabulary mismatch. Recent work has shown that "token-free" models can be trained directly on characters or bytes, but training these models from scratch requires substantial computational resources, and this implies discarding the many domain-specific models that were trained on tokens. In this paper, we present XRayEmb, a method for retrofitting existing token-based models with character-level information. XRayEmb is composed of a character-level "encoder" that computes vector representations of character sequences, and a generative component that decodes from the internal representation to a character sequence. We show that incorporating XRayEmb's learned vectors into sequences of pre-trained token embeddings helps performance on both autoregressive and masked pre-trained transformer architectures and on both sequence-level and sequence tagging tasks, particularly on non-standard English text.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-08-01T08:09:26Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yuval Pinter</name>
+    </author>
+    <author>
+      <name>Amanda Stent</name>
+    </author>
+    <author>
+      <name>Mark Dredze</name>
+    </author>
+    <author>
+      <name>Jacob Eisenstein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.03819v1</id>
+    <title>Adapting Transformer Language Models for Predictive Typing in Brain-Computer Interfaces</title>
+    <updated>2023-05-05T19:47:41Z</updated>
+    <link href="https://arxiv.org/abs/2305.03819v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.03819v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Brain-computer interfaces (BCI) are an important mode of alternative and augmentative communication for many people. Unlike keyboards, many BCI systems do not display even the 26 letters of English at one time, let alone all the symbols in more complex systems. Using language models to make character-level predictions, therefore, can greatly speed up BCI typing (Ghosh and Kristensson, 2017). While most existing BCI systems employ character n-gram models or no LM at all, this paper adapts several wordpiece-level Transformer LMs to make character predictions and evaluates them on typing tasks. GPT-2 fares best on clean text, but different LMs react differently to noisy histories. We further analyze the effect of character positions in a word and context lengths.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-05T19:47:41Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shijia Liu</name>
+    </author>
+    <author>
+      <name>David A. Smith</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.19261v1</id>
+    <title>Significance-Gain Pair Encoding for LLMs: A Statistical Alternative to Frequency-Based Subword Merging</title>
+    <updated>2026-02-26T20:29:18Z</updated>
+    <link href="https://arxiv.org/abs/2603.19261v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.19261v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Subword tokenization is a key design choice for modern language models, including large language models (LLMs), with byte- and character-level BPE serving as a widely used baseline. Standard BPE selects merges by raw pair frequency, which favors compression but can conflate true adjacency cohesion with pairs that are frequent due to high marginal counts. This paper introduces Significance-Gain BPE, a drop-in alternative merge criterion that measures cohesion via a z-statistic under an independence null model and combines it with an explicit compression-aware gain term. Significance-Gain BPE is evaluated on WikiText-103 (raw) character slices using a small causal Transformer language model, reporting both token-dependent perplexity and the tokenizer-invariant metric bits per character (BPC). At a representative operating point, Significance-Gain BPE reduces validation and test perplexity by 13% and 12%, respectively, and improves validation and test BPC by about 0.9 to 1.0%. A vocabulary-size sweep further shows lower BPC in most closest-compression comparisons, suggesting that statistically grounded merge selection can improve predictive efficiency per unit of raw text across a range of compression regimes.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-26T20:29:18Z</published>
+    <arxiv:comment>8 pages, 1 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Azam Nouri</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.28534v1</id>
+    <title>Compressing Transformer Language Models via Matrix Product Operator Decomposition: A Case Study on PicoGPT</title>
+    <updated>2026-03-30T14:57:47Z</updated>
+    <link href="https://arxiv.org/abs/2603.28534v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.28534v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer-based language models achieve strong performance across NLP tasks, but their quadratic parameter scaling with hidden dimension makes deployment on resource-constrained hardware expensive. We study Matrix Product Operator (MPO) decomposition as a principled compression method for transformers. MPO factorises weight matrices into chains of low-rank cores, with approximation quality controlled by the bond dimension chi. We replace every nn.Linear layer in PicoGPT, a GPT-2-style character-level language model with about 1M parameters, with an MPOLinear module parameterised as an MPO chain. Cores are initialised either by TT-SVD from pretrained dense weights or from random initialisation, and trained using standard PyTorch autograd without a custom backward pass. We derive balanced factorisation schemes for the five distinct weight shapes in PicoGPT and evaluate bond dimensions chi in {4, 8, 16, 32} on Tiny Shakespeare. MPO compression achieves up to 13x compression per transformer block at chi = 4. At chi = 16, the model uses 191,872 parameters instead of 1,020,224 while retaining 97.7% of baseline token accuracy (51.6% vs 52.8%). Reconstruction error follows the expected trend and is lower for three-site than two-site factorisations at the same bond dimension. The chi = 8 model gives the best accuracy per parameter, exceeding the dense baseline by 2.7x on this metric. These results show that MPO parameterisation is a practical and theoretically grounded alternative to low-rank methods and unstructured pruning for transformer compression.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.data-an" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-30T14:57:47Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Younes Javanmard</name>
+    </author>
+    <author>
+      <name>Tanmoy Pandit</name>
+    </author>
+    <author>
+      <name>Masoud Mardani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.07955v2</id>
+    <title>Dynamic Chunking for End-to-End Hierarchical Sequence Modeling</title>
+    <updated>2025-07-15T09:06:11Z</updated>
+    <link href="https://arxiv.org/abs/2507.07955v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.07955v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Major progress on language models (LMs) in recent years has largely resulted from moving away from specialized models designed for specific tasks, to general models based on powerful architectures (e.g. the Transformer) that learn everything from raw data. Despite this trend, pre-processing steps such as tokenization remain a barrier to true end-to-end foundation models. We introduce a collection of new techniques that enable a dynamic chunking mechanism which automatically learns content- and context- dependent segmentation strategies learned jointly with the rest of the model. Incorporating this into an explicit hierarchical network (H-Net) allows replacing the (implicitly hierarchical) tokenization-LM-detokenization pipeline with a single model learned fully end-to-end. When compute- and data- matched, an H-Net with one stage of hierarchy operating at the byte level outperforms a strong Transformer language model operating over BPE tokens. Iterating the hierarchy to multiple stages further increases its performance by modeling multiple levels of abstraction, demonstrating significantly better scaling with data and matching the token-based Transformer of twice its size. H-Nets pretrained on English show significantly increased character-level robustness, and qualitatively learn meaningful data-dependent chunking strategies without any heuristics or explicit supervision. Finally, the H-Net's improvement over tokenized pipelines is further increased in languages and modalities with weaker tokenization heuristics, such as Chinese and code, or DNA sequences (nearly 4x improvement in data efficiency over baselines), showing the potential of true end-to-end models that learn and scale better from unprocessed data.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-10T17:39:37Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sukjun Hwang</name>
+    </author>
+    <author>
+      <name>Brandon Wang</name>
+    </author>
+    <author>
+      <name>Albert Gu</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/FGDtZph7XqpKx+sb2s+VURSeurY</id>
+  <title>arXiv Query: search_query=all:"RMSNorm" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T20:05:45Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22RMSNorm%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>39</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2305.14858v2</id>
+    <title>Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers</title>
+    <updated>2023-10-26T04:32:49Z</updated>
+    <link href="https://arxiv.org/abs/2305.14858v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.14858v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have achieved great success in machine learning applications. Normalization techniques, such as Layer Normalization (LayerNorm, LN) and Root Mean Square Normalization (RMSNorm), play a critical role in accelerating and stabilizing the training of Transformers. While LayerNorm recenters and rescales input vectors, RMSNorm only rescales the vectors by their RMS value. Despite being more computationally efficient, RMSNorm may compromise the representation ability of Transformers. There is currently no consensus regarding the preferred normalization technique, as some models employ LayerNorm while others utilize RMSNorm, especially in recent large language models. It is challenging to convert Transformers with one normalization to the other type. While there is an ongoing disagreement between the two normalization types, we propose a solution to unify two mainstream Transformer architectures, Pre-LN and Pre-RMSNorm Transformers. By removing the inherent redundant mean information in the main branch of Pre-LN Transformers, we can reduce LayerNorm to RMSNorm, achieving higher efficiency. We further propose the Compressed RMSNorm (CRMSNorm) and Pre-CRMSNorm Transformer based on a lossless compression of the zero-mean vectors. We formally establish the equivalence of Pre-LN, Pre-RMSNorm, and Pre-CRMSNorm Transformer variants in both training and inference. It implies that Pre-LN Transformers can be substituted with Pre-(C)RMSNorm counterparts at almost no cost, offering the same arithmetic functionality along with free efficiency improvement. Experiments demonstrate that we can reduce the training and inference time of Pre-LN Transformers by 1% - 10%.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-24T08:08:26Z</published>
+    <arxiv:comment>NeurIPS 2023 spotlight. Code is available at https://github.com/ZixuanJiang/pre-rmsnorm-transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zixuan Jiang</name>
+    </author>
+    <author>
+      <name>Jiaqi Gu</name>
+    </author>
+    <author>
+      <name>Hanqing Zhu</name>
+    </author>
+    <author>
+      <name>David Z. Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.14430v1</id>
+    <title>Three-Phase Transformer</title>
+    <updated>2026-04-15T21:23:30Z</updated>
+    <link href="https://arxiv.org/abs/2604.14430v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.14430v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Three-Phase Transformer (3PT), a residual-stream structural prior for decoder-only Transformers on a standard SwiGLU + RMSNorm + RoPE + GQA backbone. The hidden vector is partitioned into N equally-sized cyclic channels, each maintained by phase-respecting ops: a per-channel RMSNorm, a 2D Givens rotation between attention and FFN that rotates each channel by theta + i*(2*pi/N), and a head-count constraint aligning GQA heads with the partition. The architecture is a self-stabilizing equilibrium between scrambling and re-imposition, not a bolted-on module. The partition carves out a one-dimensional DC subspace orthogonal to the channels, into which we inject a fixed Gabriel's horn profile r(p) = 1/(p+1) as an absolute-position side-channel composing orthogonally with RoPE's relative-position rotation. The canonical N=3 borrows its metaphor from balanced three-phase AC, where three sinusoids 120 degrees apart sum to zero with no anti-correlated pair. At 123M parameters on WikiText-103, 3PT achieves -7.20% perplexity (-2.62% bits-per-byte) over a matched RoPE-Only baseline at +1,536 parameters (0.00124% of total), with 1.93x step-count convergence speedup (1.64x wall-clock). N behaves as a parameter-sharing knob rather than a unique optimum: at 5.5M an N-sweep over {1,2,3,4,6,8,12} is near-monotone with N=1 winning; at 123M a three-seed sweep finds N=3 and N=1 statistically indistinguishable. The load-bearing mechanism is the channel-partitioned residual stream, per-block rotation, per-phase normalization, and horn DC injection. We characterize (a) self-stabilization of the geometry without explicit enforcement, a novel instance of the conservation-law framework for neural networks; (b) a U-shaped depth profile of rotation-angle drift at 12 layers; (c) orthogonal composition with RoPE, attention, and FFN.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-15T21:23:30Z</published>
+    <arxiv:comment>48 pages, 20 figures, 23 tables. Code: https://github.com/achelousace/three-phase-transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mohammad R. Abu Ayyash</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.31963v1</id>
+    <title>Signed-Permutation Coordinate Transport for RMSNorm Transformers</title>
+    <updated>2026-06-30T17:02:33Z</updated>
+    <link href="https://arxiv.org/abs/2606.31963v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.31963v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern LLM workflows move coordinate-indexed objects across checkpoints: steering vectors, sparse autoencoders, top-$k$ neuron sets, attribution lists, and merge alignments. This is only well posed after fixing the model's residual-stream gauge, which we show is architecture-dependent: LayerNorm residual charts have permutation gauge $S_d$ (up to a global sign flip), while RMSNorm charts with generic per-channel gain have signed-permutation gauge $B_d = S_d \ltimes \{\pm 1\}^d$. Permutation-only alignment is therefore symmetry-incomplete for RMSNorm models. We introduce sign-marginalized Hungarian matching and prove a sharp failure mode: with decorrelated coordinates, raw signed-correlation matching has a structural permutation-accuracy ceiling at the positive-sign fraction of the true gauge, which sign-marginalization removes. We then make coordinate-preserving transport, not function-level merging, the primary object: composing saved-checkpoint local $B_d$ gauges along same-base fine-tuning trajectories recovers 91.1% of cross-run coordinates at 1500 steps versus 60.3% for endpoint matching, and the gain is not explained by merely routing through the base. The recovered gauge transfers tools that permutation-only alignment breaks: TinyLlama SAE reconstruction has NMSE 0.004 under $B_d$ versus 1.08 under $S_d$; Qwen sentiment steering preserves 95.8% of its effect versus 17.2%; refusal steering reverses sign under $S_d$; coordinate-preserving merges behave the same way. The same covariance governs stateful training: signed transport of AdamW state preserves the resumed trajectory, while permutation-only state follows a different one from a functionally identical checkpoint. Finally, gauge-sweep audits show index-level interpretability claims are reproducible only relative to an explicit gauge.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-30T17:02:33Z</published>
+    <arxiv:comment>31 pages, 2 figures, 26 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>John Sweeney</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.18933v1</id>
+    <title>A Geometric Analysis of Sign-Magnitude Asymmetry in a ReLU + RMSNorm Block under Ternary Quantization</title>
+    <updated>2026-05-18T15:36:33Z</updated>
+    <link href="https://arxiv.org/abs/2605.18933v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.18933v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pre-norm Transformers with RMSNorm tolerate ternary {-1,0,+1} weight quantization with surprisingly small loss (Ma et al., 2024). We give a geometric explanation via sign-magnitude decomposition of weight perturbations. In a two-layer ReLU + RMSNorm model with i.i.d. Gaussian weights, sign-flips produce $π/(π-2) \approx 2.75$ times more transverse output energy than sign-preserving magnitude perturbations of equal Frobenius norm, as the flip rate $p \to 0$ (Theorem 3). The mechanism: ReLU creates a hidden-space directional asymmetry between the two perturbation types, which RMSNorm's transverse-projection Fréchet derivative selectively exposes. Sign-quantization error is itself a sign-preserving perturbation with angular alignment $\cos^2 \to 2/π$ (Theorem 4); its post-ReLU radial fraction ($0.365$) matches the pre-ReLU value $1-2/π$ within $0.4\%$, so ReLU is approximately transparent to ternary error. Multi-layer compounding of the $2.75\times$ factor is not experimentally supported; the gap to real-model sign sensitivity arises from outlier features violating delocalization. For an input dimension with amplitude $α$, a single sign-flip produces post-ReLU energy amplified by $R \approx nα^2$ relative to a delocalized entry. On TinyLlama-1.1B, at linear response ($p \leq 0.5\%$), count-matched NLL leverage stabilizes at $\sim 10\times \approx n\mathbb{E}[α^2]$, matching the per-entry theory; the all-column NLL ratio of $5.0\times$ falls within $R_{\mathrm{col}} \leq 19$ ($67\times$ PPL gap reflects metric nonlinearity). Measured outlier $α$ at layer 12 (median $0.024$, max $0.26$) confirms heavy-tailed concentration. The Bussgang constant $2/π$, RMSNorm geometry, and ReLU half-space structure together explain sign-magnitude asymmetry in pre-norm models, with $R \propto nα^2$ accounting for real-model deviations.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T15:36:33Z</published>
+    <arxiv:comment>53 pages, 2 figures, 21 tables, 7 appendices</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Lei Dong</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.17864v3</id>
+    <title>Equivalence of Context and Parameter Updates in Modern Transformer Blocks</title>
+    <updated>2026-07-06T14:29:28Z</updated>
+    <link href="https://arxiv.org/abs/2511.17864v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.17864v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent research has established that the impact of context in a vanilla transformer can be represented implicitly by forming a token-dependent, rank-1 patch to its MLP weights. This work extends that foundational theory to the diverse architectures of modern Large Language Models. We first demonstrate a precise, analytical solution for a Gemma-style transformer block, proving that the entire effect of a context can be perfectly mapped to rank-1 patches on its MLP weight matrices and a patch to the RMSNorm scale. We then generalize this result, providing a constructive proof and algorithm for multi-layer models. To unify these findings, we introduce a general framework centered on two core properties: input controllability and output controllability. We prove that a perfect implicit weight patch is possible for any MLP block where the inner function is input-controllable and the outer function is output-controllable. This provides a simpler and more powerful lens for understanding how transformer models transmute prompts into effective weights. This setup generalizes to a wide range of modern LLM architectures including gating, pre-/post-norm, mixture of experts and sequential/parallel transformer blocks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-22T01:17:15Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Adrian Goldwaser</name>
+    </author>
+    <author>
+      <name>Michael Munn</name>
+    </author>
+    <author>
+      <name>Javier Gonzalvo</name>
+    </author>
+    <author>
+      <name>Benoit Dherin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.15773v2</id>
+    <title>Supernova: Achieving More with Less in Transformer Architectures</title>
+    <updated>2025-07-22T13:27:02Z</updated>
+    <link href="https://arxiv.org/abs/2507.15773v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.15773v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Supernova, a 650M-parameter decoder-only transformer that demonstrates how careful architectural design and tokenization innovation can achieve the performance of larger models while maintaining computational efficiency. Our architecture combines Rotary Positional Embeddings (RoPE), Grouped Query Attention (GQA) with a 3:1 compression ratio, RMSNorm for computational efficiency, and SwiGLU activation functions. A critical innovation is our custom 128,000-vocabulary byte-level BPE tokenizer, which achieves state-of-the-art compression performance. Through detailed analysis, we show that Supernova achieves 90% of the performance of 1B-parameter models while using 35% fewer parameters and requiring only 100B training tokens--an order of magnitude less than competing models. Our findings challenge the prevailing scaling paradigm, demonstrating that architectural efficiency and tokenization quality can compensate for reduced parameter counts.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-21T16:27:48Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Andrei-Valentin Tanase</name>
+    </author>
+    <author>
+      <name>Elena Pelican</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2407.09577v5</id>
+    <title>FlashNorm: Fast Normalization for Transformers</title>
+    <updated>2026-04-24T18:51:15Z</updated>
+    <link href="https://arxiv.org/abs/2407.09577v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2407.09577v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Normalization layers are ubiquitous in large language models (LLMs) yet represent a compute bottleneck: on hardware with distinct vector and matrix execution units, the RMS calculation blocks the subsequent matrix multiplication, preventing parallel execution.
+  We present FlashNorm, an exact reformulation of RMSNorm followed by a linear layer that (i) eliminates the normalization weights by folding them into the subsequent linear layer, and (ii) defers the scalar RMS normalization to the output of the matrix multiplication, enabling the two operations to execute in parallel.
+  Additionally, by the scale invariance of RMS, an RMSNorm followed by a linear layer followed by another RMSNorm allows the first RMSNorm to be eliminated entirely -- a mathematically identical simplification that removes the pre-attention RMSNorm in models using QKV-normalization (e.g., Gemma~4) and in MLA-models with latent normalization (e.g., DeepSeek-V2, Mistral Small 4, and OpenMythos).
+  The same techniques extend to LayerNorm, Dynamic Tanh (DyT), feed-forward networks with GLU variants, and RoPE-based attention.
+  On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale. We verify zero-loss weight folding on three models. Beyond inference speed, FlashNorm simplifies model implementations by reducing parameter tensor count.
+  Watch our explainer video https://youtu.be/GEuJv34_XgU?si and see https://github.com/OpenMachine-ai/transformer-tricks for code.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-07-12T00:37:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Nils Graef</name>
+    </author>
+    <author>
+      <name>Filip Makraduli</name>
+    </author>
+    <author>
+      <name>Andrew Wasielewski</name>
+    </author>
+    <author>
+      <name>Matthew Clapp</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.23582v1</id>
+    <title>Transformer Accelerator (TFA): A Macro-Op INT8 Hardware Chip for Transformer Inference and Machine Translation</title>
+    <updated>2026-08-06T06:59:25Z</updated>
+    <link href="https://arxiv.org/abs/2608.23582v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.23582v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present the Transformer Accelerator (TFA), a synthesizable, parameterizable INT8 memory-to-memory engine for transformer inference. One time-multiplexed datapath handles prompt processing and autoregressive generation. TFA implements matrix multiplication, softmax, RMSNorm, elementwise, and copy/gather operations through eight 512-bit macro-op descriptors. Offline-compiled programs are fetched, validated, and dispatched through AXI interfaces, supporting encoder, decoder, and encoder-decoder models.
+  The RTL combines an output-stationary multiply-accumulate array with ping-pong buffers that overlap DMA and compute, bit-exact reciprocal-square-root and divide units, key-value-cache and embedding addressing, and an abort-safe zero-padding write engine. A UVM environment byte-compares outputs against a bit-exact golden model. Across 25 tests and 34 constrained-random runs, TFA achieved zero mismatches, 100% functional coverage, and 94.96% code coverage.
+  We compiled the t5-small encoder-decoder pipeline for English-to-French, German, and Romanian translation. On ten multilingual proverbs, TFA executed 70,320 descriptors and matched 37.9 MB of golden-model output with zero mismatches. INT8 output matched the floating-point reference token-for-token on five sentences; the rest produced valid alternative translations. Randomized-Hadamard reparameterization recovered about 11 dB of per-tensor INT8 signal-to-noise ratio across layers. The verification configuration achieved about 20x end-to-end speedup over a 22-thread CPU, while larger designs are projected to reduce energy per token by about 1000x. After RAM inference recoding, logic area fell to 2.73 mm2, and the design completed design-rule-clean synthesis and place-and-route on SkyWater sky130. TFA demonstrates end-to-end, bit-exact execution of pretrained transformers using compact hardware and compiler-managed quantization.</summary>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-06T06:59:25Z</published>
+    <arxiv:primary_category term="cs.AR"/>
+    <author>
+      <name> Shashank</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.04819v2</id>
+    <title>Layer-Parallel Inference Reduces Encrypted Nonlinear Depth in Transformers</title>
+    <updated>2026-07-13T09:12:14Z</updated>
+    <link href="https://arxiv.org/abs/2607.04819v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.04819v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Fully homomorphic encryption (FHE) enables computation on encrypted data, but practical encrypted Transformer inference is bottlenecked by the sequential composition of many nonlinear blocks. We study whether Structured Newton Layer Parallelism (SNLP) can make this inter-layer composition more FHE-friendly: each Transformer block still requires polynomial approximations for operations such as softmax and RMSNorm, but SNLP reduces the layerwise sequential nonlinear depth from L stages to a small number of solver iterations plus linear structured corrections. Using a simulation framework based on Chebyshev polynomial approximations, we measure error accumulation under sequential versus SNLP inference across 8 models and 4 architecture families. On a 0.5B IDN-trained model, SNLP reduces symbolic bootstraps from 53 to 20 (2.65x) with only +1.2% perplexity degradation, while lowering error amplification (1.36x vs. 1.42x). Across all tested models, SNLP has lower amplification than sequential inference. Ablations show that softmax approximation dominates the error budget and CKKS arithmetic noise is negligible in our setting, suggesting that SNLP is complementary to block-level FHE-friendly operator design rather than a replacement for it.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-06T08:51:22Z</published>
+    <arxiv:comment>Code is available at https://github.com/phymhan/nanochat-snlp/tree/snlp-fhe</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ligong Han</name>
+    </author>
+    <author>
+      <name>Kai Xu</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Ruijiang Gao</name>
+    </author>
+    <author>
+      <name>Han Gao</name>
+    </author>
+    <author>
+      <name>Akash Srivastava</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.17771v2</id>
+    <title>Attention Sinks Induce Gradient Sinks: Massive Activations as Gradient Regulators in Transformers</title>
+    <updated>2026-05-06T02:55:53Z</updated>
+    <link href="https://arxiv.org/abs/2603.17771v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.17771v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Attention sinks and massive activations are recurring and closely related phenomena in Transformer models. Existing explanations have largely focused on the forward pass, yet in pre-norm Transformers, large residual-stream norms play only an indirect forward role because sublayers operate on normalized inputs. We study this relationship from the perspective of backpropagation. Empirically and theoretically, we show that under causal masking, attention sinks can induce pronounced gradient concentration, which we term gradient sinks. Since the RMSNorm Jacobian attenuates gradients roughly in inverse proportion to input norm, massive activations can be understood as adaptive regulators of this localized gradient pressure during training. This interpretation predicts that attenuating sink-induced gradients should weaken massive activations. We test this prediction with V-scale, a modification that adjusts backpropagated gradients on the value path. In V-scale models, attention sinks are preserved, whereas massive activations are suppressed. These results identify gradient sinks as a backward-pass counterpart of attention sinks, and massive activations as an adaptive RMSNorm-mediated response that attenuates the resulting localized training pressure. Our code is available at https://anonymous.4open.science/r/GradientSinkCode-B309.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-18T14:31:21Z</published>
+    <arxiv:comment>29 pages, 14 figures, 7 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yihong Chen</name>
+    </author>
+    <author>
+      <name>Zhouchen Lin</name>
+    </author>
+    <author>
+      <name>Quanming Yao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.10938v2</id>
+    <title>Stronger Normalization-Free Transformers</title>
+    <updated>2026-03-31T04:55:11Z</updated>
+    <link href="https://arxiv.org/abs/2512.10938v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.10938v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although normalization layers have long been viewed as indispensable components of deep learning architectures, the recent introduction of Dynamic Tanh (DyT) has demonstrated that alternatives are possible. The point-wise function DyT constrains extreme values for stable convergence and reaches normalization-level performance; this work seeks further for function designs that can surpass it. We first study how the intrinsic properties of point-wise functions influence training and performance. Building on these findings, we conduct a large-scale search for a more effective function design. Through this exploration, we introduce $\mathrm{Derf}(x) = \mathrm{erf}(αx + s)$, where $\mathrm{erf}(x)$ is the rescaled Gaussian cumulative distribution function, and identify it as the most performant design. Derf outperforms LayerNorm, RMSNorm, and DyT across a wide range of domains, including visual recognition and generation, speech representation, and DNA sequence modeling. Our analysis also suggests that the performance gains of Derf largely stem from its improved generalization rather than stronger fitting capacity. Its simplicity and stronger performance make Derf a practical choice for normalization-free Transformer architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-11T18:58:49Z</published>
+    <arxiv:comment>Published in CVPR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingzhi Chen</name>
+    </author>
+    <author>
+      <name>Taiming Lu</name>
+    </author>
+    <author>
+      <name>Jiachen Zhu</name>
+    </author>
+    <author>
+      <name>Mingjie Sun</name>
+    </author>
+    <author>
+      <name>Zhuang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.18702v4</id>
+    <title>From Fuzzy to Exact: The Halo Architecture for Infinite-Depth Reasoning via Rational Arithmetic</title>
+    <updated>2026-02-16T07:24:47Z</updated>
+    <link href="https://arxiv.org/abs/2601.18702v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.18702v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The prevailing scaling paradigm of Large Language Models (LLMs) rests on a substrate of "Fuzzy" floating-point arithmetic. To mitigate the inherent instability of this approximate foundation, modern architectures have erected a complex scaffolding of structural and numerical heuristics--Complex Residuals, Pre-RMSNorm, Attention Scaling, and Gradient Clipping--consuming significant compute solely to prevent numerical collapse.
+  We propose a paradigm shift to the "Exact". We introduce the Halo Architecture, grounded in the Rational Field (Q) and powered by a custom Exact Inference Unit (EIU). To resolve the exponential bit-width growth of rational arithmetic, Halo employs a Dual-Ring Topology that unifies two complementary control mechanisms: (1) The Micro-Ring (Continuum Maintenance), which strictly bounds memory complexity via Diophantine Approximation; and (2) The Macro-Ring (Symbolic Alignment), which enforces logical consistency via periodic state collapse.
+  This stable dual-ring substrate allows for the "Great Dismantling" of numerical scaffolding, reducing the Transformer block to its "Clean" algebraic form (Tabula Rasa). Furthermore, we verify the "Efficiency Paradox": the elimination of gradient noise (sigma -&gt; 0) allows for Macro-Learning Rates, potentially reducing the Total Time-to-Convergence by orders of magnitude. Halo demonstrates that General Intelligence requires the hybridization of continuous fields and discrete chains under a rigorous mathematical framework.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-26T17:24:34Z</published>
+    <arxiv:comment>Architecture update: Formalizes the Dual-Ring Topology and the Clean Transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hansheng Ren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.04405v1</id>
+    <title>Low-Rank Decay for Grokking in Scale-Invariant Transformers: A Spectral-Geometric View</title>
+    <updated>2026-06-03T03:33:45Z</updated>
+    <link href="https://arxiv.org/abs/2606.04405v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.04405v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Modern Transformer architectures frequently employ normalization mechanisms such as RMSNorm and Query-Key Normalization, making parts of the model approximately scale-invariant with respect to weight magnitudes. In this regime, standard Frobenius-norm weight decay acts purely along the radial direction of the weight space and cannot directly simplify the function represented by the normalized layer. We study grokking in small algorithmic tasks through this lens and propose \emph{Low-Rank Decay} (LRD), a nuclear-norm-like spectral regularizer whose subgradient -- the polar factor $UV^\top$ -- retains a tangential component even in the scale-invariant setting. This distinction has a concrete dynamical consequence: after the model memorizes the training set and task gradients vanish, L2 decay can no longer reshape the weight spectrum, whereas LRD continues to compress singular values in an $\ell_1$-like fashion. On modular arithmetic tasks, we find that LRD induces rapid effective-rank collapse in Query/Key matrices and expands the data-fraction boundary at which delayed generalization (grokking) occurs. We further provide a spectral-geometric interpretation through the ``needle-to-fan'' expansion of the nuclear-norm subdifferential near low-rank strata.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-03T03:33:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingyu Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.17146v1</id>
+    <title>The Geometry of Semantic Space: A Continuous Geometric Framework for the Transformer Architecture</title>
+    <updated>2026-07-19T09:08:51Z</updated>
+    <link href="https://arxiv.org/abs/2607.17146v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.17146v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a continuous geometric framework that models the discrete algebraic operations of the Transformer architecture as an integro-differential equation (IDE) on a semantic fiber bundle $\calE = \calM \times \R^d$. Beginning from a single geometric axiom -- that the token sequence forms a discrete $1$-manifold equipped with a canonical measure lattice -- we translate every core component of the modern Transformer (RMSNorm, RoPE, Softmax Attention, FFN, Residual Stream, SGD, Weight Decay) into a cohesive vocabulary of differential geometry, measure theory, and stochastic calculus. The resulting framework yields quantitative predictions spanning entropic optimal transport (Attention as a Schrödinger bridge) and non-equilibrium thermodynamics (SGD as Itô diffusion violating detailed balance). We conduct a six-part experimental campaign across five architectures (Qwen3, LLaMA\nobreakdash-3.1, Gemma\nobreakdash-3, GPT-2, Mistral) spanning $124$M to $8$B parameters. The empirical observables are quantitatively consistent with the geometric predictions: the $ε^{-1/2}$ Lipschitz scaling calibration at machine precision ($R^2 = 1.000$), the Lie--Trotter operator-splitting torsion, the symmetric ablation instability confirming the Dual-Law of Topological Stability, the $\calO(1/\sqrt{k})$ thermodynamic suppression of Poincaré recurrence on the RoPE torus, the thermodynamic context-limit phase transition, and the Non-Equilibrium Steady State parameter vortex -- verified across two optimizers (AdamW and Pure SGD) to exclude momentum artifacts. The results demonstrate that analyzing Transformers through the lens of continuous stochastic differential geometry provides a predictive descriptive vocabulary for the stability limits, context bounds, and optimization dynamics of Large Language Models.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-19T09:08:51Z</published>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <author>
+      <name>Zhihua Liang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.11169v1</id>
+    <title>Disentangling Direction and Magnitude in Transformer Representations: A Double Dissociation Through L2-Matched Perturbation Analysis</title>
+    <updated>2026-01-19T06:45:04Z</updated>
+    <link href="https://arxiv.org/abs/2602.11169v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.11169v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer hidden states encode information as high-dimensional vectors, yet whether direction (orientation in representational space) and magnitude (vector norm) serve distinct functional roles remains unclear. Studying Pythia-family models, we discover a striking cross-over dissociation: angular perturbations cause up to 42.9 more damage to language modeling loss, while magnitude perturbations cause disproportionately more damage to syntactic processing (20.4% vs.1.6% accuracy drop on subject-verb agreement).This finding is enabled by L2-matched perturbation analysis, a methodology ensuring that an gular and magnitude perturbations achieve identical Euclidean displacements. Causal intervention reveals that angular damage flows substantially through the attention pathways (28.4% loss recovery via attention repair), while magnitude damage flows partly through the LayerNorm pathways(29.9% recovery via LayerNorm repair). These patterns replicate across scales within the Pythia architecture family. These findings provide evidence that direction and magnitude support partially distinct computational roles in LayerNorm based architectures. The direction preferentially affects attentional routing, while magnitude modulates processing intensity for fine-grained syntactic judgments. We find different patterns in RMSNorm-based architectures, suggesting that the dissociation depends on architectural choices. Our results refine the linear representation hypothesis and have implications for model editing and interpretability research</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-19T06:45:04Z</published>
+    <arxiv:comment>15 pages, 7 figures. will Submit to ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Mangadoddi Srikar Vardhan</name>
+    </author>
+    <author>
+      <name>Lekkala Sai Teja</name>
+    </author>
+  </entry>
+</feed>
