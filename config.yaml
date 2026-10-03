@@ -13,6 +13,16 @@ budget:                           # hard budgets (SPEC rule 4)
   max_llm_cost_usd: 10.0
   max_followup_candidates: 2
 
+lit_search:                       # live literature search (LIT_SEARCH.md). Runs only with --niche.
+  max_queries: 12                 # LLM-proposed queries; one deterministic query per runnable change is added
+  per_query: 15                   # arXiv results requested per query
+  arxiv_min_interval_s: 3.0       # arXiv asks for ~1 request / 3 s
+  openalex: true                  # venue / peer-review / citations; contact email from OPENALEX_MAILTO
+  min_papers: 10                  # fewer retrieved -> fall back to the curated snapshot only
+  t4_threshold: 0.35              # TF-IDF cosine for "possible overlap: unextracted paper"
+  validate_extraction: true       # also extract the curated papers and report agreement with the human labels
+  max_llm_cost_usd: 3.0
+
 seeds:
   baseline: [0, 1, 2, 3, 4]       # noise floor
   paired: [0, 1, 2]               # candidate screening seeds (baseline runs are reused, never re-run)
@@ -64,5 +74,6 @@ paths:
   papers: data/papers.json
   claims: data/claims.json
   fixtures: data/fixtures.json
+  niche: niche.yaml
   results: results
   work: work

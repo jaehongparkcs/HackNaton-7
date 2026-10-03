@@ -25,7 +25,7 @@ def sha256_file(p: Path) -> str:
 
 def input_hashes() -> dict[str, str]:
     cfg = load_config()["paths"]
-    out = {k: sha256_file(ROOT / cfg[k]) for k in ("data", "papers", "claims", "fixtures")}
+    out = {k: sha256_file(ROOT / cfg[k]) for k in ("data", "papers", "claims", "fixtures", "niche")}
     for p in sorted((ROOT / "prompts").glob("*.md")):
         out[f"prompts/{p.name}"] = sha256_file(p)
     return out
@@ -53,7 +53,8 @@ def seal(out_dir: Path, store: Store, *, meta: dict) -> dict:
 
 def write_manifest(out_dir: Path) -> None:
     files = {}
-    for rel in BUNDLE_FILES:
+    corpus = sorted(str(p.relative_to(out_dir)) for p in (out_dir / "corpus").rglob("*") if p.is_file())
+    for rel in [*BUNDLE_FILES, *corpus]:        # the frozen literature corpus is part of the bundle
         p = out_dir / rel
         if p.exists():
             files[rel] = sha256_file(p)

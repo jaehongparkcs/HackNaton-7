@@ -36,6 +36,9 @@ make app                 # dashboard over every notebook in results/ and work/
 ```bash
 cp .env.example .env     # then set ANTHROPIC_API_KEY
 make timing              # ~40 s: report tokens/s on this machine (the budget is steps, so nothing to tune)
+make search NICHE=niche.yaml             # live literature search for the niche, frozen to work/corpus-niche/ (no training; ~$1-2)
+uv run python -m noesis_lab lit-dryrun --corpus work/corpus-niche   # gate stability + fixture leakage check on that corpus
+make golden CORPUS=work/corpus-niche     # record a session on the frozen corpus (or NICHE=niche.yaml to search inside the session)
 uv run python -m noesis_lab lit-dryrun   # cents: Literature agent on every fixture + queue candidate, 2x; verdicts must be identical
 make golden              # 5 baseline + 3 per candidate (+2 extra seeds if promising), every LLM call recorded
 make verify rederive replay
@@ -146,6 +149,36 @@ Each claim in [data/claims.json](data/claims.json) carries a human-curated `conf
 
 *Gap we filled before any run:* the plan did not say what happens when the mean improvement exceeds 1×SD but the seeds disagree in sign. We route that to "no improvement" and flag it as seed disagreement. It is in the rule text and has a test.
 
+## Live literature search that decides what gets run
+
+The PI defines a niche ([niche.yaml](niche.yaml), or the dashboard sidebar form, which only writes a `niche_<slug>.yaml` and shows the command). The lab searches the live literature for it, extracts checkable claims, maps what is covered, and uses that map to block or deprioritize overlapping ideas and to order the queue. Code is in [noesis_lab/search/](noesis_lab/search/).
+
+```
+NicheSpec ─► (LLM) query plan ─► (API) arXiv + OpenAlex ─► (code) dedupe + filter + rank
+          ─► (LLM) extract fields per abstract ─► (code) verify quote, map to config, coverage, tier
+          ─► freeze into results/<session>/corpus/ ─► coverage grid + paper map ─► queue ─► gate ─► runs
+```
+
+Rules it keeps:
+
+1. **APIs find papers; LLMs never recall them.** Every paper has an arXiv id and a verbatim abstract from an API response. Raw responses are cached in `corpus/raw/`.
+2. **LLMs extract; code checks and decides.** Claude proposes search queries and transcribes fields from abstracts. Code caps the queries and adds one per runnable config change, drops any claim whose quote is not a verbatim substring, nulls any `config_change` outside the allowlist, and computes coverage, tier, verdict, gate outcome and queue order.
+3. **Search live, then freeze.** A session reads only `results/<session>/corpus/` (niche, query plan, raw responses, papers with ranking components, claims with tier and coverage, drops with reasons, the search's own LLM recordings). The manifest hashes all of it; replay and rederive use no network (tested with the network disabled).
+4. **Never "novel".** The strongest statement is "not found in N papers retrieved on <date> for K queries".
+5. **Novelty errors lean toward "covered"; evidence errors lean toward "inconclusive".** For overlap, `covers` and `partially covers` both count. For `agrees` / `contradicts`, only `covers` counts.
+
+**Coverage rule for auto-extracted claims** (shown verbatim in the UI): covers = model_family ∈ {transformer, general} AND task ∈ {char_language_modeling, language_modeling, general} AND scale ∈ {tiny, small}; partially covers = same with scale ∈ {medium, large, unspecified}; otherwise does not cover. Curated claims keep their human flag.
+
+**Trust tiers.** T1 curated (the 13 human-checked claims): can hard-reject. T2 auto-extracted, quote verbatim, published at a venue: soft-reject. T3 auto-extracted, quote verbatim, preprint or unknown review status: soft-reject, exactly like T2, because being unreviewed does not make a topic uncovered. T4 retrieved but no claim passed the quote check: a TF-IDF similarity above 0.35 between the candidate and the abstract holds the candidate for PI review. Soft-rejected candidates go to the end of the queue and are not run; the PI overrides with `pi_overrides` in the niche file, and dismisses a hold with `pi_dismissed_holds`.
+
+**Queue from the frozen claims** (`stats.candidate_queue`): covered by T1 → rejected; covered by T2/T3 → end of the queue; T4-flagged → held; the rest by expected outcome, then number of supporting claims, then alphabetically. A context-only claim never "covers" a candidate. The gate then asks the Literature Agent only "same comparison?" over claims of all tiers, and `stats.gate_outcome` applies the tier.
+
+**Failure handling.** An API failure is retried once, then the search continues and the session records `search_degraded`. Fewer than `lit_search.min_papers` (10) retrieved → the session falls back to the curated snapshot and is labeled "curated snapshot only". Without `--niche` / `--corpus` a session never touches the network. Budgets are under `lit_search:` in [config.yaml](config.yaml). Record early; do not depend on live APIs in the final window.
+
+**Validation.** The search also runs extraction on the 10 curated papers and reports agreement with the human labels on the dashboard (config mapping, direction, covered-or-not). `lit-dryrun --corpus` repeats the gate and flags any fixture whose verdict changes when the corpus grows (report it and pick a new fixture; do not hide it).
+
+What differs from the plan, plainly: the T4 check compares the candidate's own text (the change plus its supporting claims) rather than the full templated hypothesis sentence, because the template's boilerplate matched every on-niche abstract (threshold 0.35 on the curated set: 0 false holds, 6 of 8 own papers found). OpenAlex does not link most arXiv records to their conference version, so it can only add evidence of publication; everything else is "review status unknown" and treated as T3. One-hop seed expansion is not built. A niche outside the testbed still gets a map, and the queue says "no runnable candidates in this testbed".
+
 ## The curated literature snapshot (read this before judging the verdicts)
 
 The snapshot is **10 arXiv papers / 13 claims** covering exactly the dimensions the testbed exposes (norm, Pre/Post-LN, optimizer, schedule, activation, positional encoding, dropout). It is deliberately tiny for the demo. Therefore:
@@ -207,11 +240,13 @@ Citations and URLs are in [BUILD_PLAN.md](BUILD_PLAN.md) §0 and were taken from
 config.yaml  pyproject.toml  uv.lock  Makefile  app.py
 noesis_lab/   schemas.py llm.py literature.py agents.py orchestrator.py runner.py stats.py
              store.py bundle.py rederive.py cli.py mock_llm.py evidence_chain.py  testbed/{harness,model}.py
-prompts/     literature.md scientist.md critic_pre.md critic_post.md
+noesis_lab/search/  plan.py arxiv.py openalex.py http.py rank.py extract.py coverage.py corpus.py grid.py textsim.py
+niche.yaml   the PI's niche (default)
+prompts/     literature.md scientist.md critic_pre.md critic_post.md query_plan.md extract.md
 data/        tinyshakespeare.txt papers.json claims.json fixtures.json
 scripts/     fetch_snapshot.py verify_snapshot.py
 tests/       pytest, CPU, mocked LLM
-results/<session>/  notebook.sqlite runs.jsonl recordings/llm.jsonl env.json state.json MANIFEST.json
+results/<session>/  notebook.sqlite runs.jsonl recordings/llm.jsonl env.json state.json MANIFEST.json corpus/
 ```
 
 ## Cut for today (see BUILD_PLAN §12)

@@ -12,8 +12,16 @@ from collections import Counter
 from pathlib import Path
 
 from .llm import LLM
-from .schemas import Claim, Fixture, LiteratureOutput, Paper, PriorArtResult, PriorArtVerdictKind
-from .stats import prior_art_verdict
+from .schemas import (
+    Claim,
+    Fixture,
+    LiteratureOutput,
+    PriorArtResult,
+    PriorArtVerdictKind,
+    RetrievedPaper,
+)
+from .search.coverage import claim_coverage, review_label
+from .stats import gate_outcome, prior_art_verdict
 
 PROMPTS = Path(__file__).resolve().parents[1] / "prompts"
 
@@ -39,10 +47,11 @@ def _tokens(s: str) -> list[str]:
 class Snapshot:
     """Papers + claims. Loading FAILS if any claim span is not a verbatim substring of its abstract."""
 
-    def __init__(self, papers_path: Path, claims_path: Path):
+    def __init__(self, papers_path: Path, claims_path: Path, meta: dict | None = None):
         doc = json.loads(Path(papers_path).read_text())
         self.source, self.fetched = doc["source"], doc["fetched"]
-        self.papers: dict[str, Paper] = {p["paper_id"]: Paper(**p) for p in doc["papers"]}
+        self.meta = meta or {"mode": "curated_only"}      # corpus/meta.json when frozen from a search
+        self.papers: dict[str, RetrievedPaper] = {p["paper_id"]: RetrievedPaper(**p) for p in doc["papers"]}
         self.claims: dict[str, Claim] = {}
         for raw in json.loads(Path(claims_path).read_text())["claims"]:
             c = Claim(**raw)
@@ -54,9 +63,27 @@ class Snapshot:
             self.claims[c.claim_id] = c
         self._build_index()
 
+    @classmethod
+    def from_corpus(cls, corpus: Path) -> Snapshot:
+        """A frozen session corpus (results/<session>/corpus). No network."""
+        mp = Path(corpus) / "meta.json"
+        return cls(Path(corpus) / "papers.json", Path(corpus) / "claims.json",
+                   json.loads(mp.read_text()) if mp.exists() else None)
+
     @property
     def size(self) -> int:
         return len(self.papers)
+
+    @property
+    def live(self) -> bool:
+        return self.meta.get("mode") == "live_search"
+
+    def not_found_label(self) -> str:
+        """The strongest negative statement we make. Never "novel"."""
+        if self.live:
+            return (f"not found in {self.size} papers retrieved on {self.meta.get('search_date')} "
+                    f"for {len(self.meta.get('queries', []))} queries")
+        return f"not found in curated snapshot ({self.size} papers)"
 
     def _doc_text(self, c: Claim) -> str:
         return " ".join([c.method, c.dimension, c.setting, c.claim, self.papers[c.paper_id].title])
@@ -90,15 +117,15 @@ def _claims_block(hits: list[tuple[Claim, float]], snap: Snapshot) -> str:
     out = []
     for c, _ in hits:
         p = snap.papers[c.paper_id]
-        out.append(f"[{c.claim_id}] {p.title} (arXiv:{c.paper_id})\n"
+        out.append(f"[{c.claim_id}] {p.title} (arXiv:{c.paper_id}, {p.published})\n"
                    f"  method: {c.method}\n  setting (per abstract): {c.setting}\n"
                    f"  claim: {c.claim}\n  passage: \"{c.source_span}\"")
     return "\n".join(out)
 
 
 class LiteratureAgent:
-    def __init__(self, llm: LLM, snap: Snapshot, top_k: int = 5):
-        self.llm, self.snap, self.top_k = llm, snap, top_k
+    def __init__(self, llm: LLM, snap: Snapshot, top_k: int = 5, overrides: tuple[str, ...] = ()):
+        self.llm, self.snap, self.top_k, self.overrides = llm, snap, top_k, set(overrides)
         self.system = (PROMPTS / "literature.md").read_text()
 
     def check(self, fixture: Fixture, *, question: str | None = None,
@@ -129,14 +156,20 @@ class LiteratureAgent:
         out, eid = self.llm.call(role, self.system, user, LiteratureOutput, validate=validate)
         claim = self.snap.claims.get(out.claim_id) if out.claim_id else None
         paper = self.snap.papers[claim.paper_id] if claim else None
-        verdict = prior_art_verdict(out.same_comparison, claim.covers_our_setting if claim else None)
+        cov = claim_coverage(claim) if claim else None
+        verdict = prior_art_verdict(out.same_comparison, cov)
+        gate = gate_outcome(verdict, claim.tier if claim else None,
+                            overridden=fixture.candidate_key in self.overrides)
         n = self.snap.size
+        where = "curated snapshot" if not self.snap.live else f"{n} retrieved papers"
+        badge = (f"{claim.tier}, {review_label(paper.peer_reviewed) if claim.tier != 'T1' else 'curated'}, "
+                 f"{paper.published}") if claim else ""
         label = {
-            PriorArtVerdictKind.known: f"KNOWN IN CORPUS (arXiv:{claim.paper_id})" if claim else "",
+            PriorArtVerdictKind.known: f"KNOWN IN CORPUS (arXiv:{claim.paper_id}; {badge})" if claim else "",
             PriorArtVerdictKind.setting_untested:
-                f"method found (arXiv:{claim.paper_id}); this setting not found in curated snapshot "
-                f"({n} papers)" if claim else "",
-            PriorArtVerdictKind.not_found: f"not found in curated snapshot ({n} papers)",
+                f"method found (arXiv:{claim.paper_id}; {badge}); this setting not found in {where}"
+                + (f" ({n} papers)" if not self.snap.live else "") if claim else "",
+            PriorArtVerdictKind.not_found: self.snap.not_found_label(),
         }[verdict]
         return PriorArtResult(
             verdict=verdict, claim_id=claim.claim_id if claim else None,
@@ -146,4 +179,5 @@ class LiteratureAgent:
             rationale=out.rationale, snapshot_size=n, label=label, event_id=eid,
             same_comparison=out.same_comparison,
             covers_our_setting=claim.covers_our_setting if claim else None,
-            coverage_note=claim.coverage_note if claim else None)
+            coverage_note=claim.coverage_note if claim else None,
+            coverage=cov, tier=claim.tier if claim else None, gate=gate)

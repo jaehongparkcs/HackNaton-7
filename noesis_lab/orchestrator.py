@@ -5,9 +5,11 @@ here by `stats.py` from stored runs, with a rule that was written before the fir
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 import time
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -20,6 +22,8 @@ from .llm import LLM, BudgetExceeded, Mode
 from .mock_llm import make_mock
 from .runner import LiveRunner, RecordedRunner, RunBudgetExceeded
 from .schemas import Analysis, ExperimentConfig, Fixture, PriorArtVerdictKind, QueueItem
+from .search.corpus import build_corpus, copy_corpus, freeze_curated, load_niche
+from .search.coverage import candidate_text, t4_overlaps
 from .store import Store
 
 
@@ -29,6 +33,10 @@ class SessionOpts:
     profile: str = "full"
     llm_mode: Mode = "live"
     force: bool = False
+    niche: str | None = None      # path to a niche.yaml: run the live literature search for it
+    corpus: str | None = None     # path to an already frozen corpus (from `make search`): no network
+    fetch: Callable[[str], str] | None = None      # HTTP transport override (tests)
+    sleep: Callable[[float], None] | None = None
     # replay: serve LLM + runs from results/<session>, write to work/replay-<session>
     # otherwise: write a new bundle to results/<session>
 
@@ -72,9 +80,9 @@ class Session:
         self.out = (root / self.cfg["paths"]["work"] / f"replay-{o.session}") if self.replay else self.src
         fresh_dir(self.out, force=self.replay or o.force)
         self.store = Store(self.out / "notebook.sqlite")
-        self.snap = Snapshot(path_of("papers"), path_of("claims"))
         fx = json.loads(path_of("fixtures").read_text())["fixtures"]
         self.fixtures = {f["fixture_id"]: Fixture(**f) for f in fx}
+        self._load_corpus()
         self.t0 = time.monotonic()
         self.budget = self.cfg["budget"]
 
@@ -89,7 +97,7 @@ class Session:
             self.runner = LiveRunner(self.store, self.profile, path_of("data"),
                                      self.cfg["paths"]["data_sha256"], self.out / "runs.jsonl",
                                      self.budget["max_runs"])
-        self.lit = LiteratureAgent(self.llm, self.snap)
+        self.lit = LiteratureAgent(self.llm, self.snap, overrides=tuple(self.niche.pi_overrides))
         self.scientist, self.critic = Scientist(self.llm, self.snap), Critic(self.llm)
         self.baseline = baseline_config(self.profile)
         self.seeds = self.cfg["seeds"]
@@ -97,12 +105,54 @@ class Session:
         self.noise: stats.NoiseFloor | None = None
         self.base_by_seed: dict = {}
         self.runs_avoided = 0
+        self.soft: set[str] = set()          # keys soft-rejected at the gate (end of the queue)
+        self.holds = self._t4_holds()        # key -> [(unextracted paper id, similarity)]
+        self.held = set(self.holds) - set(self.niche.pi_dismissed_holds)
         self.tested: set[str] = set()        # "field=value" keys tested or gated out this session
         self.followups = 0                   # queue candidates taken so far (bounded by the budget)
         self.extra_done: set[str] = set()    # hypotheses that already got extra seeds (never twice)
         self.exhausted = False
         self.noise_did = ""
         self.trigger = ""                    # decision that led to the hypothesis being evaluated now
+
+    # ------------------------------------------------------------------ literature corpus
+    def _load_corpus(self) -> None:
+        """Search live, then freeze: the session only ever reads `<bundle>/corpus/`."""
+        o = self.o
+        if self.replay:
+            cdir = self.src / "corpus"
+            if not cdir.exists():        # bundle recorded before the corpus was frozen per session
+                self.niche = load_niche()
+                self.snap = Snapshot(path_of("papers"), path_of("claims"))
+                return
+        else:
+            cdir = self.out / "corpus"
+            if o.corpus:
+                copy_corpus(Path(o.corpus), cdir)
+            elif o.niche:
+                lcfg = self.cfg["lit_search"]
+                llm = LLM(o.llm_mode, self.cfg["llm"], recordings_path=cdir / "llm.jsonl",
+                          mock_fn=make_mock(self.fixtures) if o.llm_mode == "mock" else None,
+                          max_cost_usd=lcfg["max_llm_cost_usd"])
+                kw = {k: v for k, v in (("fetch", o.fetch), ("sleep", o.sleep)) if v}
+                build_corpus(cdir, load_niche(o.niche), llm, today=dt.date.today().isoformat(), **kw)
+            else:
+                freeze_curated(cdir, load_niche())
+        self.niche = load_niche(cdir / "niche.yaml")
+        self.snap = Snapshot.from_corpus(cdir)
+
+    def _t4_holds(self) -> dict[str, list]:
+        """Candidates whose hypothesis text is close to an unextracted (T4) abstract."""
+        baseline = baseline_config(self.profile)
+        thr = self.cfg["lit_search"]["t4_threshold"]
+        holds = {}
+        for item in stats.candidate_queue(baseline, self.snap.claims.values(), []):
+            text = candidate_text(item.field, item.value,
+                                  [self.snap.claims[c] for c in item.supporting_claim_ids])
+            hits = t4_overlaps(text, list(self.snap.papers.values()), thr)
+            if hits:
+                holds[item.key] = [[pid, score] for pid, score in hits]
+        return holds
 
     # ------------------------------------------------------------------ helpers
     def _check_wall(self) -> None:
@@ -144,7 +194,7 @@ class Session:
         hid = f"hyp_{fx.fixture_id}"
         self._set_status(hid, fx, "proposed", statement=fx.statement, title=fx.title, kind=fx.kind,
                          fixture=fx.origin == "fixture", origin=fx.origin.upper(),
-                         supporting_claim_ids=list(fx.cited_claim_ids),
+                         supporting_claim_ids=list(fx.cited_claim_ids), candidate_key=fx.candidate_key,
                          queue_priority=fx.queue_priority)
         if fx.candidate_key:
             self.tested.add(fx.candidate_key)
@@ -156,7 +206,21 @@ class Session:
         if pa.claim_id:
             self.store.link("hypothesis", hid, "nearest_claim", "claim", pa.claim_id)
             self.store.link("claim", pa.claim_id, "from_paper", "paper", pa.paper_id)
-        if pa.verdict == PriorArtVerdictKind.known:
+        if pa.gate == "soft_reject":
+            # covered by an auto-extracted / preprint claim: not run, end of the queue, PI may override
+            self._set_status(hid, fx, "soft_rejected_prior_art", prior_art=pa.model_dump(mode="json"))
+            did = self.store.add_decision("prior_art_soft_rejection", hid, self._chained({
+                "runs_deferred": len(seeds), "passage": pa.passage, "paper_id": pa.paper_id,
+                "label": pa.label, "claim_id": pa.claim_id, "tier": pa.tier,
+                "note": "covered by an auto-extracted / preprint claim; the PI may override "
+                        "(niche.yaml: pi_overrides)"}))
+            self.store.link("decision", did, "rests_on", "claim", pa.claim_id)
+            self._link_trigger(did)
+            if fx.candidate_key:
+                self.tested.discard(fx.candidate_key)
+                self.soft.add(fx.candidate_key)
+            return Outcome(fx.fixture_id, hid, "soft_rejected_prior_art")
+        if pa.verdict == PriorArtVerdictKind.known and pa.gate == "reject":
             self.runs_avoided += len(seeds)
             self._set_status(hid, fx, "rejected_prior_art", prior_art=pa.model_dump(mode="json"))
             did = self.store.add_decision("prior_art_rejection", hid, self._chained({
@@ -242,8 +306,29 @@ class Session:
         return a, did
 
     # ------------------------------------------------------------------ candidate queue
+    def _queue_inputs(self) -> dict:
+        return {"tested": sorted(self.tested), "soft_rejected": sorted(self.soft),
+                "held": sorted(self.held), "overrides": sorted(self.niche.pi_overrides)}
+
     def _queue(self) -> list[QueueItem]:
-        return stats.candidate_queue(self.baseline, self.snap.claims.values(), self.tested)
+        return stats.candidate_queue(self.baseline, self.snap.claims.values(), **self._queue_inputs())
+
+    def _record_queue_gates(self) -> None:
+        """What the frozen literature already rules out, before any LLM gate or compute."""
+        kinds = {"rejected_prior_art": "queue_rejection", "soft_rejected": "queue_soft_rejection",
+                 "held": "pi_review_hold"}
+        for q in self._queue():
+            if q.status == "open":
+                continue
+            claims = [self.snap.claims[c] for c in q.covering_claim_ids]
+            did = self.store.add_decision(kinds[q.status], "", {
+                "candidate_key": q.key, "status": q.status, "note": q.note,
+                "covering": [{"claim_id": c.claim_id, "paper_id": c.paper_id, "tier": c.tier,
+                              "published": self.snap.papers[c.paper_id].published,
+                              "passage": c.source_span} for c in claims],
+                "possible_overlap": self.holds.get(q.key, []) if q.status == "held" else []})
+            for c in claims:
+                self.store.link("decision", did, "rests_on", "claim", c.claim_id)
 
     def _generate(self, item: QueueItem) -> Fixture:
         fx = generate_fixture(item, self.baseline, self.snap)
@@ -265,7 +350,7 @@ class Session:
         did = self.store.add_decision("next_action", cur.hypothesis_id, {
             "analysis_id": a.analysis_id, "next_action": na.model_dump(mode="json"),
             "triggered_by": cur.decision_id,
-            "inputs": {"extra_seeds": self.seeds["extra"], "tested": sorted(self.tested),
+            "inputs": {"extra_seeds": self.seeds["extra"], **self._queue_inputs(),
                        "queue": [q.model_dump(mode="json") for q in queue]}})
         self.store.link("decision", did, "based_on", "analysis", a.analysis_id)
         if cur.decision_id:
@@ -318,7 +403,7 @@ class Session:
         while not self.exhausted:
             while pending and not self.exhausted:
                 did = self._decide(pending.pop(0))
-            queue = self._queue()
+            queue = stats.open_items(self._queue())
             if self.exhausted or not queue:
                 break
             if self.followups >= limit:
@@ -358,14 +443,18 @@ class Session:
             self.store.set_meta("snapshot", {"papers": self.snap.size, "claims": len(self.snap.claims),
                                              "dimensions": self.snap.dimensions(),
                                              "fetched": self.snap.fetched, "source": self.snap.source})
+            self.store.set_meta("niche", self.niche.model_dump())
+            self.store.set_meta("corpus", self.snap.meta)
+            self.store.set_meta("t4_holds", self.holds)
             self.store.set_meta("objective", "Improve validation loss of a tiny character-level "
                                 "Transformer under a fixed 2,000-step training budget.")
             self.store.set_meta("profile", self.profile.model_dump())
             self.store.set_meta("baseline_config", self.baseline.model_dump())
             self.noise_floor()
-            self.store.set_meta("candidate_queue", [q.model_dump(mode="json") for q in
-                                                    stats.candidate_queue(self.baseline,
-                                                                          self.snap.claims.values(), [])])
+            self.store.set_meta("candidate_queue", [q.model_dump(mode="json") for q in self._queue()])
+            if self.snap.meta.get("degraded"):
+                self.store.add_decision("search_degraded", "", {"reasons": self.snap.meta["degraded"]})
+            self._record_queue_gates()
             self.trigger = self.noise_did
             outcomes = [self.evaluate(f) for f in list(self.fixtures.values())]
             self._chain([o for o in outcomes if o.analysis is not None])
@@ -376,7 +465,9 @@ class Session:
         meta = {"session": self.o.session, "profile": self.profile.name, "llm_mode": self.o.llm_mode,
                 "status": status, "llm_cost_usd": round(self.llm.cost_usd, 4),
                 "llm_calls": self.llm.n_calls, "runs_executed": self.runner.n_executed,
-                "runs_avoided": self.runs_avoided, "model": self.cfg["llm"]["model"]}
+                "runs_avoided": self.runs_avoided, "model": self.cfg["llm"]["model"],
+                "corpus": self.snap.meta.get("label", ""),
+                "search_llm_cost_usd": self.snap.meta.get("llm_cost_usd", 0.0)}
         if self.replay:
             self.store.set_meta("replay_of", self.o.session)
             digest = self.store.state_digest()

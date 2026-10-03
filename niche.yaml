@@ -1,0 +1,28 @@
+# The niche is a PI decision. The lab chooses the experiments, not the niche.
+# Used by: make search NICHE=niche.yaml   /   make golden NICHE=niche.yaml
+title: Training efficiency of tiny character-level Transformers
+description: >
+  Which architecture and optimization choices change the validation loss of a very small
+  character-level Transformer language model trained for a short, fixed number of steps?
+  We care about normalization, activation functions, positional encoding, optimizers,
+  learning-rate schedules and regularization, as reported for Transformer language models.
+include_terms:
+  - layer normalization
+  - activation functions
+  - positional encoding
+  - optimizer
+  - learning-rate schedule
+  - dropout
+  - Transformer language model
+exclude_terms:
+  - vision transformer
+  - speech
+  - reinforcement learning
+arxiv_categories: [cs.LG, cs.CL, cs.NE]
+date_from: "2017-01-01"
+date_to: ""            # empty = the day of the search
+seed_papers: ["2002.04745", "1910.07467"]
+max_papers: 80
+testbed: tiny_char_lm
+pi_overrides: []       # "field=value" keys to run despite a soft-reject
+pi_dismissed_holds: [] # "field=value" keys whose "possible overlap" hold the PI dismissed

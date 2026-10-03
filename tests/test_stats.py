@@ -173,6 +173,8 @@ def test_speed_claim_not_reproduced_note():
     (False, False, PriorArtVerdictKind.not_found), (False, True, PriorArtVerdictKind.not_found),
     (True, False, PriorArtVerdictKind.setting_untested), (True, None, PriorArtVerdictKind.setting_untested),
     (True, True, PriorArtVerdictKind.known),
+    (True, "covers", PriorArtVerdictKind.known), (True, "partial", PriorArtVerdictKind.known),   # lean "covered"
+    (True, "none", PriorArtVerdictKind.setting_untested), (False, "covers", PriorArtVerdictKind.not_found),
 ])
 def test_prior_art_verdict_is_a_pure_function_of_two_inputs(same, covers, verdict):
     assert stats.prior_art_verdict(same, covers) == verdict
@@ -185,10 +187,13 @@ SNAP = Snapshot(path_of("papers"), path_of("claims"))
 def test_candidate_queue_is_deterministic_and_ordered_as_specified():
     base = ExperimentConfig()
     q = stats.candidate_queue(base, SNAP.claims.values(), [])
-    assert [i.key for i in q] == [
-        "activation=relu2", "activation=swiglu", "dropout=0.1", "pos_encoding=rope",   # improves
-        "norm=rmsnorm",                                                                  # no_worse
-        "norm_position=post", "optimizer=sgd_momentum", "schedule=constant"]             # context
+    assert [(i.key, i.status) for i in q] == [
+        ("activation=swiglu", "open"), ("dropout=0.1", "open"), ("pos_encoding=rope", "open"),   # improves
+        ("norm=rmsnorm", "open"),                                                                  # no_worse
+        ("norm_position=post", "open"), ("optimizer=sgd_momentum", "open"),                        # context
+        ("schedule=constant", "open"),
+        ("activation=relu2", "rejected_prior_art")]       # covered by curated T1 claim c10: never run
+    assert q[-1].covering_claim_ids == ["c10"]
     assert q == stats.candidate_queue(base, list(reversed(list(SNAP.claims.values()))), [])
     rms = next(i for i in q if i.key == "norm=rmsnorm")
     assert rms.supporting_claim_ids == ["c04", "c05"] and rms.priority == [1, -2, "norm=rmsnorm"]
@@ -197,9 +202,9 @@ def test_candidate_queue_is_deterministic_and_ordered_as_specified():
 
 def test_candidate_queue_excludes_tested_and_baseline_values():
     base = ExperimentConfig()
-    q = stats.candidate_queue(base, SNAP.claims.values(), ["norm=rmsnorm", "activation=relu2"])
-    assert "norm=rmsnorm" not in [i.key for i in q] and "activation=relu2" not in [i.key for i in q]
-    assert q[0].key == "activation=swiglu"
+    q = stats.candidate_queue(base, SNAP.claims.values(), ["norm=rmsnorm", "activation=swiglu"])
+    assert "norm=rmsnorm" not in [i.key for i in q] and "activation=swiglu" not in [i.key for i in q]
+    assert q[0].key == "dropout=0.1"
     # a candidate equal to the baseline value is not a change
     q2 = stats.candidate_queue(ExperimentConfig(activation="swiglu"), SNAP.claims.values(), [])
     assert "activation=swiglu" not in [i.key for i in q2]

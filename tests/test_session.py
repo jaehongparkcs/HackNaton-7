@@ -145,8 +145,10 @@ def test_followups_come_from_the_queue_not_from_config(session_name):
     fups = [d for d in st.decisions() if d["kind"] == "followup_candidate"]
     assert fups and all(d["supporting_claim_ids"] for d in fups)
     queue = st.get_meta("candidate_queue")
-    assert [d["candidate_key"] for d in fups] == [q["key"] for q in queue
-                                                  if q["key"] != "norm=rmsnorm"][:len(fups)]
+    assert [d["candidate_key"] for d in fups] == [q["key"] for q in queue if q["status"] == "open"
+                                                  and q["key"] != "norm=rmsnorm"][:len(fups)]
+    rej = [d for d in st.decisions() if d["kind"] == "queue_rejection"]      # relu2: curated claim c10 covers it
+    assert [d["candidate_key"] for d in rej] == ["activation=relu2"] and rej[0]["covering"][0]["tier"] == "T1"
     for d in st.decisions():                                                 # queue stored with every rule firing
         if d["kind"] == "next_action":
             assert "norm=rmsnorm" in d["inputs"]["tested"]

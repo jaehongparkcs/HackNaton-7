@@ -101,6 +101,35 @@ class Paper(BaseModel):
     abstract_sha256: str
 
 
+Coverage = Literal["covers", "partial", "none"]
+Tier = Literal["T1", "T2", "T3", "T4"]      # curated / verified-auto / preprint / unextracted
+
+
+class RetrievedPaper(Paper):
+    """A paper as frozen into a session corpus. Curated papers load with the defaults."""
+    source: str = "curated"            # curated | arxiv
+    venue: str | None = None
+    peer_reviewed: bool | None = None  # None = review status unknown (OpenAlex off or no match)
+    cited_by: int = 0
+    doi: str | None = None
+    categories: list[str] = []
+    queries: list[str] = []            # which queries returned it
+    relevance: float | None = None
+    relevance_components: dict[str, float] = {}
+    tier: Tier = "T1"                  # paper-level: T4 = retrieved but no claim passed the quote check
+    map_xy: list[float] | None = None  # TF-IDF -> PCA position (text similarity only)
+
+
+class SettingFields(BaseModel):
+    """What the abstract says about the setting. 'unspecified' is always a valid answer."""
+    model_config = ConfigDict(extra="forbid")
+    model_family: Literal["transformer", "rnn", "cnn", "mlp", "general", "unspecified"]
+    task: Literal["language_modeling", "char_language_modeling", "translation", "classification",
+                  "vision", "speech", "general", "unspecified"]
+    scale: Literal["tiny", "small", "medium", "large", "unspecified"]
+    evidence: Literal["empirical", "theoretical", "survey"]
+
+
 class Claim(BaseModel):
     claim_id: str
     paper_id: str
@@ -109,7 +138,7 @@ class Claim(BaseModel):
     setting: str                      # as stated in the abstract; used for setting matching
     claim: str
     source_span: str                  # verbatim substring of the abstract (checked at load)
-    expected_outcome: Literal["improves", "no_worse", "context"]
+    expected_outcome: Literal["improves", "no_worse", "worse", "context"]
     # How a measured result relates to this claim; set by a human, never by an LLM.
     # Human-curated, one written criterion for every claim (README "Setting coverage"):
     # covers = the abstract states the result for Transformer language models, or for Transformers
@@ -118,6 +147,31 @@ class Claim(BaseModel):
     coverage_note: str = ""
     config_change: dict[str, str] | None = None   # single-field delta this claim speaks to (None = context only)
     claims_speed: bool = False                    # the claim includes a speed / running-time component
+    # Live-search additions. T1 = human-curated (the fields above). T2/T3 = auto-extracted: the LLM
+    # transcribed `setting_fields`; code checked the quote and computed `coverage` by one rule.
+    tier: Tier = "T1"
+    coverage: Coverage | None = None              # None on T1: derived from covers_our_setting
+    setting_fields: SettingFields | None = None
+    peer_reviewed: bool | None = None
+    published: str = ""
+    extraction_event: str = ""                    # request key of the recorded extraction call
+
+
+class NicheSpec(BaseModel):
+    """The PI's niche. A PI decision: the lab chooses experiments, not the niche."""
+    model_config = ConfigDict(extra="forbid")
+    title: str
+    description: str
+    include_terms: list[str] = []
+    exclude_terms: list[str] = []
+    arxiv_categories: list[str] = ["cs.LG", "cs.CL", "cs.NE"]
+    date_from: str = "2017-01-01"
+    date_to: str = ""                 # "" = the day of the search
+    seed_papers: list[str] = []
+    max_papers: int = Field(80, ge=1, le=300)
+    testbed: Literal["tiny_char_lm"] = "tiny_char_lm"
+    pi_overrides: list[str] = []      # "field=value" keys the PI runs despite a soft-reject
+    pi_dismissed_holds: list[str] = []   # "field=value" keys whose T4 hold the PI dismissed
 
 
 class Fixture(BaseModel):
@@ -141,6 +195,12 @@ class QueueItem(BaseModel):
     value: str
     priority: list[Any]               # [outcome rank, -n supporting claims, key]
     supporting_claim_ids: list[str]
+    # open = runnable now; soft_rejected = covered by an auto-extracted / preprint claim (end of the
+    # queue, PI may override); held = possible overlap with an unextracted paper (PI review);
+    # rejected_prior_art = covered by a curated (T1) claim.
+    status: Literal["open", "soft_rejected", "held", "rejected_prior_art"] = "open"
+    covering_claim_ids: list[str] = []
+    note: str = ""
 
 
 # --------------------------------------------------------------------------------------
@@ -159,6 +219,36 @@ class LiteratureOutput(BaseModel):
     same_comparison: bool
     claim_id: str            # the retrieved claim that tests the same change ("" if none)
     rationale: str
+
+
+class QueryDimension(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: str
+    precise: list[str]       # term-level queries
+    broad: list[str]         # area-level queries
+
+
+class QueryPlan(BaseModel):
+    """LLM-proposed search queries. Code caps the total and appends one query per runnable change."""
+    model_config = ConfigDict(extra="forbid")
+    dimensions: list[QueryDimension]
+
+
+class ExtractedClaim(BaseModel):
+    """What the LLM transcribes from ONE abstract. Code verifies the quote and maps the rest."""
+    model_config = ConfigDict(extra="forbid")
+    paper_id: str
+    method: str
+    config_change: str       # one of the allowed "field=value" pairs, or "" (context only)
+    claim: str
+    source_span: str         # must be a verbatim substring of the abstract, else dropped by code
+    direction: Literal["improves", "no_worse", "worse", "context"]
+    setting: SettingFields
+
+
+class ExtractionOutput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    claims: list[ExtractedClaim]
 
 
 class ConfigChange(BaseModel):
@@ -231,8 +321,11 @@ class PriorArtResult(BaseModel):
     label: str                # UI string, e.g. "not found in curated snapshot (10 papers)"
     event_id: str
     same_comparison: bool = False                 # the only LLM judgment behind the verdict
-    covers_our_setting: bool | None = None        # human-curated, from the claim
-    coverage_note: str | None = None              # human-curated, from the claim
+    covers_our_setting: bool | None = None        # curated (T1) or computed by the coverage rule
+    coverage_note: str | None = None
+    coverage: Coverage | None = None
+    tier: Tier | None = None                      # tier of the cited claim
+    gate: Literal["reject", "soft_reject", "run"] = "run"   # derived by stats.gate_outcome
 
 
 class NoiseFloor(BaseModel):

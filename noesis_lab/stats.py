@@ -14,6 +14,7 @@ from .schemas import (
     Analysis,
     Claim,
     Counterfactual,
+    Coverage,
     DerivedEvidence,
     ExperimentConfig,
     NextAction,
@@ -24,6 +25,7 @@ from .schemas import (
     SeedPair,
     sha256_hex,
 )
+from .search.coverage import counts_as_covered
 
 SCREENING_LABEL = "SCREENING RESULT — NOT CONFIRMED"
 
@@ -51,29 +53,51 @@ def _r(x: float) -> float:
 
 
 # --------------------------------------------------------------------------- prior-art verdict
-def prior_art_verdict(same_comparison: bool, covers_our_setting: bool | None) -> PriorArtVerdictKind:
-    """Pure function of one LLM judgment (same comparison?) and one human-curated flag (covers our
-    setting?). The LLM never chooses between known / setting-untested."""
+def prior_art_verdict(same_comparison: bool, coverage: Coverage | bool | None) -> PriorArtVerdictKind:
+    """Pure function of one LLM judgment (same comparison?) and the claim's coverage (a human flag
+    on curated claims, the written rule on auto-extracted ones). For overlap, `covers` and
+    `partial` both count as covered: novelty errors lean toward "covered"."""
     if not same_comparison:
         return PriorArtVerdictKind.not_found
-    if covers_our_setting:
+    if coverage is True or coverage in ("covers", "partial"):
         return PriorArtVerdictKind.known
     return PriorArtVerdictKind.setting_untested
+
+
+def gate_outcome(verdict: PriorArtVerdictKind, tier: str | None, overridden: bool = False) -> str:
+    """What the gate does with a verdict. Only a curated (T1) claim can hard-reject; an
+    auto-extracted or preprint claim (T2/T3) soft-rejects, which the PI may override."""
+    if verdict != PriorArtVerdictKind.known:
+        return "run"
+    if tier in (None, "T1"):
+        return "reject"
+    return "run" if overridden else "soft_reject"
 
 
 # --------------------------------------------------------------------------- candidate queue
 # Single-field changes the lab may propose. Pure retunes (lr, batch size) are excluded.
 QUEUE_FIELDS = ("norm", "norm_position", "activation", "pos_encoding", "schedule", "optimizer", "dropout")
-OUTCOME_RANK = {"improves": 0, "no_worse": 1, "context": 2}
+OUTCOME_RANK = {"improves": 0, "no_worse": 1, "context": 2, "worse": 3}
+# The testbed's runnable single-field changes ("field=value"). Extraction may map a claim only
+# onto one of these; anything else is context.
+ALLOWED_CHANGES = ("activation=relu2", "activation=swiglu", "dropout=0.1", "norm=rmsnorm",
+                   "norm_position=post", "optimizer=sgd_momentum", "pos_encoding=rope",
+                   "schedule=constant")
 
 
-def candidate_queue(baseline: ExperimentConfig, claims: Iterable[Claim],
-                    tested: Collection[str]) -> list[QueueItem]:
+def candidate_queue(baseline: ExperimentConfig, claims: Iterable[Claim], tested: Collection[str], *,
+                    soft_rejected: Collection[str] = (), held: Collection[str] = (),
+                    overrides: Collection[str] = ()) -> list[QueueItem]:
     """Every allowlisted single-field change from the baseline that at least one claim maps to,
-    in deterministic priority order; no LLM, no I/O.
+    in deterministic order; no LLM, no I/O.
 
-    Priority: (a) best expected outcome among supporting claims (improves < no_worse < context),
-    (b) more supporting claims first, (c) alphabetical by field=value.
+    Status, from the frozen claims (directional claims only; a context claim reports no result):
+      (a) covered by a curated T1 claim                       -> rejected_prior_art (not run)
+      (b) covered by a T2/T3 claim, or soft-rejected at the gate -> soft_rejected (end of the queue;
+          the PI may override)
+      (c) flagged by the T4 text-overlap check (`held`)        -> held for PI review
+      (d) the rest are open, ordered by: best expected outcome among supporting claims
+          (improves < no_worse < context < worse), more supporting claims first, alphabetical.
     `tested` holds "field=value" keys already tested or gated out this session.
     """
     base = baseline.model_dump()
@@ -93,9 +117,29 @@ def candidate_queue(baseline: ExperimentConfig, claims: Iterable[Claim],
         field, value = key.split("=", 1)
         ids = sorted(c.claim_id for c in cs)
         rank = min(OUTCOME_RANK[c.expected_outcome] for c in cs)
+        covering = sorted((c for c in cs if c.expected_outcome != "context" and counts_as_covered(c)),
+                          key=lambda c: c.claim_id)
+        t1 = [c.claim_id for c in covering if c.tier == "T1"]
+        auto = [c.claim_id for c in covering if c.tier != "T1"]
+        status, cov_ids, note = "open", [], ""
+        if t1:
+            status, cov_ids, note = "rejected_prior_art", t1, "covered by a curated (T1) claim"
+        elif (auto or key in set(soft_rejected)) and key not in set(overrides):
+            status, cov_ids = "soft_rejected", auto
+            note = "covered by an auto-extracted / preprint claim; the PI may override"
+        elif key in set(held):
+            status, note = "held", "possible overlap with an unextracted paper; waiting for PI review"
+        elif auto or key in set(soft_rejected):
+            cov_ids, note = auto, "soft-reject overridden by the PI"
         items.append(QueueItem(key=key, field=field, value=value, priority=[rank, -len(ids), key],
-                               supporting_claim_ids=ids))
-    return sorted(items, key=lambda i: tuple(i.priority))
+                               supporting_claim_ids=ids, status=status, covering_claim_ids=cov_ids,
+                               note=note))
+    order = {"open": 0, "soft_rejected": 1, "held": 2, "rejected_prior_art": 3}
+    return sorted(items, key=lambda i: (order[i.status], *i.priority))
+
+
+def open_items(queue: Sequence[QueueItem]) -> list[QueueItem]:
+    return [q for q in queue if q.status == "open"]
 
 
 # --------------------------------------------------------------------------- noise floor
@@ -267,7 +311,7 @@ def next_action(a: Analysis, *, extra_seeds: Sequence[int], queue: Sequence[Queu
             rationale=(f"candidate is worse by {-a.improvement_in_noise_sd:.2f}× the noise SD → "
                        "record a contradiction and ask the Literature Agent whether the snapshot "
                        "already reports this."))
-    nxt = queue[0].key if queue else None
+    nxt = next((q.key for q in queue if q.status == "open"), None)
     why = ("seeds disagree in sign" if a.seed_disagreement
            else f"mean improvement is {a.improvement_in_noise_sd:.2f}× the noise SD (within ±1×)")
     return NextAction(
@@ -286,16 +330,20 @@ def relate_to_claim(a: Analysis, claim: Claim) -> DerivedEvidence:
     if claim.expected_outcome == "context":
         rel, note = "inconclusive", "cited claim makes no directional prediction for val_loss"
     elif a.branch == "harmful":
-        rel = "contradicts" if cov else "not_reproduced_in_our_setting"
+        ok = claim.expected_outcome == "worse"
+        rel = (("agrees" if ok else "contradicts") if cov
+               else ("consistent_in_our_setting" if ok else "not_reproduced_in_our_setting"))
         note = "candidate measured worse than baseline beyond the noise floor"
     elif a.branch == "promising":
-        rel = "agrees" if cov else "consistent_in_our_setting"
+        ok = claim.expected_outcome != "worse"
+        rel = (("agrees" if ok else "contradicts") if cov
+               else ("consistent_in_our_setting" if ok else "not_reproduced_in_our_setting"))
         note = "candidate measured better than baseline beyond the noise floor"
     elif claim.expected_outcome == "no_worse":
         rel = "agrees" if cov else "consistent_in_our_setting"
         note = "no measurable difference beyond the noise floor (claim: comparable)"
     else:
-        rel, note = "inconclusive", "claimed improvement not detected beyond the noise floor"
+        rel, note = "inconclusive", "claimed effect not detected beyond the noise floor"
     if claim.claims_speed and a.throughput_ratio is not None and a.throughput_ratio < 0.95:
         note += "; partial: speed claim not reproduced (implementation-dependent)"
     return DerivedEvidence(evidence_id="ev_" + sha256_hex(a.analysis_id + claim.claim_id)[:10],

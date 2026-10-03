@@ -11,7 +11,8 @@ from .config import ROOT, baseline_config, get_profile, load_config, path_of
 
 def cmd_session(a) -> int:
     from .orchestrator import SessionOpts, run_session
-    out = run_session(SessionOpts(session=a.session, profile=a.profile, llm_mode=a.llm, force=a.force))
+    out = run_session(SessionOpts(session=a.session, profile=a.profile, llm_mode=a.llm, force=a.force,
+                                  niche=a.niche or None, corpus=a.corpus or None))
     print(json.dumps({k: v for k, v in out.items() if k != "counts"}, indent=2))
     if a.llm == "mock" or a.profile == "smoke":
         print("\nWARNING: mock-LLM / smoke-profile output. Proves the pipeline only; "
@@ -51,6 +52,32 @@ def cmd_verify(a) -> int:
     return 1 if problems else 0
 
 
+def cmd_search(a) -> int:
+    """Live literature search for a niche, frozen to a corpus folder. No training."""
+    import datetime as dt
+    import shutil
+    from pathlib import Path
+
+    from .llm import LLM
+    from .mock_llm import make_mock
+    from .search.corpus import build_corpus, load_niche
+    cfg = load_config()
+    niche = load_niche(a.niche)
+    out = Path(a.out) if a.out else ROOT / cfg["paths"]["work"] / ("corpus-" + Path(a.niche).stem)
+    if out.exists():
+        shutil.rmtree(out)
+    out.mkdir(parents=True)
+    llm = LLM(a.llm, cfg["llm"], recordings_path=out / "llm.jsonl",
+              mock_fn=make_mock({}) if a.llm == "mock" else None,
+              max_cost_usd=cfg["lit_search"]["max_llm_cost_usd"])
+    meta = build_corpus(out, niche, llm, today=dt.date.today().isoformat())
+    print(json.dumps({k: meta.get(k) for k in ("label", "mode", "papers", "claims", "tiers", "counts",
+                                              "extraction", "validation", "openalex", "degraded",
+                                              "llm_calls", "llm_cost_usd")}, indent=2, default=str))
+    print(f"\nfrozen corpus: {out}\nuse it:  make golden CORPUS={out}")
+    return 0
+
+
 def cmd_lit_dryrun(a) -> int:
     """P0-4 acceptance: run the Literature agent on every fixture + queue candidate `--repeat` times
     and require identical verdicts. Nothing is recorded or shipped; live mode costs cents."""
@@ -60,7 +87,9 @@ def cmd_lit_dryrun(a) -> int:
     from .mock_llm import make_mock
     from .orchestrator import generate_fixture
     from .schemas import Fixture
-    cfg, snap = load_config(), Snapshot(path_of("papers"), path_of("claims"))
+    cfg = load_config()
+    curated = Snapshot(path_of("papers"), path_of("claims"))
+    snap = Snapshot.from_corpus(a.corpus) if a.corpus else curated
     baseline = baseline_config(get_profile("full"))
     fixtures = {f["fixture_id"]: Fixture(**f) for f in json.loads(path_of("fixtures").read_text())["fixtures"]}
     for item in stats.candidate_queue(baseline, snap.claims.values(), []):
@@ -68,12 +97,18 @@ def cmd_lit_dryrun(a) -> int:
         fixtures.setdefault(fx.fixture_id, fx)
     llm = LLM(a.llm, cfg["llm"], mock_fn=make_mock(fixtures) if a.llm == "mock" else None)
     agent, stable = LiteratureAgent(llm, snap), True
+    base_agent = LiteratureAgent(llm, curated) if a.corpus else None
     for fid, fx in fixtures.items():
         runs = [agent.check(fx) for _ in range(a.repeat)]
-        verdicts = {(r.verdict.value, r.claim_id) for r in runs}
+        verdicts = {(r.verdict.value, r.claim_id or "", r.gate) for r in runs}
         stable &= len(verdicts) == 1
-        print(f"{fid:34s} {'STABLE ' if len(verdicts) == 1 else 'UNSTABLE'} "
-              + " | ".join(f"{v} {c}" for v, c in sorted(verdicts)))
+        line = (f"{fid:34s} {'STABLE ' if len(verdicts) == 1 else 'UNSTABLE'} "
+                + " | ".join(f"{v} {c} -> {g}" for v, c, g in sorted(verdicts)))
+        if base_agent and fx.origin == "fixture":      # leakage check: did the larger corpus change it?
+            before = base_agent.check(fx).verdict.value
+            if {before} != {v for v, _, _ in verdicts}:
+                line += f"   LEAKAGE: curated-only verdict was {before}. Report it and pick a new fixture."
+        print(line)
     print(f"calls={llm.n_calls} cost=${llm.cost_usd:.4f}  "
           + ("IDENTICAL verdicts across repeats" if stable else "VERDICTS DIFFER across repeats"))
     return 0 if stable else 1
@@ -110,6 +145,8 @@ def main(argv=None) -> int:
     s.add_argument("--profile", default="full")
     s.add_argument("--llm", choices=["live", "mock"], default="live")
     s.add_argument("--force", action="store_true")
+    s.add_argument("--niche", default="", help="niche.yaml: run the live literature search first")
+    s.add_argument("--corpus", default="", help="frozen corpus folder from `search` (no network)")
     s.set_defaults(fn=cmd_session)
     for name, fn, h in [("replay", cmd_replay, "R2: replay recorded LLM + runs, no key, CPU"),
                         ("rederive", cmd_rederive, "R1: recompute all stats from stored runs"),
@@ -121,9 +158,15 @@ def main(argv=None) -> int:
     t.add_argument("--profile", default="full")
     t.add_argument("--steps", type=int, default=300)
     t.set_defaults(fn=cmd_timing)
+    se = sub.add_parser("search", help="live literature search for a niche; freeze the corpus; no training")
+    se.add_argument("--niche", default="niche.yaml")
+    se.add_argument("--out", default="")
+    se.add_argument("--llm", choices=["live", "mock"], default="live")
+    se.set_defaults(fn=cmd_search)
     d = sub.add_parser("lit-dryrun", help="Literature agent only: verdict stability over repeats (cents)")
     d.add_argument("--llm", choices=["live", "mock"], default="live")
     d.add_argument("--repeat", type=int, default=2)
+    d.add_argument("--corpus", default="", help="frozen corpus folder; also runs the fixture leakage check")
     d.set_defaults(fn=cmd_lit_dryrun)
     a = ap.parse_args(argv)
     return a.fn(a)

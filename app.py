@@ -7,15 +7,18 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 
 import altair as alt
 import pandas as pd
 import streamlit as st
+import yaml
 
 from noesis_lab import stats
 from noesis_lab.evidence_chain import chain_dot, evidence_grid
-from noesis_lab.schemas import ExperimentConfig, RunResult
+from noesis_lab.schemas import ExperimentConfig, NicheSpec, RunResult
+from noesis_lab.search.grid import coverage_grid, quotes
 from noesis_lab.store import Store
 
 ROOT = Path(__file__).resolve().parent
@@ -54,7 +57,9 @@ def load(path: str, mtime: float):
                 papers={p["paper_id"]: p for p in s.papers()}, evidence=s.derived_evidence(),
                 noise=s.noise_floors().get("noise_baseline"), rule=s.get_meta("rule_text"),
                 snapshot=s.get_meta("snapshot"), objective=s.get_meta("objective"),
-                queue=s.get_meta("candidate_queue") or [], baseline=s.get_meta("baseline_config"))
+                queue=s.get_meta("candidate_queue") or [], baseline=s.get_meta("baseline_config"),
+                niche=s.get_meta("niche") or {}, corpus=s.get_meta("corpus") or {},
+                holds=s.get_meta("t4_holds") or {})
 
 
 D = load(str(books[choice]), books[choice].stat().st_mtime)
@@ -69,6 +74,7 @@ STATUS_LABEL = {
     "screened_no_improvement": ("SCREENED: NO IMPROVEMENT", "🟨"),
     "screened_harmful": ("SCREENED: HARMFUL", "🟧"),
     "run_failed": ("RUN FAILED", "⬛"),
+    "soft_rejected_prior_art": ("SOFT-REJECTED: COVERED BY AUTO-EXTRACTED / PREPRINT CLAIM (PI MAY OVERRIDE)", "🟪"),
 }
 
 # ----------------------------------------------------------------------------- header
@@ -85,9 +91,144 @@ c4.metric("Runs avoided (prior art)", meta.get("runs_avoided", 0))
 c5.metric("LLM spend", f"${meta.get('llm_cost_usd', 0):.2f}", f"{meta.get('llm_calls', len(D['events']))} calls")
 st.write(f"**Objective.** {D['objective']}")
 snap = D["snapshot"] or {}
-st.write(f"**Curated literature snapshot:** {snap.get('papers', '?')} papers, {snap.get('claims', '?')} claims "
-         f"({', '.join(snap.get('dimensions', []))}). Fetched {snap.get('fetched', '?')} from arXiv. "
-         "Verdicts are scoped to this snapshot; the UI never says “novel”.")
+corpus, niche = D["corpus"], D["niche"]
+LIVE = corpus.get("mode") == "live_search"
+if LIVE:
+    st.write(f"**Literature corpus:** {corpus['label']}. {snap.get('claims', '?')} claims. "
+             "Searched live once, then frozen into this bundle; replay reads only the frozen copy. "
+             "The strongest negative statement is “not found in these papers for these queries”; the UI never says “novel”.")
+else:
+    st.write(f"**Curated literature snapshot only:** {snap.get('papers', '?')} papers, {snap.get('claims', '?')} claims "
+             f"({', '.join(snap.get('dimensions', []))}). Fetched {snap.get('fetched', '?')} from arXiv. "
+             "Verdicts are scoped to this snapshot; the UI never says “novel”.")
+for reason in corpus.get("degraded", []):
+    st.warning(f"Search degraded: {reason}")
+
+# ----------------------------------------------------------------------------- niche form (sidebar)
+with st.sidebar.form("niche"):
+    st.markdown("### Define the niche")
+    st.caption("Chosen by the PI. The lab chooses the experiments, not the niche. This form only writes a file; "
+               "it does not start a search or training.")
+    n_title = st.text_input("Title", niche.get("title", ""))
+    n_desc = st.text_area("Description (2–4 sentences)", niche.get("description", ""))
+    n_inc = st.text_area("Include terms (one per line)", "\n".join(niche.get("include_terms", [])))
+    n_exc = st.text_area("Exclude terms (one per line)", "\n".join(niche.get("exclude_terms", [])))
+    n_cat = st.text_input("arXiv categories", ", ".join(niche.get("arxiv_categories", ["cs.LG", "cs.CL", "cs.NE"])))
+    n_from = st.text_input("Date from", niche.get("date_from", "2017-01-01"))
+    n_seed = st.text_input("Seed papers (arXiv ids)", ", ".join(niche.get("seed_papers", [])))
+    n_max = st.number_input("Max papers", 1, 300, int(niche.get("max_papers", 80)))
+    if st.form_submit_button("Write niche file") and n_title.strip():
+        def _lines(t: str, sep: str = "\n") -> list[str]:
+            return [x.strip() for x in t.split(sep) if x.strip()]
+        spec = NicheSpec(title=n_title.strip(), description=n_desc.strip(), include_terms=_lines(n_inc),
+                         exclude_terms=_lines(n_exc), arxiv_categories=_lines(n_cat, ","), date_from=n_from.strip(),
+                         seed_papers=_lines(n_seed, ","), max_papers=int(n_max))
+        fname = "niche_" + re.sub(r"[^a-z0-9]+", "_", spec.title.lower()).strip("_")[:40] + ".yaml"
+        (ROOT / fname).write_text(yaml.safe_dump(spec.model_dump(), sort_keys=False))
+        st.success(f"Wrote {fname}")
+        st.code(f"make search NICHE={fname}\nmake golden NICHE={fname} SESSION=<name>", language="bash")
+
+# ----------------------------------------------------------------------------- literature map
+st.header("Literature: the niche, the search and the map")
+if niche:
+    with st.container(border=True):
+        st.markdown(f"**Niche — chosen by the PI:** {niche['title']}")
+        st.write(niche["description"])
+        st.caption(f"Include: {', '.join(niche['include_terms']) or '—'}  ·  Exclude: {', '.join(niche['exclude_terms']) or '—'}  ·  "
+                   f"arXiv: {', '.join(niche['arxiv_categories'])}  ·  from {niche['date_from']}  ·  seeds: "
+                   f"{', '.join(niche['seed_papers']) or '—'}  ·  testbed: {niche['testbed']}")
+
+with st.expander("Search transparency: queries, what was kept or dropped, extraction yield, coverage rule, tiers",
+                 expanded=LIVE):
+    if not LIVE:
+        st.info("No live search in this session: the corpus is the curated snapshot only (13 human-checked claims, tier T1). "
+                "Run `make search NICHE=niche.yaml` or `make golden NICHE=niche.yaml`.")
+    else:
+        cnt, ext, tiers = corpus.get("counts", {}), corpus.get("extraction", {}), corpus.get("tiers", {})
+        m = st.columns(5)
+        m[0].metric("Search date", corpus.get("search_date", "?"))
+        m[1].metric("Retrieved → kept", f"{cnt.get('retrieved', '?')} → {cnt.get('kept', '?')}",
+                    f"-{cnt.get('duplicates', 0)} dup, -{cnt.get('excluded', 0)} excluded, -{cnt.get('ranked_out', 0)} ranked out",
+                    delta_color="off")
+        m[2].metric("Claims kept", ext.get("claims_kept", "?"),
+                    f"{ext.get('dropped_non_verbatim', 0)} dropped: quote not verbatim", delta_color="off")
+        m[3].metric("Tiers (claims)", f"T1·{tiers.get('T1', 0)} T2·{tiers.get('T2', 0)} T3·{tiers.get('T3', 0)}",
+                    f"T4·{tiers.get('T4', 0)} unextracted papers", delta_color="off")
+        m[4].metric("Search LLM spend", f"${corpus.get('llm_cost_usd', 0):.2f}", f"{corpus.get('llm_calls', 0)} calls")
+        st.dataframe(pd.DataFrame([{"query": q["q"], "origin": "code (one per runnable change)" if q["kind"] == "deterministic"
+                                    else f"LLM-proposed ({q['kind']})", "dimension": q["dimension"],
+                                    "papers returned": q.get("n_results")} for q in corpus.get("queries", [])]),
+                     use_container_width=True, hide_index=True)
+        v = corpus.get("validation")
+        if v and "n" in v:
+            st.markdown(f"**Extraction check against the curated set** ({v['n']} human-labeled claims with a config change): "
+                        f"config mapping **{v['config_mapping']}/{v['n']}**, direction **{v['direction']}/{v['n']}**, "
+                        f"setting (covered or not) **{v['setting']}/{v['n']}**.")
+        oa = corpus.get("openalex", {})
+        st.caption(f"OpenAlex: {'on' if oa.get('enabled') else 'off'}, {oa.get('matched', 0)} papers matched. It can only add evidence "
+                   "of publication; without it a claim is labeled “review status unknown” and treated as a preprint (T3).")
+    st.markdown("**Coverage rule** (code; one rule for every paper)")
+    st.text(corpus.get("coverage_rule", ""))
+    st.markdown("**Trust tiers.** T1 curated (human-checked; can hard-reject) · T2 auto-extracted, quote verbatim, published at a venue "
+                "(soft-reject) · T3 auto-extracted, quote verbatim, preprint or unknown review status (soft-reject) · "
+                "T4 retrieved but no claim passed the quote check (text-similarity hold for PI review). "
+                "Unreviewed work still counts as covering a topic.")
+
+MAPD = dict(D, queue=D["queue"])
+grid = coverage_grid(MAPD)
+st.subheader("Coverage grid")
+st.caption("Rows: the config changes this testbed can run. Cells: claims by tier and dominant direction. "
+           "GAP = no directional claim covers our setting, but an “improves” claim exists elsewhere: what the queue tries first.")
+gdf = pd.DataFrame(grid)
+st.dataframe(gdf.style.apply(lambda r: ["background-color: rgba(235,104,52,0.18)" if r["gap"] else "" for _ in r], axis=1),
+             use_container_width=True, hide_index=True)
+if not any(q["status"] == "open" for q in D["queue"]) and not any(h.get("origin") == "GENERATED" for h in D["hyps"]):
+    st.info("No runnable candidates in this testbed for this niche: the map and overlap analysis are still shown, "
+            "but nothing in the retrieved literature maps onto a config change the testbed can run.")
+row_key = st.selectbox("Show the quotes behind a row", [r["config change"] for r in grid])
+for qt in quotes(MAPD, row_key)[:40]:
+    st.markdown(f"`{qt['tier']}` · {qt['review']} · {qt['published']} · **{qt['bucket']}** · {qt['direction']}  \n"
+                f"> “{qt['quote']}”  \n> — [{qt['title']}]({qt['url']}) (`{qt['claim_id']}`)")
+if row_key in D["holds"]:
+    st.warning("Possible overlap with unextracted paper(s): "
+               + ", ".join(f"arXiv:{pid} (similarity {score:.2f})" for pid, score in D["holds"][row_key])
+               + ". Held for PI review unless dismissed in niche.yaml (`pi_dismissed_holds`).")
+
+papers_xy = [p for p in D["papers"].values() if p.get("map_xy")]
+if len(papers_xy) >= 3:
+    st.subheader("Paper map")
+    DIM = {"norm": "norm", "norm_position": "norm", "activation": "activation", "pos_encoding": "positional",
+           "optimizer": "optimizer", "schedule": "schedule"}
+    by_paper: dict = {}
+    for c in D["claims"].values():
+        by_paper.setdefault(c["paper_id"], []).append(DIM.get(c["dimension"], "other"))
+    pm = pd.DataFrame([{"x": p["map_xy"][0], "y": p["map_xy"][1], "title": p["title"], "paper": p["paper_id"],
+                        "tier": p.get("tier", "T1"), "relevance": p.get("relevance") or 0.3, "published": p.get("published", ""),
+                        "dimension": max(set(by_paper.get(p["paper_id"], ["other"])), key=by_paper.get(p["paper_id"], ["other"]).count)}
+                       for p in papers_xy])
+    pos = {p["paper_id"]: p["map_xy"] for p in papers_xy}
+    hyp_by_key = {h.get("candidate_key"): h for h in D["hyps"] if h.get("candidate_key")}
+    stars = []
+    for q in D["queue"]:
+        pts = [pos[D["claims"][c]["paper_id"]] for c in q["supporting_claim_ids"] if D["claims"][c]["paper_id"] in pos]
+        if pts:
+            h = hyp_by_key.get(q["key"])
+            stars.append({"x": sum(a for a, _ in pts) / len(pts), "y": sum(b for _, b in pts) / len(pts),
+                          "candidate": q["key"], "outcome": h["status"] if h else q["status"]})
+    base = alt.Chart(pm).mark_point(filled=True, opacity=0.75).encode(
+        x=alt.X("x:Q", axis=None), y=alt.Y("y:Q", axis=None), color=alt.Color("dimension:N"),
+        shape=alt.Shape("tier:N", scale=alt.Scale(domain=["T1", "T2", "T3", "T4"],
+                                                  range=["circle", "square", "triangle-up", "cross"])),
+        size=alt.Size("relevance:Q", legend=None, scale=alt.Scale(range=[40, 260])),
+        tooltip=["paper", "title", "tier", "published", "dimension", "relevance"])
+    layers = base
+    if stars:
+        layers = base + alt.Chart(pd.DataFrame(stars)).mark_point(shape="M0,-1L0.29,-0.4L0.95,-0.31L0.47,0.15L0.59,0.81L0,0.5L-0.59,0.81L-0.47,0.15L-0.95,-0.31L-0.29,-0.4Z",
+                                                                  size=420, filled=True, stroke="black", strokeWidth=1).encode(
+            x="x:Q", y="y:Q", fill=alt.Fill("outcome:N", legend=alt.Legend(title="candidate ★")), tooltip=["candidate", "outcome"])
+    st.altair_chart(layers.properties(height=380).resolve_scale(color="independent", fill="independent"), use_container_width=True)
+    st.caption("Positions show text similarity only (TF-IDF → PCA); use the coverage grid for decisions. "
+               "★ = our candidates, at the centroid of their supporting claims' papers.")
 
 # ----------------------------------------------------------------------------- noise floor
 st.header("1. Noise floor")
@@ -123,8 +264,12 @@ for h in D["hyps"]:
                 st.markdown(f"> “{pa['passage']}”  \n> — [{pa['paper_title']}]({pa['paper_url']}) (arXiv:{pa['paper_id']}, claim `{pa['claim_id']}`)")
             if pa.get("claim_id"):
                 cov = {True: "YES", False: "NO"}.get(pa.get("covers_our_setting"), "n/a")
-                st.markdown(f"**Covers our setting: {cov}** · _human-curated_ — {pa.get('coverage_note') or ''}")
+                how = "human-curated" if pa.get("tier") in (None, "T1") else f"computed by the coverage rule ({pa.get('coverage')})"
+                st.markdown(f"**Covers our setting: {cov}** · _{how}_ · tier `{pa.get('tier') or 'T1'}` — {pa.get('coverage_note') or ''}")
             st.caption(f"LLM judged only “same comparison: {pa.get('same_comparison')}”. {pa['rationale']}")
+        if h["status"] == "soft_rejected_prior_art":
+            st.info("Not run: covered by an auto-extracted / preprint claim. The PI may override by adding this "
+                    f"candidate (`{h.get('candidate_key')}`) to `pi_overrides` in the niche file.")
         if h["status"] == "rejected_prior_art":
             d = next(x for x in decisions if x["kind"] == "prior_art_rejection" and x["hypothesis_id"] == h["hypothesis_id"])
             st.success(f"No compute spent: {d['runs_avoided']} paired runs avoided.")
@@ -184,9 +329,10 @@ st.header("3. Pre-registered rule and the decisions it made")
 with st.expander("Rule text (written before the first run; implemented in stats.py)", expanded=False):
     st.text(D["rule"])
 st.subheader("Why this experiment next")
-st.caption("The PI chooses the objective and the testbed. The lab chooses the experiments: this queue is generated and "
-           "ordered by code from the literature snapshot (no LLM). Priority = (best expected outcome among supporting "
-           "claims: improves < no_worse < context, more supporting claims first, alphabetical).")
+st.caption("The PI chooses the niche, the objective and the testbed. The lab chooses the experiments: this queue is generated "
+           "and ordered by code from the frozen literature corpus (no LLM). Covered by a curated T1 claim → rejected; covered by "
+           "an auto-extracted / preprint claim → end of the queue (PI may override); possible overlap with an unextracted paper → "
+           "held for PI review; the rest by (best expected outcome among supporting claims, more supporting claims first, alphabetical).")
 if D["queue"]:
     seen = {}
     for h in D["hyps"]:
@@ -199,10 +345,14 @@ if D["queue"]:
     st.dataframe(pd.DataFrame([{
         "rank": i + 1, "candidate": q["key"], "priority (outcome rank, −#claims, key)": str(q["priority"]),
         "supporting claims": ", ".join(q["supporting_claim_ids"]),
+        "literature status": q.get("status", "open").replace("_", " "),
+        "covered by": ", ".join(q.get("covering_claim_ids", [])) or "—",
         "this session": STATUS_LABEL.get(seen.get(q["key"], ""), (seen.get(q["key"], "not reached"), ""))[0]}
         for i, q in enumerate(D["queue"])]), use_container_width=True, hide_index=True)
 for d in decisions:
-    if d["kind"] in ("next_action", "extra_seeds_result", "literature_check", "followup_candidate", "budget_exhausted"):
+    if d["kind"] in ("next_action", "extra_seeds_result", "literature_check", "followup_candidate", "budget_exhausted",
+                     "queue_rejection", "queue_soft_rejection", "pi_review_hold", "prior_art_soft_rejection",
+                     "search_degraded"):
         with st.container(border=True):
             if d["kind"] == "next_action":
                 na = d["next_action"]

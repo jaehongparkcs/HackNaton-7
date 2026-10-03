@@ -9,8 +9,12 @@ from noesis_lab.schemas import (
     CriticPostOutput,
     CriticPreOutput,
     ExperimentConfig,
+    ExtractedClaim,
+    ExtractionOutput,
     LiteratureOutput,
+    QueryPlan,
     ScientistOutput,
+    SettingFields,
     apply_delta,
 )
 from noesis_lab.testbed.harness import load_dataset, train_one
@@ -35,7 +39,10 @@ def test_llm_schemas_cannot_carry_measurements_or_decisions():
     """The governing invariant, structurally: no LLM-facing field can hold a result or a label."""
     banned = {"val_loss", "delta", "label", "branch", "decision", "status", "p_value", "mean",
               "next_action", "tokens_seen"}
-    for m in (LiteratureOutput, ScientistOutput, CriticPreOutput, CriticPostOutput):
+    search = (QueryPlan, ExtractionOutput, ExtractedClaim, SettingFields)
+    for m in search:      # extraction transcribes; it cannot set a verdict, tier, coverage or priority
+        assert not (set(m.model_fields) & {"tier", "coverage", "verdict", "priority", "covers_our_setting"}), m
+    for m in (LiteratureOutput, ScientistOutput, CriticPreOutput, CriticPostOutput, *search):
         assert not (set(m.model_fields) & banned), m
 
 

@@ -1,0 +1,26 @@
+{
+ "results": [
+  {
+   "doi": "https://doi.org/10.48550/arxiv.2402.00002",
+   "cited_by_count": 40,
+   "primary_location": {
+    "source": {
+     "type": "conference",
+     "display_name": "Proc. of Tests"
+    }
+   },
+   "locations": []
+  },
+  {
+   "doi": "https://doi.org/10.48550/arxiv.2401.00001",
+   "cited_by_count": 7,
+   "primary_location": {
+    "source": {
+     "type": "repository",
+     "display_name": "arXiv"
+    }
+   },
+   "locations": []
+  }
+ ]
+}

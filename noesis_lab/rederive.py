@@ -55,7 +55,9 @@ def rederive(bundle: Path) -> list[str]:
             fresh = stats.next_action(analyses[d["analysis_id"]], extra_seeds=inp["extra_seeds"],
                                       queue=queue)
             same(f"next_action {d['decision_id']}", d["next_action"], fresh.model_dump(mode="json"))
-            fresh_q = stats.candidate_queue(baseline, claims.values(), inp["tested"])
+            fresh_q = stats.candidate_queue(
+                baseline, claims.values(), inp["tested"], soft_rejected=inp.get("soft_rejected", []),
+                held=inp.get("held", []), overrides=inp.get("overrides", []))
             same(f"queue {d['decision_id']}", inp["queue"], [q.model_dump(mode="json") for q in fresh_q])
     for e in st.derived_evidence():
         fresh = stats.relate_to_claim(analyses[e["analysis_id"]], claims[e["claim_id"]])

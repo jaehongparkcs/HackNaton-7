@@ -1,7 +1,9 @@
 # NOESIS LAB. `make setup` is the only install step. Replay/rederive need no API key, GPU or Mac.
 SESSION ?= golden
+NICHE ?=
+CORPUS ?=
 PY := uv run python
-.PHONY: setup test lint check verify-snapshot fetch-snapshot timing smoke golden replay rederive verify app clean
+.PHONY: search setup test lint check verify-snapshot fetch-snapshot timing smoke golden replay rederive verify app clean
 
 setup:                      ## install pinned deps from uv.lock
 	uv sync --frozen
@@ -25,7 +27,10 @@ smoke:                      ## CPU pipeline check with the MOCK LLM (never a res
 	$(PY) -m noesis_lab session --session smoke --profile smoke --llm mock --force
 
 golden:                     ## the real thing: live Claude + real MPS runs, recorded into results/$(SESSION)
-	$(PY) -m noesis_lab session --session $(SESSION) --profile full --llm live
+	$(PY) -m noesis_lab session --session $(SESSION) --profile full --llm live $(if $(NICHE),--niche $(NICHE)) $(if $(CORPUS),--corpus $(CORPUS))
+
+search:                     ## live literature search for NICHE (default niche.yaml), frozen to work/corpus-<niche>; no training
+	$(PY) -m noesis_lab search --niche $(or $(NICHE),niche.yaml)
 
 replay:                     ## R2: rebuild the full session from recordings, no key/GPU; asserts identical state
 	$(PY) -m noesis_lab replay --session $(SESSION)
