@@ -23,9 +23,6 @@ rule:
   promising_sd: 1.0
   harmful_sd: 1.0
 
-# Fixed order of "literature priority" used by the no-improvement branch.
-candidate_order: [followup_swiglu, followup_relu2, followup_rope]
-
 baseline:                         # the immutable baseline ExperimentConfig (defaults live in schemas.py)
   optimizer: adamw
   lr: 0.002
@@ -37,13 +34,15 @@ baseline:                         # the immutable baseline ExperimentConfig (def
   pos_encoding: learned
 
 profiles:
-  # full: the headline profile. ~60 s of *training* wall-clock per run; set after the timing run (make timing).
+  # full: the headline profile. A FIXED STEP BUDGET (not wall-clock): every machine sees identical
+  # steps and tokens per run, so conclusions do not depend on hardware speed (~30 s on a fast
+  # M-series Mac, ~60 s on a slower one). Throughput is logged per run as a separate, secondary metric.
   full:
     device: auto
     deterministic: false
-    budget_mode: time
-    train_seconds: 60
-    eval_every_s: 10
+    budget_mode: steps
+    max_steps: 2000
+    eval_every_steps: 250
     eval_batches: 20
     eval_batch_size: 64
     prewarm_steps: 2

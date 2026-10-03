@@ -10,20 +10,9 @@ import torch.nn.functional as F
 from ..schemas import ExperimentConfig
 
 
-class RMSNorm(nn.Module):
-    """Zhang & Sennrich (2019): x / rms(x) * g, no re-centering and no bias."""
-
-    def __init__(self, dim: int, eps: float = 1e-6):
-        super().__init__()
-        self.eps = eps
-        self.weight = nn.Parameter(torch.ones(dim))
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return x * torch.rsqrt(x.pow(2).mean(-1, keepdim=True) + self.eps) * self.weight
-
-
 def make_norm(kind: str, dim: int) -> nn.Module:
-    return nn.LayerNorm(dim) if kind == "layernorm" else RMSNorm(dim)
+    # nn.RMSNorm (torch >= 2.4) is PyTorch's own kernel: we measure the method, not our own code.
+    return nn.LayerNorm(dim) if kind == "layernorm" else nn.RMSNorm(dim, eps=1e-6)
 
 
 def rope_tables(seq_len: int, head_dim: int, device, base: float = 10000.0):

@@ -35,3 +35,13 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "I", "W", "UP"]
 ignore = ["E501"]
+
+# Linux judges: take torch from the CPU-only index (the default Linux wheel pulls ~3 GB of CUDA).
+# macOS keeps the default PyPI wheel (MPS).
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

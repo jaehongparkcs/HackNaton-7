@@ -18,8 +18,8 @@ verify-snapshot:            ## every claim span must be verbatim in its abstract
 fetch-snapshot:             ## re-fetch arXiv abstracts (data/papers.json is committed; rarely needed)
 	$(PY) scripts/fetch_snapshot.py
 
-timing:                     ## measure throughput on this machine to set profiles.full.train_seconds
-	$(PY) -m noesis_lab timing --profile full --seconds 15
+timing:                     ## measure throughput on this machine (budget is a fixed step count, so this only reports speed)
+	$(PY) -m noesis_lab timing --profile full --steps 300
 
 smoke:                      ## CPU pipeline check with the MOCK LLM (never a result)
 	$(PY) -m noesis_lab session --session smoke --profile smoke --llm mock --force

@@ -13,12 +13,14 @@ from pathlib import Path
 
 from .llm import LLM
 from .schemas import Claim, Fixture, LiteratureOutput, Paper, PriorArtResult, PriorArtVerdictKind
+from .stats import prior_art_verdict
 
 PROMPTS = Path(__file__).resolve().parents[1] / "prompts"
 
 TESTBED_DESCRIPTION = (
     "Our testbed: a tiny character-level Transformer language model (<1M parameters) trained on "
-    "TinyShakespeare for a fixed ~60 second wall-clock budget; metric = validation cross-entropy."
+    "TinyShakespeare for a fixed 2,000-step budget (~0.5-1 min on Apple Silicon); "
+    "metric = validation cross-entropy."
 )
 
 
@@ -101,9 +103,16 @@ class LiteratureAgent:
 
     def check(self, fixture: Fixture, *, question: str | None = None,
               role: str = "literature") -> PriorArtResult:
-        """Prior-art verdict. `question` overrides the text checked (targeted post-hoc checks)."""
+        """Prior-art verdict. `question` overrides the text checked (targeted post-hoc checks).
+
+        The LLM judges one thing: does a retrieved claim test the same change? Setting coverage is
+        a human-curated flag on the claim; the verdict is derived by `stats.prior_art_verdict`."""
         text = question or fixture.statement
         hits = self.snap.search(text, self.top_k)
+        have = {c.claim_id for c, _ in hits}
+        # the claims a candidate was generated from are always shown to the agent
+        hits += [(self.snap.claims[cid], 0.0) for cid in fixture.cited_claim_ids
+                 if cid not in have and cid in self.snap.claims and fixture.origin == "generated"]
         valid_ids = {c.claim_id for c, _ in hits}
         user = (f"{TESTBED_DESCRIPTION}\n\nHypothesis id: {fixture.fixture_id}\n"
                 f"Text to check:\n{text}\n\n"
@@ -111,16 +120,16 @@ class LiteratureAgent:
                 f"{_claims_block(hits, self.snap)}\n")
 
         def validate(o: LiteratureOutput) -> None:
-            needs = o.verdict in (PriorArtVerdictKind.known, PriorArtVerdictKind.setting_untested)
-            if needs and o.claim_id not in valid_ids:
+            if o.same_comparison and o.claim_id not in valid_ids:
                 raise ValueError(f"claim_id {o.claim_id!r} must be one of {sorted(valid_ids)} "
-                                 f"for verdict {o.verdict.value}")
-            if not needs and o.claim_id and o.claim_id not in valid_ids:
-                raise ValueError(f"claim_id {o.claim_id!r} is not a retrieved claim; use \"\"")
+                                 "when same_comparison is true")
+            if not o.same_comparison and o.claim_id:
+                raise ValueError("claim_id must be \"\" when same_comparison is false")
 
         out, eid = self.llm.call(role, self.system, user, LiteratureOutput, validate=validate)
         claim = self.snap.claims.get(out.claim_id) if out.claim_id else None
         paper = self.snap.papers[claim.paper_id] if claim else None
+        verdict = prior_art_verdict(out.same_comparison, claim.covers_our_setting if claim else None)
         n = self.snap.size
         label = {
             PriorArtVerdictKind.known: f"KNOWN IN CORPUS (arXiv:{claim.paper_id})" if claim else "",
@@ -128,10 +137,13 @@ class LiteratureAgent:
                 f"method found (arXiv:{claim.paper_id}); this setting not found in curated snapshot "
                 f"({n} papers)" if claim else "",
             PriorArtVerdictKind.not_found: f"not found in curated snapshot ({n} papers)",
-        }[out.verdict]
+        }[verdict]
         return PriorArtResult(
-            verdict=out.verdict, claim_id=claim.claim_id if claim else None,
+            verdict=verdict, claim_id=claim.claim_id if claim else None,
             paper_id=paper.paper_id if paper else None, paper_title=paper.title if paper else None,
             paper_url=paper.url if paper else None,
             passage=claim.source_span if claim else None,    # from the snapshot, never the LLM
-            rationale=out.rationale, snapshot_size=n, label=label, event_id=eid)
+            rationale=out.rationale, snapshot_size=n, label=label, event_id=eid,
+            same_comparison=out.same_comparison,
+            covers_our_setting=claim.covers_our_setting if claim else None,
+            coverage_note=claim.coverage_note if claim else None)

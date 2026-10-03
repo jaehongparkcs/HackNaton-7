@@ -18,3 +18,6 @@ def test_dashboard_renders_without_exceptions(smoke):  # noqa: F811
     assert any("REJECTED: PRIOR ART" in m.value for m in at.markdown)
     assert any("NOT CONFIRMED" in m.value for m in at.markdown)
     assert any("MOCK LLM" in w.value for w in at.warning)
+    assert any("Why this experiment next" in h.value for h in at.subheader)
+    assert any("GENERATED" in m.value for m in at.markdown)
+    assert not any("60 second" in m.value for m in at.markdown)

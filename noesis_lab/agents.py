@@ -116,10 +116,14 @@ def analysis_facts(a: Analysis) -> dict[str, str]:
         "mean improvement in noise SDs": f"{abs(a.improvement_in_noise_sd):.2f}"
             + (" (candidate better)" if a.improvement_in_noise_sd > 0 else " (candidate worse)"),
         "tokens seen, candidate / baseline": f"{a.token_ratio:.2f}",
-        "mean delta at equal tokens": f4(a.mean_equal_token_delta) if a.mean_equal_token_delta is not None else "n/a",
-        "single-run counterfactual": cf.summary,
-        "single-run keep count": f"{cf.n_keep} of {cf.n_pairings}",
     }
+    if a.token_ratio != 1.0 and a.mean_equal_token_delta is not None:    # time-budget sessions only
+        f["mean delta at equal tokens"] = f4(a.mean_equal_token_delta)
+    if a.throughput_ratio is not None:
+        f["throughput, candidate / baseline (secondary, not part of the decision)"] = f"{a.throughput_ratio:.2f}"
+    f["single-run counterfactual, same-seed decisions (headline)"] = cf.same_seed_summary
+    f["single-run counterfactual, cross-seed pairings (secondary)"] = cf.cross_seed_summary
+    f["single-run keep count (cross-seed pairings)"] = f"{cf.n_keep} of {cf.n_pairings}"
     return f
 
 

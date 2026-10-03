@@ -1,7 +1,9 @@
 import pytest
 
 from noesis_lab import stats
-from noesis_lab.schemas import Claim, ExperimentConfig
+from noesis_lab.config import path_of
+from noesis_lab.literature import Snapshot
+from noesis_lab.schemas import Claim, ExperimentConfig, PriorArtVerdictKind, QueueItem
 
 from .conftest import make_run
 
@@ -49,25 +51,62 @@ def test_harmful():
     assert a.branch == "harmful" and a.all_seeds_worse
 
 
+def _q(*keys):
+    return [QueueItem(key=k, field=k.split("=")[0], value=k.split("=")[1], priority=[0, -1, k],
+                      supporting_claim_ids=["c"]) for k in keys]
+
+
 def test_rule_selects_action_without_any_llm():
-    kw = dict(extra_seeds=[3, 4], candidate_order=["x", "y", "z"], already_considered=["x"])
+    kw = dict(extra_seeds=[3, 4], queue=_q("a=1", "b=2"))
     assert stats.next_action(run(BASE, [1.45, 1.47, 1.43]), **kw).action == "extra_seeds"
     assert stats.next_action(run(BASE, [1.60, 1.58, 1.57]), **kw).action == "literature_check"
     n = stats.next_action(run(BASE, [1.505, 1.515, 1.475]), **kw)
-    assert n.action == "next_candidate" and n.detail["fixture_id"] == "y"      # skips 'x'
+    assert n.action == "next_candidate" and n.detail["candidate"] == "a=1"      # head of the queue
+    n = stats.next_action(run(BASE, [1.505, 1.515, 1.475]), extra_seeds=[3, 4], queue=[])
+    assert n.detail["candidate"] is None
 
 
-def test_single_seed_counterfactual_exposes_coin_flip():
-    # Candidate is ~ noise: some pairings beat the baseline run, some don't.
-    a = run(BASE, [1.505, 1.515, 1.475])
-    cf = a.counterfactual
-    assert cf.n_pairings == 15 and cf.decision_depends_on_seed and 0 < cf.n_keep < 15
-    assert "seed luck" in cf.summary
+def test_counterfactual_headline_is_same_seed_and_cross_seed_is_secondary():
+    # same-seed: seeds 0,1 keep, seed 2 revert; cross-seed pairings are mixed
+    cf = run(BASE, [1.505, 1.515, 1.475]).counterfactual
+    assert cf.n_pairings == 15 and cf.decision_depends_on_seed
+    assert cf.same_seed_summary.startswith("A single-run keep/revert loop with a fixed seed")
+    assert cf.summary.index("fixed seed") < cf.summary.index("If the seed varies")
+
+
+# Baseline val_loss 1.50..1.54 (5 seeds). A candidate at value v wins #{baselines > v} pairings.
+CF_BASE = [make_run(1.50 + 0.01 * i, i) for i in range(5)]
+WINS = {5: 1.40, 4: 1.505, 3: 1.515, 2: 1.525, 1: 1.535, 0: 1.60}
+
+
+def _cf(wins: tuple[int, int, int]):
+    cands = [make_run(WINS[w], s, cfg=CAND) for s, w in enumerate(wins)]
+    return stats.counterfactual(cands, CF_BASE)
+
+
+def test_counterfactual_wording_bands():
+    # never: every pairing agrees
+    cf = _cf((5, 5, 5))
+    assert cf.wording == "never" and cf.n_keep == 15
+    assert "seed never changed the decision" in cf.cross_seed_summary
+    assert _cf((0, 0, 0)).wording == "never"
+    # almost always: at most 2 pairings flip, either way
+    cf = _cf((5, 5, 4))
+    assert cf.n_keep == 14 and cf.wording == "almost_always"
+    assert "almost always KEEP" in cf.cross_seed_summary and "(1 of 15 pairings flip)" in cf.cross_seed_summary
+    assert _cf((5, 4, 4)).n_keep == 13 and _cf((5, 4, 4)).wording == "almost_always"
+    cf = _cf((1, 1, 0))
+    assert cf.n_keep == 2 and cf.wording == "almost_always" and "almost always REVERT" in cf.cross_seed_summary
+    # luck: otherwise
+    cf = _cf((3, 3, 1))
+    assert cf.n_keep == 7 and cf.wording == "luck"
+    assert "decided by seed luck: KEEP in 7 of 15" in cf.cross_seed_summary
+    assert _cf((5, 4, 3)).n_keep == 12 and _cf((5, 4, 3)).wording == "luck"      # 3 flips
 
 
 def test_counterfactual_no_dependence_when_effect_is_large():
     cf = run(BASE, [1.30, 1.31, 1.29]).counterfactual
-    assert not cf.decision_depends_on_seed and cf.n_keep == 15
+    assert not cf.decision_depends_on_seed and cf.n_keep == 15 and cf.wording == "never"
 
 
 def test_equal_token_delta_separates_throughput_from_learning():
@@ -85,15 +124,92 @@ def test_analysis_is_exactly_reproducible():
     assert a1.model_dump() == a2.model_dump()
 
 
-@pytest.mark.parametrize("cand,expected_outcome,relation", [
-    ([1.45, 1.47, 1.43], "improves", "agrees"),
-    ([1.60, 1.58, 1.57], "improves", "contradicts"),
-    ([1.505, 1.515, 1.475], "improves", "inconclusive"),
-    ([1.505, 1.515, 1.475], "no_worse", "agrees"),
-    ([1.60, 1.58, 1.57], "no_worse", "contradicts"),
-    ([1.45, 1.47, 1.43], "context", "inconclusive"),
+def _claim(outcome, covers, speed=False):
+    return Claim(claim_id="c", paper_id="p", dimension="d", method="m", setting="s", claim="c",
+                 source_span="x", expected_outcome=outcome, covers_our_setting=covers, claims_speed=speed)
+
+
+PROMISING, NOISE, HARMFUL = [1.45, 1.47, 1.43], [1.505, 1.515, 1.475], [1.60, 1.58, 1.57]
+
+
+@pytest.mark.parametrize("cand,outcome,covers,relation", [
+    (PROMISING, "improves", True, "agrees"),
+    (HARMFUL, "improves", True, "contradicts"),
+    (NOISE, "improves", True, "inconclusive"),
+    (NOISE, "no_worse", True, "agrees"),
+    (HARMFUL, "no_worse", True, "contradicts"),
+    (PROMISING, "context", True, "inconclusive"),
+    # the claim does not cover our setting: never agrees / contradicts
+    (PROMISING, "improves", False, "consistent_in_our_setting"),
+    (HARMFUL, "improves", False, "not_reproduced_in_our_setting"),
+    (NOISE, "improves", False, "inconclusive"),
+    (NOISE, "no_worse", False, "consistent_in_our_setting"),
+    (HARMFUL, "no_worse", False, "not_reproduced_in_our_setting"),
+    (HARMFUL, "context", False, "inconclusive"),
 ])
-def test_derived_evidence_relation(cand, expected_outcome, relation):
-    claim = Claim(claim_id="c", paper_id="p", dimension="d", method="m", setting="s", claim="c",
-                  source_span="x", expected_outcome=expected_outcome)
-    assert stats.relate_to_claim(run(BASE, cand), claim).relation == relation
+def test_derived_evidence_relation(cand, outcome, covers, relation):
+    assert stats.relate_to_claim(run(BASE, cand), _claim(outcome, covers)).relation == relation
+
+
+def _slow_candidate_analysis(seconds: float):
+    base = [make_run(v, s) for s, v in enumerate(BASE)]
+    for r in base:
+        r.train_seconds = 10.0
+    cand = [make_run(v, s, cfg=CAND) for s, v in enumerate(NOISE)]
+    for r in cand:
+        r.train_seconds = seconds
+    return stats.analyze("h", cand, base[:3], stats.noise_floor(base), all_base_runs=base)
+
+
+def test_speed_claim_not_reproduced_note():
+    slow, same = _slow_candidate_analysis(11.0), _slow_candidate_analysis(10.2)
+    assert slow.throughput_ratio < 0.95 <= same.throughput_ratio
+    assert "partial: speed claim not reproduced" in stats.relate_to_claim(slow, _claim("no_worse", False, True)).note
+    assert "partial" not in stats.relate_to_claim(same, _claim("no_worse", False, True)).note
+    assert "partial" not in stats.relate_to_claim(slow, _claim("no_worse", False, False)).note   # no speed claim
+
+
+@pytest.mark.parametrize("same,covers,verdict", [
+    (False, False, PriorArtVerdictKind.not_found), (False, True, PriorArtVerdictKind.not_found),
+    (True, False, PriorArtVerdictKind.setting_untested), (True, None, PriorArtVerdictKind.setting_untested),
+    (True, True, PriorArtVerdictKind.known),
+])
+def test_prior_art_verdict_is_a_pure_function_of_two_inputs(same, covers, verdict):
+    assert stats.prior_art_verdict(same, covers) == verdict
+
+
+# --------------------------------------------------------------------------- candidate queue
+SNAP = Snapshot(path_of("papers"), path_of("claims"))
+
+
+def test_candidate_queue_is_deterministic_and_ordered_as_specified():
+    base = ExperimentConfig()
+    q = stats.candidate_queue(base, SNAP.claims.values(), [])
+    assert [i.key for i in q] == [
+        "activation=relu2", "activation=swiglu", "dropout=0.1", "pos_encoding=rope",   # improves
+        "norm=rmsnorm",                                                                  # no_worse
+        "norm_position=post", "optimizer=sgd_momentum", "schedule=constant"]             # context
+    assert q == stats.candidate_queue(base, list(reversed(list(SNAP.claims.values()))), [])
+    rms = next(i for i in q if i.key == "norm=rmsnorm")
+    assert rms.supporting_claim_ids == ["c04", "c05"] and rms.priority == [1, -2, "norm=rmsnorm"]
+    assert all(i.field not in ("lr", "batch_size") for i in q)
+
+
+def test_candidate_queue_excludes_tested_and_baseline_values():
+    base = ExperimentConfig()
+    q = stats.candidate_queue(base, SNAP.claims.values(), ["norm=rmsnorm", "activation=relu2"])
+    assert "norm=rmsnorm" not in [i.key for i in q] and "activation=relu2" not in [i.key for i in q]
+    assert q[0].key == "activation=swiglu"
+    # a candidate equal to the baseline value is not a change
+    q2 = stats.candidate_queue(ExperimentConfig(activation="swiglu"), SNAP.claims.values(), [])
+    assert "activation=swiglu" not in [i.key for i in q2]
+
+
+def test_more_supporting_claims_rank_first_within_an_outcome_class():
+    def mk(cid, field, value, outcome):
+        return Claim(claim_id=cid, paper_id="p", dimension="d", method="m", setting="s", claim="c",
+                     source_span="x", expected_outcome=outcome, config_change={field: value})
+    claims = [mk("c1", "activation", "swiglu", "improves"), mk("c2", "dropout", "0.1", "improves"),
+              mk("c3", "dropout", "0.1", "context")]
+    q = stats.candidate_queue(ExperimentConfig(), claims, [])
+    assert [i.key for i in q] == ["dropout=0.1", "activation=swiglu"]       # 2 supporting beats 1

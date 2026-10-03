@@ -9,7 +9,7 @@ from pathlib import Path
 
 from . import stats
 from .bundle import verify_manifest
-from .schemas import Analysis, Claim, RunResult, canonical_json
+from .schemas import Analysis, Claim, ExperimentConfig, QueueItem, RunResult, canonical_json
 from .store import Store
 
 
@@ -24,6 +24,7 @@ def rederive(bundle: Path) -> list[str]:
     st = Store(bundle / "notebook.sqlite", readonly=True)
     rule = st.get_meta("rule_thresholds")
     claims = {c["claim_id"]: Claim(**c) for c in st.claims()}
+    baseline = ExperimentConfig(**st.get_meta("baseline_config"))
     n_checked = 0
 
     def same(label: str, stored, fresh) -> None:
@@ -50,10 +51,12 @@ def rederive(bundle: Path) -> list[str]:
     for d in st.decisions():
         if d["kind"] == "next_action":
             inp = d["inputs"]
+            queue = [QueueItem(**q) for q in inp["queue"]]
             fresh = stats.next_action(analyses[d["analysis_id"]], extra_seeds=inp["extra_seeds"],
-                                      candidate_order=inp["candidate_order"],
-                                      already_considered=inp["already_considered"])
+                                      queue=queue)
             same(f"next_action {d['decision_id']}", d["next_action"], fresh.model_dump(mode="json"))
+            fresh_q = stats.candidate_queue(baseline, claims.values(), inp["tested"])
+            same(f"queue {d['decision_id']}", inp["queue"], [q.model_dump(mode="json") for q in fresh_q])
     for e in st.derived_evidence():
         fresh = stats.relate_to_claim(analyses[e["analysis_id"]], claims[e["claim_id"]])
         same(f"evidence {e['evidence_id']}", e, fresh.model_dump(mode="json"))

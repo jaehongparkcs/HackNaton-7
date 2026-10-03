@@ -111,17 +111,36 @@ class Claim(BaseModel):
     source_span: str                  # verbatim substring of the abstract (checked at load)
     expected_outcome: Literal["improves", "no_worse", "context"]
     # How a measured result relates to this claim; set by a human, never by an LLM.
+    # Human-curated, one written criterion for every claim (README "Setting coverage"):
+    # covers = the abstract states the result for Transformer language models, or for Transformers
+    # in general without restricting the task. Never judged by an LLM.
+    covers_our_setting: bool = False
+    coverage_note: str = ""
+    config_change: dict[str, str] | None = None   # single-field delta this claim speaks to (None = context only)
+    claims_speed: bool = False                    # the claim includes a speed / running-time component
 
 
 class Fixture(BaseModel):
     """A predefined test hypothesis (NOT a measurement). Labeled 'fixture' in the UI."""
     fixture_id: str
-    kind: Literal["known_in_corpus", "untested_setting", "followup_candidate"]
+    kind: Literal["known_in_corpus", "untested_setting", "generated"]
     title: str
     statement: str
     allowed_fields: list[str]         # the only config fields the Scientist may touch
     cited_claim_ids: list[str] = []   # claims a result is compared against (human-curated)
+    origin: Literal["fixture", "generated"] = "fixture"   # generated = picked by code from the queue
+    candidate_key: str | None = None  # "field=value" this hypothesis tests (excluded from the queue)
+    queue_priority: list[Any] | None = None   # priority tuple that put it here (generated only)
     mock: dict[str, Any] = Field(default_factory=dict)   # used only by the offline mock LLM
+
+
+class QueueItem(BaseModel):
+    """One candidate experiment, ordered by `stats.candidate_queue` (pure code, no LLM)."""
+    key: str                          # "field=value"
+    field: str
+    value: str
+    priority: list[Any]               # [outcome rank, -n supporting claims, key]
+    supporting_claim_ids: list[str]
 
 
 # --------------------------------------------------------------------------------------
@@ -134,9 +153,11 @@ class PriorArtVerdictKind(StrEnum):
 
 
 class LiteratureOutput(BaseModel):
+    """The LLM only judges whether a retrieved claim tests the same change. The verdict is derived
+    by `stats.prior_art_verdict` from this bool and the human-curated `covers_our_setting`."""
     model_config = ConfigDict(extra="forbid")
-    verdict: PriorArtVerdictKind
-    claim_id: str            # nearest relevant claim id from the provided list ("" if none)
+    same_comparison: bool
+    claim_id: str            # the retrieved claim that tests the same change ("" if none)
     rationale: str
 
 
@@ -209,6 +230,9 @@ class PriorArtResult(BaseModel):
     snapshot_size: int
     label: str                # UI string, e.g. "not found in curated snapshot (10 papers)"
     event_id: str
+    same_comparison: bool = False                 # the only LLM judgment behind the verdict
+    covers_our_setting: bool | None = None        # human-curated, from the claim
+    coverage_note: str | None = None              # human-curated, from the claim
 
 
 class NoiseFloor(BaseModel):
@@ -230,15 +254,20 @@ class SeedPair(BaseModel):
     baseline_tokens: int
     candidate_tokens: int
     equal_token_delta: float | None   # delta of interpolated curves at min(tokens); see stats.py
+    baseline_train_seconds: float = 0.0
+    candidate_train_seconds: float = 0.0
 
 
 class Counterfactual(BaseModel):
     """What a single-run keep/revert loop (autoresearch-style) would have decided."""
-    same_seed_decisions: dict[int, str]       # seed -> "keep" | "revert"
-    n_pairings: int                           # candidate seed x baseline seed
+    same_seed_decisions: dict[int, str]       # seed -> "keep" | "revert"  (the headline)
+    n_pairings: int                           # candidate seed x baseline seed (secondary)
     n_keep: int
     keep_rate: float
-    decision_depends_on_seed: bool            # True if keep and revert both occur
+    decision_depends_on_seed: bool            # True if keep and revert both occur across pairings
+    wording: Literal["never", "almost_always", "luck"] = "never"
+    same_seed_summary: str = ""
+    cross_seed_summary: str = ""
     summary: str
 
 
@@ -254,6 +283,9 @@ class Analysis(BaseModel):
     all_seeds_improve: bool
     all_seeds_worse: bool
     token_ratio: float                        # mean candidate tokens / mean baseline tokens
+    baseline_tokens_per_s: float | None = None    # secondary "speed cost/benefit" metric,
+    candidate_tokens_per_s: float | None = None   # never used by the decision rule
+    throughput_ratio: float | None = None         # candidate / baseline tokens per second
     mean_equal_token_delta: float | None
     counterfactual: Counterfactual
     branch: Literal["promising", "no_improvement", "harmful"]
@@ -273,5 +305,6 @@ class DerivedEvidence(BaseModel):
     evidence_id: str
     claim_id: str
     analysis_id: str
-    relation: Literal["agrees", "contradicts", "inconclusive"]
+    relation: Literal["agrees", "contradicts", "inconclusive",
+                      "consistent_in_our_setting", "not_reproduced_in_our_setting"]
     note: str

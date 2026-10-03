@@ -13,6 +13,9 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from noesis_lab import stats
+from noesis_lab.evidence_chain import chain_dot, evidence_grid
+from noesis_lab.schemas import ExperimentConfig, RunResult
 from noesis_lab.store import Store
 
 ROOT = Path(__file__).resolve().parent
@@ -50,12 +53,14 @@ def load(path: str, mtime: float):
                 runs={r["run_id"]: r for r in s.runs()}, claims={c["claim_id"]: c for c in s.claims()},
                 papers={p["paper_id"]: p for p in s.papers()}, evidence=s.derived_evidence(),
                 noise=s.noise_floors().get("noise_baseline"), rule=s.get_meta("rule_text"),
-                snapshot=s.get_meta("snapshot"), objective=s.get_meta("objective"))
+                snapshot=s.get_meta("snapshot"), objective=s.get_meta("objective"),
+                queue=s.get_meta("candidate_queue") or [], baseline=s.get_meta("baseline_config"))
 
 
 D = load(str(books[choice]), books[choice].stat().st_mtime)
 analyses = {a["analysis_id"]: a for a in D["analyses"]}
 decisions = D["decisions"]
+STEPS = profile.get("budget_mode") == "steps"        # equal-token delta is redundant under a step budget
 
 STATUS_LABEL = {
     "rejected_prior_art": ("REJECTED: PRIOR ART", "🟥"),
@@ -106,14 +111,20 @@ st.header("2. Hypotheses")
 for h in D["hyps"]:
     label, icon = STATUS_LABEL.get(h["status"], (h["status"].upper(), "⬜"))
     with st.container(border=True):
-        st.markdown(f"#### {icon} {label}  ·  `FIXTURE` {h.get('title', h['fixture_id'])}")
+        st.markdown(f"#### {icon} {label}  ·  `{h.get('origin', 'FIXTURE')}` {h.get('title', h['fixture_id'])}")
         st.write(h.get("statement", ""))
+        if h.get("origin") == "GENERATED":
+            st.caption(f"Chosen by code from the literature queue. Priority tuple {h.get('queue_priority')}; "
+                       f"supporting claims {', '.join(h.get('supporting_claim_ids', []))}.")
         pa = h.get("prior_art")
         if pa:
             st.markdown(f"**Prior-art gate:** `{pa['verdict']}` — {pa['label']}  ·  event `{pa['event_id']}`")
             if pa.get("passage"):
                 st.markdown(f"> “{pa['passage']}”  \n> — [{pa['paper_title']}]({pa['paper_url']}) (arXiv:{pa['paper_id']}, claim `{pa['claim_id']}`)")
-            st.caption(pa["rationale"])
+            if pa.get("claim_id"):
+                cov = {True: "YES", False: "NO"}.get(pa.get("covers_our_setting"), "n/a")
+                st.markdown(f"**Covers our setting: {cov}** · _human-curated_ — {pa.get('coverage_note') or ''}")
+            st.caption(f"LLM judged only “same comparison: {pa.get('same_comparison')}”. {pa['rationale']}")
         if h["status"] == "rejected_prior_art":
             d = next(x for x in decisions if x["kind"] == "prior_art_rejection" and x["hypothesis_id"] == h["hypothesis_id"])
             st.success(f"No compute spent: {d['runs_avoided']} paired runs avoided.")
@@ -127,7 +138,8 @@ for h in D["hyps"]:
             st.markdown(f"##### {a['label']}  ·  analysis `{a['analysis_id']}`  ·  {len(a['pairs'])} paired seeds")
             rows = pd.DataFrame([{"seed": p["seed"], "delta": p["delta"], "baseline": p["baseline_val_loss"],
                                   "candidate": p["candidate_val_loss"], "candidate_run": p["candidate_run_id"],
-                                  "baseline_run": p["baseline_run_id"], "equal-token Δ": p["equal_token_delta"]}
+                                  "baseline_run": p["baseline_run_id"],
+                                  **({} if STEPS else {"equal-token Δ": p["equal_token_delta"]})}
                                  for p in a["pairs"]])
             sd = a["noise"]["sd"]
             band = alt.Chart(pd.DataFrame({"lo": [-sd], "hi": [sd]})).mark_rect(color=GRAY, opacity=0.18).encode(y="lo:Q", y2="hi:Q")
@@ -140,44 +152,73 @@ for h in D["hyps"]:
             with cc2:
                 st.metric("Mean Δ", f"{a['mean_delta']:+.4f}", f"{a['improvement_in_noise_sd']:+.2f}× noise SD (+ = better)", delta_color="off")
                 st.write(f"Branch (pre-registered rule): **{a['branch']}**" + ("  ·  ⚠ seeds disagree" if a["seed_disagreement"] else ""))
-                st.write(f"Tokens seen, candidate/baseline: **{a['token_ratio']:.2f}**"
-                         + (f"  ·  mean Δ at equal tokens **{a['mean_equal_token_delta']:+.4f}**" if a["mean_equal_token_delta"] is not None else ""))
-                if abs(a["token_ratio"] - 1) > 0.05:
-                    st.caption("Throughput differs by >5%: compare the equal-token delta before claiming it “learns better”.")
+                if not STEPS:
+                    st.write(f"Tokens seen, candidate/baseline: **{a['token_ratio']:.2f}**"
+                             + (f"  ·  mean Δ at equal tokens **{a['mean_equal_token_delta']:+.4f}**" if a["mean_equal_token_delta"] is not None else ""))
+                    if abs(a["token_ratio"] - 1) > 0.05:
+                        st.caption("Throughput differs by >5%: compare the equal-token delta before claiming it “learns better”.")
+                if a.get("throughput_ratio") is not None:
+                    st.caption(f"Speed cost/benefit (secondary; never part of the decision): candidate/baseline throughput "
+                               f"**{a['throughput_ratio']:.2f}×** ({a['candidate_tokens_per_s']:,.0f} vs {a['baseline_tokens_per_s']:,.0f} tokens/s).")
             cf = a["counterfactual"]
             with st.container(border=True):
                 st.markdown("**Single-run counterfactual** — what an autoresearch-style keep/revert loop would have decided")
-                st.write(cf["summary"])
-                st.caption("Same-seed decisions: " + ", ".join(f"seed {k}: {v}" for k, v in cf["same_seed_decisions"].items())
-                           + f"  ·  keep rate {cf['n_keep']}/{cf['n_pairings']}. Computed from runs already made; zero extra compute.")
+                st.write(cf.get("same_seed_summary") or cf["summary"])
+                if cf.get("cross_seed_summary"):
+                    st.caption(cf["cross_seed_summary"] + f" (keep rate {cf['n_keep']}/{cf['n_pairings']} pairings.) "
+                               "Computed from runs already made; zero extra compute.")
             with st.expander("Per-seed table (click-through to run ids)"):
                 st.dataframe(rows, use_container_width=True)
             for e in [e for e in D["evidence"] if e["analysis_id"] == a["analysis_id"]]:
                 cl = D["claims"][e["claim_id"]]
-                st.markdown(f"**Derived evidence stored next to the cited claim:** this measurement **{e['relation'].upper()}** "
+                st.markdown(f"**Derived evidence stored next to the cited claim:** this measurement **{e['relation'].replace('_', ' ').upper()}** "
                             f"claim `{cl['claim_id']}` (arXiv:{cl['paper_id']}) — {e['note']}.  \n> “{cl['source_span']}”")
-            sr = [x for x in decisions if x["kind"] == "screening_result" and x.get("analysis_id") == a["analysis_id"]]
+            sr = [x for x in decisions if x["kind"] in ("screening_result", "extra_seeds_result")
+                  and x.get("analysis_id") == a["analysis_id"]]
             if sr:
                 src = "Critic (LLM, number-checked)" if sr[0]["reading_source"] == "llm" else "deterministic template (number guard fired)"
                 st.markdown(f"**Reading** — _{src}_: {sr[0]['reading']}")
 
 # ----------------------------------------------------------------------------- rule + decisions
-st.header("3. Pre-registered rule and the decision it made")
+st.header("3. Pre-registered rule and the decisions it made")
 with st.expander("Rule text (written before the first run; implemented in stats.py)", expanded=False):
     st.text(D["rule"])
+st.subheader("Why this experiment next")
+st.caption("The PI chooses the objective and the testbed. The lab chooses the experiments: this queue is generated and "
+           "ordered by code from the literature snapshot (no LLM). Priority = (best expected outcome among supporting "
+           "claims: improves < no_worse < context, more supporting claims first, alphabetical).")
+if D["queue"]:
+    seen = {}
+    for h in D["hyps"]:
+        for d in decisions:
+            if d["kind"] == "followup_candidate" and d["hypothesis_id"] == h["hypothesis_id"]:
+                seen[d["candidate_key"]] = h["status"]
+        if h.get("config_delta") and len(h["config_delta"]) == 1:
+            k, v = next(iter(h["config_delta"].items()))
+            seen.setdefault(f"{k}={v}", h["status"])
+    st.dataframe(pd.DataFrame([{
+        "rank": i + 1, "candidate": q["key"], "priority (outcome rank, −#claims, key)": str(q["priority"]),
+        "supporting claims": ", ".join(q["supporting_claim_ids"]),
+        "this session": STATUS_LABEL.get(seen.get(q["key"], ""), (seen.get(q["key"], "not reached"), ""))[0]}
+        for i, q in enumerate(D["queue"])]), use_container_width=True, hide_index=True)
 for d in decisions:
     if d["kind"] in ("next_action", "extra_seeds_result", "literature_check", "followup_candidate", "budget_exhausted"):
         with st.container(border=True):
             if d["kind"] == "next_action":
                 na = d["next_action"]
-                st.markdown(f"**Decision `{d['decision_id']}` → {na['action'].replace('_', ' ').upper()}** (branch **{na['branch']}**, from analysis `{d['analysis_id']}`)")
+                st.markdown(f"**Decision `{d['decision_id']}` → {na['action'].replace('_', ' ').upper()}** (branch **{na['branch']}**, from analysis `{d['analysis_id']}`)  ←  triggered by `{d.get('triggered_by', '')}`")
                 st.write(na["rationale"])
+                st.caption("Queue at this decision: " + (", ".join(f"{q['key']} {q['priority']} ← {','.join(q['supporting_claim_ids'])}"
+                                                               for q in d["inputs"]["queue"]) or "empty"))
             else:
                 st.markdown(f"**{d['kind'].replace('_', ' ').title()}** `{d['decision_id']}`  ←  triggered by `{d.get('triggered_by', '')}`")
                 st.json({k: v for k, v in d.items() if k not in ("decision_id", "kind")}, expanded=False)
+chain = [d for d in decisions if d["kind"] in ("screening_result", "extra_seeds_result", "next_action", "followup_candidate",
+                                               "literature_check", "budget_exhausted")]
+st.caption(f"{len(chain)} chained decisions this session; each stores `triggered_by` → the previous decision.")
 
 # ----------------------------------------------------------------------------- learning curves
-st.header("4. Learning curves (equal-token view)")
+st.header("4. Learning curves (by tokens seen)")
 if analyses:
     aid = st.selectbox("Analysis", list(analyses), format_func=lambda a: f"{a} · {analyses[a]['hypothesis_id']}")
     rows = []
@@ -194,8 +235,30 @@ if analyses:
         detail="line:N", tooltip=["role", "seed", "tokens_seen", "val_loss", "run_id"]).properties(height=320),
         use_container_width=True)
 
+# ----------------------------------------------------------------------------- throughput / drift
+st.header("5. Throughput (secondary metric)")
+st.caption("Tokens per second per run, in run order. Speed cost/benefit is shown separately and is never mixed into a decision. "
+           "The budget is a fixed number of steps, so throughput only changes wall-clock, not what each run learns.")
+ok_runs = [r for r in D["runs"].values() if r["status"] == "ok" and r["train_seconds"] > 0]
+if ok_runs and D["baseline"]:
+    bh = ExperimentConfig(**D["baseline"]).config_hash()
+    tp = pd.DataFrame([{"run_order": r["run_order"], "tokens_per_s": r["tokens_seen"] / r["train_seconds"],
+                        "arm": "baseline" if r["config_hash"] == bh else "candidate", "run_id": r["run_id"],
+                        "seed": r["seed"]} for r in ok_runs])
+    st.altair_chart(alt.Chart(tp).mark_circle(size=80).encode(
+        x=alt.X("run_order:Q", title="run order"), y=alt.Y("tokens_per_s:Q", scale=alt.Scale(zero=False), title="tokens / s"),
+        color=alt.Color("arm:N", scale=alt.Scale(domain=["baseline", "candidate"], range=[BLUE, ORANGE])),
+        tooltip=["run_id", "seed", "run_order", "tokens_per_s"]).properties(height=240), use_container_width=True)
+    drift = stats.throughput_drift([RunResult(**r) for r in ok_runs], bh)
+    if drift["flag"]:
+        st.warning(f"Throughput drift: median baseline-era {drift['early_median']:,.0f} tokens/s vs late-session "
+                   f"{drift['late_median']:,.0f} ({drift['relative_change']:+.1%}). Candidates differ in cost, so this is a prompt "
+                   "to look at the plot, not a verdict; it cannot change a decision under a step budget.")
+    elif drift["relative_change"] is not None:
+        st.caption(f"Baseline-era vs late-session median throughput differs by {drift['relative_change']:+.1%} (flag threshold 10%).")
+
 # ----------------------------------------------------------------------------- provenance
-st.header("5. Click any number → run id → config, curve, environment")
+st.header("6. Click any number → run id → config, curve, environment")
 rid = st.selectbox("Run", list(D["runs"]), format_func=lambda r: f"{r} · seed {D['runs'][r]['seed']} · "
                    f"config {D['runs'][r]['config_hash'][:8]}")
 r = D["runs"][rid]
@@ -203,14 +266,17 @@ left, right = st.columns(2)
 left.json({k: r[k] for k in ("run_id", "status", "seed", "val_loss", "tokens_seen", "steps", "train_seconds", "n_params", "error", "run_order", "started_at")})
 right.json({"config": r["config"], "environment": r["env"]}, expanded=False)
 
-edges = pd.DataFrame(S.edges())
-with st.expander("Provenance graph (decision → analysis → runs; hypothesis → claim → paper)"):
-    nid = st.selectbox("Start from", [f"{d['decision_id']}" for d in decisions])
-    st.json(S.provenance("decision", nid), expanded=3)
-    st.caption(f"{len(edges)} stored edges")
+st.subheader("Evidence chain")
+st.caption("paper → claim → verdict → hypothesis → config → runs → analysis → decision → next decision. "
+           "Solid = produced by code or curated by a human; dashed = carries LLM output.")
+hid = st.selectbox("Hypothesis", [h["hypothesis_id"] for h in D["hyps"]])
+st.graphviz_chart(chain_dot(D, hid), use_container_width=True)
+with st.expander("All candidates at a glance (paper claim, coverage, verdict, measured result, relation)"):
+    st.dataframe(pd.DataFrame(evidence_grid(D)), use_container_width=True, hide_index=True)
+st.caption(f"{len(S.edges())} stored provenance edges")
 
 # ----------------------------------------------------------------------------- LLM log
-st.header("6. Every LLM call (recorded)")
+st.header("7. Every LLM call (recorded)")
 ev = pd.DataFrame([{"event": e["event_id"], "role": e["role"], "attempt": e["attempt"], "valid": e["valid"],
                     "model": e["model_served"], "in_tok": e["usage"].get("input_tokens"),
                     "out_tok": e["usage"].get("output_tokens"), "cost_usd": e["cost_usd"],

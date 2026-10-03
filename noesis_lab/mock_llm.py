@@ -13,6 +13,8 @@ from .schemas import CriticPostOutput, CriticPreOutput, Fixture, LiteratureOutpu
 
 
 def make_mock(fixtures: dict[str, Fixture]):
+    """`fixtures` is shared with the session: generated candidates are registered there (with
+    auto-filled `mock` hints) before they are evaluated."""
     def fid_of(user: str) -> str:
         m = re.search(r"(?:Hypothesis id: |Fixture |Hypothesis \()(\w+)", user)
         if not m or m.group(1) not in fixtures:
@@ -26,7 +28,7 @@ def make_mock(fixtures: dict[str, Fixture]):
         fx = fixtures[fid_of(user)]
         m = fx.mock
         if schema is LiteratureOutput:
-            return LiteratureOutput(verdict=m["verdict"], claim_id=m.get("claim_id", ""),
+            return LiteratureOutput(same_comparison=m["same_comparison"], claim_id=m.get("claim_id", ""),
                                     rationale=m.get("rationale", "mock"))
         if schema is ScientistOutput:
             return ScientistOutput(
@@ -36,6 +38,6 @@ def make_mock(fixtures: dict[str, Fixture]):
                 config_changes=m["config_changes"])
         if schema is CriticPreOutput:
             return CriticPreOutput(verdict="accept", confounds=["(mock) throughput may differ"],
-                                   required_controls=["report equal-token delta"], reasons="(mock) ok")
+                                   required_controls=["report throughput separately"], reasons="(mock) ok")
         raise KeyError(schema)
     return fn
