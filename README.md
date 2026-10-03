@@ -18,6 +18,34 @@ This is the hackathon profile ([BUILD_PLAN.md](BUILD_PLAN.md)). [SPEC.md](SPEC.m
 
 We do **not** claim 10×, confirmation, statistical significance, or global novelty. Results are labeled **SCREENING RESULT — NOT CONFIRMED**.
 
+## Run it
+
+Requires [uv](https://docs.astral.sh/uv/). Python 3.12 and all dependencies are installed from the lockfile.
+
+```bash
+make setup               # one-time install
+make test                # 60+ tests on CPU with a mocked LLM; no key, no GPU
+make verify-snapshot     # every claim span is verbatim in its arXiv abstract
+make smoke               # CPU pipeline check with the MOCK LLM (~10 s). Not a result.
+make app                 # dashboard over every notebook in results/ and work/
+```
+
+**The real session** (live Claude + real training; needs a Mac with Apple Silicon and an API key):
+
+```bash
+cp .env.example .env     # then set ANTHROPIC_API_KEY
+make timing              # ~1 min: measure throughput, then set profiles.full.train_seconds in config.yaml
+make golden              # ~15-20 min: 5 baseline + 3 candidate + 2-3 follow-up runs, every LLM call recorded
+make verify rederive replay
+make app
+```
+
+`make golden` writes `results/golden/` (override with `SESSION=name`). It refuses to overwrite an existing session unless you pass `--force` to the CLI. Commit the bundle so judges can run the verification commands below with no key.
+
+Budgets (runs, wall-clock minutes, LLM spend) are in [config.yaml](config.yaml); the session stops cleanly and records `budget_exhausted` if one is hit.
+
+To run without `make`: `uv run python -m prior_art session --session golden --profile full --llm live` (also `replay`, `rederive`, `verify`, `timing`; `--help` lists them).
+
 ## Verify our claims
 
 | Level | Command | Needs | Guarantee |
