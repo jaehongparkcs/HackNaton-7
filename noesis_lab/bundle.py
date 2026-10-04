@@ -61,18 +61,28 @@ def write_manifest(out_dir: Path) -> None:
     (out_dir / "MANIFEST.json").write_text(json.dumps({"files": files}, indent=2, sort_keys=True) + "\n")
 
 
+# OS metadata that is never part of a bundle and never committed (Finder writes .DS_Store).
+IGNORED_NAMES = {".DS_Store"}
+
+
 def verify_manifest(out_dir: Path) -> list[str]:
-    """Returns a list of problems (empty = every file matches its recorded SHA256)."""
+    """Returns a list of problems (empty = every file matches its recorded SHA256 and the bundle
+    holds no file the manifest does not list). An unexpected file is an error: sync tools (iCloud
+    "<name> 2.<ext>" conflict copies) or a stray edit would otherwise ride along unnoticed."""
     mf = out_dir / "MANIFEST.json"
     if not mf.exists():
         return ["MANIFEST.json missing"]
     problems = []
-    for rel, digest in json.loads(mf.read_text())["files"].items():
+    files = json.loads(mf.read_text())["files"]
+    for rel, digest in files.items():
         p = out_dir / rel
         if not p.exists():
             problems.append(f"{rel}: missing")
         elif sha256_file(p) != digest:
             problems.append(f"{rel}: sha256 mismatch")
+    extra = sorted(rel for p in out_dir.rglob("*") if p.is_file() and p.name not in IGNORED_NAMES
+                   and (rel := p.relative_to(out_dir).as_posix()) != "MANIFEST.json" and rel not in files)
+    problems += [f"{rel}: not in MANIFEST.json (unexpected file)" for rel in extra]
     return problems
 
 
