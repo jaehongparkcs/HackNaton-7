@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/f0iFMLxAVifwh/CXud6E2811XjQ</id>
+  <title>arXiv Query: search_query=all:"activation functions" AND all:"Transformer language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T23:47:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22activation+functions%22+AND+(all:%22Transformer+language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.23826v1</id>
+    <title>GLUScope: A Tool for Analyzing GLU Neurons in Transformer Language Models</title>
+    <updated>2026-02-27T09:07:45Z</updated>
+    <link href="https://arxiv.org/abs/2602.23826v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.23826v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present GLUScope, an open-source tool for analyzing neurons in Transformer-based language models, intended for interpretability researchers. We focus on more recent models than previous tools do; specifically we consider gated activation functions such as SwiGLU. This introduces a new challenge: understanding positive activations is not enough. Instead, both the gate and the in activation of a neuron can be positive or negative, leading to four different possible sign combinations that in some cases have quite different functionalities. Accordingly, for any neuron, our tool shows text examples for each of the four sign combinations, and indicates how often each combination occurs. We describe examples of how our tool can lead to novel insights. A demo is available at https: //sjgerstner.github.io/gluscope.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-27T09:07:45Z</published>
+    <arxiv:comment>6 pages for main body, 9 pages in total. 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sebastian Gerstner</name>
+    </author>
+    <author>
+      <name>Hinrich Schütze</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.09697v5</id>
+    <title>Effects of Parameter Norm Growth During Transformer Training: Inductive Bias from Gradient Descent</title>
+    <updated>2023-03-07T23:09:55Z</updated>
+    <link href="https://arxiv.org/abs/2010.09697v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.09697v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The capacity of neural networks like the widely adopted transformer is known to be very high. Evidence is emerging that they learn successfully due to inductive bias in the training routine, typically a variant of gradient descent (GD). To better understand this bias, we study the tendency for transformer parameters to grow in magnitude ($\ell_2$ norm) during training, and its implications for the emergent representations within self attention layers. Empirically, we document norm growth in the training of transformer language models, including T5 during its pretraining. As the parameters grow in magnitude, we prove that the network approximates a discretized network with saturated activation functions. Such "saturated" networks are known to have a reduced capacity compared to the full network family that can be described in terms of formal languages and automata. Our results suggest saturation is a new characterization of an inductive bias implicit in GD of particular interest for NLP. We leverage the emergent discrete structure in a saturated transformer to analyze the role of different attention heads, finding that some focus locally on a small number of positions, while other heads compute global averages, allowing counting. We believe understanding the interplay between these two capabilities may shed further light on the structure of computation within large transformers.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-19T17:40:38Z</published>
+    <arxiv:comment>Appeared at EMNLP 2021. March 7, 2023: Removed irreproducible numbers reported in a footnote with erratum note</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>William Merrill</name>
+    </author>
+    <author>
+      <name>Vivek Ramanujan</name>
+    </author>
+    <author>
+      <name>Yoav Goldberg</name>
+    </author>
+    <author>
+      <name>Roy Schwartz</name>
+    </author>
+    <author>
+      <name>Noah Smith</name>
+    </author>
+  </entry>
+</feed>

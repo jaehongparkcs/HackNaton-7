@@ -1,0 +1,342 @@
+{
+  "dropped": [],
+  "event": "unrecorded-c4454919",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "In the future, we will investigate other strategies of positioning the layer normalization and understand the optimization of Transformer from a theoretical perspective.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "norm_position=post",
+        "quote": "Since the gradients are large for some layers, using a large learning rate without warm-up may make the training unstable.",
+        "section": "conclusion"
+      },
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "warmup_frac=0",
+        "quote": "Given the gradients are well-behaved in the Pre-LN Transformer, it is natural to consider removing the learning rate warm-up stage during training.",
+        "section": "introduction"
+      }
+    ],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "warmup_frac=0",
+        "quote": "On the IWSLT14 De-En task, we set the initial learning rate to be 5e^{-4} and decay the learning rate at the 8-th epoch by 0.1.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": 0.0005,
+        "value_as_stated": "initial learning rate 5e-4, decayed at 8th epoch by 0.1 (Pre-LN, IWSLT14)"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "warmup_frac=0",
+        "quote": "For the Pre-LN BERT, we use linear learning rate decay starting from 3e^{-4} without the warm-up stage.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": 0.0003,
+        "value_as_stated": "linear decay starting from 3e-4 without warm-up (Pre-LN BERT)"
+      }
+    ],
+    "results": [
+      {
+        "direction": "worse",
+        "method": "norm_position=post",
+        "quote": "Second, the Pre-LN Transformer converges faster than the Post-LN Transformer using the same \\text{lr}_{max} .",
+        "section": "results",
+        "setting_note": "IWSLT14/WMT14 translation, same lr_max"
+      },
+      {
+        "direction": "worse",
+        "method": "norm_position=post",
+        "quote": "We have tried to use a larger learning rate (such as 3e^{-4} ) for the Post-LN BERT but found the optimization diverged.",
+        "section": "experimental_setup",
+        "setting_note": "BERT base pre-training with larger lr"
+      },
+      {
+        "direction": "worse",
+        "method": "warmup_frac=0",
+        "quote": "Without the warm-up stage, the BLEU score of the model trained with Adam optimizer can only achieve 8.45.",
+        "section": "conclusion",
+        "setting_note": "Post-LN Transformer, IWSLT14 De-En, Adam"
+      },
+      {
+        "direction": "no_worse",
+        "method": "warmup_frac=0",
+        "quote": "First, as we can see from the figure, the learning rate warm-up stage is not critical anymore for training the Pre-LN Transformer and the performance of the learned model is competitive.",
+        "section": "results",
+        "setting_note": "Pre-LN Transformer, IWSLT14/WMT14 translation"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "English Wikipedia corpus and BookCorpus",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "We follow (Devlin et al., 2018) to use English Wikipedia corpus and BookCorpus for pre-training.",
+        "section": "experimental_setup",
+        "task": "language_modeling",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "71f711bee0271eaaa3daf94210c2fdaad20d22f3c1241d4b30a7b3b64ef5fb14",
+  "paper_id": "2002.04745",
+  "section_chars": {
+    "abstract": 1380,
+    "appendix_setup": 4754,
+    "conclusion": 6025,
+    "experimental_setup": 5355,
+    "introduction": 4787,
+    "results": 1301
+  },
+  "sections": [
+    {
+      "chars": 1380,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4787,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 2241,
+      "heading": "Related work",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Optimization for the Transformer",
+      "section": "other"
+    },
+    {
+      "chars": 597,
+      "heading": "3.1 Transformer with Post-Layer Normalization",
+      "section": "other"
+    },
+    {
+      "chars": 1496,
+      "heading": "Self-attention sub-layer",
+      "section": "other"
+    },
+    {
+      "chars": 505,
+      "heading": "Position-wise FFN sub-layer",
+      "section": "other"
+    },
+    {
+      "chars": 974,
+      "heading": "Residual connection and layer normalization",
+      "section": "other"
+    },
+    {
+      "chars": 1545,
+      "heading": "Post-LN Transformer",
+      "section": "other"
+    },
+    {
+      "chars": 1098,
+      "heading": "3.2 The learning rate warm-up stage",
+      "section": "other"
+    },
+    {
+      "chars": 1246,
+      "heading": "Experimental setting",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2192,
+      "heading": "Results and discussions",
+      "section": "conclusion"
+    },
+    {
+      "chars": 301,
+      "heading": "3.3 Understanding the Transformer at initialization",
+      "section": "other"
+    },
+    {
+      "chars": 513,
+      "heading": "Notations",
+      "section": "other"
+    },
+    {
+      "chars": 1266,
+      "heading": "Parameter Initialization",
+      "section": "other"
+    },
+    {
+      "chars": 5694,
+      "heading": "Post-LN Transformer v.s. Pre-LN Transformer",
+      "section": "other"
+    },
+    {
+      "chars": 575,
+      "heading": "Extended theory to other layers/parameters",
+      "section": "other"
+    },
+    {
+      "chars": 335,
+      "heading": "3.4 Empirical verification of the theory and discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 194,
+      "heading": "On the concentration property",
+      "section": "conclusion"
+    },
+    {
+      "chars": 757,
+      "heading": "On Theorem 1",
+      "section": "conclusion"
+    },
+    {
+      "chars": 734,
+      "heading": "On the extended theory",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1037,
+      "heading": "The critical warm-up stage for Post-LN Transformer",
+      "section": "conclusion"
+    },
+    {
+      "chars": 355,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "4.1 Experiment Settings",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1582,
+      "heading": "Machine Translation",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1099,
+      "heading": "Unsupervised Pre-training (BERT)",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "4.2 Experiment Results",
+      "section": "results"
+    },
+    {
+      "chars": 1301,
+      "heading": "Machine Translation",
+      "section": "results"
+    },
+    {
+      "chars": 1069,
+      "heading": "Unsupervised Pre-training (BERT)",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 770,
+      "heading": "Conclusion and Future Work",
+      "section": "conclusion"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Experimental Settings",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "A.1 Machine Translation",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 859,
+      "heading": "Experiment on Section 3",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 753,
+      "heading": "Experiment on Section 4",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 950,
+      "heading": "A.2 Unsupervised Pretraining",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "A.3 GLUE Dataset",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 325,
+      "heading": "MRPC",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 257,
+      "heading": "RTE",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 497,
+      "heading": "Fine-tuning on GLUE tasks",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 607,
+      "heading": "Appendix B Proof of Lemma 1",
+      "section": "other"
+    },
+    {
+      "chars": 5063,
+      "heading": "Appendix C Proof of Lemma 2",
+      "section": "other"
+    },
+    {
+      "chars": 2572,
+      "heading": "Appendix D Proof of Lemma 3",
+      "section": "other"
+    },
+    {
+      "chars": 10131,
+      "heading": "Appendix E Proof of Theorem 1",
+      "section": "other"
+    },
+    {
+      "chars": 6209,
+      "heading": "Appendix F Extension to other layers",
+      "section": "other"
+    },
+    {
+      "chars": 1435,
+      "heading": "Appendix G Examples of (\\epsilon,\\delta) -bounded random variables",
+      "section": "other"
+    },
+    {
+      "chars": 1107,
+      "heading": "Appendix H Small learning rate experiment",
+      "section": "appendix_setup"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "On Layer Normalization in the Transformer Architecture",
+  "url": "https://arxiv.org/html/2002.04745",
+  "validation_only": true,
+  "version": "2002.04745v2"
+}

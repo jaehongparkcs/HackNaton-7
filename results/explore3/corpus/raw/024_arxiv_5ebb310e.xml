@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/G5jmbzITBsW8HCtulodhP2GLx1k</id>
+  <title>arXiv Query: search_query=all:"QK normalization" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T23:48:27Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22QK+normalization%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2505.22014v2</id>
+    <title>Learning in Compact Spaces with Approximately Normalized Transformer</title>
+    <updated>2025-11-18T21:57:27Z</updated>
+    <link href="https://arxiv.org/abs/2505.22014v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.22014v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The successful training of deep neural networks requires addressing challenges such as overfitting, numerical instabilities leading to divergence, and increasing variance in the residual stream. A common solution is to apply regularization and normalization techniques that usually require tuning additional hyperparameters. An alternative is to force all parameters and representations to lie on a hypersphere. This removes the need for regularization and increases convergence speed, but comes with additional costs. In this work, we propose a more holistic, approximate normalization via simple scalar multiplications motivated by the tight concentration of the norms of high-dimensional random vectors. Additionally, instead of applying strict normalization for the parameters, we constrain their norms. These modifications remove the need for weight decay and learning rate warm-up as well, but do not increase the total number of normalization layers. Our experiments with transformer architectures show up to 40% faster convergence compared to GPT models with QK normalization, with only 3% additional runtime cost. When deriving scaling laws, we found that our method enables training with larger batch sizes while preserving the favorable scaling characteristics of classic GPT architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-28T06:23:19Z</published>
+    <arxiv:comment>In Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS 2025)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jörg K. H. Franke</name>
+    </author>
+    <author>
+      <name>Urs Spiegelhalter</name>
+    </author>
+    <author>
+      <name>Marianna Nezhurina</name>
+    </author>
+    <author>
+      <name>Jenia Jitsev</name>
+    </author>
+    <author>
+      <name>Frank Hutter</name>
+    </author>
+    <author>
+      <name>Michael Hefenbrock</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.18363v1</id>
+    <title>A Controlled Study of Attention-Only Transformers</title>
+    <updated>2026-07-20T15:29:00Z</updated>
+    <link href="https://arxiv.org/abs/2607.18363v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.18363v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Feed-forward networks hold two thirds of a transformer's non-embedding parameters, yet the architecture has not received a necessity test that controls parameters, compute, and depth at once. We pretrain attention-only decoder transformers (Simple Attention Networks, SANs) against standard transformers matched separately for parameter count, training FLOPs, and depth (2 to 48 layers), for up to 105B tokens at 6M to 87M parameters. Deleting feed-forward layers in place is costly: the standard transformer leads by 0.47 nats at matched depth and 0.26 nats at matched FLOPs. Reallocating the freed budget into attention depth closes the gap: at matched parameters the difference is 0.006 nats (0.27 percent of loss), reproducible to one part in ten thousand across seed pairs, shrinking across 5B, 30B, and 105B budgets, and holding near 0.02 nats across a 29x size range. Three measurements localize the remaining gap to parametric recall: attention-only models are better on context-grounded answers and worse where knowledge must come from weights. Weight spectra show why: routing matrices (Q/K) crystallize early, content matrices accumulate rank slowly, and removing feed-forward layers relocates this accumulation to the attention output projection. QK-normalization, not feed-forward layers or residual gating, keeps 48-layer attention-only stacks trainable. The deficit concentrates on low-context query prediction and localizes there entirely by the largest budget. A pre-registered test confirms the account: it predicts a 0.02 to 0.05 nat gap on knowledge-dense web text; a matched pair trained on fineweb-edu measures 0.040. Within the tested regime, attention does the rest.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-20T15:29:00Z</published>
+    <arxiv:comment>10 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Henry Ndubuaku</name>
+    </author>
+    <author>
+      <name>Karen Mosoyan</name>
+    </author>
+    <author>
+      <name>Jakub Mroz</name>
+    </author>
+    <author>
+      <name>Noah Cylich</name>
+    </author>
+    <author>
+      <name>Satyajit Kumar</name>
+    </author>
+    <author>
+      <name>Parkirat Sandhu</name>
+    </author>
+    <author>
+      <name>Roman Shemet</name>
+    </author>
+    <author>
+      <name>Justin H Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.02091v2</id>
+    <title>One QK Channel, Many Sources: Tracing Low-Precision Attention Collapse</title>
+    <updated>2026-09-30T14:19:07Z</updated>
+    <link href="https://arxiv.org/abs/2608.02091v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.02091v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A bfloat16 transformer can train normally, then collapse abruptly. Prior work links collapse to structured attention errors and shows QK normalization disrupts their compounding. Distinct low-precision errors trigger the same collapse, leaving unclear whether each needs a fix at its source or one shared route can be blocked instead. We isolated the fault behind a reproduced GPT-2-class collapse to the streaming-softmax accumulator, where an fp32 streaming core repairs it, and turned it into an assay for moving a controlled error across sources. Using it, we found that errors placed outside attention still drove the same QK spectral runaway, and that correcting only QK kept training stable while the fault stayed active. This is a source-channel dissociation: fault source is not failure channel. It held across tested architectures and scales, and reproduced on a second GPU architecture. As a causal probe, projecting each update off the current QK weights' leading three singular directions held the query projection's largest singular value to 11.1, whereas removing equal energy elsewhere left it at 237: the QK channel causally drives the early runaway. What lets the injected error in is temporal sign-coherence, its per-head sign persisting across steps, not aggregate deviation; once inside, the runaway shows as attention-logit saturation. QK-Guard, a dormant controller, tests this by switching on parameter-free QK normalization at the first monitored threshold crossing. On the runs designated for this test, the QK-local action prevented the failure of each matched or same-configuration unguarded run; on plain GPT-2, all 12 final train and validation losses were within 0.03 nat of same-configuration always-on QK-norm, and both methods ran 60k steps without collapse. Intervention at the QK locus therefore suffices in place of a fix at each source.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-03T11:50:06Z</published>
+    <arxiv:comment>24 pages, 4 figures. Revised title and presentation; corrected the streaming-core description and updated control analyses. Updated research artifact: https://github.com/xieTwim/one-qk-channel-artifact/releases/tag/v0.2.0-arxiv-v2</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shuxiao Xie</name>
+    </author>
+    <author>
+      <name>Shuyang Xie</name>
+    </author>
+    <author>
+      <name>Yuan Cao</name>
+    </author>
+    <author>
+      <name>Dezhi Ran</name>
+    </author>
+    <author>
+      <name>Wei Yang</name>
+    </author>
+    <author>
+      <name>Tao Xie</name>
+    </author>
+  </entry>
+</feed>

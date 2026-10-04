@@ -1,0 +1,289 @@
+{
+  "dropped": [],
+  "event": "unrecorded-55f3489e",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "The experiments are conducted at academic pretraining scale rather than frontier-industrial scale.",
+        "section": "limitations"
+      },
+      {
+        "method": "activation=swiglu",
+        "quote": "The result should not be reduced to “use SwiGLU”.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "attention_behavior",
+        "method": "activation=swiglu",
+        "quote": "This creates an architectural delay: unstable residual directions are less able to drive the next upper attention block into sharp matching.",
+        "section": "method"
+      },
+      {
+        "mechanism_category": "attention_behavior",
+        "method": "activation=swiglu",
+        "quote": "gated FFNs reduce the residual input that can drive premature upper-Q/K logit growth.",
+        "section": "results"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "GPT-style GELU FFN | 26.7382 | 26.1524 | 0.5858 | 0.621 | SwiGLU gated FFN | 26.2083 | 26.1008 | 0.1075 | 0.708 |",
+        "section": "results",
+        "setting_note": "270M GPT-style decoder, matched SwiGLU vs GELU FFN control perplexity"
+      },
+      {
+        "direction": "context",
+        "method": "norm=rmsnorm",
+        "quote": "RMSNorm alone does not fix the failure: GPT+RMSNorm keeps the same early upper logit and entropy as the GPT-style reference and retains a large intervention gain.",
+        "section": "results",
+        "setting_note": "270M GPT+RMSNorm component ablation of intervention gain"
+      },
+      {
+        "direction": "context",
+        "method": "activation=swiglu",
+        "quote": "A matched SwiGLU FFN reduces the intervention gain to 0.1075 perplexity while also lowering early upper logit magnitude and raising upper entropy.",
+        "section": "results",
+        "setting_note": "270M decoder, SwiGLU reduces benefit of upper-Q/K intervention"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "FineWeb-Edu (2.5B tokens)",
+        "model_family": "transformer",
+        "parameter_count": "270M",
+        "quote": "The main experiments use a 20-layer causal decoder with width 960, 15 attention heads, sequence length 1024, RoPE position encoding, tied input/output embeddings, and roughly 270M parameters.",
+        "section": "experimental_setup",
+        "task": "language_modeling",
+        "training_steps": "2.5B tokens"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "06cee95f9e71e37f34a9ea7749411185ce71216ee480758b1f2176b3ef726304",
+  "paper_id": "2605.10504",
+  "section_chars": {
+    "abstract": 1919,
+    "appendix_setup": 876,
+    "conclusion": 1667,
+    "experimental_setup": 2374,
+    "introduction": 5183,
+    "limitations": 1068,
+    "method": 1101,
+    "results": 8296
+  },
+  "sections": [
+    {
+      "chars": 1919,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 5183,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 2098,
+      "heading": "Premature Upper Attention Specialization",
+      "section": "other"
+    },
+    {
+      "chars": 1101,
+      "heading": "Architecture: Why Gated FFNs Matter",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "Experimental Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 505,
+      "heading": "270M decoder pretraining.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 458,
+      "heading": "Architectural variants.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 305,
+      "heading": "Intervention comparisons.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1103,
+      "heading": "Mechanism measurements.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Results",
+      "section": "results"
+    },
+    {
+      "chars": 981,
+      "heading": "5.1 A GPT-Style Block Is Highly Sensitive to Early Upper Q/K Learning",
+      "section": "results"
+    },
+    {
+      "chars": 1387,
+      "heading": "5.2 Downstream Benchmark Evaluation",
+      "section": "results"
+    },
+    {
+      "chars": 897,
+      "heading": "5.3 The Failure Is Early Causal Dependence on Upper Q/K",
+      "section": "results"
+    },
+    {
+      "chars": 861,
+      "heading": "5.4 The Intervention Delays Upper Specialization, Not Lower Routing",
+      "section": "results"
+    },
+    {
+      "chars": 1814,
+      "heading": "5.5 The Phenomenon Is Architecture-Dependent",
+      "section": "results"
+    },
+    {
+      "chars": 2351,
+      "heading": "5.6 The Suppressor Is the Multiplicative Gate",
+      "section": "results"
+    },
+    {
+      "chars": 4100,
+      "heading": "Theory",
+      "section": "other"
+    },
+    {
+      "chars": 1667,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1068,
+      "heading": "Conclusion and Limitation",
+      "section": "limitations"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 876,
+      "heading": "Decoder pretraining and training-time analysis.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 859,
+      "heading": "Transformer architecture, normalization, and stability.",
+      "section": "other"
+    },
+    {
+      "chars": 763,
+      "heading": "Feed-forward networks, gated FFNs, and residual writes.",
+      "section": "other"
+    },
+    {
+      "chars": 616,
+      "heading": "Mechanistic development of attention and routing.",
+      "section": "other"
+    },
+    {
+      "chars": 733,
+      "heading": "Attention entropy, Q/K logits, and closest interventions.",
+      "section": "other"
+    },
+    {
+      "chars": 1248,
+      "heading": "Appendix B Full Theoretical Derivations",
+      "section": "other"
+    },
+    {
+      "chars": 80,
+      "heading": "B.1 Proof of Theorem 1",
+      "section": "other"
+    },
+    {
+      "chars": 2721,
+      "heading": "Full statement of Theorem 1.",
+      "section": "other"
+    },
+    {
+      "chars": 1760,
+      "heading": "B.2 Matched Gated FFNs Reduce the Immature Residual Energy Entering the Bound",
+      "section": "other"
+    },
+    {
+      "chars": 1252,
+      "heading": "B.3 The Two Levers Suppress the Same Pathway",
+      "section": "other"
+    },
+    {
+      "chars": 1230,
+      "heading": "B.4 Entropy Collapse Requires Logit-Range Growth",
+      "section": "other"
+    },
+    {
+      "chars": 671,
+      "heading": "Appendix C Direct FFN Pathway Evidence",
+      "section": "other"
+    },
+    {
+      "chars": 1614,
+      "heading": "Appendix D Entropy-Floor Mediator Control",
+      "section": "other"
+    },
+    {
+      "chars": 1579,
+      "heading": "Appendix E Global Learning-Rate Control",
+      "section": "other"
+    },
+    {
+      "chars": 2700,
+      "heading": "Appendix F Release-Rule Robustness",
+      "section": "other"
+    },
+    {
+      "chars": 1212,
+      "heading": "Appendix G Diagnostic Multiplier Sweep",
+      "section": "other"
+    },
+    {
+      "chars": 1263,
+      "heading": "Appendix H 0.7B Larger-Scale Replication",
+      "section": "other"
+    },
+    {
+      "chars": 1707,
+      "heading": "Appendix I Immature-Channel Locality Diagnostic",
+      "section": "other"
+    },
+    {
+      "chars": 774,
+      "heading": "Appendix J Reproducibility and Compute Details",
+      "section": "other"
+    },
+    {
+      "chars": 409,
+      "heading": "Appendix K LLM Usage Statement",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Learning Less Is More: Premature Upper-Layer Attention Specialization Hurts Language Model Pretraining",
+  "url": "https://arxiv.org/html/2605.10504",
+  "validation_only": false,
+  "version": "2605.10504v1"
+}

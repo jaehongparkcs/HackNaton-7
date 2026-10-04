@@ -1,0 +1,458 @@
+{
+  "fixture_id": "gap_pos_encoding_rope_qk_norm_true",
+  "round": 0,
+  "delta": {
+    "pos_encoding": "rope",
+    "qk_norm": "true"
+  },
+  "queries": [
+    {
+      "q": "\"rotary position embedding\" AND \"QK normalization\" AND \"language model\"",
+      "n_results": 10,
+      "source": "openalex"
+    },
+    {
+      "q": "\"rotary position embedding\" AND \"QK normalization\" AND \"Transformer\"",
+      "n_results": 10,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [
+    "2505.22014",
+    "2605.10504",
+    "2605.26797",
+    "2608.02091"
+  ],
+  "papers": [
+    {
+      "paper_id": "2606.16310",
+      "title": "QK-Normed MLA: QK normalization without full key caching",
+      "authors": [],
+      "published": "2026-06-15",
+      "url": "https://arxiv.org/abs/2606.16310",
+      "abstract": "Query-key (QK) normalization stabilizes attention by controlling the scale of queries and keys before the dot product, but is not immediately compatible with Multi-head Latent Attention (MLA). MLA achieves efficient decoding by caching low-dimensional latent states instead of full keys, whereas post-projection QK RMSNorm appears to require the fully projected key for every cached token. We show this apparent incompatibility is an implementation artifact, not an architectural constraint. RMSNorm decomposes into a static affine weight and a dynamic scalar RMS statistic. The static key-side weight can be absorbed into the MLA query-side projection; the dynamic key statistic reduces to one inverse-RMS scalar per token and KV group. The resulting formulation is exactly equivalent to explicit post-projection QK RMSNorm in exact arithmetic and preserves MLA's latent decode path. In our 400M runs trained for up to 100B tokens, QK-Normed MLA achieves lower training loss and better downstream accuracy than QK clipping, while H800 decode benchmarks show less than 2% latency overhead up to 256k context. These results make QK normalization a practical stabilization option for MLA models without requiring full-key caching.",
+      "abstract_sha256": "c900184c0bd1941c61f3fde33e142665b83b41257e392aea9ccdf013289ba5ea",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2606.16310",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2510.06548",
+      "title": "Reusing Overtrained Language Models Saturates Scaling",
+      "authors": [],
+      "published": "2025-10-08",
+      "url": "https://arxiv.org/abs/2510.06548",
+      "abstract": "Reusing pretrained base models for further pretraining, such as continual pretraining or model growth, is promising at reducing the cost of training language models from scratch. However, the effectiveness remains unclear, especially when applied to overtrained base models. In this work, we empirically study the scaling properties of model reuse and find that the scaling efficiency diminishes in a predictable manner: The scaling exponent with respect to second-stage training tokens decreases logarithmically with the number of tokens used to pretrain the base model. The joint dependence on first- and second-stage tokens is accurately modeled by a simple scaling law. Such saturation effect reveals a fundamental trade-off in multi-stage pretraining strategies: the more extensively a base model is pretrained, the less benefit additional pretraining provides. Our findings provide practical insights for efficient language model training and raise important considerations for the reuse of overtrained models.",
+      "abstract_sha256": "e5004b575ede4faef54b4fb52ecf18eedd5167301a329831ff708d82b90a262f",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2510.06548",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2510.06824",
+      "title": "Efficient numeracy in language models through single-token number embeddings",
+      "authors": [],
+      "published": "2025-10-08",
+      "url": "https://arxiv.org/abs/2510.06824",
+      "abstract": "To drive progress in science and engineering, large language models (LLMs) must be able to process large amounts of numerical data and solve long calculations efficiently. This is currently only possible through the use of external tools or extensive reasoning chains, either weakening the numerical representations of LLMs or limiting the length of problems they can solve. We show that frontier LLMs require excessive amounts of reasoning tokens to solve even basic calculations, which is exacerbated by their tokenization strategies that split single numbers into multiple tokens. This motivates the need for efficient and effective single-token number encodings. We introduce a set of desiderata for such encodings and show that existing approaches fail to fulfill them. To address these shortcomings, we propose BitTokens, a novel encoding strategy that represents any number as a single token using its IEEE 754 binary floating-point representation. Through extensive experiments we show that our BitTokens allow even small language models to learn algorithms that solve basic arithmetic operations nearly perfectly. This newly gained efficiency could expand the length and complexity of problems language models can solve.",
+      "abstract_sha256": "af98fc5a9920e1b9a43df744f3e2620693f7a0dc4a24ee20c675483a6fc0d2c6",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2510.06824",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2608.02602",
+      "title": "AURORA-LM: Autoencoding Unified Representation for Continuous-Latent Diffusion Language Modeling",
+      "authors": [],
+      "published": "2026-08-03",
+      "url": "https://arxiv.org/abs/2608.02602",
+      "abstract": "Language remains an outlier in generative modeling: while images, video, and audio are increasingly modeled in continuous latent spaces, text generation still relies predominantly on discrete tokens. Existing continuous language models either inherit embedding spaces not designed for joint generation and decoding, or compress autoencoded latents to ease diffusion, sacrificing token-level fidelity. Instead of simplifying the representation to suit the generative model, we preserve a high-capacity, decodable text latent and design the diffusion model to learn its distribution directly. We introduce AURORA-LM, a continuous-latent diffusion language model that separates the construction of a decodable text representation from the modeling of its distribution. A Query-based Encoder-Decoder organizes text into a high-capacity, prefix-aligned latent sequence, and a Block-causal Diffusion Transformer learns its distribution through flow matching, generating blocks left to right while denoising positions within each block in parallel. Because such a latent is harder for diffusion to model, AURORA-LM restricts only the noisy-input pathway while retaining the full clean-latent prediction target, accommodating full-width latents without reducing decoder-facing capacity. We further calibrate the noise-level distribution to the latent width, and introduce self-trajectory consistency to bridge independently sampled training noise and iterative denoising at inference. AURORA-LM achieves the strongest performance among evaluated continuous and diffusion-based language models on OpenWebText free generation and XSum summarization. Scaling to 1B parameters with about 1500 EFLOPs of total compute yields further gains, surpassing a larger publicly released latent-diffusion language model under a matched evaluation protocol. All experiments are conducted on Ascend NPUs.",
+      "abstract_sha256": "8cd6ee507f9dc5114a54cfc7dda563c760d06e18e9a3b34cd7b08d84282fd25d",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2608.02602",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2505.10046",
+      "title": "Exploring the Deep Fusion of Large Language Models and Diffusion Transformers for Text-to-Image Synthesis",
+      "authors": [],
+      "published": "2025-05-15",
+      "url": "https://arxiv.org/abs/2505.10046",
+      "abstract": "This paper does not describe a new method; instead, it provides a thorough exploration of an important yet understudied design space related to recent advances in text-to-image synthesis -- specifically, the deep fusion of large language models (LLMs) and diffusion transformers (DiTs) for multi-modal generation. Previous studies mainly focused on overall system performance rather than detailed comparisons with alternative methods, and key design details and training recipes were often left undisclosed. These gaps create uncertainty about the real potential of this approach. To fill these gaps, we conduct an empirical study on text-to-image generation, performing controlled comparisons with established baselines, analyzing important design choices, and providing a clear, reproducible recipe for training at scale. We hope this work offers meaningful data points and practical guidelines for future research in multi-modal generation.",
+      "abstract_sha256": "16503f4f026c53267af46bb8506371213d7b416c2e4206c5e0beefdad4874ba4",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2505.10046",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2603.11535",
+      "title": "Expert Threshold Routing for Autoregressive Language Modeling with Dynamic Computation Allocation and Load Balancing",
+      "authors": [],
+      "published": "2026-03-12",
+      "url": "https://arxiv.org/abs/2603.11535",
+      "abstract": "Token-choice Mixture-of-Experts (TC-MoE) routes each token to a fixed number of experts, limiting dynamic computation allocation and requiring auxiliary losses to maintain load balance. We propose Expert Threshold (ET) routing, where each expert maintains an exponential moving average (EMA) threshold estimated from the global token distribution. At both training and inference, each token is independently routed to an expert if its score exceeds the expert's threshold, enabling dynamic computation allocation while achieving load balance without auxiliary losses. This fully causal mechanism eliminates dependence on other tokens in the batch, making it well-suited for autoregressive language modeling. In pretraining experiments scaling to 2.4B parameters on FineWeb-Edu, ET achieves 0.067 lower cross-entropy loss than TC-MoE, equivalent to reaching the same performance with 1.6$\\times$ fewer tokens.",
+      "abstract_sha256": "6303db4653e40188d02ca4486ada2355ead626666952d460806842ac6408bb01",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2603.11535",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2603.16077",
+      "title": "MDM-Prime-v2: Binary Encoding and Index Shuffling Enable Scaling of Diffusion Language Models",
+      "authors": [],
+      "published": "2026-03-17",
+      "url": "https://arxiv.org/abs/2603.16077",
+      "abstract": "Masked diffusion models (MDM) exhibit superior generalization when learned using a Partial masking scheme (Prime). This approach converts tokens into sub-tokens and models the diffusion process at the sub-token level. We identify two limitations of the MDM-Prime framework. First, we find that the functional form of the subtokenizer significantly increases the cross-entropy loss in the objective when paired with commonly used Byte-Pair-Encoding (BPE) tokenizers. Second, we lack tools to guide the hyperparameter choice of the token granularity in the subtokenizer. To address these limitations, we analyze the optimal design of the subtokenizer that minimizes MDM-Prime training objective and develop MDM-Prime-v2, a masked diffusion language model which incorporates Binary Encoding and Index Shuffling. Our analysis characterizes how token granularity and sub-token entropy influence the training objective and downstream performance, providing principled criteria for subtokenizer design. When extending the model size to 1.1B parameters, MDM-Prime-v2 demonstrates superior average zero-shot accuracy across eight commonsense reasoning benchmarks, outperforming similar-sized baselines including GPT-Neo, OPT, Pythia, Bloom, SMDM, and TinyLLaMA.",
+      "abstract_sha256": "3346ec7a84b51d4cc396eeb1df498984474a8187cd65abf3120101ff08095728",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2603.16077",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2608.30092",
+      "title": "Arkios: An Open Bilingual English-Nepali Language Model Trained From Scratch, with a Devanagari-Aware Tokenizer",
+      "authors": [],
+      "published": "2026-08-30",
+      "url": "https://arxiv.org/abs/2608.30092",
+      "abstract": "We present Arkios, a 1.04B-parameter dense transformer pretrained from scratch on 150B tokens of bilingual English-Nepali text, using a custom single-file C/CUDA training stack and a Devanagari-aware byte-level BPE tokenizer built for this project. On ARC-Easy and ARC-Challenge, Arkios exceeds three comparably sized open models (Pythia-1.4B, TinyLlama-1.1B, OLMo-1B) despite an order of magnitude fewer training tokens, likely aided by a match between our educational-web-text pretraining data and ARC's grade-school-science format rather than a general capability advantage. We report full evaluation results under standard protocols, including a correction to an earlier partial-sample estimate, and findings specific to evaluating small models in a low-resource language: the standard multiple-choice-letter prompt format used by common evaluation harnesses places this model at chance on Nepali reading comprehension, and simultaneously at chance on English in the same format, which would lead a naive benchmark run to conclude the model has no Nepali ability when in fact it does. Concretely, both languages score at chance in the letter-choice format (0.240 Nepali, 0.236 English, against a chance baseline of 0.250), while scoring the answer text directly reveals genuine, English-favoring comprehension (0.306 Nepali, 0.387 English). We describe a manifest-conditioned tool-use contract introduced during instruction tuning, where tool calls are permitted only when a tool manifest is declared in context and suppressed otherwise, and report where that contract holds and where it does not. We release both the base and instruction-tuned model weights under Apache-2.0. The training code and a small privately-sourced portion of the Nepali pretraining corpus are not released; everything needed to reproduce the reported numbers from the released weights is included here.",
+      "abstract_sha256": "1e66e0bcb143a496ff064cdf9b7ca6907add55bab218e24f90e46ac804fe51de",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2608.30092",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2407.09577",
+      "title": "FlashNorm: Fast Normalization for Transformers",
+      "authors": [],
+      "published": "2024-07-12",
+      "url": "https://arxiv.org/abs/2407.09577",
+      "abstract": "Normalization layers are ubiquitous in large language models (LLMs) yet represent a compute bottleneck: on hardware with distinct vector and matrix execution units, the RMS calculation blocks the subsequent matrix multiplication, preventing parallel execution. We present FlashNorm, an exact reformulation of RMSNorm followed by a linear layer that (i) eliminates the normalization weights by folding them into the subsequent linear layer, and (ii) defers the scalar RMS normalization to the output of the matrix multiplication, enabling the two operations to execute in parallel. Additionally, by the scale invariance of RMS, an RMSNorm followed by a linear layer followed by another RMSNorm allows the first RMSNorm to be eliminated entirely -- a mathematically identical simplification that removes the pre-attention RMSNorm in models using QKV-normalization (e.g., Gemma~4) and in MLA-models with latent normalization (e.g., DeepSeek-V2, Mistral Small 4, and OpenMythos). The same techniques extend to LayerNorm, Dynamic Tanh (DyT), feed-forward networks with GLU variants, and RoPE-based attention. On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale. We verify zero-loss weight folding on three models. Beyond inference speed, FlashNorm simplifies model implementations by reducing parameter tensor count. Watch our explainer video https://youtu.be/GEuJv34_XgU?si and see https://github.com/OpenMachine-ai/transformer-tricks for code.",
+      "abstract_sha256": "c5b5679bf0eb9db49c934e47328cefac34e6c3b4e5645773dbc64fee954cd02f",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2407.09577",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2510.03511",
+      "title": "Platonic Transformers: A Solid Choice For Equivariance",
+      "authors": [],
+      "published": "2025-10-03",
+      "url": "https://arxiv.org/abs/2510.03511",
+      "abstract": "While widespread, Transformers lack inductive biases for geometric symmetries common in science and computer vision. Existing equivariant methods often sacrifice the efficiency and flexibility that make Transformers so effective through complex, computationally intensive designs. We introduce the Platonic Transformer to resolve this trade-off. By defining attention relative to reference frames from the Platonic solid symmetry groups, our method induces a principled weight-sharing scheme. This enables combined equivariance to continuous translations and Platonic symmetries, while preserving the exact architecture and computational cost of a standard Transformer. Furthermore, we show that this attention is formally equivalent to a dynamic group convolution, which reveals that the model learns adaptive geometric filters and enables a highly scalable, linear-time convolutional variant. Across diverse benchmarks in computer vision (CIFAR-10), 3D point clouds (ScanObjectNN), and molecular property prediction (QM9, OMol25), the Platonic Transformer achieves competitive performance by leveraging these geometric constraints at no additional cost.",
+      "abstract_sha256": "538b19beaa88b55f7aebc435d2001e859a2ee19d9cf0887cbae6e280767b7c33",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2510.03511",
+      "categories": [],
+      "queries": [
+        "tighten gap_pos_encoding_rope_qk_norm_true: \"rotary position embedding\" AND \"QK normalization\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2606_16310_1",
+      "paper_id": "2606.16310",
+      "dimension": "qk_norm",
+      "method": "QK-Normed MLA (QK RMSNorm in Multi-head Latent Attention)",
+      "setting": "transformer, language_modeling, scale medium, empirical (extracted from the abstract)",
+      "claim": "In 400M runs up to 100B tokens, QK-Normed MLA achieves lower training loss and better downstream accuracy than QK clipping with under 2% decode latency overhead.",
+      "source_span": "In our 400M runs trained for up to 100B tokens, QK-Normed MLA achieves lower training loss and better downstream accuracy than QK clipping",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": {
+        "qk_norm": "true"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "medium",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-15",
+      "extraction_event": "unrecorded-c3518f4a",
+      "mechanism": "stabilizes attention by controlling the scale of queries and keys before the dot product",
+      "mechanism_category": "attention_behavior"
+    },
+    {
+      "claim_id": "x2510_06548_1",
+      "paper_id": "2510.06548",
+      "dimension": "outside_testbed",
+      "method": "Reusing overtrained base models for further pretraining",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "The scaling exponent with respect to second-stage tokens decreases logarithmically with base-model pretraining tokens, so more pretrained bases benefit less from additional pretraining.",
+      "source_span": "the more extensively a base model is pretrained, the less benefit additional pretraining provides",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-10-08",
+      "extraction_event": "unrecorded-c3518f4a"
+    },
+    {
+      "claim_id": "x2510_06824_1",
+      "paper_id": "2510.06824",
+      "dimension": "outside_testbed",
+      "method": "BitTokens single-token number encoding",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "BitTokens let small language models learn basic arithmetic nearly perfectly.",
+      "source_span": "our BitTokens allow even small language models to learn algorithms that solve basic arithmetic operations nearly perfectly",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-10-08",
+      "extraction_event": "unrecorded-c3518f4a"
+    },
+    {
+      "claim_id": "x2608_02602_1",
+      "paper_id": "2608.02602",
+      "dimension": "outside_testbed",
+      "method": "AURORA-LM continuous-latent diffusion LM",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "AURORA-LM achieves the strongest performance among evaluated continuous and diffusion LMs on OpenWebText generation and XSum.",
+      "source_span": "AURORA-LM achieves the strongest performance among evaluated continuous and diffusion-based language models on OpenWebText free generation and XSum summarization.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-08-03",
+      "extraction_event": "unrecorded-c3518f4a"
+    },
+    {
+      "claim_id": "x2603_11535_1",
+      "paper_id": "2603.11535",
+      "dimension": "outside_testbed",
+      "method": "Expert Threshold routing for MoE",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "ET routing achieves 0.067 lower cross-entropy loss than token-choice MoE at up to 2.4B parameters, equivalent to 1.6x fewer tokens.",
+      "source_span": "ET achieves 0.067 lower cross-entropy loss than TC-MoE, equivalent to reaching the same performance with 1.6$\\times$ fewer tokens",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-03-12",
+      "extraction_event": "unrecorded-00185a0c"
+    },
+    {
+      "claim_id": "x2603_16077_1",
+      "paper_id": "2603.16077",
+      "dimension": "outside_testbed",
+      "method": "MDM-Prime-v2 (binary encoding, index shuffling)",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "At 1.1B parameters MDM-Prime-v2 outperforms similar-sized baselines on zero-shot commonsense reasoning accuracy.",
+      "source_span": "MDM-Prime-v2 demonstrates superior average zero-shot accuracy across eight commonsense reasoning benchmarks",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-03-17",
+      "extraction_event": "unrecorded-00185a0c"
+    },
+    {
+      "claim_id": "x2407_09577_1",
+      "paper_id": "2407.09577",
+      "dimension": "outside_testbed",
+      "method": "FlashNorm reformulation of RMSNorm + linear",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "FlashNorm reduces norm-then-project latency by 33-35% at small scale and 12-14% at 7B scale with exact equivalence.",
+      "source_span": "FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-07-12",
+      "extraction_event": "unrecorded-00185a0c",
+      "mechanism": "enabling the two operations to execute in parallel",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2510_03511_1",
+      "paper_id": "2510.03511",
+      "dimension": "outside_testbed",
+      "method": "Platonic Transformer",
+      "setting": "transformer, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Platonic Transformer achieves competitive performance across vision, point cloud and molecular benchmarks at no additional cost.",
+      "source_span": "the Platonic Transformer achieves competitive performance by leveraging these geometric constraints at no additional cost",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-10-03",
+      "extraction_event": "unrecorded-00185a0c"
+    }
+  ],
+  "dropped": [],
+  "degraded": []
+}

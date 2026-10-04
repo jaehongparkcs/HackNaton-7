@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/6a2tYWZjkNswxApHELJY+0s0mY8</id>
+  <title>arXiv Query: search_query=all:"output logit divergence" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:47:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22output+logit+divergence%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2601.02031v3</id>
+    <title>Output Embedding Centering for Stable LLM Pretraining</title>
+    <updated>2026-09-10T09:26:21Z</updated>
+    <link href="https://arxiv.org/abs/2601.02031v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.02031v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pretraining of large language models is not only expensive but also prone to certain training instabilities. A specific instability that often occurs at the end of training is output logit divergence. The most widely used mitigation strategies, z-loss and logit soft-capping, merely address the symptoms rather than the underlying cause of the problem. In this paper, we analyze the instability from the perspective of the output embeddings' geometry and identify anisotropic embeddings as its source. Based on this, we propose output embedding centering (OEC) as a new mitigation strategy, and demonstrate that it suppresses output logit divergence. OEC can be implemented in two different ways: as a deterministic operation called $μ$-centering, or a regularization method called $μ$-loss. Our experiments show that both variants outperform z-loss in terms of training stability, while being on par with logit soft-capping. This holds true both in the presence and the absence of weight tying. As a secondary result, we find that $μ$-loss is significantly less sensitive to regularization hyperparameter tuning than z-loss.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-05T11:44:05Z</published>
+    <arxiv:comment>Additional experiments using weight decay</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Felix Stollenwerk</name>
+    </author>
+    <author>
+      <name>Anna Lokrantz</name>
+    </author>
+    <author>
+      <name>Niclas Hertzberg</name>
+    </author>
+  </entry>
+</feed>

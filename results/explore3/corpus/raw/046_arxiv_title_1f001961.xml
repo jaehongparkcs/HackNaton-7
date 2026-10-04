@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/mZ9hJWhL87W0aAnkBctUl+zf+XQ</id>
+  <title>arXiv Query: search_query=ti:"GLU Variants Improve Transformer"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:45:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22GLU+Variants+Improve+Transformer%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2002.05202v1</id>
+    <title>GLU Variants Improve Transformer</title>
+    <updated>2020-02-12T19:57:13Z</updated>
+    <link href="https://arxiv.org/abs/2002.05202v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.05202v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gated Linear Units (arXiv:1612.08083) consist of the component-wise product of two linear projections, one of which is first passed through a sigmoid function. Variations on GLU are possible, using different nonlinear (or even linear) functions in place of sigmoid. We test these variants in the feed-forward sublayers of the Transformer (arXiv:1706.03762) sequence-to-sequence model, and find that some of them yield quality improvements over the typically-used ReLU or GELU activations.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-12T19:57:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+  </entry>
+</feed>

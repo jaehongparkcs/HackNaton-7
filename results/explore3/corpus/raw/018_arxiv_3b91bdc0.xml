@@ -1,0 +1,383 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/pEWkvoeRzPdRvJGM3s7TczRgfRQ</id>
+  <title>arXiv Query: search_query=all:"label smoothing" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T23:48:09Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22label+smoothing%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>27</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2107.11481v1</id>
+    <title>Similarity Based Label Smoothing For Dialogue Generation</title>
+    <updated>2021-07-23T23:25:19Z</updated>
+    <link href="https://arxiv.org/abs/2107.11481v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2107.11481v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Generative neural conversational systems are generally trained with the objective of minimizing the entropy loss between the training "hard" targets and the predicted logits. Often, performance gains and improved generalization can be achieved by using regularization techniques like label smoothing, which converts the training "hard" targets to "soft" targets. However, label smoothing enforces a data independent uniform distribution on the incorrect training targets, which leads to an incorrect assumption of equi-probable incorrect targets for each correct target. In this paper we propose and experiment with incorporating data dependent word similarity based weighing methods to transforms the uniform distribution of the incorrect target probabilities in label smoothing, to a more natural distribution based on semantics. We introduce hyperparameters to control the incorrect target distribution, and report significant performance gains over networks trained using standard label smoothing based loss, on two standard open domain dialogue corpora.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-07-23T23:25:19Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Sougata Saha</name>
+    </author>
+    <author>
+      <name>Souvik Das</name>
+    </author>
+    <author>
+      <name>Rohini Srihari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.16427v1</id>
+    <title>Combined Image Data Augmentations diminish the benefits of Adaptive Label Smoothing</title>
+    <updated>2025-07-22T10:21:37Z</updated>
+    <link href="https://arxiv.org/abs/2507.16427v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.16427v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Soft augmentation regularizes the supervised learning process of image classifiers by reducing label confidence of a training sample based on the magnitude of random-crop augmentation applied to it. This paper extends this adaptive label smoothing framework to other types of aggressive augmentations beyond random-crop. Specifically, we demonstrate the effectiveness of the method for random erasing and noise injection data augmentation. Adaptive label smoothing permits stronger regularization via higher-intensity Random Erasing. However, its benefits vanish when applied with a diverse range of image transformations as in the state-of-the-art TrivialAugment method, and excessive label smoothing harms robustness to common corruptions. Our findings suggest that adaptive label smoothing should only be applied when the training data distribution is dominated by a limited, homogeneous set of image transformation types.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-22T10:21:37Z</published>
+    <arxiv:comment>Preprint submitted to the Fast Review Track of DAGM German Conference on Pattern Recognition (GCPR) 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Georg Siedel</name>
+    </author>
+    <author>
+      <name>Ekagra Gupta</name>
+    </author>
+    <author>
+      <name>Weijia Shao</name>
+    </author>
+    <author>
+      <name>Silvia Vock</name>
+    </author>
+    <author>
+      <name>Andrey Morozov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.12689v3</id>
+    <title>AMPLIFY:Attention-based Mixup for Performance Improvement and Label Smoothing in Transformer</title>
+    <updated>2024-05-08T11:14:41Z</updated>
+    <link href="https://arxiv.org/abs/2309.12689v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.12689v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Mixup is an effective data augmentation method that generates new augmented samples by aggregating linear combinations of different original samples. However, if there are noises or aberrant features in the original samples, Mixup may propagate them to the augmented samples, leading to over-sensitivity of the model to these outliers . To solve this problem, this paper proposes a new Mixup method called AMPLIFY. This method uses the Attention mechanism of Transformer itself to reduce the influence of noises and aberrant values in the original samples on the prediction results, without increasing additional trainable parameters, and the computational cost is very low, thereby avoiding the problem of high resource consumption in common Mixup methods such as Sentence Mixup . The experimental results show that, under a smaller computational resource cost, AMPLIFY outperforms other Mixup methods in text classification tasks on 7 benchmark datasets, providing new ideas and new ways to further improve the performance of pre-trained models based on the Attention mechanism, such as BERT, ALBERT, RoBERTa, and GPT. Our code can be obtained at https://github.com/kiwi-lilo/AMPLIFY.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-22T08:02:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>https://peerj.com/articles/cs-2011/</arxiv:journal_ref>
+    <author>
+      <name>Leixin Yang</name>
+    </author>
+    <author>
+      <name>Yu Xiang</name>
+    </author>
+    <arxiv:doi>10.7717/peerj-cs.2011</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.7717/peerj-cs.2011" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2401.13987v1</id>
+    <title>Cross-Domain Few-Shot Learning via Adaptive Transformer Networks</title>
+    <updated>2024-01-25T07:05:42Z</updated>
+    <link href="https://arxiv.org/abs/2401.13987v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2401.13987v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most few-shot learning works rely on the same domain assumption between the base and the target tasks, hindering their practical applications. This paper proposes an adaptive transformer network (ADAPTER), a simple but effective solution for cross-domain few-shot learning where there exist large domain shifts between the base task and the target task. ADAPTER is built upon the idea of bidirectional cross-attention to learn transferable features between the two domains. The proposed architecture is trained with DINO to produce diverse, and less biased features to avoid the supervision collapse problem. Furthermore, the label smoothing approach is proposed to improve the consistency and reliability of the predictions by also considering the predicted labels of the close samples in the embedding space. The performance of ADAPTER is rigorously evaluated in the BSCD-FSL benchmarks in which it outperforms prior arts with significant margins.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-01-25T07:05:42Z</published>
+    <arxiv:comment>Under Consideration in Knowledge-based Systems</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Naeem Paeedeh</name>
+    </author>
+    <author>
+      <name>Mahardhika Pratama</name>
+    </author>
+    <author>
+      <name>Muhammad Anwar Ma'sum</name>
+    </author>
+    <author>
+      <name>Wolfgang Mayer</name>
+    </author>
+    <author>
+      <name>Zehong Cao</name>
+    </author>
+    <author>
+      <name>Ryszard Kowlczyk</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.10321v1</id>
+    <title>DropDim: A Regularization Method for Transformer Networks</title>
+    <updated>2023-04-20T13:54:18Z</updated>
+    <link href="https://arxiv.org/abs/2304.10321v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.10321v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduceDropDim, a structured dropout method designed for regularizing the self-attention mechanism, which is a key component of the transformer. In contrast to the general dropout method, which randomly drops neurons, DropDim drops part of the embedding dimensions. In this way, the semantic information can be completely discarded. Thus, the excessive coadapting between different embedding dimensions can be broken, and the self-attention is forced to encode meaningful featureswith a certain number of embedding dimensions erased. Experiments on a wide range of tasks executed on the MUST-C English-Germany dataset show that DropDim can effectively improve model performance, reduce over-fitting, and show complementary effects with other regularization methods. When combined with label smoothing, the WER can be reduced from 19.1% to 15.1% on the ASR task, and the BLEU value can be increased from26.90 to 28.38 on the MT task. On the ST task, the model can reach a BLEU score of 22.99, an increase by 1.86 BLEU points compared to the strong baseline.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-20T13:54:18Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>IEEE SIGNAL PROCESSING LETTERS, VOL. 29, 2022</arxiv:journal_ref>
+    <author>
+      <name>Hao Zhang</name>
+    </author>
+    <author>
+      <name>Dan Qu</name>
+    </author>
+    <author>
+      <name>Keji Shao</name>
+    </author>
+    <author>
+      <name>Xukui Yang</name>
+    </author>
+    <arxiv:doi>10.1109/LSP.2022.3140693</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/LSP.2022.3140693" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1905.04413v3</id>
+    <title>Knowledge-aware Graph Neural Networks with Label Smoothness Regularization for Recommender Systems</title>
+    <updated>2019-06-14T00:25:25Z</updated>
+    <link href="https://arxiv.org/abs/1905.04413v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.04413v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Knowledge graphs capture structured information and relations between a set of entities or items. As such knowledge graphs represent an attractive source of information that could help improve recommender systems. However, existing approaches in this domain rely on manual feature engineering and do not allow for an end-to-end training. Here we propose Knowledge-aware Graph Neural Networks with Label Smoothness regularization (KGNN-LS) to provide better recommendations. Conceptually, our approach computes user-specific item embeddings by first applying a trainable function that identifies important knowledge graph relationships for a given user. This way we transform the knowledge graph into a user-specific weighted graph and then apply a graph neural network to compute personalized item embeddings. To provide better inductive bias, we rely on label smoothness assumption, which posits that adjacent items in the knowledge graph are likely to have similar user relevance labels/scores. Label smoothness provides regularization over the edge weights and we prove that it is equivalent to a label propagation scheme on a graph. We also develop an efficient implementation that shows strong scalability with respect to the knowledge graph size. Experiments on four datasets show that our method outperforms state of the art baselines. KGNN-LS also achieves strong performance in cold-start scenarios where user-item interactions are sparse.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-11T00:43:54Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hongwei Wang</name>
+    </author>
+    <author>
+      <name>Fuzheng Zhang</name>
+    </author>
+    <author>
+      <name>Mengdi Zhang</name>
+    </author>
+    <author>
+      <name>Jure Leskovec</name>
+    </author>
+    <author>
+      <name>Miao Zhao</name>
+    </author>
+    <author>
+      <name>Wenjie Li</name>
+    </author>
+    <author>
+      <name>Zhongyuan Wang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.16797v2</id>
+    <title>Calibration of Transformer-based Models for Identifying Stress and Depression in Social Media</title>
+    <updated>2023-07-05T21:45:29Z</updated>
+    <link href="https://arxiv.org/abs/2305.16797v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.16797v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In today's fast-paced world, the rates of stress and depression present a surge. Social media provide assistance for the early detection of mental health conditions. Existing methods mainly introduce feature extraction approaches and train shallow machine learning classifiers. Other researches use deep neural networks or transformers. Despite the fact that transformer-based models achieve noticeable improvements, they cannot often capture rich factual knowledge. Although there have been proposed a number of studies aiming to enhance the pretrained transformer-based models with extra information or additional modalities, no prior work has exploited these modifications for detecting stress and depression through social media. In addition, although the reliability of a machine learning model's confidence in its predictions is critical for high-risk applications, there is no prior work taken into consideration the model calibration. To resolve the above issues, we present the first study in the task of depression and stress detection in social media, which injects extra linguistic information in transformer-based models, namely BERT and MentalBERT. Specifically, the proposed approach employs a Multimodal Adaptation Gate for creating the combined embeddings, which are given as input to a BERT (or MentalBERT) model. For taking into account the model calibration, we apply label smoothing. We test our proposed approaches in three publicly available datasets and demonstrate that the integration of linguistic features into transformer-based models presents a surge in the performance. Also, the usage of label smoothing contributes to both the improvement of the model's performance and the calibration of the model. We finally perform a linguistic analysis of the posts and show differences in language between stressful and non-stressful texts, as well as depressive and non-depressive posts.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-26T10:19:04Z</published>
+    <arxiv:comment>IEEE Transactions on Computational Social Systems (Accepted)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Loukas Ilias</name>
+    </author>
+    <author>
+      <name>Spiros Mouzakitis</name>
+    </author>
+    <author>
+      <name>Dimitris Askounis</name>
+    </author>
+    <arxiv:doi>10.1109/TCSS.2023.3283009</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/TCSS.2023.3283009" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.04398v6</id>
+    <title>Intelligent Anomaly Detection for Lane Rendering Using Transformer with Self-Supervised Pre-Training and Customized Fine-Tuning</title>
+    <updated>2025-06-07T22:29:37Z</updated>
+    <link href="https://arxiv.org/abs/2312.04398v6" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.04398v6" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The burgeoning navigation services using digital maps provide great convenience to drivers. Nevertheless, the presence of anomalies in lane rendering map images occasionally introduces potential hazards, as such anomalies can be misleading to human drivers and consequently contribute to unsafe driving conditions. In response to this concern and to accurately and effectively detect the anomalies, this paper transforms lane rendering image anomaly detection into a classification problem and proposes a four-phase pipeline consisting of data pre-processing, self-supervised pre-training with the masked image modeling (MiM) method, customized fine-tuning using cross-entropy based loss with label smoothing, and post-processing to tackle it leveraging state-of-the-art deep learning techniques, especially those involving Transformer models. Various experiments verify the effectiveness of the proposed pipeline. Results indicate that the proposed pipeline exhibits superior performance in lane rendering image anomaly detection, and notably, the self-supervised pre-training with MiM can greatly enhance the detection accuracy while significantly reducing the total training time. For instance, employing the Swin Transformer with Uniform Masking as self-supervised pretraining (Swin-Trans-UM) yielded a heightened accuracy at 94.77% and an improved Area Under The Curve (AUC) score of 0.9743 compared with the pure Swin Transformer without pre-training (Swin-Trans) with an accuracy of 94.01% and an AUC of 0.9498. The fine-tuning epochs were dramatically reduced to 41 from the original 280. In conclusion, the proposed pipeline, with its incorporation of self-supervised pre-training using MiM and other advanced deep learning techniques, emerges as a robust solution for enhancing the accuracy and efficiency of lane rendering image anomaly detection in digital navigation systems.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-07T16:10:10Z</published>
+    <arxiv:comment>16 pages, 7 figures, accepted and presented at the 103rd Transportation Research Board (TRB) Annual Meeting, and published by Transportation Research Record: Journal of the Transportation Research Board</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Yongqi Dong</name>
+    </author>
+    <author>
+      <name>Xingmin Lu</name>
+    </author>
+    <author>
+      <name>Ruohan Li</name>
+    </author>
+    <author>
+      <name>Wei Song</name>
+    </author>
+    <author>
+      <name>Bart van Arem</name>
+    </author>
+    <author>
+      <name>Haneen Farah</name>
+    </author>
+    <arxiv:doi>10.1177/03611981251333341</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1177/03611981251333341" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.16390v1</id>
+    <title>Inducing Spatial Locality in Vision Transformers through the Training Protocol</title>
+    <updated>2026-05-11T19:31:33Z</updated>
+    <link href="https://arxiv.org/abs/2605.16390v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.16390v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate whether the training protocol can induce spatial locality in the early layers of a Vision Transformer (ViT) trained from scratch, without large-scale pretraining. Keeping the architecture and optimization procedure fixed, we compare a Baseline protocol with a Modern protocol (AutoAugment/ColorJitter, CutMix, and Label Smoothing) on CIFAR-10, CIFAR-100, and Tiny-ImageNet, characterizing each attention head via Mean Attention Distance (MAD) and normalized entropy. Across all three datasets, the Modern protocol produces more local and more concentrated attention in early layers; on CIFAR-100, the minimum MAD drops from 0.316 (Baseline) to 0.008 (Modern). To identify the source of this effect, we conduct an ablation study on CIFAR-100 by adding or removing each component individually. The results identify CutMix as the determining component within our experiments: all conditions with CutMix exhibit MAD 0.024, while all conditions without CutMix remain at MAD 0.210. AutoAugment and Label Smoothing show no independent effect on locality. Taken together, these findings suggest that the pressure to classify from partial image regions, induced by CutMix, can promote the emergence of local attention in Vision Transformers.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-11T19:31:33Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Eduardo Santiago Toledo</name>
+    </author>
+    <author>
+      <name>Asael Fabian Martínez</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.16407v1</id>
+    <title>Balancing Trial and Reorder: A Hybrid Sequential Transformer-GBDT Ranker for On-Demand Delivery</title>
+    <updated>2026-09-14T22:25:22Z</updated>
+    <link href="https://arxiv.org/abs/2609.16407v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.16407v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>On a delivery platform, personalized store ranking greatly influences what users find and order. Unlike digital-only domains, candidate stores are local and bound by real-time availability and delivery operations. One central modeling tension is between surfacing new stores for trial and preserving ranking quality for sessions with reorder intent. We present Universal Venue Ranker (UVR), a production system deployed at Wolt that pairs a bidirectional transformer encoder for sequential user modeling with a GBDT ranker integrating contextual, user, and store features. Trained across all stores and domains of a country while enforcing local delivery constraints at inference, UVR replaces four previously separate ranking models (three for restaurants, one for retail) with a single unified system. Label smoothing and trial-biased sample weighting steer the model toward new stores, lifting offline trial MRR by +12% to +30% over production while regressing reorder MRR in five of six countries. These regressions leave Global CVR, our core online metric, which blends trial and reorder sessions, statistically unchanged. We validate UVR in three consecutive A/B tests, the first two across Wolt's largest operating markets and the third spanning all operating countries and both domains. UVR V1 delivers +5.5% Merchant Trial Rate and +0.16% Global CVR over the previous production ranker; V2 adds a further +0.45% Merchant Trial Rate on top; and V3, our cross-domain unification of the restaurant and retail rankers, adds a further +1.31% Retail Merchant Trial Rate, together accounting for substantial incremental gross order value and a materially simplified serving stack.</summary>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-14T22:25:22Z</published>
+    <arxiv:comment>10 pages, 4 figures, 5 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.IR"/>
+    <author>
+      <name>Marcel Kurovski</name>
+    </author>
+    <author>
+      <name>Attila Nagy</name>
+    </author>
+    <author>
+      <name>Steffen Klempau</name>
+    </author>
+    <author>
+      <name>Aleksandr Fedintsev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2003.07892v3</id>
+    <title>Calibration of Pre-trained Transformers</title>
+    <updated>2020-10-15T17:04:21Z</updated>
+    <link href="https://arxiv.org/abs/2003.07892v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2003.07892v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pre-trained Transformers are now ubiquitous in natural language processing, but despite their high end-task performance, little is known empirically about whether they are calibrated. Specifically, do these models' posterior probabilities provide an accurate empirical measure of how likely the model is to be correct on a given example? We focus on BERT and RoBERTa in this work, and analyze their calibration across three tasks: natural language inference, paraphrase detection, and commonsense reasoning. For each task, we consider in-domain as well as challenging out-of-domain settings, where models face more examples they should be uncertain about. We show that: (1) when used out-of-the-box, pre-trained models are calibrated in-domain, and compared to baselines, their calibration error out-of-domain can be as much as 3.5x lower; (2) temperature scaling is effective at further reducing calibration error in-domain, and using label smoothing to deliberately increase empirical uncertainty helps calibrate posteriors out-of-domain.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-03-17T18:58:44Z</published>
+    <arxiv:comment>Accepted to EMNLP 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Shrey Desai</name>
+    </author>
+    <author>
+      <name>Greg Durrett</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.05939v1</id>
+    <title>GCI-ViTAL: Gradual Confidence Improvement with Vision Transformers for Active Learning on Label Noise</title>
+    <updated>2024-11-08T19:59:40Z</updated>
+    <link href="https://arxiv.org/abs/2411.05939v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.05939v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Active learning aims to train accurate classifiers while minimizing labeling costs by strategically selecting informative samples for annotation. This study focuses on image classification tasks, comparing AL methods on CIFAR10, CIFAR100, Food101, and the Chest X-ray datasets under varying label noise rates. We investigate the impact of model architecture by comparing Convolutional Neural Networks (CNNs) and Vision Transformer (ViT)-based models. Additionally, we propose a novel deep active learning algorithm, GCI-ViTAL, designed to be robust to label noise. GCI-ViTAL utilizes prediction entropy and the Frobenius norm of last-layer attention vectors compared to class-centric clean set attention vectors. Our method identifies samples that are both uncertain and semantically divergent from typical images in their assigned class. This allows GCI-ViTAL to select informative data points even in the presence of label noise while flagging potentially mislabeled candidates. Label smoothing is applied to train a model that is not overly confident about potentially noisy labels. We evaluate GCI-ViTAL under varying levels of symmetric label noise and compare it to five other AL strategies. Our results demonstrate that using ViTs leads to significant performance improvements over CNNs across all AL strategies, particularly in noisy label settings. We also find that using the semantic information of images as label grounding helps in training a more robust model under label noise. Notably, we do not perform extensive hyperparameter tuning, providing an out-of-the-box comparison that addresses the common challenge practitioners face in selecting models and active learning strategies without an exhaustive literature review on training and fine-tuning vision models on real-world application data.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-08T19:59:40Z</published>
+    <arxiv:comment>under review</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Moseli Mots'oehli</name>
+    </author>
+    <author>
+      <name>kyungim Baek</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.11413v1</id>
+    <title>Learning Confidence for Transformer-based Neural Machine Translation</title>
+    <updated>2022-03-22T01:51:58Z</updated>
+    <link href="https://arxiv.org/abs/2203.11413v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.11413v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Confidence estimation aims to quantify the confidence of the model prediction, providing an expectation of success. A well-calibrated confidence estimate enables accurate failure prediction and proper risk measurement when given noisy samples and out-of-distribution data in real-world settings. However, this task remains a severe challenge for neural machine translation (NMT), where probabilities from softmax distribution fail to describe when the model is probably mistaken. To address this problem, we propose an unsupervised confidence estimate learning jointly with the training of the NMT model. We explain confidence as how many hints the NMT model needs to make a correct prediction, and more hints indicate low confidence. Specifically, the NMT model is given the option to ask for hints to improve translation accuracy at the cost of some slight penalty. Then, we approximate their level of confidence by counting the number of hints the model uses. We demonstrate that our learned confidence estimate achieves high accuracy on extensive sentence/word-level quality estimation tasks. Analytical results verify that our confidence estimate can correctly assess underlying risk in two real-world scenarios: (1) discovering noisy samples and (2) detecting out-of-domain data. We further propose a novel confidence-based instance-specific label smoothing approach based on our learned confidence estimate, which outperforms standard label smoothing.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-22T01:51:58Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yu Lu</name>
+    </author>
+    <author>
+      <name>Jiali Zeng</name>
+    </author>
+    <author>
+      <name>Jiajun Zhang</name>
+    </author>
+    <author>
+      <name>Shuangzhi Wu</name>
+    </author>
+    <author>
+      <name>Mu Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.02162v1</id>
+    <title>Advancing Text-to-GLOSS Neural Translation Using a Novel Hyper-parameter Optimization Technique</title>
+    <updated>2023-09-05T11:59:31Z</updated>
+    <link href="https://arxiv.org/abs/2309.02162v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.02162v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we investigate the use of transformers for Neural Machine Translation of text-to-GLOSS for Deaf and Hard-of-Hearing communication. Due to the scarcity of available data and limited resources for text-to-GLOSS translation, we treat the problem as a low-resource language task. We use our novel hyper-parameter exploration technique to explore a variety of architectural parameters and build an optimal transformer-based architecture specifically tailored for text-to-GLOSS translation. The study aims to improve the accuracy and fluency of Neural Machine Translation generated GLOSS. This is achieved by examining various architectural parameters including layer count, attention heads, embedding dimension, dropout, and label smoothing to identify the optimal architecture for improving text-to-GLOSS translation performance. The experiments conducted on the PHOENIX14T dataset reveal that the optimal transformer architecture outperforms previous work on the same dataset. The best model reaches a ROUGE (Recall-Oriented Understudy for Gisting Evaluation) score of 55.18% and a BLEU-1 (BiLingual Evaluation Understudy 1) score of 63.6%, outperforming state-of-the-art results on the BLEU1 and ROUGE score by 8.42 and 0.63 respectively.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-05T11:59:31Z</published>
+    <arxiv:comment>8 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Younes Ouargani</name>
+    </author>
+    <author>
+      <name>Noussaima El Khattabi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.05666v5</id>
+    <title>Jaccard Metric Losses: Optimizing the Jaccard Index with Soft Labels</title>
+    <updated>2024-03-20T16:50:25Z</updated>
+    <link href="https://arxiv.org/abs/2302.05666v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.05666v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Intersection over Union (IoU) losses are surrogates that directly optimize the Jaccard index. Leveraging IoU losses as part of the loss function have demonstrated superior performance in semantic segmentation tasks compared to optimizing pixel-wise losses such as the cross-entropy loss alone. However, we identify a lack of flexibility in these losses to support vital training techniques like label smoothing, knowledge distillation, and semi-supervised learning, mainly due to their inability to process soft labels. To address this, we introduce Jaccard Metric Losses (JMLs), which are identical to the soft Jaccard loss in standard settings with hard labels but are fully compatible with soft labels. We apply JMLs to three prominent use cases of soft labels: label smoothing, knowledge distillation and semi-supervised learning, and demonstrate their potential to enhance model accuracy and calibration. Our experiments show consistent improvements over the cross-entropy loss across 4 semantic segmentation datasets (Cityscapes, PASCAL VOC, ADE20K, DeepGlobe Land) and 13 architectures, including classic CNNs and recent vision transformers. Remarkably, our straightforward approach significantly outperforms state-of-the-art knowledge distillation and semi-supervised learning methods. The code is available at \href{https://github.com/zifuwanggg/JDTLosses}{https://github.com/zifuwanggg/JDTLosses}.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-11T11:56:06Z</published>
+    <arxiv:comment>NeurIPS 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Zifu Wang</name>
+    </author>
+    <author>
+      <name>Xuefei Ning</name>
+    </author>
+    <author>
+      <name>Matthew B. Blaschko</name>
+    </author>
+  </entry>
+</feed>

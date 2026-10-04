@@ -1,0 +1,515 @@
+{
+  "fixture_id": "gap_activation_relu2_pos_encoding_rope",
+  "round": 0,
+  "delta": {
+    "activation": "relu2",
+    "pos_encoding": "rope"
+  },
+  "queries": [
+    {
+      "q": "\"squared ReLU\" AND \"rotary position embedding\" AND \"language model\"",
+      "n_results": 10,
+      "source": "openalex"
+    },
+    {
+      "q": "\"squared ReLU\" AND \"rotary position embedding\" AND \"Transformer\"",
+      "n_results": 10,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [
+    "2411.13010",
+    "2603.13347"
+  ],
+  "papers": [
+    {
+      "paper_id": "2606.18324",
+      "title": "Why SWAVE May Not Be All You Need:A Concept-Evolution Retrospective on Complex-Valued Recurrent Language Models",
+      "authors": [],
+      "published": "2026-06-16",
+      "url": "https://arxiv.org/abs/2606.18324",
+      "abstract": "SWave is a complex-valued recurrent language model (169.26M parameters, D=384, L=16, T=2048) trained on FineWeb-Edu using 2xH100 NVL. It was designed around three founding premises: that representing language as complex waves rather than real-valued numbers enables richer information encoding; that a Cayley-parameterised unitary transition provides a mathematical guarantee against state decay or explosion; and that a hidden state which rotates rather than shrinks preserves signal integrity over arbitrarily long contexts. The core of SWave evolved substantially across three development phases. The Resonance Head was found to structurally admit imaginary-channel collapse as a global loss minimum (a failure mode we term cos-domination collapse) and was superseded by an untied head with independent real and imaginary embedding tables from the Phase-Associative Memory (PAM) architecture. This resolved the degenerate minimum and enabled stable 200,000-step training (best-step PPL 22.0 at step 89,861). ComplexNorm and the Wave Propagation Scan proved load-bearing throughout all three phases and were retained to the final architecture. ProtectGatedScan was reframed as a structural prior rather than a learned behaviour. The four multi-scale retention concepts showed no measurable improvement under controlled evaluation and were found non-load-bearing. The ComplexGatedUnit was superseded by a real-valued squared-ReLU channel mixer with fewer parameters. The auxiliary training objectives showed no benefit once structural constraints were resolved. The investigation yields a formal characterisation of cos-domination collapse, a parallel scan with a log-space backward pass for numerical stability, six transferable engineering principles for complex-valued recurrent training, and a plan-to-code traceability methodology for catching structural divergences that conventional test suites miss.",
+      "abstract_sha256": "ed4d6cc5afb63a8136ab0cd531a16fd7adf3bbab868d0040e6da7a17907ca2f5",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2606.18324",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2410.07524",
+      "title": "Upcycling Large Language Models into Mixture of Experts",
+      "authors": [],
+      "published": "2024-10-10",
+      "url": "https://arxiv.org/abs/2410.07524",
+      "abstract": "Upcycling pre-trained dense language models into sparse mixture-of-experts (MoE) models is an efficient approach to increase the model capacity of already trained models. However, optimal techniques for upcycling at scale remain unclear. In this work, we conduct an extensive study of upcycling methods and hyperparameters for billion-parameter scale language models. We propose a novel \"virtual group\" initialization scheme and weight scaling approach to enable upcycling into fine-grained MoE architectures. Through ablations, we find that upcycling outperforms continued dense model training. In addition, we show that softmax-then-topK expert routing improves over topK-then-softmax approach and higher granularity MoEs can help improve accuracy. Finally, we upcycled Nemotron-4 15B on 1T tokens and compared it to a continuously trained version of the same model on the same 1T tokens: the continuous trained model achieved 65.3% MMLU, whereas the upcycled model achieved 67.6%. Our results offer insights and best practices to effectively leverage upcycling for building MoE language models. Code is available.",
+      "abstract_sha256": "82864e4f84c50a03bdc73d36e10b0bc7adc8498e7b85762b0a16d27c31108368",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 1,
+      "doi": "https://doi.org/10.48550/arxiv.2410.07524",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2407.07263",
+      "title": "Reuse, Don't Retrain: A Recipe for Continued Pretraining of Language Models",
+      "authors": [],
+      "published": "2024-07-09",
+      "url": "https://arxiv.org/abs/2407.07263",
+      "abstract": "As language models have scaled both their number of parameters and pretraining dataset sizes, the computational cost for pretraining has become intractable except for the most well-resourced teams. This increasing cost makes it ever more important to be able to reuse a model after it has completed pretraining; allowing for a model's abilities to further improve without needing to train from scratch. In this work, we detail a set of guidelines that cover how to design efficacious data distributions and learning rate schedules for continued pretraining of language models. When applying these findings within a continued pretraining run on top of a well-trained 15B parameter model, we show an improvement of 9\\% in average model accuracy compared to the baseline of continued training on the pretraining set. The resulting recipe provides a practical starting point with which to begin developing language models through reuse rather than retraining.",
+      "abstract_sha256": "cb419c5d6668a22385200e89fcba625d670dc38f0804d84c22b848fb942c18c0",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 5,
+      "doi": "https://doi.org/10.48550/arxiv.2407.07263",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2607.20448",
+      "title": "Domyn-Small: A European 10B Reasoning Language Model",
+      "authors": [],
+      "published": "2026-05-13",
+      "url": "https://arxiv.org/abs/2607.20448",
+      "abstract": "We introduce Domyn-Small, a 10-billion-parameter open-weight reasoning language model released under the MIT license. Domyn-Small is the product of an initial pre-training phase on 9 trillion tokens multilingual data, followed by a post-training pipeline for reasoning, instruction following, and context extension. For the latter, we performed a Continued Pre-Training (CPT) phase that doubles the native context window to 32K tokens, followed by SFT with a math-focused annealing run. Finally, the RL phase includes GRPO with verifiable rewards, DPO, and a multi-environment GRPO stage spanning five task domains: mathematics, code, multiple-choice QA, instruction-following, and tool calling. The 32K-token native context extends to 128K at inference via YaRN, and a chat-template toggle enables dual-mode reasoning. Against peer models in the 7--10B class (Qwen3.5-9B, OLMo-3-7B-Think, Nemotron-Nano-8B, Ministral-3-8B), Domyn-Small achieves a strong accuracy-efficiency balance: it produces roughly one-third as many tokens as Qwen3.5-9B and approximately 35% of OLMo-3-7B-Think's token budget on core reasoning benchmarks, while delivering strong instruction-following (IFEval 79.9) and competitive science reasoning (GPQA-Diamond 50.0). We release the weights and the post-training recipe alongside Domyn Swarm (Apache~2.0), an open-source framework for scalable LLM inference on HPC clusters developed during this program and used throughout this work.",
+      "abstract_sha256": "9d1b1d39bf895d3e7ee0d2e6966d9184f88fdcd1df1682df8dc1fb4bdb44c659",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2607.20448",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2606.25156",
+      "title": "ATMA: Long-Context Language Modeling via Polar Attention and Gated-Delta Compression Memory",
+      "authors": [],
+      "published": "2026-06-23",
+      "url": "https://arxiv.org/abs/2606.25156",
+      "abstract": "Length extrapolation in language models involves competing objectives: retrieval fidelity, long-document likelihood, short-context quality, and inference cost. We present ATMA, a 378M-parameter hybrid recipe that combines Polar Attention with gated-delta recurrent memory, and study these objectives as a Pareto problem rather than claiming general architectural dominance. Polar Attention separates a normalized direction channel from a bounded participation-ratio magnitude channel. We select the recipe with a complete 120-cell, 1B-token factorial sweep, then train matched NoPE, RoPE, and Polar variants for 9.816B tokens at length 2K and evaluate them through 256K. Across the factorial, memory improves Polar's 64K retrieval score in all 20 matched cells (mean +47.8 points), whereas its effect on NoPE is small and inconsistent. At 256K, Polar retains 34.4% teacher-forced target-token accuracy and 9.0% exact five-token accuracy; exact retrieval is 18.0% on synthetic contexts but 0.0% on FinePDFs contexts. Polar also limits mean fixed-target bits-per-byte degradation to 1.26 times, at a 1.9-point mean cost on eight short-context tasks. Raven baselines lead BABILong and have length-independent decode state, illustrating a different point on the frontier. Finally, a post-hoc checkpoint audit shows that nearly identical 2K validation curves can conceal a 6.70-nat difference at 256K. Because those runs were neither seed-paired nor randomized across devices, we interpret this as checkpoint variability associated with an infrastructure transition, not a causal hardware effect. Code: https://github.com/kreasof-ai/atma",
+      "abstract_sha256": "a37c3340823eec72f9fa92f54e30443c88154f7071a96d8293985f655f31db6d",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2606.25156",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2605.26489",
+      "title": "The Stability of Singular Distribution: A Spectral Perspective on the Two-Phase Dynamics of Language Model Pre-training",
+      "authors": [],
+      "published": "2026-05-26",
+      "url": "https://arxiv.org/abs/2605.26489",
+      "abstract": "Large language model pre-training typically exhibits a two-phase trajectory: a fast initial loss drop followed by a prolonged slow improvement. We identify an underlying spectral phenomenon, Stability of Singular Distribution (SoSD), where the trace-normalized singular value spectrum stabilizes early, even as parameter matrices continue to evolve. We demonstrate that synchronization between SoSD and the slow-descent regime is widely observed across diverse architectures (GPT-2, LLaMA) and settings, including various schedules (Step-wise, WSD, Cosine Decay), weight decays, and optimizers (AdamW, Muon). By analyzing a simplified Transformer, we prove that growing weight norms inevitably precipitate an early SoSD threshold, after which the rate of loss decrease becomes theoretically bounded by the variation in the singular distribution. We further interpret strategies like WSD and Muon through their ability to modulate the SoSD scale, offering a spectral lens for understanding efficient pre-training dynamics.",
+      "abstract_sha256": "79f75dedc96bb60efb1661c584810ba93eb20832dfb309a88c0d14ac0e42e0e1",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2605.26489",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2604.21106",
+      "title": "How Much Is One Recurrence Worth? Iso-Depth Scaling Laws for Looped Language Models",
+      "authors": [],
+      "published": "2026-04-22",
+      "url": "https://arxiv.org/abs/2604.21106",
+      "abstract": "We measure how much one recurrence is worth to a looped (depth-recurrent) transformer, in equivalent unique parameters. From an iso-depth pretraining sweep across recurrence counts $r \\in \\{1, 2, 4, 8\\}$ spanning ${\\sim}50\\times$ in training compute, we fit a joint scaling law $L = E + A\\,(N_\\text{once} + r^φ N_\\text{rec})^{-α} + B\\,D^{-β}$ and measure a recurrence-equivalence exponent $φ= 0.46$. Intuitively, $φ$ tells us whether looping a block $r$ times is equivalent in validation loss to $r$ unique blocks of a non-looped model (full equivalence, $φ{=}1$) or to a single block run repeatedly with no capacity gain ($φ{=}0$). Our $φ= 0.46$ sits in between, so replacing unique blocks with shared recurrences increases validation loss at matched training compute. For example, at $r{=}4$ a 410M looped model performs on par with a 580M non-looped model, but incurs the training cost of a 1B non-looped one. We demonstrate the utility of $φ$ as a diagnostic tool on two case studies: commonly used truncated backpropagation lowers $φ$ to $0.38$, indicating that the loop mechanism is poorly trained under truncation, even though validation loss decreases. Conversely, hyperconnections raise $φ$ to $0.65$, a genuine capacity gain. Our method separates true loop improvements from training-side gains, a distinction raw validation loss cannot make.",
+      "abstract_sha256": "140c9fe5a17d858901eefa053b3502ad10d9594e950cca8d5e85b38922ec733e",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2604.21106",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2202.10447",
+      "title": "Transformer Quality in Linear Time",
+      "authors": [],
+      "published": "2022-02-21",
+      "url": "https://arxiv.org/abs/2202.10447",
+      "abstract": "We revisit the design choices in Transformers, and propose methods to address their weaknesses in handling long sequences. First, we propose a simple layer named gated attention unit, which allows the use of a weaker single-head attention with minimal quality loss. We then propose a linear approximation method complementary to this new layer, which is accelerator-friendly and highly competitive in quality. The resulting model, named FLASH, matches the perplexity of improved Transformers over both short (512) and long (8K) context lengths, achieving training speedups of up to 4.9$\\times$ on Wiki-40B and 12.1$\\times$ on PG-19 for auto-regressive language modeling, and 4.8$\\times$ on C4 for masked language modeling.",
+      "abstract_sha256": "cc895a3179c37fb4319e65e1f868516c002452542c2ede8c108967c36f45ec62",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 44,
+      "doi": "https://doi.org/10.48550/arxiv.2202.10447",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2207.06366",
+      "title": "N-Grammer: Augmenting Transformers with latent n-grams",
+      "authors": [],
+      "published": "2022-07-13",
+      "url": "https://arxiv.org/abs/2207.06366",
+      "abstract": "Transformer models have recently emerged as one of the foundational models in natural language processing, and as a byproduct, there is significant recent interest and investment in scaling these models. However, the training and inference costs of these large Transformer language models are prohibitive, thus necessitating more research in identifying more efficient variants. In this work, we propose a simple yet effective modification to the Transformer architecture inspired by the literature in statistical language modeling, by augmenting the model with n-grams that are constructed from a discrete latent representation of the text sequence. We evaluate our model, the N-Grammer on language modeling on the C4 data-set as well as text classification on the SuperGLUE data-set, and find that it outperforms several strong baselines such as the Transformer and the Primer. We open-source our model for reproducibility purposes in Jax.",
+      "abstract_sha256": "03be2ce64dcbc556f931b2a62ed456683afc53a29fe9e12e587c2ebb05826493",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 6,
+      "doi": "https://doi.org/10.48550/arxiv.2207.06366",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2605.26797",
+      "title": "Latent Recurrent Transformer: Architecture Exploration, Training Strategies, and Scaling Behavior",
+      "authors": [],
+      "published": "2026-05-26",
+      "url": "https://arxiv.org/abs/2605.26797",
+      "abstract": "We study Latent Recurrent Transformer (LRT), a lightweight augmentation of autoregressive transformers that reuses a high-level source-layer hidden state from the previous token as recurrent memory for the next token. Because this state is already computed during ordinary decoding, LRT introduces a cross-token, cross-layer latent pathway while preserving the standard attention mechanism, KV-cache interface, and one model forward per generated token. To pretrain this recurrence without sequentially unrolling the full sequence, we introduce interleaved parallel training: one full-sequence initialization forward constructs a shared buffer, followed by sequential refinement of disjoint position subsets with parallel computation within each subset. This provides every token with recurrent-memory-aware supervision at approximately 2x ideal token compute. Across 1.3B- and 2.1B-parameter nanochat-style backbones and a wide range of training budgets, LRT improves both BPB and CORE under matched effective compute. Additionally, LRT outperforms two-forward PonderLM-2 and matches a three-loop Transformer in BPB, while retaining one-forward-per-token decoding with 9% latency overhead over the standard Transformer.",
+      "abstract_sha256": "ddf79c0ae6aa4a13da209a6ad875d37fd7e426ee283ec293d85254461cbf6280",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2605.26797",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_pos_encoding_rope: \"squared ReLU\" AND \"rotary position embedding\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2606_18324_1",
+      "paper_id": "2606.18324",
+      "dimension": "activation",
+      "method": "Replace ComplexGatedUnit with real-valued squared-ReLU channel mixer",
+      "setting": "rnn, language_modeling, scale medium, empirical (extracted from the abstract)",
+      "claim": "The ComplexGatedUnit was superseded by a real-valued squared-ReLU channel mixer with fewer parameters.",
+      "source_span": "The ComplexGatedUnit was superseded by a real-valued squared-ReLU channel mixer with fewer parameters.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": {
+        "activation": "relu2"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "rnn",
+        "task": "language_modeling",
+        "scale": "medium",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-16",
+      "extraction_event": "unrecorded-97c87c51",
+      "mechanism": "with fewer parameters",
+      "mechanism_category": "parameter_efficiency"
+    },
+    {
+      "claim_id": "x2410_07524_1",
+      "paper_id": "2410.07524",
+      "dimension": "outside_testbed",
+      "method": "Upcycling dense LM into MoE",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "Upcycling into MoE outperforms continued dense model training.",
+      "source_span": "we find that upcycling outperforms continued dense model training",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-10-10",
+      "extraction_event": "unrecorded-97c87c51"
+    },
+    {
+      "claim_id": "x2410_07524_2",
+      "paper_id": "2410.07524",
+      "dimension": "outside_testbed",
+      "method": "softmax-then-topK routing",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "Softmax-then-topK expert routing improves over topK-then-softmax.",
+      "source_span": "softmax-then-topK expert routing improves over topK-then-softmax approach",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-10-10",
+      "extraction_event": "unrecorded-97c87c51"
+    },
+    {
+      "claim_id": "x2407_07263_1",
+      "paper_id": "2407.07263",
+      "dimension": "outside_testbed",
+      "method": "Continued pretraining recipe (data distribution and LR schedule)",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "The recipe improves average accuracy by 9% over continued training on the pretraining set for a 15B model.",
+      "source_span": "we show an improvement of 9\\% in average model accuracy compared to the baseline of continued training on the pretraining set",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-07-09",
+      "extraction_event": "unrecorded-97c87c51"
+    },
+    {
+      "claim_id": "x2606_25156_1",
+      "paper_id": "2606.25156",
+      "dimension": "outside_testbed",
+      "method": "Gated-delta memory with Polar Attention",
+      "setting": "transformer, language_modeling, scale medium, empirical (extracted from the abstract)",
+      "claim": "Memory improves Polar's 64K retrieval in all 20 matched cells, while its effect on NoPE is small.",
+      "source_span": "memory improves Polar's 64K retrieval score in all 20 matched cells (mean +47.8 points)",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "medium",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-23",
+      "extraction_event": "unrecorded-97c87c51"
+    },
+    {
+      "claim_id": "x2605_26489_1",
+      "paper_id": "2605.26489",
+      "dimension": "outside_testbed",
+      "method": "Stability of Singular Distribution analysis",
+      "setting": "transformer, unspecified, scale unspecified, theoretical (extracted from the abstract)",
+      "claim": "Growing weight norms cause an early SoSD threshold after which loss decrease rate is bounded by singular distribution variation.",
+      "source_span": "we prove that growing weight norms inevitably precipitate an early SoSD threshold, after which the rate of loss decrease becomes theoretically bounded by the variation in the singular distribution",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "theoretical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-05-26",
+      "extraction_event": "unrecorded-2dea9392"
+    },
+    {
+      "claim_id": "x2604_21106_1",
+      "paper_id": "2604.21106",
+      "dimension": "outside_testbed",
+      "method": "Looped (depth-recurrent) transformer replacing unique blocks",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Replacing unique blocks with shared recurrences increases validation loss at matched training compute.",
+      "source_span": "replacing unique blocks with shared recurrences increases validation loss at matched training compute",
+      "expected_outcome": "worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-04-22",
+      "extraction_event": "unrecorded-2dea9392"
+    },
+    {
+      "claim_id": "x2202_10447_1",
+      "paper_id": "2202.10447",
+      "dimension": "outside_testbed",
+      "method": "FLASH (gated attention unit + linear approximation)",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "FLASH matches perplexity of improved Transformers with large training speedups.",
+      "source_span": "matches the perplexity of improved Transformers over both short (512) and long (8K) context lengths",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2022-02-21",
+      "extraction_event": "unrecorded-2dea9392"
+    },
+    {
+      "claim_id": "x2207_06366_1",
+      "paper_id": "2207.06366",
+      "dimension": "outside_testbed",
+      "method": "N-Grammer latent n-gram augmentation",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "N-Grammer outperforms Transformer and Primer baselines on C4 language modeling and SuperGLUE.",
+      "source_span": "find that it outperforms several strong baselines such as the Transformer and the Primer",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2022-07-13",
+      "extraction_event": "unrecorded-2dea9392"
+    },
+    {
+      "claim_id": "x2605_26797_1",
+      "paper_id": "2605.26797",
+      "dimension": "outside_testbed",
+      "method": "Latent Recurrent Transformer",
+      "setting": "transformer, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "LRT improves BPB and CORE under matched effective compute at 1.3B and 2.1B parameters.",
+      "source_span": "LRT improves both BPB and CORE under matched effective compute",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-05-26",
+      "extraction_event": "unrecorded-2dea9392"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2302.11824",
+      "title": "MossFormer: Pushing the Performance Limit of Monaural Speech Separation using Gated Single-Head Transformer with Convolution-Augmented Joint Self-Attentions",
+      "reason": "exclude_term: speech"
+    },
+    {
+      "paper_id": "2607.00603",
+      "title": "Measuring Dead Directions: Decomposing and Classifying Singular Structure off Canonical Alignment",
+      "reason": "exclude_term: vision transformer"
+    }
+  ],
+  "degraded": []
+}

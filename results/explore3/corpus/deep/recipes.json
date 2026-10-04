@@ -1,0 +1,22 @@
+{
+  "optimizer=lion": {
+    "lr_mult": 0.2,
+    "lr_mult_source": {
+      "how": "ratio 0.1–0.333 to AdamW (geometric middle)",
+      "quote": "Based on our experience, a suitable learning rate for Lion is typically 3-10x smaller than that for AdamW.",
+      "ratio": 0.182483,
+      "section": "experimental_setup",
+      "stated": "3-10x smaller than that for AdamW"
+    },
+    "paper_id": "2302.06675",
+    "version": "2302.06675v4",
+    "wd_mult": 5.0,
+    "wd_mult_source": {
+      "how": "ratio 3–10 to AdamW (geometric middle)",
+      "quote": "the value of \\lambda used for Lion is 3-10x larger than that for AdamW in order to maintain a similar strength",
+      "ratio": 5.477226,
+      "section": "experimental_setup",
+      "stated": "3-10x larger than that for AdamW"
+    }
+  }
+}

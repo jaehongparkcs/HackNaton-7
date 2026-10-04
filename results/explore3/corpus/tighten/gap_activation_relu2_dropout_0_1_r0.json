@@ -1,0 +1,447 @@
+{
+  "fixture_id": "gap_activation_relu2_dropout_0_1",
+  "round": 0,
+  "delta": {
+    "activation": "relu2",
+    "dropout": "0.1"
+  },
+  "queries": [
+    {
+      "q": "\"squared ReLU\" AND \"dropout\" AND \"language model\"",
+      "n_results": 10,
+      "source": "openalex"
+    },
+    {
+      "q": "\"squared ReLU\" AND \"dropout\" AND \"Transformer\"",
+      "n_results": 10,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [
+    "2410.07524",
+    "2607.20448"
+  ],
+  "papers": [
+    {
+      "paper_id": "W4404470990",
+      "title": "From Transformers to the Future: An In-Depth Exploration of Modern Language Model Architectures",
+      "authors": [],
+      "published": "2024-11-18",
+      "url": "https://openalex.org/W4404470990",
+      "abstract": "This book provides a comprehensive guide to Transformer and other modern language model architectures. It covers influential models such as BERT, GPT, RWKV, RetNet, and Mamba, examining their applications in NLP, computer vision, and beyond. With a focus on both theoretical foundations and practical advancements, the book also explores future directions, making it an essential resource for researchers and practitioners in AI.",
+      "abstract_sha256": "d5a12f521b5b09b7f8377eb8b3dbe76fa9aba275950eb4bb58f9f181eefcd1ff",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 1,
+      "doi": "https://doi.org/10.31219/osf.io/n8r5j",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2509.25149",
+      "title": "Pretraining Large Language Models with NVFP4",
+      "authors": [],
+      "published": "2025-09-29",
+      "url": "https://arxiv.org/abs/2509.25149",
+      "abstract": "Large Language Models (LLMs) today are powerful problem solvers across many domains, and they continue to get stronger as they scale in model size, training set size, and training set quality, as shown by extensive research and experimentation across the industry. Training a frontier model today requires on the order of tens to hundreds of yottaflops, which is a massive investment of time, compute, and energy. Improving pretraining efficiency is therefore essential to enable the next generation of even more capable LLMs. While 8-bit floating point (FP8) training is now widely adopted, transitioning to even narrower precision, such as 4-bit floating point (FP4), could unlock additional improvements in computational speed and resource utilization. However, quantization at this level poses challenges to training stability, convergence, and implementation, notably for large-scale models trained on long token horizons. In this study, we introduce a novel approach for stable and accurate training of large language models (LLMs) using the NVFP4 format. Our method integrates Random Hadamard transforms (RHT) to bound block-level outliers, employs a two-dimensional quantization scheme for consistent representations across both the forward and backward passes, utilizes stochastic rounding for unbiased gradient estimation, and incorporates selective high-precision layers. We validate our approach by training a 12-billion-parameter model on 10 trillion tokens -- the longest publicly documented training run in 4-bit precision to date. Our results show that the model trained with our NVFP4-based pretraining technique achieves training loss and downstream task accuracies comparable to an FP8 baseline. These findings highlight that NVFP4, when combined with our training approach, represents a major step forward in narrow-precision LLM training algorithms.",
+      "abstract_sha256": "3718ad1f5adcde0d403bdf711b78893b8f83b8e028050824962d64d33d43f72d",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2509.25149",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2308.03429",
+      "title": "RCMHA: Relative Convolutional Multi-Head Attention for Natural Language Modelling",
+      "authors": [],
+      "published": "2023-08-07",
+      "url": "https://arxiv.org/abs/2308.03429",
+      "abstract": "The Attention module finds common usage in language modeling, presenting distinct challenges within the broader scope of Natural Language Processing. Multi-Head Attention (MHA) employs an absolute positional encoding, which imposes limitations on token length and entails substantial memory consumption during the processing of embedded inputs. The current remedy proposed by researchers involves the utilization of relative positional encoding, similar to the approach adopted in Transformer-XL or Relative Multi-Head Attention (RMHA), albeit the employed architecture consumes considerable memory resources. To address these challenges, this study endeavors to refine MHA, leveraging relative positional encoding in conjunction with the Depth-Wise Convolutional Layer architecture, which promises heightened accuracy coupled with minimized memory usage. The proposed RCMHA framework entails the modification of two integral components: firstly, the application of the Depth-Wise Convolutional Layer to the input embedding, encompassing Query, Key, and Value parameters; secondly, the incorporation of Relative Positional Encoding into the attention scoring phase, harmoniously integrated with Scaled Dot-Product Attention. Empirical experiments underscore the advantages of RCMHA, wherein it exhibits superior accuracy, boasting a score of 0.572 in comparison to alternative attention modules such as MHA, Multi-DConv-Head Attention (MDHA), and RMHA. Concerning memory utilization, RMHA emerges as the most frugal, demonstrating an average consumption of 2.98 GB, surpassing RMHA which necessitates 3.5 GB.",
+      "abstract_sha256": "d3e93e2ca47f64cf26bc12f5d75bf232bb128bd5c5c9f7d9d3bef3c4f8ef6dd8",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2308.03429",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2407.10969",
+      "title": "Q-Sparse: All Large Language Models can be Fully Sparsely-Activated",
+      "authors": [],
+      "published": "2024-07-15",
+      "url": "https://arxiv.org/abs/2407.10969",
+      "abstract": "We introduce, Q-Sparse, a simple yet effective approach to training sparsely-activated large language models (LLMs). Q-Sparse enables full sparsity of activations in LLMs which can bring significant efficiency gains in inference. This is achieved by applying top-K sparsification to the activations and the straight-through-estimator to the training. We also introduce Block Q-Sparse for batch training and inference. The key results from this work are, (1) Q-Sparse can achieve results comparable to those of baseline LLMs while being much more efficient at inference time; (2) We present an inference-optimal scaling law for sparsely-activated LLMs; (3) Q-Sparse is effective in different settings, including training-from-scratch, continue-training of off-the-shelf LLMs, and finetuning; (4) Q-Sparse works for both full-precision and 1-bit LLMs (e.g., BitNet b1.58). Particularly, the synergy of BitNet b1.58 and Q-Sparse (can be equipped with MoE) provides the cornerstone and a clear path to revolutionize the efficiency, including cost and energy consumption, of future LLMs.",
+      "abstract_sha256": "a048d1b68afa3ba2e03cc601160d3d6602afa7f7ebf76394c0b51c9715470933",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 2,
+      "doi": "https://doi.org/10.48550/arxiv.2407.10969",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2402.16819",
+      "title": "Nemotron-4 15B Technical Report",
+      "authors": [],
+      "published": "2024-02-26",
+      "url": "https://arxiv.org/abs/2402.16819",
+      "abstract": "We introduce Nemotron-4 15B, a 15-billion-parameter large multilingual language model trained on 8 trillion text tokens. Nemotron-4 15B demonstrates strong performance when assessed on English, multilingual, and coding tasks: it outperforms all existing similarly-sized open models on 4 out of 7 downstream evaluation areas and achieves competitive performance to the leading open models in the remaining ones. Specifically, Nemotron-4 15B exhibits the best multilingual capabilities of all similarly-sized models, even outperforming models over four times larger and those explicitly specialized for multilingual tasks.",
+      "abstract_sha256": "58cef75e516ae4ab70342dddffbafa58ec5294f7fc2957bacad6ff16c3ab322f",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2402.16819",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2205.13760",
+      "title": "Tranception: protein fitness prediction with autoregressive transformers and inference-time retrieval",
+      "authors": [],
+      "published": "2022-05-27",
+      "url": "https://arxiv.org/abs/2205.13760",
+      "abstract": "The ability to accurately model the fitness landscape of protein sequences is critical to a wide range of applications, from quantifying the effects of human variants on disease likelihood, to predicting immune-escape mutations in viruses and designing novel biotherapeutic proteins. Deep generative models of protein sequences trained on multiple sequence alignments have been the most successful approaches so far to address these tasks. The performance of these methods is however contingent on the availability of sufficiently deep and diverse alignments for reliable training. Their potential scope is thus limited by the fact many protein families are hard, if not impossible, to align. Large language models trained on massive quantities of non-aligned protein sequences from diverse families address these problems and show potential to eventually bridge the performance gap. We introduce Tranception, a novel transformer architecture leveraging autoregressive predictions and retrieval of homologous sequences at inference to achieve state-of-the-art fitness prediction performance. Given its markedly higher performance on multiple mutants, robustness to shallow alignments and ability to score indels, our approach offers significant gain of scope over existing approaches. To enable more rigorous model testing across a broader range of protein families, we develop ProteinGym -- an extensive set of multiplexed assays of variant effects, substantially increasing both the number and diversity of assays compared to existing benchmarks.",
+      "abstract_sha256": "cf23d5c73761e7d98439c3f64207fd97667fc092abfed1c683b43ae34173a2f3",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 125,
+      "doi": "https://doi.org/10.48550/arxiv.2205.13760",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2406.11704",
+      "title": "Nemotron-4 340B Technical Report",
+      "authors": [],
+      "published": "2024-06-17",
+      "url": "https://arxiv.org/abs/2406.11704",
+      "abstract": "We release the Nemotron-4 340B model family, including Nemotron-4-340B-Base, Nemotron-4-340B-Instruct, and Nemotron-4-340B-Reward. Our models are open access under the NVIDIA Open Model License Agreement, a permissive model license that allows distribution, modification, and use of the models and its outputs. These models perform competitively to open access models on a wide range of evaluation benchmarks, and were sized to fit on a single DGX H100 with 8 GPUs when deployed in FP8 precision. We believe that the community can benefit from these models in various research studies and commercial applications, especially for generating synthetic data to train smaller language models. Notably, over 98% of data used in our model alignment process is synthetically generated, showcasing the effectiveness of these models in generating synthetic data. To further support open research and facilitate model development, we are also open-sourcing the synthetic data generation pipeline used in our model alignment process.",
+      "abstract_sha256": "a25515fba4fb884648368cbad3efac853683137efa5ef672274bddf7552bbf4b",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 7,
+      "doi": "https://doi.org/10.48550/arxiv.2406.11704",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W4389524555",
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": [],
+      "published": "2023-01-01",
+      "url": "https://openalex.org/W4389524555",
+      "abstract": "Bo Peng, Eric Alcaide, Quentin Anthony, Alon Albalak, Samuel Arcadinho, Stella Biderman, Huanqi Cao, Xin Cheng, Michael Chung, Leon Derczynski, Xingjian Du, Matteo Grella, Kranthi Gv, Xuzheng He, Haowen Hou, Przemyslaw Kazienko, Jan Kocon, Jiaming Kong, Bartłomiej Koptyra, Hayden Lau, Jiaju Lin, Krishna Sri Ipsit Mantri, Ferdinand Mom, Atsushi Saito, Guangyu Song, Xiangru Tang, Johan Wind, Stanisław Woźniak, Zhenyuan Zhang, Qinghua Zhou, Jian Zhu, Rui-Jie Zhu. Findings of the Association for Computational Linguistics: EMNLP 2023. 2023.",
+      "abstract_sha256": "ed9493b39c4f7315e066f3f4b3638a99ab57a2b979a2a7714f614d0676b8523e",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 367,
+      "doi": "https://doi.org/10.18653/v1/2023.findings-emnlp.936",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W4386566428",
+      "title": "Transformers with Learnable Activation Functions",
+      "authors": [],
+      "published": "2023-01-01",
+      "url": "https://openalex.org/W4386566428",
+      "abstract": "Activation functions can have a significant impact on reducing the topological complexity of input data and therefore, improving a model's performance.However, the choice of activation functions is seldom discussed or explored in Transformer-based language models.As a common practice, commonly used activation functions like Gaussian Error Linear Unit (GELU) are chosen beforehand and then remain fixed from pre-training to fine-tuning.In this paper, we investigate the impact of activation functions on Transformer-based models by utilizing rational activation functions (RAFs).In contrast to fixed activation functions (FAF), RAFs are capable of learning the optimal activation functions from data.Our experiments show that the RAF-based Transformer model (RAFT) achieves a better performance than its FAF-based counterpart (FAFT).For instance, we find that RAFT outperforms FAFT on the GLUE benchmark by 5.71 points when using only 100 training examples and by 2.05 points on SQuAD with all available data.Analyzing the shapes of the learned RAFs further unveils that they vary across different layers and different tasks; opening a promising way to better analyze and understand large, pre-trained language models. 1",
+      "abstract_sha256": "dc4d6c1ea5da37e92f8b0473d6fdf6025bbefd987e770e7ad03ba4e0d43ffdbd",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 14,
+      "doi": "https://doi.org/10.18653/v1/2023.findings-eacl.181",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2305.13048",
+      "title": "RWKV: Reinventing RNNs for the Transformer Era",
+      "authors": [],
+      "published": "2023-05-22",
+      "url": "https://arxiv.org/abs/2305.13048",
+      "abstract": "Transformers have revolutionized almost all natural language processing (NLP) tasks but suffer from memory and computational complexity that scales quadratically with sequence length. In contrast, recurrent neural networks (RNNs) exhibit linear scaling in memory and computational requirements but struggle to match the same performance as Transformers due to limitations in parallelization and scalability. We propose a novel model architecture, Receptance Weighted Key Value (RWKV), that combines the efficient parallelizable training of transformers with the efficient inference of RNNs. Our approach leverages a linear attention mechanism and allows us to formulate the model as either a Transformer or an RNN, thus parallelizing computations during training and maintains constant computational and memory complexity during inference. We scale our models as large as 14 billion parameters, by far the largest dense RNN ever trained, and find RWKV performs on par with similarly sized Transformers, suggesting future work can leverage this architecture to create more efficient models. This work presents a significant step towards reconciling trade-offs between computational efficiency and model performance in sequence processing tasks.",
+      "abstract_sha256": "0557ea7cdaf4761f9bba1aeefd681f50e61a2e5dec72d79e58cda8c91fe5c66f",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 17,
+      "doi": "https://doi.org/10.48550/arxiv.2305.13048",
+      "categories": [],
+      "queries": [
+        "tighten gap_activation_relu2_dropout_0_1: \"squared ReLU\" AND \"dropout\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2509_25149_1",
+      "paper_id": "2509.25149",
+      "dimension": "outside_testbed",
+      "method": "NVFP4 4-bit pretraining with RHT, 2D quantization, stochastic rounding",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "A 12B model trained in NVFP4 on 10T tokens achieves training loss and downstream accuracy comparable to an FP8 baseline.",
+      "source_span": "Our results show that the model trained with our NVFP4-based pretraining technique achieves training loss and downstream task accuracies comparable to an FP8 baseline.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-09-29",
+      "extraction_event": "unrecorded-0922737d",
+      "mechanism": "could unlock additional improvements in computational speed and resource utilization",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2308_03429_1",
+      "paper_id": "2308.03429",
+      "dimension": "outside_testbed",
+      "method": "RCMHA: relative positional encoding with depth-wise convolution in attention",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "RCMHA achieves higher accuracy than MHA, MDHA, and RMHA.",
+      "source_span": "it exhibits superior accuracy, boasting a score of 0.572 in comparison to alternative attention modules such as MHA, Multi-DConv-Head Attention (MDHA), and RMHA",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-08-07",
+      "extraction_event": "unrecorded-0922737d"
+    },
+    {
+      "claim_id": "x2407_10969_1",
+      "paper_id": "2407.10969",
+      "dimension": "outside_testbed",
+      "method": "Q-Sparse top-K activation sparsification with straight-through estimator",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Q-Sparse achieves results comparable to baseline LLMs while being much more efficient at inference.",
+      "source_span": "Q-Sparse can achieve results comparable to those of baseline LLMs while being much more efficient at inference time",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-07-15",
+      "extraction_event": "unrecorded-0922737d",
+      "mechanism": "much more efficient at inference time",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2205_13760_1",
+      "paper_id": "2205.13760",
+      "dimension": "outside_testbed",
+      "method": "Tranception (autoregressive transformer with inference-time retrieval)",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Tranception achieves state-of-the-art protein fitness prediction performance.",
+      "source_span": "We introduce Tranception, a novel transformer architecture leveraging autoregressive predictions and retrieval of homologous sequences at inference to achieve state-of-the-art fitness prediction performance.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2022-05-27",
+      "extraction_event": "unrecorded-da61be18"
+    },
+    {
+      "claim_id": "x2406_11704_1",
+      "paper_id": "2406.11704",
+      "dimension": "outside_testbed",
+      "method": "Nemotron-4 340B",
+      "setting": "unspecified, unspecified, scale large, empirical (extracted from the abstract)",
+      "claim": "Nemotron-4 340B models perform competitively with open access models on many benchmarks.",
+      "source_span": "These models perform competitively to open access models on a wide range of evaluation benchmarks",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-06-17",
+      "extraction_event": "unrecorded-da61be18"
+    },
+    {
+      "claim_id": "xW4386566428_1",
+      "paper_id": "W4386566428",
+      "dimension": "outside_testbed",
+      "method": "Rational activation functions (RAFT)",
+      "setting": "transformer, classification, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Transformers with learnable rational activation functions outperform fixed-activation counterparts.",
+      "source_span": "Our experiments show that the RAF-based Transformer model (RAFT) achieves a better performance than its FAF-based counterpart (FAFT).",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "classification",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-01-01",
+      "extraction_event": "unrecorded-da61be18"
+    },
+    {
+      "claim_id": "x2305_13048_1",
+      "paper_id": "2305.13048",
+      "dimension": "outside_testbed",
+      "method": "RWKV linear attention RNN",
+      "setting": "rnn, unspecified, scale large, empirical (extracted from the abstract)",
+      "claim": "RWKV up to 14B parameters performs on par with similarly sized Transformers while having constant inference cost.",
+      "source_span": "find RWKV performs on par with similarly sized Transformers",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "rnn",
+        "task": "unspecified",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-05-22",
+      "extraction_event": "unrecorded-da61be18",
+      "mechanism": "maintains constant computational and memory complexity during inference",
+      "mechanism_category": "computational_efficiency"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2609.05275",
+      "title": "Don't Drop Dropout: Optimizing Layer Sparsity for Efficient LLM Training and Inference",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2309.08586",
+      "title": "Replacing softmax with ReLU in Vision Transformers",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2302.11824",
+      "title": "MossFormer: Pushing the Performance Limit of Monaural Speech Separation using Gated Single-Head Transformer with Convolution-Augmented Joint Self-Attentions",
+      "reason": "exclude_term: speech"
+    }
+  ],
+  "degraded": []
+}

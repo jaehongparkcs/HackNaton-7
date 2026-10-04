@@ -1,0 +1,358 @@
+{
+  "fixture_id": "gap_norm_rmsnorm",
+  "round": 0,
+  "delta": {
+    "norm": "rmsnorm"
+  },
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"language model\"",
+      "n_results": 10,
+      "source": "openalex"
+    },
+    {
+      "q": "\"RMSNorm\" AND \"Transformer\"",
+      "n_results": 8,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [
+    "2305.14858"
+  ],
+  "papers": [
+    {
+      "paper_id": "W7155041702",
+      "title": "AVEN: A 362M Parameter Transformer Language",
+      "authors": [],
+      "published": "2026-04-21",
+      "url": "https://openalex.org/W7155041702",
+      "abstract": "AVEN is a 362-million parameter decoder-only transformer language model built entirely from scratch using PyTorch. The model implements modern architectural techniques including Rotary Position Embeddings (RoPE), Grouped Query Attention (GQA), SwiGLU activation, and RMSNorm normalization — following the same architecture family as Meta's LLaMA. The model was pre-trained on approximately 10 billion tokens from five curated datasets (FineWeb-Edu, DCLM, The Stack, OpenWebText, Wikipedia) and fine-tuned using a three-stage process including supervised fine-tuning and DPO alignment. Training was performed using FP16 mixed-precision on both cloud (NVIDIA L4, 24GB) and local (NVIDIA RTX 4060, 8GB) hardware. The project includes a custom BPE tokenizer (49,152 vocabulary), a React + Vite web interface with FastAPI backend supporting streaming inference, and comprehensive training infrastructure with gradient accumulation and checkpointing. Developed by Alpha Dynamics as an educational project demonstrating end-to-end language model development.",
+      "abstract_sha256": "874842571631c298f18348092945de9deb28512b0399e3d3347918477a1c212b",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.5281/zenodo.19675072",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2606.19491",
+      "title": "Algebraic Dead Directions in LayerNorm Transformers: A Forward-Pass-Only Diagnostic at LLM Scale",
+      "authors": [],
+      "published": "2026-06-17",
+      "url": "https://arxiv.org/abs/2606.19491",
+      "abstract": "Pretrained transformers sit near singular minima of the loss, where the Fisher information metric degenerates along dead directions: directions in parameter space along which the directional Fisher vanishes. Locating such a direction normally needs a forward pass and an eigendecomposition of activations, or a sampling-based complexity estimate; none returns a direction computable from the network's parameters alone. We give one, for LayerNorm transformers. The inverse-scale direction $γ^{-1}/\\|γ^{-1}\\|$ of the LayerNorm affine is an exact algebraic kernel of the post-final-norm centred activation covariance, for any input distribution, and induces a corresponding dead direction in parameter space. It is read from the LN scale parameter alone, with no forward or backward pass and no eigensolve: the cheapest dead-direction read, specific to LayerNorm. We test it on $14$ pretrained transformers ($9$ LayerNorm, $5$ RMSNorm; $160$M-$35$B; language and vision objectives). At random initialisation the predicted direction matches the measured bottom singular direction (one forward pass, direct SVD) to four decimal places on $9/9$ LayerNorm models, and is correctly absent on $5/5$ RMSNorm models, which lack the mean-subtraction projector that creates it. On the trained checkpoint the covariance eigenvalue along this direction deepens by ${\\sim}10^3\\times$ and further dead directions open; the random-init-to-trained gap is a one-forward-pass, per-checkpoint readout of singular structure along the predicted coordinate. Two consequences follow in closed form: the residual stream's smallest singular value is preserved block-to-block on $13/14$ transformers measured on their own input distribution, the one exception (Gemma$4$-$31$B) a genuine dead direction the same read pinpoints; and the kernel direction's presence classifies a transformer's normalisation from the parameters alone.",
+      "abstract_sha256": "cd84554a1958372bc1f4a44b20a127e8675a0669bc82ab1a8bc6c9985d14559e",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2606.19491",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7211958003",
+      "title": "Large language model",
+      "authors": [],
+      "published": "2026-09-08",
+      "url": "https://openalex.org/W7211958003",
+      "abstract": "We present a mechanistic measurement study of how context-token attention contributions accumulate in the residual stream of Gemma-4 26B-A4B-IT. The study tests one explicit claim: that the summed context contribution ‖Σ cⱼ‖ is predicted by the zero-parameter formula √(N + N(N−1)ρ), where N is the number of context tokens and ρ is their mean pairwise cosine similarity. We measure this formula's fit, the scaling of ‖Σ‖ with N, the projection of the context sum onto a linear probe axis, and whether different \"context families\" lie on a common (N, ρ, ‖Σ‖) surface. A second complementary audit measures all the same quantities after the post-attention RMSNorm, which is the actual update added to the residual stream. All forward passes are exact decompositions with numerical verification. The experiments partially falsify the accumulation account as written: ρ does not significantly differ between coherent and shuffled text, and the context sum does not systematically align with the probe axis. 1. Introduction Modern large language models accumulate information through a residual stream — a sum of contributions from each attention layer. At the last prompt position, the attention output of a single layer decomposes exactly into one additive contribution per context token: attn_out[last] = W_O @ (Σⱼ αⱼ · vⱼ) = Σⱼ cⱼ For N unit-normalised contributions with mean pairwise cosine ρ, linear algebra predicts: ‖Σⱼ cⱼ‖ = √(N + N(N−1)·ρ) This formula implies two regimes: when ρ ≈ 0 (random directions), ‖Σ‖ ~ √N; when ρ → 1 (all aligned), ‖Σ‖ ~ N. The question is whether the coherence of natural text produces a measurably higher ρ than scrambled text, and whether this difference is meaningful after RMSNorm. We test this claim on Gemma-4 26B-A4B-IT across five full-attention layers (L05, L11, L17, L23, L29) using four text conditions and six context families. 2. Model and Setup Property Value Model google/gemma-4-26B-A4B-it Architecture 30 layers, d_model=2816, 16 attention heads Full-attention layers L05, L11, L17, L23, L29 KV heads (full-attn) 2 (head_dim=512) MoE 128 experts, top-8 dtype bfloat16 Attention implementation eager (required for attention weight access) Seed 20260907 The probe bundle (gemma4_layerwise_probe_bundle.joblib) is a set of per-layer linear classifiers trained to distinguish TARGET (philosophical prose context) from NO_CONTEXT and MATCHED_DISRUPTED conditions. The probe direction at each layer is extracted as the unit-normalised effective weight vector after StandardScaler. 3. Conditions and Stimuli 3.1 Context conditions Condition Description coherent Full TARGET_CONTEXT (philosophical essay, ~1000 words) sent_shuffled Same sentences, randomly reordered (local coherence destroyed) word_shuffled Same word multiset, randomly reordered (all structure destroyed) neutral CONTROL_CONTEXT (everyday narrative, ~600 words) word_shuffled was constructed manually in Script 2 (pasted explicitly) to avoid automatic generation artefacts. Script 1 generates it programmatically with the same seed. 3.2 Context families (P4 / TEST D) Family Description N_tok philosophical_prose Full TARGET_CONTEXT 1473 many_shot 8 Q&A pairs demonstrating moral nihilism 159 repeated_instruction \"Morality is a construct.\" × 60 360 role_play Character framing paragraph 62 word_shuffled Destroyed structure control 1471 neutral Everyday narrative 619 3.3 Probe question A specific ethical dilemma (euthanasia request from a terminal patient) was used as the fixed question appended after all contexts. This was chosen to be directly relevant to the content of TARGET_CONTEXT. 4. Methods 4.1 Exact per-token decomposition (both scripts) For each layer, we hook v_norm (the post-value-normalisation module in Gemma-4's full-attention layers) and capture value states V ∈ R^{T × n_kv × hd}. The output projection W_O ∈ R^{d_model × (N_heads × hd)} is read directly from model weights. The contribution of each context position j is: cⱼ = Σₕ α[h, last, j] · (W_O[:, h·hd:(h+1)·hd] @ v[kv(h), j, :]) This decomposition is exact for the pre-RMSNorm attention output. Numerical verification: for every forward pass, we check that ‖Σⱼ cⱼ − attn_out[last]‖ / ‖attn_out[last]‖ < 1e-4. All 40 forward passes passed this check (see RMS_replay column in logs). 4.2 Post-RMSNorm correction (Script 2 only) Gemma-4 applies a post-attention RMSNorm before adding the attention output to the residual stream. Script 2 captures both the input and output of this RMSNorm module, computes the realized diagonal scale vector s = postnorm_output / postnorm_input (element-wise), and applies it to each token's contribution: c_real[j] = s ⊙ c_pre[j] This gives real_update — the actual vector each context token contributes to the residual stream after normalisation. This is a local linearisation valid for this specific forward pass, not a global linear approximation of RMSNorm. 4.3 Mean pairwise cosine ρ For a block of contribution vectors C[s:e], ρ is estimated as: ρ̂ = (Σᵢ≠ⱼ cos(cᵢ, cⱼ)) / (N(N−1)) When N > 400, uniform subsampling is applied. Zero-norm rows are excluded. 4.4 Scaling measurement Context is truncated to a grid of word counts [25, 50, 100, 200, 400, 700, 1000]. For each truncation level, we measure ‖Σ‖ before and after RMSNorm. Log-log slope is fitted by OLS: slope 0.5 means √N growth, slope 1.0 means linear growth. 5. Results 5.1 Condition comparison — ρ and ‖Σ‖ before RMSNorm (P1 / TEST A) Table 1. Mean pairwise cosine ρ and pre-RMSNorm sum norm across layers and conditions. Layer Condition ρ N_tokens ‖Σ‖ pre-norm mean‖c‖ ratio to √N L05 coherent 0.1039 1477 13.57 0.0270 13.10 L05 sent_shuffled 0.1168 1448 13.55 0.0278 12.80 L05 word_shuffled 0.2165 1446 15.81 0.0252 16.52 L05 neutral 0.1326 623 11.18 0.0433 10.35 L11 coherent 0.1078 1477 5.07 0.0121 10.92 L11 sent_shuffled 0.1090 1448 5.11 0.0136 9.91 L11 word_shuffled 0.1710 1446 5.34 0.0120 11.73 L11 neutral 0.1501 623 3.60 0.0174 8.30 L17 coherent 0.0609 1477 8.15 0.0243 8.71 L17 sent_shuffled 0.0674 1448 8.30 0.0243 8.98 L17 word_shuffled 0.1158 1446 5.52 0.0154 9.46 L17 neutral 0.0829 623 2.67 0.0155 6.92 L23 coherent 0.0602 1477 22.57 0.0562 10.45 L23 sent_shuffled 0.0587 1448 23.46 0.0616 10.02 L23 word_shuffled 0.0731 1446 15.93 0.0394 10.63 L23 neutral 0.0926 623 3.93 0.0167 9.45 L29 coherent 0.0960 1477 15.75 0.0432 9.50 L29 sent_shuffled 0.0948 1448 18.71 0.0551 8.93 L29 word_shuffled 0.0874 1446 9.68 0.0289 8.82 L29 neutral 0.1566 623 3.85 0.0183 8.42 Table 2. Condition comparison with post-RMSNorm real_update (TEST A, Script 2). Layer Condition N_tok ‖Σ‖ pre-norm real_update add_vs_cancel same_direction probe_TARGET L05 coherent 1473 12.96 5.99 4.27 0.128 +1.589 L05 sent_shuffled 1444 12.56 5.78 6.37 0.126 −0.665 L05 word_shuffled 1471 19.13 7.95 5.47 0.194 −3.235 L05 neutral 619 10.34 4.16 3.18 0.153 −0.334 L11 coherent 1473 4.83 5.28 3.53 0.086 +1.361 L11 sent_shuffled 1444 4.88 5.19 3.33 0.075 +0.458 L11 word_shuffled 1471 4.49 4.89 3.63 0.108 −1.862 L11 neutral 619 3.28 3.50 2.62 0.096 −0.916 L17 coherent 1473 8.05 12.87 3.63 0.050 +0.122 L17 sent_shuffled 1444 8.22 13.22 3.75 0.055 −1.360 L17 word_shuffled 1471 4.59 7.14 3.03 0.058 −4.219 L17 neutral 619 2.52 3.34 2.09 0.061 −2.723 L23 coherent 1473 22.55 18.19 3.19 0.042 +1.049 L23 sent_shuffled 1444 23.43 18.94 2.94 0.039 −0.146 L23 word_shuffled 1471 15.06 8.39 3.05 0.032 −2.041 L23 neutral 619 3.82 1.42 2.26 0.049 −1.643 L29 coherent 1473 15.72 11.45 2.62 0.057 +2.500 L29 sent_shuffled 1444 18.69 16.03 2.66 0.051 −1.093 L29 word_shuffled 1471 9.38 6.94 4.07 0.060 −2.724 L29 neutral 619 3.70 2.80 4.56 0.121 −2.983 Key observation (RMSNorm effect): At L23, word_shuffled pre-norm is 15.06 but post-norm (real_update) is only 8.39 — a 44% reduction. At L17, coherent pre-norm is 8.05 but post-norm is 12.87 — an amplification. RMSNorm is not uniformly attenuating. 5.2 Scaling law (P2 / TEST B) Table 3. ‖Σ‖ vs N at L17 — coherent text. Words N_tok ‖Σ‖ pre-norm pred(ρ̂) pred(ρ=0) real_update add_pre add_real 25 27–31 0.72–1.04 9.36 5.57 1.01 1.70 1.65 50 55–59 2.91–3.29 16.35 7.68 4.47 2.02 2.03 100 118–122 2.84–2.98 31.94 11.05 4.27 2.70 2.71 200 235–239 2.42–2.54 60.84 15.46 3.68 3.00 3.00 400 469–473 4.60–4.70 118.58 21.75 6.45 2.10–2.19 2.19 700 824–828 6.08–6.19 206.17 28.77 9.46 2.80–3.14 3.14 1000 1172–1176 7.37–7.45 292.02 34.29 11.86 3.25–3.52 3.52 Log-log slopes at L17: Condition Slope pre-norm (Script 1) Slope pre-norm (Script 2) Slope real_update (Script 2) coherent 0.830 0.493 0.512 word_shuffled 0.850 0.412 0.416 Note on discrepancy: Script 1 normalises ‖Σ‖ by mean‖c‖ before fitting the slope (fitting in \"units of a single contribution\"), which gives higher slopes (0.83–0.85). Script 2 fits the raw absolute norm, giving slopes of 0.41–0.51. The raw slopes are more conservative and are the correct interpretation for residual stream magnitude. Critical result: Observed ‖Σ‖ is dramatically lower than the formula prediction. At 1000 words, pred(ρ̂=0.061) = 292.02 but observed = 7.45 (in normalised units, 278 vs 34). This means the formula over-predicts by a factor of ~40. The formula is not validated by the data. 5.3 Probe projection (P3 / TEST C) Table 4. Projection of context sum onto probe direction and per-token breakdown. Layer Condition proj(Σ) ‖Σ‖ cos(Σ,dir) per-token mean probe_TARGET update_on_probe tokens_probe+ L05 coherent +0.044 13.57 +0.003 +0.00003 +1.589 +0.002 0.595 L05 sent_shuffled −0.616 13.55 −0.045 −0.00043 −0.665 −0.003 0.421 L05 word_shuffled −1.200 15.81 −0.076 −0.00083 −3.235 −0.011 0.125 L05 neutral −0.046 11.18 −0.004 −0.00007 −0.334 +0.001 0.714 L11 coherent −0.035 5.07 −0.007 −0.00002 +1.361 +0.020 0.671 L11 sent_shuffled −0.059 5.11 −0.012 −0.00004 +0.458 +0.003 0.613 L11 word_shuffled −0.078 5.34 −0.015 −0.00005 −1.862 −0.018 0.258 L11 neutral −0.034 3.60 −0.010 −0.00005 −0.916 +0.007 0.666 L17 coherent +0.191 8.15 +0.023 +0.00013 +0.122 +0.042 0.726 L17 sent_shuffled +0.101 8.30 +0.012 +0.00007 −1.360 +0",
+      "abstract_sha256": "8861c8f1ae61eb9ca9f17648ea77ef6c5e331538ef233c059a56e0c06783d79b",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.6084/m9.figshare.33470863.v1",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7211978002",
+      "title": "Large language model",
+      "authors": [],
+      "published": "2026-09-08",
+      "url": "https://openalex.org/W7211978002",
+      "abstract": "We present a mechanistic measurement study of how context-token attention contributions accumulate in the residual stream of Gemma-4 26B-A4B-IT. The study tests one explicit claim: that the summed context contribution ‖Σ cⱼ‖ is predicted by the zero-parameter formula √(N + N(N−1)ρ), where N is the number of context tokens and ρ is their mean pairwise cosine similarity. We measure this formula's fit, the scaling of ‖Σ‖ with N, the projection of the context sum onto a linear probe axis, and whether different \"context families\" lie on a common (N, ρ, ‖Σ‖) surface. A second complementary audit measures all the same quantities after the post-attention RMSNorm, which is the actual update added to the residual stream. All forward passes are exact decompositions with numerical verification. The experiments partially falsify the accumulation account as written: ρ does not significantly differ between coherent and shuffled text, and the context sum does not systematically align with the probe axis. 1. Introduction Modern large language models accumulate information through a residual stream — a sum of contributions from each attention layer. At the last prompt position, the attention output of a single layer decomposes exactly into one additive contribution per context token: attn_out[last] = W_O @ (Σⱼ αⱼ · vⱼ) = Σⱼ cⱼ For N unit-normalised contributions with mean pairwise cosine ρ, linear algebra predicts: ‖Σⱼ cⱼ‖ = √(N + N(N−1)·ρ) This formula implies two regimes: when ρ ≈ 0 (random directions), ‖Σ‖ ~ √N; when ρ → 1 (all aligned), ‖Σ‖ ~ N. The question is whether the coherence of natural text produces a measurably higher ρ than scrambled text, and whether this difference is meaningful after RMSNorm. We test this claim on Gemma-4 26B-A4B-IT across five full-attention layers (L05, L11, L17, L23, L29) using four text conditions and six context families. 2. Model and Setup Property Value Model google/gemma-4-26B-A4B-it Architecture 30 layers, d_model=2816, 16 attention heads Full-attention layers L05, L11, L17, L23, L29 KV heads (full-attn) 2 (head_dim=512) MoE 128 experts, top-8 dtype bfloat16 Attention implementation eager (required for attention weight access) Seed 20260907 The probe bundle (gemma4_layerwise_probe_bundle.joblib) is a set of per-layer linear classifiers trained to distinguish TARGET (philosophical prose context) from NO_CONTEXT and MATCHED_DISRUPTED conditions. The probe direction at each layer is extracted as the unit-normalised effective weight vector after StandardScaler. 3. Conditions and Stimuli 3.1 Context conditions Condition Description coherent Full TARGET_CONTEXT (philosophical essay, ~1000 words) sent_shuffled Same sentences, randomly reordered (local coherence destroyed) word_shuffled Same word multiset, randomly reordered (all structure destroyed) neutral CONTROL_CONTEXT (everyday narrative, ~600 words) word_shuffled was constructed manually in Script 2 (pasted explicitly) to avoid automatic generation artefacts. Script 1 generates it programmatically with the same seed. 3.2 Context families (P4 / TEST D) Family Description N_tok philosophical_prose Full TARGET_CONTEXT 1473 many_shot 8 Q&A pairs demonstrating moral nihilism 159 repeated_instruction \"Morality is a construct.\" × 60 360 role_play Character framing paragraph 62 word_shuffled Destroyed structure control 1471 neutral Everyday narrative 619 3.3 Probe question A specific ethical dilemma (euthanasia request from a terminal patient) was used as the fixed question appended after all contexts. This was chosen to be directly relevant to the content of TARGET_CONTEXT. 4. Methods 4.1 Exact per-token decomposition (both scripts) For each layer, we hook v_norm (the post-value-normalisation module in Gemma-4's full-attention layers) and capture value states V ∈ R^{T × n_kv × hd}. The output projection W_O ∈ R^{d_model × (N_heads × hd)} is read directly from model weights. The contribution of each context position j is: cⱼ = Σₕ α[h, last, j] · (W_O[:, h·hd:(h+1)·hd] @ v[kv(h), j, :]) This decomposition is exact for the pre-RMSNorm attention output. Numerical verification: for every forward pass, we check that ‖Σⱼ cⱼ − attn_out[last]‖ / ‖attn_out[last]‖ < 1e-4. All 40 forward passes passed this check (see RMS_replay column in logs). 4.2 Post-RMSNorm correction (Script 2 only) Gemma-4 applies a post-attention RMSNorm before adding the attention output to the residual stream. Script 2 captures both the input and output of this RMSNorm module, computes the realized diagonal scale vector s = postnorm_output / postnorm_input (element-wise), and applies it to each token's contribution: c_real[j] = s ⊙ c_pre[j] This gives real_update — the actual vector each context token contributes to the residual stream after normalisation. This is a local linearisation valid for this specific forward pass, not a global linear approximation of RMSNorm. 4.3 Mean pairwise cosine ρ For a block of contribution vectors C[s:e], ρ is estimated as: ρ̂ = (Σᵢ≠ⱼ cos(cᵢ, cⱼ)) / (N(N−1)) When N > 400, uniform subsampling is applied. Zero-norm rows are excluded. 4.4 Scaling measurement Context is truncated to a grid of word counts [25, 50, 100, 200, 400, 700, 1000]. For each truncation level, we measure ‖Σ‖ before and after RMSNorm. Log-log slope is fitted by OLS: slope 0.5 means √N growth, slope 1.0 means linear growth. 5. Results 5.1 Condition comparison — ρ and ‖Σ‖ before RMSNorm (P1 / TEST A) Table 1. Mean pairwise cosine ρ and pre-RMSNorm sum norm across layers and conditions. Layer Condition ρ N_tokens ‖Σ‖ pre-norm mean‖c‖ ratio to √N L05 coherent 0.1039 1477 13.57 0.0270 13.10 L05 sent_shuffled 0.1168 1448 13.55 0.0278 12.80 L05 word_shuffled 0.2165 1446 15.81 0.0252 16.52 L05 neutral 0.1326 623 11.18 0.0433 10.35 L11 coherent 0.1078 1477 5.07 0.0121 10.92 L11 sent_shuffled 0.1090 1448 5.11 0.0136 9.91 L11 word_shuffled 0.1710 1446 5.34 0.0120 11.73 L11 neutral 0.1501 623 3.60 0.0174 8.30 L17 coherent 0.0609 1477 8.15 0.0243 8.71 L17 sent_shuffled 0.0674 1448 8.30 0.0243 8.98 L17 word_shuffled 0.1158 1446 5.52 0.0154 9.46 L17 neutral 0.0829 623 2.67 0.0155 6.92 L23 coherent 0.0602 1477 22.57 0.0562 10.45 L23 sent_shuffled 0.0587 1448 23.46 0.0616 10.02 L23 word_shuffled 0.0731 1446 15.93 0.0394 10.63 L23 neutral 0.0926 623 3.93 0.0167 9.45 L29 coherent 0.0960 1477 15.75 0.0432 9.50 L29 sent_shuffled 0.0948 1448 18.71 0.0551 8.93 L29 word_shuffled 0.0874 1446 9.68 0.0289 8.82 L29 neutral 0.1566 623 3.85 0.0183 8.42 Table 2. Condition comparison with post-RMSNorm real_update (TEST A, Script 2). Layer Condition N_tok ‖Σ‖ pre-norm real_update add_vs_cancel same_direction probe_TARGET L05 coherent 1473 12.96 5.99 4.27 0.128 +1.589 L05 sent_shuffled 1444 12.56 5.78 6.37 0.126 −0.665 L05 word_shuffled 1471 19.13 7.95 5.47 0.194 −3.235 L05 neutral 619 10.34 4.16 3.18 0.153 −0.334 L11 coherent 1473 4.83 5.28 3.53 0.086 +1.361 L11 sent_shuffled 1444 4.88 5.19 3.33 0.075 +0.458 L11 word_shuffled 1471 4.49 4.89 3.63 0.108 −1.862 L11 neutral 619 3.28 3.50 2.62 0.096 −0.916 L17 coherent 1473 8.05 12.87 3.63 0.050 +0.122 L17 sent_shuffled 1444 8.22 13.22 3.75 0.055 −1.360 L17 word_shuffled 1471 4.59 7.14 3.03 0.058 −4.219 L17 neutral 619 2.52 3.34 2.09 0.061 −2.723 L23 coherent 1473 22.55 18.19 3.19 0.042 +1.049 L23 sent_shuffled 1444 23.43 18.94 2.94 0.039 −0.146 L23 word_shuffled 1471 15.06 8.39 3.05 0.032 −2.041 L23 neutral 619 3.82 1.42 2.26 0.049 −1.643 L29 coherent 1473 15.72 11.45 2.62 0.057 +2.500 L29 sent_shuffled 1444 18.69 16.03 2.66 0.051 −1.093 L29 word_shuffled 1471 9.38 6.94 4.07 0.060 −2.724 L29 neutral 619 3.70 2.80 4.56 0.121 −2.983 Key observation (RMSNorm effect): At L23, word_shuffled pre-norm is 15.06 but post-norm (real_update) is only 8.39 — a 44% reduction. At L17, coherent pre-norm is 8.05 but post-norm is 12.87 — an amplification. RMSNorm is not uniformly attenuating. 5.2 Scaling law (P2 / TEST B) Table 3. ‖Σ‖ vs N at L17 — coherent text. Words N_tok ‖Σ‖ pre-norm pred(ρ̂) pred(ρ=0) real_update add_pre add_real 25 27–31 0.72–1.04 9.36 5.57 1.01 1.70 1.65 50 55–59 2.91–3.29 16.35 7.68 4.47 2.02 2.03 100 118–122 2.84–2.98 31.94 11.05 4.27 2.70 2.71 200 235–239 2.42–2.54 60.84 15.46 3.68 3.00 3.00 400 469–473 4.60–4.70 118.58 21.75 6.45 2.10–2.19 2.19 700 824–828 6.08–6.19 206.17 28.77 9.46 2.80–3.14 3.14 1000 1172–1176 7.37–7.45 292.02 34.29 11.86 3.25–3.52 3.52 Log-log slopes at L17: Condition Slope pre-norm (Script 1) Slope pre-norm (Script 2) Slope real_update (Script 2) coherent 0.830 0.493 0.512 word_shuffled 0.850 0.412 0.416 Note on discrepancy: Script 1 normalises ‖Σ‖ by mean‖c‖ before fitting the slope (fitting in \"units of a single contribution\"), which gives higher slopes (0.83–0.85). Script 2 fits the raw absolute norm, giving slopes of 0.41–0.51. The raw slopes are more conservative and are the correct interpretation for residual stream magnitude. Critical result: Observed ‖Σ‖ is dramatically lower than the formula prediction. At 1000 words, pred(ρ̂=0.061) = 292.02 but observed = 7.45 (in normalised units, 278 vs 34). This means the formula over-predicts by a factor of ~40. The formula is not validated by the data. 5.3 Probe projection (P3 / TEST C) Table 4. Projection of context sum onto probe direction and per-token breakdown. Layer Condition proj(Σ) ‖Σ‖ cos(Σ,dir) per-token mean probe_TARGET update_on_probe tokens_probe+ L05 coherent +0.044 13.57 +0.003 +0.00003 +1.589 +0.002 0.595 L05 sent_shuffled −0.616 13.55 −0.045 −0.00043 −0.665 −0.003 0.421 L05 word_shuffled −1.200 15.81 −0.076 −0.00083 −3.235 −0.011 0.125 L05 neutral −0.046 11.18 −0.004 −0.00007 −0.334 +0.001 0.714 L11 coherent −0.035 5.07 −0.007 −0.00002 +1.361 +0.020 0.671 L11 sent_shuffled −0.059 5.11 −0.012 −0.00004 +0.458 +0.003 0.613 L11 word_shuffled −0.078 5.34 −0.015 −0.00005 −1.862 −0.018 0.258 L11 neutral −0.034 3.60 −0.010 −0.00005 −0.916 +0.007 0.666 L17 coherent +0.191 8.15 +0.023 +0.00013 +0.122 +0.042 0.726 L17 sent_shuffled +0.101 8.30 +0.012 +0.00007 −1.360 +0",
+      "abstract_sha256": "8861c8f1ae61eb9ca9f17648ea77ef6c5e331538ef233c059a56e0c06783d79b",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.6084/m9.figshare.33470863",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7118944198",
+      "title": "Hardware-Oriented Approximations of Softmax and RMSNorm for Efficient Transformer Inference",
+      "authors": [],
+      "published": "2026-01-07",
+      "url": "https://openalex.org/W7118944198",
+      "abstract": "With the rapid advancement of Transformer-based large language models (LLMs), these models have found widespread applications in industrial domains such as code generation and non-functional requirement (NFR) classification in software engineering. However, recent research has primarily focused on optimizing linear matrix operations, while nonlinear operators remain relatively underexplored. This paper proposes hardware-efficient approximation and acceleration methods for the Softmax and RMSNorm operators to reduce resource cost and accelerate Transformer inference while maintaining model accuracy. For the Softmax operator, an additional range reduction based on the SafeSoftmax technique enables the adoption of a bipartite lookup table (LUT) approximation and acceleration. The bit-width configuration is optimized through Pareto frontier analysis to balance precision and hardware cost, and an error compensation mechanism is further applied to preserve numerical accuracy. The division is reformulated as a logarithmic subtraction implemented with a small LOD-driven lookup table, eliminating expensive dividers. For RMSNorm, LOD is further leveraged to decompose the reciprocal square root into mantissa and exponent parts, enabling parallel table lookup and a single multiplication. Based on these optimizations, an FPGA-based pipelined accelerator is implemented, achieving low operator-level latency and power consumption with significantly reduced hardware resource usage while preserving model accuracy.",
+      "abstract_sha256": "6f9f0fd88121e67d41364f89bb99587960b9f093c643ed677f0dfe3d19f3e712",
+      "source": "openalex",
+      "venue": "Micromachines",
+      "peer_reviewed": true,
+      "cited_by": 2,
+      "doi": "https://doi.org/10.3390/mi17010084",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W2970903692",
+      "title": "Root Mean Square Layer Normalization",
+      "authors": [],
+      "published": "2019-12-05",
+      "url": "https://openalex.org/W2970903692",
+      "abstract": "Layer normalization (LayerNorm) has been successfully applied to various deep neural networks to help stabilize training and boost model convergence because of its capability in handling re-centering and re-scaling of both inputs and weight matrix.However, the computational overhead introduced by LayerNorm makes these improvements expensive and significantly slows the underlying network, e.g.RNN in particular.In this paper, we hypothesize that re-centering invariance in LayerNorm is dispensable and propose root mean square layer normalization, or RMSNorm.RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability.RMSNorm is computationally simpler and thus more efficient than LayerNorm.We also present partial RMSNorm, or pRMSNorm where the RMS is estimated from p% of the summed inputs without breaking the above properties.Extensive experiments on several tasks using diverse network architectures show that RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%∼64% on different models.",
+      "abstract_sha256": "b19e45d833b68c7fb25dada3fb35b20cb38a78347ee61ac605a9e29942e8650c",
+      "source": "openalex",
+      "venue": "Neural Information Processing Systems",
+      "peer_reviewed": true,
+      "cited_by": 36,
+      "doi": "https://doi.org/10.5167/uzh-177483",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7167259951",
+      "title": "MAYA: A Persian Language Model Based on the Transformer Architecture",
+      "authors": [],
+      "published": "2026-07-03",
+      "url": "https://openalex.org/W7167259951",
+      "abstract": "This paper presents MAYA, a transformer-based Persian language model designed to achieve a balance between language generation quality, computational efficiency, and hardware accessibility. The model incorporates modern architectural components, including Rotary Positional Embeddings (RoPE), Grouped Query Attention (GQA), RMSNorm, and SwiGLU, to improve training stability and inference efficiency. The study describes the overall model architecture, data preparation process, training strategy, implementation details, and experimental evaluation. Training was performed using a staged approach, and the results indicate a steady reduction in training loss and perplexity throughout the optimization process, demonstrating that the model successfully learns the statistical structure of Persian text. Although MAYA is still under active development, the current results suggest that it provides a promising foundation for future Persian large language models. Future work will focus on expanding the training corpus, improving reasoning capabilities, optimizing inference performance, and extending the model to larger parameter scales.",
+      "abstract_sha256": "2da96235f885d4d81f7a4e140eaf91b8a97cb1ae39e175ccae5192c336e68779",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.5281/zenodo.21171707",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7172030916",
+      "title": "Decoded Entropy is Not One Signal: Pre- and Post-RMSNorm Projections Yield Non-Equivalent Measurements in RMSNorm-Based Decoder LMs",
+      "authors": [],
+      "published": "2026-01-01",
+      "url": "https://openalex.org/W7172030916",
+      "abstract": "Layerwise decoded entropy—the Shannon entropy of intermediate hidden states projected to vocabulary space—is increasingly used as an internal diagnostic in decoder language models (LMs) that employ root mean square layer normalization (RMSNorm), yet whether the projection is applied before or after the final RMSNorm has not been uniformly specified. We empirically quantify the consequences of this implementation choice in three 7–8B instruction-tuned decoder LMs (Qwen2.5-7B, Llama-3-8B, Mistral-7B). Pre-normalization entropy ( $H_{\\text {pre}}$ ) and post-normalization entropy ( $H_{\\text {post}}$ ) are non-equivalent measurements: $H_{\\text {pre}}$ is mathematically scale-sensitive by construction (softmax temperature effect) and our interventions confirm that its empirical magnitude is large—unit-normalizing hidden states collapses $H_{\\text {pre}}$ toward maximal entropy in all three families—whereas $H_{\\text {post}}$ is largely scale-invariant in middle and late layers. This non-equivalence has two diagnostic consequences in the tested settings: 1) simple scale baselines (logit standard deviation, hidden-state norm) from a single forward pass match or exceed single-layer entropy for correctness discrimination under our protocol, providing diagnostic baselines rather than a deployable uncertainty estimator; 2) $H_{\\text {pre}}$ and $H_{\\text {post}}$ yield different per-layer discrimination landscapes and classifier choice alone shifts the apparent area under the receiver operating characteristic curve (AUROC) by up to + 0.17, so reported findings depend on which variant is used. All reported quantities are decoder-dependent diagnostic measurements under the raw logit lens and should not be interpreted as direct readouts of latent model belief. As illustrative context, we note cross-paper variation in normalization reporting and recommend that future studies specify the normalization point, include direct scale baselines, and report classifier and token-position choices.",
+      "abstract_sha256": "6ba94c10cfb5848eeca0241f64f450acceb4645f8af0e1de3c8a48fcf15a55f8",
+      "source": "openalex",
+      "venue": "IEEE Access",
+      "peer_reviewed": true,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.1109/access.2026.3719188",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2606.17781",
+      "title": "MIVE: A Minimalist Integer Vector Engine for Softmax LayerNorm and RMSNorm Acceleration",
+      "authors": [],
+      "published": "2026-06-16",
+      "url": "https://arxiv.org/abs/2606.17781",
+      "abstract": "The rapid growth of Large Language Models (LLMs) has intensified the need for specialized hardware accelerators that can satisfy stringent inference latency and power constraints. Although matrix multiplications dominate the overall computational workload, non-linear vector normalization operations, such as LayerNorm, RMSNorm and Softmax can become critical hardware bottlenecks. Existing accelerators typically implement these functions using dedicated hardware blocks, leading to duplicated resources and inefficient silicon utilization. To address this limitation, we propose a Minimalist Integer Vector Engine (MIVE), a programmable architecture capable of executing all three operations within a unified datapath. By exploiting common computational patterns across LayerNorm, RMSNorm and Softmax the proposed vector engine maximizes hardware sharing while reducing implementation overhead. Physical ASIC implementation results show that MIVE provides comprehensive multi-function support while achieving higher area and hardware efficiency than most state-of-the-art standalone accelerators.",
+      "abstract_sha256": "c824bcb5bb3f9aab1da24e38feddb4a62c109653c7bed3b5d6a7f75de9a047e4",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2606.17781",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W7167244763",
+      "title": "MAYA: A Persian Language Model Based on the Transformer Architecture",
+      "authors": [],
+      "published": "2026-07-03",
+      "url": "https://openalex.org/W7167244763",
+      "abstract": "This paper presents MAYA, a transformer-based Persian language model designed to achieve a balance between language generation quality, computational efficiency, and hardware accessibility. The model incorporates modern architectural components, including Rotary Positional Embeddings (RoPE), Grouped Query Attention (GQA), RMSNorm, and SwiGLU, to improve training stability and inference efficiency. The study describes the overall model architecture, data preparation process, training strategy, implementation details, and experimental evaluation. Training was performed using a staged approach, and the results indicate a steady reduction in training loss and perplexity throughout the optimization process, demonstrating that the model successfully learns the statistical structure of Persian text. Although MAYA is still under active development, the current results suggest that it provides a promising foundation for future Persian large language models. Future work will focus on expanding the training corpus, improving reasoning capabilities, optimizing inference performance, and extending the model to larger parameter scales.",
+      "abstract_sha256": "2da96235f885d4d81f7a4e140eaf91b8a97cb1ae39e175ccae5192c336e68779",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.5281/zenodo.21171706",
+      "categories": [],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2606_19491_1",
+      "paper_id": "2606.19491",
+      "dimension": "outside_testbed",
+      "method": "LayerNorm inverse-scale direction as dead-direction diagnostic",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "The LayerNorm inverse-scale direction matches the measured bottom singular direction at init on all LayerNorm models and is absent on RMSNorm models.",
+      "source_span": "At random initialisation the predicted direction matches the measured bottom singular direction (one forward pass, direct SVD) to four decimal places on $9/9$ LayerNorm models, and is correctly absent on $5/5$ RMSNorm models",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-17",
+      "extraction_event": "unrecorded-a7ce893b"
+    },
+    {
+      "claim_id": "xW7118944198_1",
+      "paper_id": "W7118944198",
+      "dimension": "outside_testbed",
+      "method": "Hardware approximations of Softmax and RMSNorm on FPGA",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "The FPGA accelerator with approximated Softmax and RMSNorm reduces latency, power and resources while preserving model accuracy.",
+      "source_span": "achieving low operator-level latency and power consumption with significantly reduced hardware resource usage while preserving model accuracy",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T2",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": true,
+      "published": "2026-01-07",
+      "extraction_event": "unrecorded-a7ce893b",
+      "mechanism": "reduce resource cost and accelerate Transformer inference",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "xW2970903692_1",
+      "paper_id": "W2970903692",
+      "dimension": "norm",
+      "method": "RMSNorm replacing LayerNorm",
+      "setting": "general, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "RMSNorm achieves comparable performance to LayerNorm while reducing running time by 7-64% across tasks and architectures.",
+      "source_span": "Extensive experiments on several tasks using diverse network architectures show that RMSNorm achieves comparable performance against LayerNorm but reduces the running time by 7%∼64% on different models.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": {
+        "norm": "rmsnorm"
+      },
+      "claims_speed": false,
+      "tier": "T2",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "general",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": true,
+      "published": "2019-12-05",
+      "extraction_event": "unrecorded-471f4f43",
+      "mechanism": "RMSNorm is computationally simpler and thus more efficient than LayerNorm",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "xW2970903692_2",
+      "paper_id": "W2970903692",
+      "dimension": "norm",
+      "method": "RMSNorm re-scaling invariance",
+      "setting": "unspecified, unspecified, scale unspecified, theoretical (extracted from the abstract)",
+      "claim": "RMSNorm gives re-scaling invariance and implicit learning rate adaptation.",
+      "source_span": "RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability.",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": {
+        "norm": "rmsnorm"
+      },
+      "claims_speed": false,
+      "tier": "T2",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "theoretical"
+      },
+      "peer_reviewed": true,
+      "published": "2019-12-05",
+      "extraction_event": "unrecorded-471f4f43",
+      "mechanism": "re-scaling invariance property and implicit learning rate adaptation ability",
+      "mechanism_category": "scale_invariance"
+    }
+  ],
+  "dropped": [],
+  "degraded": []
+}

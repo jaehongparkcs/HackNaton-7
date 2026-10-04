@@ -1,0 +1,332 @@
+{
+  "dropped": [],
+  "event": "unrecorded-f054a130",
+  "findings": {
+    "limitations": [
+      {
+        "method": "optimizer=lion",
+        "quote": "There are also several tasks where Lion performs similarly to AdamW, including: (1) the Imagen text-to-image base model, (2) the perplexity of autoregressive language model trained on the large-scale internal dataset, which is arguably a more reliable metric the in-context learning benchmarks, and (3) masked language modeling on C4.",
+        "section": "limitations"
+      },
+      {
+        "method": "optimizer=lion",
+        "quote": "Though people often scale up the batch size to enable more parallelism, it is likely that Lion performs no better than AdamW if the batch size is small ( < 64).",
+        "section": "limitations"
+      },
+      {
+        "method": "optimizer=lion",
+        "quote": "The performance gain brought by Lion decreases when strong augmentations are utilized.",
+        "section": "limitations"
+      },
+      {
+        "method": "optimizer=lion",
+        "quote": "On vision tasks, the discrepancies between Lion, AdamW, and momentum SGD are pretty small on ResNets, likely due to the fact that ConvNets are easier to optimize compared to Transformers.",
+        "section": "limitations"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "optimization_speed",
+        "method": "optimizer=lion",
+        "quote": "It achieves 1.6x and 1.5x speedup when training the medium size model on Wiki-40B and PG-19, respectively.",
+        "section": "results"
+      },
+      {
+        "mechanism_category": "computational_efficiency",
+        "method": "optimizer=lion",
+        "quote": "It is more memory-efficient than Adam as it only keeps track of the momentum.",
+        "section": "abstract"
+      }
+    ],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "optimizer=lion",
+        "quote": "Based on our experience, a suitable learning rate for Lion is typically 3-10x smaller than that for AdamW.",
+        "ratio_to_adamw_max": 0.333,
+        "ratio_to_adamw_min": 0.1,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "3-10x smaller than that for AdamW"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "weight_decay",
+        "method": "optimizer=lion",
+        "quote": "the value of \\lambda used for Lion is 3-10x larger than that for AdamW in order to maintain a similar strength",
+        "ratio_to_adamw_max": 10.0,
+        "ratio_to_adamw_min": 3.0,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "3-10x larger than that for AdamW"
+      },
+      {
+        "adamw_value": 0.001,
+        "hyperparameter": "lr",
+        "method": "optimizer=lion",
+        "quote": "lr=1e-4 , \\lambda=0.01 in Lion and lr=1e-3 , \\lambda=0.001 in Adafactor for the 7.5B language modeling",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": 0.0001,
+        "value_as_stated": "lr=1e-4 in Lion vs lr=1e-3 in Adafactor for 7.5B LM"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "betas",
+        "method": "optimizer=lion",
+        "quote": "while in Lion, the default values for \\beta_{1} and \\beta_{2} are discovered through the program search process and set as 0.9 and 0.99, respectively",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "0.9 and 0.99 default"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "betas",
+        "method": "optimizer=lion",
+        "quote": "We only tune those hyperparameters in Section 4.4, where \\beta_{1}=0.9 , \\beta_{2}=0.99 in AdamW, and \\beta_{1}=0.95 , \\beta_{2}=0.98 in Lion.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "beta1=0.95, beta2=0.98 for language tasks"
+      }
+    ],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "optimizer=lion",
+        "quote": "Lion consistently achieves lower validation perplexity than AdamW.",
+        "section": "results",
+        "setting_note": "Transformer LM 110M-731M on Wiki-40B and PG-19"
+      },
+      {
+        "direction": "no_worse",
+        "method": "optimizer=lion",
+        "quote": "On this massive dataset, we observe no perplexity difference throughout training.",
+        "section": "results",
+        "setting_note": "1.1B-7.5B LM on 1.6T token dataset, perplexity"
+      },
+      {
+        "direction": "improves",
+        "method": "optimizer=lion",
+        "quote": "Lion performs slightly better than AdamW regarding the validation perplexity: 4.18 vs. 4.25 (small), 3.42 vs. 3.54 (medium), and 3.18 vs. 3.25 (large).",
+        "section": "results",
+        "setting_note": "BERT masked LM on C4"
+      },
+      {
+        "direction": "improves",
+        "method": "optimizer=lion",
+        "quote": "As shown in Table 2, Lion significantly outperforms AdamW on various architectures.",
+        "section": "results",
+        "setting_note": "ViT/Mixer/ResNet trained from scratch on ImageNet"
+      },
+      {
+        "direction": "improves",
+        "method": "optimizer=lion",
+        "quote": "On average, Lion beats AdamW across all three model scales.",
+        "section": "results",
+        "setting_note": "T5 fine-tuning on GLUE"
+      },
+      {
+        "direction": "improves",
+        "method": "optimizer=lion",
+        "quote": "The final FID scores are 4.1 (Lion) vs. 4.7 (AdamW), and for reference, the FID of ADM (Dhariwal and Nichol, 2021) is 10.94.",
+        "section": "results",
+        "setting_note": "diffusion U-Net ImageNet 256x256 FID"
+      },
+      {
+        "direction": "worse",
+        "method": "optimizer=sgd_momentum",
+        "quote": "The result of momentum SGD is only included for ResNet since it performs worse than AdamW elsewhere.",
+        "section": "results",
+        "setting_note": "non-ResNet tasks vs AdamW"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "3M tokens",
+        "dataset": "GLaM-like dataset of 1.6 trillion tokens",
+        "model_family": "transformer",
+        "parameter_count": "7.5B",
+        "quote": "Following GPT-3 (Brown et al., 2020), we train three models, ranging from 1.1B to 7.5B parameters, for 300B tokens with a batch size of 3M tokens and a context length of 1K.",
+        "section": "results",
+        "task": "language_modeling",
+        "training_steps": "300B tokens"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "4aaf398a018761820052ae9654af63e26837cdae1bf6f26415032f353ab8b4a7",
+  "paper_id": "2302.06675",
+  "section_chars": {
+    "abstract": 1869,
+    "conclusion": 401,
+    "experimental_setup": 2409,
+    "introduction": 5507,
+    "limitations": 2162,
+    "method": 13161,
+    "results": 19179
+  },
+  "sections": [
+    {
+      "chars": 1869,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 5507,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 744,
+      "heading": "Symbolic Discovery of Algorithms",
+      "section": "method"
+    },
+    {
+      "chars": 4911,
+      "heading": "2.1 Program Search Space",
+      "section": "method"
+    },
+    {
+      "chars": 4535,
+      "heading": "2.2 Efficient Search Techniques",
+      "section": "method"
+    },
+    {
+      "chars": 2968,
+      "heading": "2.3 Generalization: Program Selection and Simplification",
+      "section": "method"
+    },
+    {
+      "chars": 343,
+      "heading": "Derivation and Analysis of Lion",
+      "section": "other"
+    },
+    {
+      "chars": 923,
+      "heading": "3.1 Derivation",
+      "section": "other"
+    },
+    {
+      "chars": 3548,
+      "heading": "3.2 Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 2019,
+      "heading": "Evaluation of Lion",
+      "section": "results"
+    },
+    {
+      "chars": 3623,
+      "heading": "4.1 Image Classification",
+      "section": "results"
+    },
+    {
+      "chars": 2690,
+      "heading": "4.2 Vision-Language Contrastive Learning",
+      "section": "results"
+    },
+    {
+      "chars": 2407,
+      "heading": "4.3 Diffusion Model",
+      "section": "results"
+    },
+    {
+      "chars": 4900,
+      "heading": "4.4 Language Modeling and Fine-tuning",
+      "section": "results"
+    },
+    {
+      "chars": 2001,
+      "heading": "4.5 Comparison with Other Popular Optimizers",
+      "section": "results"
+    },
+    {
+      "chars": 1533,
+      "heading": "4.6 Ablations",
+      "section": "results"
+    },
+    {
+      "chars": 2409,
+      "heading": "Hyperparameter Tuning",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2162,
+      "heading": "Limitations",
+      "section": "limitations"
+    },
+    {
+      "chars": 1433,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 401,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 578,
+      "heading": "Acknowledgements",
+      "section": "other"
+    },
+    {
+      "chars": 2027,
+      "heading": "Appendix A Pseudocode for AdamW and Lion",
+      "section": "other"
+    },
+    {
+      "chars": 340,
+      "heading": "Appendix B Image Classification Tasks",
+      "section": "other"
+    },
+    {
+      "chars": 2156,
+      "heading": "Appendix C NLP Tasks",
+      "section": "other"
+    },
+    {
+      "chars": 418,
+      "heading": "Appendix D Other Discovered Programs",
+      "section": "other"
+    },
+    {
+      "chars": 227,
+      "heading": "Appendix E Architecture Details for Language Modeling",
+      "section": "other"
+    },
+    {
+      "chars": 575,
+      "heading": "Appendix F Details of Proxy Tasks",
+      "section": "other"
+    },
+    {
+      "chars": 771,
+      "heading": "Appendix G Analysis of Loss Landscape",
+      "section": "other"
+    },
+    {
+      "chars": 1583,
+      "heading": "Appendix H Available Functions",
+      "section": "other"
+    },
+    {
+      "chars": 9133,
+      "heading": "Appendix I Abstract Execution",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Symbolic Discovery of Optimization Algorithms",
+  "url": "https://arxiv.org/html/2302.06675",
+  "validation_only": false,
+  "version": "2302.06675v4"
+}

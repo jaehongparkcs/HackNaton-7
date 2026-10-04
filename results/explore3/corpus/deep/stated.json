@@ -1,0 +1,287 @@
+[
+  {
+    "concrete": true,
+    "delta": {
+      "norm": "rmsnorm"
+    },
+    "delta_key": "norm=rmsnorm",
+    "event": "unrecorded-e9bb09c5",
+    "limitation_claim_id": "deep_1910.07467_l1",
+    "method": "norm=rmsnorm",
+    "paper_id": "1910.07467",
+    "quote": "Actual speed improvements depend on the framework, hardware, neural network architecture and relative computational cost of other components, and we empirically observed speedups of 7% \\sim 64% across different models and implementations.",
+    "rationale": "The authors say RMSNorm's speedup depends on framework, hardware, and the relative cost of other components. Swapping in RMSNorm on this tiny model trained on Apple Silicon checks whether its benefit holds in a setting where normalization may be a small share of compute, by comparing validation cross-entropy and wall-clock time within the fixed 2,000-step budget.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "norm": "rmsnorm",
+      "norm_position": "post"
+    },
+    "delta_key": "norm=rmsnorm+norm_position=post",
+    "event": "unrecorded-d030ea11",
+    "limitation_claim_id": "deep_1910.07467_l2",
+    "method": "norm=rmsnorm",
+    "paper_id": "1910.07467",
+    "quote": "In the future, we would like to take more analysis about the success behind RMSNorm.",
+    "rationale": "The authors say they have not yet analyzed why RMSNorm succeeds, so swapping LayerNorm for RMSNorm in our tiny char-level Transformer checks whether dropping re-centering still matches LayerNorm on validation cross-entropy. Running it in the post-norm position probes whether that holds when normalization has to carry more of the training stability.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "norm": "rmsnorm"
+    },
+    "delta_key": "norm=rmsnorm",
+    "event": "unrecorded-60c2c389",
+    "limitation_claim_id": "deep_2305.14858_l1",
+    "method": "norm=rmsnorm",
+    "paper_id": "2305.14858",
+    "quote": "It is necessary to focus on developing highly optimized implementations of (C)RMSNorm to bridge the gap between theoretical and practical efficiency improvements.",
+    "rationale": "The authors note that RMSNorm's theoretical efficiency gains may not appear in practice without optimized implementations. Swapping LayerNorm for RMSNorm in our tiny model under a fixed 2,000-step budget tests whether it gives any practical benefit in validation loss (and wall-clock time) without specialized kernels.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "norm": "rmsnorm"
+    },
+    "delta_key": "norm=rmsnorm",
+    "event": "unrecorded-2ccdcab2",
+    "limitation_claim_id": "deep_2305.14858_l2",
+    "method": "norm=rmsnorm",
+    "paper_id": "2305.14858",
+    "quote": "The normalization takes <1\\% of the inference time for GPT-3 XL and larger models, which is the upper bound of the speedup with our methods.",
+    "rationale": "The authors say RMSNorm's benefit is limited to normalization compute, which is under 1% of inference time, so swapping in norm=rmsnorm should leave the model's quality essentially unchanged. Running it in our tiny model tests whether validation cross-entropy at the fixed 2,000-step budget actually stays the same, i.e. whether the change is purely an efficiency trade-off here.",
+    "section": "experimental_setup"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "activation": "swiglu"
+    },
+    "delta_key": "activation=swiglu",
+    "event": "unrecorded-f96090c6",
+    "limitation_claim_id": "deep_2605.10504_l2",
+    "method": "activation=swiglu",
+    "paper_id": "2605.10504",
+    "quote": "The result should not be reduced to “use SwiGLU”.",
+    "rationale": "The authors caution that their result should not be reduced to \"use SwiGLU\", so swapping in SwiGLU alone tests whether the activation by itself yields a meaningful validation cross-entropy gain in our tiny char-level setting. A null or negligible change would support the claim that the benefit depends on more than the activation choice.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "qk_norm": "true"
+    },
+    "delta_key": "qk_norm=true",
+    "event": "unrecorded-f1ba0698",
+    "limitation_claim_id": "deep_2608.02091_l1",
+    "method": "qk_norm=true",
+    "paper_id": "2608.02091",
+    "quote": "Where a source-local repair exists, such as an fp32 streaming core, it remains the direct fix; the channel is where to act for sources that lack one or keep low precision by design.",
+    "rationale": "The authors say QK-norm-style channel interventions matter mainly when no source-local precision fix exists; our testbed trains in full precision (effectively the source-local fix already in place), so enabling qk_norm=true tests whether the channel intervention adds little or nothing to validation loss here. A negligible or negative effect would support the limitation that the channel fix is redundant when precision is not the bottleneck.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "norm_position": "post",
+      "warmup_frac": "0"
+    },
+    "delta_key": "norm_position=post+warmup_frac=0",
+    "event": "unrecorded-e602b5a5",
+    "limitation_claim_id": "deep_1910.05895_l1",
+    "method": "norm_position=post",
+    "paper_id": "1910.05895",
+    "quote": "In the future, we would like to investigate the relationship between PostNorm and PreNorm when using other optimizers such as RAdam Liu et al. (2019), which has been shown to improve Transformer training without warmup.",
+    "rationale": "The authors leave open how PostNorm behaves relative to PreNorm when training without warmup (the regime RAdam targets), and our testbed has no RAdam option. This run therefore uses PostNorm with warmup removed to probe the no-warmup condition the quote highlights.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "warmup_frac": "0"
+    },
+    "delta_key": "warmup_frac=0",
+    "event": "unrecorded-24521329",
+    "limitation_claim_id": "deep_1910.05895_l2",
+    "method": "warmup_frac=0",
+    "paper_id": "1910.05895",
+    "quote": "We believe that in general, one can do without warmup, though it remains useful in the lowest resource settings.",
+    "rationale": "The authors claim warmup can generally be dropped, though it still helps in the lowest-resource settings. Our tiny model on a short 2,000-step run is itself a low-resource setting, so removing warmup tests whether validation cross-entropy degrades here.",
+    "section": "results"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "optimizer": "lion"
+    },
+    "delta_key": "optimizer=lion",
+    "event": "unrecorded-d77c8b52",
+    "limitation_claim_id": "deep_2302.06675_l1",
+    "method": "optimizer=lion",
+    "paper_id": "2302.06675",
+    "quote": "There are also several tasks where Lion performs similarly to AdamW, including: (1) the Imagen text-to-image base model, (2) the perplexity of autoregressive language model trained on the large-scale internal dataset, which is arguably a more reliable metric the in-context learning benchmarks, and (3) masked language modeling on C4.",
+    "rationale": "The authors note Lion performs only similarly to AdamW on autoregressive language-model perplexity. Swapping the default AdamW for Lion on our char-level LM tests whether validation cross-entropy shows any gain or is merely on par.",
+    "section": "limitations"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "optimizer": "lion"
+    },
+    "delta_key": "optimizer=lion",
+    "event": "unrecorded-ffe53fa9",
+    "limitation_claim_id": "deep_2302.06675_l2",
+    "method": "optimizer=lion",
+    "paper_id": "2302.06675",
+    "quote": "Though people often scale up the batch size to enable more parallelism, it is likely that Lion performs no better than AdamW if the batch size is small ( < 64).",
+    "rationale": "The authors expect Lion to offer no advantage over AdamW at small batch sizes (<64). Our tiny char-level testbed trains with small batches, so swapping AdamW for Lion directly tests whether Lion's validation cross-entropy fails to beat AdamW in that small-batch regime. The batch-size condition cannot be varied with the allowed changes, so no second change is added.",
+    "section": "limitations"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "dropout": "0.1",
+      "optimizer": "lion"
+    },
+    "delta_key": "dropout=0.1+optimizer=lion",
+    "event": "unrecorded-6601943a",
+    "limitation_claim_id": "deep_2302.06675_l3",
+    "method": "optimizer=lion",
+    "paper_id": "2302.06675",
+    "quote": "The performance gain brought by Lion decreases when strong augmentations are utilized.",
+    "rationale": "The authors report that Lion's advantage shrinks under strong augmentation; the testbed has no data augmentation, so dropout stands in as the nearest regularization proxy. Comparing Lion's validation-loss gain over the baseline with and without dropout=0.1 tests whether its benefit also shrinks under added regularization.",
+    "section": "limitations"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "optimizer": "lion"
+    },
+    "delta_key": "optimizer=lion",
+    "event": "unrecorded-c95e4727",
+    "limitation_claim_id": "deep_2302.06675_l4",
+    "method": "optimizer=lion",
+    "paper_id": "2302.06675",
+    "quote": "On vision tasks, the discrepancies between Lion, AdamW, and momentum SGD are pretty small on ResNets, likely due to the fact that ConvNets are easier to optimize compared to Transformers.",
+    "rationale": "The authors suggest Lion's advantage over AdamW and momentum SGD appears mainly on hard-to-optimize Transformers rather than ConvNets. Switching our tiny Transformer to Lion tests whether that advantage over the AdamW baseline holds in a small-scale character-level Transformer, or whether the gap shrinks the way it did for ResNets.",
+    "section": "limitations"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "pos_encoding": "rope"
+    },
+    "delta_key": "pos_encoding=rope",
+    "event": "unrecorded-9f39bf89",
+    "limitation_claim_id": "deep_2104.09864_l1",
+    "method": "pos_encoding=rope",
+    "paper_id": "2104.09864",
+    "quote": "Despite the fact that we mathematically format the relative position relations as rotations under 2D sub-spaces, there lacks of thorough explanations on why it converges faster than baseline models that incorporates other position encoding strategies.",
+    "rationale": "The RoFormer authors say RoPE converges faster than other position encodings but cannot explain why. Switching our baseline's position encoding to RoPE under the fixed 2,000-step budget tests whether that faster convergence appears as lower validation cross-entropy in a tiny character-level model.",
+    "section": "limitations"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "pos_encoding": "rope"
+    },
+    "delta_key": "pos_encoding=rope",
+    "event": "unrecorded-99ff165c",
+    "limitation_claim_id": "deep_2104.09864_l2",
+    "method": "pos_encoding=rope",
+    "paper_id": "2104.09864",
+    "quote": "Our proposed RoFormer is built upon the Transformer-based infrastructure, which requires hardware resources for pre-training purpose.",
+    "rationale": "The authors say RoFormer relies on resource-heavy Transformer pre-training. Swapping in RoPE on a tiny (<1M param) model with a fixed 2,000-step budget tests whether its benefit to validation cross-entropy still appears without large-scale pre-training resources.",
+    "section": "limitations"
+  },
+  {
+    "concrete": true,
+    "delta": {
+      "pos_encoding": "rope"
+    },
+    "delta_key": "pos_encoding=rope",
+    "event": "unrecorded-a3508c1f",
+    "limitation_claim_id": "deep_2305.19466_l1",
+    "method": "pos_encoding=rope",
+    "paper_id": "2305.19466",
+    "quote": "We could not study how large-scale pretraining affects different PEs because there are no publicly available large language models trained with various PEs under similar conditions.",
+    "rationale": "The authors could not compare positional encodings under matched pretraining conditions, and our testbed can train otherwise-identical models that differ only in PE. Switching to RoPE on the fixed 2,000-step TinyShakespeare budget is a small-scale, matched-condition check of how the choice of PE affects pretraining validation loss.",
+    "section": "limitations"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "pos_encoding": "rope"
+    },
+    "delta_key": "pos_encoding=rope",
+    "event": "unrecorded-b8c7800c",
+    "limitation_claim_id": "deep_2305.19466_l2",
+    "method": "pos_encoding=rope",
+    "paper_id": "2305.19466",
+    "quote": "A comprehensive downstream evaluation of these models remains a subject for future research.",
+    "rationale": "The authors say a broader evaluation of these positional-encoding variants is still future work. Switching to RoPE in our fixed-budget character-level testbed adds one more data point on whether its benefits carry over to a different, small-scale setting, measured by validation cross-entropy.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "grad_clip": "0",
+      "optimizer": "lion"
+    },
+    "delta_key": "grad_clip=0+optimizer=lion",
+    "event": "unrecorded-3470b454",
+    "limitation_claim_id": "deep_2307.06440_l1",
+    "method": "optimizer=lion",
+    "paper_id": "2307.06440",
+    "quote": "In initial experiments with BERT, we observed several numerical instabilities (NaN training losses) during hyper-parameter search after inserting Lion and Sophia into our training pipelines as drop-in replacements.",
+    "rationale": "The authors report NaN losses when Lion was dropped into an existing pipeline. Swapping in Lion with gradient clipping disabled removes a common stabilizer and tests whether the tiny model shows similar instability or divergence in validation loss.",
+    "section": "experimental_setup"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "optimizer": "lion",
+      "warmup_frac": "0"
+    },
+    "delta_key": "optimizer=lion+warmup_frac=0",
+    "event": "unrecorded-7588d167",
+    "limitation_claim_id": "deep_2307.06440_l2",
+    "method": "optimizer=lion",
+    "paper_id": "2307.06440",
+    "quote": "Initial tests with Lion and Sophia without additional adjustments led to divergence for higher learning rates or suboptimal performance.",
+    "rationale": "The authors report that Lion, used without additional adjustments, diverged or underperformed. Switching to Lion and also removing warmup (a stabilizing adjustment) tests whether unadjusted Lion destabilizes or degrades validation cross-entropy in our tiny char-level setting.",
+    "section": "experimental_setup"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "activation": "swiglu"
+    },
+    "delta_key": "activation=swiglu",
+    "event": "unrecorded-63490e21",
+    "limitation_claim_id": "deep_2002.05202_l1",
+    "method": "activation=swiglu",
+    "paper_id": "2002.05202",
+    "quote": "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence.",
+    "rationale": "The authors give no mechanistic justification for GLU-variant FFNs, so their benefit may not carry over to new settings. Swapping in SwiGLU on a tiny char-level model with a fixed 2,000-step budget checks whether the unexplained gain in validation cross-entropy still shows up there.",
+    "section": "conclusion"
+  },
+  {
+    "concrete": false,
+    "delta": {
+      "activation": "swiglu"
+    },
+    "delta_key": "activation=swiglu",
+    "event": "unrecorded-bf92afac",
+    "limitation_claim_id": "deep_2607.15525_l2",
+    "method": "activation=swiglu",
+    "paper_id": "2607.15525",
+    "quote": "Even the strongest dense feed-forward network therefore does not convert a validation-loss lead into a standardized-benchmark lead",
+    "rationale": "The quote says the strongest dense FFN (SwiGLU) gains validation loss without matching downstream gains. The testbed only measures validation cross-entropy, so swapping in SwiGLU can only check whether its validation-loss lead appears at tiny scale, not whether that lead carries over to benchmarks.",
+    "section": "conclusion"
+  }
+]

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/qBlYYGWF3H9xWiwVFGewOtpi01o</id>
+  <title>arXiv Query: search_query=all:"layer normalization placement" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:44:56Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22layer+normalization+placement%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2510.09904v2</id>
+    <title>Stability of Transformers under Layer Normalization</title>
+    <updated>2026-08-07T08:18:09Z</updated>
+    <link href="https://arxiv.org/abs/2510.09904v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.09904v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Despite their widespread use, training deep Transformers can be unstable. Layer normalization, a standard component, improves training stability, but its placement has often been ad-hoc. In this paper, we conduct a principled study on the forward (hidden states) and backward (gradient) stability of Transformers under different layer normalization placements. Our theory provides key insights into the training dynamics: whether training drives Transformers toward regular solutions or pathological behaviors. For forward stability, we derive explicit bounds on the growth of hidden states in trained Transformers. For backward stability, we analyze how layer normalization affects the backpropagation of gradients, thereby explaining the training dynamics of each layer normalization placement. Our analysis also guides the scaling of residual steps in Transformer blocks, where appropriate choices can further improve stability and performance. Our numerical results corroborate our theoretical findings. Beyond these results, our framework provides a principled way to sanity-check the stability of Transformers under new architectural modifications, offering guidance for future designs.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-10T22:27:20Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kelvin Kan</name>
+    </author>
+    <author>
+      <name>Xingjian Li</name>
+    </author>
+    <author>
+      <name>Benjamin J. Zhang</name>
+    </author>
+    <author>
+      <name>Tuhin Sahai</name>
+    </author>
+    <author>
+      <name>Stanley Osher</name>
+    </author>
+    <author>
+      <name>Krishna Kumar</name>
+    </author>
+    <author>
+      <name>Markos A. Katsoulakis</name>
+    </author>
+  </entry>
+</feed>

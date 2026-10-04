@@ -1,0 +1,72 @@
+[
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22RMSNorm%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "000_openalex_tighten_e62b2fa9.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22RMSNorm%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "001_openalex_tighten_e0040eb0.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22squared+ReLU%22+AND+%22rotary+position+embedding%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "002_openalex_tighten_e37a0c2e.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22squared+ReLU%22+AND+%22rotary+position+embedding%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "003_openalex_tighten_c7f10bcf.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22RMSNorm%22+AND+%22Lion+optimizer%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "004_openalex_tighten_edd5f8c7.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22RMSNorm%22+AND+%22Lion+optimizer%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "005_openalex_tighten_3e958cc6.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22rotary+position+embedding%22+AND+%22QK+normalization%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "006_openalex_tighten_376cde9b.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22rotary+position+embedding%22+AND+%22QK+normalization%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "007_openalex_tighten_95670cf7.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22squared+ReLU%22+AND+%22dropout%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "008_openalex_tighten_eaecda85.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22squared+ReLU%22+AND+%22dropout%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "009_openalex_tighten_0edeb86a.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22without+warmup%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "010_openalex_tighten_820967a1.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22without+warmup%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "011_openalex_tighten_044dffd6.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22QK+normalization%22+AND+%22without+warmup%22+AND+%22language+model%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "012_openalex_tighten_3c67d7af.json"
+  },
+  {
+    "kind": "openalex_tighten",
+    "url": "https://api.openalex.org/works?search=%22QK+normalization%22+AND+%22without+warmup%22+AND+%22Transformer%22&filter=from_publication_date%3A2017-01-01%2Cto_publication_date%3A2026-10-03&per-page=10&sort=relevance_score%3Adesc&select=id%2Cdoi%2Ctitle%2Cpublication_date%2Cabstract_inverted_index%2Cprimary_location%2Clocations%2Ccited_by_count",
+    "file": "013_openalex_tighten_e5c535a9.json"
+  }
+]

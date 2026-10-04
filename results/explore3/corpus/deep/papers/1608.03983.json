@@ -1,0 +1,154 @@
+{
+  "dropped": [],
+  "event": "unrecorded-ef357aaa",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "Future work should consider warm restarts for other popular training algorithms such as AdaDelta (Zeiler, 2012) and Adam (Kingma & Ba, 2014).",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "optimizer=sgd_momentum",
+        "quote": "The results for \\eta_{0}=0.05 show better performance, and therefore we use \\eta_{0}=0.05 in our later experiments.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "results",
+        "value": 0.05,
+        "value_as_stated": "0.05"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "weight_decay",
+        "method": "optimizer=sgd_momentum",
+        "quote": "For training, Zagoruyko & Komodakis (2016) used SGD with Nesterov’s momentum with initial learning rate set to \\eta_{0}=0.1 , weight decay to 0.0005, dampening to 0, momentum to 0.9 and minibatch size to 128.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": 0.0005,
+        "value_as_stated": "weight decay to 0.0005"
+      }
+    ],
+    "results": [],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "downsampled ImageNet (32x32, 1000 classes)",
+        "model_family": "cnn",
+        "parameter_count": "unspecified",
+        "quote": "We benchmarked SGD with momentum with the default learning rate schedule, SGDR with T_{0}=1,T_{mult}=2 and SGDR with T_{0}=10,T_{mult}=2 on WRN-28-10, all trained with 4 settings of the initial learning rate \\eta^{i}_{max} : 0.050, 0.025, 0.01 and 0.005.",
+        "section": "experimental_setup",
+        "task": "vision",
+        "training_steps": "40 epochs"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "acc8eb624a28a06a0661fc294a44bae62e1eb4e69cffedc70561134f9dfe29c2",
+  "paper_id": "1608.03983",
+  "section_chars": {
+    "abstract": 790,
+    "conclusion": 3591,
+    "experimental_setup": 5513,
+    "introduction": 4446,
+    "results": 5890
+  },
+  "sections": [
+    {
+      "chars": 790,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4446,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1456,
+      "heading": "2.1 Restarts in gradient-free optimization",
+      "section": "other"
+    },
+    {
+      "chars": 2887,
+      "heading": "2.2 Restarts in gradient-based optimization",
+      "section": "other"
+    },
+    {
+      "chars": 4925,
+      "heading": "Stochastic Gradient Descent with warm restarts (SGDR)",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Experimental results",
+      "section": "results"
+    },
+    {
+      "chars": 1870,
+      "heading": "4.1 Experimental settings",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 3304,
+      "heading": "4.2 Single-Model Results",
+      "section": "results"
+    },
+    {
+      "chars": 2585,
+      "heading": "4.3 Ensemble Results",
+      "section": "results"
+    },
+    {
+      "chars": 1407,
+      "heading": "4.4 Experiments on a dataset of EEG recordings",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2234,
+      "heading": "4.5 Preliminary experiments on a downsampled ImageNet dataset",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1976,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1614,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 417,
+      "heading": "Acknowledgments",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Supplementary Material",
+      "section": "other"
+    },
+    {
+      "chars": 879,
+      "heading": "8.1 50k vs 100k examples per epoch",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "SGDR: Stochastic Gradient Descent with Warm Restarts",
+  "url": "https://arxiv.org/html/1608.03983",
+  "validation_only": true,
+  "version": "1608.03983v5"
+}

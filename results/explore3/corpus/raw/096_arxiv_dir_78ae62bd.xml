@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/8SL4ojPMUpFlQGOeP8W8IKJoPSI</id>
+  <title>arXiv Query: search_query=all:"adaptive gradient clipping" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:49:37Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22adaptive+gradient+clipping%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>15</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2608.15153v1</id>
+    <title>An Adaptive Gradient Clipping and Noise Injection Mechanism for Differentially Private Federated Learning</title>
+    <updated>2026-08-15T10:10:34Z</updated>
+    <link href="https://arxiv.org/abs/2608.15153v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.15153v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Differentially private federated learning must balance privacy protection against model accuracy and training efficiency. Static gradient clipping applies a fixed threshold throughout training and across model layers, which can cause excessive clipping when the threshold is too small or unnecessarily large noise when it is too large. This paper presents DDP-SA-adaptive, an adaptive gradient clipping and noise adding mechanism for differentially private federated learning with secure aggregation. At each communication round, every client determines a separate clipping threshold for each model layer from the median of its per-sample gradient norms. The resulting layer-wise thresholds adapt to the evolving gradient distributions and calibrate the Laplace noise added before the updates are encoded and secret-shared among intermediate aggregation servers. We evaluate the proposed mechanism on a federated regression task in terms of efficiency, accuracy, privacy, convergence, clipping norm, and noise magnitude. Compared with the static DDP-SA baseline, DDP-SA-adaptive reduces the number of communication rounds by 6.81%, total training time by 19.21%, and average per-round training time by 13.33%, leading to improved training efficiency. It also reduces test loss by 98.74% and increases test R2 by 3.41%, leading to improved model accuracy. To attain R2 = 0.99, the adaptive mechanism operates with a privacy budget of approximately epsilon = 0.1, compared with epsilon = 0.4 for static DDP-SA, thus providing stronger privacy protection and achieving stronger privacy guarantees. These results demonstrate that round-wise, layer-wise adaptation can improve the privacy-accuracy-efficiency trade-off of differentially private federated learning.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-15T10:10:34Z</published>
+    <arxiv:comment>Submitted to International Conference on Computing, Networking and Communications (ICNC 2027)</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Wenjing Wei</name>
+    </author>
+    <author>
+      <name>Alla Jammine</name>
+    </author>
+    <author>
+      <name>Farid Nait-Abdesselam</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14432v5</id>
+    <title>Adaptive Gradient Clipping for Robust Federated Learning</title>
+    <updated>2025-05-09T07:46:34Z</updated>
+    <link href="https://arxiv.org/abs/2405.14432v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14432v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Robust federated learning aims to maintain reliable performance despite the presence of adversarial or misbehaving workers. While state-of-the-art (SOTA) robust distributed gradient descent (Robust-DGD) methods were proven theoretically optimal, their empirical success has often relied on pre-aggregation gradient clipping. However, existing static clipping strategies yield inconsistent results: enhancing robustness against some attacks while being ineffective or even detrimental against others. To address this limitation, we propose a principled adaptive clipping strategy, Adaptive Robust Clipping (ARC), which dynamically adjusts clipping thresholds based on the input gradients. We prove that ARC not only preserves the theoretical robustness guarantees of SOTA Robust-DGD methods but also provably improves asymptotic convergence when the model is well-initialized. Extensive experiments on benchmark image classification tasks confirm these theoretical insights, demonstrating that ARC significantly enhances robustness, particularly in highly heterogeneous and adversarial settings.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T11:00:31Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Youssef Allouah</name>
+    </author>
+    <author>
+      <name>Rachid Guerraoui</name>
+    </author>
+    <author>
+      <name>Nirupam Gupta</name>
+    </author>
+    <author>
+      <name>Ahmed Jellouli</name>
+    </author>
+    <author>
+      <name>Geovani Rizk</name>
+    </author>
+    <author>
+      <name>John Stephan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2007.14469v1</id>
+    <title>AutoClip: Adaptive Gradient Clipping for Source Separation Networks</title>
+    <updated>2020-07-25T20:59:39Z</updated>
+    <link href="https://arxiv.org/abs/2007.14469v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2007.14469v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Clipping the gradient is a known approach to improving gradient descent, but requires hand selection of a clipping threshold hyperparameter. We present AutoClip, a simple method for automatically and adaptively choosing a gradient clipping threshold, based on the history of gradient norms observed during training. Experimental results show that applying AutoClip results in improved generalization performance for audio source separation networks. Observation of the training dynamics of a separation network trained with and without AutoClip show that AutoClip guides optimization into smoother parts of the loss landscape. AutoClip is very simple to implement and can be integrated readily into a variety of applications across multiple domains.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-07-25T20:59:39Z</published>
+    <arxiv:comment>Accepted at 2020 IEEE International Workshop on Machine Learning for Signal Processing, Sept.\ 21--24, 2020, Espoo, Finland</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Prem Seetharaman</name>
+    </author>
+    <author>
+      <name>Gordon Wichern</name>
+    </author>
+    <author>
+      <name>Bryan Pardo</name>
+    </author>
+    <author>
+      <name>Jonathan Le Roux</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.11034v4</id>
+    <title>AdaGC: Enhancing LLM Pretraining Stability via Adaptive Gradient Clipping</title>
+    <updated>2026-07-19T05:20:00Z</updated>
+    <link href="https://arxiv.org/abs/2502.11034v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.11034v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Loss spikes remain a persistent obstacle in large-scale language model pretraining. While previous research has attempted to identify the root cause of loss spikes by investigating individual factors, we observe that, in practice, such spikes are typically triggered by the confluence of heterogeneous factors. Empirically, loss spikes may arise from a combination of data outliers, hardware or transient computational faults, numerical precision issues, and hyperparameter settings. Regardless of the underlying cause, these spikes manifest as unstable optimizer updates, as abnormal gradients contaminate both first- and second-moment states. In this paper, we propose a principled gradient-centric remedy: AdaGC, an adaptive per-tensor gradient clipping scheme that mitigates such contamination by bounding gradient norms relative to a tensor-wise exponential moving average of their historical clipped values. AdaGC is optimizer-agnostic, introduces negligible memory overhead, and reduces communication costs compared to GlobalGC, particularly in hybrid-parallel distributed training. Experiments on Llama-2 7B, Mixtral 8x1B, and ERNIE 10B-A1.4B demonstrate that AdaGC robustly eliminates training instabilities, consistently reducing spike scores to zero for all models and improving downstream accuracy over GlobalGC by 1.32%, 1.27%, and 2.48%, respectively. Furthermore, AdaGC seamlessly integrates with optimizers such as Muon and Lion, consistently yielding higher average accuracy and zero spike scores. The code is available at https://github.com/PaddlePaddle/PaddleFleet (see Research/AdaGC).</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-16T08:13:23Z</published>
+    <arxiv:comment>Accept by ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Guoxia Wang</name>
+    </author>
+    <author>
+      <name>Shuai Li</name>
+    </author>
+    <author>
+      <name>Congliang Chen</name>
+    </author>
+    <author>
+      <name>Jinle Zeng</name>
+    </author>
+    <author>
+      <name>Jiabin Yang</name>
+    </author>
+    <author>
+      <name>Dianhai Yu</name>
+    </author>
+    <author>
+      <name>Yanjun Ma</name>
+    </author>
+    <author>
+      <name>Li Shen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.15893v1</id>
+    <title>Adap DP-FL: Differentially Private Federated Learning with Adaptive Noise</title>
+    <updated>2022-11-29T03:20:40Z</updated>
+    <link href="https://arxiv.org/abs/2211.15893v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.15893v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning seeks to address the issue of isolated data islands by making clients disclose only their local training models. However, it was demonstrated that private information could still be inferred by analyzing local model parameters, such as deep neural network model weights. Recently, differential privacy has been applied to federated learning to protect data privacy, but the noise added may degrade the learning performance much. Typically, in previous work, training parameters were clipped equally and noises were added uniformly. The heterogeneity and convergence of training parameters were simply not considered. In this paper, we propose a differentially private scheme for federated learning with adaptive noise (Adap DP-FL). Specifically, due to the gradient heterogeneity, we conduct adaptive gradient clipping for different clients and different rounds; due to the gradient convergence, we add decreasing noises accordingly. Extensive experiments on real-world datasets demonstrate that our Adap DP-FL outperforms previous methods significantly.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-29T03:20:40Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jie Fu</name>
+    </author>
+    <author>
+      <name>Zhili Chen</name>
+    </author>
+    <author>
+      <name>Xiao Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.02507v1</id>
+    <title>ZClip: Adaptive Spike Mitigation for LLM Pre-Training</title>
+    <updated>2025-04-03T11:41:55Z</updated>
+    <link href="https://arxiv.org/abs/2504.02507v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.02507v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training large language models (LLMs) presents numerous challenges, including gradient instability and loss spikes. These phenomena can lead to catastrophic divergence, requiring costly checkpoint restoration and data batch skipping. Traditional gradient clipping techniques, such as constant or norm-based methods, fail to address these issues effectively due to their reliance on fixed thresholds or heuristics, leading to inefficient learning and requiring frequent manual intervention. In this work, we propose ZClip, an adaptive gradient clipping algorithm that dynamically adjusts the clipping threshold based on statistical properties of gradient norms over time. Unlike prior reactive strategies, ZClip proactively adapts to training dynamics without making any prior assumptions on the scale and the temporal evolution of gradient norms. At its core, it leverages z-score-based anomaly detection to identify and mitigate large gradient spikes, preventing malignant loss spikes while not interfering with convergence otherwise. Our code is available at: https://github.com/bluorion-com/ZClip.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-03T11:41:55Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Abhay Kumar</name>
+    </author>
+    <author>
+      <name>Louis Owen</name>
+    </author>
+    <author>
+      <name>Nilabhra Roy Chowdhury</name>
+    </author>
+    <author>
+      <name>Fabian Güra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2102.06171v1</id>
+    <title>High-Performance Large-Scale Image Recognition Without Normalization</title>
+    <updated>2021-02-11T18:23:20Z</updated>
+    <link href="https://arxiv.org/abs/2102.06171v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2102.06171v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Batch normalization is a key component of most image classification models, but it has many undesirable properties stemming from its dependence on the batch size and interactions between examples. Although recent work has succeeded in training deep ResNets without normalization layers, these models do not match the test accuracies of the best batch-normalized networks, and are often unstable for large learning rates or strong data augmentations. In this work, we develop an adaptive gradient clipping technique which overcomes these instabilities, and design a significantly improved class of Normalizer-Free ResNets. Our smaller models match the test accuracy of an EfficientNet-B7 on ImageNet while being up to 8.7x faster to train, and our largest models attain a new state-of-the-art top-1 accuracy of 86.5%. In addition, Normalizer-Free models attain significantly better performance than their batch-normalized counterparts when finetuning on ImageNet after large-scale pre-training on a dataset of 300 million labeled images, with our best models obtaining an accuracy of 89.2%. Our code is available at https://github.com/deepmind/ deepmind-research/tree/master/nfnets</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-02-11T18:23:20Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Andrew Brock</name>
+    </author>
+    <author>
+      <name>Soham De</name>
+    </author>
+    <author>
+      <name>Samuel L. Smith</name>
+    </author>
+    <author>
+      <name>Karen Simonyan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.08347v3</id>
+    <title>Differentially Private Relational Learning with Entity-level Privacy Guarantees</title>
+    <updated>2026-02-03T01:38:50Z</updated>
+    <link href="https://arxiv.org/abs/2506.08347v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.08347v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning with relational and network-structured data is increasingly vital in sensitive domains where protecting the privacy of individual entities is paramount. Differential Privacy (DP) offers a principled approach for quantifying privacy risks, with DP-SGD emerging as a standard mechanism for private model training. However, directly applying DP-SGD to relational learning is challenging due to two key factors: (i) entities often participate in multiple relations, resulting in high and difficult-to-control sensitivity; and (ii) relational learning typically involves multi-stage, potentially coupled (interdependent) sampling procedures that make standard privacy amplification analyses inapplicable. This work presents a principled framework for relational learning with formal entity-level DP guarantees. We provide a rigorous sensitivity analysis and introduce an adaptive gradient clipping scheme that modulates clipping thresholds based on entity occurrence frequency. We also extend the privacy amplification results to a tractable subclass of coupled sampling, where the dependence arises only through sample sizes. These contributions lead to a tailored DP-SGD variant for relational data with provable privacy guarantees. Experiments on fine-tuning text encoders over text-attributed network-structured relational data demonstrate the strong utility-privacy trade-offs of our approach. Our code is available at https://github.com/Graph-COM/Node_DP.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-10T02:03:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yinan Huang</name>
+    </author>
+    <author>
+      <name>Haoteng Yin</name>
+    </author>
+    <author>
+      <name>Eli Chien</name>
+    </author>
+    <author>
+      <name>Rongzhe Wei</name>
+    </author>
+    <author>
+      <name>Pan Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.03059v1</id>
+    <title>Enhancing DP-SGD through Non-monotonous Adaptive Scaling Gradient Weight</title>
+    <updated>2024-11-05T12:47:30Z</updated>
+    <link href="https://arxiv.org/abs/2411.03059v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.03059v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the domain of deep learning, the challenge of protecting sensitive data while maintaining model utility is significant. Traditional Differential Privacy (DP) techniques such as Differentially Private Stochastic Gradient Descent (DP-SGD) typically employ strategies like direct or per-sample adaptive gradient clipping. These methods, however, compromise model accuracy due to their critical influence on gradient handling, particularly neglecting the significant contribution of small gradients during later training stages. In this paper, we introduce an enhanced version of DP-SGD, named Differentially Private Per-sample Adaptive Scaling Clipping (DP-PSASC). This approach replaces traditional clipping with non-monotonous adaptive gradient scaling, which alleviates the need for intensive threshold setting and rectifies the disproportionate weighting of smaller gradients. Our contribution is twofold. First, we develop a novel gradient scaling technique that effectively assigns proper weights to gradients, particularly small ones, thus improving learning under differential privacy. Second, we integrate a momentum-based method into DP-PSASC to reduce bias from stochastic sampling, enhancing convergence rates. Our theoretical and empirical analyses confirm that DP-PSASC preserves privacy and delivers superior performance across diverse datasets, setting new standards for privacy-sensitive applications.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-05T12:47:30Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tao Huang</name>
+    </author>
+    <author>
+      <name>Qingyu Huang</name>
+    </author>
+    <author>
+      <name>Xin Shi</name>
+    </author>
+    <author>
+      <name>Jiayang Meng</name>
+    </author>
+    <author>
+      <name>Guolong Zheng</name>
+    </author>
+    <author>
+      <name>Xu Yang</name>
+    </author>
+    <author>
+      <name>Xun Yi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.08215v1</id>
+    <title>"BNN - BN = ?": Training Binary Neural Networks without Batch Normalization</title>
+    <updated>2021-04-16T16:46:57Z</updated>
+    <link href="https://arxiv.org/abs/2104.08215v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.08215v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Batch normalization (BN) is a key facilitator and considered essential for state-of-the-art binary neural networks (BNN). However, the BN layer is costly to calculate and is typically implemented with non-binary parameters, leaving a hurdle for the efficient implementation of BNN training. It also introduces undesirable dependence between samples within each batch. Inspired by the latest advance on Batch Normalization Free (BN-Free) training, we extend their framework to training BNNs, and for the first time demonstrate that BNs can be completed removed from BNN training and inference regimes. By plugging in and customizing techniques including adaptive gradient clipping, scale weight standardization, and specialized bottleneck block, a BN-free BNN is capable of maintaining competitive accuracy compared to its BN-based counterpart. Extensive experiments validate the effectiveness of our proposal across diverse BNN backbones and datasets. For example, after removing BNs from the state-of-the-art ReActNets, it can still be trained with our proposed methodology to achieve 92.08%, 68.34%, and 68.0% accuracy on CIFAR-10, CIFAR-100, and ImageNet respectively, with marginal performance drop (0.23%~0.44% on CIFAR and 1.40% on ImageNet). Codes and pre-trained models are available at: https://github.com/VITA-Group/BNN_NoBN.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-16T16:46:57Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianlong Chen</name>
+    </author>
+    <author>
+      <name>Zhenyu Zhang</name>
+    </author>
+    <author>
+      <name>Xu Ouyang</name>
+    </author>
+    <author>
+      <name>Zechun Liu</name>
+    </author>
+    <author>
+      <name>Zhiqiang Shen</name>
+    </author>
+    <author>
+      <name>Zhangyang Wang</name>
+    </author>
+  </entry>
+</feed>

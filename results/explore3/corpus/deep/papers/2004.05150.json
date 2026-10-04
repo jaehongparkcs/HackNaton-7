@@ -1,0 +1,290 @@
+{
+  "dropped": [],
+  "event": "unrecorded-8ff67944",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "schedule",
+        "method": "schedule=constant",
+        "quote": "LR scheduler | constant throughout each phase",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": null,
+        "value_as_stated": "constant throughout each phase"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "warmup",
+        "method": "warmup_frac=0.1",
+        "quote": "Warmup | 10% of the phase steps with maximum 10K steps",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": null,
+        "value_as_stated": "10% of the phase steps with maximum 10K steps"
+      }
+    ],
+    "results": [],
+    "setting": [
+      {
+        "batch_size": "64 ( 2^{18} tokens)",
+        "dataset": "corpus of long documents (Books, English Wikipedia, Realnews, Stories)",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "Both models are trained for 65K gradient updates with sequences length 4,096, batch size 64 ( 2^{18} tokens), maximum learning rate of 3e-5, linear warmup of 500 steps, followed by a power 3 polynomial decay.",
+        "section": "experimental_setup",
+        "task": "language_modeling",
+        "training_steps": "65K gradient updates"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "743db310243b2473f15f6ebd866c1a8f1007b7493e8d127a4af043d7ee4084be",
+  "paper_id": "2004.05150",
+  "section_chars": {
+    "abstract": 1163,
+    "appendix_setup": 6388,
+    "conclusion": 1056,
+    "experimental_setup": 8211,
+    "introduction": 4842,
+    "method": 3632,
+    "results": 5124
+  },
+  "sections": [
+    {
+      "chars": 1163,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4842,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1846,
+      "heading": "Long-Document Transformers",
+      "section": "other"
+    },
+    {
+      "chars": 2087,
+      "heading": "Task-specific Models for Long Documents",
+      "section": "method"
+    },
+    {
+      "chars": 534,
+      "heading": "Longformer",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "3.1 Attention Pattern",
+      "section": "other"
+    },
+    {
+      "chars": 934,
+      "heading": "Sliding Window",
+      "section": "other"
+    },
+    {
+      "chars": 678,
+      "heading": "Dilated Sliding Window",
+      "section": "other"
+    },
+    {
+      "chars": 1554,
+      "heading": "Global Attention",
+      "section": "other"
+    },
+    {
+      "chars": 685,
+      "heading": "Linear Projections for Global Attention",
+      "section": "other"
+    },
+    {
+      "chars": 1064,
+      "heading": "3.2 Implementation",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 540,
+      "heading": "Autoregressive Language Modeling",
+      "section": "method"
+    },
+    {
+      "chars": 1003,
+      "heading": "4.1 Attention Pattern",
+      "section": "method"
+    },
+    {
+      "chars": 91,
+      "heading": "4.2 Experiment Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 960,
+      "heading": "Training",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 228,
+      "heading": "Evaluation",
+      "section": "results"
+    },
+    {
+      "chars": 1868,
+      "heading": "4.2.1 Results",
+      "section": "results"
+    },
+    {
+      "chars": 1169,
+      "heading": "4.2.2 Ablation Study",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 913,
+      "heading": "Pretraining and Finetuning",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 115,
+      "heading": "Attention Pattern",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1176,
+      "heading": "Position Embeddings",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2362,
+      "heading": "Continued MLM Pretraining",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 353,
+      "heading": "Frozen RoBERTa Weights",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1214,
+      "heading": "Tasks",
+      "section": "other"
+    },
+    {
+      "chars": 1499,
+      "heading": "6.1 Question answering",
+      "section": "other"
+    },
+    {
+      "chars": 350,
+      "heading": "6.2 Coreference Resolution",
+      "section": "other"
+    },
+    {
+      "chars": 498,
+      "heading": "6.3 Document Classification",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "6.4 Results",
+      "section": "results"
+    },
+    {
+      "chars": 1151,
+      "heading": "Main Result",
+      "section": "results"
+    },
+    {
+      "chars": 1874,
+      "heading": "Longformer-large for QA",
+      "section": "results"
+    },
+    {
+      "chars": 1342,
+      "heading": "6.5 Ablations on WikiHop",
+      "section": "other"
+    },
+    {
+      "chars": 3620,
+      "heading": "Longformer-Encoder-Decoder (LED)",
+      "section": "other"
+    },
+    {
+      "chars": 1056,
+      "heading": "Conclusion and Future Work",
+      "section": "conclusion"
+    },
+    {
+      "chars": 191,
+      "heading": "Acknowledgment",
+      "section": "other"
+    },
+    {
+      "chars": 1745,
+      "heading": "Appendix A Implementation Details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 342,
+      "heading": "Tensor Virtual Machine (TVM)",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 3374,
+      "heading": "Appendix B Character LM Hyperparameters",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 924,
+      "heading": "Appendix C Pretraining Data",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 228,
+      "heading": "Appendix D Task specific model details",
+      "section": "other"
+    },
+    {
+      "chars": 2955,
+      "heading": "WikiHop",
+      "section": "other"
+    },
+    {
+      "chars": 1506,
+      "heading": "TriviaQA",
+      "section": "other"
+    },
+    {
+      "chars": 3800,
+      "heading": "HotpotQA",
+      "section": "other"
+    },
+    {
+      "chars": 2418,
+      "heading": "Coreference model details",
+      "section": "other"
+    },
+    {
+      "chars": 493,
+      "heading": "Text classification",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Longformer: The Long-Document Transformer",
+  "url": "https://arxiv.org/html/2004.05150",
+  "validation_only": false,
+  "version": "2004.05150v2"
+}

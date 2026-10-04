@@ -1,0 +1,322 @@
+{
+  "dropped": [],
+  "event": "unrecorded-985906b0",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "All experiments are character-level, \\leq 6 M parameters, single seed.",
+        "section": "limitations"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "position_generalization",
+        "method": "pos_encoding=rope",
+        "quote": "PE-ROPE | 1.4637 | +0.011 | relative PE | relative helps |",
+        "section": "experimental_setup"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "pos_encoding=rope",
+        "quote": "PE-ROPE | 1.4637 | +0.011 | rotary (relative) |",
+        "section": "results",
+        "setting_note": "char-level TinyShakespeare, 6-layer GPT, single seed; small effect vs learned PE baseline"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "TinyShakespeare",
+        "model_family": "transformer",
+        "parameter_count": "\\leq 6 M parameters",
+        "quote": "GPT-style decoder, L=6 , H=8 , d=256 , context T=256 , character-level TinyShakespeare. All models trained for 5,000 steps with cosine LR decay from 3\\times 10^{-4} , AdamW, identical mini-batches throughout.",
+        "section": "experimental_setup",
+        "task": "char_language_modeling",
+        "training_steps": "5,000 steps"
+      }
+    ],
+    "small_scale_evidence": [
+      {
+        "char_level": true,
+        "direction": "improves",
+        "method": "pos_encoding=rope",
+        "parameter_count": "\\leq 6 M parameters",
+        "quote": "PE-ROPE | 1.4637 | +0.011 | rotary (relative) |",
+        "section": "results"
+      }
+    ]
+  },
+  "full_text": "read",
+  "html_sha256": "0ae125c914f2b7635451f1f5b0bee803219133742a0faca7d6aedf20d5c67ea8",
+  "paper_id": "2605.26355",
+  "section_chars": {
+    "abstract": 1908,
+    "conclusion": 2891,
+    "experimental_setup": 3296,
+    "introduction": 3431,
+    "limitations": 433,
+    "method": 6896,
+    "results": 1760
+  },
+  "sections": [
+    {
+      "chars": 1908,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 421,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 667,
+      "heading": "Attention lacks salience.",
+      "section": "introduction"
+    },
+    {
+      "chars": 649,
+      "heading": "Positional encoding lacks adaptive locality.",
+      "section": "introduction"
+    },
+    {
+      "chars": 308,
+      "heading": "The complementarity hypothesis.",
+      "section": "introduction"
+    },
+    {
+      "chars": 359,
+      "heading": "Main result.",
+      "section": "results"
+    },
+    {
+      "chars": 671,
+      "heading": "Supporting findings.",
+      "section": "introduction"
+    },
+    {
+      "chars": 710,
+      "heading": "Contributions.",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Method",
+      "section": "method"
+    },
+    {
+      "chars": 704,
+      "heading": "2.1 Interpreting Attention as Cross-Correlation",
+      "section": "method"
+    },
+    {
+      "chars": 701,
+      "heading": "What zero-lag discards.",
+      "section": "method"
+    },
+    {
+      "chars": 1240,
+      "heading": "2.2 Energy-Gated Attention (EGA)",
+      "section": "method"
+    },
+    {
+      "chars": 1010,
+      "heading": "On the term “energy salience.”",
+      "section": "method"
+    },
+    {
+      "chars": 463,
+      "heading": "2.3 Morlet Positional Encoding (MoPE)",
+      "section": "method"
+    },
+    {
+      "chars": 296,
+      "heading": "Theoretical properties.",
+      "section": "method"
+    },
+    {
+      "chars": 494,
+      "heading": "Connection to prior PE methods.",
+      "section": "method"
+    },
+    {
+      "chars": 1300,
+      "heading": "Cross-correlation structure.",
+      "section": "method"
+    },
+    {
+      "chars": 680,
+      "heading": "2.4 Combined Model: Salience and Locality",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "Theoretical Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 843,
+      "heading": "3.1 Why the Combination is Superadditive",
+      "section": "other"
+    },
+    {
+      "chars": 795,
+      "heading": "3.2 Why Structured Priors Fail",
+      "section": "other"
+    },
+    {
+      "chars": 751,
+      "heading": "3.3 Spectral Cascade: Qualitative Layer Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "4.1 Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 208,
+      "heading": "Architecture and data.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 339,
+      "heading": "Statistical note.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 764,
+      "heading": "4.2 Main Result: Salience and Locality",
+      "section": "results"
+    },
+    {
+      "chars": 635,
+      "heading": "Result interpretation.",
+      "section": "results"
+    },
+    {
+      "chars": 775,
+      "heading": "4.3 Ablation: What Helps and What Fails",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 332,
+      "heading": "Convolution attention ( +0.007 ).",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 312,
+      "heading": "Scale initialization ( -0.007 ).",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 331,
+      "heading": "Spectral flux ( +0.012 ).",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 339,
+      "heading": "Phase coherence ( -0.007 ).",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 653,
+      "heading": "4.4 Learned MoPE Parameters",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 425,
+      "heading": "The complementarity of salience and locality.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 481,
+      "heading": "Why unconstrained learning wins.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 395,
+      "heading": "Long-context opportunity.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 437,
+      "heading": "Multiscale structure across layers.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 433,
+      "heading": "Limitations.",
+      "section": "limitations"
+    },
+    {
+      "chars": 0,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 620,
+      "heading": "Positional encoding.",
+      "section": "other"
+    },
+    {
+      "chars": 439,
+      "heading": "Signal processing in transformers.",
+      "section": "other"
+    },
+    {
+      "chars": 208,
+      "heading": "Spectral and energy-based attention.",
+      "section": "other"
+    },
+    {
+      "chars": 197,
+      "heading": "Efficient and sparse attention.",
+      "section": "other"
+    },
+    {
+      "chars": 240,
+      "heading": "Mechanistic interpretability.",
+      "section": "other"
+    },
+    {
+      "chars": 1149,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 767,
+      "heading": "Appendix A Additional Ablations",
+      "section": "other"
+    },
+    {
+      "chars": 716,
+      "heading": "Appendix B Memory-Efficient Convolution Attention",
+      "section": "other"
+    },
+    {
+      "chars": 478,
+      "heading": "Appendix C MoPE Initialization and Admissibility",
+      "section": "other"
+    }
+  ],
+  "source": "ar5iv",
+  "title": "Energy-Gated Attention and Wavelet Positional Encoding: Complementary Inductive Biases for Transformer Attention",
+  "url": "https://ar5iv.labs.arxiv.org/html/2605.26355",
+  "validation_only": false,
+  "version": "unknown"
+}

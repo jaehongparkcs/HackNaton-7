@@ -1,0 +1,390 @@
+{
+  "dropped": [],
+  "event": "unrecorded-ce891250",
+  "findings": {
+    "limitations": [
+      {
+        "method": "optimizer=lion",
+        "quote": "In initial experiments with BERT, we observed several numerical instabilities (NaN training losses) during hyper-parameter search after inserting Lion and Sophia into our training pipelines as drop-in replacements.",
+        "section": "experimental_setup"
+      },
+      {
+        "method": "optimizer=lion",
+        "quote": "Initial tests with Lion and Sophia without additional adjustments led to divergence for higher learning rates or suboptimal performance.",
+        "section": "experimental_setup"
+      }
+    ],
+    "mechanisms": [],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "optimizer=lion",
+        "quote": "For BERT, we determine a LR of 7e-4 and a weight decay of 0.1 to be best, as illustrated in Figure 11(a).",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": 0.0007,
+        "value_as_stated": "7e-4 (BERT)"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "weight_decay",
+        "method": "optimizer=lion",
+        "quote": "For BERT, we determine a LR of 7e-4 and a weight decay of 0.1 to be best, as illustrated in Figure 11(a).",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": 0.1,
+        "value_as_stated": "0.1 (BERT)"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "optimizer=lion",
+        "quote": "For T5, we do not use any weight decay (following Raffel et al. [76], Shazeer [81]) and find an LR of 7.5e-4 to yield the best performance, as shown in Figure 11(b).",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": 0.00075,
+        "value_as_stated": "7.5e-4 (T5, no weight decay)"
+      },
+      {
+        "adamw_value": null,
+        "hyperparameter": "betas",
+        "method": "optimizer=lion",
+        "quote": "We adopt these default \\beta_{1},\\beta_{2} hyper-parameters.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "appendix_setup",
+        "value": null,
+        "value_as_stated": "default betas from Lion authors' guidelines"
+      }
+    ],
+    "results": [
+      {
+        "direction": "no_worse",
+        "method": "optimizer=lion",
+        "quote": "In the case of BERT downstream performances (Table 1), we find that Lion and Sophia perform about the same as the baseline.",
+        "section": "results",
+        "setting_note": "BERT downstream GLUE/SuperGLUE, fixed RST budgets"
+      },
+      {
+        "direction": "worse",
+        "method": "optimizer=lion",
+        "quote": "We note that baseline (AdamW) consistently ranks the highest and has a comparatively low standard deviation over random seeds.",
+        "section": "results",
+        "setting_note": "BERT downstream, ranking vs AdamW"
+      },
+      {
+        "direction": "worse",
+        "method": "optimizer=lion",
+        "quote": "Lion | 20.8 | ± 1.1 | 30.7 | ± 0.4 | 33.7 | ± 0.0 |",
+        "section": "introduction",
+        "setting_note": "T5-Base SNI ROUGE-L at 6/12/24h budgets"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "1536 sequences",
+        "dataset": "C4",
+        "model_family": "transformer",
+        "parameter_count": "120M",
+        "quote": "We pre-train a BERT-base-like model with 16 layers instead of 12, which consists of 120M parameters, using a masked language modeling (MLM) objective.",
+        "section": "experimental_setup",
+        "task": "language_modeling",
+        "training_steps": "24 hours RST budget"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "d11c8069586c8b301ec7b3711b335a6963270bb6a677989af68be817d32a6363",
+  "paper_id": "2307.06440",
+  "section_chars": {
+    "abstract": 1057,
+    "appendix_setup": 11985,
+    "conclusion": 585,
+    "experimental_setup": 8941,
+    "introduction": 4535,
+    "method": 2001,
+    "results": 3346
+  },
+  "sections": [
+    {
+      "chars": 1057,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4535,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 349,
+      "heading": "Comparing Efficient Training Algorithms",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 129,
+      "heading": "The Pitfalls of Iterations",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 356,
+      "heading": "The Pitfalls of FLOPs",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 329,
+      "heading": "The Pitfalls of Wall-Clock Time",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 637,
+      "heading": "Our Proposal: Reference System Time (RST)",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2082,
+      "heading": "2.1 The Pitfall of Comparing Intermediate Performances",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 485,
+      "heading": "Experimental Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1053,
+      "heading": "BERT: Encoder-only.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 737,
+      "heading": "T5: Encoder-Decoder.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 222,
+      "heading": "Dataset.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 152,
+      "heading": "Learning-rate schedule.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 227,
+      "heading": "Hyper-parameter search.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 195,
+      "heading": "Reference System.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Case Study 1: Dynamic Architectures",
+      "section": "method"
+    },
+    {
+      "chars": 541,
+      "heading": "4.1 Layer stacking",
+      "section": "method"
+    },
+    {
+      "chars": 1459,
+      "heading": "4.2 Layer dropping",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "4.3 Results",
+      "section": "results"
+    },
+    {
+      "chars": 680,
+      "heading": "Training losses.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1321,
+      "heading": "Downstream performance.",
+      "section": "results"
+    },
+    {
+      "chars": 604,
+      "heading": "Case Study 2: Batch Selection",
+      "section": "other"
+    },
+    {
+      "chars": 479,
+      "heading": "5.1 Selective Backprop",
+      "section": "other"
+    },
+    {
+      "chars": 1557,
+      "heading": "5.2 RHO Loss",
+      "section": "other"
+    },
+    {
+      "chars": 757,
+      "heading": "5.3 Results",
+      "section": "results"
+    },
+    {
+      "chars": 358,
+      "heading": "Validation loss.",
+      "section": "results"
+    },
+    {
+      "chars": 351,
+      "heading": "Downstream performance.",
+      "section": "results"
+    },
+    {
+      "chars": 1191,
+      "heading": "5.4 Ablation: Batch Selection For Free",
+      "section": "other"
+    },
+    {
+      "chars": 948,
+      "heading": "Case Study 3: Efficient Optimizers",
+      "section": "other"
+    },
+    {
+      "chars": 684,
+      "heading": "Mixed Precision Training with BF16 vs. FP16",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 609,
+      "heading": "RMS-Scaling for T5 Pre-training",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 555,
+      "heading": "6.1 Results",
+      "section": "results"
+    },
+    {
+      "chars": 585,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 997,
+      "heading": "Acknowledgments",
+      "section": "other"
+    },
+    {
+      "chars": 1368,
+      "heading": "Appendix A Limitations and Future Work",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix B Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 206,
+      "heading": "B.1 Efficient Training Algorithms",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1153,
+      "heading": "Architecture-centric strategies.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1364,
+      "heading": "Data-centric strategies.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 624,
+      "heading": "Optimization-centric strategies.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 185,
+      "heading": "Others.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "B.2 Efficient Training Meta-Studies",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 376,
+      "heading": "Budget-centric recipes.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1252,
+      "heading": "Empirical Meta-Studies of Training Transformer-based models.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix C Hyper-Parameter Search",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 439,
+      "heading": "C.1 Layer stacking: When To Stack",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 616,
+      "heading": "C.2 Layer dropping: How to Drop",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 618,
+      "heading": "C.3 Selective backprop: Selectivity Scale",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1402,
+      "heading": "C.4 RHO loss: Mega-batch Size",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 997,
+      "heading": "C.5 Lion: Learning Rate (LR) And Weight Decay (WD)",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1328,
+      "heading": "C.6 Sophia: Learning Rate (LR), Weight Decay (WD) and \\rho",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Additional Results",
+      "section": "other"
+    },
+    {
+      "chars": 1412,
+      "heading": "D.1 Training BERT, Evaluating on GLUE",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1456,
+      "heading": "D.2 Layer dropping on small datasets",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "No Train No Gain: Revisiting Efficient Training Algorithms For Transformer-based Language Models",
+  "url": "https://arxiv.org/html/2307.06440",
+  "validation_only": false,
+  "version": "2307.06440v4"
+}

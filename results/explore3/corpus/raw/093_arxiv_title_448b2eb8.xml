@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/qhA4aaYDagvoo7Q9WsSvlrMnwWU</id>
+  <title>arXiv Query: search_query=ti:"Tensor Programs V Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:49:22Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Tensor+Programs+V+Tuning+Large+Neural+Networks+via+Zero-Shot+Hyperparameter+Transfer%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2203.03466v2</id>
+    <title>Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer</title>
+    <updated>2022-03-28T08:12:14Z</updated>
+    <link href="https://arxiv.org/abs/2203.03466v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.03466v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hyperparameter (HP) tuning in deep learning is an expensive process, prohibitively so for neural networks (NNs) with billions of parameters. We show that, in the recently discovered Maximal Update Parametrization (muP), many optimal HPs remain stable even as model size changes. This leads to a new HP tuning paradigm we call muTransfer: parametrize the target model in muP, tune the HP indirectly on a smaller model, and zero-shot transfer them to the full-sized model, i.e., without directly tuning the latter at all. We verify muTransfer on Transformer and ResNet. For example, 1) by transferring pretraining HPs from a model of 13M parameters, we outperform published numbers of BERT-large (350M parameters), with a total tuning cost equivalent to pretraining BERT-large once; 2) by transferring from 40M parameters, we outperform published numbers of the 6.7B GPT-3 model, with tuning cost only 7% of total pretraining cost. A Pytorch implementation of our technique can be found at github.com/microsoft/mup and installable via `pip install mup`.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-07T15:37:35Z</published>
+    <arxiv:comment>NeurIPS 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Greg Yang</name>
+    </author>
+    <author>
+      <name>Edward J. Hu</name>
+    </author>
+    <author>
+      <name>Igor Babuschkin</name>
+    </author>
+    <author>
+      <name>Szymon Sidor</name>
+    </author>
+    <author>
+      <name>Xiaodong Liu</name>
+    </author>
+    <author>
+      <name>David Farhi</name>
+    </author>
+    <author>
+      <name>Nick Ryder</name>
+    </author>
+    <author>
+      <name>Jakub Pachocki</name>
+    </author>
+    <author>
+      <name>Weizhu Chen</name>
+    </author>
+    <author>
+      <name>Jianfeng Gao</name>
+    </author>
+  </entry>
+</feed>

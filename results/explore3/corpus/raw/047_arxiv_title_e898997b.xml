@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api//+mnIaJCAAXxsUWAPuletXT70tI</id>
+  <title>arXiv Query: search_query=ti:"Gaussian Error Linear Units GELUs"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:45:31Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Gaussian+Error+Linear+Units+GELUs%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1606.08415v5</id>
+    <title>Gaussian Error Linear Units (GELUs)</title>
+    <updated>2023-06-06T01:53:32Z</updated>
+    <link href="https://arxiv.org/abs/1606.08415v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.08415v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose the Gaussian Error Linear Unit (GELU), a high-performing neural network activation function. The GELU activation function is $xΦ(x)$, where $Φ(x)$ the standard Gaussian cumulative distribution function. The GELU nonlinearity weights inputs by their value, rather than gates inputs by their sign as in ReLUs ($x\mathbf{1}_{x&gt;0}$). We perform an empirical evaluation of the GELU nonlinearity against the ReLU and ELU activations and find performance improvements across all considered computer vision, natural language processing, and speech tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-27T19:20:40Z</published>
+    <arxiv:comment>Trimmed version of 2016 draft</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dan Hendrycks</name>
+    </author>
+    <author>
+      <name>Kevin Gimpel</name>
+    </author>
+  </entry>
+</feed>

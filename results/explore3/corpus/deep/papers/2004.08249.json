@@ -1,0 +1,225 @@
+{
+  "dropped": [],
+  "event": "unrecorded-151ef6d6",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "norm_position=post",
+        "quote": "We find that strong dependencies of Post-LN amplify fluctuations brought by parameter changes and destabilize the training (as in Theorem 2 and Figure 4).",
+        "section": "introduction"
+      },
+      {
+        "mechanism_category": "loss_landscape_smoothness",
+        "method": "norm_position=post",
+        "quote": "Intuitively, massive output shifts not only require a small learning rate but also unsmoothes the loss surface Li et al. (2018) and make the training ill-conditioned.",
+        "section": "experimental_setup"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "worse",
+        "method": "norm_position=post",
+        "quote": "Specifically, 12-Layer and 18-Layer Post-LN diverges without the adaptive initialization.",
+        "section": "experimental_setup",
+        "setting_note": "12- and 18-layer Transformer on WMT'14 En-De, Post-LN diverges"
+      },
+      {
+        "direction": "improves",
+        "method": "norm_position=post",
+        "quote": "As in Figure 1 and Figure 9, although the 6-layer Pre-LN converges faster than Post-LN, its final performance is worse than Post-LN.",
+        "section": "experimental_setup",
+        "setting_note": "6-layer Transformer on WMT'14, final performance vs Pre-LN"
+      },
+      {
+        "direction": "no_worse",
+        "method": "norm_position=post",
+        "quote": "We use 6-layer Transformer-small (its hidden dimension is smaller than the base model) on the IWSLT’14 dataset, and all methods perform similarly.",
+        "section": "experimental_setup",
+        "setting_note": "6-layer Transformer-small on IWSLT'14 De-En"
+      },
+      {
+        "direction": "context",
+        "method": "optimizer=sgd_momentum",
+        "quote": "although stochastic gradient descent (SGD) is the standard algorithm for conventional RNNs and CNNs, it converges to bad/suspicious local optima for Transformers Zhang et al. (2019b).",
+        "section": "introduction",
+        "setting_note": "cited prior work on Transformers"
+      },
+      {
+        "direction": "context",
+        "method": "warmup_frac=0",
+        "quote": "Moreover, comparing to other neural architectures, removing the warmup stage in Transformer training results in more severe consequences such as model divergence Popel and Bojar (2018); Liu et al. (2020a).",
+        "section": "introduction",
+        "setting_note": "cited prior work on Transformer training"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "5000 per GPU (max) for 60L-16L",
+        "dataset": "WMT'14 En-Fr",
+        "model_family": "transformer",
+        "parameter_count": "262M",
+        "quote": "On the WMT’14 En-Fr dataset, 6L-6L models (w. 67 M Param.) takes \\sim 2 days to train, and 60L-12L models (w. 262M Param.) takes \\sim 2.5 days to train.",
+        "section": "appendix_setup",
+        "task": "translation",
+        "training_steps": "50 epochs"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "84b475c10727e666f48975258b1a93af653cef32941674e1b2daf587912d8c83",
+  "paper_id": "2004.08249",
+  "section_chars": {
+    "abstract": 1191,
+    "appendix_setup": 8013,
+    "conclusion": 1397,
+    "experimental_setup": 5221,
+    "introduction": 2800,
+    "method": 3443
+  },
+  "sections": [
+    {
+      "chars": 1191,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 2800,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 3134,
+      "heading": "Preliminaries",
+      "section": "other"
+    },
+    {
+      "chars": 1047,
+      "heading": "Unbalanced Gradients",
+      "section": "other"
+    },
+    {
+      "chars": 2848,
+      "heading": "3.1 Gradients at Initialization",
+      "section": "other"
+    },
+    {
+      "chars": 1263,
+      "heading": "3.2 Impact of the Gradient Vanishing",
+      "section": "other"
+    },
+    {
+      "chars": 534,
+      "heading": "Instability from Amplification Effect",
+      "section": "other"
+    },
+    {
+      "chars": 3956,
+      "heading": "4.1 Impact of Layer Norms Positions",
+      "section": "other"
+    },
+    {
+      "chars": 3314,
+      "heading": "4.2 Amplification Effect at Initialization",
+      "section": "other"
+    },
+    {
+      "chars": 3443,
+      "heading": "4.3 Admin – Adaptive Model Initialization",
+      "section": "method"
+    },
+    {
+      "chars": 116,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2376,
+      "heading": "5.1 Performance Comparison",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1765,
+      "heading": "5.2 Connection to Warmup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 961,
+      "heading": "5.3 Comparing to Other Initializations",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2186,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1397,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 449,
+      "heading": "Acknowledge",
+      "section": "other"
+    },
+    {
+      "chars": 676,
+      "heading": "Appendix A Gradients at Initialization",
+      "section": "other"
+    },
+    {
+      "chars": 1301,
+      "heading": "A.1 Pre-LN Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 6658,
+      "heading": "A.2 Post-LN Encoder Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 1318,
+      "heading": "A.3 Post-LN Decoder Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 2132,
+      "heading": "A.4 Distributes of Unbalanced Gradients",
+      "section": "other"
+    },
+    {
+      "chars": 5030,
+      "heading": "Appendix B Proof of Theorem 2",
+      "section": "other"
+    },
+    {
+      "chars": 3688,
+      "heading": "Appendix C Admin Implementation Details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 4324,
+      "heading": "Appendix D Experimental Setup",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 718,
+      "heading": "Appendix E Comparison to ReZero",
+      "section": "other"
+    },
+    {
+      "chars": 1030,
+      "heading": "Appendix F Performance on the WMT’14 En-Fr",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Understanding the Difficulty of Training Transformers",
+  "url": "https://arxiv.org/html/2004.08249",
+  "validation_only": true,
+  "version": "2004.08249v3"
+}

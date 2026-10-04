@@ -1,0 +1,678 @@
+{
+  "max_papers": 20,
+  "per_hypothesis": 3,
+  "rule": "For each of the top N queued hypotheses (by gap_score) and every contradiction gap, each paper gets\nproximity = \u03a3 over its relations to the hypothesis of base \u00d7 tier_weight \u00d7 setting_similarity, with base:\n  1.0 a claim on the hypothesis's explanation path; 1.0 a claim the prior-art gate listed (re-runs only);\n  0.7 a claim on the same method node (any setting); 0.5 a claim on a mechanism node of the hypothesis's\n  methods; 0.3 found by a scout direction on the hypothesis's building blocks (paper tier weight).\ntier_weight: T1 1.0, T2 0.8, T3 0.6, T4 0. Top 3 papers per hypothesis, deduplicated, at most 20 in total,\ntaken in hypothesis order. Ties: more citations, then arXiv id. Only arXiv papers can be read (arXiv HTML / ar5iv).",
+  "selected": [
+    "1910.07467",
+    "2305.14858",
+    "2004.05150",
+    "2605.26355",
+    "2605.10504",
+    "2603.09616",
+    "2607.18363",
+    "2608.02091",
+    "1910.05895",
+    "2302.06675",
+    "2104.09864",
+    "2305.19466",
+    "2108.12409",
+    "2109.08668",
+    "2605.03667",
+    "2307.06440",
+    "2002.05202",
+    "2607.15525",
+    "1606.08415"
+  ],
+  "targets": [
+    {
+      "delta": {
+        "norm": "rmsnorm"
+      },
+      "gap_ids": [
+        "abc:norm=rmsnorm:computational_efficiency",
+        "coverage:norm=rmsnorm"
+      ],
+      "gap_score": 0.432,
+      "key": "norm=rmsnorm",
+      "papers": [
+        {
+          "paper_id": "1910.07467",
+          "proximity": 1.26,
+          "read": true,
+          "relations": [
+            {
+              "ref": "c04",
+              "relation": "path",
+              "weight": 0.4
+            },
+            {
+              "ref": "c04",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "c05",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "dir_01",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "Root Mean Square Layer Normalization"
+        },
+        {
+          "paper_id": "2305.14858",
+          "proximity": 0.792,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2305_14858_1",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x2305_14858_2",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x2305_14858_1",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "x2305_14858_2",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "dir_01",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers"
+        },
+        {
+          "paper_id": "2004.05150",
+          "proximity": 0.54,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2004_05150_1",
+              "relation": "path",
+              "weight": 0.36
+            },
+            {
+              "ref": "x2004_05150_1",
+              "relation": "mechanism",
+              "weight": 0.18
+            }
+          ],
+          "title": "Longformer: The Long-Document Transformer"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "warmup_frac": "0"
+      },
+      "gap_ids": [
+        "abc:warmup_frac=0:attention_behavior",
+        "coverage:warmup_frac=0"
+      ],
+      "gap_score": 0.36,
+      "key": "warmup_frac=0",
+      "papers": [
+        {
+          "paper_id": "2605.26355",
+          "proximity": 0.9,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2605_26355_1",
+              "relation": "path",
+              "weight": 0.6
+            },
+            {
+              "ref": "x2605_26355_1",
+              "relation": "mechanism",
+              "weight": 0.3
+            }
+          ],
+          "title": "Energy-Gated Attention and Wavelet Positional Encoding: Complementary Inductive Biases for Transformer Attention"
+        },
+        {
+          "paper_id": "2605.10504",
+          "proximity": 0.486,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2605_10504_1",
+              "relation": "path",
+              "weight": 0.324
+            },
+            {
+              "ref": "x2605_10504_1",
+              "relation": "mechanism",
+              "weight": 0.162
+            }
+          ],
+          "title": "Learning Less Is More: Premature Upper-Layer Attention Specialization Hurts Language Model Pretraining"
+        },
+        {
+          "paper_id": "2603.09616",
+          "proximity": 0.324,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2603_09616_1",
+              "relation": "path",
+              "weight": 0.216
+            },
+            {
+              "ref": "x2603_09616_1",
+              "relation": "mechanism",
+              "weight": 0.108
+            }
+          ],
+          "title": "Surgical Repair of Collapsed Attention Heads in ALiBi Transformers"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "qk_norm": "true",
+        "warmup_frac": "0"
+      },
+      "gap_ids": [
+        "link:qk_norm=true+warmup_frac=0"
+      ],
+      "gap_score": 0.3,
+      "key": "qk_norm=true+warmup_frac=0",
+      "papers": [
+        {
+          "paper_id": "2607.18363",
+          "proximity": 0.5202,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2607_18363_2",
+              "relation": "method",
+              "weight": 0.3402
+            },
+            {
+              "ref": "dir_06",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "A Controlled Study of Attention-Only Transformers"
+        },
+        {
+          "paper_id": "2608.02091",
+          "proximity": 0.486,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2608_02091_1",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x2608_02091_1",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "dir_06",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "One QK Channel, Many Sources: Tracing Low-Precision Attention Collapse"
+        },
+        {
+          "paper_id": "1910.05895",
+          "proximity": 0.306,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x1910_05895_1",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x1910_05895_1",
+              "relation": "method",
+              "weight": 0.126
+            }
+          ],
+          "title": "Transformers without Tears: Improving the Normalization of Self-Attention"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "norm": "rmsnorm",
+        "optimizer": "lion"
+      },
+      "gap_ids": [
+        "link:norm=rmsnorm+optimizer=lion"
+      ],
+      "gap_score": 0.261687,
+      "key": "norm=rmsnorm+optimizer=lion",
+      "papers": [
+        {
+          "paper_id": "1910.07467",
+          "proximity": 1.26,
+          "read": true,
+          "relations": [
+            {
+              "ref": "c04",
+              "relation": "path",
+              "weight": 0.4
+            },
+            {
+              "ref": "c04",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "c05",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "dir_01",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "Root Mean Square Layer Normalization"
+        },
+        {
+          "paper_id": "2305.14858",
+          "proximity": 0.612,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2305_14858_1",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x2305_14858_1",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "x2305_14858_2",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "dir_01",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers"
+        },
+        {
+          "paper_id": "2302.06675",
+          "proximity": 0.5058,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2302_06675_1",
+              "relation": "path",
+              "weight": 0.162
+            },
+            {
+              "ref": "x2302_06675_1",
+              "relation": "method",
+              "weight": 0.1134
+            },
+            {
+              "ref": "x2302_06675_2",
+              "relation": "method",
+              "weight": 0.0504
+            },
+            {
+              "ref": "dir_04",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Symbolic Discovery of Optimization Algorithms"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "pos_encoding": "rope"
+      },
+      "gap_ids": [
+        "coverage:pos_encoding=rope",
+        "contradiction:pos_encoding=rope:none"
+      ],
+      "gap_score": 0.25,
+      "key": "pos_encoding=rope",
+      "papers": [
+        {
+          "paper_id": "2104.09864",
+          "proximity": 0.98,
+          "read": true,
+          "relations": [
+            {
+              "ref": "c12",
+              "relation": "path",
+              "weight": 0.4
+            },
+            {
+              "ref": "c12",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "dir_03",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding"
+        },
+        {
+          "paper_id": "2305.19466",
+          "proximity": 0.576,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2305_19466_1",
+              "relation": "path",
+              "weight": 0.18
+            },
+            {
+              "ref": "x2305_19466_1",
+              "relation": "method",
+              "weight": 0.126
+            },
+            {
+              "ref": "x2305_19466_2",
+              "relation": "mechanism",
+              "weight": 0.09
+            },
+            {
+              "ref": "dir_03",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "The Impact of Positional Encoding on Length Generalization in Transformers"
+        },
+        {
+          "paper_id": "2108.12409",
+          "proximity": 0.45,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2108_12409_1",
+              "relation": "mechanism",
+              "weight": 0.108
+            },
+            {
+              "ref": "x2108_12409_2",
+              "relation": "mechanism",
+              "weight": 0.162
+            },
+            {
+              "ref": "dir_03",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "activation": "relu2",
+        "optimizer": "lion"
+      },
+      "gap_ids": [
+        "link:activation=relu2+optimizer=lion"
+      ],
+      "gap_score": 0.236865,
+      "key": "activation=relu2+optimizer=lion",
+      "papers": [
+        {
+          "paper_id": "2109.08668",
+          "proximity": 1.0,
+          "read": true,
+          "relations": [
+            {
+              "ref": "c10",
+              "relation": "method",
+              "weight": 0.7
+            },
+            {
+              "ref": "dir_14",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "Primer: Searching for Efficient Transformers for Language Modeling"
+        },
+        {
+          "paper_id": "2605.03667",
+          "proximity": 0.7308,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2605_03667_1",
+              "relation": "path",
+              "weight": 0.324
+            },
+            {
+              "ref": "x2605_03667_1",
+              "relation": "method",
+              "weight": 0.2268
+            },
+            {
+              "ref": "dir_14",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "ELAS: Efficient Pre-Training of Low-Rank Large Language Models via 2:4 Activation Sparsity"
+        },
+        {
+          "paper_id": "2307.06440",
+          "proximity": 0.5508,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2307_06440_1",
+              "relation": "path",
+              "weight": 0.324
+            },
+            {
+              "ref": "x2307_06440_1",
+              "relation": "method",
+              "weight": 0.2268
+            }
+          ],
+          "title": "No Train No Gain: Revisiting Efficient Training Algorithms For Transformer-based Language Models"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "activation": "swiglu"
+      },
+      "gap_ids": [
+        "coverage:activation=swiglu"
+      ],
+      "gap_score": 0.2534,
+      "key": "activation=swiglu",
+      "papers": [
+        {
+          "paper_id": "2002.05202",
+          "proximity": 0.98,
+          "read": true,
+          "relations": [
+            {
+              "ref": "c09",
+              "relation": "path",
+              "weight": 0.4
+            },
+            {
+              "ref": "c09",
+              "relation": "method",
+              "weight": 0.28
+            },
+            {
+              "ref": "dir_02",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "GLU Variants Improve Transformer"
+        },
+        {
+          "paper_id": "2607.15525",
+          "proximity": 0.7308,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2607_15525_1",
+              "relation": "path",
+              "weight": 0.324
+            },
+            {
+              "ref": "x2607_15525_1",
+              "relation": "method",
+              "weight": 0.2268
+            },
+            {
+              "ref": "dir_02",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Kolmogorov--Arnold Networks for Small Language Models"
+        },
+        {
+          "paper_id": "1606.08415",
+          "proximity": 0.3,
+          "read": true,
+          "relations": [
+            {
+              "ref": "dir_02",
+              "relation": "direction",
+              "weight": 0.3
+            }
+          ],
+          "title": "Gaussian Error Linear Units (GELUs)"
+        }
+      ],
+      "reason": "queued"
+    },
+    {
+      "delta": {
+        "optimizer": "lion"
+      },
+      "gap_ids": [
+        "abc:optimizer=lion:computational_efficiency",
+        "coverage:optimizer=lion",
+        "contradiction:optimizer=lion:none"
+      ],
+      "gap_score": 0.18144,
+      "key": "optimizer=lion",
+      "papers": [
+        {
+          "paper_id": "2302.06675",
+          "proximity": 0.5778,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2302_06675_1",
+              "relation": "path",
+              "weight": 0.162
+            },
+            {
+              "ref": "x2302_06675_2",
+              "relation": "path",
+              "weight": 0.072
+            },
+            {
+              "ref": "x2302_06675_1",
+              "relation": "method",
+              "weight": 0.1134
+            },
+            {
+              "ref": "x2302_06675_2",
+              "relation": "method",
+              "weight": 0.0504
+            },
+            {
+              "ref": "dir_04",
+              "relation": "direction",
+              "weight": 0.18
+            }
+          ],
+          "title": "Symbolic Discovery of Optimization Algorithms"
+        },
+        {
+          "paper_id": "2307.06440",
+          "proximity": 0.5508,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2307_06440_1",
+              "relation": "path",
+              "weight": 0.324
+            },
+            {
+              "ref": "x2307_06440_1",
+              "relation": "method",
+              "weight": 0.2268
+            }
+          ],
+          "title": "No Train No Gain: Revisiting Efficient Training Algorithms For Transformer-based Language Models"
+        },
+        {
+          "paper_id": "2004.05150",
+          "proximity": 0.54,
+          "read": true,
+          "relations": [
+            {
+              "ref": "x2004_05150_1",
+              "relation": "path",
+              "weight": 0.36
+            },
+            {
+              "ref": "x2004_05150_1",
+              "relation": "mechanism",
+              "weight": 0.18
+            }
+          ],
+          "title": "Longformer: The Long-Document Transformer"
+        }
+      ],
+      "reason": "queued"
+    }
+  ],
+  "top_n": 8
+}

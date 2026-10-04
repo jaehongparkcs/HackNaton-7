@@ -1,0 +1,261 @@
+{
+  "dropped": [],
+  "event": "unrecorded-f6415dd3",
+  "findings": {
+    "limitations": [
+      {
+        "method": "norm_position=post",
+        "quote": "In the future, we would like to investigate the relationship between PostNorm and PreNorm when using other optimizers such as RAdam Liu et al. (2019), which has been shown to improve Transformer training without warmup.",
+        "section": "conclusion"
+      },
+      {
+        "method": "warmup_frac=0",
+        "quote": "We believe that in general, one can do without warmup, though it remains useful in the lowest resource settings.",
+        "section": "results"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "norm_position=post",
+        "quote": "We conjectured that warmup is primarily needed when using PostNorm to gradually learn LayerNorm parameters without gradient explosion/vanishing (Section 2.1).",
+        "section": "experimental_setup"
+      },
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "norm_position=post",
+        "quote": "Though both models now achieve similar performance, we note that PreNorm works in all setups, suggesting greater stability during training.",
+        "section": "results"
+      }
+    ],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "lr",
+        "method": "warmup_frac=0",
+        "quote": "For NoWarmup, we instead use a learning rate of 3\\cdot 10^{-4} for all datasets.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "results",
+        "value": null,
+        "value_as_stated": "3e-4 learning rate for NoWarmup"
+      }
+    ],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "norm_position=post",
+        "quote": "Surprisingly, in this task PostNorm works notably better than PreNorm; one observes similar behavior in Wang et al. (2019).",
+        "section": "results",
+        "setting_note": "WMT'14 En-De high-resource, PostNorm vs PreNorm"
+      },
+      {
+        "direction": "worse",
+        "method": "norm_position=post",
+        "quote": "Then, we see that PreNorm (2) achieves comparable or slightly better results than PostNorm on all tasks.",
+        "section": "results",
+        "setting_note": "low-resource TED/IWSLT NMT, PostNorm vs PreNorm"
+      },
+      {
+        "direction": "no_worse",
+        "method": "warmup_frac=0",
+        "quote": "In Table 4, we see that NoWarmup performs comparably to InvSqrtDecay and ValDecay except on gl→en.",
+        "section": "results",
+        "setting_note": "low-resource NMT with PreNorm+FixNorm+ScaleNorm"
+      },
+      {
+        "direction": "worse",
+        "method": "norm_position=post",
+        "quote": "As seen in Table 5, PostNorm often fails without warmup even with 5 or 6 layers.",
+        "section": "results",
+        "setting_note": "en→vi without warmup, varying depth"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "WMT '14 English-German",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "We train the Transformer base model on WMT '14 English-German using fairseq and report tokenized BLEU scores on newstest2014.",
+        "section": "results",
+        "task": "translation",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "6f18505e96f5a3b3db803d7645f757d92f02ef04ad2861a98fea12ba8b4b8087",
+  "paper_id": "1910.05895",
+  "section_chars": {
+    "abstract": 1087,
+    "appendix_setup": 2777,
+    "conclusion": 1275,
+    "experimental_setup": 234,
+    "introduction": 2967,
+    "results": 8128
+  },
+  "sections": [
+    {
+      "chars": 1087,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 518,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 1067,
+      "heading": "Placement of normalization.",
+      "section": "introduction"
+    },
+    {
+      "chars": 1380,
+      "heading": "Choice of normalization.",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Background",
+      "section": "other"
+    },
+    {
+      "chars": 2191,
+      "heading": "2.1 Identity mappings for transformers",
+      "section": "other"
+    },
+    {
+      "chars": 1225,
+      "heading": "2.2 Weight initialization",
+      "section": "other"
+    },
+    {
+      "chars": 2606,
+      "heading": "2.3 Scaled \\ell_{2} normalization and FixNorm",
+      "section": "other"
+    },
+    {
+      "chars": 723,
+      "heading": "2.4 Learning rates",
+      "section": "other"
+    },
+    {
+      "chars": 234,
+      "heading": "Warmup-free training.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 499,
+      "heading": "Large learning rates.",
+      "section": "other"
+    },
+    {
+      "chars": 536,
+      "heading": "Validation-based decay.",
+      "section": "other"
+    },
+    {
+      "chars": 309,
+      "heading": "Experiments and results",
+      "section": "results"
+    },
+    {
+      "chars": 2421,
+      "heading": "3.1 Large vs. small initialization",
+      "section": "results"
+    },
+    {
+      "chars": 2150,
+      "heading": "3.2 Scaled \\ell_{2} normalization and FixNorm",
+      "section": "results"
+    },
+    {
+      "chars": 2121,
+      "heading": "3.3 Learning rates",
+      "section": "results"
+    },
+    {
+      "chars": 1123,
+      "heading": "3.4 High-resource setting",
+      "section": "results"
+    },
+    {
+      "chars": 0,
+      "heading": "Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 1492,
+      "heading": "4.1 Performance curves",
+      "section": "other"
+    },
+    {
+      "chars": 2141,
+      "heading": "4.2 Activation scaling and the role of g",
+      "section": "other"
+    },
+    {
+      "chars": 1275,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 101,
+      "heading": "Acknowledgements",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Training details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 996,
+      "heading": "Data and preprocessing.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 693,
+      "heading": "Model configuration.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 749,
+      "heading": "Training.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 336,
+      "heading": "Evaluation.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 976,
+      "heading": "Appendix B Further analysis",
+      "section": "other"
+    },
+    {
+      "chars": 23,
+      "heading": "Appendix C Listings",
+      "section": "other"
+    },
+    {
+      "chars": 289,
+      "heading": "ScaleNorm.",
+      "section": "other"
+    },
+    {
+      "chars": 1198,
+      "heading": "fairseq.",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Transformers without Tears: Improving the Normalization of Self-Attention",
+  "url": "https://arxiv.org/html/1910.05895",
+  "validation_only": false,
+  "version": "1910.05895v2"
+}

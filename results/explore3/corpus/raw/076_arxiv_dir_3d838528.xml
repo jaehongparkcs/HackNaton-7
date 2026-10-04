@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/iu4q/z2NUl3Cxi5+aVSVWrto5iA</id>
+  <title>arXiv Query: search_query=all:"early dropout" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:47:57Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22early+dropout%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>7</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2308.00539v1</id>
+    <title>Predicting Early Dropouts of an Active and Healthy Ageing App</title>
+    <updated>2023-08-01T13:32:07Z</updated>
+    <link href="https://arxiv.org/abs/2308.00539v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2308.00539v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, we present a machine learning approach for predicting early dropouts of an active and healthy ageing app. The presented algorithms have been submitted to the IFMBE Scientific Challenge 2022, part of IUPESM WC 2022. We have processed the given database and generated seven datasets. We used pre-processing techniques to construct classification models that predict the adherence of users using dynamic and static features. We submitted 11 official runs and our results show that machine learning algorithms can provide high-quality adherence predictions. Based on the results, the dynamic features positively influence a model's classification performance. Due to the imbalanced nature of the dataset, we employed oversampling methods such as SMOTE and ADASYN to improve the classification performance. The oversampling approaches led to a remarkable improvement of 10\%. Our methods won first place in the IFMBE Scientific Challenge 2022.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-08-01T13:32:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Vasileios Perifanis</name>
+    </author>
+    <author>
+      <name>Ioanna Michailidi</name>
+    </author>
+    <author>
+      <name>Giorgos Stamatelatos</name>
+    </author>
+    <author>
+      <name>George Drosatos</name>
+    </author>
+    <author>
+      <name>Pavlos S. Efraimidis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2309.04311v1</id>
+    <title>Federated Learning for Early Dropout Prediction on Healthy Ageing Applications</title>
+    <updated>2023-09-08T13:17:06Z</updated>
+    <link href="https://arxiv.org/abs/2309.04311v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.04311v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The provision of social care applications is crucial for elderly people to improve their quality of life and enables operators to provide early interventions. Accurate predictions of user dropouts in healthy ageing applications are essential since they are directly related to individual health statuses. Machine Learning (ML) algorithms have enabled highly accurate predictions, outperforming traditional statistical methods that struggle to cope with individual patterns. However, ML requires a substantial amount of data for training, which is challenging due to the presence of personal identifiable information (PII) and the fragmentation posed by regulations. In this paper, we present a federated machine learning (FML) approach that minimizes privacy concerns and enables distributed training, without transferring individual data. We employ collaborative training by considering individuals and organizations under FML, which models both cross-device and cross-silo learning scenarios. Our approach is evaluated on a real-world dataset with non-independent and identically distributed (non-iid) data among clients, class imbalance and label ambiguity. Our results show that data selection and class imbalance handling techniques significantly improve the predictive accuracy of models trained under FML, demonstrating comparable or superior predictive performance than traditional ML models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-08T13:17:06Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Christos Chrysanthos Nikolaidis</name>
+    </author>
+    <author>
+      <name>Vasileios Perifanis</name>
+    </author>
+    <author>
+      <name>Nikolaos Pavlidis</name>
+    </author>
+    <author>
+      <name>Pavlos S. Efraimidis</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2303.01500v2</id>
+    <title>Dropout Reduces Underfitting</title>
+    <updated>2023-05-31T17:47:18Z</updated>
+    <link href="https://arxiv.org/abs/2303.01500v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.01500v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Introduced by Hinton et al. in 2012, dropout has stood the test of time as a regularizer for preventing overfitting in neural networks. In this study, we demonstrate that dropout can also mitigate underfitting when used at the start of training. During the early phase, we find dropout reduces the directional variance of gradients across mini-batches and helps align the mini-batch gradients with the entire dataset's gradient. This helps counteract the stochasticity of SGD and limit the influence of individual batches on model training. Our findings lead us to a solution for improving performance in underfitting models - early dropout: dropout is applied only during the initial phases of training, and turned off afterwards. Models equipped with early dropout achieve lower final training loss compared to their counterparts without dropout. Additionally, we explore a symmetric technique for regularizing overfitting models - late dropout, where dropout is not used in the early iterations and is only activated later in training. Experiments on ImageNet and various vision tasks demonstrate that our methods consistently improve generalization accuracy. Our results encourage more research on understanding regularization in deep learning and our methods can be useful tools for future neural network training, especially in the era of large data. Code is available at https://github.com/facebookresearch/dropout.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-02T18:59:15Z</published>
+    <arxiv:comment>ICML 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zhuang Liu</name>
+    </author>
+    <author>
+      <name>Zhiqiu Xu</name>
+    </author>
+    <author>
+      <name>Joseph Jin</name>
+    </author>
+    <author>
+      <name>Zhiqiang Shen</name>
+    </author>
+    <author>
+      <name>Trevor Darrell</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2103.09068v1</id>
+    <title>Predicting Early Dropout: Calibration and Algorithmic Fairness Considerations</title>
+    <updated>2021-03-16T13:42:16Z</updated>
+    <link href="https://arxiv.org/abs/2103.09068v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2103.09068v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this work, the problem of predicting dropout risk in undergraduate studies is addressed from a perspective of algorithmic fairness. We develop a machine learning method to predict the risks of university dropout and underperformance. The objective is to understand if such a system can identify students at risk while avoiding potential discriminatory biases. When modeling both risks, we obtain prediction models with an Area Under the ROC Curve (AUC) of 0.77-0.78 based on the data available at the enrollment time, before the first year of studies starts. This data includes the students' demographics, the high school they attended, and their admission (average) grade. Our models are calibrated: they produce estimated probabilities for each risk, not mere scores. We analyze if this method leads to discriminatory outcomes for some sensitive groups in terms of prediction accuracy (AUC) and error rates (Generalized False Positive Rate, GFPR, or Generalized False Negative Rate, GFNR). The models exhibit some equity in terms of AUC and GFNR along groups. The similar GFNR means a similar probability of failing to detect risk for students who drop out. The disparities in GFPR are addressed through a mitigation process that does not affect the calibration of the model.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-03-16T13:42:16Z</published>
+    <arxiv:comment>10 pages, Companion Proceedings 11th International Conference on Learning Analytics &amp; Knowledge (LAK21)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Marzieh Karimi-Haghighi</name>
+    </author>
+    <author>
+      <name>Carlos Castillo</name>
+    </author>
+    <author>
+      <name>Davinia Hernandez-Leo</name>
+    </author>
+    <author>
+      <name>Veronica Moreno Oliver</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.12281v1</id>
+    <title>Enhancing the Performance of Automated Grade Prediction in MOOC using Graph Representation Learning</title>
+    <updated>2023-10-18T19:27:39Z</updated>
+    <link href="https://arxiv.org/abs/2310.12281v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.12281v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, Massive Open Online Courses (MOOCs) have gained significant traction as a rapidly growing phenomenon in online learning. Unlike traditional classrooms, MOOCs offer a unique opportunity to cater to a diverse audience from different backgrounds and geographical locations. Renowned universities and MOOC-specific providers, such as Coursera, offer MOOC courses on various subjects. Automated assessment tasks like grade and early dropout predictions are necessary due to the high enrollment and limited direct interaction between teachers and learners. However, current automated assessment approaches overlook the structural links between different entities involved in the downstream tasks, such as the students and courses. Our hypothesis suggests that these structural relationships, manifested through an interaction graph, contain valuable information that can enhance the performance of the task at hand. To validate this, we construct a unique knowledge graph for a large MOOC dataset, which will be publicly available to the research community. Furthermore, we utilize graph embedding techniques to extract latent structural information encoded in the interactions between entities in the dataset. These techniques do not require ground truth labels and can be utilized for various tasks. Finally, by combining entity-specific features, behavioral features, and extracted structural features, we enhance the performance of predictive machine learning models in student assignment grade prediction. Our experiments demonstrate that structural features can significantly improve the predictive performance of downstream assessment tasks. The code and data are available in \url{https://github.com/DSAatUSU/MOOPer_grade_prediction}</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-18T19:27:39Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Soheila Farokhi</name>
+    </author>
+    <author>
+      <name>Aswani Yaramala</name>
+    </author>
+    <author>
+      <name>Jiangtao Huang</name>
+    </author>
+    <author>
+      <name>Muhammad F. A. Khan</name>
+    </author>
+    <author>
+      <name>Xiaojun Qi</name>
+    </author>
+    <author>
+      <name>Hamid Karimi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.24788v1</id>
+    <title>Drop Dropout on Single-Epoch Language Model Pretraining</title>
+    <updated>2025-05-30T16:48:38Z</updated>
+    <link href="https://arxiv.org/abs/2505.24788v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.24788v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Originally, dropout was seen as a breakthrough regularization technique that reduced overfitting and improved performance in almost all applications of deep learning by reducing overfitting. Yet, single-epoch pretraining tasks common to modern LLMs yield minimal overfitting, leading to dropout not being used for large LLMs. Nevertheless, no thorough empirical investigation has been done on the role of dropout in LM pretraining. Through experiments in single-epoch pretraining of both masked (BERT) and autoregressive (Pythia 160M and 1.4B) LMs with varying levels of dropout, we find that downstream performance in language modeling, morpho-syntax (BLiMP), question answering (SQuAD), and natural-language inference (MNLI) improves when dropout is not applied during pretraining. We additionally find that the recently-introduced "early dropout" also degrades performance over applying no dropout at all. We further investigate the models' editability, and find that models trained without dropout are more successful in gradient-based model editing (MEND) and equivalent in representation-based model editing (ReFT). Therefore, we advocate to drop dropout during single-epoch pretraining.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-30T16:48:38Z</published>
+    <arxiv:comment>Accepted to ACL Findings; 5 pages, 2 figures, 4 pages of appendix</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Houjun Liu</name>
+    </author>
+    <author>
+      <name>John Bauer</name>
+    </author>
+    <author>
+      <name>Christopher D. Manning</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.07305v1</id>
+    <title>FedLE: Federated Learning Client Selection with Lifespan Extension for Edge IoT Networks</title>
+    <updated>2023-02-14T19:41:24Z</updated>
+    <link href="https://arxiv.org/abs/2302.07305v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.07305v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning (FL) is a distributed and privacy-preserving learning framework for predictive modeling with massive data generated at the edge by Internet of Things (IoT) devices. One major challenge preventing the wide adoption of FL in IoT is the pervasive power supply constraints of IoT devices due to the intensive energy consumption of battery-powered clients for local training and model updates. Low battery levels of clients eventually lead to their early dropouts from edge networks, loss of training data jeopardizing the performance of FL, and their availability to perform other designated tasks. In this paper, we propose FedLE, an energy-efficient client selection framework that enables lifespan extension of edge IoT networks. In FedLE, the clients first run for a minimum epoch to generate their local model update. The models are partially uploaded to the server for calculating similarities between each pair of clients. Clustering is performed against these client pairs to identify those with similar model distributions. In each round, low-powered clients have a lower probability of being selected, delaying the draining of their batteries. Empirical studies show that FedLE outperforms baselines on benchmark datasets and lasts more training rounds than FedAvg with battery power constraints.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-14T19:41:24Z</published>
+    <arxiv:comment>6 pages, 6 figures, accepted to 2023 IEEE International Conference on Communications (ICC 2023)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jiajun Wu</name>
+    </author>
+    <author>
+      <name>Steve Drew</name>
+    </author>
+    <author>
+      <name>Jiayu Zhou</name>
+    </author>
+  </entry>
+</feed>

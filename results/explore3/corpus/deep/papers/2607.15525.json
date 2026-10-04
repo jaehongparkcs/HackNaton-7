@@ -1,0 +1,290 @@
+{
+  "dropped": [],
+  "event": "unrecorded-13ff7be6",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "The main limitation of this study is that the standardized evidence is well powered at small scale but still sparse at larger scale.",
+        "section": "conclusion"
+      },
+      {
+        "method": "activation=swiglu",
+        "quote": "Even the strongest dense feed-forward network therefore does not convert a validation-loss lead into a standardized-benchmark lead",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "mean validation cross-entropy is 3.770 for SwiGLU, 3.781 for Chebyshev, 3.800 for canonical GR-KAN, and 3.820 for the MLP",
+        "section": "results",
+        "setting_note": "BabyLM Strict-Small validation CE, ~13.8M params, ten seeds, vs GELU MLP"
+      },
+      {
+        "direction": "no_worse",
+        "method": "activation=swiglu",
+        "quote": "There SwiGLU again has the best validation loss, yet its BLiMP and EWoK accuracy is within the sub-1-point, overlapping-CI spread of both the GELU MLP and the KAN-family rows.",
+        "section": "conclusion",
+        "setting_note": "BabyLM BLiMP/EWoK benchmarks vs GELU MLP"
+      },
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "The SwiGLU baseline is the strongest quality row in Table 2 at 0.2763\\pm 0.0003 , slightly better than the GELU MLP and the Chebyshev tie, while retaining MLP-class latency (320.8 ms).",
+        "section": "conclusion",
+        "setting_note": "GuppyLM validation loss, 11.60M params, three seeds, vs GELU MLP"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "524,288 tokens per step",
+        "dataset": "ClimbMix",
+        "model_family": "transformer",
+        "parameter_count": "~286M",
+        "quote": "The original ClimbMix d12 comparison uses 2,520 steps, sequence length 2,048, and total batch 524,288 tokens per step, for approximately 1.32B training tokens.",
+        "section": "appendix_setup",
+        "task": "language_modeling",
+        "training_steps": "2,520"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "88acce5ba2b6dd096dccb5d9cb2f113f75872123c4c2737de7e78d4197fb570d",
+  "paper_id": "2607.15525",
+  "section_chars": {
+    "abstract": 2540,
+    "appendix_setup": 9040,
+    "conclusion": 9511,
+    "introduction": 3069,
+    "limitations": 1627,
+    "method": 8917,
+    "results": 27877
+  },
+  "sections": [
+    {
+      "chars": 2540,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 3069,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1246,
+      "heading": "KANs and efficient variants.",
+      "section": "other"
+    },
+    {
+      "chars": 906,
+      "heading": "Rational and grouped KANs.",
+      "section": "other"
+    },
+    {
+      "chars": 1281,
+      "heading": "Basis selection and small-LM evaluation.",
+      "section": "results"
+    },
+    {
+      "chars": 1419,
+      "heading": "MLP baselines and interpretability.",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Methods",
+      "section": "method"
+    },
+    {
+      "chars": 4515,
+      "heading": "3.1 Study design and model families",
+      "section": "method"
+    },
+    {
+      "chars": 2163,
+      "heading": "3.2 Metrics",
+      "section": "method"
+    },
+    {
+      "chars": 1057,
+      "heading": "3.3 Edge-function reconstruction and analysis",
+      "section": "method"
+    },
+    {
+      "chars": 1179,
+      "heading": "3.4 A post-hoc univariate diagnostic for MLP FFNs",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "Results",
+      "section": "results"
+    },
+    {
+      "chars": 3256,
+      "heading": "4.1 KAN edge functions are measurable, nonlinear, and low-dimensional",
+      "section": "results"
+    },
+    {
+      "chars": 1506,
+      "heading": "Control analysis: random initialization versus trained edges.",
+      "section": "results"
+    },
+    {
+      "chars": 2240,
+      "heading": "Grid-size sweep: interpretability versus basis capacity.",
+      "section": "results"
+    },
+    {
+      "chars": 1280,
+      "heading": "Cross-corpus replication on BabyLM.",
+      "section": "results"
+    },
+    {
+      "chars": 2052,
+      "heading": "The audit is actionable: activity-guided pruning.",
+      "section": "results"
+    },
+    {
+      "chars": 6361,
+      "heading": "4.2 On a standardized benchmark the replacement variants show no consistent advantage over the MLP",
+      "section": "results"
+    },
+    {
+      "chars": 2641,
+      "heading": "Profiler breakdown of the Chebyshev slowdown.",
+      "section": "results"
+    },
+    {
+      "chars": 1068,
+      "heading": "Statistical comparison (GuppyLM, local).",
+      "section": "results"
+    },
+    {
+      "chars": 887,
+      "heading": "Benchmark dynamic range.",
+      "section": "results"
+    },
+    {
+      "chars": 1491,
+      "heading": "Parameter-count and runtime analysis.",
+      "section": "results"
+    },
+    {
+      "chars": 3803,
+      "heading": "4.3 Scale stress tests remain cautionary for the tested replacement variants",
+      "section": "results"
+    },
+    {
+      "chars": 3598,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 761,
+      "heading": "Required evidence for scaling claims.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1627,
+      "heading": "Domain limitations and the division of testbeds.",
+      "section": "limitations"
+    },
+    {
+      "chars": 3568,
+      "heading": "Comparison against a strong SwiGLU baseline.",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1581,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1563,
+      "heading": "Data and artifact availability",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Reproducibility and implementation details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 862,
+      "heading": "A.1 Code revisions and denominator correction",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 940,
+      "heading": "A.2 Environment and hardware",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1702,
+      "heading": "A.3 Datasets, tokenizers, and token budgets",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1224,
+      "heading": "A.4 Exact GuppyLM command patterns",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 747,
+      "heading": "A.5 Edge-audit sensitivity tables",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 2113,
+      "heading": "A.6 Cross-corpus edge audit and MLP pruning baseline",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1446,
+      "heading": "A.7 Checkpoint lineage",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 2856,
+      "heading": "Appendix B Compute and runtime analysis",
+      "section": "other"
+    },
+    {
+      "chars": 1617,
+      "heading": "Appendix C Stabilized GR-KAN continuation (unmatched)",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Additional interpretability figures",
+      "section": "other"
+    },
+    {
+      "chars": 3427,
+      "heading": "Appendix E Additional statistical notes",
+      "section": "other"
+    },
+    {
+      "chars": 2018,
+      "heading": "Appendix F Submission checklist and broader impact",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Kolmogorov--Arnold Networks for Small Language Models",
+  "url": "https://arxiv.org/html/2607.15525",
+  "validation_only": false,
+  "version": "2607.15525v1"
+}

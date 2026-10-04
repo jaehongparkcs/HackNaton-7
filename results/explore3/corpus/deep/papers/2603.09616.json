@@ -1,0 +1,212 @@
+{
+  "dropped": [],
+  "event": "unrecorded-4a0b8b8f",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [],
+    "recipes": [],
+    "results": [],
+    "setting": [
+      {
+        "batch_size": "effective batch 8",
+        "dataset": "curated corpus and C4 validation split",
+        "model_family": "transformer",
+        "parameter_count": "1.7B",
+        "quote": "Batch: Size 1 with gradient accumulation over 8 steps (effective batch 8)",
+        "section": "experimental_setup",
+        "task": "language_modeling",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "00f0b7c6ecb79ec3395a9d9d1764a33302022ed469b254730c5d903f429eae03",
+  "paper_id": "2603.09616",
+  "section_chars": {
+    "abstract": 1389,
+    "conclusion": 6311,
+    "experimental_setup": 873,
+    "introduction": 3575,
+    "limitations": 1644,
+    "method": 3012,
+    "results": 12549
+  },
+  "sections": [
+    {
+      "chars": 1389,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 1063,
+      "heading": "1. Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 1542,
+      "heading": "1.1 Cross-Scale Diagnosis",
+      "section": "introduction"
+    },
+    {
+      "chars": 968,
+      "heading": "1.2 The BOS Distribution Is Bimodal",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "2. Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 575,
+      "heading": "Attention Sinks and BOS Concentration",
+      "section": "other"
+    },
+    {
+      "chars": 448,
+      "heading": "Pruning Approaches",
+      "section": "method"
+    },
+    {
+      "chars": 647,
+      "heading": "Quantization and Outlier Features",
+      "section": "other"
+    },
+    {
+      "chars": 303,
+      "heading": "Architectural Mitigation",
+      "section": "other"
+    },
+    {
+      "chars": 585,
+      "heading": "Our Contribution",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "3. Method",
+      "section": "method"
+    },
+    {
+      "chars": 826,
+      "heading": "3.1 Diagnosis",
+      "section": "method"
+    },
+    {
+      "chars": 1030,
+      "heading": "3.2 Surgical Reinitialization",
+      "section": "method"
+    },
+    {
+      "chars": 873,
+      "heading": "3.3 Training Configuration",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 705,
+      "heading": "3.4 Two-Pass Surgery",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "4. Experiments and Results",
+      "section": "results"
+    },
+    {
+      "chars": 1959,
+      "heading": "4.1 Head Recovery",
+      "section": "results"
+    },
+    {
+      "chars": 910,
+      "heading": "4.2 Controlled Baseline: C4 vs. Curated Corpus",
+      "section": "results"
+    },
+    {
+      "chars": 1433,
+      "heading": "4.3 Global Attention Redistribution",
+      "section": "results"
+    },
+    {
+      "chars": 1570,
+      "heading": "4.4 Two Distinct Phenomena",
+      "section": "results"
+    },
+    {
+      "chars": 949,
+      "heading": "4.5 Column-Specific Propagation",
+      "section": "results"
+    },
+    {
+      "chars": 3423,
+      "heading": "4.6 Extended Surgery: Healthy Head Reinitialization",
+      "section": "results"
+    },
+    {
+      "chars": 2299,
+      "heading": "4.7 Generation Quality",
+      "section": "results"
+    },
+    {
+      "chars": 0,
+      "heading": "5. Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 993,
+      "heading": "5.1 Collapsed Heads Are Not Redundant",
+      "section": "conclusion"
+    },
+    {
+      "chars": 824,
+      "heading": "5.2 The Residual Stream as Shared Infrastructure",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1209,
+      "heading": "5.3 Corpus Structure and Redistribution Quality",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1754,
+      "heading": "5.4 Multiple Attention Attractors",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1644,
+      "heading": "5.5 Limitations",
+      "section": "limitations"
+    },
+    {
+      "chars": 1527,
+      "heading": "6. Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1660,
+      "heading": "Appendix A Held-Out Evaluation Prompts",
+      "section": "other"
+    },
+    {
+      "chars": 760,
+      "heading": "Appendix B ALiBi Slope Schedule",
+      "section": "other"
+    },
+    {
+      "chars": 904,
+      "heading": "Appendix C Reproducibility",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Supplementary Figures",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Surgical Repair of Collapsed Attention Heads in ALiBi Transformers",
+  "url": "https://arxiv.org/html/2603.09616",
+  "validation_only": false,
+  "version": "2603.09616v1"
+}

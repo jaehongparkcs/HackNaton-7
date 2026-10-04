@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/kCVOQ8bZvhDlllOg+gJS1cSAm38</id>
+  <title>arXiv Query: search_query=all:"normalization-free Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:49:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22normalization-free+Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2512.10938v2</id>
+    <title>Stronger Normalization-Free Transformers</title>
+    <updated>2026-03-31T04:55:11Z</updated>
+    <link href="https://arxiv.org/abs/2512.10938v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.10938v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Although normalization layers have long been viewed as indispensable components of deep learning architectures, the recent introduction of Dynamic Tanh (DyT) has demonstrated that alternatives are possible. The point-wise function DyT constrains extreme values for stable convergence and reaches normalization-level performance; this work seeks further for function designs that can surpass it. We first study how the intrinsic properties of point-wise functions influence training and performance. Building on these findings, we conduct a large-scale search for a more effective function design. Through this exploration, we introduce $\mathrm{Derf}(x) = \mathrm{erf}(αx + s)$, where $\mathrm{erf}(x)$ is the rescaled Gaussian cumulative distribution function, and identify it as the most performant design. Derf outperforms LayerNorm, RMSNorm, and DyT across a wide range of domains, including visual recognition and generation, speech representation, and DNA sequence modeling. Our analysis also suggests that the performance gains of Derf largely stem from its improved generalization rather than stronger fitting capacity. Its simplicity and stronger performance make Derf a practical choice for normalization-free Transformer architectures.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-11T18:58:49Z</published>
+    <arxiv:comment>Published in CVPR 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Mingzhi Chen</name>
+    </author>
+    <author>
+      <name>Taiming Lu</name>
+    </author>
+    <author>
+      <name>Jiachen Zhu</name>
+    </author>
+    <author>
+      <name>Mingjie Sun</name>
+    </author>
+    <author>
+      <name>Zhuang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2504.05356v2</id>
+    <title>DyTTP: Trajectory Prediction with Normalization-Free Transformers</title>
+    <updated>2025-05-06T14:46:21Z</updated>
+    <link href="https://arxiv.org/abs/2504.05356v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2504.05356v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Accurate trajectory prediction is a cornerstone for the safe operation of autonomous driving systems, where understanding the dynamic behavior of surrounding agents is crucial. Transformer-based architectures have demonstrated significant promise in capturing complex spatio-temporality dependencies. However, their reliance on normalization layers can lead to computation overhead and training instabilities. In this work, we present a two-fold approach to address these challenges. First, we integrate DynamicTanh (DyT), which is the latest method to promote transformers, into the backbone, replacing traditional layer normalization. This modification simplifies the network architecture and improves the stability of the inference. We are the first work to deploy the DyT to the trajectory prediction task. Complementing this, we employ a snapshot ensemble strategy to further boost trajectory prediction performance. Using cyclical learning rate scheduling, multiple model snapshots are captured during a single training run. These snapshots are then aggregated via simple averaging at inference time, allowing the model to benefit from diverse hypotheses without incurring substantial additional computational cost. Extensive experiments on Argoverse datasets demonstrate that our combined approach significantly improves prediction accuracy, inference speed and robustness in diverse driving scenarios. This work underscores the potential of normalization-free transformer designs augmented with lightweight ensemble techniques in advancing trajectory forecasting for autonomous vehicles.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-04-07T09:26:25Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>JianLin Zhu</name>
+    </author>
+    <author>
+      <name>HongKuo Niu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.11890v3</id>
+    <title>Subcritical Signal Propagation at Initialization in Normalization-Free Transformers</title>
+    <updated>2026-05-07T13:38:17Z</updated>
+    <link href="https://arxiv.org/abs/2604.11890v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.11890v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study signal propagation at initialization in transformers through the averaged partial Jacobian norm (APJN), a measure of gradient amplification across layers. We extend APJN analysis to transformers with bidirectional attention and permutation-symmetric input token configurations by deriving recurrence relations for activation statistics and APJNs across layers. Our theory predicts how attention modifies the asymptotic behavior of the APJN at large depth and matches APJNs measured in deep vision transformers. The criticality picture known from residual networks carries over to transformers: the pre-LayerNorm architecture exhibits power-law APJN growth, whereas transformers with LayerNorm replaced by elementwise $\tanh$-like nonlinearities have stretched-exponential APJN growth, indicating that the latter are subcritical. Applied to Dynamic Tanh (DyT) and Dynamic erf (Derf) transformers, the theory explains why these architectures can be more sensitive to initialization and optimization choices and require careful tuning for stable training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-13T18:00:04Z</published>
+    <arxiv:comment>Minor text edits; 10 pages of main text; 34 pages total; 5 figures in the main text, 25 figures total; preprint</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sergey Alekseev</name>
+    </author>
+  </entry>
+</feed>

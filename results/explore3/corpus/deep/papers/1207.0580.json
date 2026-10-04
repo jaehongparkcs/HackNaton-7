@@ -1,0 +1,187 @@
+{
+  "dropped": [],
+  "event": "unrecorded-18bc9ac6",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [
+      {
+        "mechanism_category": "implicit_regularization",
+        "method": "dropout=0.1",
+        "quote": "This confirms that dropout indeed forces the discriminative model to learn good features which are less co-adapted and leads to better generalization.",
+        "section": "appendix_setup"
+      },
+      {
+        "mechanism_category": "implicit_regularization",
+        "method": "dropout=0.1",
+        "quote": "It significantly controls overfitting, making the method robust to choices of network architecture.",
+        "section": "appendix_setup"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "dropout=0.1",
+        "quote": "While standard back propagation gave about 118 errors, dropout decreased the errors to about 92.",
+        "section": "appendix_setup",
+        "setting_note": "MNIST, finetuning pretrained DBN with 50% hidden / 20% input dropout"
+      },
+      {
+        "direction": "improves",
+        "method": "dropout=0.1",
+        "quote": "We were able to get a mean of about 79 errors with dropout whereas usual finetuning gives about 94 errors.",
+        "section": "appendix_setup",
+        "setting_note": "MNIST, finetuning pretrained DBM"
+      },
+      {
+        "direction": "improves",
+        "method": "dropout=0.1",
+        "quote": "Dropout consistently achieves lower error and cross-entropy.",
+        "section": "appendix_setup",
+        "setting_note": "TIMIT frame classification, various architectures"
+      },
+      {
+        "direction": "improves",
+        "method": "dropout=0.1",
+        "quote": "As in all previous datasets discussed so far, we obtain significant improvements here too.",
+        "section": "appendix_setup",
+        "setting_note": "Reuters RCV1-v2 document classification"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "100",
+        "dataset": "MNIST",
+        "model_family": "mlp",
+        "parameter_count": "unspecified",
+        "quote": "We use stochastic gradient descent with 100-sized minibatches and a cross-entropy objective function.",
+        "section": "appendix_setup",
+        "task": "classification",
+        "training_steps": "3000 epochs"
+      }
+    ],
+    "small_scale_evidence": [
+      {
+        "char_level": false,
+        "direction": "improves",
+        "method": "dropout=0.1",
+        "parameter_count": "784-500-500-2000 architecture (count not stated)",
+        "quote": "While standard back propagation gave about 118 errors, dropout decreased the errors to about 92.",
+        "section": "appendix_setup"
+      }
+    ]
+  },
+  "full_text": "read",
+  "html_sha256": "f97d739b93a0c367a28b21693cc50523be98215c83bdd16ed27321d3008b6236",
+  "paper_id": "1207.0580",
+  "section_chars": {
+    "appendix_setup": 11434
+  },
+  "sections": [
+    {
+      "chars": 0,
+      "heading": "Appendix A Experiments on MNIST",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 3006,
+      "heading": "A.1 Details for dropout training",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1600,
+      "heading": "A.2 Details for dropout finetuning",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 819,
+      "heading": "A.3 Effect on features",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1264,
+      "heading": "Appendix B Experiments on TIMIT",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1076,
+      "heading": "B.1 Pretraining",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1182,
+      "heading": "B.2 Dropout Finetuning",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1671,
+      "heading": "Appendix C Experiments on Reuters",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 988,
+      "heading": "Appendix D Tiny Images and CIFAR-10",
+      "section": "other"
+    },
+    {
+      "chars": 1016,
+      "heading": "Appendix E ImageNet",
+      "section": "other"
+    },
+    {
+      "chars": 2659,
+      "heading": "Appendix F Convolutional Neural Networks",
+      "section": "other"
+    },
+    {
+      "chars": 1499,
+      "heading": "F.1 Pooling",
+      "section": "other"
+    },
+    {
+      "chars": 761,
+      "heading": "F.2 Local response normalization",
+      "section": "other"
+    },
+    {
+      "chars": 910,
+      "heading": "F.3 Neuron nonlinearities",
+      "section": "other"
+    },
+    {
+      "chars": 239,
+      "heading": "F.4 Objective function",
+      "section": "other"
+    },
+    {
+      "chars": 913,
+      "heading": "F.5 Weight initialization",
+      "section": "other"
+    },
+    {
+      "chars": 809,
+      "heading": "F.6 Training",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 316,
+      "heading": "F.7 Learning rates",
+      "section": "other"
+    },
+    {
+      "chars": 1284,
+      "heading": "Appendix G Models for CIFAR-10",
+      "section": "other"
+    },
+    {
+      "chars": 3572,
+      "heading": "Appendix H Models for ImageNet",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Improving neural networks by preventing co-adaptation of feature detectors",
+  "url": "https://arxiv.org/html/1207.0580",
+  "validation_only": true,
+  "version": "1207.0580v1"
+}

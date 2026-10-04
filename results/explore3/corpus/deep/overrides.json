@@ -1,0 +1,268 @@
+{
+  "1606.08415": {
+    "batch_size": "unspecified",
+    "dataset": "CIFAR-100",
+    "parameter_count": "unspecified",
+    "quote": "Next we consider a wide residual network on CIFAR-100 with 40 layers and a widening factor of 4 (Zagoruyko & Komodakis, 2016). We train for 50 epochs with the learning rate schedule described in (Loshchilov & Hutter, 2016)",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "cnn",
+      "scale": "unspecified",
+      "task": "vision"
+    },
+    "training_steps": "50 epochs"
+  },
+  "1910.05895": {
+    "batch_size": "unspecified",
+    "dataset": "WMT '14 English-German",
+    "parameter_count": "unspecified",
+    "quote": "We train the Transformer base model on WMT '14 English-German using fairseq and report tokenized BLEU scores on newstest2014.",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "translation"
+    },
+    "training_steps": "unspecified"
+  },
+  "1910.07467": {
+    "batch_size": "unspecified",
+    "dataset": "WMT14 English-German",
+    "parameter_count": "unspecified",
+    "quote": "We use an in-house Tensorflow implementation of the Transformer, and employ the base setting as in [31] with all models trained for 300K steps.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "translation"
+    },
+    "training_steps": "300K steps"
+  },
+  "2002.05202": {
+    "batch_size": "128 examples",
+    "dataset": "C4",
+    "parameter_count": "unspecified",
+    "quote": "Identically to [Raffel et al., 2019], we pre-train for 524,288 steps on the span-filling objective on the C4 dataset. Each training batch consists of 128 examples, each of which has an input of 512 tokens and an output of 114 tokens",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "language_modeling"
+    },
+    "training_steps": "524,288"
+  },
+  "2004.05150": {
+    "batch_size": "64 ( 2^{18} tokens)",
+    "dataset": "corpus of long documents (Books, English Wikipedia, Realnews, Stories)",
+    "parameter_count": "unspecified",
+    "quote": "Both models are trained for 65K gradient updates with sequences length 4,096, batch size 64 ( 2^{18} tokens), maximum learning rate of 3e-5, linear warmup of 500 steps, followed by a power 3 polynomial decay.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "language_modeling"
+    },
+    "training_steps": "65K gradient updates"
+  },
+  "2104.09864": {
+    "batch_size": "64",
+    "dataset": "BookCorpus and Wikipedia Corpus",
+    "parameter_count": "unspecified",
+    "quote": "We train both BERT and RoFormer with batch size 64 and maximum sequence length of 512 for 100k steps.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "language_modeling"
+    },
+    "training_steps": "100k steps"
+  },
+  "2108.12409": {
+    "batch_size": "unspecified",
+    "dataset": "RoBERTa training corpus + English part of CC-100 (461 GB)",
+    "parameter_count": "1.3B",
+    "quote": "These models have 1.3B parameters. We train our models for one epoch, which is 50k updates on 128 V100 GPUs.",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "large",
+      "task": "language_modeling"
+    },
+    "training_steps": "50k updates (one epoch)"
+  },
+  "2109.08668": {
+    "batch_size": "~2M tokens",
+    "dataset": "proprietary pretraining dataset",
+    "parameter_count": "1.9B",
+    "quote": "Each model is trained using batches of \\sim 2M tokens using 512 TPUv4 chips for \\sim 140 hours ( \\sim 71.8K total accelerator hours or \\sim 1M train steps).",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "large",
+      "task": "language_modeling"
+    },
+    "training_steps": "~1M"
+  },
+  "2302.06675": {
+    "batch_size": "3M tokens",
+    "dataset": "GLaM-like dataset of 1.6 trillion tokens",
+    "parameter_count": "7.5B",
+    "quote": "Following GPT-3 (Brown et al., 2020), we train three models, ranging from 1.1B to 7.5B parameters, for 300B tokens with a batch size of 3M tokens and a context length of 1K.",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "large",
+      "task": "language_modeling"
+    },
+    "training_steps": "300B tokens"
+  },
+  "2305.14858": {
+    "batch_size": "unspecified",
+    "dataset": "ImageNet (dummy data for timing)",
+    "parameter_count": "unspecified",
+    "quote": "We replicate the ViT and GPT-3 architectures as described in their respective papers, employing dummy data to assess the training and inference speed.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "unspecified",
+      "task": "vision"
+    },
+    "training_steps": "unspecified"
+  },
+  "2305.19466": {
+    "batch_size": "64",
+    "dataset": "synthetic algorithmic tasks (copy, reverse, addition, polynomial eval, sorting, summation, parity, LEGO, SCAN, PCFG)",
+    "parameter_count": "~107M",
+    "quote": "We use the same hyperparameters for all PEs and employ the “base” model size configuration, popular in HuggingFace library (Wolf et al., 2020), resulting in \\sim 107M trainable weights (List of all hyperparameters in Section D.2).",
+    "section": "results",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "medium",
+      "task": "general"
+    },
+    "training_steps": "40K steps"
+  },
+  "2307.06440": {
+    "batch_size": "1536 sequences",
+    "dataset": "C4",
+    "parameter_count": "120M",
+    "quote": "We pre-train a BERT-base-like model with 16 layers instead of 12, which consists of 120M parameters, using a masked language modeling (MLM) objective.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "medium",
+      "task": "language_modeling"
+    },
+    "training_steps": "24 hours RST budget"
+  },
+  "2603.09616": {
+    "batch_size": "effective batch 8",
+    "dataset": "curated corpus and C4 validation split",
+    "parameter_count": "1.7B",
+    "quote": "Batch: Size 1 with gradient accumulation over 8 steps (effective batch 8)",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "large",
+      "task": "language_modeling"
+    },
+    "training_steps": "unspecified"
+  },
+  "2605.03667": {
+    "batch_size": "unspecified",
+    "dataset": "C4",
+    "parameter_count": "1B",
+    "quote": "We validate ELAS through comprehensive experiments on LLaMA models ranging from 60M to 1B parameters on the C4 dataset (Raffel et al., 2020), demonstrating that our method maintains competitive perplexity compared to full-rank baselines while achieving meaningful speedups and activation memory reduction.",
+    "section": "introduction",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "large",
+      "task": "language_modeling"
+    },
+    "training_steps": "unspecified"
+  },
+  "2605.10504": {
+    "batch_size": "unspecified",
+    "dataset": "FineWeb-Edu (2.5B tokens)",
+    "parameter_count": "270M",
+    "quote": "The main experiments use a 20-layer causal decoder with width 960, 15 attention heads, sequence length 1024, RoPE position encoding, tied input/output embeddings, and roughly 270M parameters.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "medium",
+      "task": "language_modeling"
+    },
+    "training_steps": "2.5B tokens"
+  },
+  "2605.26355": {
+    "batch_size": "unspecified",
+    "dataset": "TinyShakespeare",
+    "parameter_count": "\\leq 6 M parameters",
+    "quote": "GPT-style decoder, L=6 , H=8 , d=256 , context T=256 , character-level TinyShakespeare. All models trained for 5,000 steps with cosine LR decay from 3\\times 10^{-4} , AdamW, identical mini-batches throughout.",
+    "section": "experimental_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "tiny",
+      "task": "char_language_modeling"
+    },
+    "training_steps": "5,000 steps"
+  },
+  "2607.15525": {
+    "batch_size": "524,288 tokens per step",
+    "dataset": "ClimbMix",
+    "parameter_count": "~286M",
+    "quote": "The original ClimbMix d12 comparison uses 2,520 steps, sequence length 2,048, and total batch 524,288 tokens per step, for approximately 1.32B training tokens.",
+    "section": "appendix_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "medium",
+      "task": "language_modeling"
+    },
+    "training_steps": "2,520"
+  },
+  "2607.18363": {
+    "batch_size": "512 rows, 1.05M tokens/step",
+    "dataset": "68B-token reasoning-dense corpus",
+    "parameter_count": "87M",
+    "quote": "for up to 105B tokens (1.5 epochs of a 68B-token reasoning-dense corpus) at 6M to 87M total parameters",
+    "section": "abstract",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "small",
+      "task": "language_modeling"
+    },
+    "training_steps": "up to 105B tokens"
+  },
+  "2608.02091": {
+    "batch_size": "micro-batch size 20 with gradient accumulation set per arm",
+    "dataset": "OpenWebText",
+    "parameter_count": "350M",
+    "quote": "All main-grid experiments train GPT-2-class decoder-only transformers [30] on OpenWebText [12] with AdamW [22]",
+    "section": "appendix_setup",
+    "setting_fields": {
+      "evidence": "empirical",
+      "model_family": "transformer",
+      "scale": "medium",
+      "task": "language_modeling"
+    },
+    "training_steps": "unspecified"
+  }
+}

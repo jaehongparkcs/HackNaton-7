@@ -1,0 +1,208 @@
+{
+  "dropped": [],
+  "event": "unrecorded-dcc33966",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [
+      {
+        "mechanism_category": "position_generalization",
+        "method": "pos_encoding=rope",
+        "quote": "We suspect that this segregation of position information may be beneficial for extrapolation",
+        "section": "method"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "pos_encoding=rope",
+        "quote": "The perplexity results (Figure 1 and Appendix Tables 2 and 3) are better than the sinusoidal approach",
+        "section": "method",
+        "setting_note": "WikiText-103 extrapolation, Baevski & Auli LM, vs sinusoidal"
+      },
+      {
+        "direction": "context",
+        "method": "pos_encoding=rope",
+        "quote": "Additionally, Table 5 (in the appendix) also shows that, for L s of 1024 and 3072, our method performs better than the rotary and T5 bias models even when L_{\\textit{valid}} = L (i.e., no extrapolation is occurring).",
+        "section": "results",
+        "setting_note": "WikiText-103; ALiBi outperforms rotary at L=1024 and 3072 without extrapolation"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "RoBERTa training corpus + English part of CC-100 (461 GB)",
+        "model_family": "transformer",
+        "parameter_count": "1.3B",
+        "quote": "These models have 1.3B parameters. We train our models for one epoch, which is 50k updates on 128 V100 GPUs.",
+        "section": "results",
+        "task": "language_modeling",
+        "training_steps": "50k updates (one epoch)"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "6fefdadb68bef130d5887a33d0571e996cf8a65d543dd6ed16c33b11805ef26b",
+  "paper_id": "2108.12409",
+  "section_chars": {
+    "abstract": 1121,
+    "conclusion": 1199,
+    "experimental_setup": 3955,
+    "introduction": 2790,
+    "method": 5365,
+    "results": 10065
+  },
+  "sections": [
+    {
+      "chars": 1121,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 2790,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 575,
+      "heading": "Current Approaches Do Not Extrapolate Efficiently",
+      "section": "method"
+    },
+    {
+      "chars": 1031,
+      "heading": "2.1 Background and Experimental Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 253,
+      "heading": "Nonoverlapping Inference",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 783,
+      "heading": "Extrapolation During Inference",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 806,
+      "heading": "Experiment Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "2.2 Measuring Extrapolation",
+      "section": "method"
+    },
+    {
+      "chars": 1013,
+      "heading": "Sinusoidal Position Embeddings",
+      "section": "method"
+    },
+    {
+      "chars": 1390,
+      "heading": "Rotary Position Embeddings",
+      "section": "method"
+    },
+    {
+      "chars": 2384,
+      "heading": "T5 Bias",
+      "section": "method"
+    },
+    {
+      "chars": 3133,
+      "heading": "Attention with Linear Biases (ALiBi)",
+      "section": "other"
+    },
+    {
+      "chars": 1078,
+      "heading": "Implementation.",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1332,
+      "heading": "Results",
+      "section": "results"
+    },
+    {
+      "chars": 4193,
+      "heading": "4.1 Results on WikiText-103 and Toronto BookCorpus",
+      "section": "results"
+    },
+    {
+      "chars": 4538,
+      "heading": "4.2 Results on the CC100+RoBERTa Corpus",
+      "section": "results"
+    },
+    {
+      "chars": 2312,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 949,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 249,
+      "heading": "Acknowledgments",
+      "section": "conclusion"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Appendix",
+      "section": "other"
+    },
+    {
+      "chars": 10044,
+      "heading": "A.1 Introduction",
+      "section": "other"
+    },
+    {
+      "chars": 3775,
+      "heading": "A.2 ALiBi Results on WikiText-103",
+      "section": "other"
+    },
+    {
+      "chars": 4115,
+      "heading": "A.3 Results on the Toronto Book Corpus",
+      "section": "other"
+    },
+    {
+      "chars": 1296,
+      "heading": "A.4 Results on the CC100+RoBERTa Corpus",
+      "section": "other"
+    },
+    {
+      "chars": 334,
+      "heading": "Appendix B Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "B.1 Defining sliding window evaluation and the early token curse",
+      "section": "other"
+    },
+    {
+      "chars": 1089,
+      "heading": "Sliding Window Inference",
+      "section": "other"
+    },
+    {
+      "chars": 493,
+      "heading": "Early Token Curse",
+      "section": "other"
+    },
+    {
+      "chars": 4576,
+      "heading": "B.2 Extrapolation reduces the early token curse",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+  "url": "https://arxiv.org/html/2108.12409",
+  "validation_only": false,
+  "version": "2108.12409v2"
+}

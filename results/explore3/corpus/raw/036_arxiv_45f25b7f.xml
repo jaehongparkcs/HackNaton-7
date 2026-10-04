@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/iVu3uk1gGqwSavE5aWelcDKqLFg</id>
+  <title>arXiv Query: search_query=all:"weight tying" AND all:"language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-04T00:44:09Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22weight+tying%22+AND+(all:%22language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>11</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2309.08351v1</id>
+    <title>Headless Language Models: Learning without Predicting with Contrastive Weight Tying</title>
+    <updated>2023-09-15T12:20:00Z</updated>
+    <link href="https://arxiv.org/abs/2309.08351v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.08351v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Self-supervised pre-training of language models usually consists in predicting probability distributions over extensive token vocabularies. In this study, we propose an innovative method that shifts away from probability prediction and instead focuses on reconstructing input embeddings in a contrastive fashion via Constrastive Weight Tying (CWT). We apply this approach to pretrain Headless Language Models in both monolingual and multilingual contexts. Our method offers practical advantages, substantially reducing training computational requirements by up to 20 times, while simultaneously enhancing downstream performance and data efficiency. We observe a significant +1.6 GLUE score increase and a notable +2.7 LAMBADA accuracy improvement compared to classical LMs within similar compute budgets.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-15T12:20:00Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Nathan Godey</name>
+    </author>
+    <author>
+      <name>Éric de la Clergerie</name>
+    </author>
+    <author>
+      <name>Benoît Sagot</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.26663v1</id>
+    <title>Weight Tying Biases Token Embeddings Towards the Output Space</title>
+    <updated>2026-03-27T17:58:42Z</updated>
+    <link href="https://arxiv.org/abs/2603.26663v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.26663v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Weight tying, i.e. sharing parameters between input and output embedding matrices, is common practice in language model design, yet its impact on the learned embedding space remains poorly understood. In this paper, we show that tied embedding matrices align more closely with output (unembedding) matrices than with input embeddings of comparable untied models, indicating that the shared matrix is shaped primarily for output prediction rather than input representation. This unembedding bias arises because output gradients dominate early in training. Using tuned lens analysis, we show this negatively affects early-layer computations, which contribute less effectively to the residual stream. Scaling input gradients during training reduces this bias, providing causal evidence for the role of gradient imbalance. This is mechanistic evidence that weight tying optimizes the embedding matrix for output prediction, compromising its role in input representation. These results help explain why weight tying can harm performance at scale and have implications for training smaller LLMs, where the embedding matrix contributes substantially to total parameter count.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-27T17:58:42Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Antonio Lopardo</name>
+    </author>
+    <author>
+      <name>Avyukth Harish</name>
+    </author>
+    <author>
+      <name>Catherine Arnett</name>
+    </author>
+    <author>
+      <name>Akshat Gupta</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.09578v2</id>
+    <title>Tied-Lora: Enhancing parameter efficiency of LoRA with weight tying</title>
+    <updated>2024-04-12T23:15:51Z</updated>
+    <link href="https://arxiv.org/abs/2311.09578v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.09578v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce Tied-LoRA, a novel paradigm leveraging weight tying and selective training to enhance the parameter efficiency of Low-rank Adaptation (LoRA). Our exploration encompasses different plausible combinations of parameter training and freezing, coupled with weight tying, aimed at identifying the optimal trade-off between performance and the count of trainable parameters. Across $5$ diverse tasks and two foundational language models with different parameter counts, our experiments provide comprehensive insights into the inherent trade-offs between efficiency and performance.
+  Our findings reveal a specific Tied-LoRA configuration that distinguishes itself by showcasing comparable performance to LoRA across multiple tasks while utilizing only a fraction of the parameters employed by the standard LoRA method, particularly at elevated ranks. This underscores the efficacy of Tied-LoRA in achieving impressive results with significantly reduced model complexity.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-16T05:29:39Z</published>
+    <arxiv:comment>8 pages 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Adithya Renduchintala</name>
+    </author>
+    <author>
+      <name>Tugrul Konuk</name>
+    </author>
+    <author>
+      <name>Oleksii Kuchaiev</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.40335v1</id>
+    <title>Is Weight Tying Still Beneficial for Decoder-Only LLMs in Private Settings Under DP-SGD?</title>
+    <updated>2026-09-30T17:57:43Z</updated>
+    <link href="https://arxiv.org/abs/2609.40335v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.40335v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Differentially Private Stochastic Gradient Descent (DP-SGD) is a leading approach for privacy-preserving fine-tuning of large language models (LLMs). Many decoder-only LLMs employ weight tying between input and output embeddings, a design choice originally introduced for parameter efficiency and improved language modeling performance in the non-private setting. However, the impact of weight tying under differentially private training remains largely unexplored. In this work, we investigate the role of weight tying in the DP setting using GPT2 and DistilGPT2 as representative decoder-only architectures. Interestingly, we find that untied embeddings consistently outperform weight-tied models under DP-SGD, achieving gains of up to 4.74% points in accuracy on SST-2, QNLI, and QQP. Beyond improved utility, untying embeddings enables the use of memory-efficient ghost clipping for DP-SGD. By contrast, weight tying introduces shared-parameter interactions that complicate standard ghost norm computation and largely negate its computational advantages. As a result, untied models achieve over 60% lower memory usage while preserving the benefits of ghost clipping. Our results indicate that untied embeddings provide a more effective and scalable design for differentially private training of decoder-only LLMs and highlight the need to revisit standard LLM architectural choices in the privacy-preserving setting.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T17:57:43Z</published>
+    <arxiv:comment>Accepted at the 8th IEEE International Conference on Trust, Privacy and Security in Intelligent Systems, and Applications (IEEE TPS 2026). 12 pages (10 pages of main content), 1 figure, 13 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Razan El Mais</name>
+    </author>
+    <author>
+      <name>Ali Chehab</name>
+    </author>
+    <author>
+      <name>Ibrahim Issa</name>
+    </author>
+    <author>
+      <name>Razane Tajeddine</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.04556v2</id>
+    <title>Rethinking Weight Tying: Pseudo-Inverse Tying for LM Stable Training and Updates</title>
+    <updated>2026-05-08T07:58:16Z</updated>
+    <link href="https://arxiv.org/abs/2602.04556v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.04556v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Weight tying is widely used in compact language models to reduce parameters by sharing the token table between the input embedding and the output projection. However, parameter sharing alone does not guarantee a stable token interface: during training, the correspondence between encoding tokens into hidden states and decoding hidden states into logits can drift, worsening optimization sensitivity and weakening explainability probes that rely on a meaningful vocabulary-space decoder. We propose Pseudo-Inverse Tying (PIT), which synchronizes embedding and unembedding as coupled projections of a shared latent token memory, guaranteeing a pseudo-inverse-consistent interface throughout training. PIT maintains an orthonormal shared memory, obtained by polar initialization from a source checkpoint for continued pretraining or by random orthonormal initialization for from-scratch pretraining, and introduces a learned symmetric positive definite hidden-space transform parameterized via a Cholesky factor. The output head applies this transform to hidden states before the vocabulary projection, while the embedding applies the inverse transform to token vectors using stable triangular solves, avoiding explicit pseudo-inverse recomputation and vocabulary-sized auxiliary parameters. Beyond improving training stability, PIT provides a cleaner substrate for logit-lens-style and vocabulary-space explainability probes by keeping the input and output token geometries synchronized. We evaluate PIT on on-device models spanning 256M-1.3B parameters. The results show that PIT improves continued-pretraining stability, enforces near-exact token-interface consistency across settings, and yields more predictable lightweight adaptation after continued pretraining, while from-scratch pretraining reveals a trade-off between strict interface consistency and unconstrained optimization.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-04T13:44:53Z</published>
+    <arxiv:comment>an early-stage version</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jian Gu</name>
+    </author>
+    <author>
+      <name>Aldeida Aleti</name>
+    </author>
+    <author>
+      <name>Chunyang Chen</name>
+    </author>
+    <author>
+      <name>Hongyu Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.14159v2</id>
+    <title>Super Tiny Language Models</title>
+    <updated>2024-06-26T08:41:06Z</updated>
+    <link href="https://arxiv.org/abs/2405.14159v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.14159v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rapid advancement of large language models (LLMs) has led to significant improvements in natural language processing but also poses challenges due to their high computational and energy demands. This paper introduces a series of research efforts focused on Super Tiny Language Models (STLMs), which aim to deliver high performance with significantly reduced parameter counts. We explore innovative techniques such as byte-level tokenization with a pooling mechanism, weight tying, and efficient training strategies. These methods aim to significantly reduce reduce the parameter count compared to traditional models -- in future works, we aim to build on these in a way that maintains and improves upon the performance of base transformer models. This series of papers will explore into various subproblems, including tokenizer-free models, self-play based training, and alternative training objectives. We will target models with 10M, 50M, and 100M parameters. Our ultimate goal is to make high-performance language models more accessible and practical for a wide range of applications.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-23T04:12:49Z</published>
+    <arxiv:comment>11 pages, 4 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Dylan Hillier</name>
+    </author>
+    <author>
+      <name>Leon Guertler</name>
+    </author>
+    <author>
+      <name>Cheston Tan</name>
+    </author>
+    <author>
+      <name>Palaash Agrawal</name>
+    </author>
+    <author>
+      <name>Chen Ruirui</name>
+    </author>
+    <author>
+      <name>Bobby Cheng</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1907.12009v1</id>
+    <title>Representation Degeneration Problem in Training Natural Language Generation Models</title>
+    <updated>2019-07-28T03:57:41Z</updated>
+    <link href="https://arxiv.org/abs/1907.12009v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1907.12009v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study an interesting problem in training neural network-based models for natural language generation tasks, which we call the \emph{representation degeneration problem}. We observe that when training a model for natural language generation tasks through likelihood maximization with the weight tying trick, especially with big training datasets, most of the learnt word embeddings tend to degenerate and be distributed into a narrow cone, which largely limits the representation power of word embeddings. We analyze the conditions and causes of this problem and propose a novel regularization method to address it. Experiments on language modeling and machine translation show that our method can largely mitigate the representation degeneration problem and achieve better performance than baseline algorithms.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-07-28T03:57:41Z</published>
+    <arxiv:comment>ICLR 2019</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Jun Gao</name>
+    </author>
+    <author>
+      <name>Di He</name>
+    </author>
+    <author>
+      <name>Xu Tan</name>
+    </author>
+    <author>
+      <name>Tao Qin</name>
+    </author>
+    <author>
+      <name>Liwei Wang</name>
+    </author>
+    <author>
+      <name>Tie-Yan Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1810.06682v2</id>
+    <title>Trellis Networks for Sequence Modeling</title>
+    <updated>2019-03-11T21:37:42Z</updated>
+    <link href="https://arxiv.org/abs/1810.06682v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1810.06682v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present trellis networks, a new architecture for sequence modeling. On the one hand, a trellis network is a temporal convolutional network with special structure, characterized by weight tying across depth and direct injection of the input into deep layers. On the other hand, we show that truncated recurrent networks are equivalent to trellis networks with special sparsity structure in their weight matrices. Thus trellis networks with general weight matrices generalize truncated recurrent networks. We leverage these connections to design high-performing trellis networks that absorb structural and algorithmic elements from both recurrent and convolutional models. Experiments demonstrate that trellis networks outperform the current state of the art methods on a variety of challenging benchmarks, including word-level language modeling and character-level language modeling tasks, and stress tests designed to evaluate long-term memory retention. The code is available at https://github.com/locuslab/trellisnet .</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-10-15T20:50:05Z</published>
+    <arxiv:comment>Published at ICLR 2019</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shaojie Bai</name>
+    </author>
+    <author>
+      <name>J. Zico Kolter</name>
+    </author>
+    <author>
+      <name>Vladlen Koltun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.02031v3</id>
+    <title>Output Embedding Centering for Stable LLM Pretraining</title>
+    <updated>2026-09-10T09:26:21Z</updated>
+    <link href="https://arxiv.org/abs/2601.02031v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.02031v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Pretraining of large language models is not only expensive but also prone to certain training instabilities. A specific instability that often occurs at the end of training is output logit divergence. The most widely used mitigation strategies, z-loss and logit soft-capping, merely address the symptoms rather than the underlying cause of the problem. In this paper, we analyze the instability from the perspective of the output embeddings' geometry and identify anisotropic embeddings as its source. Based on this, we propose output embedding centering (OEC) as a new mitigation strategy, and demonstrate that it suppresses output logit divergence. OEC can be implemented in two different ways: as a deterministic operation called $μ$-centering, or a regularization method called $μ$-loss. Our experiments show that both variants outperform z-loss in terms of training stability, while being on par with logit soft-capping. This holds true both in the presence and the absence of weight tying. As a secondary result, we find that $μ$-loss is significantly less sensitive to regularization hyperparameter tuning than z-loss.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-05T11:44:05Z</published>
+    <arxiv:comment>Additional experiments using weight decay</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Felix Stollenwerk</name>
+    </author>
+    <author>
+      <name>Anna Lokrantz</name>
+    </author>
+    <author>
+      <name>Niclas Hertzberg</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2109.07513v1</id>
+    <title>Tied &amp; Reduced RNN-T Decoder</title>
+    <updated>2021-09-15T18:19:16Z</updated>
+    <link href="https://arxiv.org/abs/2109.07513v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2109.07513v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Previous works on the Recurrent Neural Network-Transducer (RNN-T) models have shown that, under some conditions, it is possible to simplify its prediction network with little or no loss in recognition accuracy (arXiv:2003.07705 [eess.AS], [2], arXiv:2012.06749 [cs.CL]). This is done by limiting the context size of previous labels and/or using a simpler architecture for its layers instead of LSTMs. The benefits of such changes include reduction in model size, faster inference and power savings, which are all useful for on-device applications.
+  In this work, we study ways to make the RNN-T decoder (prediction network + joint network) smaller and faster without degradation in recognition performance. Our prediction network performs a simple weighted averaging of the input embeddings, and shares its embedding matrix weights with the joint network's output layer (a.k.a. weight tying, commonly used in language modeling arXiv:1611.01462 [cs.LG]). This simple design, when used in conjunction with additional Edit-based Minimum Bayes Risk (EMBR) training, reduces the RNN-T Decoder from 23M parameters to just 2M, without affecting word-error rate (WER).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-09-15T18:19:16Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>Proc. Interspeech 2021, 4563-4567</arxiv:journal_ref>
+    <author>
+      <name>Rami Botros</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Tara N. Sainath</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Robert David</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Emmanuel Guzman</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Wei Li</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Yanzhang He</name>
+      <arxiv:affiliation>Google Inc. USA</arxiv:affiliation>
+    </author>
+    <arxiv:doi>10.21437/Interspeech.2021-212</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.21437/Interspeech.2021-212" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.04032v3</id>
+    <title>Do Transformers Need Three Projections? Systematic Study of QKV Variants</title>
+    <updated>2026-08-12T18:36:37Z</updated>
+    <link href="https://arxiv.org/abs/2606.04032v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.04032v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have become the standard solution for various AI tasks, with the query, key, and value (QKV) attention formulation playing a central role. However, the individual contribution of these three projections and the impact of omitting some remain poorly understood. We systematically evaluate three projection sharing constraints: a) Q-K=V (shared key-value), b) Q=K-V (shared query-key), and c) Q=K=V (single projection). The last two variants produce symmetric attention maps; to address this, we also explore asymmetric attention via 2D positional encodings. Through experiments spanning synthetic tasks, vision (MNIST, CIFAR, TinyImageNet, anomaly), and language modeling (300M and 1.2B parameter models on 10B tokens), we discovered that our transformers perform on par or occasionally better than the QKV transformer. In language modeling, Q-K=V projection sharing achieves 50% KV cache reduction with only 3.1% perplexity degradation. Crucially, projection sharing is complementary to head sharing (GQA/MQA): combining Q-K=V with GQA-4 yields 87.5% cache reduction, while Q-K=V + MQA achieves 96.9%, enabling practical on-device inference. We show that Q-K=V preserves quality because keys and values can occupy similar representational spaces and attention operates in a low-rank regime, whereas Q=K-V breaks attention directionality. Our results systematically characterize projection sharing as an underexplored instance of weight tying in attention, with direct, quantifiable inference memory benefits, particularly valuable for edge deployment. The code is publicly available at https://github.com/Brainchip-Inc/Do-Transformers-Need-3-Projections</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-01T20:59:05Z</published>
+    <arxiv:comment>Accepted at ICML 2026 (PMLR vol. 306). 26 pages, 12 figures, 16 tables. Code: https://github.com/Brainchip-Inc/Do-Transformers-Need-3-Projections</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ali Kayyam</name>
+    </author>
+    <author>
+      <name>Anusha Madan Gopal</name>
+    </author>
+    <author>
+      <name>M Anthony Lewis</name>
+    </author>
+  </entry>
+</feed>

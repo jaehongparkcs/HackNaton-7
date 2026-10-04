@@ -1,0 +1,91 @@
+{
+  "claims": 74,
+  "concrete_rule": "A limitation 'names a concrete untested condition' (plausibility \u00d7 1.0, else \u00d7 0.5) when its quote mentions a number or one of: small, large, scale, character, char-level, batch, longer, shorter, dataset, task, step, token, width, depth, layer, size.",
+  "config": {
+    "enabled": true,
+    "max_llm_cost_usd": 4.0,
+    "max_papers": 20,
+    "papers_per_hypothesis": 3,
+    "section_token_budget": 12000,
+    "small_scale_max_params": 10000000,
+    "top_hypotheses": 8,
+    "validate": true
+  },
+  "deep_read_version": 1,
+  "dropped": [],
+  "fetch_failures": [
+    {
+      "error": "HTTPError: HTTP Error 406: Not Acceptable",
+      "kind": "html_arxiv_html",
+      "status": 406,
+      "url": "https://arxiv.org/html/2605.26355"
+    }
+  ],
+  "llm_calls": 45,
+  "llm_cost_usd": 2.0907,
+  "overrides": 19,
+  "read": [
+    "1207.0580",
+    "1606.08415",
+    "1608.03983",
+    "1910.05895",
+    "1910.07467",
+    "2002.04745",
+    "2002.05202",
+    "2004.05150",
+    "2004.08249",
+    "2104.09864",
+    "2108.12409",
+    "2109.08668",
+    "2302.06675",
+    "2305.14858",
+    "2305.19466",
+    "2307.06440",
+    "2603.09616",
+    "2605.03667",
+    "2605.10504",
+    "2605.26355",
+    "2607.15525",
+    "2607.18363",
+    "2608.02091"
+  ],
+  "recipes": [
+    "optimizer=lion"
+  ],
+  "selected": [
+    "1910.07467",
+    "2305.14858",
+    "2004.05150",
+    "2605.26355",
+    "2605.10504",
+    "2603.09616",
+    "2607.18363",
+    "2608.02091",
+    "1910.05895",
+    "2302.06675",
+    "2104.09864",
+    "2305.19466",
+    "2108.12409",
+    "2109.08668",
+    "2605.03667",
+    "2307.06440",
+    "2002.05202",
+    "2607.15525",
+    "1606.08415"
+  ],
+  "stated_gaps": 20,
+  "unavailable": [],
+  "validation": {
+    "abstract_only": {
+      "config_mapping": 7,
+      "direction": 6,
+      "setting": 4
+    },
+    "n": 9,
+    "with_full_text": {
+      "config_mapping": 7,
+      "direction": 6,
+      "setting": 5
+    }
+  }
+}

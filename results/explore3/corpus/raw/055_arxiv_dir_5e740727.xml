@@ -1,0 +1,246 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/dnCkiW/t1ALkdut+uKZs/5djNfw</id>
+  <title>arXiv Query: search_query=all:"Lion optimizer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:46:11Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Lion+optimizer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>13</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2508.12327v1</id>
+    <title>Convergence Analysis of the Lion Optimizer in Centralized and Distributed Settings</title>
+    <updated>2025-08-17T10:54:01Z</updated>
+    <link href="https://arxiv.org/abs/2508.12327v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.12327v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this paper, we analyze the convergence properties of the Lion optimizer. First, we establish that the Lion optimizer attains a convergence rate of $\mathcal{O}(d^{1/2}T^{-1/4})$ under standard assumptions, where $d$ denotes the problem dimension and $T$ is the iteration number. To further improve this rate, we introduce the Lion optimizer with variance reduction, resulting in an enhanced convergence rate of $\mathcal{O}(d^{1/2}T^{-1/3})$. We then analyze in distributed settings, where the standard and variance reduced version of the distributed Lion can obtain the convergence rates of $\mathcal{O}(d^{1/2}(nT)^{-1/4})$ and $\mathcal{O}(d^{1/2}(nT)^{-1/3})$, with $n$ denoting the number of nodes. Furthermore, we investigate a communication-efficient variant of the distributed Lion that ensures sign compression in both communication directions. By employing the unbiased sign operations, the proposed Lion variant and its variance reduction counterpart, achieve convergence rates of $\mathcal{O}\left( \max \left\{\frac{d^{1/4}}{T^{1/4}}, \frac{d^{1/10}}{n^{1/5}T^{1/5}} \right\} \right)$ and $\mathcal{O}\left( \frac{d^{1/4}}{T^{1/4}} \right)$, respectively.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-17T10:54:01Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Wei Jiang</name>
+    </author>
+    <author>
+      <name>Lijun Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.14587v1</id>
+    <title>CLion: Efficient Cautious Lion Optimizer with Enhanced Generalization</title>
+    <updated>2026-04-16T03:32:48Z</updated>
+    <link href="https://arxiv.org/abs/2604.14587v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.14587v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Lion optimizer is a popular learning-based optimization algorithm in machine learning, which shows impressive performance in training many deep learning models. Although convergence property of the Lion optimizer has been studied, its generalization analysis is still missing. To fill this gap, we study generalization property of the Lion via algorithmic stability based on the mathematical induction. Specifically, we prove that the Lion has a generalization error of $O(\frac{1}{Nτ^T})$, where $N$ is training sample size, and $τ&gt;0$ denotes the smallest absolute value of non-zero element in gradient estimator, and $T$ is the total iteration number. In addition, we obtain an interesting byproduct that the SignSGD algorithm has the same generalization error as the Lion. To enhance generalization of the Lion, we design a novel efficient Cautious Lion (i.e., CLion) optimizer by cautiously using sign function. Moreover, we prove that our CLion has a lower generalization error of $O(\frac{1}{N})$ than $O(\frac{1}{Nτ^T})$ of the Lion, since the parameter $τ$ generally is very small. Meanwhile, we study convergence property of our CLion optimizer, and prove that our CLion has a fast convergence rate of $O(\frac{\sqrt{d}}{T^{1/4}})$ under $\ell_1$-norm of gradient for nonconvex stochastic optimization, where $d$ denotes the model dimension.
+  Extensive numerical experiments demonstrate effectiveness of our CLion optimizer.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-16T03:32:48Z</published>
+    <arxiv:comment>30 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Feihu Huang</name>
+    </author>
+    <author>
+      <name>Guanyi Zhang</name>
+    </author>
+    <author>
+      <name>Songcan Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.02910v5</id>
+    <title>Ant Hill Colonization optimization algorithm(AHCOA) for controlling the side lobe of a uniform linear array</title>
+    <updated>2022-11-29T16:45:09Z</updated>
+    <link href="https://arxiv.org/abs/2207.02910v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.02910v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper aims to introduce the Ant hill colonization optimization algorithm(AHCOA) to the electromagnetics and antenna community. The ant hill is built by special species of ants known as formicas ants(also meadow ants, fire ants and harvester ants). AHCOA is a novel new nature inspired algorithm mimicking how the ants built and sustain the ant hill for their survival and sustenance for many years. This problem solves constrained and unconstrained optimization problems with wide capability in diverse fields. AHCOA is used by writing equations of volumetric analysis of the ant hill mould the manner in which the structure is architected. In this paper, we have shown how AHCOA is better than the previous paper on ant lion optimizer for controlling side lobe in antenna pattern synthesis in paper [1]. The potential of AHCOA in synthesizing and analyzing for d/ varying from 1.1,0.6,0.5,0.3 and 0.1 linear array is also illustrated. Antenna side lobe level minimization is compared with ant lion optimizer showing why AHCOA is better than the previously simulated ant lion optimizer for side lobe control. The results show why linear arrays are better synthesized for AHCOA then other algorithms used in planar arrays. This paper shows why AHCOA is a strong candidate for antenna optimization used in linear arrays.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-06-22T16:44:37Z</published>
+    <arxiv:comment>Withdrawn for major modifications</arxiv:comment>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Sunit Shantanu Digamber Fulari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.04707v1</id>
+    <title>From Rattle to Roar: Optimizer Showdown for MambaStock on S&amp;P 500</title>
+    <updated>2025-07-09T12:51:24Z</updated>
+    <link href="https://arxiv.org/abs/2508.04707v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.04707v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We evaluate the performance of several optimizers on the task of forecasting S&amp;P 500 Index returns with the MambaStock model. Among the most widely used algorithms, gradient-smoothing and adaptive-rate optimizers (for example, Adam and RMSProp) yield the lowest test errors. In contrast, the Lion optimizer offers notably faster training. To combine these advantages, we introduce a novel family of optimizers, Roaree, that dampens the oscillatory loss behavior often seen with Lion while preserving its training speed.</summary>
+    <category term="q-fin.CP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-09T12:51:24Z</published>
+    <arxiv:primary_category term="q-fin.CP"/>
+    <author>
+      <name>Alena Chan</name>
+    </author>
+    <author>
+      <name>Maria Garmonina</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2207.04046v5</id>
+    <title>Optimal Pattern synthesis of linear antenna array using Ant Hill Colonization Optimization algorithm(AHCOA)</title>
+    <updated>2022-11-29T16:46:33Z</updated>
+    <link href="https://arxiv.org/abs/2207.04046v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2207.04046v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The aim of this paper is to introduce AHCOA to the electromagnetic and antenna community. AHCOA is a new nature inspired meta heuristic algorithm inspired by how there is a hierarchy and departments in the ant hill colonization. It has high probabilistic potential in solving not only unconstrained but also constrained optimization problems. In this paper the AHCOA is applied to linear antenna array for better pattern synthesis in the following ways : By uniform excitation considering equal spacing of the antenna elements with respect to the uniform array. AHCOA is used in obtaining an array pattern to achieve minimum side lobe levels. The results are compared to other state of the art nature based algorithms such as ant lion optimizer, which show a considerable improvement in AHCOA.</summary>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-07-06T10:22:05Z</published>
+    <arxiv:primary_category term="cs.NE"/>
+    <author>
+      <name>Sunit Shantanu Digamber Fulari</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2411.16462v2</id>
+    <title>Lion Cub: Minimizing Communication Overhead in Distributed Lion</title>
+    <updated>2025-07-04T04:44:35Z</updated>
+    <link href="https://arxiv.org/abs/2411.16462v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.16462v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Communication overhead is a key challenge in distributed deep learning, especially on slower Ethernet interconnects, and given current hardware trends, communication is likely to become a major bottleneck. While gradient compression techniques have been explored for SGD and Adam, the Lion optimizer has the distinct advantage that its update vectors are the output of a sign operation, enabling straightforward quantization. However, simply compressing updates for communication and using techniques like majority voting fails to lead to end-to-end speedups due to inefficient communication algorithms and reduced convergence. We analyze three factors critical to distributed learning with Lion: optimizing communication methods, identifying effective quantization methods, and assessing the necessity of momentum synchronization. Our findings show that quantization techniques adapted to Lion and selective momentum synchronization can significantly reduce communication costs while maintaining convergence. We combine these into Lion Cub, which enables up to 5x speedups in end-to-end training compared to Lion. This highlights Lion's potential as a communication-efficient solution for distributed training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-25T15:08:24Z</published>
+    <arxiv:comment>ICML 2025 Workshop "Tiny Titans: The Next Wave of On-Device Learning for Foundational Models (TTODLer-FM)"</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Satoki Ishikawa</name>
+    </author>
+    <author>
+      <name>Tal Ben-Nun</name>
+    </author>
+    <author>
+      <name>Brian Van Essen</name>
+    </author>
+    <author>
+      <name>Rio Yokota</name>
+    </author>
+    <author>
+      <name>Nikoli Dryden</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.00438v1</id>
+    <title>Communication Efficient Distributed Training with Distributed Lion</title>
+    <updated>2024-03-30T18:07:29Z</updated>
+    <link href="https://arxiv.org/abs/2404.00438v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.00438v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Lion optimizer has been a promising competitor with the AdamW for training large AI models, with advantages on memory, computation, and sample efficiency. In this paper, we introduce Distributed Lion, an innovative adaptation of Lion for distributed training environments. Leveraging the sign operator in Lion, our Distributed Lion only requires communicating binary or lower-precision vectors between workers to the center server, significantly reducing the communication cost. Our theoretical analysis confirms Distributed Lion's convergence properties. Empirical results demonstrate its robustness across a range of tasks, worker counts, and batch sizes, on both vision and language problems. Notably, Distributed Lion attains comparable performance to standard Lion or AdamW optimizers applied on aggregated gradients, but with significantly reduced communication bandwidth. This feature is particularly advantageous for training large models. In addition, we also demonstrate that Distributed Lion presents a more favorable performance-bandwidth balance compared to existing efficient distributed methods such as deep gradient compression and ternary gradients.</summary>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-30T18:07:29Z</published>
+    <arxiv:comment>22 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.DC"/>
+    <author>
+      <name>Bo Liu</name>
+    </author>
+    <author>
+      <name>Lemeng Wu</name>
+    </author>
+    <author>
+      <name>Lizhang Chen</name>
+    </author>
+    <author>
+      <name>Kaizhao Liang</name>
+    </author>
+    <author>
+      <name>Jiaxu Zhu</name>
+    </author>
+    <author>
+      <name>Chen Liang</name>
+    </author>
+    <author>
+      <name>Raghuraman Krishnamoorthi</name>
+    </author>
+    <author>
+      <name>Qiang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.07147v3</id>
+    <title>QFT: Quantized Full-parameter Tuning of LLMs with Affordable Resources</title>
+    <updated>2026-03-18T04:23:42Z</updated>
+    <link href="https://arxiv.org/abs/2310.07147v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.07147v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large Language Models (LLMs) have showcased remarkable impacts across a wide spectrum of natural language processing tasks. Fine-tuning these pretrained models on downstream datasets provides further significant performance gains; however, this process typically requires a large number of expensive, high-end GPUs. Although there have been efforts focused on parameter-efficient fine-tuning, they cannot fully unlock the powerful potential of full-parameter fine-tuning. In this paper, we propose QFT, a Quantized Full-parameter Tuning framework for LLMs that quantizes and stores all training states, including weights, gradients, and optimizer states, in INT8 format to reduce training memory, thereby enabling full-parameter fine-tuning on existing GPUs at an affordable cost. To ensure training performance, we make two key efforts: i) for quantized gradients and optimizer states, we theoretically prove that the Lion optimizer, with its property of consistent update magnitudes, is highly robust to quantization; ii) and for quantized weights, we employ the hybrid feature quantizer, which identifies and protects a small subset of sparse critical features while quantizing the remaining dense features, thus ensuring accurate weight updates without FP32 backups. Moreover, to support backpropagation in the integer context, we develop a stack-based gradient flow scheme with O(1) complexity, forming a unified integer training pipeline. As a result, QFT reduces the model state memory to 21% of the standard solution while achieving comparable performance, e.g., tuning a LLaMA-7B model requires only &lt;30GB of memory, making it feasible on a single A6000 GPU.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-11T02:47:40Z</published>
+    <arxiv:comment>ICLR 2026 Workshop on Scaling Post-training for LLMs (SPOT)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zhikai Li</name>
+    </author>
+    <author>
+      <name>Xiaoxuan Liu</name>
+    </author>
+    <author>
+      <name>Banghua Zhu</name>
+    </author>
+    <author>
+      <name>Zhen Dong</name>
+    </author>
+    <author>
+      <name>Qingyi Gu</name>
+    </author>
+    <author>
+      <name>Kurt Keutzer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.10453v1</id>
+    <title>Nature-Inspired Algorithms for Wireless Sensor Networks: A Comprehensive Survey</title>
+    <updated>2020-12-24T05:30:04Z</updated>
+    <link href="https://arxiv.org/abs/2101.10453v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.10453v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In order to solve the critical issues in Wireless Sensor Networks (WSNs), with concern for limited sensor lifetime, nature-inspired algorithms are emerging as a suitable method. Getting optimal network coverage is one of those challenging issues that need to be examined critically before any network setup. Optimal network coverage not only minimizes the consumption of limited energy of battery-driven sensors but also reduce the sensing of redundant information. In this paper, we focus on nature-inspired optimization algorithms concerning the optimal coverage in WSNs. In the first half of the paper, we have briefly discussed the taxonomy of the optimization algorithms along with the problem domains in WSNs. In the second half of the paper, we have compared the performance of two nature-inspired algorithms for getting optimal coverage in WSNs. The first one is a combined Improved Genetic Algorithm and Binary Ant Colony Algorithm (IGABACA), and the second one is Lion Optimization (LO). The simulation results confirm that LO gives better network coverage, and the convergence rate of LO is faster than that of IGA-BACA. Further, we observed that the optimal coverage is achieved at a lesser number of generations in LO as compared to IGA-BACA. This review will help researchers to explore the applications in this field as well as beyond this area. Keywords: Optimal Coverage, Bio-inspired Algorithm, Lion Optimization, WSNs.</summary>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-24T05:30:04Z</published>
+    <arxiv:primary_category term="cs.NI"/>
+    <arxiv:journal_ref>Computer Science Review (2020) 100342</arxiv:journal_ref>
+    <author>
+      <name>Abhilash Singh</name>
+    </author>
+    <author>
+      <name>Sandeep Sharma</name>
+    </author>
+    <author>
+      <name>Jitenda Singh</name>
+    </author>
+    <arxiv:doi>10.1016/j.cosrev.2020.100342</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.cosrev.2020.100342" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.13792v1</id>
+    <title>Micro-Facial Expression Recognition in Video Based on Optimal Convolutional Neural Network (MFEOCNN) Algorithm</title>
+    <updated>2020-09-29T05:56:26Z</updated>
+    <link href="https://arxiv.org/abs/2009.13792v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.13792v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Facial expression is a standout amongst the most imperative features of human emotion recognition. For demonstrating the emotional states facial expressions are utilized by the people. In any case, recognition of facial expressions has persisted a testing and intriguing issue with regards to PC vision. Recognizing the Micro-Facial expression in video sequence is the main objective of the proposed approach. For efficient recognition, the proposed method utilizes the optimal convolution neural network. Here the proposed method considering the input dataset is the CK+ dataset. At first, by means of Adaptive median filtering preprocessing is performed in the input image. From the preprocessed output, the extracted features are Geometric features, Histogram of Oriented Gradients features and Local binary pattern features. The novelty of the proposed method is, with the help of Modified Lion Optimization (MLO) algorithm, the optimal features are selected from the extracted features. In a shorter computational time, it has the benefits of rapidly focalizing and effectively acknowledging with the aim of getting an overall arrangement or idea. Finally, the recognition is done by Convolution Neural network (CNN). Then the performance of the proposed MFEOCNN method is analysed in terms of false measures and recognition accuracy. This kind of emotion recognition is mainly used in medicine, marketing, E-learning, entertainment, law and monitoring. From the simulation, we know that the proposed approach achieves maximum recognition accuracy of 99.2% with minimum Mean Absolute Error (MAE) value. These results are compared with the existing for MicroFacial Expression Based Deep-Rooted Learning (MFEDRL), Convolutional Neural Network with Lion Optimization (CNN+LO) and Convolutional Neural Network (CNN) without optimization. The simulation of the proposed method is done in the working platform of MATLAB.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.IV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-29T05:56:26Z</published>
+    <arxiv:comment>19 pages, 10 figures, "for published version see https://www.ijeat.org/wp-content/uploads/papers/v9i1/A9802109119.pdf"</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>S. D. Lalitha</name>
+    </author>
+    <author>
+      <name>K. K. Thyagharajan</name>
+    </author>
+    <arxiv:doi>10.35940/ijeat.A9802.109119</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.35940/ijeat.A9802.109119" title="doi"/>
+  </entry>
+</feed>

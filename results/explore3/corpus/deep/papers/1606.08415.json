@@ -1,0 +1,110 @@
+{
+  "dropped": [],
+  "event": "unrecorded-e6d4bbee",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [],
+    "recipes": [],
+    "results": [],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "CIFAR-100",
+        "model_family": "cnn",
+        "parameter_count": "unspecified",
+        "quote": "Next we consider a wide residual network on CIFAR-100 with 40 layers and a widening factor of 4 (Zagoruyko & Komodakis, 2016). We train for 50 epochs with the learning rate schedule described in (Loshchilov & Hutter, 2016)",
+        "section": "experimental_setup",
+        "task": "vision",
+        "training_steps": "50 epochs"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "79e4647ed4d239105454ae81b72deed28104f3a1d3c3388a0f353441b0df9e26",
+  "paper_id": "1606.08415",
+  "section_chars": {
+    "abstract": 560,
+    "appendix_setup": 772,
+    "conclusion": 2893,
+    "experimental_setup": 6039,
+    "introduction": 2313
+  },
+  "sections": [
+    {
+      "chars": 560,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 2313,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 2837,
+      "heading": "GELU Formulation",
+      "section": "other"
+    },
+    {
+      "chars": 576,
+      "heading": "GELU Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1249,
+      "heading": "3.1 MNIST Classification",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 589,
+      "heading": "3.2 MNIST Autoencoder",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 865,
+      "heading": "3.3 Twitter POS Tagging",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 715,
+      "heading": "3.4 TIMIT Frame Classification",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2040,
+      "heading": "3.5 CIFAR-10/100 Classification",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2718,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 174,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 98,
+      "heading": "Acknowledgment",
+      "section": "other"
+    },
+    {
+      "chars": 772,
+      "heading": "Appendix A Neural network architecture for CIFAR-10 experiments",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 3575,
+      "heading": "Appendix B History of the GELU and SiLU",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Gaussian Error Linear Units (GELUs)",
+  "url": "https://arxiv.org/html/1606.08415",
+  "validation_only": false,
+  "version": "1606.08415v5"
+}

@@ -1,0 +1,533 @@
+{
+  "fixture_id": "gap_warmup_frac_0",
+  "round": 0,
+  "delta": {
+    "warmup_frac": "0"
+  },
+  "queries": [
+    {
+      "q": "\"without warmup\" AND \"language model\"",
+      "n_results": 10,
+      "source": "openalex"
+    },
+    {
+      "q": "\"without warmup\" AND \"Transformer\"",
+      "n_results": 10,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [
+    {
+      "paper_id": "W4385570253",
+      "title": "Pruning Pre-trained Language Models Without Fine-Tuning",
+      "authors": [],
+      "published": "2023-01-01",
+      "url": "https://openalex.org/W4385570253",
+      "abstract": "To overcome the overparameterized problem in Pre-trained Language Models (PLMs), pruning is widely used as a simple and straightforward compression method by directly removing unimportant weights.Previous first-order methods successfully compress PLMs to extremely high sparsity with little performance drop.These methods, such as movement pruning, use first-order information to prune PLMs while fine-tuning the remaining weights.In this work, we argue fine-tuning is redundant for first-order pruning, since first-order pruning is sufficient to converge PLMs to downstream tasks without fine-tuning.Under this motivation, we propose Static Model Pruning (SMP), which only uses first-order pruning to adapt PLMs to downstream tasks while achieving the target sparsity level.In addition, we also design a new masking function and training objective to further improve SMP.Extensive experiments at various sparsity levels show SMP has significant improvements over firstorder and zero-order methods.Unlike previous first-order methods, SMP is also applicable to low sparsity and outperforms zero-order methods.Meanwhile, SMP is more parameter efficient than other methods due to it does not require fine-tuning.Our code is available at https://github.com/kongds/SMP.",
+      "abstract_sha256": "a9d803d126da1885b7ac43cb51bc43cd4c541cf87156a5d434584b3a2558e554",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 1,
+      "doi": "https://doi.org/10.18653/v1/2023.acl-long.35",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2601.22947",
+      "title": "Reconsidering Positional Supervision in Masked Diffusion Language Model Training",
+      "authors": [],
+      "published": "2026-01-30",
+      "url": "https://arxiv.org/abs/2601.22947",
+      "abstract": "Masked diffusion language models (MDLMs) generate text by unmasking tokens in parallel and have recently emerged as alternatives to autoregressive language models. They can be viewed as parallel decoders trained with a position-wise cross-entropy (CE) loss, the same setup as non-autoregressive translation (NAT). In NAT, CE-trained parallel decoders have been argued to be sensitive to small positional shifts, since CE penalizes them harshly. We ask whether CE-trained MDLMs are similarly sensitive to such shifts under iterative decoding. To probe this, we apply a controlled intervention that introduces them during decoding. On LLaDA-8B-Instruct with Arena-Hard, displacing as little as 1% of generated tokens by one position substantially reduces win rates against the unintervened model, showing that MDLMs are sensitive to such small shifts under iterative parallel decoding. Motivated by this, we adapt connectionist temporal classification (CTC), an alignment-flexible objective known to mitigate it there, to MDLM supervised fine-tuning. By relaxing the strict position-wise match that CE imposes, CTC gives the loss room to absorb small positional shifts; concretely, we modified CTC objective to use a special token that absorbs positional uncertainty between target tokens and output positions, and a updated collapse map that preserves target surface forms. Across four open-ended generation benchmarks, the resulting model consistently improves over both the original model and a matched cross-entropy-trained baseline, with statistically significant gains on all four. These results identify training-side alignment flexibility as a useful design dimension for MDLM SFT, complementary to the inference-time approaches explored in prior work.",
+      "abstract_sha256": "0a8f5fb7157dd533dc5acf3acf949136775f5c8ba5aa07b4c4e7e6db9bcdea4d",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2601.22947",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W4389519901",
+      "title": "TRAMS: Training-free Memory Selection for Long-range Language Modeling",
+      "authors": [],
+      "published": "2023-01-01",
+      "url": "https://openalex.org/W4389519901",
+      "abstract": "The Transformer architecture is crucial for numerous AI models, but it still faces challenges in long-range language modeling.Though several specific transformer architectures have been designed to tackle issues of long-range dependencies, existing methods like Transformer-XL are plagued by a high percentage of ineffective memories.In this study, we present a plug-and-play strategy, known as TRAiningfree Memory Selection (TRAMS), that selects tokens participating in attention calculation based on one simple metric.This strategy allows us to keep tokens that are likely to have a high attention score with the current queries and ignore the other ones.We have tested our approach on the word-level benchmark (WikiText-103) and the character-level benchmark (enwik8), and the results indicate an improvement without having additional training or adding additional parameters.",
+      "abstract_sha256": "9b7b19c956068da9ab2a44d741ace7211de12695b07c02d249bb88e62e4064a2",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 1,
+      "doi": "https://doi.org/10.18653/v1/2023.findings-emnlp.331",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2304.13013",
+      "title": "Stable and low-precision training for large-scale vision-language models",
+      "authors": [],
+      "published": "2023-04-25",
+      "url": "https://arxiv.org/abs/2304.13013",
+      "abstract": "We introduce new methods for 1) accelerating and 2) stabilizing training for large language-vision models. 1) For acceleration, we introduce SwitchBack, a linear layer for int8 quantized training which provides a speed-up of 13-25% while matching the performance of bfloat16 training within 0.1 percentage points for the 1B parameter CLIP ViT-Huge -- the largest int8 training to date. Our main focus is int8 as GPU support for float8 is rare, though we also analyze float8 training through simulation. While SwitchBack proves effective for float8, we show that standard techniques are also successful if the network is trained and initialized so that large feature magnitudes are discouraged, which we accomplish via layer-scale initialized with zeros. 2) For stability, we analyze loss spikes and find they consistently occur 1-8 iterations after the squared gradients become under-estimated by their AdamW second moment estimator. As a result, we recommend an AdamW-Adafactor hybrid which avoids loss spikes when training a CLIP ViT-Huge model and outperforms gradient clipping at the scales we test.",
+      "abstract_sha256": "f30fb0c877c0c8bd8e5ba0e7c31ef70477ec3432e4630de0be25a6a1a8edae49",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 5,
+      "doi": "https://doi.org/10.48550/arxiv.2304.13013",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "W4404783110",
+      "title": "Extending Context Window of Large Language Models from a Distributional Perspective",
+      "authors": [],
+      "published": "2024-01-01",
+      "url": "https://openalex.org/W4404783110",
+      "abstract": "Scaling the rotary position embedding (RoPE) has become a common method for extending the context window of RoPE-based large language models (LLMs).However, existing scaling methods often rely on empirical approaches and lack a profound understanding of the internal distribution within RoPE, resulting in suboptimal performance in extending the context window length.In this paper, we propose to optimize the context window extending task from the view of rotary angle distribution.Specifically, we first estimate the distribution of the rotary angles within the model and analyze the extent to which length extension perturbs this distribution.Then, we present a novel extension strategy that minimizes the disturbance between rotary angle distributions to maintain consistency with the pre-training phase, enhancing the model's capability to generalize to longer sequences.Experimental results compared to the strong baseline methods demonstrate that our approach reduces by up to 72% of the distributional disturbance when extending LLaMA2's context window to 8k, and reduces by up to 32% when extending to 16k.On the LongBench-E benchmark, our method achieves an average improvement of up to 4.33% over existing state-of-the-art methods.Furthermore, our method maintains the model's performance on the Hugging Face Open LLM benchmark after context window extension, with only an average performance fluctuation ranging from -0.12 to +0.22.Our code is available at https: //github.com/1180301012/DPRoPE.",
+      "abstract_sha256": "c9cd314c9642dec79d41a8ea5d8395adb2dc138321151a5cabadd5cb1fa61a49",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 2,
+      "doi": "https://doi.org/10.18653/v1/2024.emnlp-main.414",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2310.15494",
+      "title": "TRAMS: Training-free Memory Selection for Long-range Language Modeling",
+      "authors": [],
+      "published": "2023-10-24",
+      "url": "https://arxiv.org/abs/2310.15494",
+      "abstract": "The Transformer architecture is crucial for numerous AI models, but it still faces challenges in long-range language modeling. Though several specific transformer architectures have been designed to tackle issues of long-range dependencies, existing methods like Transformer-XL are plagued by a high percentage of ineffective memories. In this study, we present a plug-and-play strategy, known as TRAining-free Memory Selection (TRAMS), that selects tokens participating in attention calculation based on one simple metric. This strategy allows us to keep tokens that are likely to have a high attention score with the current queries and ignore the other ones. We have tested our approach on the word-level benchmark (WikiText-103) and the character-level benchmark (enwik8), and the results indicate an improvement without having additional training or adding additional parameters.",
+      "abstract_sha256": "90446b7fa98c5c3f7acbcc9f1a728ce794a66233c78e20c80ac2cea9bbb923b9",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2310.15494",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2602.13498",
+      "title": "TrasMuon: Trust-Region Adaptive Scaling for Orthogonalized Momentum Optimizers",
+      "authors": [],
+      "published": "2026-02-13",
+      "url": "https://arxiv.org/abs/2602.13498",
+      "abstract": "Muon-style optimizers leverage Newton-Schulz (NS) iterations to orthogonalize updates, yielding update geometries that often outperform Adam-series methods. However, this orthogonalization discards magnitude information, rendering training sensitive to step-size hyperparameters and vulnerable to high-energy bursts. To mitigate this, we introduce TrasMuon (\\textbf{T}rust \\textbf{R}egion \\textbf{A}daptive \\textbf{S}caling \\textbf{Muon}). TrasMuon preserves the near-isometric geometry of Muon while stabilizing magnitudes through (i) global RMS calibration and (ii) energy-based trust-region clipping. We demonstrate that while reintroducing adaptive scaling improves optimization efficiency, it typically exacerbates instability due to high-energy outliers. TrasMuon addresses this by defining a trust region based on relative energy ratios, confining updates to a stable zone. Empirical experiments on vision and language models demonstrate that TrasMuon converges faster than baselines. Furthermore, experiments without warmup stages confirm TrasMuon's superior stability and robustness.",
+      "abstract_sha256": "1b39f6dc1275ae3653315dfac76fa9dc4b010cf249b256960970ba5a207d59e6",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2602.13498",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2410.01490",
+      "title": "Extending Context Window of Large Language Models from a Distributional Perspective",
+      "authors": [],
+      "published": "2024-10-02",
+      "url": "https://arxiv.org/abs/2410.01490",
+      "abstract": "Scaling the rotary position embedding (RoPE) has become a common method for extending the context window of RoPE-based large language models (LLMs). However, existing scaling methods often rely on empirical approaches and lack a profound understanding of the internal distribution within RoPE, resulting in suboptimal performance in extending the context window length. In this paper, we propose to optimize the context window extending task from the view of rotary angle distribution. Specifically, we first estimate the distribution of the rotary angles within the model and analyze the extent to which length extension perturbs this distribution. Then, we present a novel extension strategy that minimizes the disturbance between rotary angle distributions to maintain consistency with the pre-training phase, enhancing the model's capability to generalize to longer sequences. Experimental results compared to the strong baseline methods demonstrate that our approach reduces by up to 72% of the distributional disturbance when extending LLaMA2's context window to 8k, and reduces by up to 32% when extending to 16k. On the LongBench-E benchmark, our method achieves an average improvement of up to 4.33% over existing state-of-the-art methods. Furthermore, Our method maintains the model's performance on the Hugging Face Open LLM benchmark after context window extension, with only an average performance fluctuation ranging from -0.12 to +0.22.",
+      "abstract_sha256": "31e514dc4a491c54b18dd4a86a7b46cb4b4fd25ba6561e6dfdd4aaa86228ebe1",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2410.01490",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2405.03133",
+      "title": "Lory: Fully Differentiable Mixture-of-Experts for Autoregressive Language Model Pre-training",
+      "authors": [],
+      "published": "2024-05-06",
+      "url": "https://arxiv.org/abs/2405.03133",
+      "abstract": "Mixture-of-experts (MoE) models facilitate efficient scaling; however, training the router network introduces the challenge of optimizing a non-differentiable, discrete objective. Recently, a fully-differentiable MoE architecture, SMEAR, was proposed (Muqeeth et al., 2023), which softly merges experts in the parameter space; nevertheless, its effectiveness was only demonstrated in downstream fine-tuning on classification tasks. In this paper, we present Lory, the first approach that scales such architectures to autoregressive language model pre-training. Lory introduces two key techniques: (1) a causal segment routing strategy that achieves high efficiency for expert merging operations while preserving the autoregressive nature of language models; (2) a similarity-based data batching method that encourages expert specialization by grouping similar documents in training instances. We pre-train a series of Lory models on 150B tokens from scratch, with up to 32 experts and 30B (1.5B active) parameters. Experimental results show significant performance gains over parameter-matched dense models on both perplexity (+13.9%) and a variety of downstream tasks (+1.5%-11.1%). Despite segment-level routing, Lory models achieve competitive performance compared to state-of-the-art MoE models with token-level routing. We further demonstrate that the trained experts in Lory capture domain-level specialization without supervision. Our work highlights the potential of fully-differentiable MoE architectures for language model pre-training and advocates future research in this area.",
+      "abstract_sha256": "4e2d72d9ed9951751d69e921be22564a0b88a779112702e37047739ea57031bb",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 6,
+      "doi": "https://doi.org/10.48550/arxiv.2405.03133",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2609.13144",
+      "title": "Type Diversity Enables Transformers to Generalise Compositionally",
+      "authors": [],
+      "published": "2026-09-11",
+      "url": "https://arxiv.org/abs/2609.13144",
+      "abstract": "Compositional generalisation has been divided into lexical and structural generalisation. Previous work has found that structural generalisation is harder than lexical for Transformers. We propose that this difference is not inherent to Transformers, but due to the high diversity of lexical types and low diversity of structural types in the specific datasets of these previous works. By type diversity we mean the number of different constructors of that type, instead of, for example, the specific word combinations that might populate the structure. To test this, we vary the amounts of type diversity of lexical and structural types in previously published datasets. We create linguistically diverse variants of the COGS and SLOG datasets using Grammatical Framework. We find that type diversity correlates with compositional generalisation equally in lexical and structural test cases, supporting our hypothesis. We note a contradiction with the proposition in previous work that compound divergence explains the difficulty in compositional generalisation tasks. We further investigate the effects of other dataset properties on compositional generalisation, such as the diversity of types other than the novel test structure, and surface properties of the logical semantics format.",
+      "abstract_sha256": "73937ed353ac8817cd225e89b0a44935a11766ad7946427e5d4e04ed848986c9",
+      "source": "openalex",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "https://doi.org/10.48550/arxiv.2609.13144",
+      "categories": [],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "xW4385570253_1",
+      "paper_id": "W4385570253",
+      "dimension": "outside_testbed",
+      "method": "Static Model Pruning (SMP)",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "SMP significantly improves over first-order and zero-order pruning methods across sparsity levels without fine-tuning.",
+      "source_span": "Extensive experiments at various sparsity levels show SMP has significant improvements over firstorder and zero-order methods.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-01-01",
+      "extraction_event": "unrecorded-246d5515"
+    },
+    {
+      "claim_id": "x2601_22947_1",
+      "paper_id": "2601.22947",
+      "dimension": "outside_testbed",
+      "method": "CTC-based objective for MDLM supervised fine-tuning",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "A modified CTC objective for MDLM SFT improves over the original model and a cross-entropy baseline on four generation benchmarks.",
+      "source_span": "Across four open-ended generation benchmarks, the resulting model consistently improves over both the original model and a matched cross-entropy-trained baseline, with statistically significant gains on all four.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-01-30",
+      "extraction_event": "unrecorded-246d5515",
+      "mechanism": "CTC gives the loss room to absorb small positional shifts",
+      "mechanism_category": "position_generalization"
+    },
+    {
+      "claim_id": "xW4389519901_1",
+      "paper_id": "W4389519901",
+      "dimension": "outside_testbed",
+      "method": "TRAMS training-free memory selection",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "TRAMS improves results on WikiText-103 and enwik8 without additional training or parameters.",
+      "source_span": "the results indicate an improvement without having additional training or adding additional parameters",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-01-01",
+      "extraction_event": "unrecorded-246d5515",
+      "mechanism": "keep tokens that are likely to have a high attention score with the current queries",
+      "mechanism_category": "attention_behavior"
+    },
+    {
+      "claim_id": "x2304_13013_1",
+      "paper_id": "2304.13013",
+      "dimension": "outside_testbed",
+      "method": "SwitchBack int8 linear layer",
+      "setting": "transformer, vision, scale large, empirical (extracted from the abstract)",
+      "claim": "SwitchBack int8 training speeds up training 13-25% while matching bfloat16 performance within 0.1 points for CLIP ViT-Huge.",
+      "source_span": "provides a speed-up of 13-25% while matching the performance of bfloat16 training within 0.1 percentage points for the 1B parameter CLIP ViT-Huge",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "vision",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-04-25",
+      "extraction_event": "unrecorded-246d5515",
+      "mechanism": "speed-up of 13-25%",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2304_13013_2",
+      "paper_id": "2304.13013",
+      "dimension": "outside_testbed",
+      "method": "AdamW-Adafactor hybrid optimizer",
+      "setting": "transformer, vision, scale large, empirical (extracted from the abstract)",
+      "claim": "An AdamW-Adafactor hybrid avoids loss spikes and outperforms gradient clipping when training CLIP ViT-Huge.",
+      "source_span": "we recommend an AdamW-Adafactor hybrid which avoids loss spikes when training a CLIP ViT-Huge model and outperforms gradient clipping at the scales we test",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "vision",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-04-25",
+      "extraction_event": "unrecorded-246d5515",
+      "mechanism": "avoids loss spikes",
+      "mechanism_category": "gradient_stability"
+    },
+    {
+      "claim_id": "xW4404783110_1",
+      "paper_id": "W4404783110",
+      "dimension": "outside_testbed",
+      "method": "Distribution-aware RoPE scaling for context extension",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "The method achieves up to 4.33% average improvement on LongBench-E over state-of-the-art context extension methods.",
+      "source_span": "On the LongBench-E benchmark, our method achieves an average improvement of up to 4.33% over existing state-of-the-art methods.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-01-01",
+      "extraction_event": "unrecorded-246d5515",
+      "mechanism": "enhancing the model's capability to generalize to longer sequences",
+      "mechanism_category": "position_generalization"
+    },
+    {
+      "claim_id": "x2310_15494_1",
+      "paper_id": "2310.15494",
+      "dimension": "outside_testbed",
+      "method": "TRAMS training-free memory selection",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Selecting memory tokens by a simple metric improves results on WikiText-103 and enwik8 without extra training or parameters.",
+      "source_span": "the results indicate an improvement without having additional training or adding additional parameters",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2023-10-24",
+      "extraction_event": "unrecorded-fb43d03d",
+      "mechanism": "keep tokens that are likely to have a high attention score with the current queries",
+      "mechanism_category": "attention_behavior"
+    },
+    {
+      "claim_id": "x2602_13498_1",
+      "paper_id": "2602.13498",
+      "dimension": "outside_testbed",
+      "method": "TrasMuon optimizer",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "TrasMuon converges faster than baselines on vision and language models.",
+      "source_span": "Empirical experiments on vision and language models demonstrate that TrasMuon converges faster than baselines.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-02-13",
+      "extraction_event": "unrecorded-fb43d03d",
+      "mechanism": "confining updates to a stable zone",
+      "mechanism_category": "gradient_stability"
+    },
+    {
+      "claim_id": "x2410_01490_1",
+      "paper_id": "2410.01490",
+      "dimension": "outside_testbed",
+      "method": "Rotary angle distribution-preserving RoPE scaling",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "The method improves LongBench-E by up to 4.33% over state-of-the-art context extension methods.",
+      "source_span": "On the LongBench-E benchmark, our method achieves an average improvement of up to 4.33% over existing state-of-the-art methods.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-10-02",
+      "extraction_event": "unrecorded-fb43d03d",
+      "mechanism": "enhancing the model's capability to generalize to longer sequences",
+      "mechanism_category": "position_generalization"
+    },
+    {
+      "claim_id": "x2405_03133_1",
+      "paper_id": "2405.03133",
+      "dimension": "outside_testbed",
+      "method": "Lory fully differentiable MoE",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "Lory outperforms parameter-matched dense models in perplexity and downstream tasks.",
+      "source_span": "Experimental results show significant performance gains over parameter-matched dense models on both perplexity (+13.9%) and a variety of downstream tasks (+1.5%-11.1%).",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-05-06",
+      "extraction_event": "unrecorded-fb43d03d"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2303.06296",
+      "title": "Stabilizing Transformer Training by Preventing Attention Entropy Collapse",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2210.05956",
+      "title": "Towards Theoretically Inspired Neural Initialization Optimization",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2304.09856",
+      "title": "LipsFormer: Introducing Lipschitz Continuity to Vision Transformers",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2601.19849",
+      "title": "HexFormer: Hyperbolic Vision Transformer with Exponential Map Aggregation",
+      "reason": "exclude_term: vision transformer"
+    }
+  ],
+  "degraded": []
+}

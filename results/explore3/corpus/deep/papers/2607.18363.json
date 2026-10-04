@@ -1,0 +1,146 @@
+{
+  "dropped": [],
+  "event": "unrecorded-179233f5",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "All results are at or below 87M total parameters and 105B tokens, on one reasoning-dense corpus plus one knowledge-dense control pair; MMLU-class benchmarks are at chance throughout and cannot yet discriminate.",
+        "section": "limitations"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "qk_norm=true",
+        "quote": "the identification of QK-normalization, not feed-forward layers or residual gating, as the component that keeps deep attention-only stacks trainable",
+        "section": "introduction"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "qk_norm=true",
+        "quote": "QK-normalization, not feed-forward layers or residual gating, keeps 48-layer attention-only stacks trainable.",
+        "section": "abstract",
+        "setting_note": "48-layer attention-only transformer stacks"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "512 rows, 1.05M tokens/step",
+        "dataset": "68B-token reasoning-dense corpus",
+        "model_family": "transformer",
+        "parameter_count": "87M",
+        "quote": "for up to 105B tokens (1.5 epochs of a 68B-token reasoning-dense corpus) at 6M to 87M total parameters",
+        "section": "abstract",
+        "task": "language_modeling",
+        "training_steps": "up to 105B tokens"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "ae363e22f98fad6925000daa649c78ae0fb6ef309b9720c356847458215a3be1",
+  "paper_id": "2607.18363",
+  "section_chars": {
+    "abstract": 2342,
+    "experimental_setup": 7411,
+    "introduction": 4318,
+    "limitations": 2674,
+    "results": 2762
+  },
+  "sections": [
+    {
+      "chars": 2342,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4318,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 2815,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 7411,
+      "heading": "Experimental Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2205,
+      "heading": "The Cost of Removing Feed-Forward Layers",
+      "section": "other"
+    },
+    {
+      "chars": 5193,
+      "heading": "Where the Gap Lives",
+      "section": "other"
+    },
+    {
+      "chars": 1447,
+      "heading": "Mechanism: Weight-Spectrum Dynamics",
+      "section": "other"
+    },
+    {
+      "chars": 2705,
+      "heading": "Component Ablations",
+      "section": "other"
+    },
+    {
+      "chars": 2674,
+      "heading": "Discussion and Limitations",
+      "section": "limitations"
+    },
+    {
+      "chars": 1731,
+      "heading": "Appendix A: Additional Formal Results",
+      "section": "results"
+    },
+    {
+      "chars": 1418,
+      "heading": "Appendix B: Registration Record",
+      "section": "other"
+    },
+    {
+      "chars": 448,
+      "heading": "Appendix C: Learning-Rate Probes for the Size Ladder",
+      "section": "other"
+    },
+    {
+      "chars": 1030,
+      "heading": "Appendix D: Per-Seed Downstream Results",
+      "section": "results"
+    },
+    {
+      "chars": 414,
+      "heading": "Appendix E: Repetition: Exact Values",
+      "section": "other"
+    },
+    {
+      "chars": 615,
+      "heading": "Appendix F: Gate Trajectories and FFN-Arm Observations",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix G: Depth Ladder",
+      "section": "other"
+    },
+    {
+      "chars": 1486,
+      "heading": "Appendix H: Reproducibility Details",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "A Controlled Study of Attention-Only Transformers",
+  "url": "https://arxiv.org/html/2607.18363",
+  "validation_only": false,
+  "version": "2607.18363v1"
+}

@@ -1,0 +1,205 @@
+{
+  "dropped": [],
+  "event": "unrecorded-3d35a3a1",
+  "findings": {
+    "limitations": [
+      {
+        "method": "norm=rmsnorm",
+        "quote": "Actual speed improvements depend on the framework, hardware, neural network architecture and relative computational cost of other components, and we empirically observed speedups of 7% \\sim 64% across different models and implementations.",
+        "section": "conclusion"
+      },
+      {
+        "method": "norm=rmsnorm",
+        "quote": "In the future, we would like to take more analysis about the success behind RMSNorm.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "scale_invariance",
+        "method": "norm=rmsnorm",
+        "quote": "RMSNorm regularizes the summed inputs to a neuron in one layer according to root mean square (RMS), giving the model re-scaling invariance property and implicit learning rate adaptation ability.",
+        "section": "abstract"
+      },
+      {
+        "mechanism_category": "computational_efficiency",
+        "method": "norm=rmsnorm",
+        "quote": "Our efficiency improvement come from simplifying the computation, and we thus expect them to be orthogonal to other means of increasing training speed, such as low-precision arithmetic and GPU kernel fusion.",
+        "section": "conclusion"
+      },
+      {
+        "mechanism_category": "gradient_stability",
+        "method": "norm=rmsnorm",
+        "quote": "This supports our hypothesis that RMSNorm stabilizes recurrent activations without the need to explicitly normalize the mean.",
+        "section": "experimental_setup"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "RMSNorm achieves BLEU scores comparable to LayerNorm, and yields a speedup of 7% \\sim 9%.",
+        "section": "experimental_setup",
+        "setting_note": "Transformer base, WMT14 En-De"
+      },
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "Overall, RMSNorm yields comparable translation quality compared with LayerNorm but incurs less computational overhead, outperforming LayerNorm with speedups ranging from 11% \\sim 34%.",
+        "section": "experimental_setup",
+        "setting_note": "RNNSearch/Transformer in Theano and PyTorch, translation"
+      },
+      {
+        "direction": "improves",
+        "method": "norm=rmsnorm",
+        "quote": "both RMSNorm and LayerNorm improve the model performance, reaching higher recall values (except LayerNorm on R@5) and lower mean rank, though RMSNorm reveals better generalization than LayerNorm.",
+        "section": "experimental_setup",
+        "setting_note": "order-embedding image-caption retrieval, MS COCO"
+      },
+      {
+        "direction": "improves",
+        "method": "norm=rmsnorm",
+        "quote": "In contrast, RMSNorm shows better generalization, surpassing the Baseline by 0.013% and saving about 20.5% training time compared to LayerNorm.",
+        "section": "experimental_setup",
+        "setting_note": "ConvPool-CNN-C on CIFAR-10"
+      },
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "Although in Figure 5 the performance of RMSNorm and LayerNorm is comparable, RMSNorm is around 15% faster than LayerNorm as shown in Table 6.",
+        "section": "experimental_setup",
+        "setting_note": "attentive reader on CNN QA"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "WMT14 English-German",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "We use an in-house Tensorflow implementation of the Transformer, and employ the base setting as in [31] with all models trained for 300K steps.",
+        "section": "experimental_setup",
+        "task": "translation",
+        "training_steps": "300K steps"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "123eee1103c34b7aa54e84daea4493e83502e55ca77e6ce507e51d3934525b0e",
+  "paper_id": "1910.07467",
+  "section_chars": {
+    "abstract": 1249,
+    "conclusion": 1582,
+    "experimental_setup": 10057,
+    "introduction": 2996
+  },
+  "sections": [
+    {
+      "chars": 1249,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 2996,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 3227,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1746,
+      "heading": "Background",
+      "section": "other"
+    },
+    {
+      "chars": 2468,
+      "heading": "RMSNorm",
+      "section": "other"
+    },
+    {
+      "chars": 1971,
+      "heading": "4.1 Invariance Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 3885,
+      "heading": "4.2 Gradient Analysis",
+      "section": "other"
+    },
+    {
+      "chars": 1108,
+      "heading": "p RMSNorm",
+      "section": "other"
+    },
+    {
+      "chars": 733,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 4779,
+      "heading": "6.1 Machine Translation",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1898,
+      "heading": "6.2 CNN/Daily Mail Reading Comprehension",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1626,
+      "heading": "6.3 Image-Caption Retrieval",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1017,
+      "heading": "6.4 CIFAR-10 Classification",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1582,
+      "heading": "Conclusion and Future Work",
+      "section": "conclusion"
+    },
+    {
+      "chars": 538,
+      "heading": "Acknowledgments",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Appendix",
+      "section": "other"
+    },
+    {
+      "chars": 1996,
+      "heading": "A.1 Machine Translation",
+      "section": "other"
+    },
+    {
+      "chars": 511,
+      "heading": "A.2 CNN/Daily Mail Reading Comprehension",
+      "section": "other"
+    },
+    {
+      "chars": 776,
+      "heading": "A.3 Image-Caption Retrieval",
+      "section": "other"
+    },
+    {
+      "chars": 385,
+      "heading": "A.4 CIFAR-10 Classification",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Root Mean Square Layer Normalization",
+  "url": "https://arxiv.org/html/1910.07467",
+  "validation_only": false,
+  "version": "1910.07467v1"
+}

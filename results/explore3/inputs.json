@@ -1,0 +1,18 @@
+{
+  "claims": "d0b2dbb178278b0cf241989b01116a083c97ed99f2481567d12fc2053706fc30",
+  "data": "86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed",
+  "fixtures": "72d935f8436f6a972161513d4bba882029b511863b107f42f1eecd28a235c994",
+  "niche": "970c20c2c11115cbac910f955e501f5769abbac510b152def0c906f8daf13787",
+  "papers": "1416f66b73849b335b7f63d4a07b44362633a37d5be8db8fd9ee454aeb804990",
+  "prompts/critic_post.md": "4b8032ebdebec077003354a4341a743b1dcba0ac31d97fcefd41c7fea92d2cbb",
+  "prompts/critic_pre.md": "5a326abfd48dcbe7c75d650ee6fa43a08f999b8567fd61859d63fc02ea89e590",
+  "prompts/deep_read.md": "85ab65eca186e63b9da69fa6a20bd559e9301cfbecae1eb0a57507a5bf76dde0",
+  "prompts/extract.md": "4e67e8a6685378c95d6a0687dfaf56b5efd783b7abf5f4dddaa7f5a418bf776d",
+  "prompts/literature.md": "1e6988477d9311a69d3500fdbb1d01a7c787fc887fbc08b31c31e95a128ac79b",
+  "prompts/literature_gate.md": "b4ca47e2fb84baa688184917b3072d436a7383b1889ef1daa7bc3cff4d6690ae",
+  "prompts/query_plan.md": "de7ce1732b6b5b7f08d608fc943bfe311b46ee33066a36270fd7cf0e1e181956",
+  "prompts/scientist.md": "4b3f3323e49ec46244b540b3e3fa48dd8e7c10ddf9299897875731fe3190a23c",
+  "prompts/scientist_gap.md": "c39c87f8d54cc735b10c1ffeb4f5d54774e92513183cccd1f456cff06e1bd48d",
+  "prompts/scout.md": "1ec654bba2d5290e599de49af556bee92617da71212664b940efa6f3fba74e41",
+  "prompts/stated_gap.md": "7a9d42636321c5ac28354c3dd96431c09a0356dfaa081f16afaaa2a5276b4c18"
+}

@@ -1,0 +1,293 @@
+{
+  "dropped": [],
+  "event": "unrecorded-3704e0d5",
+  "findings": {
+    "limitations": [
+      {
+        "method": "",
+        "quote": "First, although our comparisons are at substantial sizes, they are still orders of magnitude smaller than state-of-the-art models such as the full-scale GPT-3 [7].",
+        "section": "limitations"
+      },
+      {
+        "method": "",
+        "quote": "This result suggests that architectural modifications that work well for decoder-only auto-regressive language models may not necessarily be as effective for encoder-based masked language models.",
+        "section": "limitations"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "optimization_speed",
+        "method": "activation=relu2",
+        "quote": "However, they improve the sample efficiency of the model so much that they decrease the total compute needed to reach a target quality, by drastically reducing the number of training steps needed to get there.",
+        "section": "method"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "activation=relu2",
+        "quote": "Adding squared ReLUs to Synthesizer reduces training costs by a factor of 2.0X and improves perplexity by 0.7 when fully trained.",
+        "section": "results",
+        "setting_note": "Synthesizer on C4, T5 codebase, 145M"
+      },
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "Transformer++ | 110M | 524K | 20.03 | 1.52 | 998K | 19.28 | 1.64",
+        "section": "appendix_setup",
+        "setting_note": "Transformer++ (RMSNorm+SwiGLU) vs vanilla on C4, 110M"
+      },
+      {
+        "direction": "improves",
+        "method": "activation=relu2",
+        "quote": "The Primer-EZ techniques of added depthwise convolutions and squared ReLUs reduce Switch Transformer’s compute cost by a factor of 1.5X; this translates to a 0.6 perplexity improvement when controlling for compute (see Appendix A.10).",
+        "section": "results",
+        "setting_note": "Primer-EZ (squared ReLU + depthwise conv) on Switch Transformer"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "~2M tokens",
+        "dataset": "proprietary pretraining dataset",
+        "model_family": "transformer",
+        "parameter_count": "1.9B",
+        "quote": "Each model is trained using batches of \\sim 2M tokens using 512 TPUv4 chips for \\sim 140 hours ( \\sim 71.8K total accelerator hours or \\sim 1M train steps).",
+        "section": "results",
+        "task": "language_modeling",
+        "training_steps": "~1M"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "eb680af938204866ac087e3267106bb1dd2168def848c9cb144408c90eba6035",
+  "paper_id": "2109.08668",
+  "section_chars": {
+    "abstract": 1712,
+    "appendix_setup": 2754,
+    "conclusion": 818,
+    "experimental_setup": 2134,
+    "introduction": 3319,
+    "limitations": 868,
+    "method": 7736,
+    "results": 8691
+  },
+  "sections": [
+    {
+      "chars": 1712,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 3319,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Search Space and Search Method",
+      "section": "method"
+    },
+    {
+      "chars": 3992,
+      "heading": "Searching Over TensorFlow Programs:",
+      "section": "method"
+    },
+    {
+      "chars": 3743,
+      "heading": "Evolutionary Search:",
+      "section": "method"
+    },
+    {
+      "chars": 0,
+      "heading": "Primer",
+      "section": "other"
+    },
+    {
+      "chars": 463,
+      "heading": "Primer:",
+      "section": "other"
+    },
+    {
+      "chars": 736,
+      "heading": "Primer-EZ:",
+      "section": "other"
+    },
+    {
+      "chars": 1370,
+      "heading": "Squared ReLU:",
+      "section": "other"
+    },
+    {
+      "chars": 938,
+      "heading": "Multi-DConv-Head Attention (MDHA):",
+      "section": "other"
+    },
+    {
+      "chars": 2227,
+      "heading": "Other Modifications:",
+      "section": "other"
+    },
+    {
+      "chars": 1753,
+      "heading": "Results",
+      "section": "results"
+    },
+    {
+      "chars": 2550,
+      "heading": "4.1 Search Task Comparison",
+      "section": "results"
+    },
+    {
+      "chars": 1539,
+      "heading": "4.2 Primer Transferability to Other Codebases, Datasets, and Model Types",
+      "section": "results"
+    },
+    {
+      "chars": 2134,
+      "heading": "4.3 Large Scale T5 Auto-Regressive Language Model Training",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2846,
+      "heading": "4.4 Primer Transferability to Downstream One-Shot Tasks",
+      "section": "results"
+    },
+    {
+      "chars": 0,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 868,
+      "heading": "Limitations:",
+      "section": "limitations"
+    },
+    {
+      "chars": 818,
+      "heading": "Recommendations and Future Directions:",
+      "section": "conclusion"
+    },
+    {
+      "chars": 295,
+      "heading": "Acknowledgements",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Appendix",
+      "section": "other"
+    },
+    {
+      "chars": 2664,
+      "heading": "A.1 TensorFlow Primitives Vocabulary",
+      "section": "other"
+    },
+    {
+      "chars": 140,
+      "heading": "A.2 Constructing TensorFlow Graphs",
+      "section": "other"
+    },
+    {
+      "chars": 325,
+      "heading": "Relative Dimensions:",
+      "section": "other"
+    },
+    {
+      "chars": 739,
+      "heading": "Values Bank:",
+      "section": "other"
+    },
+    {
+      "chars": 627,
+      "heading": "Causal Masking:",
+      "section": "other"
+    },
+    {
+      "chars": 738,
+      "heading": "Branching:",
+      "section": "other"
+    },
+    {
+      "chars": 390,
+      "heading": "Resolving Dimension Mismatches:",
+      "section": "other"
+    },
+    {
+      "chars": 1706,
+      "heading": "A.3 Halving Hurdles",
+      "section": "other"
+    },
+    {
+      "chars": 168,
+      "heading": "A.4 Evolution Search Details",
+      "section": "other"
+    },
+    {
+      "chars": 1330,
+      "heading": "Mutations:",
+      "section": "other"
+    },
+    {
+      "chars": 1436,
+      "heading": "A.5 Transformer and Primer Program Comparisons",
+      "section": "other"
+    },
+    {
+      "chars": 1986,
+      "heading": "A.6 Exact LM1B Numbers",
+      "section": "other"
+    },
+    {
+      "chars": 1728,
+      "heading": "A.7 Ablation and Insertion Studies",
+      "section": "other"
+    },
+    {
+      "chars": 1070,
+      "heading": "A.8 Full Training Details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1736,
+      "heading": "A.9 Power Law Compute Savings Derivations",
+      "section": "other"
+    },
+    {
+      "chars": 1683,
+      "heading": "A.10 Exact T5 Numbers for Medium Sized Experiments",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 3444,
+      "heading": "A.11 Performance on Individual One-Shot Tasks",
+      "section": "other"
+    },
+    {
+      "chars": 1600,
+      "heading": "A.12 Masked Language Modeling",
+      "section": "other"
+    },
+    {
+      "chars": 5920,
+      "heading": "A.13 Carbon Emission Estimates",
+      "section": "other"
+    },
+    {
+      "chars": 3724,
+      "heading": "A.14 Comparison to Evolved Transformer",
+      "section": "other"
+    },
+    {
+      "chars": 2502,
+      "heading": "A.15 Practical Discussion",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Primer: Searching for Efficient Transformers for Language Modeling",
+  "url": "https://arxiv.org/html/2109.08668",
+  "validation_only": false,
+  "version": "2109.08668v2"
+}

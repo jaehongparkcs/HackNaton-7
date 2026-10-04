@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/AzulL/u/K2joydJn6SMD3iQ2Kcg</id>
+  <title>arXiv Query: search_query=all:"warmup" AND all:"Transformer" AND all:"learning rate" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-04T00:44:05Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22warmup%22+AND+(all:%22Transformer%22+AND+(all:%22learning+rate%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>19</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2505.21910v1</id>
+    <title>Taming Transformer Without Using Learning Rate Warmup</title>
+    <updated>2025-05-28T02:55:28Z</updated>
+    <link href="https://arxiv.org/abs/2505.21910v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.21910v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Scaling Transformer to a large scale without using some technical tricks such as learning rate warump and using an obviously lower learning rate is an extremely challenging task, and is increasingly gaining more attention. In this paper, we provide a theoretical analysis for the process of training Transformer and reveal the rationale behind the model crash phenomenon in the training process, termed \textit{spectral energy concentration} of ${\bW_q}^{\top} \bW_k$, which is the reason for a malignant entropy collapse, where ${\bW_q}$ and $\bW_k$ are the projection matrices for the query and the key in Transformer, respectively. To remedy this problem, motivated by \textit{Weyl's Inequality}, we present a novel optimization strategy, \ie, making the weight updating in successive steps smooth -- if the ratio $\frac{σ_{1}(\nabla \bW_t)}{σ_{1}(\bW_{t-1})}$ is larger than a threshold, we will automatically bound the learning rate to a weighted multiple of $\frac{σ_{1}(\bW_{t-1})}{σ_{1}(\nabla \bW_t)}$, where $\nabla \bW_t$ is the updating quantity in step $t$. Such an optimization strategy can prevent spectral energy concentration to only a few directions, and thus can avoid malignant entropy collapse which will trigger the model crash. We conduct extensive experiments using ViT, Swin-Transformer and GPT, showing that our optimization strategy can effectively and stably train these Transformers without using learning rate warmup.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-28T02:55:28Z</published>
+    <arxiv:comment>This paper is published as a conference paper at ICLR 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xianbiao Qi</name>
+    </author>
+    <author>
+      <name>Yelin He</name>
+    </author>
+    <author>
+      <name>Jiaquan Ye</name>
+    </author>
+    <author>
+      <name>Chun-Guang Li</name>
+    </author>
+    <author>
+      <name>Bojia Zi</name>
+    </author>
+    <author>
+      <name>Xili Dai</name>
+    </author>
+    <author>
+      <name>Qin Zou</name>
+    </author>
+    <author>
+      <name>Rong Xiao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.23420v1</id>
+    <title>The Warmup Dilemma: How Learning Rate Strategies Impact Speech-to-Text Model Convergence</title>
+    <updated>2025-05-29T13:10:57Z</updated>
+    <link href="https://arxiv.org/abs/2505.23420v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.23420v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training large-scale models presents challenges not only in terms of resource requirements but also in terms of their convergence. For this reason, the learning rate (LR) is often decreased when the size of a model is increased. Such a simple solution is not enough in the case of speech-to-text (S2T) trainings, where evolved and more complex variants of the Transformer architecture -- e.g., Conformer or Branchformer -- are used in light of their better performance. As a workaround, OWSM designed a double linear warmup of the LR, increasing it to a very small value in the first phase before updating it to a higher value in the second phase. While this solution worked well in practice, it was not compared with alternative solutions, nor was the impact on the final performance of different LR warmup schedules studied. This paper fills this gap, revealing that i) large-scale S2T trainings demand a sub-exponential LR warmup, and ii) a higher LR in the warmup phase accelerates initial convergence, but it does not boost final performance.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-29T13:10:57Z</published>
+    <arxiv:comment>Accepted to IWSLT 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Marco Gaido</name>
+    </author>
+    <author>
+      <name>Sara Papi</name>
+    </author>
+    <author>
+      <name>Luisa Bentivogli</name>
+    </author>
+    <author>
+      <name>Alessio Brutti</name>
+    </author>
+    <author>
+      <name>Mauro Cettolo</name>
+    </author>
+    <author>
+      <name>Roberto Gretter</name>
+    </author>
+    <author>
+      <name>Marco Matassoni</name>
+    </author>
+    <author>
+      <name>Mohamed Nabih</name>
+    </author>
+    <author>
+      <name>Matteo Negri</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2604.27077v2</id>
+    <title>Learning Rate Transfer in Normalized Transformers</title>
+    <updated>2026-05-01T03:33:05Z</updated>
+    <link href="https://arxiv.org/abs/2604.27077v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2604.27077v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Normalized Transformer, or nGPT (arXiv:2410.01131) achieves impressive training speedups and does not require weight decay or learning rate warmup. However, despite having hyperparameters that explicitly scale with model size, we observe that nGPT does not exhibit learning rate transfer across model dimension and token horizon. To rectify this, we combine numerical experiments with a principled use of alignment exponents (arXiv:2407.05872) to revisit and modify the $μ$P approach to hyperparameter transfer (arXiv:2011.14522). The result is a novel nGPT parameterization we call $ν$GPT. Through extensive empirical validation, we find $ν$GPT exhibits learning rate transfer across width, depth, and token horizon.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-04-29T18:11:42Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Boris Shigida</name>
+    </author>
+    <author>
+      <name>Boris Hanin</name>
+    </author>
+    <author>
+      <name>Andrey Gromov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.01483v1</id>
+    <title>Training Dynamics of the Cooldown Stage in Warmup-Stable-Decay Learning Rate Scheduler</title>
+    <updated>2025-08-02T20:36:52Z</updated>
+    <link href="https://arxiv.org/abs/2508.01483v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.01483v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning rate scheduling is essential in transformer training, where the final annealing plays a crucial role in getting the best performance. However, the mechanisms behind this cooldown phase, with its characteristic drop in loss, remain poorly understood. To address this, we provide a comprehensive analysis focusing solely on the cooldown phase in the Warmup-Stable-Decay (WSD) learning rate scheduler. Our analysis reveals that different cooldown shapes reveal a fundamental bias-variance trade-off in the resulting models, with shapes that balance exploration and exploitation consistently outperforming alternatives. Similarly, we find substantial performance variations $\unicode{x2013}$ comparable to those from cooldown shape selection $\unicode{x2013}$ when tuning AdamW hyperparameters. Notably, we observe consistent improvements with higher values of $β_2$ during cooldown. From a loss landscape perspective, we provide visualizations of the landscape during cooldown, supporting the river valley loss perspective empirically. These findings offer practical recommendations for configuring the WSD scheduler in transformer training, emphasizing the importance of optimizing the cooldown phase alongside traditional hyperparameter tuning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-02T20:36:52Z</published>
+    <arxiv:comment>Published in TMLR. Review: https://openreview.net/forum?id=ZnSYEcZod3</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Transactions on Machine Learning Research (TMLR), 2025</arxiv:journal_ref>
+    <author>
+      <name>Aleksandr Dremov</name>
+    </author>
+    <author>
+      <name>Alexander Hägele</name>
+    </author>
+    <author>
+      <name>Atli Kosson</name>
+    </author>
+    <author>
+      <name>Martin Jaggi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.09000v1</id>
+    <title>Universal Dynamics of Warmup Stable Decay: understanding WSD beyond Transformers</title>
+    <updated>2026-01-13T21:54:22Z</updated>
+    <link href="https://arxiv.org/abs/2601.09000v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.09000v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Warmup Stable Decay (WSD) learning rate scheduler has recently become popular, largely due to its good performance and flexibility when training large language models. It remains an open question whether the remarkable performance of WSD - using a decaying learning rate for only a fraction of training compared to cosine decay - is a phenomenon specific to transformer-based language models that can potentially offer new theoretical insights into their training dynamics. Inspired by the usage of learning rate schedulers as a new lens into understanding landscape geometry (e.g., river valley, connected minima, progressive sharpening), in this work we compare the WSD path of the Adam optimizer on a Pythia-like language model to that of a small CNN trained to classify CIFAR10 images. We observe most training signals, optimizer path features, and sharpness dynamics to be qualitatively similar in such architectures. This consistency points to shared geometric characteristics of the loss landscapes of old and new nonconvex problems, and hints to future research questions around the geometry of high dimensional optimization problems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-13T21:54:22Z</published>
+    <arxiv:comment>Accepted at the 2025 HiLD and MOSS Workshops at ICML</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Annalisa Belloni</name>
+    </author>
+    <author>
+      <name>Lorenzo Noci</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.09856v1</id>
+    <title>LipsFormer: Introducing Lipschitz Continuity to Vision Transformers</title>
+    <updated>2023-04-19T17:59:39Z</updated>
+    <link href="https://arxiv.org/abs/2304.09856v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.09856v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a Lipschitz continuous Transformer, called LipsFormer, to pursue training stability both theoretically and empirically for Transformer-based models. In contrast to previous practical tricks that address training instability by learning rate warmup, layer normalization, attention formulation, and weight initialization, we show that Lipschitz continuity is a more essential property to ensure training stability. In LipsFormer, we replace unstable Transformer component modules with Lipschitz continuous counterparts: CenterNorm instead of LayerNorm, spectral initialization instead of Xavier initialization, scaled cosine similarity attention instead of dot-product attention, and weighted residual shortcut. We prove that these introduced modules are Lipschitz continuous and derive an upper bound on the Lipschitz constant of LipsFormer. Our experiments show that LipsFormer allows stable training of deep Transformer architectures without the need of careful learning rate tuning such as warmup, yielding a faster convergence and better generalization. As a result, on the ImageNet 1K dataset, LipsFormer-Swin-Tiny based on Swin Transformer training for 300 epochs can obtain 82.7\% without any learning rate warmup. Moreover, LipsFormer-CSwin-Tiny, based on CSwin, training for 300 epochs achieves a top-1 accuracy of 83.5\% with 4.7G FLOPs and 24M parameters. The code will be released at \url{https://github.com/IDEA-Research/LipsFormer}.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-19T17:59:39Z</published>
+    <arxiv:comment>To appear in ICLR 2023, our code will be public at https://github.com/IDEA-Research/LipsFormer</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Xianbiao Qi</name>
+    </author>
+    <author>
+      <name>Jianan Wang</name>
+    </author>
+    <author>
+      <name>Yihao Chen</name>
+    </author>
+    <author>
+      <name>Yukai Shi</name>
+    </author>
+    <author>
+      <name>Lei Zhang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1904.11660v2</id>
+    <title>Transformers with convolutional context for ASR</title>
+    <updated>2020-03-02T23:25:25Z</updated>
+    <link href="https://arxiv.org/abs/1904.11660v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1904.11660v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The recent success of transformer networks for neural machine translation and other NLP tasks has led to a surge in research work trying to apply it for speech recognition. Recent efforts studied key research questions around ways of combining positional embedding with speech features, and stability of optimization for large scale learning of transformer networks. In this paper, we propose replacing the sinusoidal positional embedding for transformers with convolutionally learned input representations. These contextual representations provide subsequent transformer blocks with relative positional information needed for discovering long-range relationships between local concepts. The proposed system has favorable optimization characteristics where our reported results are produced with fixed learning rate of 1.0 and no warmup steps. The proposed model achieves a competitive 4.7% and 12.9% WER on the Librispeech ``test clean'' and ``test other'' subsets when no extra LM text is provided.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-04-26T03:00:19Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abdelrahman Mohamed</name>
+    </author>
+    <author>
+      <name>Dmytro Okhonko</name>
+    </author>
+    <author>
+      <name>Luke Zettlemoyer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2212.06144v2</id>
+    <title>Optimizing Learning Rate Schedules for Iterative Pruning of Deep Neural Networks</title>
+    <updated>2022-12-31T01:55:11Z</updated>
+    <link href="https://arxiv.org/abs/2212.06144v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2212.06144v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The importance of learning rate (LR) schedules on network pruning has been observed in a few recent works. As an example, Frankle and Carbin (2019) highlighted that winning tickets (i.e., accuracy preserving subnetworks) can not be found without applying a LR warmup schedule and Renda, Frankle and Carbin (2020) demonstrated that rewinding the LR to its initial state at the end of each pruning cycle improves performance. In this paper, we go one step further by first providing a theoretical justification for the surprising effect of LR schedules. Next, we propose a LR schedule for network pruning called SILO, which stands for S-shaped Improved Learning rate Optimization. The advantages of SILO over existing state-of-the-art (SOTA) LR schedules are two-fold: (i) SILO has a strong theoretical motivation and dynamically adjusts the LR during pruning to improve generalization. Specifically, SILO increases the LR upper bound (max_lr) in an S-shape. This leads to an improvement of 2% - 4% in extensive experiments with various types of networks (e.g., Vision Transformers, ResNet) on popular datasets such as ImageNet, CIFAR-10/100. (ii) In addition to the strong theoretical motivation, SILO is empirically optimal in the sense of matching an Oracle, which exhaustively searches for the optimal value of max_lr via grid search. We find that SILO is able to precisely adjust the value of max_lr to be within the Oracle optimized interval, resulting in performance competitive with the Oracle with significantly lower complexity.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-12-09T14:39:50Z</published>
+    <arxiv:comment>23 Pages. arXiv admin note: text overlap with arXiv:2110.08764</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shiyu Liu</name>
+    </author>
+    <author>
+      <name>Rohan Ghosh</name>
+    </author>
+    <author>
+      <name>John Tan Chong Min</name>
+    </author>
+    <author>
+      <name>Mehul Motani</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1804.00247v2</id>
+    <title>Training Tips for the Transformer Model</title>
+    <updated>2018-05-02T15:27:25Z</updated>
+    <link href="https://arxiv.org/abs/1804.00247v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1804.00247v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This article describes our experiments in neural machine translation using the recent Tensor2Tensor framework and the Transformer sequence-to-sequence model (Vaswani et al., 2017). We examine some of the critical parameters that affect the final translation quality, memory usage, training stability and training time, concluding each experiment with a set of recommendations for fellow researchers. In addition to confirming the general mantra "more data and larger models", we address scaling to multiple GPUs and provide practical tips for improved training regarding batch size, learning rate, warmup steps, maximum sentence length and checkpoint averaging. We hope that our observations will allow others to get better results given their particular hardware and data constraints.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-04-01T01:59:52Z</published>
+    <arxiv:comment>This is the version published in PBML (https://ufal.mff.cuni.cz/pbml/110/art-popel-bojar.pdf)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <arxiv:journal_ref>The Prague Bulletin of Mathematical Linguistics 110, April 2018, pp. 43-70</arxiv:journal_ref>
+    <author>
+      <name>Martin Popel</name>
+    </author>
+    <author>
+      <name>Ondřej Bojar</name>
+    </author>
+    <arxiv:doi>10.2478/pralin-2018-0002</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2478/pralin-2018-0002" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.10986v2</id>
+    <title>What Does It Mean to Be a Transformer? Insights from a Theoretical Hessian Analysis</title>
+    <updated>2025-03-17T17:32:06Z</updated>
+    <link href="https://arxiv.org/abs/2410.10986v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.10986v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Transformer architecture has inarguably revolutionized deep learning, overtaking classical architectures like multi-layer perceptrons (MLPs) and convolutional neural networks (CNNs). At its core, the attention block differs in form and functionality from most other architectural components in deep learning--to the extent that, in comparison to MLPs/CNNs, Transformers are more often accompanied by adaptive optimizers, layer normalization, learning rate warmup, etc. The root causes behind these outward manifestations and the precise mechanisms that govern them remain poorly understood. In this work, we bridge this gap by providing a fundamental understanding of what distinguishes the Transformer from the other architectures--grounded in a theoretical comparison of the (loss) Hessian. Concretely, for a single self-attention layer, (a) we first entirely derive the Transformer's Hessian and express it in matrix derivatives; (b) we then characterize it in terms of data, weight, and attention moment dependencies; and (c) while doing so further highlight the important structural differences to the Hessian of classical networks. Our results suggest that various common architectural and optimization choices in Transformers can be traced back to their highly non-linear dependencies on the data and weight matrices, which vary heterogeneously across parameters. Ultimately, our findings provide a deeper understanding of the Transformer's unique optimization landscape and the challenges it poses.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-14T18:15:02Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Weronika Ormaniec</name>
+    </author>
+    <author>
+      <name>Felix Dangel</name>
+    </author>
+    <author>
+      <name>Sidak Pal Singh</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.15701v1</id>
+    <title>Robust Transformer-Based One-Step Stock Index Forecasting via Shifted Data Augmentation</title>
+    <updated>2026-06-14T09:30:41Z</updated>
+    <link href="https://arxiv.org/abs/2606.15701v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.15701v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformers have shown remarkable success in sequence modeling, yet their direct application to financial time series remains challenging due to noisy signals, short-memory dynamics, and distributional shifts. This paper proposes a modified Transformer architecture for one-step stock index forecasting, combined with advanced learning-rate scheduling and a novel Shifted Data Augmentation (SDA) technique. We evaluate the proposed framework on two benchmark stock index datasets, VN30 and S&amp;P 500. Experimental results demonstrate that cosine annealing with warmup consistently improves forecasting accuracy over the generalized inverse-power scheduler. Furthermore, SDA substantially reduces forecasting errors and run-to-run variability while improving robustness to hyperparameter selection. The combination of cosine annealing scheduling and SDA achieved the best performance on both datasets, indicating that data augmentation can play a more important role than increasing model complexity in Transformer-based financial forecasting. These findings provide a practical and computationally efficient approach for robust stock index forecasting in noisy financial environments.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-fin.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-14T09:30:41Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tien Thanh Thach</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.04774v2</id>
+    <title>Theory of Optimal Learning Rate Schedules and Scaling Laws for a Random Feature Model</title>
+    <updated>2026-05-08T16:24:57Z</updated>
+    <link href="https://arxiv.org/abs/2602.04774v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.04774v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Setting the learning rate (LR) for a deep learning model is a critical part of successful training. Choosing LRs is often done empirically with trial and error. In this work, we explore a solvable model of optimal LR schedules for a powerlaw random feature model trained with stochastic gradient descent (SGD). We consider the optimal schedule $η_T^\star(t)$ where $t$ is the current iterate and $T$ is the training horizon. This schedule is computed both as a numerical optimization problem and also analytically using optimal control theory. Our analysis reveals two regimes which we term the easy phase and hard phase. In the easy phase the optimal schedule is a polynomial decay $η_T^\star(t) \simeq T^{-ξ} (1-t/T)^δ$ where $ξ$ and $δ$ depend on the properties of the features and task. In the hard phase, the optimal schedule resembles warmup-stable-decay with constant initial LR and annealing performed over a vanishing fraction of training steps. We investigate joint optimization of LR and batch size and find batch ramps can improve the wall-clock time in the easy phase. Beyond SGD, we derive optimal schedules for momentum parameter $β(t)$ and show that it improves the loss-scaling exponent in the hard phase. We compare our optimal schedule to various benchmarks including (1) optimal constant learning rates $η_T(t) \sim T^{-ξ}$ (2) optimal power laws $η_T(t) \sim T^{-ξ} t^{-χ}$, finding that our schedule achieves better rates than either of these. Our theory suggests that LR transfer across training horizon depends on the structure of the model and task. For ResNet image classification on CIFAR-5M, the learning curves exhibit hard-phase behavior where optimal base LRs are constant under sufficient annealing. GPT-2 style transformers trained in language modeling exhibit easy-phase behavior where optimal LRs shift even under annealing.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-04T17:11:36Z</published>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <author>
+      <name>Blake Bordelon</name>
+    </author>
+    <author>
+      <name>Francesco Mori</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.09723v1</id>
+    <title>When Will Gradient Regularization Be Harmful?</title>
+    <updated>2024-06-14T05:17:39Z</updated>
+    <link href="https://arxiv.org/abs/2406.09723v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.09723v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gradient regularization (GR), which aims to penalize the gradient norm atop the loss function, has shown promising results in training modern over-parameterized deep neural networks. However, can we trust this powerful technique? This paper reveals that GR can cause performance degeneration in adaptive optimization scenarios, particularly with learning rate warmup. Our empirical and theoretical analyses suggest this is due to GR inducing instability and divergence in gradient statistics of adaptive optimizers at the initial training stage. Inspired by the warmup heuristic, we propose three GR warmup strategies, each relaxing the regularization effect to a certain extent during the warmup course to ensure the accurate and stable accumulation of gradients. With experiments on Vision Transformer family, we confirm the three GR warmup strategies can effectively circumvent these issues, thereby largely improving the model performance. Meanwhile, we note that scalable models tend to rely more on the GR warmup, where the performance can be improved by up to 3\% on Cifar10 compared to baseline GR. Code is available at \href{https://github.com/zhaoyang-0204/gnp}{https://github.com/zhaoyang-0204/gnp}.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-14T05:17:39Z</published>
+    <arxiv:comment>ICML 2024 paper</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yang Zhao</name>
+    </author>
+    <author>
+      <name>Hao Zhang</name>
+    </author>
+    <author>
+      <name>Xiuyuan Hu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1910.05895v2</id>
+    <title>Transformers without Tears: Improving the Normalization of Self-Attention</title>
+    <updated>2019-12-30T03:53:04Z</updated>
+    <link href="https://arxiv.org/abs/1910.05895v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1910.05895v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We evaluate three simple, normalization-centric changes to improve Transformer training. First, we show that pre-norm residual connections (PreNorm) and smaller initializations enable warmup-free, validation-based training with large learning rates. Second, we propose $\ell_2$ normalization with a single scale parameter (ScaleNorm) for faster training and better performance. Finally, we reaffirm the effectiveness of normalizing word embeddings to a fixed length (FixNorm). On five low-resource translation pairs from TED Talks-based corpora, these changes always converge, giving an average +1.1 BLEU over state-of-the-art bilingual baselines and a new 32.8 BLEU on IWSLT'15 English-Vietnamese. We observe sharper performance curves, more consistent gradient norms, and a linear relationship between activation scaling and decoder depth. Surprisingly, in the high-resource setting (WMT'14 English-German), ScaleNorm and FixNorm remain competitive but PreNorm degrades performance.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-10-14T02:23:43Z</published>
+    <arxiv:comment>Accepted to IWSLT 2019 (oral); code is available at https://github.com/tnq177/transformers_without_tears</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Toan Q. Nguyen</name>
+    </author>
+    <author>
+      <name>Julian Salazar</name>
+    </author>
+    <arxiv:doi>10.5281/zenodo.3525484</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5281/zenodo.3525484" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.09417v2</id>
+    <title>Why Post-Norm Transformers Collapse: Attention Amplification and Gradient Repair Failure</title>
+    <updated>2026-08-11T06:00:23Z</updated>
+    <link href="https://arxiv.org/abs/2608.09417v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.09417v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep decoder-only Transformers often replace the original Post-Norm architecture with Pre-Norm variants because Post-Norm training is highly sensitive to warmup and learning rate under conventional initialization schemes. Although prior work has identified rank collapse and gradient vanishing as related symptoms, it remains poorly understood how causal attention creates high-similarity representations and why training dynamics fail to repair them. We give a two-stage analysis of Post-Norm rank collapse using token similarity as a scalar state variable. First, at initialization, causal attention acts approximately as a prefix-averaging operator that increases token similarity across depth, while the SwiGLU branch contributes only a smaller damping effect. Second, once training enters a high-similarity regime, growth of pre-normalization residual norms makes the RMSNorm backward factor contractive; under mild conditions, gradients to earlier layers decay geometrically. As a complementary result, we characterize the properties of a collapsed network: its best predictor is frequency distribution with relatively high loss floor, and gradients in collapsed layers vanish at frequency distribution. Experiments on 48-layer decoder-only Transformers trained on C4 dataset match the predicted initialization-time similarity growth and collapse-time gradient contraction, and show that collapsed runs stay near the predicted frequency loss. Together, these results distinguish the forward similarity amplification and backward repair incapacity in Post-Norm collapse, while also characterizing the behavior of collapsed networks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-10T10:45:16Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xingjian Wang</name>
+    </author>
+    <author>
+      <name>Qingyu Han</name>
+    </author>
+    <author>
+      <name>Xiaodong Luo</name>
+    </author>
+    <author>
+      <name>Yin Zhang</name>
+    </author>
+  </entry>
+</feed>

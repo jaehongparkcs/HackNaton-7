@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/7ZhnYPI6CnkSsMmKEgwYFGihEgs</id>
+  <title>arXiv Query: search_query=all:"z-loss" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-04T00:44:15Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22z-loss%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.16179v1</id>
+    <title>Z-Loss Backward Geometry in Dense Output Heads and Sparse Routers</title>
+    <updated>2026-07-31T05:22:58Z</updated>
+    <link href="https://arxiv.org/abs/2609.16179v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.16179v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Z-loss has been widely applied to the logits of language-model output heads and sparse mixture-of-experts routers. Z-loss constrains the softmax log-normalizers of these output heads and routers, thereby limiting large-logit excursions, reducing finite-precision roundoff exposure, and avoiding training-loss divergence. These use cases arise in modern Transformer settings where large-vocabulary softmax heads, top-$k$ routing, fused losses, and mixed-precision optimizers interact. Z-loss has typically been understood only as a scalar penalty on the log-normalizer. This paper instead analyzes Z-loss from a backward-pass perspective, focusing on the gradients produced by the Z-loss penalty. The logit-space gradient, which we call the backward source, is injected at the logit boundary of the Z-loss branch of backpropagation; consequently, the backward source's effect depends on the architecture and implementation through which the gradient is transported. We develop a backward-transport view for Z-loss that separates the source's scalar amplitude and softmax shape from the transport factors. These factors include common-shift coordinates, tied-embedding pathways, output-to-hidden gain, fused-loss source consistency, optimizer-facing updates, and top-$k$ router reduction scale. These diagnostics show that nearly identical forward Z-loss values can coexist with distinct logit-space Z-loss gradients and, after architectural and optimizer transport, distinct parameter updates. The transport diagnostics also explain why raw-logit Z-loss can reduce scalar tails without changing output-to-hidden gain and why active-route reductions alter the effective router coefficient. Across evaluations of models in the GPT-2 and Pythia families on WikiText-103 and FineWeb-Edu, architecture-aware variants reduce backward-geometry tails while maintaining comparable validation perplexity in low-coefficient regimes.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-31T05:22:58Z</published>
+    <arxiv:comment>30 pages, 2 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Bum Jun Kim</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.13989v3</id>
+    <title>VectraYX-Nano: A 42M-Parameter Spanish Cybersecurity Language Model with Curriculum Learning and Native Tool Use</title>
+    <updated>2026-05-21T13:59:18Z</updated>
+    <link href="https://arxiv.org/abs/2605.13989v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.13989v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present VectraYX-Nano, a 41.95M-parameter decoder-only language model trained from scratch in Spanish for cybersecurity, with a Latin-American regional focus and native tool invocation via the Model Context Protocol (MCP). The model has four contributions. (i) Corpus: VectraYX-Sec-ES, a 170M-token Spanish corpus assembled by an eight-VM distributed pipeline at ~$25 USD of cloud compute and split into three curriculum phases (conversational 42M, cybersecurity 118M, offensive tooling 10M). (ii) Architecture: a 42M Transformer decoder with GQA, QK-Norm, RMSNorm, SwiGLU, RoPE and z-loss, paired with a domain-balanced 16,384-token byte-fallback BPE. (iii) Curriculum with replay across the three phases yields a monotonic loss descent (9.80 -&gt; 3.17 -&gt; 3.00 -&gt; 2.16); after SFT (loss 1.74) the v2 bootstrap-ablation reference attains a conversational gate of 0.775 +/- 0.043 on B5 over N=4 seeds, and a controlled Phase-2 replay sweep over {0,5,10,25,50}% saturates B5 at &gt;=25% replay. (iv) Two empirical findings, both N=4. A controlled bootstrap-corpus ablation across v2 (OpenSubs), v4 (mC4-ES), and v6 (60/25/15 OpenSubs/mC4/Wiki) exposes a loss-versus-register inversion: lower-perplexity bootstraps yield measurably worse conversational behavior (v2 &gt; v4 &gt; v6 on B5 at every paired seed). The B4 (tool-selection) floor of 0.000 is a corpus-density artifact, not a capacity gate: rebalancing the SFT mixture to tool-use ratio 1:21 yields VectraYX-Nano v7, the released headline configuration, reaching B4 = 0.230 +/- 0.052 at 42M while retaining B1 = 0.332 +/- 0.005 and B5 = 0.725 +/- 0.130; a LoRA replication on a 260M from-scratch mid-tier reaches 0.445 +/- 0.201. The released GGUF is 96 MB in F16, runs sub-second TTFT on commodity hardware under llama.cpp, and is, to our knowledge, the first published Spanish-native cybersecurity LLM with end-to-end MCP integration.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-13T18:03:07Z</published>
+    <arxiv:comment>24 pages, 5 figures, 12 tables. v3: post-Chinchilla compute ablation (v8-v15), Globant affiliation finalized, EMNLP Findings 2026 submission. Released model: VectraYX-Nano v7 (42M params, GGUF Q4 ~20 MB, native MCP)</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Juan S. Santillana</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.13769v1</id>
+    <title>Dense vs Sparse Pretraining at Tiny Scale: Active-Parameter vs Total-Parameter Matching</title>
+    <updated>2026-05-13T16:48:24Z</updated>
+    <link href="https://arxiv.org/abs/2605.13769v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.13769v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study dense and mixture-of-experts (MoE) transformers in a tiny-scale pretraining regime under a shared LLaMA-style decoder training recipe. The sparse model replaces dense feed-forward blocks with Mixtral-style routed experts. Dense baselines are modestly width-resized to tightly match either active or total parameter budgets, while tokenizer, data, optimizer, schedule, depth, context length, normalization style, and evaluation protocol are held fixed. Our best sparse recipe uses four experts, top-2 routing, Switch-style load balancing, and router z-loss. In a three-seed full-data comparison, the dense active-match model reaches 1.6545 +/- 0.0012 best validation loss, the MoE reaches 1.5788 +/- 0.0020, and the dense total-match model reaches 1.5608 +/- 0.0025. This yields a matched-active gap of 0.0758 +/- 0.0021 in the MoE's favor and a matched-total gap of 0.0180 +/- 0.0020 in the dense model's favor. Across training, the matched-active advantage grows while the matched-total dense advantage narrows sharply. In this sub-25M-parameter regime, MoE therefore improves validation loss under active-parameter matching but does not surpass dense training at equal total stored capacity.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-13T16:48:24Z</published>
+    <arxiv:comment>10 pages, 6 figures, 8 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Abdalrahman Wael</name>
+    </author>
+  </entry>
+</feed>

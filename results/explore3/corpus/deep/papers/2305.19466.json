@@ -1,0 +1,364 @@
+{
+  "dropped": [],
+  "event": "unrecorded-b2dc2d4b",
+  "findings": {
+    "limitations": [
+      {
+        "method": "pos_encoding=rope",
+        "quote": "We could not study how large-scale pretraining affects different PEs because there are no publicly available large language models trained with various PEs under similar conditions.",
+        "section": "limitations"
+      },
+      {
+        "method": "pos_encoding=rope",
+        "quote": "A comprehensive downstream evaluation of these models remains a subject for future research.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "attention_behavior",
+        "method": "pos_encoding=rope",
+        "quote": "The attention distributions reveal that NoPE and T5’s Relative PE encourage attending to both long and short-range positions, ALiBi to recent positions, and Rotary and APE to no particular positions.",
+        "section": "introduction"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "worse",
+        "method": "pos_encoding=rope",
+        "quote": "Most commonly used positional encoding methods, including ALiBi, Rotary, and APE, are ill-suited for length generalization in downstream tasks and are outperformed by T5’s Relative PE.",
+        "section": "introduction",
+        "setting_note": "length generalization on downstream synthetic tasks, vs NoPE and T5 relative PE"
+      },
+      {
+        "direction": "no_worse",
+        "method": "pos_encoding=rope",
+        "quote": "In the I.I.D. case (context length \\leq 1024 ), no significant differences among the models are discernible across all length buckets.",
+        "section": "appendix_setup",
+        "setting_note": "1.3B code LM, in-distribution context perplexity"
+      },
+      {
+        "direction": "worse",
+        "method": "pos_encoding=rope",
+        "quote": "Conversely, in the O.O.D. case (context length >1024 ), the model trained with Rotary fails to generalize as its perplexity explodes in all cases, aligning with our findings in Section 4.",
+        "section": "appendix_setup",
+        "setting_note": "1.3B code LM, perplexity beyond training context"
+      },
+      {
+        "direction": "context",
+        "method": "pos_encoding=rope",
+        "quote": "However, our result in Section 4 clearly demonstrates that Rotary marginally outperforms APE at length generalization.",
+        "section": "conclusion",
+        "setting_note": "length generalization vs APE"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "64",
+        "dataset": "synthetic algorithmic tasks (copy, reverse, addition, polynomial eval, sorting, summation, parity, LEGO, SCAN, PCFG)",
+        "model_family": "transformer",
+        "parameter_count": "~107M",
+        "quote": "We use the same hyperparameters for all PEs and employ the “base” model size configuration, popular in HuggingFace library (Wolf et al., 2020), resulting in \\sim 107M trainable weights (List of all hyperparameters in Section D.2).",
+        "section": "results",
+        "task": "general",
+        "training_steps": "40K steps"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "833d07d343bdeb39342dc0141db986e0ae93c6a3a5b659f658cdb2c49e258092",
+  "paper_id": "2305.19466",
+  "section_chars": {
+    "abstract": 1532,
+    "appendix_setup": 19573,
+    "conclusion": 4115,
+    "experimental_setup": 2017,
+    "introduction": 4750,
+    "limitations": 358,
+    "results": 2633
+  },
+  "sections": [
+    {
+      "chars": 1532,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 4750,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 2676,
+      "heading": "Background: Positional Encoding in Transformers",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Model Evaluation",
+      "section": "results"
+    },
+    {
+      "chars": 2017,
+      "heading": "Length Generalization Setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1057,
+      "heading": "Architecture",
+      "section": "results"
+    },
+    {
+      "chars": 1575,
+      "heading": "Tasks",
+      "section": "results"
+    },
+    {
+      "chars": 2064,
+      "heading": "What Is The Effect of Positional Encoding?",
+      "section": "other"
+    },
+    {
+      "chars": 271,
+      "heading": "How Does NoPE Represent Positions?",
+      "section": "other"
+    },
+    {
+      "chars": 2726,
+      "heading": "5.1 NoPE can theoretically represent both absolute and relative PEs",
+      "section": "other"
+    },
+    {
+      "chars": 2420,
+      "heading": "5.2 NoPE learns to use relative PE in practice",
+      "section": "other"
+    },
+    {
+      "chars": 1691,
+      "heading": "Does Scratchpad Render The Choice of Positional Encoding Irrelevant?",
+      "section": "other"
+    },
+    {
+      "chars": 1569,
+      "heading": "6.1 Which part of the sequence is attended to?",
+      "section": "other"
+    },
+    {
+      "chars": 1584,
+      "heading": "Discussion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 1012,
+      "heading": "Scaling up to 1B models",
+      "section": "conclusion"
+    },
+    {
+      "chars": 943,
+      "heading": "Perplexity vs. downstream Performance",
+      "section": "conclusion"
+    },
+    {
+      "chars": 0,
+      "heading": "Related Work",
+      "section": "other"
+    },
+    {
+      "chars": 1541,
+      "heading": "Length Generalization Failure In Transformers",
+      "section": "other"
+    },
+    {
+      "chars": 2047,
+      "heading": "Positional Encoding",
+      "section": "other"
+    },
+    {
+      "chars": 573,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 358,
+      "heading": "Limitations",
+      "section": "limitations"
+    },
+    {
+      "chars": 434,
+      "heading": "Acknowledgements",
+      "section": "other"
+    },
+    {
+      "chars": 734,
+      "heading": "Appendix A Number of instances decreases rapidly as sequence length grows",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix B Background",
+      "section": "other"
+    },
+    {
+      "chars": 4439,
+      "heading": "B.1 Preliminaries",
+      "section": "other"
+    },
+    {
+      "chars": 282,
+      "heading": "B.2 Positional Encoding",
+      "section": "other"
+    },
+    {
+      "chars": 2103,
+      "heading": "Absolute Positional Encoding (APE)",
+      "section": "other"
+    },
+    {
+      "chars": 2084,
+      "heading": "T5’s Relative PE",
+      "section": "other"
+    },
+    {
+      "chars": 595,
+      "heading": "ALiBi",
+      "section": "other"
+    },
+    {
+      "chars": 1378,
+      "heading": "Rotary",
+      "section": "other"
+    },
+    {
+      "chars": 226,
+      "heading": "NoPE",
+      "section": "other"
+    },
+    {
+      "chars": 195,
+      "heading": "Appendix C Proofs",
+      "section": "other"
+    },
+    {
+      "chars": 7609,
+      "heading": "C.1 Absolute Positional Encoding in NoPE",
+      "section": "other"
+    },
+    {
+      "chars": 5614,
+      "heading": "C.2 Relative Positional Encoding in NoPE",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Experimental Details",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 233,
+      "heading": "D.1 Tasks",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 806,
+      "heading": "Addition",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1007,
+      "heading": "Polynomial Evaluation",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1453,
+      "heading": "Sorting",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 683,
+      "heading": "Summation",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 367,
+      "heading": "Parity",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1046,
+      "heading": "LEGO",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 917,
+      "heading": "Copy",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 757,
+      "heading": "Reverse",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 439,
+      "heading": "D.2 Hyperparameters",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 534,
+      "heading": "D.3 Compute",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1173,
+      "heading": "D.4 Reproducibility",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix E Full Results",
+      "section": "other"
+    },
+    {
+      "chars": 148,
+      "heading": "E.1 Detailed Model Accuracy",
+      "section": "other"
+    },
+    {
+      "chars": 239,
+      "heading": "E.2 Detailed Head Distance",
+      "section": "other"
+    },
+    {
+      "chars": 330,
+      "heading": "E.3 Detailed Model Accuracy On Various Scratchpad Formats",
+      "section": "other"
+    },
+    {
+      "chars": 385,
+      "heading": "Appendix F Pretraining at 1.3B Scale",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 755,
+      "heading": "F.1 Model Architecture",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 440,
+      "heading": "F.2 Dataset Selection",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 8563,
+      "heading": "F.3 Generalization Evaluation",
+      "section": "appendix_setup"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "The Impact of Positional Encoding on Length Generalization in Transformers",
+  "url": "https://arxiv.org/html/2305.19466",
+  "validation_only": false,
+  "version": "2305.19466v2"
+}

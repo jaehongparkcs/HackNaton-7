@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/6iTDt9/Z7HWRFAilBZNftNGcGY8</id>
+  <title>arXiv Query: search_query=all:"warmup-stable-decay" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:46:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22warmup-stable-decay%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>26</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2508.01483v1</id>
+    <title>Training Dynamics of the Cooldown Stage in Warmup-Stable-Decay Learning Rate Scheduler</title>
+    <updated>2025-08-02T20:36:52Z</updated>
+    <link href="https://arxiv.org/abs/2508.01483v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.01483v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Learning rate scheduling is essential in transformer training, where the final annealing plays a crucial role in getting the best performance. However, the mechanisms behind this cooldown phase, with its characteristic drop in loss, remain poorly understood. To address this, we provide a comprehensive analysis focusing solely on the cooldown phase in the Warmup-Stable-Decay (WSD) learning rate scheduler. Our analysis reveals that different cooldown shapes reveal a fundamental bias-variance trade-off in the resulting models, with shapes that balance exploration and exploitation consistently outperforming alternatives. Similarly, we find substantial performance variations $\unicode{x2013}$ comparable to those from cooldown shape selection $\unicode{x2013}$ when tuning AdamW hyperparameters. Notably, we observe consistent improvements with higher values of $β_2$ during cooldown. From a loss landscape perspective, we provide visualizations of the landscape during cooldown, supporting the river valley loss perspective empirically. These findings offer practical recommendations for configuring the WSD scheduler in transformer training, emphasizing the importance of optimizing the cooldown phase alongside traditional hyperparameter tuning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-02T20:36:52Z</published>
+    <arxiv:comment>Published in TMLR. Review: https://openreview.net/forum?id=ZnSYEcZod3</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Transactions on Machine Learning Research (TMLR), 2025</arxiv:journal_ref>
+    <author>
+      <name>Aleksandr Dremov</name>
+    </author>
+    <author>
+      <name>Alexander Hägele</name>
+    </author>
+    <author>
+      <name>Atli Kosson</name>
+    </author>
+    <author>
+      <name>Martin Jaggi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.05192v3</id>
+    <title>Understanding Warmup-Stable-Decay Learning Rates: A River Valley Loss Landscape Perspective</title>
+    <updated>2024-12-02T21:54:54Z</updated>
+    <link href="https://arxiv.org/abs/2410.05192v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.05192v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training language models currently requires pre-determining a fixed compute budget because the typical cosine learning rate schedule depends on the total number of steps. In contrast, the Warmup-Stable-Decay (WSD) schedule uses a constant learning rate to produce a main branch of iterates that can in principle continue indefinitely without a pre-specified compute budget. Then, given any compute budget, one can branch out from the main branch at a proper time with a rapidly decaying learning rate to produce a strong model. Empirically, WSD generates a non-traditional loss curve: the loss remains elevated during the stable phase but sharply declines during the decay phase. Towards explaining this phenomenon, we conjecture that pretraining loss exhibits a river valley landscape, which resembles a deep valley with a river at its bottom. Under this assumption, we show that during the stable phase, the iterate undergoes large oscillations due to the high learning rate, yet it progresses swiftly along the river. During the decay phase, the rapidly dropping learning rate minimizes the iterate's oscillations, moving it closer to the river and revealing true optimization progress. Therefore, the sustained high learning rate phase and fast decaying phase are responsible for progress in the river and the mountain directions respectively, and are both critical. Our analysis predicts phenomenons consistent with empirical observations and shows that this landscape can emerge from pretraining on a simple bi-gram dataset. Inspired by the theory, we introduce WSD-S, a variant of WSD that reuses previous checkpoints' decay phases and keeps only one main branch, where we resume from a decayed checkpoint. WSD-S empirically outperforms WSD and Cyclic-Cosine in obtaining multiple language model checkpoints across various compute budgets in a single run for parameters scaling from 0.1B to 1.2B.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-07T16:49:39Z</published>
+    <arxiv:comment>45 pages,13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kaiyue Wen</name>
+    </author>
+    <author>
+      <name>Zhiyuan Li</name>
+    </author>
+    <author>
+      <name>Jason Wang</name>
+    </author>
+    <author>
+      <name>David Hall</name>
+    </author>
+    <author>
+      <name>Percy Liang</name>
+    </author>
+    <author>
+      <name>Tengyu Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.06797v3</id>
+    <title>Optimal Learning Rate Schedules under Functional Scaling Laws: Power Decay and Warmup-Stable-Decay</title>
+    <updated>2026-09-14T16:48:11Z</updated>
+    <link href="https://arxiv.org/abs/2602.06797v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.06797v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study optimal learning rate (LR) schedules under the functional scaling law (FSL) framework (Li et al., 2025), which decomposes training dynamics into signal learning and noise forgetting. In power-law kernel regression, these two components are governed by a source exponent $s&gt;0$ and a capacity exponent $q&gt;1$, respectively, with smaller $s$ corresponding to harder tasks. For a fixed training horizon $N$, we characterize the schedules that minimize the final-step loss under a stability constraint and reveal a sharp phase transition. In the easy-task regime $s&gt;1-1/q$, the optimal schedule follows power decay from the beginning of training; in the hard-task regime $s&lt;1-1/q$, it becomes warmup-stable-decay (WSD)-like (Hu et al., 2024), staying at the largest admissible LR for most of training before a final decay. In both regimes, the decay exponent is $2q-1$: task difficulty determines when to decay, while model capacity determines how to decay. Beyond the exact optimum, we study fractional schedules, whose shape is defined over relative training progress. We show that precise tuning of the decay shape is often unnecessary: a broad class of profiles attains the optimal convergence rate, while overly slow terminal decay leads to schedule-induced capacity saturation. Finally, for one-pass SGD in kernel regression, FSL-motivated power-decay schedules achieve optimal last-iterate rates. Experiments support the theoretical predictions and the task-dependent transition between early and delayed decay.</summary>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-06T15:52:30Z</published>
+    <arxiv:comment>Accepted at COLT 2026. Major revision with improved analysis of fractional LR schedule</arxiv:comment>
+    <arxiv:primary_category term="stat.ML"/>
+    <author>
+      <name>Binghui Li</name>
+    </author>
+    <author>
+      <name>Zilin Wang</name>
+    </author>
+    <author>
+      <name>Fengling Chen</name>
+    </author>
+    <author>
+      <name>Shiyang Zhao</name>
+    </author>
+    <author>
+      <name>Ruiheng Zheng</name>
+    </author>
+    <author>
+      <name>Lei Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.09000v1</id>
+    <title>Universal Dynamics of Warmup Stable Decay: understanding WSD beyond Transformers</title>
+    <updated>2026-01-13T21:54:22Z</updated>
+    <link href="https://arxiv.org/abs/2601.09000v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.09000v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Warmup Stable Decay (WSD) learning rate scheduler has recently become popular, largely due to its good performance and flexibility when training large language models. It remains an open question whether the remarkable performance of WSD - using a decaying learning rate for only a fraction of training compared to cosine decay - is a phenomenon specific to transformer-based language models that can potentially offer new theoretical insights into their training dynamics. Inspired by the usage of learning rate schedulers as a new lens into understanding landscape geometry (e.g., river valley, connected minima, progressive sharpening), in this work we compare the WSD path of the Adam optimizer on a Pythia-like language model to that of a small CNN trained to classify CIFAR10 images. We observe most training signals, optimizer path features, and sharpness dynamics to be qualitatively similar in such architectures. This consistency points to shared geometric characteristics of the loss landscapes of old and new nonconvex problems, and hints to future research questions around the geometry of high dimensional optimization problems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-13T21:54:22Z</published>
+    <arxiv:comment>Accepted at the 2025 HiLD and MOSS Workshops at ICML</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Annalisa Belloni</name>
+    </author>
+    <author>
+      <name>Lorenzo Noci</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.24275v4</id>
+    <title>GradPower: Powering Gradients for Faster Language Model Pre-Training</title>
+    <updated>2026-06-13T06:31:26Z</updated>
+    <link href="https://arxiv.org/abs/2505.24275v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.24275v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We propose GradPower, a lightweight gradient-transformation technique for accelerating language model pre-training. Given a gradient vector $g=(g_i)_i$, GradPower first applies the elementwise sign-power transformation: $\varphi_p(g)=({\rm sign}(g_i)|g_i|^p)_{i}$ for a fixed $p&gt;0$, and then feeds the transformed gradient into a base optimizer. Notably, GradPower requires only a single-line code change and no modifications to the base optimizer's internal logic, including the hyperparameters. When applied to Adam (termed AdamPower), GradPower consistently achieves lower terminal loss across diverse architectures (LLaMA, Qwen2MoE), parameter scales (66M to 2B), datasets (C4, OpenWebText), and learning-rate schedules (cosine, warmup-stable-decay). The most pronounced gains are observed when training modern mixture-of-experts models with warmup-stable-decay schedules. GradPower also integrates seamlessly with other state-of-the-art optimizers, such as Muon, yielding further improvements. Finally, we provide theoretical analyses that reveal the underlying mechanism of GradPower and highlight the influence of gradient noise.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-30T06:49:57Z</published>
+    <arxiv:comment>24 pages, accepted by ICML 2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jinbo Wang</name>
+    </author>
+    <author>
+      <name>Mingze Wang</name>
+    </author>
+    <author>
+      <name>Jiaqi Zhang</name>
+    </author>
+    <author>
+      <name>Wei Wang</name>
+    </author>
+    <author>
+      <name>Peng Pei</name>
+    </author>
+    <author>
+      <name>Xunliang Cai</name>
+    </author>
+    <author>
+      <name>Weinan E</name>
+    </author>
+    <author>
+      <name>Lei Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2605.19095v1</id>
+    <title>ScheduleFree+: Scaling Learning-Rate-Free &amp; Schedule-Free Learning to Large Language Models</title>
+    <updated>2026-05-18T20:31:49Z</updated>
+    <link href="https://arxiv.org/abs/2605.19095v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2605.19095v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Schedule-Free Learning has shown promise as a practical anytime training method for machine learning, showing success across dozens of standard benchmark problems. However, strong performance for LLM training has only been demonstrated at small scales. We identify a number of fixes necessary to scale up Schedule-Free Learning to larger batch sizes and model sizes, and present a learning-rate-free and schedule-free method (ScheduleFree+) for training large language models which greatly outperforms Warmup-Stable-Decay (WSD) schedules. We also demonstrate that Schedule-Free Learning is most effective for long duration training, and at 1000 tokens per parameter, it outperforms SOTA schedules by 31%. Schedule-Free Learning provides a theoretical foundation for the use of model averaging and checkpoint merging during pretraining.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-05-18T20:31:49Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Aaron Defazio</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.02069v2</id>
+    <title>Scaling Laws of SignSGD in Linear Regression: When Does It Outperform SGD?</title>
+    <updated>2026-09-20T15:27:46Z</updated>
+    <link href="https://arxiv.org/abs/2603.02069v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.02069v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study scaling laws of signSGD under a power-law random features (PLRF) model that accounts for both feature and target decay. We analyze the population risk of a linear model trained with one-pass signSGD on Gaussian-sketched features. We express the risk as a function of model size, training steps, learning rate, and the feature and target decay parameters. Comparing against the SGD risk analyzed by Paquette et al. (2024), we identify a drift-normalization effect and a noise-reshaping effect unique to signSGD. We then obtain compute-optimal scaling laws under the optimal choice of learning rate. Our analysis shows that the noise-reshaping effect can make the compute-optimal slope of signSGD steeper than that of SGD in regimes where noise is dominant. Finally, we observe that the widely used warmup-stable-decay (WSD) schedule further reduces the noise term and sharpens the compute-optimal slope, when feature decay is fast but target decay is slow.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-02T16:58:02Z</published>
+    <arxiv:comment>Accepted at ICLR 2026, 89 pages, 25 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jihwan Kim</name>
+    </author>
+    <author>
+      <name>Dogyoon Song</name>
+    </author>
+    <author>
+      <name>Chulhee Yun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.28308v2</id>
+    <title>Deriving Scaling Laws for OpenEuroLLM Models: Learning Rate, Batch Size and Loss</title>
+    <updated>2026-08-31T09:44:10Z</updated>
+    <link href="https://arxiv.org/abs/2608.28308v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.28308v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study the scaling behavior of learning rate and batch size in pretraining dense large language models on English-prevalent corpora. Beyond scaling jointly optimal learning rates and batch sizes, we investigate their marginal evolution with model capacity and data scale and develop a model that captures these relationships. As we employ a Warmup-Stable-Decay learning rate schedule, we further investigate the gains from learning rate annealing over a broad range of hyperparameters settings, models and data budgets, and whether the optimal learning rate and batch size transfer between the stable and decay phases. Finally, we characterize the dependence of loss on model capacity and dataset size, evaluating recently proposed scaling forms that explicitly model their interaction. We find these approaches particularly effective at capturing both undertraining and overtraining regimes across our experiments. This study establishes a first baseline and scaling procedure for the development of future OpenEuroLLM models. We open-source the complete collection of pretraining runs used in this study.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-08-28T13:16:56Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Niccolò Ajroldi</name>
+    </author>
+    <author>
+      <name>Diana Alexandra Onutu</name>
+    </author>
+    <author>
+      <name>Haider Al-Tahan</name>
+    </author>
+    <author>
+      <name>Jörg Franke</name>
+    </author>
+    <author>
+      <name>Sampo Pyysalo</name>
+    </author>
+    <author>
+      <name>Jenia Jitsev</name>
+    </author>
+    <author>
+      <name>Aaron Klein</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.17634v2</id>
+    <title>WSM: Decay-Free Learning Rate Schedule via Checkpoint Merging for LLM Pre-training</title>
+    <updated>2025-08-11T08:36:31Z</updated>
+    <link href="https://arxiv.org/abs/2507.17634v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.17634v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent advances in learning rate (LR) scheduling have demonstrated the effectiveness of decay-free approaches that eliminate the traditional decay phase while maintaining competitive performance. Model merging techniques have emerged as particularly promising solutions in this domain. We present Warmup-Stable and Merge (WSM), a general framework that establishes a formal connection between learning rate decay and model merging. WSM provides a unified theoretical foundation for emulating various decay strategies-including cosine decay, linear decay and inverse square root decay-as principled model averaging schemes, while remaining fully compatible with diverse optimization methods. Through extensive experiments, we identify merge duration-the training window for checkpoint aggregation-as the most critical factor influencing model performance, surpassing the importance of both checkpoint interval and merge quantity. Our framework consistently outperforms the widely-adopted Warmup-Stable-Decay (WSD) approach across multiple benchmarks, achieving significant improvements of +3.5% on MATH, +2.9% on HumanEval, and +5.5% on MMLU-Pro. The performance advantages extend to supervised fine-tuning scenarios, highlighting WSM's potential for long-term model refinement.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-23T16:02:06Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Changxin Tian</name>
+    </author>
+    <author>
+      <name>Jiapeng Wang</name>
+    </author>
+    <author>
+      <name>Qian Zhao</name>
+    </author>
+    <author>
+      <name>Kunlong Chen</name>
+    </author>
+    <author>
+      <name>Jia Liu</name>
+    </author>
+    <author>
+      <name>Ziqi Liu</name>
+    </author>
+    <author>
+      <name>Jiaxin Mao</name>
+    </author>
+    <author>
+      <name>Wayne Xin Zhao</name>
+    </author>
+    <author>
+      <name>Zhiqiang Zhang</name>
+    </author>
+    <author>
+      <name>Jun Zhou</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.10959v1</id>
+    <title>WSqD: A Horizon-Free Learning Rate Schedule for Large Model Training</title>
+    <updated>2026-07-12T23:24:42Z</updated>
+    <link href="https://arxiv.org/abs/2607.10959v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.10959v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Standard learning rate schedules such as cosine annealing are tied to a fixed training horizon, limiting their ability to accommodate post hoc horizon extension. Warmup-stable-decay (WSD) partially addresses this issue by maintaining a long constant-rate phase before a short linear cooldown, allowing training to resume from a pre-decay checkpoint. However, its peak learning rate is still tuned based on the original training horizon and can become suboptimal when training is extended. Motivated by stochastic convex optimization, we propose WSqD (Warmup with Square-root base and linear Decay), a learning rate schedule that replaces WSD's constant stable phase with a shifted inverse-square-root base while retaining the final linear cooldown. In the stochastic convex setting, WSqD provably attains the minimax-optimal $O(1/\sqrt{T})$ last-iterate convergence rate. Importantly, its base learning rate schedule is horizon-independent, and the training horizon is needed only to determine when to begin the final cooldown. Empirically, on language-model pretraining using the SlimPajama corpus, WSqD matches or outperforms carefully tuned WSD and other baselines across multiple training horizons while reusing a single peak learning rate.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-12T23:24:42Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jianhao Ma</name>
+    </author>
+    <author>
+      <name>Yuxin Chen</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,136 @@
+{
+  "abstract_only": {
+    "config_mapping": 7,
+    "direction": 6,
+    "setting": 4
+  },
+  "errors": [],
+  "n": 9,
+  "papers_read": [
+    "1207.0580",
+    "1608.03983",
+    "1910.07467",
+    "2002.04745",
+    "2002.05202",
+    "2004.08249",
+    "2104.09864",
+    "2109.08668"
+  ],
+  "rows_after": [
+    {
+      "claim_id": "c02",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c03",
+      "config_mapping": false,
+      "direction": false,
+      "setting": false
+    },
+    {
+      "claim_id": "c04",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c05",
+      "config_mapping": true,
+      "direction": false,
+      "setting": true
+    },
+    {
+      "claim_id": "c06",
+      "config_mapping": false,
+      "direction": false,
+      "setting": false
+    },
+    {
+      "claim_id": "c09",
+      "config_mapping": true,
+      "direction": true,
+      "setting": false
+    },
+    {
+      "claim_id": "c10",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c12",
+      "config_mapping": true,
+      "direction": true,
+      "setting": false
+    },
+    {
+      "claim_id": "c13",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    }
+  ],
+  "rows_before": [
+    {
+      "claim_id": "c02",
+      "config_mapping": true,
+      "direction": true,
+      "setting": false
+    },
+    {
+      "claim_id": "c03",
+      "config_mapping": false,
+      "direction": false,
+      "setting": false
+    },
+    {
+      "claim_id": "c04",
+      "config_mapping": true,
+      "direction": true,
+      "setting": false
+    },
+    {
+      "claim_id": "c05",
+      "config_mapping": true,
+      "direction": false,
+      "setting": false
+    },
+    {
+      "claim_id": "c06",
+      "config_mapping": false,
+      "direction": false,
+      "setting": false
+    },
+    {
+      "claim_id": "c09",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c10",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c12",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    },
+    {
+      "claim_id": "c13",
+      "config_mapping": true,
+      "direction": true,
+      "setting": true
+    }
+  ],
+  "with_full_text": {
+    "config_mapping": 7,
+    "direction": 6,
+    "setting": 5
+  }
+}

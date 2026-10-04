@@ -1,0 +1,41 @@
+{
+  "fixture_id": "gap_norm_rmsnorm_optimizer_lion_i1",
+  "round": 0,
+  "delta": {
+    "norm": "rmsnorm",
+    "optimizer": "lion"
+  },
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"Lion optimizer\" AND \"language model\"",
+      "n_results": 9,
+      "source": "openalex"
+    },
+    {
+      "q": "\"RMSNorm\" AND \"Lion optimizer\" AND \"Transformer\"",
+      "n_results": 9,
+      "source": "openalex"
+    }
+  ],
+  "already_in_corpus": [
+    "2404.00438",
+    "2404.05728",
+    "2512.07737",
+    "2604.15416",
+    "2605.05577",
+    "2605.17156",
+    "2605.18528",
+    "2605.19811",
+    "2609.16309"
+  ],
+  "papers": [],
+  "claims": [],
+  "dropped": [
+    {
+      "paper_id": "2602.22988",
+      "title": "Residual Koopman Spectral Profiling for Predicting and Preventing Transformer Training Instability",
+      "reason": "exclude_term: vision transformer"
+    }
+  ],
+  "degraded": []
+}

@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/KZDS6BxPudQn40ABCF4LeIzFSd8</id>
+  <title>arXiv Query: search_query=all:"cosine learning rate schedule" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:46:36Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22cosine+learning+rate+schedule%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2503.12811v1</id>
+    <title>A Multi-Power Law for Loss Curve Prediction Across Learning Rate Schedules</title>
+    <updated>2025-03-17T04:36:45Z</updated>
+    <link href="https://arxiv.org/abs/2503.12811v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.12811v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training large models is both resource-intensive and time-consuming, making it crucial to understand the quantitative relationship between model performance and hyperparameters. In this paper, we present an empirical law that describes how the pretraining loss of large language models evolves under different learning rate schedules, such as constant, cosine, and step decay schedules. Our proposed law takes a multi-power form, combining a power law based on the sum of learning rates and additional power laws to account for a loss reduction effect induced by learning rate decay. We extensively validate this law on various model sizes and architectures, and demonstrate that after fitting on a few learning rate schedules, the law accurately predicts the loss curves for unseen schedules of different shapes and horizons. Moreover, by minimizing the predicted final pretraining loss across learning rate schedules, we are able to find a schedule that outperforms the widely used cosine learning rate schedule. Interestingly, this automatically discovered schedule bears some resemblance to the recently proposed Warmup-Stable-Decay (WSD) schedule (Hu et al, 2024) but achieves a slightly lower final loss. We believe these results could offer valuable insights for understanding the dynamics of pretraining and designing learning rate schedules to improve efficiency.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-17T04:36:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kairong Luo</name>
+    </author>
+    <author>
+      <name>Haodong Wen</name>
+    </author>
+    <author>
+      <name>Shengding Hu</name>
+    </author>
+    <author>
+      <name>Zhenbo Sun</name>
+    </author>
+    <author>
+      <name>Zhiyuan Liu</name>
+    </author>
+    <author>
+      <name>Maosong Sun</name>
+    </author>
+    <author>
+      <name>Kaifeng Lyu</name>
+    </author>
+    <author>
+      <name>Wenguang Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.05192v3</id>
+    <title>Understanding Warmup-Stable-Decay Learning Rates: A River Valley Loss Landscape Perspective</title>
+    <updated>2024-12-02T21:54:54Z</updated>
+    <link href="https://arxiv.org/abs/2410.05192v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.05192v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training language models currently requires pre-determining a fixed compute budget because the typical cosine learning rate schedule depends on the total number of steps. In contrast, the Warmup-Stable-Decay (WSD) schedule uses a constant learning rate to produce a main branch of iterates that can in principle continue indefinitely without a pre-specified compute budget. Then, given any compute budget, one can branch out from the main branch at a proper time with a rapidly decaying learning rate to produce a strong model. Empirically, WSD generates a non-traditional loss curve: the loss remains elevated during the stable phase but sharply declines during the decay phase. Towards explaining this phenomenon, we conjecture that pretraining loss exhibits a river valley landscape, which resembles a deep valley with a river at its bottom. Under this assumption, we show that during the stable phase, the iterate undergoes large oscillations due to the high learning rate, yet it progresses swiftly along the river. During the decay phase, the rapidly dropping learning rate minimizes the iterate's oscillations, moving it closer to the river and revealing true optimization progress. Therefore, the sustained high learning rate phase and fast decaying phase are responsible for progress in the river and the mountain directions respectively, and are both critical. Our analysis predicts phenomenons consistent with empirical observations and shows that this landscape can emerge from pretraining on a simple bi-gram dataset. Inspired by the theory, we introduce WSD-S, a variant of WSD that reuses previous checkpoints' decay phases and keeps only one main branch, where we resume from a decayed checkpoint. WSD-S empirically outperforms WSD and Cyclic-Cosine in obtaining multiple language model checkpoints across various compute budgets in a single run for parameters scaling from 0.1B to 1.2B.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-07T16:49:39Z</published>
+    <arxiv:comment>45 pages,13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kaiyue Wen</name>
+    </author>
+    <author>
+      <name>Zhiyuan Li</name>
+    </author>
+    <author>
+      <name>Jason Wang</name>
+    </author>
+    <author>
+      <name>David Hall</name>
+    </author>
+    <author>
+      <name>Percy Liang</name>
+    </author>
+    <author>
+      <name>Tengyu Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.08763v4</id>
+    <title>Simple and Scalable Strategies to Continually Pre-train Large Language Models</title>
+    <updated>2024-09-04T16:13:18Z</updated>
+    <link href="https://arxiv.org/abs/2403.08763v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.08763v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models (LLMs) are routinely pre-trained on billions of tokens, only to start the process over again once new data becomes available. A much more efficient solution is to continually pre-train these models, saving significant compute compared to re-training. However, the distribution shift induced by new data typically results in degraded performance on previous data or poor adaptation to the new data. In this work, we show that a simple and scalable combination of learning rate (LR) re-warming, LR re-decaying, and replay of previous data is sufficient to match the performance of fully re-training from scratch on all available data, as measured by the final loss and the average score on several language model (LM) evaluation benchmarks. Specifically, we show this for a weak but realistic distribution shift between two commonly used LLM pre-training datasets (English$\rightarrow$English) and a stronger distribution shift (English$\rightarrow$German) at the $405$M parameter model scale with large dataset sizes (hundreds of billions of tokens). Selecting the weak but realistic shift for larger-scale experiments, we also find that our continual learning strategies match the re-training baseline for a 10B parameter LLM. Our results demonstrate that LLMs can be successfully updated via simple and scalable continual learning strategies, matching the re-training baseline using only a fraction of the compute. Finally, inspired by previous work, we propose alternatives to the cosine learning rate schedule that help circumvent forgetting induced by LR re-warming and that are not bound to a fixed token budget.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-13T17:58:57Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Adam Ibrahim</name>
+    </author>
+    <author>
+      <name>Benjamin Thérien</name>
+    </author>
+    <author>
+      <name>Kshitij Gupta</name>
+    </author>
+    <author>
+      <name>Mats L. Richter</name>
+    </author>
+    <author>
+      <name>Quentin Anthony</name>
+    </author>
+    <author>
+      <name>Timothée Lesort</name>
+    </author>
+    <author>
+      <name>Eugene Belilovsky</name>
+    </author>
+    <author>
+      <name>Irina Rish</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.30455v1</id>
+    <title>Curvature-Weighted Gradient Diversity: A Noise Measure for Geometry-Adaptive SGD Schedules</title>
+    <updated>2026-06-29T15:22:32Z</updated>
+    <link href="https://arxiv.org/abs/2606.30455v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.30455v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The standard convergence analysis of mini-batch stochastic gradient descent (SGD) models gradient noise using a single variance term that treats all parameter directions equally, ignoring the fact that noise in high-curvature directions has less impact because learning rates are already constrained there. We introduce Curvature-Weighted Gradient Diversity (CWGD), a geometry-aware measure that weights per-sample gradient diversity by the inverse square root of the Hessian, providing a tighter proxy for the effective optimization noise. For strongly convex quadratic objectives with diagonal Hessians and isotropic noise, we prove that a CWGD-modulated cosine learning-rate schedule can reduce the asymptotic optimization error floor by up to a factor of two compared with standard cosine annealing. We implement this idea as CWGD-Cosine using a Hutchinson-based diagonal Hessian estimator that is exact for quadratic objectives. Across a range of condition numbers, batch sizes, and noise structures, CWGD-Cosine consistently achieves approximately 20% lower final optimization error than standard cosine annealing while incurring negligible overhead in the quadratic setting. We also identify and correct a degenerate curvature estimator, analyze the robustness of the proposed estimator, and explicitly discuss the limitations of the method, including Hessian staleness in non-convex optimization. These results establish CWGD as a principled geometry-aware measure of optimization noise and motivate future extensions to more general learning problems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-29T15:22:32Z</published>
+    <arxiv:comment>15 pages, 3 figures, code available</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Muhammad Hamza</name>
+      <arxiv:affiliation>Indian Institute of Technology Kharagpur</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Ayush Goel</name>
+      <arxiv:affiliation>Indian Institute of Technology Kharagpur</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.03702v2</id>
+    <title>Anytime Pretraining: Horizon-Free Learning-Rate Schedules with Weight Averaging</title>
+    <updated>2026-08-25T01:44:43Z</updated>
+    <link href="https://arxiv.org/abs/2602.03702v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.03702v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Large language models are increasingly trained in continual or open-ended settings, where the total training horizon is not known in advance. Despite this, most existing pretraining recipes are not anytime: they rely on horizon-dependent learning rate schedules and extensive tuning under a fixed compute budget. In this work, we provide a theoretical analysis demonstrating the existence of anytime learning schedules for overparameterized linear regression, and we highlight the central role of weight averaging - also known as model merging - in achieving the minimax convergence rates of stochastic gradient descent. We show that these anytime schedules polynomially decay with time, with the decay rate determined by the source and capacity conditions of the problem. Empirically, we evaluate 150M and 300M parameter language models trained for up to 32x Chinchilla scale, comparing constant and $1/\sqrt{t}$ schedules with weight averaging against a well-tuned cosine schedule. Across the full training range, the anytime schedules achieve comparable final loss to cosine decay. Taken together, our results suggest that weight averaging combined with simple, horizon-free step sizes offers a practical and effective anytime alternative to cosine learning rate schedules for large language model pretraining.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-03T16:24:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alexandru Meterez</name>
+    </author>
+    <author>
+      <name>Pranav Ajit Nair</name>
+    </author>
+    <author>
+      <name>Depen Morwani</name>
+    </author>
+    <author>
+      <name>Cengiz Pehlevan</name>
+    </author>
+    <author>
+      <name>Sham Kakade</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2507.09846v4</id>
+    <title>Through the River: Understanding the Benefit of Schedule-Free Methods for Language Model Training</title>
+    <updated>2025-11-01T03:58:54Z</updated>
+    <link href="https://arxiv.org/abs/2507.09846v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2507.09846v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As both model and dataset sizes continue to scale rapidly, conventional pretraining strategies with fixed compute budgets-such as cosine learning rate schedules-are increasingly inadequate for large-scale training. Recent alternatives, including warmup-stable-decay (WSD) schedules and weight averaging, offer greater flexibility. However, WSD relies on explicit decay phases to track progress, while weight averaging addresses this limitation at the cost of additional memory. In search of a more principled and scalable alternative, we revisit the Schedule-Free (SF) method [Defazio et al., 2024], which has shown strong empirical performance across diverse settings. We show that SF-AdamW effectively navigates the "river" structure of the loss landscape without decay phases or auxiliary averaging, making it particularly suitable for continuously scaling training workloads. To understand this behavior, we conduct a theoretical and empirical analysis of SF dynamics, revealing that it implicitly performs weight averaging without memory overhead. Guided by this analysis, we propose a refined variant of SF that improves robustness to momentum and performs better under large batch sizes, addressing key limitations of the original method. Together, these results establish SF as a practical, scalable, and theoretically grounded approach for language model training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-14T00:54:48Z</published>
+    <arxiv:comment>Published at NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Minhak Song</name>
+    </author>
+    <author>
+      <name>Beomhan Baek</name>
+    </author>
+    <author>
+      <name>Kwangjun Ahn</name>
+    </author>
+    <author>
+      <name>Chulhee Yun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.27202v1</id>
+    <title>Reliable Federated TinyML Deployment for IoT Security</title>
+    <updated>2026-09-23T01:08:21Z</updated>
+    <link href="https://arxiv.org/abs/2609.27202v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.27202v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The growing deployment of Internet of Things (IoT) devices has increased the need for privacy-preserving intrusion detection systems that operate directly on resource-constrained hardware. Federated Learning enables collaborative model training without sharing raw data, but conventional federated models are often too large and unstable for deployment on microcontroller-class devices. TinyML techniques enable compact neural networks but are typically designed for inference-only workloads.
+  This work investigates combining Federated Learning with TinyML-based model compression for intrusion detection in IoT environments. We evaluate compression strategies including knowledge distillation, structured pruning, and quantization within a federated training pipeline. Preliminary results show that training stability plays a critical role in federated TinyML systems. In particular, server-coordinated cosine learning-rate scheduling improves Attack Recall from 46.7% to 93.85% while enabling substantial model compression and efficient edge deployment. These findings provide insights for designing lightweight and privacy preserving intrusion detection systems for IoT devices.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-23T01:08:21Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+    <author>
+      <name>Younsoo Park</name>
+    </author>
+    <author>
+      <name>Seokhyoen Bae</name>
+    </author>
+    <author>
+      <name>Shasi Kumar Ramachandran Prabhu</name>
+    </author>
+    <author>
+      <name>Suman Saha</name>
+    </author>
+    <author>
+      <name>Peilong Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.25687v1</id>
+    <title>On Neural Scaling Laws for Weather Emulation through Continual Training</title>
+    <updated>2026-03-26T17:37:25Z</updated>
+    <link href="https://arxiv.org/abs/2603.25687v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.25687v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Neural scaling laws, which in some domains can predict the performance of large neural networks as a function of model, data, and compute scale, are the cornerstone of building foundation models in Natural Language Processing and Computer Vision. We study neural scaling in Scientific Machine Learning, focusing on models for weather forecasting. To analyze scaling behavior in as simple a setting as possible, we adopt a minimal, scalable, general-purpose Swin Transformer architecture, and we use continual training with constant learning rates and periodic cooldowns as an efficient training strategy. We show that models trained in this minimalist way follow predictable scaling trends and even outperform standard cosine learning rate schedules. Cooldown phases can be re-purposed to improve downstream performance, e.g., enabling accurate multi-step rollouts over longer forecast horizons as well as sharper predictions through spectral loss adjustments. We also systematically explore a wide range of model and dataset sizes under various compute budgets to construct IsoFLOP curves, and we identify compute-optimal training regimes. Extrapolating these trends to larger scales highlights potential performance limits, demonstrating that neural scaling can serve as an important diagnostic for efficient resource allocation. We open-source our code for reproducibility.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-26T17:37:25Z</published>
+    <arxiv:comment>ICLR Foundation Models for Science Workshop 2026, 19 pages, 13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shashank Subramanian</name>
+    </author>
+    <author>
+      <name>Alexander Kiefer</name>
+    </author>
+    <author>
+      <name>Arnur Nigmetov</name>
+    </author>
+    <author>
+      <name>Amir Gholami</name>
+    </author>
+    <author>
+      <name>Dmitriy Morozov</name>
+    </author>
+    <author>
+      <name>Michael W. Mahoney</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.12285v1</id>
+    <title>Chinese ModernBERT with Whole-Word Masking</title>
+    <updated>2025-10-14T08:41:22Z</updated>
+    <link href="https://arxiv.org/abs/2510.12285v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.12285v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Encoder-only Transformers have advanced along three axes -- architecture, data, and systems -- yielding Pareto gains in accuracy, speed, and memory efficiency. Yet these improvements have not fully transferred to Chinese, where tokenization and morphology differ markedly from English. We introduce Chinese ModernBERT, a from-scratch Chinese encoder that couples: (i) a hardware-aware 32k BPE vocabulary tailored to frequent Chinese affixes/compounds, lowering the embedding budget; (ii) whole-word masking (WWM) with a dynamic masking curriculum (30% -&gt; 15%) to align task difficulty with training progress; (iii) a two-stage pre-training pipeline that extends the native context from 1,024 to 8,192 tokens using RoPE and alternating local/global attention; and (iv) a damped-cosine learning-rate schedule for stable long-horizon optimization. We pre-train on ~1.2T Chinese tokens from CCI3-HQ, CCI4 (Chinese), and Cosmopedia-Chinese. On CLUE, Chinese ModernBERT is competitive with strong Chinese encoders under a unified fine-tuning protocol. Under bf16 it achieves high long-sequence throughput while maintaining strong short-sequence speed, reflecting benefits from budget allocation and attention design. To probe retrieval-oriented quality, we add a small amount of open contrastive data: fine-tuning on SimCLUE (~3M pairs) improves further when adding T2Ranking (~2M), reaching 0.505 (Pearson) / 0.537 (Spearman) on the SimCLUE test set. Under this open-data setting, Chinese ModernBERT surpasses Qwen-0.6B-embedding on SimCLUE, suggesting a clear scaling path for STS with additional curated pairs. We will release tokenizer and weights to facilitate reproducible research.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-14T08:41:22Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zeyu Zhao</name>
+    </author>
+    <author>
+      <name>Ningtao Wang</name>
+    </author>
+    <author>
+      <name>Xing Fu</name>
+    </author>
+    <author>
+      <name>Yu Cheng</name>
+    </author>
+  </entry>
+</feed>

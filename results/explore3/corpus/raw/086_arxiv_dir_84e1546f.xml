@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/BWio8mceMdJoP2c3n1soJtzRn9o</id>
+  <title>arXiv Query: search_query=all:"embedding sharing" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:48:47Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22embedding+sharing%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>14</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2111.09543v4</id>
+    <title>DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing</title>
+    <updated>2023-03-24T09:17:17Z</updated>
+    <link href="https://arxiv.org/abs/2111.09543v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2111.09543v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper presents a new pre-trained language model, DeBERTaV3, which improves the original DeBERTa model by replacing mask language modeling (MLM) with replaced token detection (RTD), a more sample-efficient pre-training task. Our analysis shows that vanilla embedding sharing in ELECTRA hurts training efficiency and model performance. This is because the training losses of the discriminator and the generator pull token embeddings in different directions, creating the "tug-of-war" dynamics. We thus propose a new gradient-disentangled embedding sharing method that avoids the tug-of-war dynamics, improving both training efficiency and the quality of the pre-trained model. We have pre-trained DeBERTaV3 using the same settings as DeBERTa to demonstrate its exceptional performance on a wide range of downstream natural language understanding (NLU) tasks. Taking the GLUE benchmark with eight tasks as an example, the DeBERTaV3 Large model achieves a 91.37% average score, which is 1.37% over DeBERTa and 1.91% over ELECTRA, setting a new state-of-the-art (SOTA) among the models with a similar structure. Furthermore, we have pre-trained a multi-lingual model mDeBERTa and observed a larger improvement over strong baselines compared to English models. For example, the mDeBERTa Base achieves a 79.8% zero-shot cross-lingual accuracy on XNLI and a 3.6% improvement over XLM-R Base, creating a new SOTA on this benchmark. We have made our pre-trained models and inference code publicly available at https://github.com/microsoft/DeBERTa.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-11-18T06:48:00Z</published>
+    <arxiv:comment>16 pages, 10 tables, 2 Figures. The DeBERTaV3 model significantly improves performance of the downstream NLU tasks over models with a similar structure, e.g. DeBERTaV3 large achieves 91.37% average GLUE score which is 1.37% over DeBERTa large. XSmall has only 22M backbone parameters, but significantly outperforms RoBERTa/XLNet-base. Paper is published as a conference paper at ICLR 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Pengcheng He</name>
+    </author>
+    <author>
+      <name>Jianfeng Gao</name>
+    </author>
+    <author>
+      <name>Weizhu Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2311.10341v1</id>
+    <title>Federated Knowledge Graph Completion via Latent Embedding Sharing and Tensor Factorization</title>
+    <updated>2023-11-17T06:03:56Z</updated>
+    <link href="https://arxiv.org/abs/2311.10341v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2311.10341v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Knowledge graphs (KGs), which consist of triples, are inherently incomplete and always require completion procedure to predict missing triples. In real-world scenarios, KGs are distributed across clients, complicating completion tasks due to privacy restrictions. Many frameworks have been proposed to address the issue of federated knowledge graph completion. However, the existing frameworks, including FedE, FedR, and FEKG, have certain limitations. = FedE poses a risk of information leakage, FedR's optimization efficacy diminishes when there is minimal overlap among relations, and FKGE suffers from computational costs and mode collapse issues. To address these issues, we propose a novel method, i.e., Federated Latent Embedding Sharing Tensor factorization (FLEST), which is a novel approach using federated tensor factorization for KG completion. FLEST decompose the embedding matrix and enables sharing of latent dictionary embeddings to lower privacy risks. Empirical results demonstrate FLEST's effectiveness and efficiency, offering a balanced solution between performance and privacy. FLEST expands the application of federated tensor factorization in KG completion tasks.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-11-17T06:03:56Z</published>
+    <arxiv:comment>Accepted by ICDM 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Maolin Wang</name>
+    </author>
+    <author>
+      <name>Dun Zeng</name>
+    </author>
+    <author>
+      <name>Zenglin Xu</name>
+    </author>
+    <author>
+      <name>Ruocheng Guo</name>
+    </author>
+    <author>
+      <name>Xiangyu Zhao</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2403.16610v1</id>
+    <title>Distributed collaborative anomalous sound detection by embedding sharing</title>
+    <updated>2024-03-25T10:40:04Z</updated>
+    <link href="https://arxiv.org/abs/2403.16610v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2403.16610v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To develop a machine sound monitoring system, a method for detecting anomalous sound is proposed. In this paper, we explore a method for multiple clients to collaboratively learn an anomalous sound detection model while keeping their raw data private from each other. In the context of industrial machine anomalous sound detection, each client possesses data from different machines or different operational states, making it challenging to learn through federated learning or split learning. In our proposed method, each client calculates embeddings using a common pre-trained model developed for sound data classification, and these calculated embeddings are aggregated on the server to perform anomalous sound detection through outlier exposure. Experiments showed that our proposed method improves the AUC of anomalous sound detection by an average of 6.8%.</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-03-25T10:40:04Z</published>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Kota Dohi</name>
+    </author>
+    <author>
+      <name>Yohei Kawaguchi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2203.09553v3</id>
+    <title>Efficient Federated Learning on Knowledge Graphs via Privacy-preserving Relation Embedding Aggregation</title>
+    <updated>2022-10-29T04:48:55Z</updated>
+    <link href="https://arxiv.org/abs/2203.09553v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2203.09553v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated learning (FL) can be essential in knowledge representation, reasoning, and data mining applications over multi-source knowledge graphs (KGs). A recent study FedE first proposes an FL framework that shares entity embeddings of KGs across all clients. However, entity embedding sharing from FedE would incur a severe privacy leakage. Specifically, the known entity embedding can be used to infer whether a specific relation between two entities exists in a private client. In this paper, we introduce a novel attack method that aims to recover the original data based on the embedding information, which is further used to evaluate the vulnerabilities of FedE. Furthermore, we propose a Federated learning paradigm with privacy-preserving Relation embedding aggregation (FedR) to tackle the privacy issue in FedE. Besides, relation embedding sharing can significantly reduce the communication cost due to its smaller size of queries. We conduct extensive experiments to evaluate FedR with five different KG embedding models and three datasets. Compared to FedE, FedR achieves similar utility and significant improvements regarding privacy-preserving effect and communication efficiency on the link prediction task.</summary>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-03-17T18:32:19Z</published>
+    <arxiv:comment>Accepted to Findings of EMNLP 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.AI"/>
+    <author>
+      <name>Kai Zhang</name>
+    </author>
+    <author>
+      <name>Yu Wang</name>
+    </author>
+    <author>
+      <name>Hongyi Wang</name>
+    </author>
+    <author>
+      <name>Lifu Huang</name>
+    </author>
+    <author>
+      <name>Carl Yang</name>
+    </author>
+    <author>
+      <name>Xun Chen</name>
+    </author>
+    <author>
+      <name>Lichao Sun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.00785v1</id>
+    <title>FedHypeVAE: Federated Learning with Hypernetwork Generated Conditional VAEs for Differentially Private Embedding Sharing</title>
+    <updated>2026-01-02T18:40:41Z</updated>
+    <link href="https://arxiv.org/abs/2601.00785v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.00785v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Federated data sharing promises utility without centralizing raw data, yet existing embedding-level generators struggle under non-IID client heterogeneity and provide limited formal protection against gradient leakage. We propose FedHypeVAE, a differentially private, hypernetwork-driven framework for synthesizing embedding-level data across decentralized clients. Building on a conditional VAE backbone, we replace the single global decoder and fixed latent prior with client-aware decoders and class-conditional priors generated by a shared hypernetwork from private, trainable client codes. This bi-level design personalizes the generative layerrather than the downstream modelwhile decoupling local data from communicated parameters. The shared hypernetwork is optimized under differential privacy, ensuring that only noise-perturbed, clipped gradients are aggregated across clients. A local MMD alignment between real and synthetic embeddings and a Lipschitz regularizer on hypernetwork outputs further enhance stability and distributional coherence under non-IID conditions. After training, a neutral meta-code enables domain agnostic synthesis, while mixtures of meta-codes provide controllable multi-domain coverage. FedHypeVAE unifies personalization, privacy, and distribution alignment at the generator level, establishing a principled foundation for privacy-preserving data synthesis in federated settings. Code: github.com/sunnyinAI/FedHypeVAE</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-02T18:40:41Z</published>
+    <arxiv:comment>10 pages, 1 figures, Accepted at AAI'26</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Sunny Gupta</name>
+    </author>
+    <author>
+      <name>Amit Sethi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2402.14905v2</id>
+    <title>MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases</title>
+    <updated>2024-06-27T03:53:46Z</updated>
+    <link href="https://arxiv.org/abs/2402.14905v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2402.14905v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper addresses the growing need for efficient large language models (LLMs) on mobile devices, driven by increasing cloud costs and latency concerns. We focus on designing top-quality LLMs with fewer than a billion parameters, a practical choice for mobile deployment. Contrary to prevailing belief emphasizing the pivotal role of data and parameter quantity in determining model quality, our investigation underscores the significance of model architecture for sub-billion scale LLMs. Leveraging deep and thin architectures, coupled with embedding sharing and grouped-query attention mechanisms, we establish a strong baseline network denoted as MobileLLM, which attains a remarkable 2.7%/4.3% accuracy boost over preceding 125M/350M state-of-the-art models. Additionally, we propose an immediate block-wise weight-sharing approach with no increase in model size and only marginal latency overhead. The resultant models, denoted as MobileLLM-LS, demonstrate a further accuracy enhancement of 0.7%/0.8% than MobileLLM 125M/350M. Moreover, MobileLLM model family shows significant improvements compared to previous sub-billion models on chat benchmarks, and demonstrates close correctness to LLaMA-v2 7B in API calling tasks, highlighting the capability of small models for common on-device use cases.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-02-22T18:58:55Z</published>
+    <arxiv:comment>ICML 2024. Code is available at https://github.com/facebookresearch/MobileLLM</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Zechun Liu</name>
+    </author>
+    <author>
+      <name>Changsheng Zhao</name>
+    </author>
+    <author>
+      <name>Forrest Iandola</name>
+    </author>
+    <author>
+      <name>Chen Lai</name>
+    </author>
+    <author>
+      <name>Yuandong Tian</name>
+    </author>
+    <author>
+      <name>Igor Fedorov</name>
+    </author>
+    <author>
+      <name>Yunyang Xiong</name>
+    </author>
+    <author>
+      <name>Ernie Chang</name>
+    </author>
+    <author>
+      <name>Yangyang Shi</name>
+    </author>
+    <author>
+      <name>Raghuraman Krishnamoorthi</name>
+    </author>
+    <author>
+      <name>Liangzhen Lai</name>
+    </author>
+    <author>
+      <name>Vikas Chandra</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.10625v1</id>
+    <title>Searching to Sparsify Tensor Decomposition for N-ary Relational Data</title>
+    <updated>2021-04-21T16:37:04Z</updated>
+    <link href="https://arxiv.org/abs/2104.10625v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.10625v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tensor, an extension of the vector and matrix to the multi-dimensional case, is a natural way to describe the N-ary relational data. Recently, tensor decomposition methods have been introduced into N-ary relational data and become state-of-the-art on embedding learning. However, the performance of existing tensor decomposition methods is not as good as desired. First, they suffer from the data-sparsity issue since they can only learn from the N-ary relational data with a specific arity, i.e., parts of common N-ary relational data. Besides, they are neither effective nor efficient enough to be trained due to the over-parameterization problem. In this paper, we propose a novel method, i.e., S2S, for effectively and efficiently learning from the N-ary relational data. Specifically, we propose a new tensor decomposition framework, which allows embedding sharing to learn from facts with mixed arity. Since the core tensors may still suffer from the over-parameterization, we propose to reduce parameters by sparsifying the core tensors while retaining their expressive power using neural architecture search (NAS) techniques, which can search for data-dependent architectures. As a result, the proposed S2S not only guarantees to be expressive but also efficiently learns from mixed arity. Finally, empirical results have demonstrated that S2S is efficient to train and achieves state-of-the-art performance.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-21T16:37:04Z</published>
+    <arxiv:comment>WebConf 2021</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Shimin Di</name>
+    </author>
+    <author>
+      <name>Quanming Yao</name>
+    </author>
+    <author>
+      <name>Lei Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.06663v1</id>
+    <title>SecureNet: A Comparative Study of DeBERTa and Large Language Models for Phishing Detection</title>
+    <updated>2024-06-10T13:13:39Z</updated>
+    <link href="https://arxiv.org/abs/2406.06663v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.06663v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Phishing, whether through email, SMS, or malicious websites, poses a major threat to organizations by using social engineering to trick users into revealing sensitive information. It not only compromises company's data security but also incurs significant financial losses. In this paper, we investigate whether the remarkable performance of Large Language Models (LLMs) can be leveraged for particular task like text classification, particularly detecting malicious content and compare its results with state-of-the-art Deberta V3 (DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing) model. We systematically assess the potential and limitations of both approaches using comprehensive public datasets comprising diverse data sources such as email, HTML, URL, SMS, and synthetic data generation. Additionally, we demonstrate how LLMs can generate convincing phishing emails, making it harder to spot scams and evaluate the performance of both models in this context. Our study delves further into the challenges encountered by DeBERTa V3 during its training phases, fine-tuning methodology and transfer learning processes. Similarly, we examine the challenges associated with LLMs and assess their respective performance. Among our experimental approaches, the transformer-based DeBERTa method emerged as the most effective, achieving a test dataset (HuggingFace phishing dataset) recall (sensitivity) of 95.17% closely followed by GPT-4 providing a recall of 91.04%. We performed additional experiments with other datasets on the trained DeBERTa V3 model and LLMs like GPT 4 and Gemini 1.5. Based on our findings, we provide valuable insights into the effectiveness and robustness of these advanced language models, offering a detailed comparative analysis that can inform future research efforts in strengthening cybersecurity measures for detecting and mitigating phishing threats.</summary>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-10T13:13:39Z</published>
+    <arxiv:comment>Preprint. 10 pages, Accepted in IEEE 7th International Conference on Big Data and Artificial Intelligence (BDAI 2024)</arxiv:comment>
+    <arxiv:primary_category term="cs.CR"/>
+    <arxiv:journal_ref>2024 IEEE 7th International Conference on Big Data and Artificial Intelligence (BDAI), Beijing, China, 2024, pp. 160-169</arxiv:journal_ref>
+    <author>
+      <name>Sakshi Mahendru</name>
+    </author>
+    <author>
+      <name>Tejul Pandit</name>
+    </author>
+    <arxiv:doi>10.1109/BDAI62182.2024.10692765</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/BDAI62182.2024.10692765" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.12474v2</id>
+    <title>Mind the Gap Between Prototypes and Images in Cross-domain Finetuning</title>
+    <updated>2024-10-20T08:25:18Z</updated>
+    <link href="https://arxiv.org/abs/2410.12474v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.12474v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In cross-domain few-shot classification (CFC), recent works mainly focus on adapting a simple transformation head on top of a frozen pre-trained backbone with few labeled data to project embeddings into a task-specific metric space where classification can be performed by measuring similarities between image instance and prototype representations. Technically, an assumption implicitly adopted in such a framework is that the prototype and image instance embeddings share the same representation transformation. However, in this paper, we find that there naturally exists a gap, which resembles the modality gap, between the prototype and image instance embeddings extracted from the frozen pre-trained backbone, and simply applying the same transformation during the adaptation phase constrains exploring the optimal representations and shrinks the gap between prototype and image representations. To solve this problem, we propose a simple yet effective method, contrastive prototype-image adaptation (CoPA), to adapt different transformations respectively for prototypes and images similarly to CLIP by treating prototypes as text prompts. Extensive experiments on Meta-Dataset demonstrate that CoPA achieves the state-of-the-art performance more efficiently. Meanwhile, further analyses also indicate that CoPA can learn better representation clusters, enlarge the gap, and achieve minimal validation loss at the enlarged gap.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-16T11:42:11Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Hongduan Tian</name>
+    </author>
+    <author>
+      <name>Feng Liu</name>
+    </author>
+    <author>
+      <name>Zhanke Zhou</name>
+    </author>
+    <author>
+      <name>Tongliang Liu</name>
+    </author>
+    <author>
+      <name>Chengqi Zhang</name>
+    </author>
+    <author>
+      <name>Bo Han</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.22887v1</id>
+    <title>MoVE: Mixture of Value Embeddings -- A New Axis for Scaling Parametric Memory in Autoregressive Models</title>
+    <updated>2026-01-30T12:07:23Z</updated>
+    <link href="https://arxiv.org/abs/2601.22887v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.22887v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autoregressive sequence modeling stands as the cornerstone of modern Generative AI, powering results across diverse modalities ranging from text generation to image generation. However, a fundamental limitation of this paradigm is the rigid structural coupling of model capacity to computational cost: expanding a model's parametric memory -- its repository of factual knowledge or visual patterns -- traditionally requires deepening or widening the network, which incurs a proportional rise in active FLOPs. In this work, we introduce $\textbf{MoVE (Mixture of Value Embeddings)}$, a mechanism that breaks this coupling and establishes a new axis for scaling capacity. MoVE decouples memory from compute by introducing a global bank of learnable value embeddings shared across all attention layers. For every step in the sequence, the model employs a differentiable soft gating mechanism to dynamically mix retrieved concepts from this bank into the standard value projection. This architecture allows parametric memory to be scaled independently of network depth by simply increasing the number of embedding slots. We validate MoVE through strictly controlled experiments on two representative applications of autoregressive modeling: Text Generation and Image Generation. In both domains, MoVE yields consistent performance improvements over standard and layer-wise memory baselines, enabling the construction of "memory-dense" models that achieve lower perplexity and higher fidelity than their dense counterparts at comparable compute budgets.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-30T12:07:23Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yangyan Li</name>
+    </author>
+  </entry>
+</feed>

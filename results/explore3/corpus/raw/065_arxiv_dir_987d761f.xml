@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/VpHlCvf2PcrHg4lfOKwE/VF/f7c</id>
+  <title>arXiv Query: search_query=all:"attention logit growth" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:47:02Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22attention+logit+growth%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2505.15548v2</id>
+    <title>Dense Local Dependencies Induce Attention-Logit Explosion and Training Instability During Long-Sequence Transformer Training</title>
+    <updated>2026-07-28T05:39:01Z</updated>
+    <link href="https://arxiv.org/abs/2505.15548v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.15548v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Autoregressive transformer language models frequently exhibit training instability when trained on long sequences, particularly under low-precision arithmetic. Although this instability is often accompanied by attention-logit explosion, its underlying cause remains poorly understood. In this work, we present analytical insights and empirical evidence that dense local dependencies are a major contributor to attention-logit explosion. We demonstrate that dense local dependency patterns yield an effectively high-rank attention structure, which the low-rank parameterization of self-attention can only approximate with increasingly large logits as the sequence length grows. This logit inflation ultimately leads to training instability under low-precision arithmetic. We support this explanation through extensive experiments on synthetic and language modeling tasks. Our results consistently show that attention-logit growth increases with sequence length, is mitigated by increasing the attention dimension, and is substantially reduced by explicitly modeling dense local dependencies. Furthermore, we show that this growth is driven by the density of local dependencies rather than by locality alone. More broadly, our findings suggest that explicitly modeling dense local dependencies constitutes an important design principle for developing stable, efficient, and scalable long-context transformer architectures for autoregressive language modeling.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-21T14:12:30Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Suvadeep Hajra</name>
+    </author>
+  </entry>
+</feed>

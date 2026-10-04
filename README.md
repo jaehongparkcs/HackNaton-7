@@ -17,6 +17,7 @@ Design documents, in the order they were built: [BUILD_PLAN.md](BUILD_PLAN.md) (
 |---|---|
 | **`results/golden/`** — exhibit 1, core loop | Live Claude, live arXiv search, real MPS training. Recorded before the hypothesis engine existed: its follow-ups came from the literature-ordered queue. Rule v1, gate v1. `make verify rederive replay` pass. |
 | **`results/explore2/`** — exhibit 2, hypothesis engine | Live, 160 papers, 185 claims, real MPS training, 28 runs. Protocol v2 (rule v2, gate v2), the wider testbed and the explore → confirm → promote loop: RoPE was confirmed and promoted, three later finalists were measured on it, and four gap predictions were scored. Prediction v1 (combinations make no directional prediction). Recorded with one limitation: a thin mechanism graph (2 shared mechanism nodes, want ≥ 3). `make verify rederive replay` pass. |
+| **`results/explore3/`** — exhibit 3, deep read in the loop | Live, same frozen corpus as `explore2` plus the deep read (23 full texts, 55 `deep_read_update` decisions), real MPS training, 20 runs, $0.56 loop + $0.42 gate check. The first session with the Lion learning-rate fix and a full-text recipe (lr × 0.2, wd × 5, quoted from arXiv:2302.06675). ReLU² + RoPE held on paired and extra seeds and was promoted (still a screening result); Lion still lost. Recorded with one limitation: `search_degraded` (`dec_002`). `make verify rederive replay verify-deep` pass. |
 | `results/explore1/` — superseded | Live, 120 papers, 128 claims. The scout failed (a schema bug, since fixed), so only the per-building-block directions were searched. One gap hypothesis ran (dropout: predicted better, measured harmful, a **miss**). It was recorded although the gate check had reported UNSTABLE rows, which is why recording now stops on that. Rule v1, gate v1. Verify, rederive and replay pass. Kept as an exhibit of what went wrong. |
 | Prediction v2 (combination predictions), timestamps, the speed work (FINAL_FIXES B1–B4, B6) | Built and tested with a scripted LLM and recorded API responses. Not yet recorded live. |
 | **Deep read** ([DEEP_READ.md](DEEP_READ.md)): full text of the papers closest to the top hypotheses | Built and tested on HTML fixtures with a scripted LLM. Run live on `corpus-explore2` (23 papers read, 0 unavailable, $2.09). Setting agreement with the human labels: **5/9 with full text, 4/9 abstract only** — below the ≥ 6/9 target, which was mis-set: 2 labels (c03, c06) never match a change, so the ceiling is 7/9 (5/7 on matched); the other 2 misses (c09 SwiGLU, c12 RoPE) are by design, because the human criterion is abstract-scoped ("seq-to-seq", "text classification") while the full text shows Transformer pre-training (C4 524k steps; BookCorpus+Wikipedia 100k steps), which the coverage rule calls `partial`. Curated labels were not changed after seeing this; T1 labels are never overridden. `make deep-read` now prints both denominators and each disagreement. |
@@ -152,6 +153,22 @@ Both promising; both shrink with more seeds. Still screening results, not confir
 **Prediction scorecard** (`explore2`, prediction v1): 1 hit (RoPE, "+", promising), 1 miss (constant schedule, "0" = no worse, measured harmful), 1 null (RMSNorm, "+", no improvement), 1 no prediction (ReLU² + RMSNorm, a combination). Counts, not rates: four is too few for a rate.
 
 **Extraction validation** (auto-extraction vs the 9 human-labeled curated claims with a config change): direction 5/9, setting 3/9, config mapping 6/9 in `explore2`, after the counter-examples added to `prompts/extract.md`; before (`explore1`): direction 4/9, setting 3/9, config mapping 6/9.
+
+### Claims table (recorded bundle `results/explore3`)
+
+Recorded 2026-10-04 (UTC) on MPS: 20 runs, 30 loop LLM calls ($0.56). Same corpus as `explore2` (160 papers retrieved, 219 after the deep read) plus the deep read of 23 papers. Noise floor SD 0.0094 over 5 baseline seeds (mean 1.5389). Protocol: rule v2, gate v2.
+
+| Claim | Evidence in the bundle | Reproduce | Hardware |
+|---|---|---|---|
+| Reading the full text changes coverage, gap scores and the queue, each with its quote | `dec_003`–`dec_057` `deep_read_update` (coverage `none`→`partial` from experimental-setup passages, gap scores, queue status, 15 author-stated limitations) | `make replay`, `make verify-deep` | none (network for verify-deep) |
+| A recipe from the paper sets the hyperparameters, not a guess | `dec_042`: Lion lr × 0.2, wd × 5, from "3-10x smaller" / "3-10x larger" (arXiv:2302.06675v4) | `make verify-deep` | network |
+| ReLU² + RoPE holds on paired and extra seeds and is promoted (a screening result, not a confirmation) | exploration +2.72× SD on one seed (`dec_061`) → screening (`dec_067`, hit) → extra seeds (`dec_070`, `ana_cdc1cbaaa0`, +2.35× SD, 5 seeds, every seed better) → `dec_074` promotion | `make rederive` | MPS |
+| Lion at the paper's learning rate still loses here | RMSNorm + Lion: −10.5× SD on the baseline (`dec_062`), −5.6× SD on the incumbent (`dec_076`); one seed each, exploration only | `make rederive` | MPS |
+| Predictions are scored | ReLU² + RoPE hit (`dec_067`), no warm-up null (`dec_071`), QK-norm + no warm-up miss: harmful (`dec_079`) → literature check: not found (`dec_083`) | `make replay` | none |
+
+**Read with care.**
+- **The promotion is mostly RoPE.** It is a combination measured from the original baseline. RoPE alone gave +1.28× SD in `explore2`, and there ReLU² added nothing on top of RoPE (with RMSNorm, −0.67× SD). This bundle does not separate ReLU² from RoPE, so we do not claim that ReLU² helps.
+- **Lion was never tested alone.** The single-change candidate was soft-rejected and left the queue; Lion only ran paired with RMSNorm, on one seed. The deep read surfaced the authors' own limitation that Lion "performs no better than AdamW if the batch size is small (< 64)" (`dec_055`); our batch size is 64, 0.8M parameters, 2,000 steps. Consistent with the loss, not a test of it.
 
 ## How it works
 

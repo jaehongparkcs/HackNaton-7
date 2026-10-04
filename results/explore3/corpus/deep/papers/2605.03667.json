@@ -1,0 +1,193 @@
+{
+  "dropped": [],
+  "event": "unrecorded-cf0cd60a",
+  "findings": {
+    "limitations": [],
+    "mechanisms": [
+      {
+        "mechanism_category": "computational_efficiency",
+        "method": "activation=relu2",
+        "quote": "Additionally, by removing the gating mechanism present in SwiGLU, this simplified structure reduces computational overhead while maintaining nonlinearity for model expressiveness.",
+        "section": "method"
+      }
+    ],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "warmup",
+        "method": "warmup_frac=0.1",
+        "quote": "We also follow the common pre-training settings, which linearly increase the learning rate before the first 10% of training tokens.",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "linearly increase the learning rate before the first 10% of training tokens"
+      }
+    ],
+    "results": [
+      {
+        "direction": "no_worse",
+        "method": "activation=relu2",
+        "quote": "Specifically, ELAS achieves perplexity scores very close to the LORO baseline with only minimal degradation ranging from 0.07 to 0.28 perplexity points.",
+        "section": "results",
+        "setting_note": "ELAS (ReLU2 + 2:4 activation sparsity, low-rank) vs LORO, LLaMA 60M-1B on C4"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "C4",
+        "model_family": "transformer",
+        "parameter_count": "1B",
+        "quote": "We validate ELAS through comprehensive experiments on LLaMA models ranging from 60M to 1B parameters on the C4 dataset (Raffel et al., 2020), demonstrating that our method maintains competitive perplexity compared to full-rank baselines while achieving meaningful speedups and activation memory reduction.",
+        "section": "introduction",
+        "task": "language_modeling",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "5ed7af54e66259d62e80193610776abe2a5f5ef7722dc53039cfc19c36ece4f4",
+  "paper_id": "2605.03667",
+  "section_chars": {
+    "abstract": 1529,
+    "conclusion": 1123,
+    "experimental_setup": 18317,
+    "introduction": 6319,
+    "method": 3814,
+    "results": 5546
+  },
+  "sections": [
+    {
+      "chars": 1529,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 6319,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 0,
+      "heading": "Related work",
+      "section": "other"
+    },
+    {
+      "chars": 2062,
+      "heading": "2.1 Low-rank Pre-training",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 3105,
+      "heading": "2.2 Sparse training and N:M structured sparsity",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2933,
+      "heading": "2.3 Low-rank and sparse training",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 681,
+      "heading": "Methodology",
+      "section": "method"
+    },
+    {
+      "chars": 1781,
+      "heading": "3.1 Low-Rank Training Framework",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1027,
+      "heading": "3.2 Model Architecture Modification",
+      "section": "method"
+    },
+    {
+      "chars": 349,
+      "heading": "3.3 2:4 Activation Sparsity",
+      "section": "method"
+    },
+    {
+      "chars": 1222,
+      "heading": "3.3.1 Forward Pass Sparsification",
+      "section": "method"
+    },
+    {
+      "chars": 531,
+      "heading": "3.3.2 Backward Pass with Straight-Through Estimator",
+      "section": "method"
+    },
+    {
+      "chars": 2400,
+      "heading": "3.4 Training Procedure",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 247,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1143,
+      "heading": "4.1 Experiments setup",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 439,
+      "heading": "4.1.1 Baselines",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 385,
+      "heading": "4.1.2 Hyper parameters selection",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 0,
+      "heading": "4.2 Main results",
+      "section": "results"
+    },
+    {
+      "chars": 2517,
+      "heading": "4.2.1 ELAS shows competitive performance with baseline methods",
+      "section": "results"
+    },
+    {
+      "chars": 1203,
+      "heading": "4.2.2 ELAS achieves activation memory reduction",
+      "section": "results"
+    },
+    {
+      "chars": 1824,
+      "heading": "4.2.3 ELAS aobtains computational acceleration",
+      "section": "results"
+    },
+    {
+      "chars": 274,
+      "heading": "4.3 Ablation study",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1334,
+      "heading": "4.3.1 Ablation on activation 2:4 dense warmup steps",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2203,
+      "heading": "4.3.2 Ablation on activation 2:4 sparse methods",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1123,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "ELAS: Efficient Pre-Training of Low-Rank Large Language Models via 2:4 Activation Sparsity",
+  "url": "https://arxiv.org/html/2605.03667",
+  "validation_only": false,
+  "version": "2605.03667v1"
+}

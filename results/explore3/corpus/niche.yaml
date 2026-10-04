@@ -1,0 +1,33 @@
+title: Training efficiency of tiny character-level Transformers
+description: 'Which architecture and optimization choices change the validation loss
+  of a very small character-level Transformer language model trained for a short,
+  fixed number of steps? We care about normalization, activation functions, positional
+  encoding, optimizers, learning-rate schedules and regularization, as reported for
+  Transformer language models.
+
+  '
+include_terms:
+- layer normalization
+- activation functions
+- positional encoding
+- optimizer
+- learning-rate schedule
+- dropout
+- Transformer language model
+exclude_terms:
+- vision transformer
+- speech
+- reinforcement learning
+arxiv_categories:
+- cs.LG
+- cs.CL
+- cs.NE
+date_from: '2017-01-01'
+date_to: ''
+seed_papers:
+- '2002.04745'
+- '1910.07467'
+max_papers: 80
+testbed: tiny_char_lm
+pi_overrides: []
+pi_dismissed_holds: []

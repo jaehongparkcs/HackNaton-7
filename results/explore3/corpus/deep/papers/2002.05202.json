@@ -1,0 +1,127 @@
+{
+  "dropped": [
+    {
+      "field": "mechanisms",
+      "quote": "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence.",
+      "reason": "no listed mechanism",
+      "section": "conclusion"
+    }
+  ],
+  "event": "unrecorded-91833bec",
+  "findings": {
+    "limitations": [
+      {
+        "method": "activation=swiglu",
+        "quote": "We offer no explanation as to why these architectures seem to work; we attribute their success, as all else, to divine benevolence.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [],
+    "recipes": [
+      {
+        "adamw_value": null,
+        "hyperparameter": "other",
+        "method": "activation=swiglu",
+        "quote": "we reduce the hidden layer to d_{ff}=2048 , so as to maintain the same parameter and operation counts as the base model",
+        "ratio_to_adamw_max": null,
+        "ratio_to_adamw_min": null,
+        "section": "experimental_setup",
+        "value": null,
+        "value_as_stated": "d_ff=2048 (reduced from 3072) to match parameters"
+      }
+    ],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "The GEGLU and SwiGLU variants produce the best perplexities.",
+        "section": "results",
+        "setting_note": "T5-base span-filling heldout log-perplexity on C4"
+      },
+      {
+        "direction": "improves",
+        "method": "activation=swiglu",
+        "quote": "While the results are noisy, the new GLU-variants perform best on most of the tasks.",
+        "section": "experimental_setup",
+        "setting_note": "GLUE/SuperGLUE/SQuAD fine-tuning"
+      },
+      {
+        "direction": "worse",
+        "method": "dropout=0.1",
+        "quote": "Our main departure from [Raffel et al., 2019] is that we use no dropout during pre-training. We find this to produce superior results.",
+        "section": "results",
+        "setting_note": "dropout during pre-training vs none, T5 base"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "128 examples",
+        "dataset": "C4",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "Identically to [Raffel et al., 2019], we pre-train for 524,288 steps on the span-filling objective on the C4 dataset. Each training batch consists of 128 examples, each of which has an input of 512 tokens and an output of 114 tokens",
+        "section": "results",
+        "task": "language_modeling",
+        "training_steps": "524,288"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "f5af33eda58f3e7885acc01119a0cd126b45c623e0e73bda35997d596310f26a",
+  "paper_id": "2002.05202",
+  "section_chars": {
+    "abstract": 496,
+    "conclusion": 512,
+    "experimental_setup": 6329,
+    "introduction": 1222,
+    "results": 1046
+  },
+  "sections": [
+    {
+      "chars": 496,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 1222,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 1774,
+      "heading": "Gated Linear Units (GLU) and Variants",
+      "section": "other"
+    },
+    {
+      "chars": 303,
+      "heading": "Experiments on Text-to-Text Transfer Transformer (T5)",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1173,
+      "heading": "3.1 Model Architecture",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1046,
+      "heading": "3.2 Pre-Training and Perplexity Results",
+      "section": "results"
+    },
+    {
+      "chars": 4851,
+      "heading": "3.3 Fine-Tuning",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 512,
+      "heading": "Conclusions",
+      "section": "conclusion"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "GLU Variants Improve Transformer",
+  "url": "https://arxiv.org/html/2002.05202",
+  "validation_only": false,
+  "version": "2002.05202v1"
+}

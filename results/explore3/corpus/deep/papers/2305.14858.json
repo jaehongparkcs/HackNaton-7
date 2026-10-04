@@ -1,0 +1,222 @@
+{
+  "dropped": [],
+  "event": "unrecorded-88a185fe",
+  "findings": {
+    "limitations": [
+      {
+        "method": "norm=rmsnorm",
+        "quote": "It is necessary to focus on developing highly optimized implementations of (C)RMSNorm to bridge the gap between theoretical and practical efficiency improvements.",
+        "section": "conclusion"
+      },
+      {
+        "method": "norm=rmsnorm",
+        "quote": "The normalization takes <1\\% of the inference time for GPT-3 XL and larger models, which is the upper bound of the speedup with our methods.",
+        "section": "experimental_setup"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "computational_efficiency",
+        "method": "norm=rmsnorm",
+        "quote": "RMSNorm only rescales the input vector with its RMS value, offering greater computational efficiency than LayerNorm.",
+        "section": "introduction"
+      },
+      {
+        "mechanism_category": "computational_efficiency",
+        "method": "norm=rmsnorm",
+        "quote": "Overall, the Pre-RMSNorm reduces the training time by 2.36\\% .",
+        "section": "experimental_setup"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "For validation and reference, we train ViT-S/16 as Pre-LN, Pre-RMSNorm, and Pre-CRMSNorm models on ImageNet-1k following the DeiT-3 setting and achieve similar accuracy.",
+        "section": "appendix_setup",
+        "setting_note": "ViT-S/16 on ImageNet-1k, DeiT-3 setting"
+      },
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "These performance curves exhibit remarkable similarity, providing empirical evidence for their training equivalence.",
+        "section": "appendix_setup",
+        "setting_note": "GPT-2 Small on wikitext-103"
+      },
+      {
+        "direction": "no_worse",
+        "method": "norm=rmsnorm",
+        "quote": "In our experiments, we can convert the pre-trained Pre-LN ViT-H/14 into Pre-(C)RMS variants without any accuracy change on the ImageNet validation dataset.",
+        "section": "appendix_setup",
+        "setting_note": "pre-trained ViT-H/14 converted, ImageNet val"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "unspecified",
+        "dataset": "ImageNet (dummy data for timing)",
+        "model_family": "transformer",
+        "parameter_count": "unspecified",
+        "quote": "We replicate the ViT and GPT-3 architectures as described in their respective papers, employing dummy data to assess the training and inference speed.",
+        "section": "experimental_setup",
+        "task": "vision",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "df111c268e841596b8853493d438addf484a32c11765a8d010891f1562664454",
+  "paper_id": "2305.14858",
+  "section_chars": {
+    "abstract": 1685,
+    "appendix_setup": 4662,
+    "conclusion": 2076,
+    "experimental_setup": 12726,
+    "introduction": 5145,
+    "method": 7757
+  },
+  "sections": [
+    {
+      "chars": 1685,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 5145,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 116,
+      "heading": "Background",
+      "section": "other"
+    },
+    {
+      "chars": 1918,
+      "heading": "2.1 LayerNorm and RMSNorm",
+      "section": "other"
+    },
+    {
+      "chars": 1143,
+      "heading": "2.2 Normalization in Transformers",
+      "section": "other"
+    },
+    {
+      "chars": 2009,
+      "heading": "2.3 Pre-LN Transformer",
+      "section": "other"
+    },
+    {
+      "chars": 836,
+      "heading": "Method",
+      "section": "method"
+    },
+    {
+      "chars": 2829,
+      "heading": "3.1 Pre-LN Transformer = Pre-RMSNorm Transformer",
+      "section": "method"
+    },
+    {
+      "chars": 3537,
+      "heading": "3.2 Pre-RMSNorm Transformer = Pre-CRMSNorm Transformer",
+      "section": "method"
+    },
+    {
+      "chars": 552,
+      "heading": "3.3 Pre-LN Transformer = Pre-CRMSNorm Transformer",
+      "section": "method"
+    },
+    {
+      "chars": 337,
+      "heading": "3.4 Training and Inference Efficiency",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2979,
+      "heading": "3.4.1 Pre-RMSNorm Transformer",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1197,
+      "heading": "3.4.2 Pre-CRMSNorm Transformer",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1685,
+      "heading": "3.5 Training and Inference Equivalence",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 1493,
+      "heading": "Experiments",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 4106,
+      "heading": "4.1 Experiments on ViT",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 923,
+      "heading": "4.2 Experiments on GPT",
+      "section": "experimental_setup"
+    },
+    {
+      "chars": 2076,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 155,
+      "heading": "Acknowledgments and Disclosure of Funding",
+      "section": "other"
+    },
+    {
+      "chars": 2062,
+      "heading": "Appendix A Proof for Lemma 1.",
+      "section": "other"
+    },
+    {
+      "chars": 1487,
+      "heading": "Appendix B Post-LN Transformers",
+      "section": "other"
+    },
+    {
+      "chars": 1012,
+      "heading": "Appendix C Revertible Conversions",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Experiments",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1019,
+      "heading": "D.1 Implementation of Normalization",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1236,
+      "heading": "D.2 Extended Experiments in ViT",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1789,
+      "heading": "D.3 Numerical Issue",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 615,
+      "heading": "D.4 Verification of Training Equivalence",
+      "section": "appendix_setup"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "Pre-RMSNorm and Pre-CRMSNorm Transformers: Equivalent and Efficient Pre-LN Transformers",
+  "url": "https://arxiv.org/html/2305.14858",
+  "validation_only": false,
+  "version": "2305.14858v2"
+}

@@ -1,0 +1,302 @@
+{
+  "dropped": [
+    {
+      "field": "mechanisms",
+      "quote": "Correcting only the QK route blocks that channel.",
+      "reason": "quote not verbatim in that section",
+      "section": "introduction"
+    }
+  ],
+  "event": "unrecorded-f359ba63",
+  "findings": {
+    "limitations": [
+      {
+        "method": "qk_norm=true",
+        "quote": "Where a source-local repair exists, such as an fp32 streaming core, it remains the direct fix; the channel is where to act for sources that lack one or keep low precision by design.",
+        "section": "conclusion"
+      }
+    ],
+    "mechanisms": [
+      {
+        "mechanism_category": "attention_behavior",
+        "method": "qk_norm=true",
+        "quote": "The same normalization also prevents attention-logit growth, a known instability of large-scale training [9, 38].",
+        "section": "introduction"
+      }
+    ],
+    "recipes": [],
+    "results": [
+      {
+        "direction": "improves",
+        "method": "qk_norm=true",
+        "quote": "Scale transfer is tested at 350M with the same threshold: query–key normalization ends at 4.04, and an fp32 streaming-core hot-swap at 4.03 train and 4.02 validation loss, versus the shared unguarded arm’s 8.28 .",
+        "section": "method",
+        "setting_note": "350M GPT-2 bf16 fault, vs unguarded"
+      },
+      {
+        "direction": "improves",
+        "method": "qk_norm=true",
+        "quote": "on plain GPT-2, all 12 final train and validation losses were within 0.03 nat of same-configuration always-on QK-norm, and both methods ran 60k steps without collapse",
+        "section": "abstract",
+        "setting_note": "GPT-2 low-precision fault, 60k steps"
+      },
+      {
+        "direction": "improves",
+        "method": "qk_norm=true",
+        "quote": "6 of six unguarded twins collapse after their pair’s fire step, whereas 0 of six guarded arms collapse, and every guarded arm reaches 15900 logged steps",
+        "section": "method",
+        "setting_note": "RoPE GPT-2 matched pairs"
+      }
+    ],
+    "setting": [
+      {
+        "batch_size": "micro-batch size 20 with gradient accumulation set per arm",
+        "dataset": "OpenWebText",
+        "model_family": "transformer",
+        "parameter_count": "350M",
+        "quote": "All main-grid experiments train GPT-2-class decoder-only transformers [30] on OpenWebText [12] with AdamW [22]",
+        "section": "appendix_setup",
+        "task": "language_modeling",
+        "training_steps": "unspecified"
+      }
+    ],
+    "small_scale_evidence": []
+  },
+  "full_text": "read",
+  "html_sha256": "2e49f40f71c61ae341e14e8710768c6c6475d28f8078b0ce008d500b2a7ddb87",
+  "paper_id": "2608.02091",
+  "section_chars": {
+    "abstract": 2038,
+    "appendix_setup": 21436,
+    "conclusion": 911,
+    "introduction": 3291,
+    "method": 1909
+  },
+  "sections": [
+    {
+      "chars": 2038,
+      "heading": "Abstract",
+      "section": "abstract"
+    },
+    {
+      "chars": 3291,
+      "heading": "Introduction",
+      "section": "introduction"
+    },
+    {
+      "chars": 3346,
+      "heading": "Isolating a Fault and Building the Assay",
+      "section": "other"
+    },
+    {
+      "chars": 1488,
+      "heading": "A manipulable assay.",
+      "section": "other"
+    },
+    {
+      "chars": 448,
+      "heading": "Identifying a Common QK Failure Channel Across Fault Sources",
+      "section": "other"
+    },
+    {
+      "chars": 1250,
+      "heading": "3.1 Locating the blocking channel",
+      "section": "other"
+    },
+    {
+      "chars": 2134,
+      "heading": "3.2 Moving the fault source",
+      "section": "other"
+    },
+    {
+      "chars": 2461,
+      "heading": "3.3 Portability and scope",
+      "section": "other"
+    },
+    {
+      "chars": 318,
+      "heading": "Explaining Entry and Testing the Causal Role of the QK Channel",
+      "section": "other"
+    },
+    {
+      "chars": 3325,
+      "heading": "4.1 Temporal sign-coherence, not aggregate deviation, gates entry",
+      "section": "other"
+    },
+    {
+      "chars": 2075,
+      "heading": "4.2 Direction-specific removal suppresses the QK runaway",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Closing the Channel in Flight",
+      "section": "other"
+    },
+    {
+      "chars": 1926,
+      "heading": "5.1 Monitor downstream, act at QK",
+      "section": "other"
+    },
+    {
+      "chars": 1742,
+      "heading": "5.2 At a fixed trigger, the action decides rescue",
+      "section": "other"
+    },
+    {
+      "chars": 1909,
+      "heading": "5.3 Transfer Across Architecture, Scale, and Fault Source",
+      "section": "method"
+    },
+    {
+      "chars": 860,
+      "heading": "5.4 Endpoint gaps and deployment durability",
+      "section": "other"
+    },
+    {
+      "chars": 911,
+      "heading": "Conclusion",
+      "section": "conclusion"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix A Experimental Setup, Protocols, and Measurement Semantics",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 5760,
+      "heading": "A.1 Models, data, and optimization",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 680,
+      "heading": "A.2 The sustained-divergence crash rule",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 2793,
+      "heading": "A.3 Measurement conventions and injection protocols",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 2700,
+      "heading": "A.4 The interventions, defined",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 668,
+      "heading": "A.5 The threshold of 30: provenance and sweeps",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 1095,
+      "heading": "What moving the threshold does, at one seed.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 2471,
+      "heading": "Moving the threshold across two seeds.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 618,
+      "heading": "A.6 Per-arm seed counts and horizons",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 478,
+      "heading": "Route correction.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 4164,
+      "heading": "Horizons of the §3 route-correction grid.",
+      "section": "appendix_setup"
+    },
+    {
+      "chars": 546,
+      "heading": "Appendix B The QK-Subspace Control Battery",
+      "section": "other"
+    },
+    {
+      "chars": 2037,
+      "heading": "The two operations.",
+      "section": "other"
+    },
+    {
+      "chars": 910,
+      "heading": "Appendix C Full Per-Arm Results",
+      "section": "other"
+    },
+    {
+      "chars": 7164,
+      "heading": "Same trigger, same nominal bound, inside the softmax.",
+      "section": "other"
+    },
+    {
+      "chars": 1563,
+      "heading": "C.1 Positioning and further details",
+      "section": "other"
+    },
+    {
+      "chars": 735,
+      "heading": "Related interventions.",
+      "section": "other"
+    },
+    {
+      "chars": 246,
+      "heading": "Older forms of the principle.",
+      "section": "other"
+    },
+    {
+      "chars": 179,
+      "heading": "Why the streaming recurrence went unmodelled (§2).",
+      "section": "other"
+    },
+    {
+      "chars": 0,
+      "heading": "Appendix D Further Analyses",
+      "section": "other"
+    },
+    {
+      "chars": 916,
+      "heading": "Why no per-step summary reads the gate.",
+      "section": "other"
+    },
+    {
+      "chars": 843,
+      "heading": "The pathwise measurement.",
+      "section": "other"
+    },
+    {
+      "chars": 1363,
+      "heading": "The cross-hardware portability check in full.",
+      "section": "other"
+    },
+    {
+      "chars": 251,
+      "heading": "The dose–response ordering behind §2.",
+      "section": "other"
+    },
+    {
+      "chars": 524,
+      "heading": "Where fp32 accumulation is the boundary.",
+      "section": "other"
+    },
+    {
+      "chars": 754,
+      "heading": "The runaway across data-parallel shapes.",
+      "section": "other"
+    },
+    {
+      "chars": 463,
+      "heading": "What the two fault sources share, and what they do not.",
+      "section": "other"
+    }
+  ],
+  "source": "arxiv_html",
+  "title": "One QK Channel, Many Sources: Tracing Low-Precision Attention Collapse",
+  "url": "https://arxiv.org/html/2608.02091",
+  "validation_only": false,
+  "version": "2608.02091v2"
+}
