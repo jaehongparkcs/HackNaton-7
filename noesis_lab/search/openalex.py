@@ -68,9 +68,6 @@ def enrich(papers: Sequence[RetrievedPaper], cache: RawCache) -> int:
     return matched
 
 
-SEARCH_API = "https://api.openalex.org/works"
-
-
 def search_url(query: str, niche, date_to: str, per_page: int = 15, boolean: bool = False) -> str:
     """OpenAlex full-text search: a fallback for scout directions when arXiv throttles, and the
     first source for tighten searches. Higher rate limits; abstracts come back as an inverted index
@@ -83,7 +80,7 @@ def search_url(query: str, niche, date_to: str, per_page: int = 15, boolean: boo
               "select": "id,doi,title,publication_date,abstract_inverted_index,primary_location,locations,cited_by_count"}
     if os.environ.get("OPENALEX_MAILTO"):
         params["mailto"] = os.environ["OPENALEX_MAILTO"]
-    return SEARCH_API + "?" + urllib.parse.urlencode(params)
+    return API + "?" + urllib.parse.urlencode(params)
 
 
 def _abstract(inv: dict | None) -> str:
@@ -101,8 +98,6 @@ def parse_search(body: str, query_tag: str):
     """OpenAlex search results as RetrievedPaper objects (source=openalex). The arXiv id is used
     when the work is an arXiv DOI, else the OpenAlex id; the quote check downstream is unchanged."""
     import hashlib
-
-    from ..schemas import RetrievedPaper
     out = []
     for w in json.loads(body).get("results", []):
         abstract = _abstract(w.get("abstract_inverted_index"))

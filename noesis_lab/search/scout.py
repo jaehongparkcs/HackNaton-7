@@ -88,7 +88,7 @@ def run_scout(llm: LLM, niche: NicheSpec, n_range: Sequence[int] = (8, 15)
         if not lo <= len(o.directions) <= hi:
             raise ValueError(f"return {lo} to {hi} directions")
         for d in o.directions:
-            if not 1 <= len([t for t in d.search_terms if t.strip()]):
+            if not any(t.strip() for t in d.search_terms):
                 raise ValueError(f"direction {d.title!r} needs search_terms")
 
     out, err = None, ""

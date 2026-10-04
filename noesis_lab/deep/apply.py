@@ -86,7 +86,3 @@ def apply(snap, dr: DeepRead) -> None:
     snap.recipes = dr.recipes
     snap.stated = [s for s in dr.stated if "delta" in s]
     snap._build_index()
-
-
-def full_text_setting(sf: dict) -> SettingFields:
-    return SettingFields(**sf)

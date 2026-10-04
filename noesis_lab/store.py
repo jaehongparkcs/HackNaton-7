@@ -9,7 +9,6 @@ from __future__ import annotations
 import datetime as dt
 import json
 import sqlite3
-from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
@@ -215,9 +214,6 @@ class Store:
                 rows = [[*r[:-1], _without_ts(r[-1])] for r in rows]
             h[t] = sorted(rows, key=canonical_json)
         return sha256_hex(canonical_json(h))
-
-    def iter_run_payloads(self) -> Iterable[dict]:
-        return iter(self.runs())
 
 
 def _without_ts(payload: str) -> str:

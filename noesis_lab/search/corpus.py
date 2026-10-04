@@ -132,7 +132,6 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
     if n_retrieved < cfg["min_papers"]:
         degraded.append(f"only {n_retrieved} papers retrieved (< {cfg['min_papers']}): "
                         "fell back to the curated snapshot")
-        cache.write_index()
         return freeze_curated(out, niche, degraded=degraded, query_plan=plan_doc,
                               extra=stats_(queries=queries, search_attempted=today))
 

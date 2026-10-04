@@ -449,5 +449,5 @@ def is_full_text(c: Claim) -> bool:
     return c.span_source == "full_text"
 
 
-__all__ = ["build_deep", "verify_deep", "numbers_in", "map_recipe", "scale_of", "params_of", "is_derived",
+__all__ = ["build_deep", "verify_deep", "numbers_in", "map_recipe", "scale_of", "params_of",
            "is_full_text", "merge_setting"]
