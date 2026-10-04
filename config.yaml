@@ -32,6 +32,7 @@ lit_search:                       # live literature search (LIT_SEARCH.md). Runs
   arxiv_max_retries: 3            # on 429/503: honor Retry-After, else back off 15s -> 45s -> 120s
   max_failed_fraction: 0.1        # > this share of attempted requests failing -> abort, freeze nothing (re-run resumes)
   openalex: true                  # venue / peer-review / citations; contact email from OPENALEX_MAILTO
+  openalex_min_interval_s: 0.1    # OpenAlex polite pool (~10 requests/s with OPENALEX_MAILTO)
   openalex_fallback: true         # scout directions: if an arXiv query keeps failing, try OpenAlex search
   min_papers: 10                  # fewer retrieved -> fall back to the curated snapshot only
   t4_threshold: 0.35              # TF-IDF cosine for "possible overlap: unextracted paper"
@@ -50,6 +51,8 @@ explore:                          # hypothesis engine (NEXT_VERSION.md). Runs wi
   top_gaps_for_hypotheses: 8
   tighten_queries: 2
   tighten_cap: 10
+  tighten_openalex_first: true    # OpenAlex polite pool first, arXiv only if that request fails (B4)
+  tighten_shared_cache: true      # reuse tighten responses across sessions: work/cache/tighten_{openalex,arxiv}/
 
 search_loop:                      # explore cheaply, confirm rigorously, promote (GRAPH_GAPS Part B)
   enabled: true                   # only for sessions whose corpus has scout directions

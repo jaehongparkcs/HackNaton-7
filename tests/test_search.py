@@ -43,6 +43,8 @@ CFG = load_config()
 
 def fake_fetch(url: str) -> str:
     """Recorded responses only. Any other URL is a test failure, never a live call."""
+    if "openalex.org" in url and "search=" in url:      # no recorded OpenAlex search: tighten falls back to arXiv
+        raise OSError("no recorded OpenAlex search response")
     if "openalex.org" in url:
         return (DATA / "openalex.json").read_text()
     assert "export.arxiv.org" in url, url

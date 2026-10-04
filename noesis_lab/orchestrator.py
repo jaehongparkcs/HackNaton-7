@@ -214,7 +214,12 @@ class Session:
         self.tightener = Tightener(self.corpus_dir, self.niche, replay=self.replay, llm=llm, fetch=o.fetch,
                                    sleep=o.sleep, min_interval_s=lcfg["arxiv_min_interval_s"],
                                    n_queries=ecfg["tighten_queries"], cap=ecfg["tighten_cap"],
-                                   today=dt.date.today().isoformat())
+                                   today=dt.date.today().isoformat(),
+                                   openalex_first=bool(ecfg.get("tighten_openalex_first", False)),
+                                   openalex_min_interval_s=lcfg.get("openalex_min_interval_s", 0.1),
+                                   # the cross-session cache holds real API responses only (never a test transport)
+                                   shared_cache=(Path(__file__).resolve().parents[1] / self.cfg["paths"]["work"] / "cache"
+                                                 if ecfg.get("tighten_shared_cache") and o.fetch is None else None))
 
     # ------------------------------------------------------------------ resolving claims by id
     def _derived_sorted(self) -> list[Claim]:

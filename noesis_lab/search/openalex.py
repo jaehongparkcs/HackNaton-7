@@ -71,10 +71,13 @@ def enrich(papers: Sequence[RetrievedPaper], cache: RawCache) -> int:
 SEARCH_API = "https://api.openalex.org/works"
 
 
-def search_url(query: str, niche, date_to: str, per_page: int = 15) -> str:
-    """OpenAlex full-text search, used as a fallback for scout directions when arXiv throttles.
-    Higher rate limits; abstracts come back as an inverted index and are reconstructed by code."""
-    terms = " ".join(p.strip().strip('"') for p in re.split(r"\s+AND\s+", query) if p.strip().strip('"'))
+def search_url(query: str, niche, date_to: str, per_page: int = 15, boolean: bool = False) -> str:
+    """OpenAlex full-text search: a fallback for scout directions when arXiv throttles, and the
+    first source for tighten searches. Higher rate limits; abstracts come back as an inverted index
+    and are reconstructed by code. `boolean` keeps the query's quoted phrases and AND operators
+    (OpenAlex `search` accepts them), so a tighten query for a combination still needs both methods."""
+    terms = query if boolean else " ".join(
+        p.strip().strip('"') for p in re.split(r"\s+AND\s+", query) if p.strip().strip('"'))
     params = {"search": terms, "filter": f"from_publication_date:{niche.date_from},to_publication_date:{date_to}",
               "per-page": per_page, "sort": "relevance_score:desc",
               "select": "id,doi,title,publication_date,abstract_inverted_index,primary_location,locations,cited_by_count"}

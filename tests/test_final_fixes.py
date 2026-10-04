@@ -335,3 +335,59 @@ def test_concurrent_extraction_keeps_batch_order(monkeypatch):
     one = ex.extract(LLM("mock", cfg, mock_fn=slow_first), papers)
     many = ex.extract(LLM("mock", {**cfg, "concurrency": 3}, mock_fn=slow_first), papers)
     assert [c.claim_id for c in one[0]] == [c.claim_id for c in many[0]] and len(one[0]) == len(papers)
+
+
+# --------------------------------------------------------------------------- B4 tighten sources + cache
+def _oa_body():
+    inv = {w: [i] for i, w in enumerate("We find RMSNorm lowers the loss of small Transformer language models .".split())}
+    return json.dumps({"results": [
+        {"id": "https://openalex.org/W1", "doi": "https://doi.org/10.48550/arxiv.2402.09999", "title": "OA paper",
+         "publication_date": "2024-02-01", "cited_by_count": 1, "abstract_inverted_index": inv}]})
+
+
+def _tightener(tmp_path, fetch, name="c", shared=None):
+    from noesis_lab.mock_llm import make_mock
+    from noesis_lab.search.corpus import load_niche
+    from noesis_lab.search.tighten import Tightener
+    cfg = {"model": "m", "effort": "medium", "max_tokens": 10, "price_per_mtok": {"input": 0, "output": 0}}
+    return Tightener(tmp_path / name, load_niche(), replay=False, llm=LLM("mock", cfg, mock_fn=make_mock({})),
+                     fetch=fetch, sleep=lambda s: None, min_interval_s=0, n_queries=2, cap=5, today="2026-10-04",
+                     openalex_first=True, shared_cache=shared)
+
+
+def test_tighten_asks_openalex_first_and_keeps_the_quote_check(tmp_path):
+    calls = []
+
+    def fetch(url):
+        calls.append(url)
+        assert "openalex.org/works?search=" in url, url             # arXiv is never asked
+        assert "%22RMSNorm%22+AND" in url                           # quoted phrases and AND survive
+        return _oa_body()
+    out = _tightener(tmp_path, fetch).run("gap_x", 0, {"norm": "rmsnorm"}, set())
+    assert len(calls) == 2 and {q["source"] for q in out["queries"]} == {"openalex"}
+    assert [p.paper_id for p in out["papers"]] == ["2402.09999"] and out["papers"][0].source == "openalex"
+    assert out["claims"] and all(c.source_span in out["papers"][0].abstract for c in out["claims"])
+    assert not out["degraded"] and (tmp_path / "c" / "tighten" / "raw_openalex" / "index.json").exists()
+
+
+def test_tighten_falls_back_to_arxiv_when_openalex_fails(tmp_path):
+    from .test_search import fake_fetch
+    out = _tightener(tmp_path, fake_fetch).run("gap_x", 0, {"norm": "rmsnorm"}, set())
+    assert {q["source"] for q in out["queries"]} == {"arxiv"} and out["papers"]
+    assert not out["degraded"]                                       # the fallback answered: not degraded
+
+
+def test_tighten_reuses_responses_across_sessions(tmp_path):
+    calls = []
+
+    def fetch(url):
+        calls.append(url)
+        return _oa_body()
+    shared = tmp_path / "work_cache"
+    first = _tightener(tmp_path, fetch, "s1", shared).run("gap_x", 0, {"norm": "rmsnorm"}, set())
+    n = len(calls)
+    t2 = _tightener(tmp_path, fetch, "s2", shared)
+    second = t2.run("gap_x", 0, {"norm": "rmsnorm"}, set())
+    assert n == 2 and len(calls) == n and t2.oa_cache.from_shared == 2      # no new request
+    assert [p.paper_id for p in second["papers"]] == [p.paper_id for p in first["papers"]]
+    assert len(list((tmp_path / "s2" / "tighten" / "raw_openalex").glob("*.json"))) == 3   # 2 bodies + index: in the bundle

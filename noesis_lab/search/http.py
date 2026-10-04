@@ -43,7 +43,10 @@ class RawCache:
 
     def __init__(self, raw_dir: Path, fetch: Callable[[str], str] = urllib_fetch,
                  min_interval_s: float = 5.0, sleep: Callable[[float], None] = time.sleep,
-                 max_retries: int = 3, backoff: tuple[float, ...] = BACKOFF):
+                 max_retries: int = 3, backoff: tuple[float, ...] = BACKOFF, shared: RawCache | None = None):
+        """`shared` is a cache that outlives the session (work/cache/…): a URL it holds is copied
+        into this cache instead of fetched, and every new response is written to both. The bundle
+        still holds its own copy of every response it used."""
         self.dir, self.fetch, self.min_interval, self.sleep = raw_dir, fetch, min_interval_s, sleep
         self.max_retries, self.backoff = max_retries, backoff
         self.dir.mkdir(parents=True, exist_ok=True)
@@ -53,6 +56,8 @@ class RawCache:
         self.attempted = 0                       # requests that were not served from cache
         self.reused = 0
         self._last = 0.0
+        self.shared = shared
+        self.from_shared = 0
         idx = self.dir / "index.json"
         if idx.exists():                         # resume: reuse what a previous run already fetched
             for rec in json.loads(idx.read_text()):
@@ -72,6 +77,9 @@ class RawCache:
         if url in self.cache:
             self.reused += 1
             return (self.dir / self.cache[url]).read_text()
+        if self.shared is not None and url in self.shared.cache:
+            self.from_shared += 1
+            return self._store(kind, url, ext, (self.shared.dir / self.shared.cache[url]).read_text())
         self.attempted += 1
         err, status = "", None
         for attempt in range(self.max_retries + 1):
@@ -88,14 +96,19 @@ class RawCache:
                 if attempt >= 1:          # one quick retry for a transient non-HTTP error, then give up
                     break
                 continue
-            name = f"{len(self.index):03d}_{kind}_{hashlib.sha256(url.encode()).hexdigest()[:8]}.{ext}"
-            (self.dir / name).write_text(body)
-            self.index.append({"kind": kind, "url": url, "file": name})
-            self.cache[url] = name
-            self.write_index()            # persist after every success so an interrupted run still resumes
-            return body
+            if self.shared is not None:
+                self.shared._store(kind, url, ext, body)
+            return self._store(kind, url, ext, body)
         self.failures.append({"kind": kind, "url": url, "error": err, "status": status})
         return None
+
+    def _store(self, kind: str, url: str, ext: str, body: str) -> str:
+        name = f"{len(self.index):03d}_{kind}_{hashlib.sha256(url.encode()).hexdigest()[:8]}.{ext}"
+        (self.dir / name).write_text(body)
+        self.index.append({"kind": kind, "url": url, "file": name})
+        self.cache[url] = name
+        self.write_index()            # persist after every success so an interrupted run still resumes
+        return body
 
     @property
     def failure_fraction(self) -> float:

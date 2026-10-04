@@ -1,6 +1,10 @@
 """Tighten pass (EXPLORE §5): one targeted search per hypothesis, built from the hypothesis's own
 change, then extraction and the quote check. Runs live while a session is recorded; everything it
-returns is frozen under `corpus/tighten/` so replay needs no network."""
+returns is frozen under `corpus/tighten/` so replay needs no network.
+
+Sources (FINAL_FIXES B4): OpenAlex first (polite pool, ~10 requests/s with OPENALEX_MAILTO), arXiv
+only when the OpenAlex request fails. The quote check is identical for both. Responses are also kept
+in a URL-keyed cache under work/cache/ that later sessions reuse; the bundle keeps its own copy."""
 from __future__ import annotations
 
 import json
@@ -10,7 +14,7 @@ from pathlib import Path
 
 from ..llm import LLM
 from ..schemas import Claim, NicheSpec, RetrievedPaper
-from . import arxiv
+from . import arxiv, openalex
 from .extract import extract
 from .http import RawCache
 from .rank import filter_excluded
@@ -40,12 +44,18 @@ def tighten_queries(delta: dict[str, str], n: int = 2) -> list[str]:
 class Tightener:
     def __init__(self, corpus: Path, niche: NicheSpec, *, replay: bool, llm: LLM | None = None,
                  fetch: Callable[[str], str] | None = None, sleep: Callable[[float], None] | None = None,
-                 min_interval_s: float = 3.0, n_queries: int = 2, cap: int = 10, today: str = ""):
+                 min_interval_s: float = 3.0, n_queries: int = 2, cap: int = 10, today: str = "",
+                 openalex_first: bool = False, openalex_min_interval_s: float = 0.1,
+                 shared_cache: Path | None = None):
         self.dir, self.niche, self.replay, self.llm = Path(corpus) / "tighten", niche, replay, llm
-        self.n_queries, self.cap, self.today = n_queries, cap, today
+        self.n_queries, self.cap, self.today, self.openalex_first = n_queries, cap, today, openalex_first
         if not replay:
             kw = {k: v for k, v in (("fetch", fetch), ("sleep", sleep)) if v}
-            self.cache = RawCache(self.dir / "raw", min_interval_s=min_interval_s, **kw)
+            shared = {name: RawCache(Path(shared_cache) / f"tighten_{name}", min_interval_s=0, **kw)
+                      for name in ("arxiv", "openalex")} if shared_cache else {}
+            self.cache = RawCache(self.dir / "raw", min_interval_s=min_interval_s, shared=shared.get("arxiv"), **kw)
+            self.oa_cache = RawCache(self.dir / "raw_openalex", min_interval_s=openalex_min_interval_s,
+                                     shared=shared.get("openalex"), **kw) if openalex_first else None
 
     def _file(self, fixture_id: str, rnd: int) -> Path:
         return self.dir / f"{re.sub(r'[^A-Za-z0-9_]+', '_', fixture_id)}_r{rnd}.json"
@@ -62,9 +72,18 @@ class Tightener:
         queries, found, n_fail = [], {}, len(self.cache.failures)
         date_to = self.niche.date_to or self.today
         for q in tighten_queries(delta, self.n_queries):
-            body = self.cache.get("arxiv_tighten", arxiv.search_url(q, self.niche, date_to, self.cap), "xml")
-            hits = arxiv.parse_feed(body, f"tighten {fixture_id}: {q}") if body else []
-            queries.append({"q": q, "n_results": len(hits)})
+            tag, body, source = f"tighten {fixture_id}: {q}", None, "arxiv"
+            if self.oa_cache is not None:
+                body = self.oa_cache.get("openalex_tighten",
+                                         openalex.search_url(q, self.niche, date_to, self.cap, boolean=True), "json")
+                source = "openalex"
+            if body is not None:
+                hits = openalex.parse_search(body, tag)
+            else:                         # OpenAlex off, or its request failed: arXiv
+                source = "arxiv"
+                body = self.cache.get("arxiv_tighten", arxiv.search_url(q, self.niche, date_to, self.cap), "xml")
+                hits = arxiv.parse_feed(body, tag) if body else []
+            queries.append({"q": q, "n_results": len(hits), **({"source": source} if self.oa_cache else {})})
             for p in hits:
                 found.setdefault(p.paper_id, p)
         new = [p for p in found.values() if p.paper_id not in known_papers]
@@ -82,4 +101,6 @@ class Tightener:
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n")
         self.cache.write_index()
+        if self.oa_cache is not None:
+            self.oa_cache.write_index()
         return {**doc, "papers": new, "claims": claims}
