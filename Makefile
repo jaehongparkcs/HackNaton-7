@@ -3,7 +3,11 @@ SESSION ?= golden
 NICHE ?=
 CORPUS ?=
 PY := uv run python
-.PHONY: record search setup test lint check verify-snapshot fetch-snapshot timing smoke golden replay rederive verify app clean
+# Long live commands run under `caffeinate -i` on macOS so the machine cannot sleep mid-session
+# (explore2 lost ~57 minutes after its last run). Elsewhere it is a no-op.
+CAFFEINATE := $(shell command -v caffeinate >/dev/null 2>&1 && echo caffeinate -i)
+LIVE := $(CAFFEINATE) $(PY)
+.PHONY: record search setup test lint check verify-snapshot fetch-snapshot timing smoke golden rehearse replay rederive verify app clean
 
 setup:                      ## install pinned deps from uv.lock
 	uv sync --frozen
@@ -27,20 +31,24 @@ smoke:                      ## CPU pipeline check with the MOCK LLM (never a res
 	$(PY) -m noesis_lab session --session smoke --profile smoke --llm mock --force
 
 golden:                     ## the real thing: live Claude + real MPS runs, recorded into results/$(SESSION)
-	$(PY) -m noesis_lab session --session $(SESSION) --profile full --llm live $(if $(NICHE),--niche $(NICHE)) $(if $(CORPUS),--corpus $(CORPUS))
+	$(LIVE) -m noesis_lab session --session $(SESSION) --profile full --llm live $(if $(NICHE),--niche $(NICHE)) $(if $(CORPUS),--corpus $(CORPUS))
 
 record:                     ## search (resumes from cache; aborts if >10% requests fail) -> gate stability (aborts if UNSTABLE) -> session -> verify -> rederive -> replay
 	@test -n "$(NICHE)" || (echo "usage: make record SESSION=<name> NICHE=niche.yaml" && exit 2)
-	$(PY) -m noesis_lab search --niche $(NICHE) --out work/corpus-$(SESSION)
-	$(PY) -m noesis_lab lit-dryrun --corpus work/corpus-$(SESSION) --repeat 3 || \
+	$(LIVE) -m noesis_lab search --niche $(NICHE) --out work/corpus-$(SESSION)
+	$(LIVE) -m noesis_lab lit-dryrun --corpus work/corpus-$(SESSION) --repeat 3 || \
 	  (echo "ABORT: the prior-art gate is UNSTABLE on this corpus (see rows above). Nothing was recorded." && exit 1)
-	$(PY) -m noesis_lab session --session $(SESSION) --profile full --llm live --corpus work/corpus-$(SESSION)
+	$(LIVE) -m noesis_lab session --session $(SESSION) --profile full --llm live --corpus work/corpus-$(SESSION)
 	$(PY) -m noesis_lab verify --session $(SESSION)
 	$(PY) -m noesis_lab rederive --session $(SESSION)
 	$(PY) -m noesis_lab replay --session $(SESSION)
 
 search:                     ## live literature search for NICHE (default niche.yaml), frozen to work/corpus-<niche>; no training
-	$(PY) -m noesis_lab search --niche $(or $(NICHE),niche.yaml)
+	$(LIVE) -m noesis_lab search --niche $(or $(NICHE),niche.yaml)
+
+rehearse:                   ## ~5 min dry run of the live pipeline on a frozen CORPUS (500 steps, 1 short cycle). Never a result.
+	@test -n "$(CORPUS)" || (echo "usage: make rehearse CORPUS=work/corpus-<name>" && exit 2)
+	$(LIVE) -m noesis_lab session --session rehearse --profile rehearse --llm live --corpus $(CORPUS) --force
 
 replay:                     ## R2: rebuild the full session from recordings, no key/GPU; asserts identical state
 	$(PY) -m noesis_lab replay --session $(SESSION)

@@ -32,6 +32,15 @@ def protocol(cfg: dict[str, Any]) -> dict[str, int]:
             "search_loop": bool(cfg.get("search_loop", {}).get("enabled", False))}
 
 
+def with_profile_overrides(cfg: dict[str, Any], profile: str) -> dict[str, Any]:
+    """`profile_overrides.<profile>` merged into the config's sections (one level deep), e.g. the
+    rehearse profile's shorter search loop. Replay applies it from the bundle's own snapshot."""
+    over = cfg.get("profile_overrides", {}).get(profile)
+    if not over:
+        return cfg
+    return {**cfg, **{k: ({**cfg.get(k, {}), **v} if isinstance(v, dict) else v) for k, v in over.items()}}
+
+
 def path_of(key: str) -> Path:
     return ROOT / load_config()["paths"][key]
 

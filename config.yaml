@@ -3,6 +3,16 @@ llm:
   model: claude-opus-5-5          # pinned. Claude 5 IDs are complete as-is (no date suffix exists)
   effort: medium                  # output_config.effort. NOTE: Opus 5.5 rejects temperature/top_p, so
                                   # "temperature 0" from the plan is not expressible; recordings give determinism.
+  effort_by_role:                 # cheaper routine roles (B3). Part of the replay key: new sessions only;
+    literature: low               # bundles recorded without this block replay with `effort` for every role
+    literature_targeted: low
+    critic_post: low
+    extract: low
+    extract_validation: low
+    extract_tighten: low
+  critic_pre_cap: {confounds: 5, required_controls: 4}   # one line each; recorded bundles had no cap
+  timeout_s: 120                  # per request; with max_retries 2 a stalled call fails in ~6 min at worst
+  max_retries: 2
   max_tokens: 16000
   server_side_fallback: true      # refusal -> API re-runs on a fallback model (beta). Set false to disable.
   price_per_mtok: {input: 4.0, output: 20.0}   # for budget accounting only
@@ -102,6 +112,23 @@ profiles:
     eval_batch_size: 16
     prewarm_steps: 1
     baseline_overrides: {n_layer: 2, n_head: 2, n_embd: 32, batch_size: 16, seq_len: 32}
+  # rehearse: the whole live pipeline in ~5 minutes (live Claude, real training, 500 steps, one short
+  # cycle). A dry run before recording; labeled like smoke and NEVER used for headline numbers.
+  rehearse:
+    device: auto
+    deterministic: false
+    budget_mode: steps
+    max_steps: 500
+    eval_every_steps: 125
+    eval_batches: 20
+    eval_batch_size: 64
+    prewarm_steps: 2
+
+# Config sections a profile overrides for the whole session (the Profile itself is part of every
+# run's cache key, so engine settings live here rather than on it).
+profile_overrides:
+  rehearse:
+    search_loop: {explore_k: 3, cycles: 1}
 
 paths:
   data: data/tinyshakespeare.txt

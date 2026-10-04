@@ -116,6 +116,8 @@ st.caption("LLMs propose and interpret. Deterministic code measures, decides and
            "An LLM mistake can waste compute or skip an idea; it cannot produce a measured result or a decision.")
 if meta.get("llm_mode") == "mock" or profile.get("name") == "smoke":
     st.warning("MOCK LLM / SMOKE PROFILE: pipeline check only. These numbers are not results.")
+elif profile.get("name") == "rehearse":
+    st.warning("REHEARSAL PROFILE (500 steps, one short cycle): pipeline dry run only. These numbers are not results.")
 c1, c2, c3, c4, c5 = st.columns(5)
 c1.metric("LLM mode", meta.get("llm_mode", "?"))
 c2.metric("Device / profile", f"{(D['runs'] and next(iter(D['runs'].values()))['env'].get('device', '?'))} / {profile.get('name', '?')}")

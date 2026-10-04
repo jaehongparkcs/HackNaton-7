@@ -16,7 +16,15 @@ from pathlib import Path
 from . import gaps, stats
 from .agents import Critic, GapScientist, Scientist
 from .bundle import fresh_dir, seal
-from .config import baseline_config, bundle_config, get_profile, load_config, path_of, protocol
+from .config import (
+    baseline_config,
+    bundle_config,
+    get_profile,
+    load_config,
+    path_of,
+    protocol,
+    with_profile_overrides,
+)
 from .literature import LiteratureAgent, Snapshot
 from .llm import LLM, BudgetExceeded, Mode
 from .mock_llm import make_mock
@@ -99,7 +107,7 @@ class Session:
         root = Path(__file__).resolve().parents[1]
         self.src = root / load_config()["paths"]["results"] / o.session
         # replay runs under the config the bundle was recorded with, never today's config.yaml
-        self.cfg = bundle_config(self.src) if self.replay else load_config()
+        self.cfg = with_profile_overrides(bundle_config(self.src) if self.replay else load_config(), o.profile)
         self.protocol = protocol(self.cfg)
         self.profile = get_profile(o.profile, self.cfg)
         self.out = (root / self.cfg["paths"]["work"] / f"replay-{o.session}") if self.replay else self.src
@@ -124,7 +132,7 @@ class Session:
                                      self.budget["max_runs"])
         self.lit = LiteratureAgent(self.llm, self.snap, overrides=tuple(self.niche.pi_overrides),
                                    version=self.protocol["gate_version"])
-        self.scientist, self.critic = Scientist(self.llm, self.snap), Critic(self.llm)
+        self.scientist, self.critic = Scientist(self.llm, self.snap), Critic(self.llm, self.cfg["llm"].get("critic_pre_cap"))
         self.baseline = baseline_config(self.profile, self.cfg)
         self.incumbent = self.baseline       # what candidates are deltas on; changes only by promotion
         self.incumbent_delta: dict[str, str] = {}

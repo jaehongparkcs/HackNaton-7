@@ -6,6 +6,11 @@ Modes
   replay  serve from recordings keyed by a hash of (model, effort, role, system, user, schema).
           A miss is an error: replay must be exact, never silently live.
 
+Effort is per role (`llm.effort_by_role`, falling back to `llm.effort`) and is part of the key, so a
+bundle recorded before per-role effort replays under its own config with its single effort.
+Live calls have an explicit timeout (`llm.timeout_s`, `llm.max_retries`): a stalled request fails
+and goes through the crash-seal path instead of hanging the session.
+
 Rules enforced here (SPEC): strict JSON validated by Pydantic; invalid output -> one retry with the
 validation error -> fail loudly. Refusals and truncation also fail loudly.
 """
@@ -87,18 +92,22 @@ class LLM:
             self.recordings_path.parent.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------------ transport
-    def _live(self, system: str, user: str, schema: dict) -> dict:
+    def effort_for(self, role: str) -> str:
+        return self.cfg.get("effort_by_role", {}).get(role, self.effort)
+
+    def _live(self, role: str, system: str, user: str, schema: dict) -> dict:
         if self._client is None:
             import anthropic
             from dotenv import load_dotenv
             load_dotenv()
             if not os.environ.get("ANTHROPIC_API_KEY"):
                 raise LLMError("ANTHROPIC_API_KEY not set (live/record mode only; replay needs none)")
-            self._client = anthropic.Anthropic()
+            self._client = anthropic.Anthropic(timeout=float(self.cfg.get("timeout_s", 120)),
+                                               max_retries=int(self.cfg.get("max_retries", 2)))
         kw: dict[str, Any] = dict(
             model=self.model, max_tokens=self.cfg["max_tokens"], system=system,
             messages=[{"role": "user", "content": user}],
-            output_config={"effort": self.effort, "format": {"type": "json_schema", "schema": schema}})
+            output_config={"effort": self.effort_for(role), "format": {"type": "json_schema", "schema": schema}})
         if self.cfg.get("server_side_fallback", False):
             resp = self._client.beta.messages.create(betas=[FALLBACK_BETA], fallbacks="default", **kw)
         else:
@@ -119,7 +128,8 @@ class LLM:
 
     def _raw(self, role: str, system: str, user: str, schema_cls: type[BaseModel],
              schema: dict) -> tuple[str, dict]:
-        key = request_key(self.model, self.effort, role, system, user, schema)
+        effort = self.effort_for(role)
+        key = request_key(self.model, effort, role, system, user, schema)
         if self.mode == "replay":
             rec = self._replay.get(key)
             if rec is None:
@@ -133,8 +143,8 @@ class LLM:
             rec = {"response_text": out.model_dump_json(), "served_model": "mock",
                    "usage": {"input_tokens": 0, "output_tokens": 0}, "stop_reason": "end_turn"}
         else:
-            rec = self._live(system, user, schema)
-        rec = {"key": key, "role": role, "model": self.model, "effort": self.effort,
+            rec = self._live(role, system, user, schema)
+        rec = {"key": key, "role": role, "model": self.model, "effort": effort,
                "system": system, "user": user, "schema_name": schema_cls.__name__, **rec}
         if self.recordings_path:
             with self.recordings_path.open("a") as f:
@@ -174,7 +184,7 @@ class LLM:
             return f"unrecorded-{key[:8]}"
         return self.store.add_event("llm_call", {
             "role": role, "request_hash": key, "model_requested": self.model,
-            "model_served": rec.get("served_model"), "effort": self.effort, "attempt": attempt,
+            "model_served": rec.get("served_model"), "effort": self.effort_for(role), "attempt": attempt,
             "usage": usage, "cost_usd": round(cost, 6), "response_text": rec["response_text"],
             "system": rec.get("system", ""), "user": rec.get("user", ""),
             "valid": not err, "validation_error": err})

@@ -127,9 +127,15 @@ class GapScientist:
 
 
 class Critic:
-    def __init__(self, llm: LLM):
+    def __init__(self, llm: LLM, cap: dict[str, int] | None = None):
+        """`cap` (llm.critic_pre_cap) bounds the pre-run review's length. It is appended to the
+        prompt only when configured, so bundles recorded without it replay with the same prompt."""
         self.llm = llm
         self.pre_system = (PROMPTS / "critic_pre.md").read_text()
+        if cap:
+            self.pre_system += (f"\nOutput limits: at most {cap['confounds']} confounds and at most "
+                                f"{cap['required_controls']} required controls, the most important first, one "
+                                "short line each (under 20 words). `reasons`: at most two sentences.\n")
         self.post_system = (PROMPTS / "critic_post.md").read_text()
 
     def review(self, fx: Fixture, prop: ScientistOutput, baseline: ExperimentConfig,

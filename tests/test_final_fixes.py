@@ -204,3 +204,90 @@ def test_timeline_flags_a_long_silence():
     rows = dashboard.timeline_rows(ev, dec, runs)
     assert [r["kind"] for r in rows] == ["LLM call", "run", "decision", "decision"]
     assert rows[-1]["gap before (s)"] == 3420.0 and rows[-1]["stall"] and not any(r["stall"] for r in rows[:-1])
+
+
+# --------------------------------------------------------------------------- B1 / B3 / B6
+from pydantic import BaseModel  # noqa: E402
+
+from noesis_lab.llm import LLM  # noqa: E402
+
+
+class _Out(BaseModel):
+    reading: str
+
+
+def _mock(role, system, user, schema_cls):
+    return _Out(reading="ok")
+
+
+def test_effort_is_per_role_and_recorded_in_the_key(tmp_path):
+    cfg = {"model": "m", "effort": "medium", "max_tokens": 10, "price_per_mtok": {"input": 0, "output": 0},
+           "effort_by_role": {"literature": "low"}}
+    rec = tmp_path / "llm.jsonl"
+    llm = LLM("mock", cfg, recordings_path=rec, mock_fn=_mock)
+    llm.call("literature", "s", "u", _Out)
+    llm.call("scientist_gap", "s", "u", _Out)
+    efforts = [json.loads(line)["effort"] for line in rec.read_text().splitlines()]
+    assert efforts == ["low", "medium"]
+    LLM("replay", cfg, recordings_path=rec).call("literature", "s", "u", _Out)       # same key on replay
+    old = {k: v for k, v in cfg.items() if k != "effort_by_role"}                    # a bundle recorded before B3
+    assert LLM("mock", old, mock_fn=_mock).effort_for("literature") == "medium"
+
+
+def test_live_client_has_an_explicit_timeout(monkeypatch):
+    import types
+
+    import anthropic
+    seen = {}
+
+    class Fake:
+        def __init__(self, **kw):
+            seen.update(kw)
+            resp = types.SimpleNamespace(stop_reason="end_turn", model="m", content=[types.SimpleNamespace(
+                type="text", text='{"reading": "ok"}')], usage=types.SimpleNamespace(input_tokens=1, output_tokens=1))
+            self.messages = types.SimpleNamespace(create=lambda **k: seen.setdefault("req", k) and resp)
+
+    monkeypatch.setattr(anthropic, "Anthropic", Fake)
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "x")
+    cfg = {"model": "m", "effort": "medium", "max_tokens": 10, "price_per_mtok": {"input": 0, "output": 0},
+           "server_side_fallback": False, "timeout_s": 120, "max_retries": 2, "effort_by_role": {"critic_post": "low"}}
+    out, _ = LLM("live", cfg).call("critic_post", "s", "u", _Out)
+    assert out.reading == "ok" and seen["timeout"] == 120.0 and seen["max_retries"] == 2
+    assert seen["req"]["output_config"]["effort"] == "low"
+
+
+def test_config_sets_cheap_routine_roles_and_keeps_the_scientist_at_medium():
+    from noesis_lab.config import load_config
+    llm = load_config()["llm"]
+    for role in ("literature", "critic_post", "extract"):
+        assert llm["effort_by_role"][role] == "low"
+    assert "scientist_gap" not in llm["effort_by_role"] and "critic_pre" not in llm["effort_by_role"]
+    assert llm["effort"] == "medium" and llm["timeout_s"] == 120 and llm["max_retries"] == 2
+
+
+def test_critic_pre_cap_changes_the_prompt_only_when_configured():
+    from noesis_lab.agents import Critic
+    plain, capped = Critic(None), Critic(None, {"confounds": 5, "required_controls": 4})
+    assert plain.pre_system == (ROOT / "prompts" / "critic_pre.md").read_text()      # recorded bundles replay
+    assert capped.pre_system.startswith(plain.pre_system)
+    assert "at most 5 confounds" in capped.pre_system and "at most 4 required controls" in capped.pre_system
+
+
+def test_rehearse_profile_is_short_and_shrinks_the_loop():
+    from noesis_lab.config import get_profile, load_config, with_profile_overrides
+    p = get_profile("rehearse")
+    assert p.max_steps == 500 and p.budget_mode == "steps"
+    cfg = with_profile_overrides(load_config(), "rehearse")
+    assert cfg["search_loop"]["explore_k"] == 3 and cfg["search_loop"]["cycles"] == 1
+    assert cfg["search_loop"]["finalists_per_cycle"] == load_config()["search_loop"]["finalists_per_cycle"]
+    assert with_profile_overrides(load_config(), "full") is load_config()
+    assert "pipeline checks: not results" in dashboard.notebook_label("results/rehearse/notebook.sqlite") or \
+        "rehearsal profile: not results" in dashboard.notebook_label("results/rehearse/notebook.sqlite")
+
+
+def test_live_make_targets_run_under_caffeinate():
+    mk = (ROOT / "Makefile").read_text()
+    assert "caffeinate -i" in mk
+    for target in ("golden:", "record:", "search:", "rehearse:"):
+        body = mk.split("\n" + target, 1)[1].split("\n\n", 1)[0]
+        assert "$(LIVE)" in body, target

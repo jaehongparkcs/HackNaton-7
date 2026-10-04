@@ -13,3 +13,4 @@ results/mps-mock/
 # iCloud / Finder conflict copies ("name 2.ext") and metadata: never part of the repo or a bundle
 * 2.*
 .DS_Store
+results/rehearse/

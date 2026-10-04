@@ -14,8 +14,8 @@ def cmd_session(a) -> int:
     out = run_session(SessionOpts(session=a.session, profile=a.profile, llm_mode=a.llm, force=a.force,
                                   niche=a.niche or None, corpus=a.corpus or None))
     print(json.dumps({k: v for k, v in out.items() if k != "counts"}, indent=2))
-    if a.llm == "mock" or a.profile == "smoke":
-        print("\nWARNING: mock-LLM / smoke-profile output. Proves the pipeline only; "
+    if a.llm == "mock" or a.profile in ("smoke", "rehearse"):
+        print("\nWARNING: mock-LLM / smoke- or rehearse-profile output. Proves the pipeline only; "
               "never present these numbers as results.", file=sys.stderr)
     return 0 if out["status"] == "complete" else 2
 
