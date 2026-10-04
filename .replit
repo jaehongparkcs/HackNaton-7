@@ -1,0 +1,8 @@
+run = "streamlit run app.py --server.port 3000 --server.address 0.0.0.0"
+language = "python3"
+
+[deployment]
+run = "streamlit run app.py --server.port 3000 --server.address 0.0.0.0"
+
+[nix]
+channel = "stable-24_05"
