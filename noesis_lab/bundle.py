@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 from pathlib import Path
 
@@ -32,7 +33,11 @@ def input_hashes() -> dict[str, str]:
 
 
 def seal(out_dir: Path, store: Store, *, meta: dict) -> dict:
-    """Checkpoint the DB into a single file, write state/env/inputs, then the manifest."""
+    """Checkpoint the DB into a single file, write state/env/inputs, then the manifest. Checked
+    first as well, so a refusal leaves the notebook and runs untouched for a re-seal."""
+    junk = conflict_copies(out_dir)
+    if junk:
+        raise SealRefused(f"refusing to seal {out_dir}: sync conflict copies present: {', '.join(junk[:10])}")
     state = {"state_digest": store.state_digest(), **meta,
              "counts": {"runs": len(store.runs()), "events": len(store.events()),
                         "hypotheses": len(store.hypotheses()), "analyses": len(store.analyses()),
@@ -51,7 +56,27 @@ def seal(out_dir: Path, store: Store, *, meta: dict) -> dict:
     return state
 
 
+# Sync-tool conflict copies: iCloud writes "<name> 2.<ext>" (or " 3", ...) when a file it is syncing
+# is rewritten. explore2 sealed 41 of these into its manifest; never again.
+_CONFLICT_COPY = re.compile(r" \d+(\.[^./]+)?$")
+
+
+class SealRefused(RuntimeError):
+    pass
+
+
+def conflict_copies(out_dir: Path) -> list[str]:
+    return sorted(p.relative_to(out_dir).as_posix() for p in out_dir.rglob("*")
+                  if p.is_file() and _CONFLICT_COPY.search(p.name))
+
+
 def write_manifest(out_dir: Path) -> None:
+    """Hashes the bundle files and the frozen corpus. Refuses (SealRefused) if any sync-tool
+    conflict copy ("<name> 2.<ext>") is present, so junk can never be sealed in as valid."""
+    junk = conflict_copies(out_dir)
+    if junk:
+        raise SealRefused(f"refusing to seal {out_dir}: {len(junk)} sync conflict copies present "
+                          f"(move the repo out of iCloud, delete them, re-seal): {', '.join(junk[:10])}")
     files = {}
     corpus = sorted(str(p.relative_to(out_dir)) for p in (out_dir / "corpus").rglob("*") if p.is_file())
     for rel in [*BUNDLE_FILES, *corpus]:        # the frozen literature corpus is part of the bundle

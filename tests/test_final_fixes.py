@@ -44,6 +44,31 @@ def test_verify_ignores_finder_metadata_but_not_the_manifest_contents(tmp_path):
     assert "MANIFEST.json" not in files and set(files) == {"state.json", "corpus/raw/001_arxiv.xml"}
 
 
+def test_sealing_refuses_when_a_sync_conflict_copy_is_present(tmp_path):
+    import pytest
+
+    from noesis_lab.bundle import SealRefused, conflict_copies, seal
+    d = _bundle(tmp_path)
+    (d / "corpus" / "raw" / "index 2.json").write_text("[]")
+    (d / "corpus" / "raw" / "043_arxiv_dir_a0322299 3.xml").write_text("<feed/>")
+    assert conflict_copies(d) == ["corpus/raw/043_arxiv_dir_a0322299 3.xml", "corpus/raw/index 2.json"]
+    before = (d / "MANIFEST.json").read_text()
+    with pytest.raises(SealRefused, match="sync conflict copies"):
+        write_manifest(d)
+    assert (d / "MANIFEST.json").read_text() == before          # the old manifest is not overwritten
+    st = Store(d / "notebook.sqlite")
+    with pytest.raises(SealRefused):
+        seal(d, st, meta={})
+    assert not (d / "state.json").read_text().strip("{}\n")      # refused before writing anything
+
+
+def test_ordinary_bundle_names_are_not_conflict_copies(tmp_path):
+    from noesis_lab.bundle import conflict_copies
+    for s in ("golden", "explore1", "explore2"):
+        assert conflict_copies(ROOT / "results" / s) == []
+    assert conflict_copies(_bundle(tmp_path)) == []
+
+
 # --------------------------------------------------------------------------- A1-A4 presentation
 EXPLORE2 = ROOT / "results" / "explore2" / "notebook.sqlite"
 
