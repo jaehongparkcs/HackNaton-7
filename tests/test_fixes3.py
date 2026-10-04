@@ -190,22 +190,25 @@ def test_fixture_b_is_kept_without_an_engine_corpus():
 
 # --------------------------------------------------------------------------- P1-5 Lion scaling
 def test_lion_uses_a_smaller_step_and_a_larger_decay_than_adam():
-    c = ExperimentConfig(optimizer="lion", lr=0.002, weight_decay=0.01, n_layer=1, n_head=2, n_embd=32, seq_len=16)
+    # The scaling is carried by lr_mult / wd_mult (stated default 0.2 / 5, or a full-text recipe);
+    # the harness has no hidden per-optimizer scaling any more (see test_lion_schedule.py).
+    c = ExperimentConfig(optimizer="lion", lr=0.002, weight_decay=0.01, n_layer=1, n_head=2, n_embd=32, seq_len=16,
+                         lr_mult=0.2, wd_mult=5.0)
     opt = build_optimizer(GPT(c, 65), c)
     assert type(opt).__name__ == "Lion"
-    assert opt.param_groups[0]["lr"] == pytest.approx(0.002 / 5)                 # lr / 5
+    assert opt.param_groups[0]["base_lr"] == pytest.approx(0.002 * 0.2)          # lr x 0.2
     assert opt.param_groups[0]["weight_decay"] == pytest.approx(0.01 * 5)        # wd x 5 on the decay group
     assert opt.param_groups[1]["weight_decay"] == 0.0                           # none on biases / norms
-    adam = build_optimizer(GPT(c.model_copy(update={"optimizer": "adamw"}), 65),
-                           c.model_copy(update={"optimizer": "adamw"}))
-    assert adam.param_groups[0]["lr"] == pytest.approx(0.002)                    # Adam keeps the baseline lr
+    adam = build_optimizer(GPT(c.model_copy(update={"optimizer": "adamw", "lr_mult": 1.0, "wd_mult": 1.0}), 65),
+                           c.model_copy(update={"optimizer": "adamw", "lr_mult": 1.0, "wd_mult": 1.0}))
+    assert adam.param_groups[0]["base_lr"] == pytest.approx(0.002)               # Adam keeps the baseline lr
 
 
 def test_lion_trains_on_cpu_with_the_scaled_hyperparameters():
     from noesis_lab.config import load_config, path_of
     from noesis_lab.testbed.harness import load_dataset, train_one
     data = load_dataset(path_of("data"), load_config()["paths"]["data_sha256"])
-    c = baseline_config(get_profile("smoke")).model_copy(update={"optimizer": "lion"})
+    c = baseline_config(get_profile("smoke")).model_copy(update={"optimizer": "lion", "lr_mult": 0.2, "wd_mult": 5.0})
     r = train_one(c, 0, get_profile("smoke"), data, torch.device("cpu"))
     assert r.status == "ok" and r.val_loss is not None and r.val_loss < 4.5
 

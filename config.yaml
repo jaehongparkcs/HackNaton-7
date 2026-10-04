@@ -54,6 +54,12 @@ explore:                          # hypothesis engine (NEXT_VERSION.md). Runs wi
   tighten_openalex_first: true    # OpenAlex polite pool first, arXiv only if that request fails (B4)
   tighten_shared_cache: true      # reuse tighten responses across sessions: work/cache/tighten_{openalex,arxiv}/
 
+# Stated per-method scaling when no full-text recipe exists (applied once, via lr_mult / wd_mult; the
+# card labels it "stated default"). Before 2026-10-04 the harness hard-coded Lion's lr / 5, which the
+# schedule then overwrote, so recorded Lion runs trained at AdamW's lr; bundles without this key replay as recorded.
+method_defaults:
+  optimizer=lion: {lr_mult: 0.2, wd_mult: 5.0, source: "Chen et al. 2023 (arXiv:2302.06675) guidance: lr 3-10x smaller, weight decay 3-10x larger than AdamW"}
+
 deep_read:                        # full text of the papers closest to the top hypotheses (DEEP_READ.md)
   enabled: true                   # `make record` runs the deep read after the search
   top_hypotheses: 8

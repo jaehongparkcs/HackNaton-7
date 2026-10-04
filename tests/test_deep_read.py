@@ -143,15 +143,15 @@ def test_recipe_multipliers_are_typed_and_left_out_of_the_hash_at_defaults():
         ExperimentConfig(optimizer="lion").config_hash()
 
 
-def test_harness_uses_the_recipe_instead_of_the_built_in_lion_default():
+def test_harness_applies_lr_and_wd_multipliers_once():
     from noesis_lab.testbed.harness import build_optimizer
     from noesis_lab.testbed.model import GPT
     small = dict(n_layer=1, n_head=2, n_embd=16)
-    for cfg, lr, wd in [(ExperimentConfig(optimizer="lion", **small), 2e-3 / 5, 0.01 * 5),
+    for cfg, lr, wd in [(ExperimentConfig(optimizer="lion", **small), 2e-3, 0.01),          # no hidden scaling
                         (ExperimentConfig(optimizer="lion", lr_mult=0.1, wd_mult=10, **small), 2e-4, 0.1),
                         (ExperimentConfig(lr_mult=0.5, **small), 1e-3, 0.01)]:
         opt = build_optimizer(GPT(cfg, vocab_size=10), cfg)
-        assert opt.param_groups[0]["lr"] == pytest.approx(lr) and opt.param_groups[0]["weight_decay"] == pytest.approx(wd)
+        assert opt.param_groups[0]["base_lr"] == pytest.approx(lr) and opt.param_groups[0]["weight_decay"] == pytest.approx(wd)
 
 
 def test_scale_from_the_stated_parameter_count():

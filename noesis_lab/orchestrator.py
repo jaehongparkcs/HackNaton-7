@@ -266,13 +266,23 @@ class Session:
         return holds
 
     # ------------------------------------------------------------------ deep read (DEEP_READ.md)
+    def _method_scaling(self, method: str) -> dict | None:
+        """The lr / weight-decay scaling a method runs with: its full-text recipe if the deep read found
+        one, else the stated default in config (`method_defaults`, e.g. Lion 0.2 / 5), else none.
+        Labeled, so the card says which one was used."""
+        rc = self.snap.recipes.get(method)
+        if rc:
+            return {**rc, "kind": "full_text_recipe"}
+        d = self.cfg.get("method_defaults", {}).get(method)
+        return {**d, "kind": "stated_default"} if d else None
+
     def _with_recipe(self, cfg: ExperimentConfig, delta: dict) -> tuple[ExperimentConfig, dict | None]:
-        """A change of optimizer runs with that optimizer's full-text recipe (lr / weight-decay
-        multipliers), or with the defaults (1, 1) if none was found. Code applies it; it is decided
-        before any run and never swept. Without a deep read nothing changes."""
+        """A change of optimizer runs with that optimizer's scaling (`_method_scaling`), applied once by
+        the harness through lr_mult / wd_mult; (1, 1) if there is none. Decided before any run, never
+        swept. Bundles recorded before `method_defaults` and without a deep read get (1, 1): unchanged."""
         if "optimizer" not in delta:
             return cfg, None
-        rc = self.snap.recipes.get(f"optimizer={delta['optimizer']}")
+        rc = self._method_scaling(f"optimizer={delta['optimizer']}")
         mults = (rc["lr_mult"], rc["wd_mult"]) if rc else (1.0, 1.0)
         if (cfg.lr_mult, cfg.wd_mult) == mults:
             return cfg, rc
@@ -295,22 +305,24 @@ class Session:
         lines = [f'[{c.claim_id}] ({c.section}, {c.tier}, {c.expected_outcome}) "{c.source_span}"'
                  for c in sorted(self._deep_claims_for(key), key=lambda c: c.claim_id)[:8]]
         if "optimizer" in delta:
-            rc = self.snap.recipes.get(f"optimizer={delta['optimizer']}")
-            lines.append(f"Recipe (applied by code): lr × {rc['lr_mult']:g}, weight decay × {rc['wd_mult']:g}, from "
-                         f"arXiv:{rc['paper_id']}" if rc else "No recipe for this optimizer was found in the full text.")
+            rc = self._method_scaling(f"optimizer={delta['optimizer']}")
+            lines.append("No recipe for this optimizer was found in the full text." if not rc else
+                         f"Recipe (applied by code): lr × {rc['lr_mult']:g}, weight decay × {rc['wd_mult']:g}, "
+                         + (f"from arXiv:{rc['paper_id']}" if rc["kind"] == "full_text_recipe" else
+                            f"stated default ({rc.get('source', '')}); no recipe in the full text"))
         return "\n".join(lines)
 
     def _deep_payload(self, key: str, recipe: dict | None) -> dict:
-        """Hypothesis-card fields: the r0 → r1 revision and the recipe badge (only with a deep read)."""
+        """Hypothesis-card fields: the scaling badge (recipe or stated default) and, with a deep read,
+        the r0 → r1 revision. Empty for bundles recorded before either existed."""
+        out: dict = {"recipe": recipe} if recipe else {}
         if not self.snap.deep:
-            return {}
-        out: dict = {"deep_findings": [c.claim_id for c in self._deep_claims_for(key)]}
+            return out
+        out["deep_findings"] = [c.claim_id for c in self._deep_claims_for(key)]
         rev = getattr(self, "revisions", {}).get(key)
         if rev:
             out["revision"] = rev
-        if recipe:
-            out["recipe"] = recipe
-        elif any(m.startswith("optimizer=") for m in key.split("+")):
+        if not recipe and any(m.startswith("optimizer=") for m in key.split("+")):
             out["recipe"] = {"none": "no recipe found in full text"}
         return out
 

@@ -66,9 +66,9 @@ class ExperimentConfig(BaseModel):
     z_loss_coef: float = Field(0.0, ge=0.0, le=1e-2)   # training-only penalty on log Z of the output logits
     label_smoothing: float = Field(0.0, ge=0.0, le=0.3)   # training-only; val_loss stays plain cross-entropy
     init_scale: float = Field(1.0, ge=0.25, le=4.0)    # multiplies the initialization std
-    # Method recipes from a paper's full text (DEEP_READ §4.2): multipliers on the baseline lr and
-    # weight decay, one recipe per method, decided before any run (never swept). At (1, 1) Lion keeps
-    # the harness's built-in default (lr ÷ 5, wd × 5); any other pair replaces it.
+    # Per-method learning-rate / weight-decay scaling: multipliers on the baseline lr and weight decay,
+    # applied once by the harness. Set by the orchestrator from a full-text recipe (DEEP_READ §4.2) or
+    # a stated default (config `method_defaults`, e.g. Lion 0.2 / 5); decided before any run, never swept.
     lr_mult: float = 1.0
     wd_mult: float = 1.0
 

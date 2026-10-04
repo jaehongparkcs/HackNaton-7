@@ -23,7 +23,7 @@ from noesis_lab.dashboard import (
     deep_selection_rows,
     deep_update_rows,
     degraded_note,
-    is_lion,
+    lion_caveat,
     notebook_label,
     order_notebooks,
     revision_lines,
@@ -371,7 +371,7 @@ if D["gaps"]:
                    "**EXPLORATION — NOT A RESULT**: it only decides which hypotheses earn a paired confirmation. "
                    "Finalists are picked by code (best per mechanism cell, then top by single-seed improvement).")
         st.dataframe(pd.DataFrame(ex_rows), use_container_width=True, hide_index=True)
-        if any("optimizer=lion" in r["candidate"] for r in ex_rows):
+        if any(lion_caveat(h) for h in D["hyps"]):
             st.caption("⚠ Lion rows: " + LION_CAVEAT)
         sh = shrinkage_rows(decisions)
         if sh:
@@ -494,8 +494,8 @@ for h in D["hyps"]:
         cr = credit(h, analyses, D["baseline"])
         if cr:      # tested on an incumbent: never credit the incumbent's gain to this change
             st.markdown(f"**{cr['text']}**")
-        if is_lion(h):
-            st.caption("⚠ " + LION_CAVEAT)
+        if lion_caveat(h):
+            st.caption("⚠ " + lion_caveat(h))
         if h.get("kind") == "gap":
             g = h.get("gap") or {}
             st.markdown(f"**`{(h.get('novelty_type') or '?').upper()}`** · from gap `{', '.join(h.get('gap_ids', []))}` · gap score "
@@ -547,6 +547,9 @@ for h in D["hyps"]:
         rc = h.get("recipe")
         if rc and "none" in rc:
             st.caption("Recipe: no recipe found in full text; the optimizer runs with the built-in default.")
+        elif rc and rc.get("kind") == "stated_default":
+            st.markdown(f"**Scaling: stated default** (no full-text recipe; applied once by code): lr × {rc['lr_mult']:g}, "
+                        f"weight decay × {rc['wd_mult']:g} — {rc.get('source', '')}")
         elif rc:
             src = rc.get("lr_mult_source") or rc.get("wd_mult_source") or {}
             st.markdown(f"**Recipe from arXiv:{rc['paper_id']}** (applied by code, not a retune): lr × {rc['lr_mult']:g}, "

@@ -104,14 +104,22 @@ def analysis_role(h: dict, analysis_id: str, baseline: dict | None) -> str:
 
 
 # ----------------------------------------------------------------------------- Lion
-LION_CAVEAT = ("Exploration only; our hyperparameter scaling, not a test of Lion. Every Lion run scored "
-               "~1.64–1.70 vs ~1.53 baseline (single seed, never confirmed); the likely cause is our lr ÷ 5 "
-               "scaling under a 2,000-step cosine budget, not Lion itself.")
+LION_CAVEAT = ("Exploration only; not a test of Lion or of its recipe. This run trained at AdamW's learning rate: the "
+               "schedule overwrote Lion's per-group lr (the built-in lr ÷ 5 never took effect; weight decay × 5 did). "
+               "Fixed in the harness on 2026-10-04; the recorded number is left as it is.")
 
 
 def is_lion(h: dict) -> bool:
     delta = h.get("config_delta") or {}
     return delta.get("optimizer") == "lion" or "optimizer=lion" in (h.get("candidate_key") or "")
+
+
+def lion_caveat(h: dict) -> str | None:
+    """The caveat for a Lion hypothesis recorded before the schedule fix: its config carries no
+    lr_mult, so it ran at AdamW's learning rate. Lion runs after the fix carry lr_mult and get none."""
+    if not is_lion(h):
+        return None
+    return LION_CAVEAT if (h.get("candidate_config") or {}).get("lr_mult", 1.0) == 1.0 else None
 
 
 # ----------------------------------------------------------------------------- timeline

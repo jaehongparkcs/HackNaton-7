@@ -111,24 +111,30 @@ class Lion(torch.optim.Optimizer):
 
 
 def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
+    """Every param group stores its own `base_lr`; the schedule scales THAT (apply_schedule), so a
+    per-method learning rate survives training. Learning-rate and weight-decay scaling happen once,
+    here, through `lr_mult` / `wd_mult` (a full-text recipe or a stated default, chosen by the
+    orchestrator and recorded on the hypothesis). There is no hidden per-optimizer scaling.
+
+    Until 2026-10-04 Lion was built with lr / 5 but the loop then set every group to c.lr x schedule,
+    so recorded Lion runs (explore2) trained at AdamW's learning rate (with weight decay x 5)."""
     decay = [p for p in model.parameters() if p.dim() >= 2]
     no_decay = [p for p in model.parameters() if p.dim() < 2]
-    recipe = (c.lr_mult, c.wd_mult) != (1.0, 1.0)      # a full-text recipe (DEEP_READ §4.2) replaces defaults
     lr, wd = c.lr * c.lr_mult, c.weight_decay * c.wd_mult
-    groups = [{"params": decay, "weight_decay": wd},
-              {"params": no_decay, "weight_decay": 0.0}]
+    groups = [{"params": decay, "weight_decay": wd, "base_lr": lr},
+              {"params": no_decay, "weight_decay": 0.0, "base_lr": lr}]
     if c.optimizer == "adamw":
         return torch.optim.AdamW(groups, lr=lr, betas=(0.9, 0.95))
-    if c.optimizer == "lion" and recipe:
-        return Lion(groups, lr=lr)
     if c.optimizer == "lion":
-        # Lion's sign update takes a smaller step and a larger decay than Adam (Chen et al., 2023,
-        # recommend lr/3-10 and wd x3-10). We fix lr/5, wd x5, so a "harmful" result is the method's,
-        # not an artifact of reusing Adam's learning rate. The ratio is held across every Lion run.
-        lion_groups = [{"params": decay, "weight_decay": c.weight_decay * 5},
-                       {"params": no_decay, "weight_decay": 0.0}]
-        return Lion(lion_groups, lr=c.lr / 5)
+        return Lion(groups, lr=lr)
     return torch.optim.SGD(groups, lr=lr, momentum=0.9)
+
+
+def apply_schedule(opt: torch.optim.Optimizer, progress: float, c: ExperimentConfig) -> None:
+    """Warm-up / cosine on each group's own base lr (never on c.lr, which would erase lr_mult)."""
+    m = lr_multiplier(progress, c)
+    for gr in opt.param_groups:
+        gr["lr"] = gr["base_lr"] * m
 
 
 # ------------------------------------------------------------------------------ env
@@ -238,8 +244,7 @@ def train_one(c: ExperimentConfig, seed: int, profile: Profile, data: Dataset,
         next_eval = every
         while (train_s if time_mode else step) < budget:
             progress = (train_s if time_mode else step) / budget
-            for gr in opt.param_groups:
-                gr["lr"] = c.lr * lr_multiplier(progress, c)
+            apply_schedule(opt, progress, c)
             x, y = batch()
             _sync(device)
             t0 = time.perf_counter()
