@@ -16,6 +16,15 @@ import streamlit as st
 import yaml
 
 from noesis_lab import stats
+from noesis_lab.dashboard import (
+    LION_CAVEAT,
+    analysis_role,
+    credit,
+    degraded_note,
+    is_lion,
+    notebook_label,
+    order_notebooks,
+)
 from noesis_lab.evidence_chain import chain_dot, evidence_grid
 from noesis_lab.gap_views import (
     DIRECTION_WORD,
@@ -51,13 +60,15 @@ def find_notebooks() -> dict[str, Path]:
 
 
 books = find_notebooks()
+books = {k: books[k] for k in order_notebooks(list(books))}     # explore2, golden, then the rest
 env_nb = os.environ.get("NOESIS_NOTEBOOK")
 if env_nb:
     books = {env_nb: Path(env_nb), **books}
 if not books:
     st.error("No notebook found. Run `make golden` (needs an API key and a Mac), or `make smoke`.")
     st.stop()
-choice = st.sidebar.selectbox("Session notebook", list(books), index=0)
+choice = st.sidebar.selectbox("Session notebook", list(books), index=0,
+                              format_func=lambda k: k if k == env_nb else notebook_label(k))
 S = Store(books[choice], readonly=True)
 meta = S.get_meta("session") or {"status": "replayed", "llm_mode": "replay"}
 profile = S.get_meta("profile") or {}
@@ -129,8 +140,9 @@ else:
     st.write(f"**Curated literature snapshot only:** {snap.get('papers', '?')} papers, {snap.get('claims', '?')} claims "
              f"({', '.join(snap.get('dimensions', []))}). Fetched {snap.get('fetched', '?')} from arXiv. "
              "Verdicts are scoped to this snapshot; the UI never says “novel”.")
+SEALED = bool(S.get_meta("session") or S.get_meta("replay_of"))      # a recorded bundle, not a search in progress
 for reason in corpus.get("degraded", []):
-    st.warning(f"Search degraded: {reason}")
+    (st.info if SEALED else st.warning)(degraded_note(reason, SEALED))
 
 # ----------------------------------------------------------------------------- niche form (sidebar)
 with st.sidebar.form("niche"):
@@ -307,9 +319,10 @@ if D["gaps"]:
                  f"× testability {gap['testability']:.1f} × evidence quality {gap['evidence_quality']:.2f}")
         st.markdown(f"Predicted direction along the path (code, from the signs of the claims): "
                     f"**{DIRECTION_WORD.get(gap.get('predicted_direction', ''), '?')}**")
-        measured = [r for r in our_results(D["hyps"], analyses) if r["delta_key"] == gap["delta_key"]]
+        measured = [r for r in our_results(D["hyps"], analyses, D["baseline"]) if r["delta_key"] == gap["delta_key"]]
         for r in measured:
-            st.markdown(f"Measured ({r['seeds']} paired seeds): **{r['branch']}** ({r['sd']:+.2f}× noise SD)"
+            st.markdown(f"Measured ({r['seeds']} paired seeds{', vs incumbent ' + r['incumbent'] if r.get('incumbent') else ''}): "
+                        f"**{r['branch']}** ({r['sd']:+.2f}× noise SD)"
                         + (f" → prediction **{r['outcome'].upper()}**" if r["outcome"] not in ("", "no_prediction") else ""))
         if not measured:
             st.caption("Not measured in this session.")
@@ -338,6 +351,8 @@ if D["gaps"]:
                    "**EXPLORATION — NOT A RESULT**: it only decides which hypotheses earn a paired confirmation. "
                    "Finalists are picked by code (best per mechanism cell, then top by single-seed improvement).")
         st.dataframe(pd.DataFrame(ex_rows), use_container_width=True, hide_index=True)
+        if any("optimizer=lion" in r["candidate"] for r in ex_rows):
+            st.caption("⚠ Lion rows: " + LION_CAVEAT)
         sh = shrinkage_rows(decisions)
         if sh:
             st.markdown("**Shrinkage** — what a single run suggested vs what the paired protocol measured "
@@ -352,7 +367,7 @@ if D["gaps"]:
         if not [d for d in decisions if d["kind"] == "promotion"]:
             st.caption("No promotion in this session: no finalist stayed promising on every seed. The baseline is still the incumbent.")
     st.subheader("How good were the gaps?")
-    prows = prediction_rows(D["hyps"], analyses)
+    prows = prediction_rows(D["hyps"], analyses, D["baseline"])
     if not prows:
         st.info("No gap hypothesis has been screened in this session yet, so there is nothing to score.")
     else:
@@ -364,7 +379,7 @@ if D["gaps"]:
         pc2.dataframe(pd.DataFrame(prediction_counts(prows, "label")), use_container_width=True, hide_index=True)
         st.dataframe(pd.DataFrame(prows), use_container_width=True, hide_index=True)
     st.subheader("Overview map")
-    st.graphviz_chart(overview_dot(D["gap_graph"], D["gaps"], our_results(D["hyps"], analyses)), use_container_width=True)
+    st.graphviz_chart(overview_dot(D["gap_graph"], D["gaps"], our_results(D["hyps"], analyses, D["baseline"])), use_container_width=True)
     st.caption("Boxes = runnable methods, ellipses = mechanisms quoted from abstracts, colors = graph communities. "
                "Claim edges: green +, red −, grey 0 (×count). Thick edges = our measured results. Dashed orange = gaps with their score.")
 
@@ -419,6 +434,11 @@ for h in D["hyps"]:
     with st.container(border=True):
         st.markdown(f"#### {icon} {label}  ·  `{h.get('origin', 'FIXTURE')}` {h.get('title', h['fixture_id'])}")
         st.write(h.get("statement", ""))
+        cr = credit(h, analyses, D["baseline"])
+        if cr:      # tested on an incumbent: never credit the incumbent's gain to this change
+            st.markdown(f"**{cr['text']}**")
+        if is_lion(h):
+            st.caption("⚠ " + LION_CAVEAT)
         if h.get("kind") == "gap":
             g = h.get("gap") or {}
             st.markdown(f"**`{(h.get('novelty_type') or '?').upper()}`** · from gap `{', '.join(h.get('gap_ids', []))}` · gap score "
@@ -467,6 +487,9 @@ for h in D["hyps"]:
         # latest analysis for this hypothesis
         aids = [a for a in D["analyses"] if a["hypothesis_id"] == h["hypothesis_id"]]
         for a in aids:
+            role = analysis_role(h, a["analysis_id"], D["baseline"])
+            if role:
+                st.markdown(f"**{role.split(' (')[0].upper()}** ({role.split(' (', 1)[1]}")
             st.markdown(f"##### {a['label']}  ·  analysis `{a['analysis_id']}`  ·  {len(a['pairs'])} paired seeds")
             rows = pd.DataFrame([{"seed": p["seed"], "delta": p["delta"], "baseline": p["baseline_val_loss"],
                                   "candidate": p["candidate_val_loss"], "candidate_run": p["candidate_run_id"],
@@ -559,7 +582,12 @@ st.caption(f"{len(chain)} chained decisions this session; each stores `triggered
 # ----------------------------------------------------------------------------- learning curves
 st.header("4. Learning curves (by tokens seen)")
 if analyses:
-    aid = st.selectbox("Analysis", list(analyses), format_func=lambda a: f"{a} · {analyses[a]['hypothesis_id']}")
+    _hyp_by_id = {h["hypothesis_id"]: h for h in D["hyps"]}
+
+    def _ana_label(a: str) -> str:
+        role = analysis_role(_hyp_by_id.get(analyses[a]["hypothesis_id"], {}), a, D["baseline"])
+        return f"{a} · {analyses[a]['hypothesis_id']}" + (f" · {role.split(' (')[0]}" if role else "")
+    aid = st.selectbox("Analysis", list(analyses), format_func=_ana_label)
     rows = []
     for p in analyses[aid]["pairs"]:
         for role, rid in (("baseline", p["baseline_run_id"]), ("candidate", p["candidate_run_id"])):

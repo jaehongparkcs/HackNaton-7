@@ -70,8 +70,11 @@ def chain_dot(data: dict[str, Any], hypothesis_id: str) -> str:
         for a in [a for a in data["analyses"] if a["hypothesis_id"] == hypothesis_id]:
             aid = a["analysis_id"]
             out.append(_node(f"runs_{aid}", f"{len(a['pairs'])} paired seeds ({2 * len(a['pairs'])} runs)"))
+            vs = ("\nvs ORIGINAL baseline: cumulative,\nincludes the incumbent (informational)"
+                  if aid == hyp.get("headline_analysis_id") else
+                  "\nvs incumbent (this change)" if hyp.get("headline_analysis_id") else "")
             out.append(_node(aid, _q(f"analysis {aid}\nbranch: {a['branch']}\n"
-                                      f"{a['improvement_in_noise_sd']:+.2f}× noise SD")))
+                                      f"{a['improvement_in_noise_sd']:+.2f}× noise SD{vs}", 36, 6)))
             edges += [(prev, f"runs_{aid}"), (f"runs_{aid}", aid)]
             last = aid
             for d in [x for x in decisions if x.get("analysis_id") == aid
@@ -106,7 +109,12 @@ def evidence_grid(data: dict[str, Any]) -> list[dict[str, Any]]:
     rows = []
     for h in data["hyps"]:
         pa = h.get("prior_art") or {}
-        ana = next((a for a in reversed(data["analyses"]) if a["hypothesis_id"] == h["hypothesis_id"]), None)
+        # the analysis the rule used (vs the incumbent it was tested on), never the cumulative
+        # vs-original headline, which includes the incumbent's gain
+        by_id = {a["analysis_id"]: a for a in data["analyses"]}
+        ana = by_id.get(h.get("latest_analysis_id", "")) or next(
+            (a for a in reversed(data["analyses"]) if a["hypothesis_id"] == h["hypothesis_id"]), None)
+        head = by_id.get(h.get("headline_analysis_id", ""))
         ev = [e for e in data["evidence"] if ana and e["analysis_id"] == ana["analysis_id"]]
         rows.append({
             "origin": h.get("origin", "FIXTURE"),
@@ -114,7 +122,10 @@ def evidence_grid(data: dict[str, Any]) -> list[dict[str, Any]]:
             "paper claim": pa.get("claim_id") or "—",
             "covers our setting (human-curated)": {True: "yes", False: "no"}.get(pa.get("covers_our_setting"), "—"),
             "verdict": pa.get("verdict", "—"),
-            "measured": f"{ana['branch']} ({ana['improvement_in_noise_sd']:+.2f}× SD)" if ana else h["status"],
+            "measured": f"{ana['branch']} ({ana['improvement_in_noise_sd']:+.2f}× SD)"
+                        + (" vs incumbent" if head else "") if ana else h["status"],
+            "vs original baseline (cumulative, includes the incumbent)":
+                f"{head['branch']} ({head['improvement_in_noise_sd']:+.2f}× SD)" if head else "—",
             "relation": ", ".join(f"{e['claim_id']}: {e['relation']}" for e in ev) or "—",
         })
     return rows

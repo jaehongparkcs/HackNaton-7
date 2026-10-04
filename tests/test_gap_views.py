@@ -81,8 +81,9 @@ def test_our_results_are_keyed_by_delta():
             {"latest_analysis_id": "b", "config_delta": {"dropout": 0.1}, "kind": "gap", "gap": {"predicted_direction": "+"}}]
     out = gap_views.our_results(hyps, {"a": {"branch": "harmful", "improvement_in_noise_sd": -2.0, "pairs": [1, 2, 3]},
                                        "b": {"branch": "harmful", "improvement_in_noise_sd": -1.5, "pairs": [1, 2, 3]}})
-    assert out == [{"delta_key": "activation=swiglu+pos_encoding=rope", "branch": "harmful", "sd": -2.0, "seeds": 3, "outcome": ""},
-                   {"delta_key": "dropout=0.1", "branch": "harmful", "sd": -1.5, "seeds": 3, "outcome": "miss"}]
+    assert out == [{"delta_key": "activation=swiglu+pos_encoding=rope", "branch": "harmful", "sd": -2.0, "seeds": 3, "outcome": "",
+                    "incumbent": ""},
+                   {"delta_key": "dropout=0.1", "branch": "harmful", "sd": -1.5, "seeds": 3, "outcome": "miss", "incumbent": ""}]
 
 
 def test_dashboard_renders_gap_list_card_and_maps(session_name, monkeypatch):

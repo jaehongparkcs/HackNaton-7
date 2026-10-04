@@ -201,9 +201,11 @@ def direction_view_dot(direction: dict, claims: dict[str, dict], papers: dict[st
     return "\n".join(out)
 
 
-def our_results(hyps: list[dict], analyses: dict[str, dict]) -> list[dict]:
+def our_results(hyps: list[dict], analyses: dict[str, dict], baseline: dict | None = None) -> list[dict]:
     """Measured results as (delta key, branch, SDs, prediction outcome) for the overview map's
-    thick edges and the gap card."""
+    thick edges and the gap card. The analysis is the one the rule used: vs the incumbent the
+    change was tested on (named in `incumbent`), never the cumulative vs-original headline."""
+    from .dashboard import _fmt, incumbent_delta
     from .stats import delta_key, prediction_outcome
     out = []
     for h in hyps:
@@ -212,7 +214,8 @@ def our_results(hyps: list[dict], analyses: dict[str, dict]) -> list[dict]:
             pred = (h.get("gap") or {}).get("predicted_direction", "") if h.get("kind") == "gap" else ""
             out.append({"delta_key": delta_key(h["config_delta"]), "branch": a["branch"],
                         "sd": a["improvement_in_noise_sd"], "seeds": len(a["pairs"]),
-                        "outcome": prediction_outcome(pred, a["branch"]) if h.get("kind") == "gap" else ""})
+                        "outcome": prediction_outcome(pred, a["branch"]) if h.get("kind") == "gap" else "",
+                        "incumbent": _fmt(incumbent_delta(h, baseline))})
     return out
 
 
@@ -236,8 +239,10 @@ def shrinkage_rows(decisions: list[dict]) -> list[dict[str, Any]]:
 OUTCOMES = ("hit", "miss", "null", "no_prediction")
 
 
-def prediction_rows(hyps: list[dict], analyses: dict[str, dict]) -> list[dict[str, Any]]:
-    """One row per screened gap hypothesis: what its gap predicted and what was measured."""
+def prediction_rows(hyps: list[dict], analyses: dict[str, dict], baseline: dict | None = None) -> list[dict[str, Any]]:
+    """One row per screened gap hypothesis: what its gap predicted and what was measured (against
+    the config it was tested on: the baseline, or an incumbent)."""
+    from .dashboard import _fmt, incumbent_delta
     from .stats import prediction_outcome
     rows = []
     for h in hyps:
@@ -246,7 +251,9 @@ def prediction_rows(hyps: list[dict], analyses: dict[str, dict]) -> list[dict[st
             continue
         pred = gap.get("predicted_direction", "")
         rows.append({"hypothesis": h.get("candidate_key", ""), "gap type": BADGE.get(gap["gap_type"], gap["gap_type"]),
-                     "label": h.get("novelty_type", ""), "predicted": pred or "—", "measured": a["branch"],
+                     "label": h.get("novelty_type", ""), "predicted": pred or "—",
+                     "measured vs": ("incumbent " + inc) if (inc := _fmt(incumbent_delta(h, baseline))) else "baseline",
+                     "measured": a["branch"],
                      "× noise SD": a["improvement_in_noise_sd"], "paired seeds": len(a["pairs"]),
                      "outcome": prediction_outcome(pred, a["branch"])})
     return rows
