@@ -2,10 +2,15 @@
 old bundles replaying unchanged."""
 import json
 
-from noesis_lab import dashboard
+from pydantic import BaseModel
+
+from noesis_lab import dashboard, gaps
 from noesis_lab.bundle import verify_manifest, write_manifest
 from noesis_lab.config import ROOT
+from noesis_lab.llm import LLM
 from noesis_lab.store import Store
+
+from .test_gaps import DROP, MECH, RMS, ROPE, SWIGLU, claim
 
 
 # --------------------------------------------------------------------------- 0. unexpected files
@@ -127,11 +132,6 @@ def test_dashboard_renders_the_explore2_exhibit():
 
 
 # --------------------------------------------------------------------------- A5 combination predictions
-from noesis_lab import gaps  # noqa: E402
-
-from .test_gaps import DROP, MECH, RMS, ROPE, SWIGLU, claim  # noqa: E402
-
-
 def _combo_graph():
     return [claim("a", SWIGLU, "improves", "T3", "none", mech=MECH),
             claim("b", ROPE, "improves", "T3", "partial", mech=MECH),
@@ -207,11 +207,6 @@ def test_timeline_flags_a_long_silence():
 
 
 # --------------------------------------------------------------------------- B1 / B3 / B6
-from pydantic import BaseModel  # noqa: E402
-
-from noesis_lab.llm import LLM  # noqa: E402
-
-
 class _Out(BaseModel):
     reading: str
 
