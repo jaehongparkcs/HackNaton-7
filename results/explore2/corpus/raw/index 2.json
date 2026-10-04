@@ -1,0 +1,562 @@
+[
+  {
+    "kind": "arxiv_seeds",
+    "url": "https://export.arxiv.org/api/query?id_list=2002.04745%2C1910.07467&max_results=2",
+    "file": "000_arxiv_seeds_f19f0239.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "001_arxiv_9ddc1092.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22pre-layer+normalization%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "002_arxiv_fc181d9c.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22gated+linear+units%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "003_arxiv_9d437844.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "004_arxiv_cf590a56.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+warmup%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "005_arxiv_f5240972.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Lion+optimizer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "006_arxiv_afca4bae.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "007_arxiv_6be95865.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22layer+normalization%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "008_arxiv_c9fb2e54.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22activation+functions%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "009_arxiv_a689d138.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22positional+encoding%22+AND+all%3A%22Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "010_arxiv_c8c1f48b.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22optimizer%22+AND+all%3A%22learning-rate+schedule%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "011_arxiv_9af5a1c5.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22character-level+language+model%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "012_arxiv_098e8225.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "013_arxiv_2c739f82.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SwiGLU%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "014_arxiv_252e9b3c.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout%22+AND+all%3A%22Transformer%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "015_arxiv_814e2bd1.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22gradient+clipping%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "016_arxiv_eae51223.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22initialization%22+AND+all%3A%22Transformer%22+AND+all%3A%22scale%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "017_arxiv_03c066c9.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22label+smoothing%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "018_arxiv_3b91bdc0.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "019_arxiv_27532ca6.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Post-LN%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "020_arxiv_0181d8de.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Lion%22+AND+all%3A%22optimizer%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "021_arxiv_59edecd9.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD%22+AND+all%3A%22Adam%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "022_arxiv_c7942f55.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "023_arxiv_3b6251cc.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22QK+normalization%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "024_arxiv_5ebb310e.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22byte-level+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "025_arxiv_dir_12f3899a.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22auxiliary+losses+char+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "026_arxiv_dir_e15b3d84.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Character-Level+Language+Modeling+with+Deeper+Self-Attention%22&start=0&max_results=3",
+    "file": "027_arxiv_title_5517fae0.xml"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2305.14858%7C10.48550%2Farxiv.2604.14430%7C10.48550%2Farxiv.2606.31963%7C10.48550%2Farxiv.2605.18933%7C10.48550%2Farxiv.2511.17864%7C10.48550%2Farxiv.2407.09577%7C10.48550%2Farxiv.2507.15773%7C10.48550%2Farxiv.2608.23582%7C10.48550%2Farxiv.2607.04819%7C10.48550%2Farxiv.2603.17771%7C10.48550%2Farxiv.2601.18702%7C10.48550%2Farxiv.2606.04405%7C10.48550%2Farxiv.2607.17146%7C10.48550%2Farxiv.2602.11169%7C10.48550%2Farxiv.2207.06356%7C10.48550%2Farxiv.2304.14802%7C10.48550%2Farxiv.2502.05795%7C10.48550%2Farxiv.2508.19445%7C10.48550%2Farxiv.2411.00835%7C10.48550%2Farxiv.2501.18187%7C10.48550%2Farxiv.2605.09403%7C10.48550%2Farxiv.2501.07774%7C10.48550%2Farxiv.2603.13347%7C10.48550%2Farxiv.2507.00022%7C10.48550%2Farxiv.2405.20768%7C10.48550%2Farxiv.2312.17482%7C10.48550%2Farxiv.2505.21364%7C10.48550%2Farxiv.2502.01032%7C10.48550%2Farxiv.2603.00812%7C10.48550%2Farxiv.2608.14604%7C10.48550%2Farxiv.2511.09146%7C10.48550%2Farxiv.2601.22181%7C10.48550%2Farxiv.2608.29715%7C10.48550%2Farxiv.2604.09742%7C10.48550%2Farxiv.2507.23083%7C10.48550%2Farxiv.2511.17388%7C10.48550%2Farxiv.2502.11276%7C10.48550%2Farxiv.2506.09507%7C10.48550%2Farxiv.2609.30576%7C10.48550%2Farxiv.2502.12665&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "028_openalex_b8c16aa1.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2405.06985%7C10.48550%2Farxiv.2505.21910%7C10.48550%2Farxiv.2604.27077%7C10.48550%2Farxiv.2410.10986%7C10.48550%2Farxiv.1804.00247%7C10.48550%2Farxiv.2102.08098%7C10.48550%2Farxiv.2608.14691%7C10.48550%2Farxiv.2508.12327%7C10.48550%2Farxiv.2604.14587%7C10.48550%2Farxiv.2207.02910%7C10.48550%2Farxiv.2508.04707%7C10.48550%2Farxiv.2207.04046%7C10.48550%2Farxiv.2411.16462%7C10.48550%2Farxiv.2404.00438%7C10.48550%2Farxiv.2310.07147%7C10.48550%2Farxiv.2101.10453%7C10.48550%2Farxiv.2009.13792%7C10.48550%2Farxiv.2102.08928%7C10.48550%2Farxiv.2512.05981%7C10.48550%2Farxiv.2303.00922%7C10.48550%2Farxiv.1909.08053%7C10.48550%2Farxiv.2602.23826%7C10.48550%2Farxiv.2010.09697%7C10.48550%2Farxiv.2203.16634%7C10.48550%2Farxiv.2407.17406%7C10.48550%2Farxiv.2501.00659%7C10.48550%2Farxiv.2606.05346%7C10.48550%2Farxiv.2603.09616%7C10.48550%2Farxiv.2505.23623%7C10.48550%2Farxiv.2606.08562%7C10.48550%2Farxiv.2607.25507%7C10.48550%2Farxiv.2607.10959%7C10.48550%2Farxiv.2603.10301%7C10.48550%2Farxiv.2408.13359%7C10.48550%2Farxiv.2609.34681%7C10.48550%2Farxiv.2505.24275%7C10.48550%2Farxiv.2512.13705%7C10.48550%2Farxiv.2605.23061%7C10.48550%2Farxiv.2505.09792%7C10.48550%2Farxiv.2203.06211&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "029_openalex_d8cd5025.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2606.21514%7C10.48550%2Farxiv.2202.02617%7C10.48550%2Farxiv.2503.05920%7C10.48550%2Farxiv.2404.06395%7C10.48550%2Farxiv.2609.25482%7C10.48550%2Farxiv.2310.00863%7C10.48550%2Farxiv.1808.04444%7C10.48550%2Farxiv.2603.28534%7C10.48550%2Farxiv.1911.03864%7C10.48550%2Farxiv.2004.05150%7C10.48550%2Farxiv.1905.07799%7C10.48550%2Farxiv.2311.08123%7C10.48550%2Farxiv.2605.05222%7C10.48550%2Farxiv.2506.08652%7C10.48550%2Farxiv.2607.07478%7C10.48550%2Farxiv.2602.06993%7C10.48550%2Farxiv.1912.01982%7C10.48550%2Farxiv.2609.07264%7C10.48550%2Farxiv.2112.15545%7C10.48550%2Farxiv.2507.15779%7C10.48550%2Farxiv.2503.16672%7C10.48550%2Farxiv.2411.13010%7C10.48550%2Farxiv.2606.00761%7C10.48550%2Farxiv.2604.09130%7C10.48550%2Farxiv.2608.09417%7C10.48550%2Farxiv.2605.18898%7C10.48550%2Farxiv.2609.31956%7C10.48550%2Farxiv.2604.14174%7C10.48550%2Farxiv.2607.15525%7C10.48550%2Farxiv.2602.11808%7C10.48550%2Farxiv.2511.10850%7C10.48550%2Farxiv.2606.11585%7C10.48550%2Farxiv.2402.16361%7C10.48550%2Farxiv.2603.17811%7C10.48550%2Farxiv.2506.14793%7C10.48550%2Farxiv.1909.11556%7C10.48550%2Farxiv.2609.34218%7C10.48550%2Farxiv.2101.01761%7C10.48550%2Farxiv.2106.14448%7C10.48550%2Farxiv.2403.00812&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "030_openalex_dacf5932.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2508.17310%7C10.48550%2Farxiv.2503.10217%7C10.48550%2Farxiv.2206.00826%7C10.48550%2Farxiv.2509.19563%7C10.48550%2Farxiv.2505.02266%7C10.48550%2Farxiv.2105.01735%7C10.48550%2Farxiv.2404.08624%7C10.48550%2Farxiv.2305.17633%7C10.48550%2Farxiv.2405.18194%7C10.48550%2Farxiv.2510.19352%7C10.48550%2Farxiv.2506.06549%7C10.48550%2Farxiv.2506.12543%7C10.48550%2Farxiv.2508.05036%7C10.48550%2Farxiv.2510.01578%7C10.48550%2Farxiv.2510.01447%7C10.48550%2Farxiv.2304.13960%7C10.48550%2Farxiv.2510.27504%7C10.48550%2Farxiv.1908.11365%7C10.48550%2Farxiv.2609.35852%7C10.48550%2Farxiv.2304.02034%7C10.48550%2Farxiv.2609.07086%7C10.48550%2Farxiv.2602.05927%7C10.48550%2Farxiv.2405.05409%7C10.48550%2Farxiv.2310.10353%7C10.48550%2Farxiv.2605.26355%7C10.48550%2Farxiv.2607.09204%7C10.48550%2Farxiv.2410.07063%7C10.48550%2Farxiv.2502.04375%7C10.48550%2Farxiv.2107.11481%7C10.48550%2Farxiv.2507.16427%7C10.48550%2Farxiv.2309.12689%7C10.48550%2Farxiv.2401.13987%7C10.48550%2Farxiv.2304.10321%7C10.48550%2Farxiv.1905.04413%7C10.48550%2Farxiv.2305.16797%7C10.48550%2Farxiv.2312.04398%7C10.48550%2Farxiv.2609.16407%7C10.48550%2Farxiv.2003.07892%7C10.48550%2Farxiv.2203.11413%7C10.48550%2Farxiv.2309.02162&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "031_openalex_18e3875b.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2605.13989%7C10.48550%2Farxiv.2605.08504%7C10.48550%2Farxiv.2601.09719%7C10.48550%2Farxiv.2606.24898%7C10.48550%2Farxiv.2503.10251%7C10.48550%2Farxiv.2506.19697%7C10.48550%2Farxiv.2607.10137%7C10.48550%2Farxiv.2405.17849%7C10.48550%2Farxiv.2510.22777%7C10.48550%2Farxiv.2605.10504%7C10.48550%2Farxiv.2505.08823%7C10.48550%2Farxiv.2510.25262%7C10.48550%2Farxiv.2505.11329%7C10.48550%2Farxiv.2602.18849%7C10.48550%2Farxiv.2206.00330%7C10.48550%2Farxiv.2502.00213%7C10.48550%2Farxiv.2607.13491%7C10.48550%2Farxiv.2203.00555%7C10.48550%2Farxiv.2502.02732%7C10.48550%2Farxiv.2601.19895%7C10.48550%2Farxiv.2510.22026%7C10.48550%2Farxiv.2604.03190%7C10.48550%2Farxiv.2411.16085%7C10.48550%2Farxiv.2606.16243%7C10.48550%2Farxiv.2606.23637%7C10.48550%2Farxiv.2307.06440%7C10.48550%2Farxiv.2607.16268%7C10.48550%2Farxiv.2302.06165%7C10.48550%2Farxiv.2412.17107%7C10.48550%2Farxiv.2509.07252%7C10.48550%2Farxiv.2306.00204%7C10.48550%2Farxiv.2106.06749%7C10.48550%2Farxiv.2605.02317%7C10.48550%2Farxiv.2402.16788%7C10.48550%2Farxiv.2505.21829%7C10.48550%2Farxiv.2606.09658%7C10.48550%2Farxiv.2302.01029%7C10.48550%2Farxiv.2410.19964%7C10.48550%2Farxiv.2608.25990%7C10.48550%2Farxiv.2609.02373&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "032_openalex_5e3d1897.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2512.07525%7C10.48550%2Farxiv.2507.11273%7C10.48550%2Farxiv.2608.10021%7C10.48550%2Farxiv.2602.10959%7C10.48550%2Farxiv.2403.00071%7C10.48550%2Farxiv.2505.21465%7C10.48550%2Farxiv.2501.10967%7C10.48550%2Farxiv.2505.22014%7C10.48550%2Farxiv.2607.18363%7C10.48550%2Farxiv.2608.02091%7C10.48550%2Farxiv.2404.14408%7C10.48550%2Farxiv.2511.23088%7C10.48550%2Farxiv.2105.13626%7C10.48550%2Farxiv.2609.02339&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "033_openalex_02f9035f.json"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+schedule%22+AND+all%3A%22Transformer%22+AND+all%3A%22constant%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "034_arxiv_3fde6344.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22warmup%22+AND+all%3A%22Transformer%22+AND+all%3A%22learning+rate%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "035_arxiv_765a737e.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22weight+tying%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "036_arxiv_45f25b7f.xml"
+  },
+  {
+    "kind": "arxiv",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22z-loss%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=15&sortBy=relevance&sortOrder=descending",
+    "file": "037_arxiv_4d6198d1.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "038_arxiv_dir_98f18389.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22pre-LN+vs+post-LN+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "039_arxiv_dir_677d79b0.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22layer+normalization+placement%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "040_arxiv_dir_131fb7c9.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Root+Mean+Square+Layer+Normalization%22&start=0&max_results=3",
+    "file": "041_arxiv_title_7f840f0a.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22On+Layer+Normalization+in+the+Transformer+Architecture%22&start=0&max_results=3",
+    "file": "042_arxiv_title_f653dbbf.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SwiGLU%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "043_arxiv_dir_a0322299.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22GLU+variants+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "044_arxiv_dir_b8c1091b.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22GELU+activation%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "045_arxiv_dir_ebb1abe3.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22GLU+Variants+Improve+Transformer%22&start=0&max_results=3",
+    "file": "046_arxiv_title_1f001961.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Gaussian+Error+Linear+Units+GELUs%22&start=0&max_results=3",
+    "file": "047_arxiv_title_e898997b.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22rotary+position+embedding%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "048_arxiv_dir_d70a373a.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22ALiBi+attention+linear+biases%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "049_arxiv_dir_f39a347a.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22no+positional+encoding+causal+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "050_arxiv_dir_7caf9fea.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22RoFormer+Enhanced+Transformer+with+Rotary+Position+Embedding%22&start=0&max_results=3",
+    "file": "051_arxiv_title_631d3b55.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Train+Short+Test+Long+Attention+with+Linear+Biases+Enables+Input+Length+Extrapolation%22&start=0&max_results=3",
+    "file": "052_arxiv_title_6aab40aa.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22The+Impact+of+Positional+Encoding+on+Length+Generalization+in+Transformers%22&start=0&max_results=3",
+    "file": "053_arxiv_title_5a689868.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22AdamW+decoupled+weight+decay%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "054_arxiv_dir_329d04be.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Lion+optimizer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "055_arxiv_dir_5e740727.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Sophia+second-order+optimizer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "056_arxiv_dir_7ec3881f.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Decoupled+Weight+Decay+Regularization%22&start=0&max_results=3",
+    "file": "057_arxiv_title_e0b08af2.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Symbolic+Discovery+of+Optimization+Algorithms%22&start=0&max_results=3",
+    "file": "058_arxiv_title_9c587942.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22learning+rate+warmup+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "059_arxiv_dir_9eff1380.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22cosine+learning+rate+schedule%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "060_arxiv_dir_1182d9ab.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22warmup-stable-decay%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "061_arxiv_dir_1d01421f.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22SGDR+Stochastic+Gradient+Descent+with+Warm+Restarts%22&start=0&max_results=3",
+    "file": "062_arxiv_title_1b39ffb5.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22On+the+Variance+of+the+Adaptive+Learning+Rate+and+Beyond%22&start=0&max_results=3",
+    "file": "063_arxiv_title_8db2e1ad.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22QK+normalization%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "064_arxiv_dir_2e10119a.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22attention+logit+growth%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "065_arxiv_dir_987d761f.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22attention+entropy+collapse%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "066_arxiv_dir_565740ca.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Query-Key+Normalization+for+Transformers%22&start=0&max_results=3",
+    "file": "067_arxiv_title_cdce2e9e.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Small-scale+proxies+for+large-scale+Transformer+training+instabilities%22&start=0&max_results=3",
+    "file": "068_arxiv_title_9bf7da83.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22z-loss+softmax+normalizer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "069_arxiv_dir_26300bda.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22output+logit+divergence%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "070_arxiv_dir_dcb7416f.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22PaLM+training+stability%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "071_arxiv_dir_fd8158ee.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22PaLM+Scaling+Language+Modeling+with+Pathways%22&start=0&max_results=3",
+    "file": "072_arxiv_title_567773e4.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22ST-MoE+Designing+Stable+and+Transferable+Sparse+Expert+Models%22&start=0&max_results=3",
+    "file": "073_arxiv_title_e7d3637f.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout+Transformer+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "074_arxiv_dir_a7fedc54.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22dropout+underfitting+early+training%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "075_arxiv_dir_706bb6fb.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22early+dropout%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "076_arxiv_dir_3d838528.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Dropout+Reduces+Underfitting%22&start=0&max_results=3",
+    "file": "077_arxiv_title_16bdfc65.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Dropout+A+Simple+Way+to+Prevent+Neural+Networks+from+Overfitting%22&start=0&max_results=3",
+    "file": "078_arxiv_title_ba13b6b1.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22label+smoothing+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "079_arxiv_dir_eff697dc.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22label+smoothing+calibration%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "080_arxiv_dir_4083ef59.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22softmax+overconfidence+regularization%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "081_arxiv_dir_b5eda9c4.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22When+Does+Label+Smoothing+Help%22&start=0&max_results=3",
+    "file": "082_arxiv_title_cc8ac810.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Rethinking+the+Inception+Architecture+for+Computer+Vision%22&start=0&max_results=3",
+    "file": "083_arxiv_title_634db8bf.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22weight+tying+language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "084_arxiv_dir_1dae6149.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22tied+input+output+embeddings%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "085_arxiv_dir_00f9c80c.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22embedding+sharing%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "086_arxiv_dir_84e1546f.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Using+the+Output+Embedding+to+Improve+Language+Models%22&start=0&max_results=3",
+    "file": "087_arxiv_title_eaf0c3f5.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Tying+Word+Vectors+and+Word+Classifiers+A+Loss+Framework+for+Language+Modeling%22&start=0&max_results=3",
+    "file": "088_arxiv_title_62dd4590.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Transformer+initialization+scale%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "089_arxiv_dir_6b2aa36b.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22depth-scaled+residual+initialization%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "090_arxiv_dir_6f4d9284.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22signal+propagation+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "091_arxiv_dir_0a901068.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Improving+Transformer+Optimization+Through+Better+Initialization%22&start=0&max_results=3",
+    "file": "092_arxiv_title_d78290d4.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Tensor+Programs+V+Tuning+Large+Neural+Networks+via+Zero-Shot+Hyperparameter+Transfer%22&start=0&max_results=3",
+    "file": "093_arxiv_title_448b2eb8.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22gradient+clipping+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "094_arxiv_dir_35852bff.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22gradient+norm+clipping+convergence%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "095_arxiv_dir_175935b9.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22adaptive+gradient+clipping%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "096_arxiv_dir_78ae62bd.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Why+Gradient+Clipping+Accelerates+Training+A+Theoretical+Justification+for+Adaptivity%22&start=0&max_results=3",
+    "file": "097_arxiv_title_3bedfe3c.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22normalization-free+Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "098_arxiv_dir_8388c7b8.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22ReZero+residual%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "099_arxiv_dir_465fd23e.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22DeepNorm%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "100_arxiv_dir_90eb5cd1.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22ReZero+is+All+You+Need+Fast+Convergence+at+Large+Depth%22&start=0&max_results=3",
+    "file": "101_arxiv_title_cf691450.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Transformers+without+Tears+Improving+the+Normalization+of+Self-Attention%22&start=0&max_results=3",
+    "file": "102_arxiv_title_834c354f.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22Muon+optimizer+orthogonalized+momentum%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "103_arxiv_dir_5ccd9411.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU+activation%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "104_arxiv_dir_be479755.xml"
+  },
+  {
+    "kind": "arxiv_dir",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22modded+nanoGPT+speedrun%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "105_arxiv_dir_7fda26d5.xml"
+  },
+  {
+    "kind": "arxiv_title",
+    "url": "https://export.arxiv.org/api/query?search_query=ti%3A%22Primer+Searching+for+Efficient+Transformers+for+Language+Modeling%22&start=0&max_results=3",
+    "file": "106_arxiv_title_11c0f2dc.xml"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2405.06985%7C10.48550%2Farxiv.2505.21910%7C10.48550%2Farxiv.2604.27077%7C10.48550%2Farxiv.2410.10986%7C10.48550%2Farxiv.1804.00247%7C10.48550%2Farxiv.2102.08098%7C10.48550%2Farxiv.2608.14691%7C10.48550%2Farxiv.2508.12327%7C10.48550%2Farxiv.2604.14587%7C10.48550%2Farxiv.2207.02910%7C10.48550%2Farxiv.2508.04707%7C10.48550%2Farxiv.2207.04046%7C10.48550%2Farxiv.2411.16462%7C10.48550%2Farxiv.2404.00438%7C10.48550%2Farxiv.2310.07147%7C10.48550%2Farxiv.2101.10453%7C10.48550%2Farxiv.2009.13792%7C10.48550%2Farxiv.2102.08928%7C10.48550%2Farxiv.2512.05981%7C10.48550%2Farxiv.2303.00922%7C10.48550%2Farxiv.2310.00863%7C10.48550%2Farxiv.1808.04444%7C10.48550%2Farxiv.2603.28534%7C10.48550%2Farxiv.1911.03864%7C10.48550%2Farxiv.2004.05150%7C10.48550%2Farxiv.1905.07799%7C10.48550%2Farxiv.2311.08123%7C10.48550%2Farxiv.2605.05222%7C10.48550%2Farxiv.2506.08652%7C10.48550%2Farxiv.2607.07478%7C10.48550%2Farxiv.2602.06993%7C10.48550%2Farxiv.1912.01982%7C10.48550%2Farxiv.2609.07264%7C10.48550%2Farxiv.2112.15545%7C10.48550%2Farxiv.2507.15779%7C10.48550%2Farxiv.1909.08053%7C10.48550%2Farxiv.2602.23826%7C10.48550%2Farxiv.2010.09697%7C10.48550%2Farxiv.2203.16634%7C10.48550%2Farxiv.2407.17406&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "107_openalex_9ea77d83.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2501.00659%7C10.48550%2Farxiv.2606.05346%7C10.48550%2Farxiv.2603.09616%7C10.48550%2Farxiv.2505.23623%7C10.48550%2Farxiv.2606.08562%7C10.48550%2Farxiv.2607.25507%7C10.48550%2Farxiv.2607.10959%7C10.48550%2Farxiv.2603.10301%7C10.48550%2Farxiv.2408.13359%7C10.48550%2Farxiv.2609.34681%7C10.48550%2Farxiv.2505.24275%7C10.48550%2Farxiv.2512.13705%7C10.48550%2Farxiv.2605.23061%7C10.48550%2Farxiv.2505.09792%7C10.48550%2Farxiv.2203.06211%7C10.48550%2Farxiv.2606.21514%7C10.48550%2Farxiv.2202.02617%7C10.48550%2Farxiv.2503.05920%7C10.48550%2Farxiv.2404.06395%7C10.48550%2Farxiv.2609.25482%7C10.48550%2Farxiv.2503.16672%7C10.48550%2Farxiv.2411.13010%7C10.48550%2Farxiv.2606.00761%7C10.48550%2Farxiv.2604.09130%7C10.48550%2Farxiv.2608.09417%7C10.48550%2Farxiv.2605.18898%7C10.48550%2Farxiv.2609.31956%7C10.48550%2Farxiv.2604.14174%7C10.48550%2Farxiv.2607.15525%7C10.48550%2Farxiv.2602.11808%7C10.48550%2Farxiv.2511.10850%7C10.48550%2Farxiv.2606.11585%7C10.48550%2Farxiv.2402.16361%7C10.48550%2Farxiv.2603.17811%7C10.48550%2Farxiv.2506.14793%7C10.48550%2Farxiv.1909.11556%7C10.48550%2Farxiv.2609.34218%7C10.48550%2Farxiv.2101.01761%7C10.48550%2Farxiv.2106.14448%7C10.48550%2Farxiv.2403.00812&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "108_openalex_fdc453af.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2512.07525%7C10.48550%2Farxiv.2507.11273%7C10.48550%2Farxiv.2608.10021%7C10.48550%2Farxiv.2602.10959%7C10.48550%2Farxiv.2403.00071%7C10.48550%2Farxiv.2505.21465%7C10.48550%2Farxiv.2501.10967%7C10.48550%2Farxiv.2505.22014%7C10.48550%2Farxiv.2607.18363%7C10.48550%2Farxiv.2608.02091%7C10.48550%2Farxiv.2602.04774%7C10.48550%2Farxiv.2603.25687%7C10.48550%2Farxiv.2508.01483%7C10.48550%2Farxiv.2601.09000%7C10.48550%2Farxiv.2606.15701%7C10.48550%2Farxiv.1910.05895%7C10.48550%2Farxiv.2309.08351%7C10.48550%2Farxiv.2603.26663%7C10.48550%2Farxiv.2311.09578%7C10.48550%2Farxiv.2609.40335%7C10.48550%2Farxiv.2602.04556%7C10.48550%2Farxiv.2405.14159%7C10.48550%2Farxiv.1907.12009%7C10.48550%2Farxiv.1810.06682%7C10.48550%2Farxiv.2601.02031%7C10.48550%2Farxiv.2109.07513%7C10.48550%2Farxiv.2606.04032%7C10.48550%2Farxiv.2609.16179%7C10.48550%2Farxiv.2605.13769%7C10.48550%2Farxiv.2409.12951%7C10.48550%2Farxiv.2605.14521%7C10.48550%2Farxiv.2603.13180%7C10.48550%2Farxiv.2503.21708%7C10.48550%2Farxiv.2510.09904%7C10.48550%2Farxiv.2608.07323%7C10.48550%2Farxiv.2604.18128%7C10.48550%2Farxiv.2605.18106%7C10.48550%2Farxiv.2607.02521%7C10.48550%2Farxiv.2409.12517%7C10.48550%2Farxiv.2605.25704&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "109_openalex_15e40a45.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2607.27591%7C10.48550%2Farxiv.2412.01380%7C10.48550%2Farxiv.2305.12073%7C10.48550%2Farxiv.2512.21749%7C10.48550%2Farxiv.2310.14993%7C10.48550%2Farxiv.2404.06593%7C10.48550%2Farxiv.2506.17323%7C10.48550%2Farxiv.2202.01627%7C10.48550%2Farxiv.2406.02021%7C10.48550%2Farxiv.2503.03088%7C10.48550%2Farxiv.2108.12409%7C10.48550%2Farxiv.2305.19466%7C10.48550%2Farxiv.2602.05136%7C10.48550%2Farxiv.2302.06675%7C10.48550%2Farxiv.2503.12811%7C10.48550%2Farxiv.2410.05192%7C10.48550%2Farxiv.2403.08763%7C10.48550%2Farxiv.2606.30455%7C10.48550%2Farxiv.2602.03702%7C10.48550%2Farxiv.2507.09846%7C10.48550%2Farxiv.2609.27202%7C10.48550%2Farxiv.2510.12285%7C10.48550%2Farxiv.2602.06797%7C10.48550%2Farxiv.2605.19095%7C10.48550%2Farxiv.2603.02069%7C10.48550%2Farxiv.2608.28308%7C10.48550%2Farxiv.2507.17634%7C10.48550%2Farxiv.1908.03265%7C10.48550%2Farxiv.2606.16310%7C10.48550%2Farxiv.2410.07563%7C10.48550%2Farxiv.2609.37852%7C10.48550%2Farxiv.2502.17092%7C10.48550%2Farxiv.2609.23314%7C10.48550%2Farxiv.2505.15548%7C10.48550%2Farxiv.2605.12697%7C10.48550%2Farxiv.2010.04245%7C10.48550%2Farxiv.2309.14322%7C10.48550%2Farxiv.2204.02311%7C10.48550%2Farxiv.2202.08906%7C10.48550%2Farxiv.2308.00539&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "110_openalex_8ce9c271.json"
+  },
+  {
+    "kind": "openalex",
+    "url": "https://api.openalex.org/works?filter=doi%3A10.48550%2Farxiv.2309.04311%7C10.48550%2Farxiv.2303.01500%7C10.48550%2Farxiv.2103.09068%7C10.48550%2Farxiv.2310.12281%7C10.48550%2Farxiv.2505.24788%7C10.48550%2Farxiv.2302.07305%7C10.48550%2Farxiv.1512.00567%7C10.48550%2Farxiv.2111.09543%7C10.48550%2Farxiv.2311.10341%7C10.48550%2Farxiv.2403.16610%7C10.48550%2Farxiv.2203.09553%7C10.48550%2Farxiv.2601.00785%7C10.48550%2Farxiv.2402.14905%7C10.48550%2Farxiv.2104.10625%7C10.48550%2Farxiv.2406.06663%7C10.48550%2Farxiv.2410.12474%7C10.48550%2Farxiv.2601.22887%7C10.48550%2Farxiv.1608.05859%7C10.48550%2Farxiv.1611.01462%7C10.48550%2Farxiv.2203.03466%7C10.48550%2Farxiv.2608.15153%7C10.48550%2Farxiv.2405.14432%7C10.48550%2Farxiv.2007.14469%7C10.48550%2Farxiv.2502.11034%7C10.48550%2Farxiv.2211.15893%7C10.48550%2Farxiv.2504.02507%7C10.48550%2Farxiv.2102.06171%7C10.48550%2Farxiv.2506.08347%7C10.48550%2Farxiv.2411.03059%7C10.48550%2Farxiv.2104.08215%7C10.48550%2Farxiv.1905.11881%7C10.48550%2Farxiv.2504.05356%7C10.48550%2Farxiv.2305.02790%7C10.48550%2Farxiv.2506.22049%7C10.48550%2Farxiv.1712.06994%7C10.48550%2Farxiv.2003.04887%7C10.48550%2Farxiv.2605.03667%7C10.48550%2Farxiv.2205.13098%7C10.48550%2Farxiv.2606.27715%7C10.48550%2Farxiv.2604.01472&per-page=50&select=doi%2Ccited_by_count%2Cprimary_location%2Clocations",
+    "file": "111_openalex_ec03f0b0.json"
+  }
+]

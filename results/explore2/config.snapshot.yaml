@@ -1,0 +1,109 @@
+baseline:
+  activation: gelu
+  lr: 0.002
+  norm: layernorm
+  norm_position: pre
+  optimizer: adamw
+  pos_encoding: learned
+  schedule: cosine
+  warmup_frac: 0.05
+budget:
+  max_followup_candidates: 4
+  max_llm_cost_usd: 10.0
+  max_runs: 32
+  max_wall_minutes: 45
+explore:
+  enabled: true
+  link_threshold: 0.25
+  max_total_papers: 160
+  min_shared_mechanisms: 3
+  per_block_direction_cap: 30
+  per_direction_cap: 15
+  per_direction_queries: 3
+  scout_directions:
+  - 8
+  - 15
+  tighten_cap: 10
+  tighten_queries: 2
+  top_gaps_for_hypotheses: 8
+lit_search:
+  arxiv_max_retries: 3
+  arxiv_min_interval_s: 5.0
+  max_failed_fraction: 0.1
+  max_llm_cost_usd: 3.0
+  max_queries: 12
+  min_papers: 10
+  openalex: true
+  openalex_fallback: true
+  per_query: 15
+  t4_threshold: 0.35
+  validate_extraction: true
+llm:
+  effort: medium
+  max_tokens: 16000
+  model: claude-opus-5-5
+  price_per_mtok:
+    input: 4.0
+    output: 20.0
+  server_side_fallback: true
+paths:
+  claims: data/claims.json
+  data: data/tinyshakespeare.txt
+  data_sha256: 86c4e6aa9db7c042ec79f339dcb96d42b0075e16b8fc2e86bf0ca57e2dc565ed
+  fixtures: data/fixtures.json
+  niche: niche.yaml
+  papers: data/papers.json
+  results: results
+  work: work
+profiles:
+  full:
+    budget_mode: steps
+    deterministic: false
+    device: auto
+    eval_batch_size: 64
+    eval_batches: 20
+    eval_every_steps: 250
+    max_steps: 2000
+    prewarm_steps: 2
+  smoke:
+    baseline_overrides:
+      batch_size: 16
+      n_embd: 32
+      n_head: 2
+      n_layer: 2
+      seq_len: 32
+    budget_mode: steps
+    deterministic: true
+    device: cpu
+    eval_batch_size: 16
+    eval_batches: 4
+    eval_every_steps: 20
+    max_steps: 40
+    prewarm_steps: 1
+protocol:
+  gate_version: 2
+  rule_version: 2
+rule:
+  harmful_sd: 1.0
+  promising_sd: 1.0
+search_loop:
+  cycles: 3
+  enabled: true
+  explore_k: 6
+  explore_seed: 0
+  finalists_per_cycle: 2
+  min_finalists: 1
+seeds:
+  baseline:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  extra:
+  - 3
+  - 4
+  paired:
+  - 0
+  - 1
+  - 2

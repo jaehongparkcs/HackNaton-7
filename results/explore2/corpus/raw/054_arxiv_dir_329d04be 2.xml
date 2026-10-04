@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/R0Rya/BZYX9x35iPglwkGH4H1HA</id>
+  <title>arXiv Query: search_query=all:"AdamW decoupled weight decay" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:46:06Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22AdamW+decoupled+weight+decay%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2602.05136v1</id>
+    <title>Decoupled Orthogonal Dynamics: Regularization for Deep Network Optimizers</title>
+    <updated>2026-02-04T23:41:51Z</updated>
+    <link href="https://arxiv.org/abs/2602.05136v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.05136v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Is the standard weight decay in AdamW truly optimal? Although AdamW decouples weight decay from adaptive gradient scaling, a fundamental conflict remains: the Radial Tug-of-War. In deep learning, gradients tend to increase parameter norms to expand effective capacity while steering directions to learn features, whereas weight decay indiscriminately suppresses norm growth. This push--pull interaction induces radial oscillations, injecting noise into Adam's second-moment estimates and potentially degrading delicate tangential feature learning. We argue that magnitude and direction play distinct roles and should be decoupled in optimizer dynamics. We propose Orthogonal Dynamics Decoupling and instantiate it as AdamO: an SGD-style update handles the one-dimensional norm control, while Adam's adaptive preconditioning is confined to the tangential subspace. AdamO further incorporates curvature-adaptive radial step sizing and architecture-aware rules and projections for scale-invariant layers and low-dimensional parameters. Experiments on vision and language tasks show that AdamO improves generalization and stability over AdamW without introducing additional complex constraints.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-04T23:41:51Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hao Chen</name>
+    </author>
+    <author>
+      <name>Jinghui Yuan</name>
+    </author>
+    <author>
+      <name>Hanmin Zhang</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Y3QjpaJnNlgcFe5+roVBzsNDOOQ</id>
+  <title>arXiv Query: search_query=ti:"Why Gradient Clipping Accelerates Training A Theoretical Justification for Adaptivity"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:49:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Why+Gradient+Clipping+Accelerates+Training+A+Theoretical+Justification+for+Adaptivity%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1905.11881v2</id>
+    <title>Why gradient clipping accelerates training: A theoretical justification for adaptivity</title>
+    <updated>2020-02-10T22:58:53Z</updated>
+    <link href="https://arxiv.org/abs/1905.11881v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1905.11881v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We provide a theoretical explanation for the effectiveness of gradient clipping in training deep neural networks. The key ingredient is a new smoothness condition derived from practical neural network training examples. We observe that gradient smoothness, a concept central to the analysis of first-order optimization algorithms that is often assumed to be a constant, demonstrates significant variability along the training trajectory of deep neural networks. Further, this smoothness positively correlates with the gradient norm, and contrary to standard assumptions in the literature, it can grow with the norm of the gradient. These empirical observations limit the applicability of existing theoretical analyses of algorithms that rely on a fixed bound on smoothness. These observations motivate us to introduce a novel relaxation of gradient smoothness that is weaker than the commonly used Lipschitz smoothness assumption. Under the new condition, we prove that two popular methods, namely, \emph{gradient clipping} and \emph{normalized gradient}, converge arbitrarily faster than gradient descent with fixed stepsize. We further explain why such adaptively scaled gradient methods can accelerate empirical convergence and verify our results empirically in popular neural network training settings.</summary>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-05-28T15:23:12Z</published>
+    <arxiv:primary_category term="math.OC"/>
+    <author>
+      <name>Jingzhao Zhang</name>
+    </author>
+    <author>
+      <name>Tianxing He</name>
+    </author>
+    <author>
+      <name>Suvrit Sra</name>
+    </author>
+    <author>
+      <name>Ali Jadbabaie</name>
+    </author>
+  </entry>
+</feed>

@@ -77,17 +77,17 @@
       "peer_reviewed": null,
       "published": "2026-02-13",
       "extraction_event": "unrecorded-d82b6523",
-      "mechanism": "confining updates to a stable zone",
+      "mechanism": "stabilizing magnitudes through (i) global RMS calibration and (ii) energy-based trust-region clipping",
       "mechanism_category": "gradient_stability"
     },
     {
       "claim_id": "x2602_13498_2",
       "paper_id": "2602.13498",
       "dimension": "outside_testbed",
-      "method": "TrasMuon optimizer without warmup",
+      "method": "TrasMuon without warmup",
       "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
       "claim": "Experiments without warmup show TrasMuon has superior stability and robustness.",
-      "source_span": "experiments without warmup stages confirm TrasMuon's superior stability and robustness",
+      "source_span": "Furthermore, experiments without warmup stages confirm TrasMuon's superior stability and robustness.",
       "expected_outcome": "improves",
       "covers_our_setting": false,
       "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
@@ -104,7 +104,7 @@
       "peer_reviewed": null,
       "published": "2026-02-13",
       "extraction_event": "unrecorded-d82b6523",
-      "mechanism": "stabilizing magnitudes through (i) global RMS calibration and (ii) energy-based trust-region clipping",
+      "mechanism": "confining updates to a stable zone",
       "mechanism_category": "gradient_stability"
     }
   ],

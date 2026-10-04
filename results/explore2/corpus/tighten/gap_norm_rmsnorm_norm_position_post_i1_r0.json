@@ -1,0 +1,23 @@
+{
+  "fixture_id": "gap_norm_rmsnorm_norm_position_post_i1",
+  "round": 0,
+  "delta": {
+    "norm": "rmsnorm",
+    "norm_position": "post"
+  },
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"Post-LN\" AND \"language model\"",
+      "n_results": 0
+    },
+    {
+      "q": "\"RMSNorm\" AND \"Post-LN\" AND \"Transformer\"",
+      "n_results": 0
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [],
+  "claims": [],
+  "dropped": [],
+  "degraded": []
+}

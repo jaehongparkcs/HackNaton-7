@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/a2P+wxKxi0gITy0/lgHOQA4GkKE</id>
+  <title>arXiv Query: search_query=all:"constant learning rate" AND all:"language model" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T02:04:43Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22constant+learning+rate%22+AND+(all:%22language+model%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2505.12082v3</id>
+    <title>Model Merging in Pre-training of Large Language Models</title>
+    <updated>2025-05-22T09:35:43Z</updated>
+    <link href="https://arxiv.org/abs/2505.12082v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.12082v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Model merging has emerged as a promising technique for enhancing large language models, though its application in large-scale pre-training remains relatively unexplored. In this paper, we present a comprehensive investigation of model merging techniques during the pre-training process. Through extensive experiments with both dense and Mixture-of-Experts (MoE) architectures ranging from millions to over 100 billion parameters, we demonstrate that merging checkpoints trained with constant learning rates not only achieves significant performance improvements but also enables accurate prediction of annealing behavior. These improvements lead to both more efficient model development and significantly lower training costs. Our detailed ablation studies on merging strategies and hyperparameters provide new insights into the underlying mechanisms while uncovering novel applications. Through comprehensive experimental analysis, we offer the open-source community practical pre-training guidelines for effective model merging.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-17T16:53:14Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Yunshui Li</name>
+    </author>
+    <author>
+      <name>Yiyuan Ma</name>
+    </author>
+    <author>
+      <name>Shen Yan</name>
+    </author>
+    <author>
+      <name>Chaoyi Zhang</name>
+    </author>
+    <author>
+      <name>Jing Liu</name>
+    </author>
+    <author>
+      <name>Jianqiao Lu</name>
+    </author>
+    <author>
+      <name>Ziwen Xu</name>
+    </author>
+    <author>
+      <name>Mengzhao Chen</name>
+    </author>
+    <author>
+      <name>Minrui Wang</name>
+    </author>
+    <author>
+      <name>Shiyi Zhan</name>
+    </author>
+    <author>
+      <name>Jin Ma</name>
+    </author>
+    <author>
+      <name>Xunhao Lai</name>
+    </author>
+    <author>
+      <name>Deyi Liu</name>
+    </author>
+    <author>
+      <name>Yao Luo</name>
+    </author>
+    <author>
+      <name>Xingyan Bin</name>
+    </author>
+    <author>
+      <name>Hongbin Ren</name>
+    </author>
+    <author>
+      <name>Mingji Han</name>
+    </author>
+    <author>
+      <name>Wenhao Hao</name>
+    </author>
+    <author>
+      <name>Bairen Yi</name>
+    </author>
+    <author>
+      <name>LingJun Liu</name>
+    </author>
+    <author>
+      <name>Bole Ma</name>
+    </author>
+    <author>
+      <name>Xiaoying Jia</name>
+    </author>
+    <author>
+      <name>Xun Zhou</name>
+    </author>
+    <author>
+      <name>Siyuan Qiao</name>
+    </author>
+    <author>
+      <name>Liang Xiang</name>
+    </author>
+    <author>
+      <name>Yonghui Wu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.20360v1</id>
+    <title>TriPLU: Bypassing the Gate with Direct Trilinear Product FFNs in Tiny Language Models</title>
+    <updated>2026-06-17T15:50:50Z</updated>
+    <link href="https://arxiv.org/abs/2608.20360v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2608.20360v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We study whether tiny decoder-only language models benefit from feed-forward layers that directly multiply learned feature projections. TriPLU, a Trilinear Product Linear Unit, replaces the usual gated FFN branch with a product-only degree-3 branch that multiplies three projected streams coordinatewise. In a character-level TinyStories 1M-byte prefix study, TriPLU reaches a mean best validation loss of 1.0637, compared with 1.1017 for closely matched SwiGLU, 1.0780 for a degree-4 product control, and 1.1026 for a degree-2 control. In train-only Byte-BPE experiments, TriPLU also lowers validation and heldout bits per byte on TinyStories and WikiText-2 raw under low-learning-rate settings, with PMI-slice evidence suggesting gains on seen middle- and high-PMI adjacent-token pairs. Constant-learning-rate diagnostics show that product-branch normalization can reduce the high-learning-rate best-checkpoint gap, although final BPB still degrades under hot schedules. The resulting claim is deliberately narrow: direct product FFNs can improve fixed-budget small-model loss in specific low-compute regimes, but the branch is optimization-sensitive and does not establish FLOP-normalized efficiency, scaling behavior, or broad LLM performance.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-17T15:50:50Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>He Zhang</name>
+    </author>
+    <arxiv:doi>10.5281/zenodo.20725235</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5281/zenodo.20725235" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2410.05192v3</id>
+    <title>Understanding Warmup-Stable-Decay Learning Rates: A River Valley Loss Landscape Perspective</title>
+    <updated>2024-12-02T21:54:54Z</updated>
+    <link href="https://arxiv.org/abs/2410.05192v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2410.05192v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training language models currently requires pre-determining a fixed compute budget because the typical cosine learning rate schedule depends on the total number of steps. In contrast, the Warmup-Stable-Decay (WSD) schedule uses a constant learning rate to produce a main branch of iterates that can in principle continue indefinitely without a pre-specified compute budget. Then, given any compute budget, one can branch out from the main branch at a proper time with a rapidly decaying learning rate to produce a strong model. Empirically, WSD generates a non-traditional loss curve: the loss remains elevated during the stable phase but sharply declines during the decay phase. Towards explaining this phenomenon, we conjecture that pretraining loss exhibits a river valley landscape, which resembles a deep valley with a river at its bottom. Under this assumption, we show that during the stable phase, the iterate undergoes large oscillations due to the high learning rate, yet it progresses swiftly along the river. During the decay phase, the rapidly dropping learning rate minimizes the iterate's oscillations, moving it closer to the river and revealing true optimization progress. Therefore, the sustained high learning rate phase and fast decaying phase are responsible for progress in the river and the mountain directions respectively, and are both critical. Our analysis predicts phenomenons consistent with empirical observations and shows that this landscape can emerge from pretraining on a simple bi-gram dataset. Inspired by the theory, we introduce WSD-S, a variant of WSD that reuses previous checkpoints' decay phases and keeps only one main branch, where we resume from a decayed checkpoint. WSD-S empirically outperforms WSD and Cyclic-Cosine in obtaining multiple language model checkpoints across various compute budgets in a single run for parameters scaling from 0.1B to 1.2B.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-10-07T16:49:39Z</published>
+    <arxiv:comment>45 pages,13 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kaiyue Wen</name>
+    </author>
+    <author>
+      <name>Zhiyuan Li</name>
+    </author>
+    <author>
+      <name>Jason Wang</name>
+    </author>
+    <author>
+      <name>David Hall</name>
+    </author>
+    <author>
+      <name>Percy Liang</name>
+    </author>
+    <author>
+      <name>Tengyu Ma</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.20512v1</id>
+    <title>OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling</title>
+    <updated>2025-06-25T14:58:13Z</updated>
+    <link href="https://arxiv.org/abs/2506.20512v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.20512v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Different base language model families, such as Llama and Qwen, exhibit divergent behaviors during post-training with reinforcement learning (RL), especially on reasoning-intensive tasks. What makes a base language model suitable for reinforcement learning? Gaining deeper insight into this question is essential for developing RL-scalable foundation models of the next generation. In this work, we investigate how mid-training strategies shape RL dynamics, focusing on two representative model families: Qwen and Llama. Our study reveals that (1) high-quality mathematical corpora, such as MegaMath-Web-Pro, significantly improve both base model and RL performance, while existing alternatives (e.g., FineMath-4plus) fail to do so; (2) further adding QA-style data, particularly long chain-of-thought (CoT) reasoning examples, enhances RL outcomes, and instruction data further unlocks this effect; (3) while long-CoT improves reasoning depth, it can also induce verbosity of model responses and unstability of RL training, underscoring the importance of data formatting; (4) scaling mid-training consistently leads to stronger downstream RL performance. Building on these insights, we introduce a two-stage mid-training strategy, Stable-then-Decay, in which base models are first trained on 200B tokens with a constant learning rate, followed by 20B tokens across three CoT-focused branches with learning rate decay. This yields OctoThinker, a family of models demonstrating strong RL compatibility and closing the performance gap with more RL-friendly model families, i.e., Qwen. We hope our work will help shape pre-training strategies for foundation models in the RL era. To support further research, we release our open-source models along with a curated math reasoning-intensive corpus of over 70 billion tokens (i.e., MegaMath-Web-Pro-Max).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-25T14:58:13Z</published>
+    <arxiv:comment>26 pages; The first three authors contribute to this work equally</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Zengzhi Wang</name>
+    </author>
+    <author>
+      <name>Fan Zhou</name>
+    </author>
+    <author>
+      <name>Xuefeng Li</name>
+    </author>
+    <author>
+      <name>Pengfei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2603.16127v1</id>
+    <title>Pre-training LLM without Learning Rate Decay Enhances Supervised Fine-Tuning</title>
+    <updated>2026-03-17T05:17:07Z</updated>
+    <link href="https://arxiv.org/abs/2603.16127v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2603.16127v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We investigate the role of learning rate scheduling in the large-scale pre-training of large language models, focusing on its influence on downstream performance after supervised fine-tuning (SFT). Decay-based learning rate schedulers are widely used to minimize pre-training loss. However, despite their widespread use, how these schedulers affect performance after SFT remains underexplored. In this paper, we examine Warmup-Stable-Only (WSO), which maintains a constant learning rate after warmup without any decay. Through experiments with 1B and 8B parameter models, we show that WSO consistently outperforms decay-based schedulers in terms of performance after SFT, even though decay-based schedulers may exhibit better performance after pre-training. The result also holds across different regimes with mid-training and over-training. Loss landscape analysis further reveals that decay-based schedulers lead models into sharper minima, whereas WSO preserves flatter minima that support adaptability. These findings indicate that applying LR decay to improve pre-training metrics may compromise downstream adaptability. Our work also provides practical guidance for training and model release strategies, highlighting that pre-training models with WSO enhances their adaptability for downstream tasks.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-03-17T05:17:07Z</published>
+    <arxiv:comment>25 pages, accepted by ICLR 2026 as a conference paper</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kazuki Yano</name>
+    </author>
+    <author>
+      <name>Shun Kiyono</name>
+    </author>
+    <author>
+      <name>Sosuke Kobayashi</name>
+    </author>
+    <author>
+      <name>Sho Takase</name>
+    </author>
+    <author>
+      <name>Jun Suzuki</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.01083v3</id>
+    <title>Scaling Laws for Collapse in Asynchronous GRPO</title>
+    <updated>2026-09-27T16:25:24Z</updated>
+    <link href="https://arxiv.org/abs/2607.01083v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.01083v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Asynchronous reinforcement learning improves the throughput of large language model post-training by decoupling rollout generation from policy optimization, but introduces a mismatch between the behavior and learner policies. How the resulting policy staleness couples with the learning rate to govern training stability and collapse time remains poorly understood. We investigate this coupling in vanilla GRPO through controlled sweeps of the synchronization interval $S$ and constant learning rate $η$ on Llama-3.2-1B/3B, complemented by experiments on Qwen3-8B. We identify two empirical scaling laws: (i) Stability-boundary scaling: the largest stable learning rate scales approximately as $S^{-1}$, yielding a stability boundary characterized by an approximately constant product $Sη$. (ii) Collapse-time scaling: among collapsing runs, estimated collapse times scale approximately as $η^{-1}$, corresponding to a model- and setup-dependent cumulative learning-rate budget that aligns across synchronization intervals in the Llama sweeps. We interpret these laws through a local analysis of the behavior-dependent GRPO surrogate and a complementary mean-field model. Under local regularity conditions, the analysis yields an $O(Sη)$ upper bound on the staleness-induced update bias that resets at synchronization. The mean-field model shows how sufficiently strong positive feedback can sustain directional drift when update directions persist across synchronization cycles. When drift speed saturates under optimizer normalization, this mechanism predicts exit from a local surrogate-validity region after an approximately fixed cumulative learning rate. Together, these findings motivate a practical calibration rule: estimate the stability threshold and collapse budget from a coarse sweep, then jointly select $S$ and $η$ for the intended training horizon.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-01T15:40:12Z</published>
+    <arxiv:comment>29 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jingwei Song</name>
+    </author>
+    <author>
+      <name>Haofeng Xu</name>
+    </author>
+    <author>
+      <name>Jie Xiao</name>
+    </author>
+    <author>
+      <name>Chengke Bao</name>
+    </author>
+    <author>
+      <name>Jingwei Shi</name>
+    </author>
+    <author>
+      <name>Pengbin Feng</name>
+    </author>
+    <author>
+      <name>Yuhang Han</name>
+    </author>
+    <author>
+      <name>Weixun Wang</name>
+    </author>
+    <author>
+      <name>Eric Yang</name>
+    </author>
+    <author>
+      <name>Tianyu Shi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.09885v3</id>
+    <title>Index SLM Technical Report</title>
+    <updated>2026-08-21T13:34:02Z</updated>
+    <link href="https://arxiv.org/abs/2607.09885v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.09885v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present Index-1.9B, a series of open small language models developed at Bilibili. The series comprises four models: Index-1.9B-Base, a foundation model with 1.9 billion non-embedding parameters pre-trained on 2.8 trillion predominantly Chinese and English tokens; Index-1.9B-Pure, a control variant trained with an identical recipe but with all instruction-like data strictly filtered from the corpus; Index-1.9B-Chat, aligned from the base model with supervised fine-tuning and direct preference optimization; and Index-1.9B-Character, which augments the chat model with retrieval-augmented generation for few-shot role-playing customization. Pre-training employs a Warmup-Stable-Decay learning-rate schedule in which the concentration of curated data is raised substantially during the decay phase, together with a Norm-Head output layer that stabilizes training under large learning rates. On a suite of standard benchmarks covering examination, reasoning, mathematics, and code, Index-1.9B-Base attains an average score of 64.92, competitive with or exceeding open models of several times its size. We further report controlled studies on model depth, learning-rate magnitude and scheduling, the interaction between learning-rate decay and data quality, and the effect of including instruction data during pre-training, and we document an unexplained surge in benchmark performance midway through the constant-learning-rate phase. All models, together with evaluation code, are released at https://github.com/bilibili/Index-1.9B.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-10T18:19:47Z</published>
+    <arxiv:comment>16 pages, 9 figures. v3: updated author list to add Xipeng Wang</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Tianjiao Li</name>
+    </author>
+    <author>
+      <name>Lusheng Zhang</name>
+    </author>
+    <author>
+      <name>Shien He</name>
+    </author>
+    <author>
+      <name>Xiaojing Liu</name>
+    </author>
+    <author>
+      <name>Tianxing Yan</name>
+    </author>
+    <author>
+      <name>Mengran Yu</name>
+    </author>
+    <author>
+      <name>Ziang Cui</name>
+    </author>
+    <author>
+      <name>Kai Zhao</name>
+    </author>
+    <author>
+      <name>Xipeng Wang</name>
+    </author>
+    <author>
+      <name>Yang Liu</name>
+    </author>
+    <author>
+      <name>Yuxin Li</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.04774v2</id>
+    <title>Theory of Optimal Learning Rate Schedules and Scaling Laws for a Random Feature Model</title>
+    <updated>2026-05-08T16:24:57Z</updated>
+    <link href="https://arxiv.org/abs/2602.04774v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2602.04774v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Setting the learning rate (LR) for a deep learning model is a critical part of successful training. Choosing LRs is often done empirically with trial and error. In this work, we explore a solvable model of optimal LR schedules for a powerlaw random feature model trained with stochastic gradient descent (SGD). We consider the optimal schedule $η_T^\star(t)$ where $t$ is the current iterate and $T$ is the training horizon. This schedule is computed both as a numerical optimization problem and also analytically using optimal control theory. Our analysis reveals two regimes which we term the easy phase and hard phase. In the easy phase the optimal schedule is a polynomial decay $η_T^\star(t) \simeq T^{-ξ} (1-t/T)^δ$ where $ξ$ and $δ$ depend on the properties of the features and task. In the hard phase, the optimal schedule resembles warmup-stable-decay with constant initial LR and annealing performed over a vanishing fraction of training steps. We investigate joint optimization of LR and batch size and find batch ramps can improve the wall-clock time in the easy phase. Beyond SGD, we derive optimal schedules for momentum parameter $β(t)$ and show that it improves the loss-scaling exponent in the hard phase. We compare our optimal schedule to various benchmarks including (1) optimal constant learning rates $η_T(t) \sim T^{-ξ}$ (2) optimal power laws $η_T(t) \sim T^{-ξ} t^{-χ}$, finding that our schedule achieves better rates than either of these. Our theory suggests that LR transfer across training horizon depends on the structure of the model and task. For ResNet image classification on CIFAR-5M, the learning curves exhibit hard-phase behavior where optimal base LRs are constant under sufficient annealing. GPT-2 style transformers trained in language modeling exhibit easy-phase behavior where optimal LRs shift even under annealing.</summary>
+    <category term="cond-mat.dis-nn" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-02-04T17:11:36Z</published>
+    <arxiv:primary_category term="cond-mat.dis-nn"/>
+    <author>
+      <name>Blake Bordelon</name>
+    </author>
+    <author>
+      <name>Francesco Mori</name>
+    </author>
+  </entry>
+</feed>

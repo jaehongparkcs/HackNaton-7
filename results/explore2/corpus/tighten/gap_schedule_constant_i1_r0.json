@@ -1,0 +1,447 @@
+{
+  "fixture_id": "gap_schedule_constant_i1",
+  "round": 0,
+  "delta": {
+    "schedule": "constant"
+  },
+  "queries": [
+    {
+      "q": "\"constant learning rate\" AND \"language model\"",
+      "n_results": 8
+    },
+    {
+      "q": "\"constant learning rate\" AND \"Transformer\"",
+      "n_results": 4
+    }
+  ],
+  "already_in_corpus": [
+    "2410.05192",
+    "2602.04774",
+    "2603.25687"
+  ],
+  "papers": [
+    {
+      "paper_id": "2505.12082",
+      "title": "Model Merging in Pre-training of Large Language Models",
+      "authors": [
+        "Yunshui Li",
+        "Yiyuan Ma",
+        "Shen Yan",
+        "Chaoyi Zhang",
+        "Jing Liu",
+        "Jianqiao Lu",
+        "Ziwen Xu",
+        "Mengzhao Chen",
+        "Minrui Wang",
+        "Shiyi Zhan",
+        "Jin Ma",
+        "Xunhao Lai",
+        "Deyi Liu",
+        "Yao Luo",
+        "Xingyan Bin",
+        "Hongbin Ren",
+        "Mingji Han",
+        "Wenhao Hao",
+        "Bairen Yi",
+        "LingJun Liu",
+        "Bole Ma",
+        "Xiaoying Jia",
+        "Xun Zhou",
+        "Siyuan Qiao",
+        "Liang Xiang",
+        "Yonghui Wu"
+      ],
+      "published": "2025-05-17",
+      "url": "https://arxiv.org/abs/2505.12082",
+      "abstract": "Model merging has emerged as a promising technique for enhancing large language models, though its application in large-scale pre-training remains relatively unexplored. In this paper, we present a comprehensive investigation of model merging techniques during the pre-training process. Through extensive experiments with both dense and Mixture-of-Experts (MoE) architectures ranging from millions to over 100 billion parameters, we demonstrate that merging checkpoints trained with constant learning rates not only achieves significant performance improvements but also enables accurate prediction of annealing behavior. These improvements lead to both more efficient model development and significantly lower training costs. Our detailed ablation studies on merging strategies and hyperparameters provide new insights into the underlying mechanisms while uncovering novel applications. Through comprehensive experimental analysis, we offer the open-source community practical pre-training guidelines for effective model merging.",
+      "abstract_sha256": "e03a8f7f194984544c82212a8007bedaa29f413ba98cabcc9ccd4add90c60404",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2608.20360",
+      "title": "TriPLU: Bypassing the Gate with Direct Trilinear Product FFNs in Tiny Language Models",
+      "authors": [
+        "He Zhang"
+      ],
+      "published": "2026-06-17",
+      "url": "https://arxiv.org/abs/2608.20360",
+      "abstract": "We study whether tiny decoder-only language models benefit from feed-forward layers that directly multiply learned feature projections. TriPLU, a Trilinear Product Linear Unit, replaces the usual gated FFN branch with a product-only degree-3 branch that multiplies three projected streams coordinatewise. In a character-level TinyStories 1M-byte prefix study, TriPLU reaches a mean best validation loss of 1.0637, compared with 1.1017 for closely matched SwiGLU, 1.0780 for a degree-4 product control, and 1.1026 for a degree-2 control. In train-only Byte-BPE experiments, TriPLU also lowers validation and heldout bits per byte on TinyStories and WikiText-2 raw under low-learning-rate settings, with PMI-slice evidence suggesting gains on seen middle- and high-PMI adjacent-token pairs. Constant-learning-rate diagnostics show that product-branch normalization can reduce the high-learning-rate best-checkpoint gap, although final BPB still degrades under hot schedules. The resulting claim is deliberately narrow: direct product FFNs can improve fixed-budget small-model loss in specific low-compute regimes, but the branch is optimization-sensitive and does not establish FLOP-normalized efficiency, scaling behavior, or broad LLM performance.",
+      "abstract_sha256": "8cd5ad14e99975c78f3624c3263501bd969bf71e90fa1ef8992de312901c2661",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": "10.5281/zenodo.20725235",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2603.16127",
+      "title": "Pre-training LLM without Learning Rate Decay Enhances Supervised Fine-Tuning",
+      "authors": [
+        "Kazuki Yano",
+        "Shun Kiyono",
+        "Sosuke Kobayashi",
+        "Sho Takase",
+        "Jun Suzuki"
+      ],
+      "published": "2026-03-17",
+      "url": "https://arxiv.org/abs/2603.16127",
+      "abstract": "We investigate the role of learning rate scheduling in the large-scale pre-training of large language models, focusing on its influence on downstream performance after supervised fine-tuning (SFT). Decay-based learning rate schedulers are widely used to minimize pre-training loss. However, despite their widespread use, how these schedulers affect performance after SFT remains underexplored. In this paper, we examine Warmup-Stable-Only (WSO), which maintains a constant learning rate after warmup without any decay. Through experiments with 1B and 8B parameter models, we show that WSO consistently outperforms decay-based schedulers in terms of performance after SFT, even though decay-based schedulers may exhibit better performance after pre-training. The result also holds across different regimes with mid-training and over-training. Loss landscape analysis further reveals that decay-based schedulers lead models into sharper minima, whereas WSO preserves flatter minima that support adaptability. These findings indicate that applying LR decay to improve pre-training metrics may compromise downstream adaptability. Our work also provides practical guidance for training and model release strategies, highlighting that pre-training models with WSO enhances their adaptability for downstream tasks.",
+      "abstract_sha256": "df0074916bae6957d1f98064ef6bc0ad0c5af59ec056a1bc349a5d9c7d62c82a",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2607.09885",
+      "title": "Index SLM Technical Report",
+      "authors": [
+        "Tianjiao Li",
+        "Lusheng Zhang",
+        "Shien He",
+        "Xiaojing Liu",
+        "Tianxing Yan",
+        "Mengran Yu",
+        "Ziang Cui",
+        "Kai Zhao",
+        "Xipeng Wang",
+        "Yang Liu",
+        "Yuxin Li"
+      ],
+      "published": "2026-07-10",
+      "url": "https://arxiv.org/abs/2607.09885",
+      "abstract": "We present Index-1.9B, a series of open small language models developed at Bilibili. The series comprises four models: Index-1.9B-Base, a foundation model with 1.9 billion non-embedding parameters pre-trained on 2.8 trillion predominantly Chinese and English tokens; Index-1.9B-Pure, a control variant trained with an identical recipe but with all instruction-like data strictly filtered from the corpus; Index-1.9B-Chat, aligned from the base model with supervised fine-tuning and direct preference optimization; and Index-1.9B-Character, which augments the chat model with retrieval-augmented generation for few-shot role-playing customization. Pre-training employs a Warmup-Stable-Decay learning-rate schedule in which the concentration of curated data is raised substantially during the decay phase, together with a Norm-Head output layer that stabilizes training under large learning rates. On a suite of standard benchmarks covering examination, reasoning, mathematics, and code, Index-1.9B-Base attains an average score of 64.92, competitive with or exceeding open models of several times its size. We further report controlled studies on model depth, learning-rate magnitude and scheduling, the interaction between learning-rate decay and data quality, and the effect of including instruction data during pre-training, and we document an unexplained surge in benchmark performance midway through the constant-learning-rate phase. All models, together with evaluation code, are released at https://github.com/bilibili/Index-1.9B.",
+      "abstract_sha256": "fa7f99b81efe10ac5cac810dd16c6951ef64a95d51371f801eaa4d9c121b7686",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2603.28198",
+      "title": "Policy-Controlled Generalized Share: A General Framework with a Transformer Instantiation for Strictly Online Switching-Oracle Tracking",
+      "authors": [
+        "Hongkai Hu"
+      ],
+      "published": "2026-03-30",
+      "url": "https://arxiv.org/abs/2603.28198",
+      "abstract": "Static regret to a single expert is often the wrong target for strictly online prediction under non-stationarity, where the best expert may switch repeatedly over time. We study Policy-Controlled Generalized Share (PCGS), a general strictly online framework in which the generalized-share recursion is fixed while the post-loss update controls are allowed to vary adaptively. Its principal instantiation in this paper is PCGS-TF, which uses a causal Transformer as an update controller: after round t finishes and the loss vector is observed, the Transformer outputs the controls that map w_t to w_{t+1} without altering the already committed decision w_t. Under admissible post-loss update controls, we obtain a pathwise weighted regret guarantee for general time-varying learning rates, and a standard dynamic-regret guarantee against any expert path with at most S switches under the constant-learning-rate specialization. Empirically, on a controlled synthetic suite with exact dynamic-programming switching-oracle evaluation, PCGS-TF attains the lowest mean dynamic regret in all seven non-stationary families, with its advantage increasing for larger expert pools. On a reproduced household-electricity benchmark, PCGS-TF also achieves the lowest normalized dynamic regret for S = 5, 10, and 20.",
+      "abstract_sha256": "67b343cf81888ebdf70fafe8c82dda5b30b2c9500f68bc0d5ae2bfb80e2bc5c6",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "q-fin.ST"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2610.00423",
+      "title": "The Life Cycle of a Massive Activation: Stochastic Birth, Weight-Decay-Driven Growth, and Competitive Consolidation",
+      "authors": [
+        "S. Aaron McClendon",
+        "Jorge Gallego-Feliciano",
+        "Antonios Saravanos"
+      ],
+      "published": "2026-09-30",
+      "url": "https://arxiv.org/abs/2610.00423",
+      "abstract": "Massive activations, residual-stream coordinates with magnitudes far larger than typical activations, are associated with attention sinks in transformers, but how their scale is regulated during training remains incompletely understood. Combining training-trajectory analyses and controlled interventions, we trace their emergence, growth, and consolidation. Sink-carrying channels vary across random seeds but stabilize early within each run. Over longer training, surrounding channels erode and the sink concentrates onto a few redundant carriers. Across ablations, gradient attenuation follows the sink token's collective root-mean-square magnitude rather than any single channel, making collective scale central to understanding their effects. Our central result is that weight decay causally controls the turnover of global activation scale. In controlled continuations, removing decay near the peak allows this scale to keep rising, whereas retaining it produces decline even at constant learning rate. We develop a balance model for the rise and peak of massive-activation magnitude, in which AdamW-preconditioned growth opposes weight decay. Sweeping the decay coefficient $λ$ shifts peak timing approximately log-linearly and yields peak magnitudes scaling approximately as $λ^{-1/2}$, consistent with this balance. Optimizer measurements further show that preconditioning sustains the large-channel cohort against decay even when raw maintaining forces are too small to do so. Together, these findings connect the observed life cycle to scale-regulating training dynamics and establish weight decay as a training-time lever on activation magnitude.",
+      "abstract_sha256": "2949dff9972837123dca2ffe8d908f3838e34532f82b4f17cba279866ee84352",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "queries": [
+        "tighten gap_schedule_constant_i1: \"constant learning rate\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2505_12082_1",
+      "paper_id": "2505.12082",
+      "dimension": "outside_testbed",
+      "method": "Merging checkpoints trained with constant learning rates during pre-training",
+      "setting": "unspecified, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Merging checkpoints from constant-learning-rate pre-training yields significant performance improvements and enables accurate prediction of annealing behavior.",
+      "source_span": "we demonstrate that merging checkpoints trained with constant learning rates not only achieves significant performance improvements but also enables accurate prediction of annealing behavior",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-05-17",
+      "extraction_event": "unrecorded-9d542b44"
+    },
+    {
+      "claim_id": "x2608_20360_1",
+      "paper_id": "2608.20360",
+      "dimension": "outside_testbed",
+      "method": "TriPLU trilinear product FFN vs SwiGLU",
+      "setting": "transformer, char_language_modeling, scale tiny, empirical (extracted from the abstract)",
+      "claim": "TriPLU achieves lower mean best validation loss than a closely matched SwiGLU FFN in a character-level TinyStories study with tiny decoder-only models.",
+      "source_span": "TriPLU reaches a mean best validation loss of 1.0637, compared with 1.1017 for closely matched SwiGLU",
+      "expected_outcome": "improves",
+      "covers_our_setting": true,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: covers",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "covers",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "char_language_modeling",
+        "scale": "tiny",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-17",
+      "extraction_event": "unrecorded-9d542b44"
+    },
+    {
+      "claim_id": "x2603_16127_1",
+      "paper_id": "2603.16127",
+      "dimension": "schedule",
+      "method": "Warmup-Stable-Only (constant LR after warmup, no decay)",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "Keeping a constant learning rate after warmup consistently outperforms decay-based schedulers on performance after supervised fine-tuning for 1B and 8B models.",
+      "source_span": "we show that WSO consistently outperforms decay-based schedulers in terms of performance after SFT",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": {
+        "schedule": "constant"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-03-17",
+      "extraction_event": "unrecorded-9d542b44",
+      "mechanism": "WSO preserves flatter minima that support adaptability",
+      "mechanism_category": "loss_landscape_smoothness"
+    },
+    {
+      "claim_id": "x2603_16127_2",
+      "paper_id": "2603.16127",
+      "dimension": "schedule",
+      "method": "Warmup-Stable-Only (constant LR after warmup, no decay)",
+      "setting": "unspecified, language_modeling, scale large, empirical (extracted from the abstract)",
+      "claim": "Decay-based schedulers may give better performance directly after pre-training than a constant learning rate.",
+      "source_span": "even though decay-based schedulers may exhibit better performance after pre-training",
+      "expected_outcome": "worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": {
+        "schedule": "constant"
+      },
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "language_modeling",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-03-17",
+      "extraction_event": "unrecorded-9d542b44"
+    },
+    {
+      "claim_id": "x2603_28198_1",
+      "paper_id": "2603.28198",
+      "dimension": "outside_testbed",
+      "method": "PCGS-TF (Transformer update controller for generalized share)",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "PCGS-TF attains the lowest mean dynamic regret across all seven non-stationary synthetic families.",
+      "source_span": "PCGS-TF attains the lowest mean dynamic regret in all seven non-stationary families",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-03-30",
+      "extraction_event": "unrecorded-9d542b44"
+    },
+    {
+      "claim_id": "x2610_00423_1",
+      "paper_id": "2610.00423",
+      "dimension": "outside_testbed",
+      "method": "weight decay (AdamW)",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Weight decay causally controls the turnover of the global scale of massive activations; removing decay near the peak lets the scale keep rising, while retaining it causes decline even at constant learning rate.",
+      "source_span": "Our central result is that weight decay causally controls the turnover of global activation scale.",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-09-30",
+      "extraction_event": "unrecorded-1ce377fa"
+    },
+    {
+      "claim_id": "x2610_00423_2",
+      "paper_id": "2610.00423",
+      "dimension": "outside_testbed",
+      "method": "weight decay coefficient sweep",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Increasing the weight decay coefficient shifts the peak timing of massive activations roughly log-linearly and yields peak magnitudes scaling approximately as lambda^-1/2.",
+      "source_span": "Sweeping the decay coefficient $λ$ shifts peak timing approximately log-linearly and yields peak magnitudes scaling approximately as $λ^{-1/2}$, consistent with this balance.",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-09-30",
+      "extraction_event": "unrecorded-1ce377fa"
+    },
+    {
+      "claim_id": "x2610_00423_3",
+      "paper_id": "2610.00423",
+      "dimension": "outside_testbed",
+      "method": "massive activations / attention sinks",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Gradient attenuation follows the sink token's collective root-mean-square magnitude rather than any single channel.",
+      "source_span": "Across ablations, gradient attenuation follows the sink token's collective root-mean-square magnitude rather than any single channel",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-09-30",
+      "extraction_event": "unrecorded-1ce377fa"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2506.20512",
+      "title": "OctoThinker: Mid-training Incentivizes Reinforcement Learning Scaling",
+      "reason": "exclude_term: reinforcement learning"
+    },
+    {
+      "paper_id": "2607.01083",
+      "title": "Scaling Laws for Collapse in Asynchronous GRPO",
+      "reason": "exclude_term: reinforcement learning"
+    }
+  ],
+  "degraded": []
+}

@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/I1FD70Pc3k8F6u3/ojmmEt1pRVU</id>
+  <title>arXiv Query: search_query=ti:"Rethinking the Inception Architecture for Computer Vision"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:48:31Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Rethinking+the+Inception+Architecture+for+Computer+Vision%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1512.00567v3</id>
+    <title>Rethinking the Inception Architecture for Computer Vision</title>
+    <updated>2015-12-11T20:27:50Z</updated>
+    <link href="https://arxiv.org/abs/1512.00567v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.00567v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Convolutional networks are at the core of most state-of-the-art computer vision solutions for a wide variety of tasks. Since 2014 very deep convolutional networks started to become mainstream, yielding substantial gains in various benchmarks. Although increased model size and computational cost tend to translate to immediate quality gains for most tasks (as long as enough labeled data is provided for training), computational efficiency and low parameter count are still enabling factors for various use cases such as mobile vision and big-data scenarios. Here we explore ways to scale up networks in ways that aim at utilizing the added computation as efficiently as possible by suitably factorized convolutions and aggressive regularization. We benchmark our methods on the ILSVRC 2012 classification challenge validation set demonstrate substantial gains over the state of the art: 21.2% top-1 and 5.6% top-5 error for single frame evaluation using a network with a computational cost of 5 billion multiply-adds per inference and with using less than 25 million parameters. With an ensemble of 4 models and multi-crop evaluation, we report 3.5% top-5 error on the validation set (3.6% error on the test set) and 17.3% top-1 error on the validation set.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-02T03:44:38Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Christian Szegedy</name>
+    </author>
+    <author>
+      <name>Vincent Vanhoucke</name>
+    </author>
+    <author>
+      <name>Sergey Ioffe</name>
+    </author>
+    <author>
+      <name>Jonathon Shlens</name>
+    </author>
+    <author>
+      <name>Zbigniew Wojna</name>
+    </author>
+  </entry>
+</feed>

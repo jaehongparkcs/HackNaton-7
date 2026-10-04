@@ -61,12 +61,42 @@
   },
   {
     "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22Post-LN%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "012_arxiv_tighten_64537046.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22RMSNorm%22+AND+all%3A%22Post-LN%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "013_arxiv_tighten_dfa5f205.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
     "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU%22+AND+all%3A%22RMSNorm%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
-    "file": "012_arxiv_tighten_7f3fb469.xml"
+    "file": "014_arxiv_tighten_7f3fb469.xml"
   },
   {
     "kind": "arxiv_tighten",
     "url": "https://export.arxiv.org/api/query?search_query=all%3A%22squared+ReLU%22+AND+all%3A%22RMSNorm%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
-    "file": "013_arxiv_tighten_089c15c9.xml"
+    "file": "015_arxiv_tighten_089c15c9.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD+with+momentum%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "016_arxiv_tighten_2d425db7.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22SGD+with+momentum%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "017_arxiv_tighten_033816ac.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22constant+learning+rate%22+AND+all%3A%22language+model%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "018_arxiv_tighten_63e819b7.xml"
+  },
+  {
+    "kind": "arxiv_tighten",
+    "url": "https://export.arxiv.org/api/query?search_query=all%3A%22constant+learning+rate%22+AND+all%3A%22Transformer%22+AND+%28cat%3Acs.LG+OR+cat%3Acs.CL+OR+cat%3Acs.NE%29+AND+submittedDate%3A%5B201701010000+TO+202610032359%5D&start=0&max_results=10&sortBy=relevance&sortOrder=descending",
+    "file": "019_arxiv_tighten_3797c2a3.xml"
   }
 ]
