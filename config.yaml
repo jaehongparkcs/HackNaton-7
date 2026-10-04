@@ -56,9 +56,12 @@ seeds:
 # and rederive use the bundle's own versions (bundles without this block are version 1 of both).
 #   rule 2 (2026-10-03): HARMFUL also requires every paired seed to be worse (symmetric with PROMISING).
 #   gate 2 (2026-10-03): the LLM lists ALL same-comparison claims; code picks the verdict, strongest first.
+#   prediction 2 (2026-10-04): combination gaps predict the sum of their components' literature signs
+#                              (both + -> +; mixed -> no prediction). explore2 and earlier are prediction 1.
 protocol:
   rule_version: 2
   gate_version: 2
+  prediction_version: 2
 
 # Pre-registered next-action rule thresholds (BUILD_PLAN s6). Written before the first run.
 rule:

@@ -6,6 +6,7 @@ Provenance is a generic edge table so any number can be walked back:
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import sqlite3
 from collections.abc import Iterable
@@ -38,6 +39,14 @@ CREATE TABLE IF NOT EXISTS links(src_type TEXT, src_id TEXT, rel TEXT, dst_type 
 # Tables hashed by state_digest (everything derived from measurements and LLM calls).
 DIGEST_TABLES = ["papers", "claims", "events", "hypotheses", "runs", "noise_floors", "analyses",
                  "decisions", "derived_evidence", "links"]
+# Wall-clock fields: recorded so the run log shows where time went, never part of the digest
+# (a replay happens at another time and must still reproduce the state exactly).
+TIMESTAMPED_TABLES = ("events", "decisions")
+TS_KEY = "ts"
+
+
+def utc_now() -> str:
+    return dt.datetime.now(dt.UTC).isoformat(timespec="milliseconds")
 
 
 def _dump(obj: Any) -> str:
@@ -93,7 +102,8 @@ class Store:
         self._ev_seq += 1
         eid = f"evt_{self._ev_seq:04d}"
         self.db.execute("INSERT INTO events VALUES(?,?,?,?)",
-                        (eid, self._ev_seq, kind, json.dumps({**payload, "event_id": eid}, sort_keys=True)))
+                        (eid, self._ev_seq, kind,
+                         json.dumps({**payload, "event_id": eid, TS_KEY: utc_now()}, sort_keys=True)))
         self.db.commit()
         return eid
 
@@ -123,7 +133,7 @@ class Store:
         did = f"dec_{self._dec_seq:03d}"
         self.db.execute("INSERT INTO decisions VALUES(?,?,?,?,?)",
                         (did, self._dec_seq, kind, hypothesis_id,
-                         json.dumps({**payload, "decision_id": did}, sort_keys=True)))
+                         json.dumps({**payload, "decision_id": did, TS_KEY: utc_now()}, sort_keys=True)))
         self.db.commit()
         return did
 
@@ -201,8 +211,20 @@ class Store:
         h: dict[str, list] = {}
         for t in DIGEST_TABLES:
             rows = [list(r) for r in self.db.execute(f"SELECT * FROM {t}")]
+            if t in TIMESTAMPED_TABLES:
+                rows = [[*r[:-1], _without_ts(r[-1])] for r in rows]
             h[t] = sorted(rows, key=canonical_json)
         return sha256_hex(canonical_json(h))
 
     def iter_run_payloads(self) -> Iterable[dict]:
         return iter(self.runs())
+
+
+def _without_ts(payload: str) -> str:
+    """The stored payload minus its timestamp. Rows recorded before timestamps existed are left
+    byte-for-byte as they are, so old bundles keep their digest."""
+    obj = json.loads(payload)
+    if TS_KEY not in obj:
+        return payload
+    obj.pop(TS_KEY)
+    return json.dumps(obj, sort_keys=True)

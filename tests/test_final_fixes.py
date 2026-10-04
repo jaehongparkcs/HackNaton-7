@@ -124,3 +124,83 @@ def test_dashboard_renders_the_explore2_exhibit():
     assert any(i.value.startswith("Recorded with this limitation") for i in at.info)
     assert not any("Fix before recording" in w.value for w in at.warning)
     assert any("not a test of Lion" in c.value for c in at.caption)
+
+
+# --------------------------------------------------------------------------- A5 combination predictions
+from noesis_lab import gaps  # noqa: E402
+
+from .test_gaps import DROP, MECH, RMS, ROPE, SWIGLU, claim  # noqa: E402
+
+
+def _combo_graph():
+    return [claim("a", SWIGLU, "improves", "T3", "none", mech=MECH),
+            claim("b", ROPE, "improves", "T3", "partial", mech=MECH),
+            claim("c", RMS, "worse", "T3", "none", mech=MECH),
+            claim("d", DROP, "no_worse", "T3", "none", mech=MECH)]
+
+
+def test_combination_sign_is_the_sum_of_the_components_literature_signs():
+    g = gaps.build_graph(_combo_graph())
+    cd = gaps.combination_direction
+    assert cd(g, ["activation=swiglu", "pos_encoding=rope"]) == "+"            # both + -> +
+    assert cd(g, ["activation=swiglu", "norm=rmsnorm"]) == ""                  # mixed -> no prediction
+    assert cd(g, ["activation=swiglu", "dropout=0.1"]) == "+"                  # + and 0 -> +
+    assert cd(g, ["dropout=0.1", "norm=rmsnorm"]) == "-"
+    assert cd(g, ["activation=swiglu", "optimizer=lion"]) == ""                # no claim -> no prediction
+
+
+def test_our_own_results_never_set_a_components_sign():
+    ours = gaps.derived_claim({"norm": "rmsnorm"}, "promising", tier="D-confirmed")
+    g = gaps.build_graph([*_combo_graph(), ours, ours.model_copy(update={"claim_id": ours.claim_id + "b"})])
+    assert gaps.literature_sign(g, "norm=rmsnorm") == "-"
+
+
+def test_combination_predictions_only_under_prediction_version_2():
+    cs = _combo_graph()
+    old = [x for x in gaps.find_gaps(cs)[1] if x.novelty_type == "combination"]
+    new = {x.gap_id: x for x in gaps.find_gaps(cs, predict_combinations=True)[1] if x.novelty_type == "combination"}
+    assert old and all(x.predicted_direction == "" for x in old)              # how explore2 was recorded
+    assert {x.gap_id for x in old} == set(new)                                # same gaps, same scores and order
+    assert all(x.score == new[x.gap_id].score for x in old)
+    assert new["link:activation=swiglu+pos_encoding=rope"].predicted_direction == "+"
+    assert gaps.COMBINATION_RULE_TEXT.count("→") >= 3
+
+
+def test_config_turns_on_prediction_version_2_and_old_bundles_stay_on_1():
+    from noesis_lab.config import bundle_config, load_config, protocol
+    assert protocol(load_config())["prediction_version"] == 2
+    for s in ("golden", "explore1", "explore2"):
+        assert protocol(bundle_config(ROOT / "results" / s))["prediction_version"] == 1
+
+
+# --------------------------------------------------------------------------- A6 timestamps
+def test_events_and_decisions_carry_a_timestamp_outside_the_digest(tmp_path):
+    a, b = Store(tmp_path / "a.sqlite"), Store(tmp_path / "b.sqlite")
+    for s in (a, b):
+        s.add_event("llm_call", {"role": "x"})
+        s.add_decision("noise_floor", "", {"sd": 0.01})
+    b.db.execute("UPDATE decisions SET payload=json_set(payload, '$.ts', '1999-01-01T00:00:00.000+00:00')")
+    assert a.events()[0]["ts"] and a.decisions()[0]["ts"].endswith("+00:00")
+    assert a.state_digest() == b.state_digest()                               # wall time never enters the digest
+    b.db.execute("UPDATE decisions SET payload=json_set(payload, '$.sd', 0.02)")
+    assert a.state_digest() != b.state_digest()                               # content still does
+
+
+def test_rows_recorded_before_timestamps_keep_their_digest(tmp_path):
+    s = Store(tmp_path / "s.sqlite")
+    s.add_decision("noise_floor", "", {"sd": 0.01})
+    with_ts = s.state_digest()
+    p = s.decisions()[0]
+    old = json.dumps({k: v for k, v in p.items() if k not in ("ts", "kind", "hypothesis_id")}, sort_keys=True)
+    s.db.execute("UPDATE decisions SET payload=?", (old,))                    # as Store wrote rows before A6
+    assert s.state_digest() == with_ts
+
+
+def test_timeline_flags_a_long_silence():
+    ev = [{"event_id": "evt_0001", "role": "critic_pre", "ts": "2026-10-03T18:00:00.000+00:00"}]
+    dec = [{"decision_id": "dec_001", "kind": "confirmation", "ts": "2026-10-03T18:00:30.000+00:00"},
+           {"decision_id": "dec_002", "kind": "next_action", "ts": "2026-10-03T18:57:30.000+00:00"}]
+    runs = [{"run_id": "r1", "seed": 0, "train_seconds": 36.0, "started_at": "2026-10-03T18:00:10+00:00"}]
+    rows = dashboard.timeline_rows(ev, dec, runs)
+    assert [r["kind"] for r in rows] == ["LLM call", "run", "decision", "decision"]
+    assert rows[-1]["gap before (s)"] == 3420.0 and rows[-1]["stall"] and not any(r["stall"] for r in rows[:-1])

@@ -6,7 +6,7 @@ import json
 import sys
 import time
 
-from .config import ROOT, baseline_config, get_profile, load_config, path_of
+from .config import ROOT, baseline_config, get_profile, load_config, path_of, protocol
 
 
 def cmd_session(a) -> int:
@@ -113,7 +113,7 @@ def cmd_lit_dryrun(a) -> int:
     explore_mode = bool(snap.directions) and cfg.get("explore", {}).get("enabled")
     if explore_mode:                                   # the hypothesis engine's own queue
         fixtures.pop("fixture_b_rmsnorm", None)        # the engine generates RMSNorm (FIXES3 P0-3)
-        graph, found = gaps.find_gaps(frozen)
+        graph, found = gaps.find_gaps(frozen, protocol(cfg)["prediction_version"] >= 2)
         for item in gaps.gap_queue(found, graph, frozen, top_n=cfg["explore"]["top_gaps_for_hypotheses"]):
             fx = gap_fixture(item, next(g for g in found if g.gap_id == item.gap_ids[0]), baseline)
             fixtures.setdefault(fx.fixture_id, fx)

@@ -39,7 +39,7 @@ def gap_rows(gaps: list[dict]) -> list[dict[str, Any]]:
 
 
 DIRECTION_WORD = {"+": "lower validation loss (+)", "-": "higher validation loss (−)", "0": "no worse (0)",
-                  "": "none (this gap type predicts no direction)"}
+                  "": "none (no directional prediction for this gap)"}
 
 
 def gap_type_summary(gaps: list[dict], graph: dict) -> list[dict[str, Any]]:

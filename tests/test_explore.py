@@ -347,6 +347,7 @@ def test_frozen_snapshot_of_a_bundle_still_loads_scout_and_gaps_offline(session_
     s = explore_session(session_name, monkeypatch)
     s.run()
     snap = Snapshot.from_corpus(ROOT / "results" / session_name / "corpus")
-    g, found = gaps.find_gaps(sorted(snap.claims.values(), key=lambda c: c.claim_id))
+    g, found = gaps.find_gaps(sorted(snap.claims.values(), key=lambda c: c.claim_id),
+                              predict_combinations=True)          # prediction_version 2 (config.yaml)
     st = Store(ROOT / "results" / session_name / "notebook.sqlite", readonly=True)
     assert [x.model_dump() for x in found] == st.get_meta("gaps") and snap.directions

@@ -495,7 +495,8 @@ def prediction_outcome(predicted_direction: str, branch: str) -> str:
                      anything but harmful)
       miss           the measured branch has the opposite sign
       null           no improvement: the measurement decided nothing
-      no_prediction  the gap predicts no direction (contradictions, combination hints)"""
+      no_prediction  the gap predicts no direction (contradictions; combinations under prediction v1,
+                     or with mixed or unknown component signs under v2)"""
     if predicted_direction == "0":
         return "miss" if branch == "harmful" else "hit"
     if predicted_direction not in ("+", "-"):

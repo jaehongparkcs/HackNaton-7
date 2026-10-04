@@ -152,7 +152,8 @@ def test_recorded_bundles_are_still_judged_by_the_rule_they_were_recorded_under(
     if not d.exists():
         pytest.skip(f"{session} bundle not present")
     cfg = bundle_config(d)
-    assert protocol(cfg) == {"rule_version": 1, "gate_version": 1, "search_loop": False}
+    assert protocol(cfg) == {"rule_version": 1, "gate_version": 1, "prediction_version": 1,
+                             "search_loop": False}
     assert rederive(d) == []
 
 

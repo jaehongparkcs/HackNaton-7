@@ -112,3 +112,31 @@ LION_CAVEAT = ("Exploration only; our hyperparameter scaling, not a test of Lion
 def is_lion(h: dict) -> bool:
     delta = h.get("config_delta") or {}
     return delta.get("optimizer") == "lion" or "optimizer=lion" in (h.get("candidate_key") or "")
+
+
+# ----------------------------------------------------------------------------- timeline
+STALL_SECONDS = 300          # a silent stretch longer than this is flagged (a sleeping Mac, a stalled call)
+
+
+def _parse(ts: str):
+    import datetime as dt
+    t = dt.datetime.fromisoformat(ts)
+    return t if t.tzinfo else t.replace(tzinfo=dt.UTC)
+
+
+def timeline_rows(events: list[dict], decisions: list[dict], runs: list[dict]) -> list[dict[str, Any]]:
+    """Everything with a wall-clock time, in time order, with the silent gap before each item.
+    Events and decisions carry `ts` (bundles recorded before FINAL_FIXES A6 do not); runs carry
+    `started_at`."""
+    items = [(e["ts"], "LLM call", f"{e['event_id']} · {e.get('role', '')}") for e in events if e.get("ts")]
+    items += [(d["ts"], "decision", f"{d['decision_id']} · {d['kind']}") for d in decisions if d.get("ts")]
+    items += [(r["started_at"], "run", f"{r['run_id']} · seed {r['seed']} · {r.get('train_seconds', 0):.0f} s")
+              for r in runs if r.get("started_at")]
+    rows, prev = [], None
+    for ts, kind, what in sorted(items, key=lambda x: (_parse(x[0]), x[1], x[2])):
+        t = _parse(ts)
+        gap = (t - prev).total_seconds() if prev else 0.0
+        rows.append({"time (UTC)": t.strftime("%H:%M:%S"), "kind": kind, "what": what,
+                     "gap before (s)": round(gap, 1), "stall": "⚠ stall" if gap > STALL_SECONDS else ""})
+        prev = t
+    return rows

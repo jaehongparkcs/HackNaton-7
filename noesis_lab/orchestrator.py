@@ -195,7 +195,8 @@ class Session:
             self.fixtures.pop("fixture_b_rmsnorm", None)
         self.ecfg = ecfg
         self.frozen_claims = sorted(self.snap.claims.values(), key=lambda c: c.claim_id)
-        self.graph, self.gaps = gaps.find_gaps(self.frozen_claims)
+        self.predict_combos = self.protocol["prediction_version"] >= 2
+        self.graph, self.gaps = gaps.find_gaps(self.frozen_claims, self.predict_combos)
         self.gap_scientist = GapScientist(self.llm, self.snap)
         lcfg, o = self.cfg["lit_search"], self.o
         llm = None if self.replay else LLM(
@@ -649,7 +650,7 @@ class Session:
             if self.exhausted:
                 break
             self.cycle, self.explored = cycle, []
-            self.graph, self.gaps = gaps.find_gaps(self._graph_claims())
+            self.graph, self.gaps = gaps.find_gaps(self._graph_claims(), self.predict_combos)
             cycles.append({"cycle": cycle, "derived": [c.model_dump() for c in self._derived_sorted()],
                            "incumbent_delta": dict(self.incumbent_delta),
                            "gaps": [g.model_dump() for g in self.gaps]})
@@ -725,7 +726,9 @@ class Session:
                                           "shared_mechanisms": gaps.shared_mechanisms(self.graph),
                                           "tensor": gaps.coverage_tensor(self.graph)})
         self.store.set_meta("explore", {"config": self.ecfg, "gap_score_rule": gaps.GAP_SCORE_TEXT,
-                                        "direction_status_rule": DIRECTION_STATUS_RULE})
+                                        "direction_status_rule": DIRECTION_STATUS_RULE,
+                                        **({"combination_prediction_rule": gaps.COMBINATION_RULE_TEXT}
+                                           if self.predict_combos else {})})
 
     def _record_queue_gates(self) -> None:
         """What the frozen literature already rules out, before any LLM gate or compute."""

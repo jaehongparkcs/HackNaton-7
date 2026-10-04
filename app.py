@@ -24,6 +24,7 @@ from noesis_lab.dashboard import (
     is_lion,
     notebook_label,
     order_notebooks,
+    timeline_rows,
 )
 from noesis_lab.evidence_chain import chain_dot, evidence_grid
 from noesis_lab.gap_views import (
@@ -122,6 +123,15 @@ c3.metric("Runs executed", len(D["runs"]))
 c4.metric("Runs avoided (prior art)", meta.get("runs_avoided", 0))
 c5.metric("LLM spend", f"${meta.get('llm_cost_usd', 0):.2f}", f"{meta.get('llm_calls', len(D['events']))} calls")
 st.write(f"**Objective.** {D['objective']}")
+with st.expander("Timeline: where the wall time went"):
+    tl = timeline_rows(D["events"], decisions, list(D["runs"].values()))
+    if not any(e.get("ts") for e in D["events"]) and not any(d.get("ts") for d in decisions):
+        st.caption("This bundle was recorded before events and decisions carried timestamps: only run start times are shown.")
+    stalls = [r for r in tl if r["stall"]]
+    if stalls:
+        st.warning(f"{len(stalls)} silent stretch(es) over 5 minutes, longest {max(r['gap before (s)'] for r in stalls) / 60:.0f} min "
+                   "(a sleeping machine or a stalled API call; neither changes a result).")
+    st.dataframe(pd.DataFrame(tl), use_container_width=True, hide_index=True)
 snap = D["snapshot"] or {}
 corpus, niche = D["corpus"], D["niche"]
 LIVE = corpus.get("mode") == "live_search"
@@ -319,6 +329,10 @@ if D["gaps"]:
                  f"× testability {gap['testability']:.1f} × evidence quality {gap['evidence_quality']:.2f}")
         st.markdown(f"Predicted direction along the path (code, from the signs of the claims): "
                     f"**{DIRECTION_WORD.get(gap.get('predicted_direction', ''), '?')}**")
+        if gap["novelty_type"] == "combination":
+            st.caption(D["explore"].get("combination_prediction_rule")
+                       or "Recorded before combination predictions (protocol prediction_version 1): a combination "
+                          "makes no directional prediction.")
         measured = [r for r in our_results(D["hyps"], analyses, D["baseline"]) if r["delta_key"] == gap["delta_key"]]
         for r in measured:
             st.markdown(f"Measured ({r['seeds']} paired seeds{', vs incumbent ' + r['incumbent'] if r.get('incumbent') else ''}): "

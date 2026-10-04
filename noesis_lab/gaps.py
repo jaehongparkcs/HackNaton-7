@@ -143,7 +143,8 @@ class Gap(BaseModel):
     detail: dict[str, Any] = {}
     # Sign of the method's effect on quality that the path predicts for our setting, from the
     # signs of the claims on it: "+" better, "-" worse, "0" no worse, "" = the gap predicts none
-    # (a contradiction or a combination hint has no direction).
+    # (a contradiction has no direction; a combination has one only under prediction_version 2,
+    # from its components' literature signs).
     predicted_direction: str = ""
 
 
@@ -157,6 +158,33 @@ GAP_SCORE_TEXT = (
     "evidence_quality: mean tier weight (T1 1.0, T2 0.8, T3 0.6) along the explanation path.\n"
     "Ties: resolution > combination > transfer, then alphabetical. Scores are structural hints, not probabilities."
 )
+
+
+COMBINATION_RULE_TEXT = (
+    "Combination prediction (protocol prediction_version 2): each component's literature sign is the "
+    "tier-weighted majority sign of its directional literature claims (our own derived results excluded; "
+    "ties: + over 0 over −). Predicted sign = the sum of the components' signs: both + → +; + and 0 → +; "
+    "both − → −; − and 0 → −; both 0 → 0; + and − (mixed), or a component with no directional claim → ? "
+    "(no prediction)."
+)
+
+
+def literature_sign(g: GapGraph, method: str) -> str:
+    """Tier-weighted majority sign of a method's directional LITERATURE claims ("" if none)."""
+    edges = [e for e in g.edges if e.method == method and e.sign and not e.tier.startswith("D-")]
+    if not edges:
+        return ""
+    by_sign = {s: sum(e.weight for e in edges if e.sign == s) for s in "+0-"}
+    return max("+0-", key=lambda s: (by_sign[s], -"+0-".index(s)))
+
+
+def combination_direction(g: GapGraph, methods: Sequence[str]) -> str:
+    """The sum of the components' literature signs; "" (no prediction) if mixed or unknown."""
+    signs = [literature_sign(g, m) for m in methods]
+    if "" in signs or {"+", "-"} <= set(signs):
+        return ""
+    total = sum({"+": 1, "0": 0, "-": -1}[s] for s in signs)
+    return "+" if total > 0 else "-" if total < 0 else "0"
 
 
 def gap_score(plausibility: float, coverage: float, testability: float, evidence_quality: float) -> float:
@@ -282,7 +310,7 @@ def link_scores(g: GapGraph) -> dict[tuple[str, str], dict[str, float]]:
     return out
 
 
-def link_gaps(g: GapGraph) -> list[Gap]:
+def link_gaps(g: GapGraph, predict: bool = False) -> list[Gap]:
     """Combination gaps by link prediction. Score = Adamic–Adar normalized by the best pair ×
     complementarity (1.0 if both methods have mechanisms and they differ: likely additive; 0.5 if
     they share one: likely redundant; 0.75 if a mechanism is unknown). A pair needs at least one
@@ -303,7 +331,8 @@ def link_gaps(g: GapGraph) -> list[Gap]:
                     path.append({"from": m, "to": _label(g, z), "claim_id": e.claim_id})
         out.append(_mk("link", "combination", {**_delta(a), **_delta(b)}, s["adamic_adar"] / top * comp, 0.0,
                        path, g, {k: v for k, v in s.items() if k != "shared"} | {
-                           "shared_neighbors": [_label(g, z) for z in s["shared"]], "complementarity": comp}))
+                           "shared_neighbors": [_label(g, z) for z in s["shared"]], "complementarity": comp},
+                       direction=combination_direction(g, (a, b)) if predict else ""))
     return out
 
 
@@ -362,7 +391,7 @@ def communities(g: GapGraph) -> dict[str, int]:
     return {n: i for i, c in enumerate(comms) for n in c}
 
 
-def bridge_gaps(g: GapGraph) -> list[Gap]:
+def bridge_gaps(g: GapGraph, predict: bool = False) -> list[Gap]:
     """Structural holes: method pairs from different communities, joined by a path of length 2
     through a mechanism, with no paper mentioning both. Score = (1 − fraction of the two
     communities' edges that already cross between them) × path support (the weaker of the two
@@ -390,7 +419,8 @@ def bridge_gaps(g: GapGraph) -> list[Gap]:
         path = [{"from": m, "to": _label(g, k), "claim_id": _edge_to(g, m, k).claim_id} for m in (a, b)]
         out.append(_mk("bridge", "combination", {**_delta(a), **_delta(b)}, (1 - frac) * sup, 0.0, path, g,
                        {"communities": [ca, cb], "cross_edge_fraction": round(frac, 6),
-                        "path_support": round(sup, 6), "mechanism": g.mechanisms[k.split(':', 1)[1]]["label"]}))
+                        "path_support": round(sup, 6), "mechanism": g.mechanisms[k.split(':', 1)[1]]["label"]},
+                       direction=combination_direction(g, (a, b)) if predict else ""))
     return out
 
 
@@ -399,11 +429,14 @@ def rank_gaps(found: Sequence[Gap]) -> list[Gap]:
     return sorted(found, key=lambda x: (-x.score, NOVELTY_ORDER[x.novelty_type], x.delta_key, x.gap_id))
 
 
-def find_gaps(claims: Sequence[Claim]) -> tuple[GapGraph, list[Gap]]:
+def find_gaps(claims: Sequence[Claim], predict_combinations: bool = False) -> tuple[GapGraph, list[Gap]]:
+    """`predict_combinations` (protocol prediction_version >= 2) gives combination gaps a predicted
+    direction (COMBINATION_RULE_TEXT); earlier bundles recorded them with none and replay so."""
     g = build_graph(claims)
     t = coverage_tensor(g)
-    return g, rank_gaps([*coverage_gaps(g, t), *abc_gaps(g, t), *link_gaps(g),
-                         *contradiction_gaps(g, t), *bridge_gaps(g)])
+    p = predict_combinations
+    return g, rank_gaps([*coverage_gaps(g, t), *abc_gaps(g, t), *link_gaps(g, p),
+                         *contradiction_gaps(g, t), *bridge_gaps(g, p)])
 
 
 # --------------------------------------------------------------------------- novelty type + queue

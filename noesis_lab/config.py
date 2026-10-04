@@ -24,10 +24,11 @@ def bundle_config(bundle: Path) -> dict[str, Any]:
 
 
 def protocol(cfg: dict[str, Any]) -> dict[str, int]:
-    """Versions of the pre-registered rule and the prior-art gate. Bundles recorded before the
-    `protocol:` block existed are version 1 of both."""
+    """Versions of the pre-registered rule, the prior-art gate and the gap-prediction rule. Bundles
+    recorded before a key existed are version 1 of it."""
     p = cfg.get("protocol", {})
     return {"rule_version": int(p.get("rule_version", 1)), "gate_version": int(p.get("gate_version", 1)),
+            "prediction_version": int(p.get("prediction_version", 1)),
             "search_loop": bool(cfg.get("search_loop", {}).get("enabled", False))}
 
 
