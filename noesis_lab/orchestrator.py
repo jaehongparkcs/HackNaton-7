@@ -29,7 +29,15 @@ from .literature import LiteratureAgent, Snapshot
 from .llm import LLM, BudgetExceeded, Mode
 from .mock_llm import make_mock
 from .runner import LiveRunner, RecordedRunner, RunBudgetExceeded
-from .schemas import Analysis, Claim, ExperimentConfig, Fixture, PriorArtVerdictKind, QueueItem
+from .schemas import (
+    Analysis,
+    Claim,
+    ExperimentConfig,
+    Fixture,
+    PriorArtVerdictKind,
+    QueueItem,
+    apply_delta,
+)
 from .search.corpus import build_corpus, copy_corpus, freeze_curated, load_niche
 from .search.coverage import candidate_text, t4_overlaps
 from .search.scout import DIRECTION_STATUS_RULE, direction_status, link_claims
@@ -204,7 +212,8 @@ class Session:
         self.ecfg = ecfg
         self.frozen_claims = sorted(self.snap.claims.values(), key=lambda c: c.claim_id)
         self.predict_combos = self.protocol["prediction_version"] >= 2
-        self.graph, self.gaps = gaps.find_gaps(self.frozen_claims, self.predict_combos)
+        self.graph, self.gaps = gaps.find_gaps(self.frozen_claims, self.predict_combos, stated=self.snap.stated)
+        self.revisions = self._deep_revisions() if self.snap.deep else {}
         self.gap_scientist = GapScientist(self.llm, self.snap)
         lcfg, o = self.cfg["lit_search"], self.o
         llm = None if self.replay else LLM(
@@ -255,6 +264,115 @@ class Session:
             if hits:
                 holds[item.key] = [[pid, score] for pid, score in hits]
         return holds
+
+    # ------------------------------------------------------------------ deep read (DEEP_READ.md)
+    def _with_recipe(self, cfg: ExperimentConfig, delta: dict) -> tuple[ExperimentConfig, dict | None]:
+        """A change of optimizer runs with that optimizer's full-text recipe (lr / weight-decay
+        multipliers), or with the defaults (1, 1) if none was found. Code applies it; it is decided
+        before any run and never swept. Without a deep read nothing changes."""
+        if "optimizer" not in delta:
+            return cfg, None
+        rc = self.snap.recipes.get(f"optimizer={delta['optimizer']}")
+        mults = (rc["lr_mult"], rc["wd_mult"]) if rc else (1.0, 1.0)
+        if (cfg.lr_mult, cfg.wd_mult) == mults:
+            return cfg, rc
+        return apply_delta(cfg, {"lr_mult": mults[0], "wd_mult": mults[1]}), rc
+
+    @staticmethod
+    def _riders(cfg: ExperimentConfig) -> dict:
+        return {k: getattr(cfg, k) for k in ("lr_mult", "wd_mult") if getattr(cfg, k) != 1.0}
+
+    def _deep_claims_for(self, key: str) -> list[Claim]:
+        methods = set(key.split("+"))
+        return [c for c in self.snap.claims.values() if c.span_source == "full_text" and gaps.method_key(c) in methods]
+
+    def _deep_notes(self, delta: dict) -> str:
+        """What the full text adds for this change, shown to the Scientist (revision r1). Empty without
+        a deep read, so prompts of earlier sessions are unchanged."""
+        if not self.snap.deep:
+            return ""
+        key = stats.delta_key(delta)
+        lines = [f'[{c.claim_id}] ({c.section}, {c.tier}, {c.expected_outcome}) "{c.source_span}"'
+                 for c in sorted(self._deep_claims_for(key), key=lambda c: c.claim_id)[:8]]
+        if "optimizer" in delta:
+            rc = self.snap.recipes.get(f"optimizer={delta['optimizer']}")
+            lines.append(f"Recipe (applied by code): lr × {rc['lr_mult']:g}, weight decay × {rc['wd_mult']:g}, from "
+                         f"arXiv:{rc['paper_id']}" if rc else "No recipe for this optimizer was found in the full text.")
+        return "\n".join(lines)
+
+    def _deep_payload(self, key: str, recipe: dict | None) -> dict:
+        """Hypothesis-card fields: the r0 → r1 revision and the recipe badge (only with a deep read)."""
+        if not self.snap.deep:
+            return {}
+        out: dict = {"deep_findings": [c.claim_id for c in self._deep_claims_for(key)]}
+        rev = getattr(self, "revisions", {}).get(key)
+        if rev:
+            out["revision"] = rev
+        if recipe:
+            out["recipe"] = recipe
+        elif any(m.startswith("optimizer=") for m in key.split("+")):
+            out["recipe"] = {"none": "no recipe found in full text"}
+        return out
+
+    def _deep_revisions(self) -> dict[str, dict]:
+        """r0 (abstract-only corpus) vs r1 (with the deep read) for every top queued change: gap score,
+        literature status, predicted direction, coverage, path claims. Code only."""
+        snap0 = Snapshot.from_corpus(self.corpus_dir, deep=False)
+        claims0 = sorted(snap0.claims.values(), key=lambda c: c.claim_id)
+        g0, f0 = gaps.find_gaps(claims0, self.predict_combos)
+        top, over = self.ecfg["top_gaps_for_hypotheses"], self.niche.pi_overrides
+        q0 = {q.key: q for q in gaps.gap_queue(f0, g0, claims0, overrides=over, top_n=top)}
+        q1 = {q.key: q for q in gaps.gap_queue(self.gaps, self.graph, self.frozen_claims, overrides=over, top_n=top)}
+        by0, by1 = {g.gap_id: g for g in f0}, {g.gap_id: g for g in self.gaps}
+
+        def side(q: QueueItem | None, by: dict) -> dict | None:
+            if q is None:
+                return None
+            best = by[q.gap_ids[0]]
+            return {"gap_score": q.gap_score, "status": q.status, "novelty_type": q.novelty_type,
+                    "predicted_direction": best.predicted_direction, "coverage": best.coverage,
+                    "gap_ids": q.gap_ids, "claim_ids": q.supporting_claim_ids, "covering": q.covering_claim_ids}
+        out = {}
+        for key in sorted(set(q0) | set(q1)):
+            r0, r1 = side(q0.get(key), by0), side(q1.get(key), by1)
+            out[key] = {"r0": r0, "r1": r1, "changed": r0 != r1,
+                        "findings": [c.claim_id for c in self._deep_claims_for(key)]}
+        return out
+
+    def _record_deep_updates(self) -> None:
+        """Every outcome the full text changed, as a `deep_read_update` decision with its quote."""
+        dr = self.snap.deep
+        for ch in dr.changes:
+            if ch["before"] != ch["after"]:
+                did = self.store.add_decision("deep_read_update", "", {"what": "coverage", **ch})
+                self.store.link("decision", did, "rests_on", "claim", ch["claim_id"])
+        for key, rev in self.revisions.items():
+            r0, r1 = rev["r0"] or {}, rev["r1"] or {}
+            for what in ("status", "gap_score", "predicted_direction"):
+                if r0.get(what) != r1.get(what):
+                    covering = r1.get("covering") or []
+                    did = self.store.add_decision("deep_read_update", "", {
+                        "what": {"status": "queue_status"}.get(what, what), "candidate_key": key,
+                        "before": r0.get(what), "after": r1.get(what), "findings": rev["findings"],
+                        "covering": covering,
+                        "passages": {c: self.snap.claims[c].source_span for c in covering if c in self.snap.claims}})
+                    for c in rev["findings"]:
+                        self.store.link("decision", did, "rests_on", "claim", c)
+        for method, rc in sorted(self.snap.recipes.items()):
+            did = self.store.add_decision("deep_read_update", "", {
+                "what": "recipe", "method": method, "lr_mult": rc["lr_mult"], "wd_mult": rc["wd_mult"],
+                "paper_id": rc["paper_id"], "version": rc.get("version"),
+                "sources": {k: rc[k] for k in ("lr_mult_source", "wd_mult_source") if k in rc}})
+        stated_keys = {g.gap_id: g for g in self.gaps if g.gap_type == "stated"}
+        for gid, g in sorted(stated_keys.items()):
+            self.store.add_decision("deep_read_update", "", {
+                "what": "stated_gap", "gap_id": gid, "candidate_key": g.delta_key, "gap_score": g.score,
+                "limitation": g.detail.get("limitation"), "paper_id": g.detail.get("paper_id"),
+                "concrete": g.detail.get("concrete")})
+        self.store.set_meta("deep_read", {
+            "meta": dr.meta, "selection": dr.selection, "papers": dr.papers, "recipes": dr.recipes,
+            "stated": dr.stated, "validation": dr.validation, "changes": dr.changes, "revisions": self.revisions,
+            "superseded": sorted(self.snap.superseded), "stated_rule": gaps.STATED_GAP_TEXT})
 
     # ------------------------------------------------------------------ helpers
     def _check_wall(self) -> None:
@@ -340,12 +458,14 @@ class Session:
         # 2. Scientist -> typed config; Critic reviews before compute
         context = [f"[{c.claim_id}] {c.claim}" for c, _ in self.snap.search(fx.statement, 3)]
         prop, cfg, delta, sci_eid = self.scientist.propose(fx, self.baseline, context)
+        cfg, recipe = self._with_recipe(cfg, delta)
         self.store.link("hypothesis", hid, "proposed_by", "event", sci_eid)
         if len(delta) == 1:
             self.tested.add(stats.delta_key(delta))
         self._set_status(hid, fx, "proposed", prior_art=pa.model_dump(mode="json"),
                          proposal=prop.model_dump(mode="json"), config_delta=delta,
-                         config_hash=cfg.config_hash(), candidate_config=cfg.model_dump())
+                         config_hash=cfg.config_hash(), candidate_config=cfg.model_dump(),
+                         **self._deep_payload(stats.delta_key(delta), recipe))
         return self._screen(hid, fx, prop, cfg, delta, seeds)
 
     def _screen(self, hid: str, fx: Fixture, prop, cfg: ExperimentConfig, delta: dict, seeds: list[int]) -> Outcome:
@@ -354,7 +474,7 @@ class Session:
         return rejected or self._paired(hid, fx, cfg, seeds)
 
     def _critic(self, hid: str, fx: Fixture, prop, cfg: ExperimentConfig, delta: dict) -> Outcome | None:
-        review, crit_eid = self.critic.review(fx, prop, self.incumbent, cfg, delta)
+        review, crit_eid = self.critic.review(fx, prop, self.incumbent, cfg, {**delta, **self._riders(cfg)})
         self.store.link("hypothesis", hid, "reviewed_by", "event", crit_eid)
         self._set_status(hid, fx, "queued", critic_pre=review.model_dump(mode="json"))
         if review.verdict == "reject":
@@ -449,7 +569,9 @@ class Session:
         tensor = gaps.coverage_tensor(self.graph)
         for rnd in (0, 1):
             prop, cfg, delta, sci_eid = self.gap_scientist.propose(fx, self.incumbent, delta,
-                                                                   revision_of=revision_of, overlap=overlap)
+                                                                   revision_of=revision_of, overlap=overlap,
+                                                                   notes=self._deep_notes(delta))
+            cfg, recipe = self._with_recipe(cfg, delta)
             self.store.link("hypothesis", hid, "proposed_by", "event", sci_eid)
             key = stats.delta_key(delta)
             self.tested.add(key)
@@ -500,7 +622,9 @@ class Session:
             common = dict(prior_art=pa.model_dump(mode="json"), proposal=prop.model_dump(mode="json"),
                           grounded_in=prop.grounded_in, config_delta=delta, config_hash=cfg.config_hash(),
                           candidate_config=cfg.model_dump(),
-                          novelty_type=label if label in gaps.NOVELTY_ORDER else fx.novelty_type)
+                          novelty_type=(fx.novelty_type if fx.novelty_type == "author_stated" or label
+                                        not in gaps.NOVELTY_ORDER else label),
+                          **self._deep_payload(stats.delta_key(delta), recipe))
             if gate == "run" and not narrow and hold:
                 self._set_status(hid, fx, "held_pi_review", **common, tighten={"outcome": "held", "rounds": rounds})
                 did = self.store.add_decision("pi_review_hold", hid, self._chained({
@@ -663,7 +787,7 @@ class Session:
             if self.exhausted:
                 break
             self.cycle, self.explored = cycle, []
-            self.graph, self.gaps = gaps.find_gaps(self._graph_claims(), self.predict_combos)
+            self.graph, self.gaps = gaps.find_gaps(self._graph_claims(), self.predict_combos, stated=self.snap.stated)
             cycles.append({"cycle": cycle, "derived": [c.model_dump() for c in self._derived_sorted()],
                            "incumbent_delta": dict(self.incumbent_delta),
                            "gaps": [g.model_dump() for g in self.gaps]})
@@ -723,8 +847,10 @@ class Session:
         def prep(fx: Fixture) -> None:
             try:
                 with self.llm.speculate():
-                    prop, cfg, delta, _ = self.gap_scientist.propose(fx, self.incumbent, dict(fx.required_delta))
-                    self.critic.review(fx, prop, self.incumbent, cfg, delta)
+                    prop, cfg, delta, _ = self.gap_scientist.propose(fx, self.incumbent, dict(fx.required_delta),
+                                                                     notes=self._deep_notes(dict(fx.required_delta)))
+                    cfg, _ = self._with_recipe(cfg, delta)
+                    self.critic.review(fx, prop, self.incumbent, cfg, {**delta, **self._riders(cfg)})
             except Exception:  # noqa: BLE001 - a failed prefetch only means the loop calls live
                 pass
         with ThreadPoolExecutor(min(self.llm.workers, len(fixtures))) as pool:
@@ -913,6 +1039,8 @@ class Session:
             self.store.set_meta("candidate_queue", [q.model_dump(mode="json") for q in self._queue()])
             if self.snap.meta.get("degraded"):
                 self.store.add_decision("search_degraded", "", {"reasons": self.snap.meta["degraded"]})
+            if self.snap.deep and self.explore:
+                self._record_deep_updates()
             self._record_queue_gates()
             self.trigger = self.noise_did
             outcomes = [self.evaluate(f) for f in list(self.fixtures.values())]

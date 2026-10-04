@@ -55,13 +55,15 @@ def rederive(bundle: Path) -> list[str]:
     stored_gaps = st.get_meta("gaps")
     if stored_gaps is not None:             # every gap score is recomputed from the frozen claims
         from .literature import Snapshot
-        frozen = sorted(Snapshot.from_corpus(bundle / "corpus").claims.values(), key=lambda c: c.claim_id)
-        graph, found = gaps.find_gaps(frozen, predict)
+        snap = Snapshot.from_corpus(bundle / "corpus")          # applies a frozen deep read, if any
+        frozen = sorted(snap.claims.values(), key=lambda c: c.claim_id)
+        stated = snap.stated
+        graph, found = gaps.find_gaps(frozen, predict, stated=stated)
         same("gaps", stored_gaps, [g.model_dump() for g in found])
     cycles = {0: (graph, found, frozen)} if stored_gaps is not None else {}
     for cyc in st.get_meta("gap_cycles", []):   # each cycle: frozen claims + our own results written back
         cl = [*frozen, *(Claim(**c) for c in cyc["derived"])]
-        g_c, f_c = gaps.find_gaps(cl, predict)
+        g_c, f_c = gaps.find_gaps(cl, predict, stated=stated)
         same(f"gaps cycle {cyc['cycle']}", cyc["gaps"], [g.model_dump() for g in f_c])
         cycles[cyc["cycle"]] = (g_c, f_c, cl)
     for d in st.decisions():

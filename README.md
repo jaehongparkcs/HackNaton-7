@@ -19,6 +19,7 @@ Design documents, in the order they were built: [BUILD_PLAN.md](BUILD_PLAN.md) (
 | **`results/explore2/`** — exhibit 2, hypothesis engine | Live, 160 papers, 185 claims, real MPS training, 28 runs. Protocol v2 (rule v2, gate v2), the wider testbed and the explore → confirm → promote loop: RoPE was confirmed and promoted, three later finalists were measured on it, and four gap predictions were scored. Prediction v1 (combinations make no directional prediction). Recorded with one limitation: a thin mechanism graph (2 shared mechanism nodes, want ≥ 3). `make verify rederive replay` pass. |
 | `results/explore1/` — superseded | Live, 120 papers, 128 claims. The scout failed (a schema bug, since fixed), so only the per-building-block directions were searched. One gap hypothesis ran (dropout: predicted better, measured harmful, a **miss**). It was recorded although the gate check had reported UNSTABLE rows, which is why recording now stops on that. Rule v1, gate v1. Verify, rederive and replay pass. Kept as an exhibit of what went wrong. |
 | Prediction v2 (combination predictions), timestamps, the speed work (FINAL_FIXES B1–B4, B6) | Built and tested with a scripted LLM and recorded API responses. Not yet recorded live. |
+| **Deep read** ([DEEP_READ.md](DEEP_READ.md)): full text of the papers closest to the top hypotheses | Built and tested on HTML fixtures with a scripted LLM. **Not yet run live**: the validation on the curated 9 (setting agreement, target ≥ 6/9 from 3/9) and the recipe spot-checks are still to do, then `make record SESSION=explore3 CORPUS=work/corpus-explore2`. |
 | `compare-ideation`, `validate-gaps`, stagnation redirect | Not built. |
 
 Every bundle replays under the config and protocol versions it was recorded with, so the recorded bundles are untouched by everything after them. `make verify` also fails if a bundle holds any file its manifest does not list.
@@ -65,6 +66,8 @@ make app
 ```
 
 Before a recording, `make rehearse CORPUS=work/corpus-<name>` runs the same live pipeline on a frozen corpus in ~5 minutes (500 steps, one cycle of 3 explorations) into `results/rehearse/`. It is labeled "not results", like `smoke`, and never used for a number. The live targets (`search`, `record`, `golden`, `rehearse`) run under `caffeinate -i` on macOS so the machine cannot sleep mid-session.
+
+With `deep_read.enabled` (the default), `make record` reads the full text of the closest papers right after the search (see "Deep read"); `make deep-read CORPUS=…` runs that step alone.
 
 `make record` is the only way to record an engine session. It **aborts before the session** if any gate row is UNSTABLE (a different verdict or action between repeats). The steps, if you want them one at a time:
 
@@ -300,6 +303,33 @@ The dashboard shows the ranked gap list with component bars, a gap card (the exp
 
 What differs from the specs, plainly: mechanisms are a closed list of 12 rather than normalized free text; "contested" treats `covers` and `partially covers` as one bucket, because they are one bucket for the overlap question; a combination hint needs a shared mechanism or a co-tested method (a shared setting bucket alone only adds to the score); a contested cell does not count as coverage; a claim from a niche-search or curated paper is linked to a direction by its building block alone, because it has no direction provenance; a combination result is stored with no agrees/contradicts relation, since no claim is about the combination. 
 
+## Deep read: the full text of the closest papers
+
+Built and tested, not yet run live ([DEEP_READ.md](DEEP_READ.md)). Abstract-only extraction is the weakest link (setting agreement 3/9, Lion with guessed hyperparameters, 2 shared mechanism nodes, no limitations sections). So, after the search and before any compute, the lab reads the full text of the few papers closest to its top hypotheses and lets code update coverage, verdicts, hypotheses and the queue. Code is in [noesis_lab/deep/](noesis_lab/deep/).
+
+```
+make deep-read CORPUS=work/corpus-X     # select → fetch → parse → extract → verify → freeze into work/corpus-X/deep/
+uv run python -m noesis_lab lit-dryrun --corpus work/corpus-X --repeat 3     # gate stability AFTER the deep read
+make record SESSION=explore3 CORPUS=work/corpus-X                           # the session reads corpus/deep/, never the network
+make verify-deep SESSION=explore3       # re-fetch, check each page's SHA256 and every stored quote (network)
+```
+
+1. **Which papers (code).** For the top 8 queued hypotheses and every contradiction gap, each paper gets `proximity = Σ base × tier weight × setting similarity` over its relations to the hypothesis (a claim on the explanation path 1.0, a claim the gate listed 1.0 on re-runs, same method node 0.7, a shared mechanism node 0.5, the scout direction 0.3). Top 3 per hypothesis, deduplicated, at most 20; ties by citations, then id. The table is frozen (`deep/selection.json`) and shown on the dashboard ("why this paper was read").
+2. **Fetching and parsing (code).** `arxiv.org/html/<id>`, then `ar5iv`, else `full_text: unavailable` (no PDF parsing; the abstract claims stay). Same HTTP layer as the search (one request in flight, ≥ 5 s apart, backoff), cached under `work/cache/html/`. Both sources are LaTeXML, so one parser maps headings to canonical sections (abstract, introduction, method, experimental setup, results, limitations, conclusion, appendix setup), drops references and figures, keeps table text and replaces MathML by its LaTeX. The bundle stores URL, served version, SHA256, section names and lengths, and the quoted spans — **never the full text**.
+3. **Extraction (LLM, one recorded call per paper, [prompts/deep_read.md](prompts/deep_read.md)).** `DeepFindings`: setting (with parameter count), recipes, results, mechanisms, limitations, small-scale evidence. Every item carries a quote and its section; **code drops any item whose quote is not verbatim in that section**. Input is trimmed to 12k tokens, setup sections first.
+4. **What code does with it.**
+   - *Settings:* full-text fields override abstract-extracted ones (field by field) for every non-curated claim of a read paper; code maps the stated parameter count to a scale; coverage is recomputed by the same rule. **A curated (T1) label is never overridden.**
+   - *Claims:* full-text results, small-scale evidence, mechanisms and limitations join the corpus as claims (`span_source: full_text`), so they move gap scores, literature status and the gate like any other claim. A full-text result supersedes the same paper's abstract claim about the same change. A small-scale (≤ 10M parameters or character-level) report of the exact comparison makes the candidate soft-rejected with that quote; a hypothesis is still narrowable once.
+   - *Recipes:* `ExperimentConfig` has `lr_mult` ∈ {0.1, 0.2, 0.33, 0.5, 1, 2} and `wd_mult` ∈ {1, 3, 5, 10} (left out of the hash at 1). A recipe stated relative to AdamW (a range takes its geometric middle) or as absolute values against the paper's own AdamW maps to the nearest multiplier, and **every number used must appear in the quote**. One recipe per optimizer, from the closest paper, decided before any run, never swept. The Lion paper's "3–10× smaller learning rate, 3–10× larger weight decay" maps to lr × 0.2, wd × 5. Without a recipe the card says "no recipe found in full text" and Lion keeps the built-in lr ÷ 5, wd × 5.
+   - *Stated gaps:* a limitation about a runnable method becomes an `author_stated` gap: the Scientist proposes a typed delta that tests it ([prompts/stated_gap.md](prompts/stated_gap.md)); code checks it (allowed changes, ≤ 2 fields, must include the method); plausibility = tier weight × setting similarity × (1.0 if the sentence names a concrete untested condition — a number or a word like small, scale, character, batch — else 0.5). Same queue, same gate.
+   - *Revision r1:* for each queued change the session computes r0 (abstract-only corpus) and r1 (with the deep read) by code: gap score, literature status, predicted direction, coverage, new path claims. The Scientist writes the hypothesis with the full-text findings in its prompt; the predicted direction stays code's.
+   Every changed outcome is a `deep_read_update` decision with before/after and the quote; the dashboard shows them as "What the full text changed", the selection table, per-paper findings, and an r0 → r1 diff and recipe badge on each hypothesis card.
+5. **Validation.** The deep read also reads the curated papers and reports setting agreement with the human labels, abstract-only vs with full text, on the dashboard and by `make deep-read`, whatever the result.
+
+Replay and rederive read only `corpus/deep/`; the recorded bundles have none and replay unchanged (`protocol.deep_read_version`: 0 for them, 1 for new sessions).
+
+What differs from DEEP_READ.md, plainly: the HTML is parsed with Python's standard `html.parser` instead of BeautifulSoup (adding a dependency needs a relocked `uv.lock`, and both sources share LaTeXML's class names, so a small parser covers them); full-text claims are always tier T2/T3, even from a curated paper, so a full-text small-scale report soft-rejects rather than hard-rejects (only a human-checked claim can hard-reject, as everywhere else); recipes apply to optimizer changes only, because the two multipliers are relative to the AdamW baseline; work happened on the designated session branch rather than a `deep-read` branch.
+
 ### The testbed's building blocks
 
 One change, or any two that touch different fields. Original: `norm=rmsnorm`, `norm_position=post`, `activation=swiglu|relu2`, `pos_encoding=rope`, `schedule=constant`, `optimizer=sgd_momentum`, `dropout=0.1`. Added so that more of the retrieved literature maps onto something runnable (in `explore1` only 23 of 128 claims did, and no two runnable methods shared a mechanism): `qk_norm=true`, `weight_tying=true`, `z_loss_coef=0.0001`, `label_smoothing=0.1`, `warmup_frac=0|0.02|0.1`, `grad_clip=0`, `init_scale=0.5|2.0`, `optimizer=lion`. Each is implemented in the testbed, tested on CPU (shape, finite loss, gradients, determinism) and has its own deterministic search direction and query. Label smoothing and z-loss change only the optimized loss; the reported validation loss is always plain cross-entropy. Lion runs at AdamW's learning rate ÷ 5 with weight decay × 5 (see Known limitations), not retuned. Whether this lifts the count of shared mechanism nodes to 3 or more is unknown until the next search; the dashboard reports the number whatever it is.
@@ -392,6 +422,7 @@ Measured on `explore2`: training was ~17 minutes (28 runs × ~36 s); LLM calls a
 ## Known limitations
 
 - **Screening only.** Three paired seeds, five after extra seeds; no confirmation, no p-values, no multiple-comparison control.
+- **The deep read has not run live.** Section parsing is tested on LaTeXML fixtures, not on a sample of real arXiv pages; the setting-agreement validation and the recipe spot-checks (DEEP_READ §6) still need a keyed run with network. An arXiv HTML page can change between the read and `verify-deep` (the SHA256 check reports it; the quote check still runs).
 - **Prediction v2 and the speed work (FINAL_FIXES B1–B4) have not been recorded live.** They have run only against a scripted LLM and recorded API responses. OpenAlex's boolean `search` syntax for tighten queries is used as documented but was not exercised against the live API from our build machine; a failed OpenAlex request falls back to arXiv.
 - **Rule v1 was asymmetric**, and `golden` and `explore1` were judged by it. `explore1`'s "RMSNorm harmful" rests on one seed; under v2 it would be "no improvement, seeds disagree". We leave the recorded label and say so here.
 - **The noise floor is a rough estimate** from 5 seeds (see the interval above). A candidate near 1 SD can change branch with a different baseline draw.
@@ -418,6 +449,7 @@ noesis_lab/
   orchestrator.py runner.py stats.py                        session, runs, statistics and the rule
   literature.py agents.py                                   Literature Agent, Scientist, gap Scientist, Critic
   gaps.py                                                   graph, gap formulas, gap score, gap queue
+  deep/    select.py html.py read.py apply.py               deep read: paper selection, LaTeXML parsing, extraction, freeze, apply
   search/  plan.py scout.py arxiv.py openalex.py http.py    query plan, scout, API clients, raw cache
            rank.py extract.py coverage.py corpus.py         dedupe/rank, extraction checks, coverage + tiers, freeze
            tighten.py grid.py textsim.py                    per-hypothesis search, coverage grid, TF-IDF / PCA
@@ -425,14 +457,14 @@ noesis_lab/
   evidence_chain.py gap_views.py dashboard.py               dashboard graphs (DOT), wording and timeline helpers
   testbed/{harness,model}.py                                tiny GPT and its harness
 prompts/   literature.md (gate v1) literature_gate.md (gate v2) scientist.md scientist_gap.md critic_pre.md critic_post.md
-           query_plan.md scout.md extract.md
+           query_plan.md scout.md extract.md deep_read.md stated_gap.md
 data/      tinyshakespeare.txt papers.json claims.json fixtures.json
 scripts/   fetch_snapshot.py verify_snapshot.py
 tests/     pytest, CPU, mocked LLM, recorded API responses under tests/data/
 results/<session>/   notebook.sqlite runs.jsonl recordings/llm.jsonl env.json state.json
                      inputs.json config.snapshot.yaml MANIFEST.json
                      corpus/{niche.yaml,query_plan.json,scout.json,papers.json,claims.json,
-                             dropped.json,meta.json,llm.jsonl,raw/,tighten/}
+                             dropped.json,meta.json,llm.jsonl,raw/,tighten/,deep/}
 ```
 
 ## Not built

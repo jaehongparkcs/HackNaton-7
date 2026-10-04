@@ -148,7 +148,7 @@ class Gap(BaseModel):
     predicted_direction: str = ""
 
 
-NOVELTY_ORDER = {"resolution": 0, "combination": 1, "transfer": 2}
+NOVELTY_ORDER = {"resolution": 0, "combination": 1, "transfer": 2, "author_stated": 3}
 GAP_SCORE_TEXT = (
     "gap_score = plausibility × (1 − coverage_in_our_setting) × testability × evidence_quality.\n"
     "plausibility: the gap type's formula (transfer consistency × setting similarity; ABC path support; "
@@ -424,19 +424,50 @@ def bridge_gaps(g: GapGraph, predict: bool = False) -> list[Gap]:
     return out
 
 
+STATED_GAP_TEXT = (
+    "Stated gap (deep read): an author-stated limitation about a runnable method, read in the full text. The "
+    "Scientist proposes a typed delta that tests it (code checks: allowed changes, ≤ 2 fields, includes the "
+    "method). plausibility = tier weight × setting similarity of the limitation's claim × 1.0 if the sentence "
+    "names a concrete untested condition, else 0.5; coverage as for the method; label author_stated."
+)
+
+
+def stated_gaps(g: GapGraph, tensor: dict, stated: Sequence[dict]) -> list[Gap]:
+    """Gaps from author-stated limitations (DEEP_READ §4.4). Each proposal names the limitation's
+    claim (a full-text context edge in the graph) and a delta code already validated."""
+    edges = {e.claim_id: e for e in g.edges}
+    out = []
+    for s in stated:
+        e = edges.get(s["limitation_claim_id"])
+        delta = dict(s["delta"])
+        if e is None or stats.testability(delta) != 1.0:
+            continue
+        if len(delta) == 1 and strongly_covered(g, s["method"]):
+            continue
+        plaus = e.weight * e.similarity * (1.0 if s["concrete"] else 0.5)
+        cov = coverage_in_our_setting(tensor, s["method"]) if len(delta) == 1 else 0.0
+        path = [{"from": s["method"], "to": "author-stated limitation", "claim_id": e.claim_id}]
+        out.append(_mk("stated", "author_stated", delta, plaus, cov, path, g,
+                       {"limitation": s["quote"], "section": s.get("section", ""), "concrete": s["concrete"],
+                        "paper_id": s["paper_id"]}, suffix=f":{e.claim_id}"))
+    return out
+
+
 def rank_gaps(found: Sequence[Gap]) -> list[Gap]:
     """One ranked list. Ties: resolution > combination > transfer, then alphabetical by delta key."""
     return sorted(found, key=lambda x: (-x.score, NOVELTY_ORDER[x.novelty_type], x.delta_key, x.gap_id))
 
 
-def find_gaps(claims: Sequence[Claim], predict_combinations: bool = False) -> tuple[GapGraph, list[Gap]]:
+def find_gaps(claims: Sequence[Claim], predict_combinations: bool = False,
+              stated: Sequence[dict] = ()) -> tuple[GapGraph, list[Gap]]:
     """`predict_combinations` (protocol prediction_version >= 2) gives combination gaps a predicted
-    direction (COMBINATION_RULE_TEXT); earlier bundles recorded them with none and replay so."""
+    direction (COMBINATION_RULE_TEXT); earlier bundles recorded them with none and replay so.
+    `stated` are the deep read's validated stated-gap proposals (none for older corpora)."""
     g = build_graph(claims)
     t = coverage_tensor(g)
     p = predict_combinations
     return g, rank_gaps([*coverage_gaps(g, t), *abc_gaps(g, t), *link_gaps(g, p),
-                         *contradiction_gaps(g, t), *bridge_gaps(g, p)])
+                         *contradiction_gaps(g, t), *bridge_gaps(g, p), *stated_gaps(g, t, stated)])
 
 
 # --------------------------------------------------------------------------- novelty type + queue
@@ -489,7 +520,8 @@ def gap_queue(found: Sequence[Gap], g: GapGraph, claims: Sequence[Claim], tested
     for key, group in untested[:top_n]:
         best = group[0]
         label = novelty_type(best.delta, g, tensor)
-        label = label if label in NOVELTY_ORDER else best.novelty_type
+        label = (best.novelty_type if best.novelty_type == "author_stated" or label not in NOVELTY_ORDER
+                 else label)
         status, cov, note = stats.literature_status(key, by_method.get(key, []) if len(best.delta) == 1 else [],
                                                     soft_rejected, held, overrides, contested_open=True)
         items.append(QueueItem(

@@ -66,9 +66,16 @@ class ExperimentConfig(BaseModel):
     z_loss_coef: float = Field(0.0, ge=0.0, le=1e-2)   # training-only penalty on log Z of the output logits
     label_smoothing: float = Field(0.0, ge=0.0, le=0.3)   # training-only; val_loss stays plain cross-entropy
     init_scale: float = Field(1.0, ge=0.25, le=4.0)    # multiplies the initialization std
+    # Method recipes from a paper's full text (DEEP_READ §4.2): multipliers on the baseline lr and
+    # weight decay, one recipe per method, decided before any run (never swept). At (1, 1) Lion keeps
+    # the harness's built-in default (lr ÷ 5, wd × 5); any other pair replaces it.
+    lr_mult: float = 1.0
+    wd_mult: float = 1.0
 
     _LATER: ClassVar[dict[str, Any]] = {"qk_norm": False, "weight_tying": False, "z_loss_coef": 0.0,
-                                        "label_smoothing": 0.0, "init_scale": 1.0}
+                                        "label_smoothing": 0.0, "init_scale": 1.0, "lr_mult": 1.0, "wd_mult": 1.0}
+    LR_MULTS: ClassVar[tuple[float, ...]] = (0.1, 0.2, 0.33, 0.5, 1.0, 2.0)
+    WD_MULTS: ClassVar[tuple[float, ...]] = (1.0, 3.0, 5.0, 10.0)
 
     @model_serializer(mode="wrap")
     def _ser(self, handler):
@@ -80,6 +87,10 @@ class ExperimentConfig(BaseModel):
 
     @model_validator(mode="after")
     def _heads_divide(self) -> ExperimentConfig:
+        if self.lr_mult not in self.LR_MULTS:
+            raise ValueError(f"lr_mult must be one of {self.LR_MULTS}")
+        if self.wd_mult not in self.WD_MULTS:
+            raise ValueError(f"wd_mult must be one of {self.WD_MULTS}")
         if self.n_embd % self.n_head != 0:
             raise ValueError("n_embd must be divisible by n_head")
         if (self.n_embd // self.n_head) % 2 != 0:
@@ -191,7 +202,8 @@ class SettingFields(BaseModel):
 
 
 class Claim(_OmitEmpty):
-    _omit_if_empty = ("mechanism", "mechanism_category")
+    _omit_if_empty = ("mechanism", "mechanism_category", "span_source", "setting_source", "section",
+                      "superseded_by")
 
     claim_id: str
     paper_id: str
@@ -219,6 +231,13 @@ class Claim(_OmitEmpty):
     extraction_event: str = ""                    # request key of the recorded extraction call
     mechanism: str = ""                           # verbatim quote of the stated reason ("" = none given)
     mechanism_category: str = ""                  # one of MECHANISMS; kept only if the quote is verbatim
+    # Deep read (DEEP_READ.md). "full_text": source_span is a verbatim quote from the paper's full
+    # text (section `section`), checked against the fetched HTML when it was read; the stored paper
+    # record keeps the URL, version and SHA256 so anyone can re-check it (`verify-deep`).
+    span_source: str = ""
+    setting_source: str = ""                      # "full_text": setting_fields came from the full text
+    section: str = ""
+    superseded_by: str = ""                       # an abstract claim replaced by a full-text claim
 
 
 class NicheSpec(BaseModel):
@@ -361,6 +380,87 @@ class ExtractionOutput(BaseModel):
     claims: list[ExtractedClaim]
 
 
+# ------------------------------------------------------------------ deep read (full text)
+DeepSection = Literal["abstract", "introduction", "method", "experimental_setup", "results", "limitations",
+                      "conclusion", "appendix_setup"]
+
+
+class DeepSetting(BaseModel):
+    """Where the paper's experiments were run, as the full text states it."""
+    model_config = ConfigDict(extra="forbid")
+    model_family: Literal["transformer", "rnn", "cnn", "mlp", "general", "unspecified"]
+    task: Literal["language_modeling", "char_language_modeling", "translation", "classification",
+                  "vision", "speech", "general", "unspecified"]
+    parameter_count: str      # as stated ("125M", "1.3 billion"), or "unspecified"; code maps it to a scale
+    dataset: str
+    training_steps: str
+    batch_size: str
+    quote: str
+    section: DeepSection
+
+
+class DeepRecipe(BaseModel):
+    """A hyperparameter the paper used or recommends for a method, relative to AdamW when it says so."""
+    model_config = ConfigDict(extra="forbid")
+    method: str               # an allowed "field=value" change, copied exactly
+    hyperparameter: Literal["lr", "weight_decay", "warmup", "betas", "schedule", "other"]
+    value_as_stated: str
+    ratio_to_adamw_min: float | None    # e.g. "3-10x smaller" -> 0.1 and 0.333; None if not stated
+    ratio_to_adamw_max: float | None
+    value: float | None                 # absolute value used for this method, if stated
+    adamw_value: float | None           # the paper's own AdamW value for the same hyperparameter, if stated
+    quote: str
+    section: DeepSection
+
+
+class DeepResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    method: str               # allowed "field=value" change, or "" if none fits
+    direction: Literal["improves", "no_worse", "worse", "context"]
+    setting_note: str
+    quote: str
+    section: DeepSection
+
+
+class DeepMechanism(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    method: str
+    mechanism_category: MechanismCategory
+    quote: str
+    section: DeepSection
+
+
+class DeepLimitation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    method: str               # allowed "field=value" change the limitation is about, or ""
+    quote: str
+    section: DeepSection
+
+
+class DeepSmallScale(BaseModel):
+    """An experiment at <= 10M parameters or on character-level language modeling."""
+    model_config = ConfigDict(extra="forbid")
+    method: str
+    direction: Literal["improves", "no_worse", "worse", "context"]
+    parameter_count: str
+    char_level: bool
+    quote: str
+    section: DeepSection
+
+
+class DeepFindings(BaseModel):
+    """What the LLM transcribes from ONE paper's full text. Every item carries a verbatim quote and
+    the section it came from; code drops any item whose quote is not in that section. No field is a
+    measurement of ours, a verdict, a coverage label or a score."""
+    model_config = ConfigDict(extra="forbid")
+    setting: list[DeepSetting]          # 0 or 1
+    recipes: list[DeepRecipe]
+    results: list[DeepResult]
+    mechanisms: list[DeepMechanism]
+    limitations: list[DeepLimitation]
+    small_scale_evidence: list[DeepSmallScale]
+
+
 class LiteratureOutputV2(BaseModel):
     """Gate v2. The LLM lists EVERY retrieved claim that tests the same comparison; it does not
     pick a "nearest" one. `stats.gate_decision` then chooses the verdict deterministically."""
@@ -394,6 +494,13 @@ class GapScientistOutput(BaseModel):
     falsification_rule: str
     config_changes: list[ConfigChange]
     grounded_in: list[str]   # claim ids from the gap's explanation path (validated by code)
+
+
+class StatedGapProposal(BaseModel):
+    """A typed delta that would test an author-stated limitation. Code validates it."""
+    model_config = ConfigDict(extra="forbid")
+    config_changes: list[ConfigChange]
+    rationale: str
 
 
 class CriticPreOutput(BaseModel):

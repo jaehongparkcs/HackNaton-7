@@ -113,7 +113,7 @@ def test_lit_dryrun_passes_when_every_row_is_stable(capsys):
 def test_make_record_runs_the_gate_check_before_the_session():
     recipe = (ROOT / "Makefile").read_text().split("record:")[1].split("\n\n")[0]
     steps = [ln.split("noesis_lab ")[1].split()[0] for ln in recipe.splitlines() if "noesis_lab " in ln]
-    assert steps == ["search", "lit-dryrun", "session", "verify", "rederive", "replay"]
+    assert steps == ["search", "deep-read", "lit-dryrun", "session", "verify", "rederive", "replay"]   # deep read before the gate check
     assert "--repeat 3" in recipe and "ABORT" in recipe and "exit 1" in recipe
 
 
@@ -153,7 +153,7 @@ def test_recorded_bundles_are_still_judged_by_the_rule_they_were_recorded_under(
         pytest.skip(f"{session} bundle not present")
     cfg = bundle_config(d)
     assert protocol(cfg) == {"rule_version": 1, "gate_version": 1, "prediction_version": 1,
-                             "search_loop": False}
+                             "deep_read_version": 0, "search_loop": False}
     assert rederive(d) == []
 
 

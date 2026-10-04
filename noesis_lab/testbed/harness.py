@@ -113,10 +113,14 @@ class Lion(torch.optim.Optimizer):
 def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
     decay = [p for p in model.parameters() if p.dim() >= 2]
     no_decay = [p for p in model.parameters() if p.dim() < 2]
-    groups = [{"params": decay, "weight_decay": c.weight_decay},
+    recipe = (c.lr_mult, c.wd_mult) != (1.0, 1.0)      # a full-text recipe (DEEP_READ §4.2) replaces defaults
+    lr, wd = c.lr * c.lr_mult, c.weight_decay * c.wd_mult
+    groups = [{"params": decay, "weight_decay": wd},
               {"params": no_decay, "weight_decay": 0.0}]
     if c.optimizer == "adamw":
-        return torch.optim.AdamW(groups, lr=c.lr, betas=(0.9, 0.95))
+        return torch.optim.AdamW(groups, lr=lr, betas=(0.9, 0.95))
+    if c.optimizer == "lion" and recipe:
+        return Lion(groups, lr=lr)
     if c.optimizer == "lion":
         # Lion's sign update takes a smaller step and a larger decay than Adam (Chen et al., 2023,
         # recommend lr/3-10 and wd x3-10). We fix lr/5, wd x5, so a "harmful" result is the method's,
@@ -124,7 +128,7 @@ def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
         lion_groups = [{"params": decay, "weight_decay": c.weight_decay * 5},
                        {"params": no_decay, "weight_decay": 0.0}]
         return Lion(lion_groups, lr=c.lr / 5)
-    return torch.optim.SGD(groups, lr=c.lr, momentum=0.9)
+    return torch.optim.SGD(groups, lr=lr, momentum=0.9)
 
 
 # ------------------------------------------------------------------------------ env

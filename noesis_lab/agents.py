@@ -79,7 +79,7 @@ class GapScientist:
         self.system = (PROMPTS / "scientist_gap.md").read_text()
 
     def propose(self, fx: Fixture, baseline: ExperimentConfig, required: dict[str, str], *,
-                revision_of: dict[str, str] | None = None, overlap: str = ""
+                revision_of: dict[str, str] | None = None, overlap: str = "", notes: str = ""
                 ) -> tuple[GapScientistOutput, ExperimentConfig, dict, str]:
         """`required` is the delta to write for. In a revision, `revision_of` is the previous delta
         and the Scientist must pick a strict subset of it (validated by code)."""
@@ -93,6 +93,8 @@ class GapScientist:
                 f"Baseline configuration:\n{json.dumps(baseline.model_dump(), sort_keys=True, indent=1)}\n\n"
                 f"EXPLANATION PATH (why code flagged this gap):\n{path}\n\n"
                 f"Claims on the path (verbatim quotes from the retrieved abstracts):\n{quotes}\n")
+        if notes:       # deep read: what the full text adds (revision r1); absent for older sessions
+            user += f"\nFULL-TEXT FINDINGS (deep read; papers chosen by code, quotes verified):\n{notes}\n"
         if revision_of:
             user += (f"\nREVISION. The literature check found an overlap:\n{overlap}\n"
                      f"Return a strict subset of {json.dumps(revision_of, sort_keys=True)}.\n")

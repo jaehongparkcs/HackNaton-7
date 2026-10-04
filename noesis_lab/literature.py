@@ -56,6 +56,10 @@ class Snapshot:
         self.directions: list[DirectionRecord] = []       # scout + deterministic directions (scout.json)
         self.papers: dict[str, RetrievedPaper] = {p["paper_id"]: RetrievedPaper(**p) for p in doc["papers"]}
         self.claims: dict[str, Claim] = {}
+        self.deep = None                                  # a frozen deep read, when applied (DEEP_READ.md)
+        self.recipes: dict[str, dict] = {}
+        self.stated: list[dict] = []
+        self.superseded: dict[str, Claim] = {}
         for raw in json.loads(Path(claims_path).read_text())["claims"]:
             c = Claim(**raw)
             if c.paper_id not in self.papers:
@@ -67,14 +71,20 @@ class Snapshot:
         self._build_index()
 
     @classmethod
-    def from_corpus(cls, corpus: Path) -> Snapshot:
-        """A frozen session corpus (results/<session>/corpus). No network."""
+    def from_corpus(cls, corpus: Path, deep: bool = True) -> Snapshot:
+        """A frozen session corpus (results/<session>/corpus). No network. If the corpus holds a frozen
+        deep read (corpus/deep/, DEEP_READ.md) it is applied unless `deep=False` (the abstract-only r0)."""
         mp = Path(corpus) / "meta.json"
         snap = cls(Path(corpus) / "papers.json", Path(corpus) / "claims.json",
                    json.loads(mp.read_text()) if mp.exists() else None)
         sp = Path(corpus) / "scout.json"
         if sp.exists():
             snap.directions = [DirectionRecord(**d) for d in json.loads(sp.read_text())["directions"]]
+        if deep:
+            from .deep import apply as deep_apply
+            dr = deep_apply.load(Path(corpus))
+            if dr is not None:
+                deep_apply.apply(snap, dr)
         return snap
 
     def add(self, papers: list[RetrievedPaper], claims: list[Claim]) -> None:

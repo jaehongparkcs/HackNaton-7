@@ -140,3 +140,65 @@ def timeline_rows(events: list[dict], decisions: list[dict], runs: list[dict]) -
                      "gap before (s)": round(gap, 1), "stall": "⚠ stall" if gap > STALL_SECONDS else ""})
         prev = t
     return rows
+
+
+# ----------------------------------------------------------------------------- deep read
+def deep_selection_rows(selection: dict) -> list[dict[str, Any]]:
+    """Why each paper was read: hypothesis → paper, proximity and its relations."""
+    rows = []
+    for t in selection.get("targets", []):
+        for p in t["papers"]:
+            rows.append({"hypothesis": t["key"], "why queued": t["reason"], "paper": p["paper_id"],
+                         "title": p["title"][:70], "proximity": p["proximity"],
+                         "relations": ", ".join(f"{r['relation']} ({r['ref']}, {r['weight']:.2f})" for r in p["relations"]),
+                         "read": "yes" if p["read"] else "no (cap)"})
+    return rows
+
+
+def _v(x: Any) -> str:
+    return "not in queue" if x is None else f"{x:.3f}" if isinstance(x, float) else str(x)
+
+
+def deep_update_rows(decisions: list[dict]) -> list[dict[str, Any]]:
+    """Every outcome the full text changed (deep_read_update decisions), with the quote it rests on."""
+    rows = []
+    for d in decisions:
+        if d["kind"] != "deep_read_update":
+            continue
+        w = d["what"]
+        if w == "coverage":
+            row = {"what": "coverage", "subject": f"{d['claim_id']} (arXiv:{d['paper_id']})",
+                   "change": f"{d['before']} → {d['after']}",
+                   "quote": f"{d['section']}: “{d['quote']}” ({d['parameter_count']} parameters)"}
+        elif w == "recipe":
+            src = d.get("sources", {})
+            quote = next((v["quote"] for v in src.values()), "")
+            row = {"what": "recipe", "subject": d["method"],
+                   "change": f"lr × {d['lr_mult']:g}, weight decay × {d['wd_mult']:g}",
+                   "quote": f"arXiv:{d['paper_id']} ({d.get('version') or '?'}): “{quote}”"}
+        elif w == "stated_gap":
+            row = {"what": "stated gap", "subject": d["candidate_key"], "change": f"new gap, score {d['gap_score']:.3f}"
+                   + ("" if d.get("concrete") else " (no concrete condition: × 0.5)"),
+                   "quote": f"arXiv:{d['paper_id']}: “{d['limitation']}”"}
+        else:
+            passages = d.get("passages") or {}
+            row = {"what": w.replace("_", " "), "subject": d["candidate_key"],
+                   "change": f"{_v(d['before'])} → {_v(d['after'])}",
+                   "quote": "; ".join(f"{c}: “{q}”" for c, q in passages.items())
+                   or ("full-text findings: " + ", ".join(d.get("findings", [])) if d.get("findings") else "")}
+        rows.append({"decision": d["decision_id"], **row})
+    return rows
+
+
+def revision_lines(rev: dict) -> list[str]:
+    """r0 (abstract only) → r1 (with the full text) for one hypothesis, as plain lines."""
+    r0, r1 = rev.get("r0") or {}, rev.get("r1") or {}
+    out = []
+    for k, label in (("gap_score", "gap score"), ("status", "literature status"),
+                     ("predicted_direction", "predicted direction"), ("coverage", "coverage in our setting")):
+        if r0.get(k) != r1.get(k):
+            out.append(f"{label}: {_v(r0.get(k))} → {_v(r1.get(k))}")
+    new = sorted(set(r1.get("claim_ids", [])) - set(r0.get("claim_ids", [])))
+    if new:
+        out.append("new claims on the path: " + ", ".join(new))
+    return out

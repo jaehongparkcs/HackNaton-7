@@ -29,6 +29,7 @@ def protocol(cfg: dict[str, Any]) -> dict[str, int]:
     p = cfg.get("protocol", {})
     return {"rule_version": int(p.get("rule_version", 1)), "gate_version": int(p.get("gate_version", 1)),
             "prediction_version": int(p.get("prediction_version", 1)),
+            "deep_read_version": int(p.get("deep_read_version", 0)),       # 0 = no deep read
             "search_loop": bool(cfg.get("search_loop", {}).get("enabled", False))}
 
 

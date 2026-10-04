@@ -13,6 +13,7 @@ from pydantic import BaseModel
 from .schemas import (
     CriticPostOutput,
     CriticPreOutput,
+    DeepFindings,
     ExtractionOutput,
     Fixture,
     GapScientistOutput,
@@ -21,6 +22,7 @@ from .schemas import (
     QueryPlan,
     ScientistOutput,
     ScoutOutput,
+    StatedGapProposal,
 )
 
 # Keyword -> allowed config change, for the scripted extraction mock only.
@@ -59,6 +61,46 @@ def _mock_extraction(user: str) -> ExtractionOutput:
     return ExtractionOutput(claims=claims)
 
 
+_DEEP_KEYWORDS = [*_MOCK_KEYWORDS, ("lion", "optimizer=lion")]
+
+
+def _mock_deep(user: str) -> DeepFindings:
+    """Scripted stand-in for the full-text read: quote whole sentences that match simple cues."""
+    out: dict[str, list] = {k: [] for k in ("setting", "recipes", "results", "mechanisms", "limitations",
+                                            "small_scale_evidence")}
+    for name, text in re.findall(r"## SECTION (\w+)\n(.*?)(?=\n\n## SECTION |\n*$)", user, re.S):
+        for sent in re.split(r"(?<=\.)\s+", text.strip()):
+            low = sent.lower()
+            method = next((c for kw, c in _DEEP_KEYWORDS if kw in low), "")
+            params = re.search(r"(\d+(?:\.\d+)?\s*[MB])\s*parameters", sent)
+            if params and not out["setting"] and name in ("experimental_setup", "appendix_setup", "method"):
+                out["setting"].append({
+                    "model_family": "transformer" if "transformer" in low else "rnn" if "rnn" in low else "unspecified",
+                    "task": "char_language_modeling" if "character" in low else "language_modeling"
+                    if "language model" in low else "translation" if "translation" in low else "unspecified",
+                    "parameter_count": params.group(1), "dataset": "unspecified", "training_steps": "unspecified",
+                    "batch_size": "unspecified", "quote": sent, "section": name})
+            for hp, cue in (("lr", "learning rate"), ("weight_decay", "weight decay")):
+                rng = re.search(cue + r"[^,;]*?(\d+)-(\d+)x (smaller|larger)", low)
+                if method and rng:
+                    a, b = int(rng.group(1)), int(rng.group(2))
+                    lo, hi = (1 / b, 1 / a) if rng.group(3) == "smaller" else (a, b)
+                    out["recipes"].append({"method": method, "hyperparameter": hp,
+                                           "value_as_stated": rng.group(0)[len(cue):].strip(),
+                                           "ratio_to_adamw_min": lo, "ratio_to_adamw_max": hi, "value": None,
+                                           "adamw_value": None, "quote": sent, "section": name})
+            if method and name == "results":
+                out["results"].append({"method": method, "direction": "worse" if "worse" in low else "improves",
+                                       "setting_note": "as in the paper", "quote": sent, "section": name})
+            if method and name in ("limitations", "conclusion"):
+                out["limitations"].append({"method": method, "quote": sent, "section": name})
+            if method and "character-level" in low and name in ("results", "experimental_setup") and params:
+                out["small_scale_evidence"].append({"method": method, "direction": "worse" if "worse" in low else "improves",
+                                                    "parameter_count": params.group(1), "char_level": True,
+                                                    "quote": sent, "section": name})
+    return DeepFindings(**out)
+
+
 def make_mock(fixtures: dict[str, Fixture]):
     """`fixtures` is shared with the session: generated candidates are registered there (with
     auto-filled `mock` hints) before they are evaluated."""
@@ -90,6 +132,12 @@ def make_mock(fixtures: dict[str, Fixture]):
                 mk("Curriculum over sequence length", ["curriculum learning"], [])])
         if schema is ExtractionOutput:
             return _mock_extraction(user)
+        if schema is DeepFindings:
+            return _mock_deep(user)
+        if schema is StatedGapProposal:
+            f, v = re.search(r"METHOD: (\w+)=(\S+)", user).groups()
+            return StatedGapProposal(config_changes=[{"field": f, "value": v}],
+                                     rationale="(mock) tests the stated limitation in our setting.")
         if schema is CriticPostOutput:
             return CriticPostOutput(reading="(mock) The measured deltas are compared with the noise "
                                             "floor above. This is a screening result, not a confirmation.")

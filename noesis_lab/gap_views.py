@@ -7,7 +7,7 @@ import textwrap
 from typing import Any
 
 BADGE = {"coverage": "transfer", "abc": "ABC", "link": "combination", "contradiction": "resolution",
-         "bridge": "bridge"}
+         "bridge": "bridge", "stated": "author-stated"}
 STATUS_STYLE = {      # direction gap status → (fill, border style)
     "covered": ("#d9d9d6", "solid"), "partial": ("#f6d58a", "solid"), "contested": ("#c9a7e8", "solid"),
     "open": ("#a8dba8", "solid"), "unexplored": ("#ffffff", "solid")}
@@ -60,6 +60,8 @@ def gap_type_summary(gaps: list[dict], graph: dict) -> list[dict[str, Any]]:
         ("Resolution (contradiction)", count["contradiction"],
          "No structural support found: no runnable method has claims with opposite signs in one setting bucket."),
     ]
+    if count["stated"]:          # only sessions with a deep read can have author-stated gaps
+        rows.append(("Author-stated (deep read: limitations in the full text)", count["stated"], ""))
     return [{"family": name, "gaps": n, "note": "" if n else note} for name, n, note in rows]
 
 

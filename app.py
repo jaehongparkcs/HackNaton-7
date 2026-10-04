@@ -20,10 +20,13 @@ from noesis_lab.dashboard import (
     LION_CAVEAT,
     analysis_role,
     credit,
+    deep_selection_rows,
+    deep_update_rows,
     degraded_note,
     is_lion,
     notebook_label,
     order_notebooks,
+    revision_lines,
     timeline_rows,
 )
 from noesis_lab.evidence_chain import chain_dot, evidence_grid
@@ -87,7 +90,7 @@ def load(path: str, mtime: float):
                 niche=s.get_meta("niche") or {}, corpus=s.get_meta("corpus") or {},
                 holds=s.get_meta("t4_holds") or {}, gaps=s.get_meta("gaps") or [],
                 gap_graph=s.get_meta("gap_graph") or {}, directions=s.get_meta("directions") or [],
-                explore=s.get_meta("explore") or {})
+                explore=s.get_meta("explore") or {}, deep=s.get_meta("deep_read") or {})
 
 
 D = load(str(books[choice]), books[choice].stat().st_mtime)
@@ -97,7 +100,8 @@ STEPS = profile.get("budget_mode") == "steps"        # equal-token delta is redu
 
 BADGE_LABEL = {"coverage": "Coverage gap (missing cell)", "abc": "ABC closure (hidden connection)",
                "link": "Combination (link prediction)", "contradiction": "Contradiction (signed edges)",
-               "bridge": "Structural hole (bridge between communities)"}
+               "bridge": "Structural hole (bridge between communities)",
+               "stated": "Author-stated limitation (deep read, full text)"}
 STATUS_LABEL = {
     "rejected_prior_art": ("REJECTED: PRIOR ART", "🟥"),
     "rejected_critic": ("REJECTED BY CRITIC", "🟥"),
@@ -394,6 +398,43 @@ if D["gaps"]:
         pc1.dataframe(pd.DataFrame(prediction_counts(prows, "gap type")), use_container_width=True, hide_index=True)
         pc2.dataframe(pd.DataFrame(prediction_counts(prows, "label")), use_container_width=True, hide_index=True)
         st.dataframe(pd.DataFrame(prows), use_container_width=True, hide_index=True)
+    if D["deep"]:
+        dr = D["deep"]
+        st.subheader("Deep read: the full text of the closest papers")
+        dm = dr["meta"]
+        st.caption(f"Before testing, the lab read the full text (arXiv HTML / ar5iv) of {len(dm.get('read', []))} papers chosen by "
+                   "code for their proximity to the top hypotheses. Every finding below is a verbatim quote checked against the "
+                   "fetched section; the bundle stores URL, version and SHA256, never the text (`make verify-deep`).")
+        v = dr.get("validation")
+        if v:
+            b, f = v["abstract_only"]["setting"], v["with_full_text"]["setting"]
+            (st.success if f > b else st.warning)(
+                f"Setting agreement with the human labels: **{f}/{v['n']} with full text** (abstract only: {b}/{v['n']})."
+                + ("" if f > b else " Did not improve. Curated (T1) labels are never overridden."))
+        changes = deep_update_rows(decisions)
+        st.markdown(f"**What the full text changed** ({len(changes)} recorded `deep_read_update` decisions)")
+        if changes:
+            st.dataframe(pd.DataFrame(changes), use_container_width=True, hide_index=True)
+        else:
+            st.caption("Nothing: the full text did not change any coverage, queue status, gap score or recipe.")
+        with st.expander("Why these papers were read (selection by code)"):
+            st.text(dr["selection"].get("rule", ""))
+            st.dataframe(pd.DataFrame(deep_selection_rows(dr["selection"])), use_container_width=True, hide_index=True)
+        with st.expander("Per paper: sections found, findings with quotes, URL + version + SHA256"):
+            for pid, rec in sorted(dr["papers"].items()):
+                st.markdown(f"**arXiv:{pid}** — {rec.get('title', '')}  ·  `{rec['full_text']}`"
+                            + (f"  ·  [{rec['source']}]({rec['url']}) `{rec.get('version')}` sha256 `{(rec.get('html_sha256') or '')[:16]}…`"
+                               if rec.get("url") else "") + ("  ·  validation only" if rec.get("validation_only") else ""))
+                if rec.get("sections"):
+                    st.caption("sections: " + ", ".join(f"{h['heading'] or '—'} → {h['section']} ({h['chars']} chars)"
+                                                       for h in rec["sections"]))
+                for fname, items in rec.get("findings", {}).items():
+                    for it in items:
+                        st.markdown(f"- `{fname}` · {it.get('method') or ''} · _{it['section']}_: “{it['quote']}”")
+                if rec.get("dropped"):
+                    st.caption(f"{len(rec['dropped'])} item(s) dropped by the quote check: "
+                               + "; ".join(f"{d['field']}: {d['reason']}" for d in rec["dropped"][:5]))
+
     st.subheader("Overview map")
     st.graphviz_chart(overview_dot(D["gap_graph"], D["gaps"], our_results(D["hyps"], analyses, D["baseline"])), use_container_width=True)
     st.caption("Boxes = runnable methods, ellipses = mechanisms quoted from abstracts, colors = graph communities. "
@@ -496,6 +537,22 @@ for h in D["hyps"]:
         if h["status"] == "rejected_prior_art":
             d = next(x for x in decisions if x["kind"] == "prior_art_rejection" and x["hypothesis_id"] == h["hypothesis_id"])
             st.success(f"No compute spent: {d['runs_avoided']} paired runs avoided.")
+        rev = h.get("revision")
+        if rev and rev.get("changed"):
+            lines = revision_lines(rev)
+            st.markdown("**What the full text changed** (r0 abstract-only → r1 with the deep read; code):  \n"
+                        + "  \n".join(f"· {x}" for x in lines))
+            st.caption(f"r0 statement (code template): {h.get('statement', '')}  ·  r1: the Scientist's text above "
+                       "(see the proposal), written with the full-text findings. The predicted direction is code's.")
+        rc = h.get("recipe")
+        if rc and "none" in rc:
+            st.caption("Recipe: no recipe found in full text; the optimizer runs with the built-in default.")
+        elif rc:
+            src = rc.get("lr_mult_source") or rc.get("wd_mult_source") or {}
+            st.markdown(f"**Recipe from arXiv:{rc['paper_id']}** (applied by code, not a retune): lr × {rc['lr_mult']:g}, "
+                        f"weight decay × {rc['wd_mult']:g}  \n> “{src.get('quote', '')}”")
+        if h.get("deep_findings"):
+            st.caption("Full-text findings about this change: " + ", ".join(h["deep_findings"]))
         if h.get("config_delta"):
             st.markdown(f"**Typed experiment config (delta vs baseline):** `{json.dumps(h['config_delta'])}` · config hash `{h['config_hash']}`")
             with st.expander("Scientist proposal and Critic pre-run review"):
@@ -580,7 +637,7 @@ for d in decisions:
                      "cycle_start", "exploration_result", "finalists_selected", "confirmation", "promotion",
                      "headline_vs_original_baseline",
                      "queue_rejection", "queue_soft_rejection", "pi_review_hold", "prior_art_soft_rejection",
-                     "search_degraded"):
+                     "search_degraded", "deep_read_update"):
         with st.container(border=True):
             if d["kind"] == "next_action":
                 na = d["next_action"]

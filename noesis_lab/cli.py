@@ -91,6 +91,44 @@ def cmd_search(a) -> int:
     return 0
 
 
+def cmd_deep_read(a) -> int:
+    """Full-text reading of the papers closest to the top hypotheses, frozen into <corpus>/deep/
+    (DEEP_READ.md). Needs network (arXiv HTML / ar5iv) and, live, an API key. No training."""
+    from pathlib import Path
+
+    from .deep.read import build_deep
+    from .llm import LLM
+    from .mock_llm import make_mock
+    cfg = load_config()
+    if not cfg.get("deep_read", {}).get("enabled") and not a.force:
+        print("deep_read.enabled is false in config.yaml: nothing to do (pass --force to run anyway).")
+        return 0
+    corpus = Path(a.corpus)
+    llm = LLM(a.llm, cfg["llm"], mock_fn=make_mock({}) if a.llm == "mock" else None,
+              max_cost_usd=cfg["deep_read"]["max_llm_cost_usd"])
+    meta = build_deep(corpus, llm)
+    print(json.dumps({k: meta.get(k) for k in ("selected", "read", "unavailable", "claims", "overrides", "recipes",
+                                              "stated_gaps", "llm_calls", "llm_cost_usd", "validation")},
+                     indent=2, default=str))
+    v = meta.get("validation")
+    if v:
+        b, f = v["abstract_only"]["setting"], v["with_full_text"]["setting"]
+        print(f"\nsetting agreement with the human labels: {f}/{v['n']} with full text (abstract only: {b}/{v['n']})"
+              + ("" if f > b else "  -- DID NOT IMPROVE: report it (curated T1 labels are never overridden)."))
+    print(f"\nfrozen deep read: {corpus / 'deep'}")
+    return 0
+
+
+def cmd_verify_deep(a) -> int:
+    """Re-fetch every read paper and check the HTML SHA256 and every stored quote (needs network)."""
+    from .deep.read import verify_deep
+    problems = verify_deep(ROOT / load_config()["paths"]["results"] / a.session / "corpus")
+    for p in problems:
+        print("PROBLEM:", p)
+    print("VERIFY-DEEP " + ("OK" if not problems else "FAILED"))
+    return 1 if problems else 0
+
+
 def cmd_lit_dryrun(a) -> int:
     """Gate stability: run the Literature agent on every fixture + queue candidate `--repeat` times.
     A row is STABLE if every repeat gives the same verdict and the same gate action (the cited
@@ -113,7 +151,7 @@ def cmd_lit_dryrun(a) -> int:
     explore_mode = bool(snap.directions) and cfg.get("explore", {}).get("enabled")
     if explore_mode:                                   # the hypothesis engine's own queue
         fixtures.pop("fixture_b_rmsnorm", None)        # the engine generates RMSNorm (FIXES3 P0-3)
-        graph, found = gaps.find_gaps(frozen, protocol(cfg)["prediction_version"] >= 2)
+        graph, found = gaps.find_gaps(frozen, protocol(cfg)["prediction_version"] >= 2, stated=snap.stated)
         for item in gaps.gap_queue(found, graph, frozen, top_n=cfg["explore"]["top_gaps_for_hypotheses"]):
             fx = gap_fixture(item, next(g for g in found if g.gap_id == item.gap_ids[0]), baseline)
             fixtures.setdefault(fx.fixture_id, fx)
@@ -218,6 +256,14 @@ def main(argv=None) -> int:
     se.add_argument("--out", default="")
     se.add_argument("--llm", choices=["live", "mock"], default="live")
     se.set_defaults(fn=cmd_search)
+    dr = sub.add_parser("deep-read", help="read the full text of the closest papers; freeze into <corpus>/deep/")
+    dr.add_argument("--corpus", required=True)
+    dr.add_argument("--llm", choices=["live", "mock"], default="live")
+    dr.add_argument("--force", action="store_true", help="run even if deep_read.enabled is false")
+    dr.set_defaults(fn=cmd_deep_read)
+    vd = sub.add_parser("verify-deep", help="re-fetch read papers; check SHA256 and every quote (network)")
+    vd.add_argument("--session", default="golden")
+    vd.set_defaults(fn=cmd_verify_deep)
     d = sub.add_parser("lit-dryrun", help="Literature agent only: verdict stability over repeats (cents)")
     d.add_argument("--llm", choices=["live", "mock"], default="live")
     d.add_argument("--repeat", type=int, default=2)

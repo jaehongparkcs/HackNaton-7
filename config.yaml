@@ -54,6 +54,16 @@ explore:                          # hypothesis engine (NEXT_VERSION.md). Runs wi
   tighten_openalex_first: true    # OpenAlex polite pool first, arXiv only if that request fails (B4)
   tighten_shared_cache: true      # reuse tighten responses across sessions: work/cache/tighten_{openalex,arxiv}/
 
+deep_read:                        # full text of the papers closest to the top hypotheses (DEEP_READ.md)
+  enabled: true                   # `make record` runs the deep read after the search
+  top_hypotheses: 8
+  papers_per_hypothesis: 3
+  max_papers: 20
+  section_token_budget: 12000     # per paper; priority: setup > appendix setup > results > limitations > ...
+  small_scale_max_params: 10000000
+  validate: true                  # also read the curated papers and report setting agreement before/after
+  max_llm_cost_usd: 4.0
+
 search_loop:                      # explore cheaply, confirm rigorously, promote (GRAPH_GAPS Part B)
   enabled: true                   # only for sessions whose corpus has scout directions
   explore_seed: 0                 # exploration reuses the incumbent's run on this seed
@@ -73,10 +83,13 @@ seeds:
 #   gate 2 (2026-10-03): the LLM lists ALL same-comparison claims; code picks the verdict, strongest first.
 #   prediction 2 (2026-10-04): combination gaps predict the sum of their components' literature signs
 #                              (both + -> +; mixed -> no prediction). explore2 and earlier are prediction 1.
+#   deep read 1 (2026-10-04): a session whose corpus holds corpus/deep/ (from `make deep-read`) applies it
+#                             (DEEP_READ.md). Recorded bundles have no deep read.
 protocol:
   rule_version: 2
   gate_version: 2
   prediction_version: 2
+  deep_read_version: 1
 
 # Pre-registered next-action rule thresholds (BUILD_PLAN s6). Written before the first run.
 rule:
