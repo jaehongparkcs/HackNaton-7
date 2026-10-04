@@ -207,7 +207,8 @@ def test_deep_read_freezes_quotes_hashes_and_never_the_full_text(deep_corpus):
     assert "We train Transformer language models with 125M parameters" in blob     # a quoted finding
     assert "<html" not in blob and "ltx_section" not in blob                        # never the page itself
     v = meta["validation"]
-    assert v["n"] == 9 and set(v["abstract_only"]) == {"config_mapping", "direction", "setting"}
+    assert v["n"] == 9 and set(v["abstract_only"]) == {"config_mapping", "direction", "setting", "setting_of_matched"}
+    assert v["with_full_text"]["setting_of_matched"] <= v["with_full_text"]["config_mapping"]
 
 
 def test_full_text_overrides_settings_but_never_a_curated_label(deep_corpus):
