@@ -670,6 +670,7 @@ class Session:
             start = self.store.add_decision("cycle_start", "", {
                 "cycle": cycle, "candidates": [q.key for q in queue], "incumbent_delta": dict(self.incumbent_delta),
                 "queue_inputs": self._decision_inputs()})
+            self._prefetch(queue)
             for item in queue:
                 if self.runner.n_executed + 1 > self.budget["max_runs"]:
                     self._stop("max_runs", f"run budget {self.budget['max_runs']} reached while exploring", start)
@@ -702,6 +703,27 @@ class Session:
                 # ties: the simpler change (fewer fields), then alphabetical
                 best = min(promotable, key=lambda c: (-c[4].improvement_in_noise_sd, len(c[3]), stats.delta_key(c[3])))
                 self._promote(*best)
+
+    def _prefetch(self, queue: list[QueueItem]) -> None:
+        """Prepare the cycle's candidates concurrently before any training (FINAL_FIXES B2): each
+        one's Scientist proposal and its pre-run Critic review are requested in parallel, under
+        `llm.speculate()`. Nothing is recorded or decided here; the sequential loop below issues the
+        same requests in its usual order and is served the held response only for a byte-identical
+        request, so the recordings, events and decisions are what a sequential run would write."""
+        if self.replay or self.llm.workers < 2 or len(queue) < 2:
+            return
+        from concurrent.futures import ThreadPoolExecutor
+        fixtures = [self._generate(item) for item in queue]
+
+        def prep(fx: Fixture) -> None:
+            try:
+                with self.llm.speculate():
+                    prop, cfg, delta, _ = self.gap_scientist.propose(fx, self.incumbent, dict(fx.required_delta))
+                    self.critic.review(fx, prop, self.incumbent, cfg, delta)
+            except Exception:  # noqa: BLE001 - a failed prefetch only means the loop calls live
+                pass
+        with ThreadPoolExecutor(min(self.llm.workers, len(fixtures))) as pool:
+            list(pool.map(prep, fixtures))
 
     # ------------------------------------------------------------------ candidate queue
     def _queue_inputs(self) -> dict:

@@ -11,6 +11,14 @@ bundle recorded before per-role effort replays under its own config with its sin
 Live calls have an explicit timeout (`llm.timeout_s`, `llm.max_retries`): a stalled request fails
 and goes through the crash-seal path instead of hanging the session.
 
+Concurrency (`llm.concurrency` workers; 1 = sequential, the default for older configs). Calls are
+I/O-bound, so callers may issue them from a thread pool; this class is thread-safe for that.
+Callers apply results in a fixed order, so decisions never depend on which call returned first.
+`speculate()` runs calls ahead of the sequential path (live mode only): their responses are held,
+not recorded, and are served to the sequential path only for a byte-identical request (same key),
+which then records them and writes the event in its usual order. A speculative response the
+sequential path never asks for is dropped (its cost still counts towards the budget).
+
 Rules enforced here (SPEC): strict JSON validated by Pydantic; invalid output -> one retry with the
 validation error -> fail loudly. Refusals and truncation also fail loudly.
 """
@@ -18,7 +26,9 @@ from __future__ import annotations
 
 import json
 import os
-from collections.abc import Callable
+import threading
+from collections.abc import Callable, Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Literal, TypeVar
 
@@ -81,6 +91,11 @@ class LLM:
         self.n_calls = 0
         self._replay: dict[str, dict] = {}
         self._client = None
+        self.workers = max(1, int(cfg.get("concurrency", 1)))
+        self._lock = threading.Lock()
+        self._local = threading.local()
+        self._prefetched: dict[str, dict] = {}
+        self.n_speculative = 0
         if mode == "replay":
             if not self.recordings_path or not self.recordings_path.exists():
                 raise LLMError(f"replay needs recordings at {self.recordings_path}")
@@ -92,10 +107,23 @@ class LLM:
             self.recordings_path.parent.mkdir(parents=True, exist_ok=True)
 
     # ------------------------------------------------------------------ transport
+    @contextmanager
+    def speculate(self) -> Iterator[None]:
+        """Calls made in this block (on this thread) are prefetches: not recorded, no event."""
+        self._local.speculative = True
+        try:
+            yield
+        finally:
+            self._local.speculative = False
+
+    @property
+    def speculative(self) -> bool:
+        return getattr(self._local, "speculative", False)
+
     def effort_for(self, role: str) -> str:
         return self.cfg.get("effort_by_role", {}).get(role, self.effort)
 
-    def _live(self, role: str, system: str, user: str, schema: dict) -> dict:
+    def _connect(self) -> None:
         if self._client is None:
             import anthropic
             from dotenv import load_dotenv
@@ -104,6 +132,10 @@ class LLM:
                 raise LLMError("ANTHROPIC_API_KEY not set (live/record mode only; replay needs none)")
             self._client = anthropic.Anthropic(timeout=float(self.cfg.get("timeout_s", 120)),
                                                max_retries=int(self.cfg.get("max_retries", 2)))
+
+    def _live(self, role: str, system: str, user: str, schema: dict) -> dict:
+        with self._lock:
+            self._connect()
         kw: dict[str, Any] = dict(
             model=self.model, max_tokens=self.cfg["max_tokens"], system=system,
             messages=[{"role": "user", "content": user}],
@@ -127,7 +159,9 @@ class LLM:
         return (usage.get("input_tokens", 0) * p["input"] + usage.get("output_tokens", 0) * p["output"]) / 1e6
 
     def _raw(self, role: str, system: str, user: str, schema_cls: type[BaseModel],
-             schema: dict) -> tuple[str, dict]:
+             schema: dict) -> tuple[str, dict, bool]:
+        """Returns (key, record, paid): `paid` is False when the response was prefetched and its
+        cost was already counted when the speculative call was made."""
         effort = self.effort_for(role)
         key = request_key(self.model, effort, role, system, user, schema)
         if self.mode == "replay":
@@ -135,21 +169,31 @@ class LLM:
             if rec is None:
                 raise ReplayMiss(f"no recording for {role} request {key[:12]} "
                                  "(prompt or schema changed since recording?)")
-            return key, rec
-        if self.max_cost is not None and self.cost_usd >= self.max_cost:
-            raise BudgetExceeded(f"LLM budget ${self.max_cost:.2f} exhausted")
-        if self.mode == "mock":
+            return key, rec, True
+        with self._lock:
+            held = None if self.speculative else self._prefetched.pop(key, None)
+            if held is None and self.max_cost is not None and self.cost_usd >= self.max_cost:
+                raise BudgetExceeded(f"LLM budget ${self.max_cost:.2f} exhausted")
+        if held is not None:
+            rec = held
+        elif self.mode == "mock":
             out = self.mock_fn(role, system, user, schema_cls)       # type: ignore[misc]
             rec = {"response_text": out.model_dump_json(), "served_model": "mock",
                    "usage": {"input_tokens": 0, "output_tokens": 0}, "stop_reason": "end_turn"}
         else:
             rec = self._live(role, system, user, schema)
         rec = {"key": key, "role": role, "model": self.model, "effort": effort,
-               "system": system, "user": user, "schema_name": schema_cls.__name__, **rec}
-        if self.recordings_path:
-            with self.recordings_path.open("a") as f:
-                f.write(json.dumps(rec, sort_keys=True) + "\n")
-        return key, rec
+               "system": system, "user": user, "schema_name": schema_cls.__name__,
+               **{k: v for k, v in rec.items() if k not in ("key", "role", "model", "effort", "system", "user",
+                                                            "schema_name")}}
+        with self._lock:
+            if self.speculative:
+                self._prefetched[key] = rec
+                self.n_speculative += 1
+            elif self.recordings_path:
+                with self.recordings_path.open("a") as f:
+                    f.write(json.dumps(rec, sort_keys=True) + "\n")
+        return key, rec, held is None
 
     # ------------------------------------------------------------------ public
     def call(self, role: str, system: str, user: str, schema_cls: type[T], *,
@@ -158,11 +202,14 @@ class LLM:
         schema = strict_schema(schema_cls)
         prompt, last_err = user, ""
         for attempt in (1, 2):
-            key, rec = self._raw(role, system, prompt, schema_cls, schema)
+            key, rec, paid = self._raw(role, system, prompt, schema_cls, schema)
             usage = rec.get("usage", {})
             cost = self._cost(usage)
-            self.cost_usd += cost
-            self.n_calls += 1
+            with self._lock:
+                if paid:
+                    self.cost_usd += cost
+                if not self.speculative:
+                    self.n_calls += 1
             try:
                 parsed = schema_cls.model_validate_json(rec["response_text"])
                 if validate:
@@ -170,7 +217,8 @@ class LLM:
                 err = ""
             except (ValidationError, ValueError) as e:
                 parsed, err = None, str(e)[:1500]
-            eid = self._event(role, key, rec, attempt, usage, cost, err)
+            eid = (f"speculative-{key[:8]}" if self.speculative else
+                   self._event(role, key, rec, attempt, usage, cost, err))
             if parsed is not None:
                 return parsed, eid
             last_err = err

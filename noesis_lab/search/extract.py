@@ -63,25 +63,42 @@ def to_claim(ec: ExtractedClaim, paper: RetrievedPaper, n: int, event: str,
 
 def extract(llm: LLM, papers: Sequence[RetrievedPaper], *, role: str = "extract"
             ) -> tuple[list[Claim], list[dict], list[str]]:
-    """Returns (claims, dropped, errors). A failed batch leaves its papers unextracted (T4)."""
+    """Returns (claims, dropped, errors). A failed batch leaves its papers unextracted (T4).
+
+    Batches are independent LLM calls, issued concurrently (`llm.workers`); their results are
+    applied in batch order, so the output never depends on which call returned first."""
     system = (PROMPTS / "extract.md").read_text()
     claims: list[Claim] = []
     dropped: list[dict] = []
     errors: list[str] = []
-    for i in range(0, len(papers), BATCH):
-        batch = list(papers[i:i + BATCH])
+    batches = [list(papers[i:i + BATCH]) for i in range(0, len(papers), BATCH)]
+
+    def run(batch: list[RetrievedPaper]):
         by_id = {p.paper_id: p for p in batch}
 
-        def validate(o: ExtractionOutput, by_id=by_id) -> None:
+        def validate(o: ExtractionOutput) -> None:
             bad = sorted({c.paper_id for c in o.claims} - set(by_id))
             if bad:
                 raise ValueError(f"paper_id {bad} not in this batch; use only {sorted(by_id)}")
 
         try:
-            out, event = llm.call(role, system, _prompt(batch), ExtractionOutput, validate=validate)
+            return llm.call(role, system, _prompt(batch), ExtractionOutput, validate=validate), None
         except Exception as e:  # noqa: BLE001 - the search degrades instead of aborting
-            errors.append(f"extraction batch {i // BATCH}: {type(e).__name__}: {e}"[:300])
+            return None, e
+
+    workers = min(getattr(llm, "workers", 1), len(batches)) or 1
+    if workers > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(workers) as pool:
+            results = list(pool.map(run, batches))
+    else:
+        results = [run(b) for b in batches]
+    for i, (batch, (res, exc)) in enumerate(zip(batches, results)):
+        if exc is not None:
+            errors.append(f"extraction batch {i}: {type(exc).__name__}: {exc}"[:300])
             continue
+        out, event = res
+        by_id = {p.paper_id: p for p in batch}
         count: dict[str, int] = {}
         for ec in out.claims:
             paper = by_id[ec.paper_id]

@@ -11,6 +11,8 @@ llm:
     extract_validation: low
     extract_tighten: low
   critic_pre_cap: {confounds: 5, required_controls: 4}   # one line each; recorded bundles had no cap
+  concurrency: 5                  # LLM calls issued in parallel (extraction batches, gate dry run, per-cycle
+                                  # candidate prep); results are applied in a fixed order. 1 = sequential.
   timeout_s: 120                  # per request; with max_retries 2 a stalled call fails in ~6 min at worst
   max_retries: 2
   max_tokens: 16000

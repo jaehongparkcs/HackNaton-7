@@ -129,9 +129,25 @@ def cmd_lit_dryrun(a) -> int:
     llm = LLM(a.llm, cfg["llm"], mock_fn=make_mock(fixtures) if a.llm == "mock" else None)
     agent, stable = LiteratureAgent(llm, snap), True
     base_agent = LiteratureAgent(llm, curated) if a.corpus else None
+    # Every (row, repeat) check and every leakage check is an independent LLM call: issue them
+    # concurrently (llm.concurrency), then report rows in their fixed order.
+    jobs = [(fid, i) for fid in fixtures for i in range(a.repeat)]
+
+    def check(job):
+        fid, i = job
+        if i < 0:
+            return base_agent.check(fixtures[fid])
+        return agent.check(fixtures[fid], contested_ids=contested.get(fid, ()), require_change=require.get(fid))
+    if base_agent:
+        jobs += [(fid, -1) for fid, fx in fixtures.items() if fx.origin == "fixture"]
+    if llm.workers > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(llm.workers) as pool:
+            done = dict(zip(jobs, pool.map(check, jobs)))
+    else:
+        done = {j: check(j) for j in jobs}
     for fid, fx in fixtures.items():
-        runs = [agent.check(fx, contested_ids=contested.get(fid, ()), require_change=require.get(fid))
-                for _ in range(a.repeat)]
+        runs = [done[(fid, i)] for i in range(a.repeat)]
         actions = {r.gate for r in runs}
         verdicts = {r.verdict.value for r in runs}
         cited = sorted({r.claim_id or "-" for r in runs})
@@ -140,7 +156,7 @@ def cmd_lit_dryrun(a) -> int:
         line = (f"{fid:44s} {tag} actions: {', '.join(sorted(actions))}; verdicts: {', '.join(sorted(verdicts))}"
                 + f"   cited: {', '.join(cited)}")
         if base_agent and fx.origin == "fixture":      # leakage check: did the larger corpus change it?
-            before = base_agent.check(fx)
+            before = done[(fid, -1)]
             if before.gate not in actions:              # the action changed: real leakage
                 line += f"   LEAKAGE: curated-only action was {before.gate}. Report it and pick a new fixture."
             elif before.verdict.value not in verdicts:  # only the label changed: report, do not abort

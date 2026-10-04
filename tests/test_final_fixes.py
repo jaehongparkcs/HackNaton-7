@@ -291,3 +291,47 @@ def test_live_make_targets_run_under_caffeinate():
     for target in ("golden:", "record:", "search:", "rehearse:"):
         body = mk.split("\n" + target, 1)[1].split("\n\n", 1)[0]
         assert "$(LIVE)" in body, target
+
+
+# --------------------------------------------------------------------------- B2 concurrency
+def _loop_run(name, monkeypatch, workers):
+    from .test_explore import CFG, explore_session
+    from .test_loop import OPEN, _promising_dropout
+    monkeypatch.setitem(CFG["llm"], "concurrency", workers)
+    s = explore_session(name, monkeypatch, overrides=OPEN, effect=_promising_dropout)
+    assert s.llm.workers == workers
+    out = s.run()
+    d = ROOT / "results" / name
+    return out, (d / "recordings" / "llm.jsonl").read_text(), s.llm
+
+
+def test_concurrent_preparation_records_exactly_what_a_sequential_run_records(session_name, monkeypatch, capsys):
+    from noesis_lab.cli import main
+    seq, seq_rec, _ = _loop_run(session_name, monkeypatch, 1)
+    par, par_rec, llm = _loop_run(session_name, monkeypatch, 5)
+    assert llm.n_speculative > 0                                 # the cycle's candidates were prefetched
+    assert par["state_digest"] == seq["state_digest"]            # same events, decisions, runs, links
+    assert par_rec == seq_rec                                    # same recordings, in the same order
+    assert par["llm_calls"] == seq["llm_calls"]
+    assert main(["replay", "--session", session_name]) == 0 and "REPLAY OK" in capsys.readouterr().out
+
+
+def test_concurrent_extraction_keeps_batch_order(monkeypatch):
+    import time
+
+    from noesis_lab.schemas import RetrievedPaper
+    from noesis_lab.search import extract as ex
+    papers = [RetrievedPaper(paper_id=f"p{i}", title=f"t{i}", published="2020-01-01", url="u",
+                             abstract=f"We find RMSNorm helps {i}.", abstract_sha256="x", source="arxiv")
+              for i in range(3 * ex.BATCH)]
+    from noesis_lab.mock_llm import make_mock
+    base = make_mock({})
+
+    def slow_first(role, system, user, schema):             # the first batch returns last
+        if "### PAPER p0\n" in user:
+            time.sleep(0.2)
+        return base(role, system, user, schema)
+    cfg = {"model": "m", "effort": "medium", "max_tokens": 10, "price_per_mtok": {"input": 0, "output": 0}}
+    one = ex.extract(LLM("mock", cfg, mock_fn=slow_first), papers)
+    many = ex.extract(LLM("mock", {**cfg, "concurrency": 3}, mock_fn=slow_first), papers)
+    assert [c.claim_id for c in one[0]] == [c.claim_id for c in many[0]] and len(one[0]) == len(papers)
