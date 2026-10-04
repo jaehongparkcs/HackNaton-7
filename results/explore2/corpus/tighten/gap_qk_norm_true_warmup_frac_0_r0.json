@@ -1,0 +1,23 @@
+{
+  "fixture_id": "gap_qk_norm_true_warmup_frac_0",
+  "round": 0,
+  "delta": {
+    "qk_norm": "true",
+    "warmup_frac": "0"
+  },
+  "queries": [
+    {
+      "q": "\"QK normalization\" AND \"without warmup\" AND \"language model\"",
+      "n_results": 0
+    },
+    {
+      "q": "\"QK normalization\" AND \"without warmup\" AND \"Transformer\"",
+      "n_results": 0
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [],
+  "claims": [],
+  "dropped": [],
+  "degraded": []
+}

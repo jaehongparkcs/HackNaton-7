@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yRL8IhA89hVEBYjQFPXmNEl1z9Y</id>
+  <title>arXiv Query: search_query=all:"without warmup" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T01:09:59Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22without+warmup%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>2</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2303.06296v2</id>
+    <title>Stabilizing Transformer Training by Preventing Attention Entropy Collapse</title>
+    <updated>2023-07-25T17:42:37Z</updated>
+    <link href="https://arxiv.org/abs/2303.06296v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2303.06296v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training stability is of great importance to Transformers. In this work, we investigate the training dynamics of Transformers by examining the evolution of the attention layers. In particular, we track the attention entropy for each attention head during the course of training, which is a proxy for model sharpness. We identify a common pattern across different architectures and tasks, where low attention entropy is accompanied by high training instability, which can take the form of oscillating loss or divergence. We denote the pathologically low attention entropy, corresponding to highly concentrated attention scores, as $\textit{entropy collapse}$. As a remedy, we propose $σ$Reparam, a simple and efficient solution where we reparametrize all linear layers with spectral normalization and an additional learned scalar. We demonstrate that $σ$Reparam successfully prevents entropy collapse in the attention layers, promoting more stable training. Additionally, we prove a tight lower bound of the attention entropy, which decreases exponentially fast with the spectral norm of the attention logits, providing additional motivation for our approach. We conduct experiments with $σ$Reparam on image classification, image self-supervised learning, machine translation, speech recognition, and language modeling tasks. We show that $σ$Reparam provides stability and robustness with respect to the choice of hyperparameters, going so far as enabling training (a) a Vision Transformer {to competitive performance} without warmup, weight decay, layer normalization or adaptive optimizers; (b) deep architectures in machine translation and (c) speech recognition to competitive performance without warmup and adaptive optimizers. Code is available at \url{https://github.com/apple/ml-sigma-reparam}.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-03-11T03:30:47Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>In International Conference on Machine Learning (pp. 40770-40803). PMLR. 2023</arxiv:journal_ref>
+    <author>
+      <name>Shuangfei Zhai</name>
+    </author>
+    <author>
+      <name>Tatiana Likhomanenko</name>
+    </author>
+    <author>
+      <name>Etai Littwin</name>
+    </author>
+    <author>
+      <name>Dan Busbridge</name>
+    </author>
+    <author>
+      <name>Jason Ramapuram</name>
+    </author>
+    <author>
+      <name>Yizhe Zhang</name>
+    </author>
+    <author>
+      <name>Jiatao Gu</name>
+    </author>
+    <author>
+      <name>Josh Susskind</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2210.05956v1</id>
+    <title>Towards Theoretically Inspired Neural Initialization Optimization</title>
+    <updated>2022-10-12T06:49:16Z</updated>
+    <link href="https://arxiv.org/abs/2210.05956v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2210.05956v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Automated machine learning has been widely explored to reduce human efforts in designing neural architectures and looking for proper hyperparameters. In the domain of neural initialization, however, similar automated techniques have rarely been studied. Most existing initialization methods are handcrafted and highly dependent on specific architectures. In this paper, we propose a differentiable quantity, named GradCosine, with theoretical insights to evaluate the initial state of a neural network. Specifically, GradCosine is the cosine similarity of sample-wise gradients with respect to the initialized parameters. By analyzing the sample-wise optimization landscape, we show that both the training and test performance of a network can be improved by maximizing GradCosine under gradient norm constraint. Based on this observation, we further propose the neural initialization optimization (NIO) algorithm. Generalized from the sample-wise analysis into the real batch setting, NIO is able to automatically look for a better initialization with negligible cost compared with the training time. With NIO, we improve the classification performance of a variety of neural architectures on CIFAR-10, CIFAR-100, and ImageNet. Moreover, we find that our method can even help to train large vision Transformer architecture without warmup.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-10-12T06:49:16Z</published>
+    <arxiv:comment>NeurIPS 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yibo Yang</name>
+    </author>
+    <author>
+      <name>Hong Wang</name>
+    </author>
+    <author>
+      <name>Haobo Yuan</name>
+    </author>
+    <author>
+      <name>Zhouchen Lin</name>
+    </author>
+  </entry>
+</feed>

@@ -1,0 +1,23 @@
+{
+  "fixture_id": "gap_activation_relu2_optimizer_lion",
+  "round": 0,
+  "delta": {
+    "activation": "relu2",
+    "optimizer": "lion"
+  },
+  "queries": [
+    {
+      "q": "\"squared ReLU\" AND \"Lion optimizer\" AND \"language model\"",
+      "n_results": 0
+    },
+    {
+      "q": "\"squared ReLU\" AND \"Lion optimizer\" AND \"Transformer\"",
+      "n_results": 0
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [],
+  "claims": [],
+  "dropped": [],
+  "degraded": []
+}

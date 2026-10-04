@@ -135,7 +135,10 @@ class Paper(_OmitEmpty):
 
 
 Coverage = Literal["covers", "partial", "none"]
-Tier = Literal["T1", "T2", "T3", "T4"]      # curated / verified-auto / preprint / unextracted
+Tier = Literal["T1", "T2", "T3", "T4", "D-explore", "D-confirmed"]
+# T1 curated / T2 verified-auto / T3 preprint / T4 unextracted / D-* = our own derived results
+# (D-explore = a single-seed exploration, weak; D-confirmed = a paired screening). D-* claims
+# shape the gap graph but never count as prior art and are never used as a literature search.
 
 
 class RetrievedPaper(Paper):

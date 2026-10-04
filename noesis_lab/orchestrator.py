@@ -21,7 +21,7 @@ from .literature import LiteratureAgent, Snapshot
 from .llm import LLM, BudgetExceeded, Mode
 from .mock_llm import make_mock
 from .runner import LiveRunner, RecordedRunner, RunBudgetExceeded
-from .schemas import Analysis, ExperimentConfig, Fixture, PriorArtVerdictKind, QueueItem
+from .schemas import Analysis, Claim, ExperimentConfig, Fixture, PriorArtVerdictKind, QueueItem
 from .search.corpus import build_corpus, copy_corpus, freeze_curated, load_niche
 from .search.coverage import candidate_text, t4_overlaps
 from .search.scout import DIRECTION_STATUS_RULE, direction_status, link_claims
@@ -182,7 +182,7 @@ class Session:
         ecfg = self.cfg.get("explore", {})
         self.explore = bool(ecfg.get("enabled")) and bool(self.snap.directions) and self.corpus_dir is not None
         self.loop = self.explore and self.protocol["search_loop"]
-        self.derived: list = []              # our own results written back into the gap graph
+        self.derived: dict[str, Claim] = {}  # our own results written back into the gap graph, by claim id
         self.cycle = 0
         if not self.explore:
             return
@@ -206,6 +206,28 @@ class Session:
                                    sleep=o.sleep, min_interval_s=lcfg["arxiv_min_interval_s"],
                                    n_queries=ecfg["tighten_queries"], cap=ecfg["tighten_cap"],
                                    today=dt.date.today().isoformat())
+
+    # ------------------------------------------------------------------ resolving claims by id
+    def _derived_sorted(self) -> list[Claim]:
+        return [self.derived[k] for k in sorted(self.derived)]
+
+    def _graph_claims(self) -> list[Claim]:
+        """Everything the gap graph and queue are computed over: the frozen literature plus our own
+        derived results. Our results shape gap scores; code (not an LLM) still decides every step."""
+        return [*self.frozen_claims, *self._derived_sorted()]
+
+    def _claim(self, cid: str) -> Claim | None:
+        """Resolve a claim id against literature AND our own derived results (a gap path or a
+        candidate's cited ids may reference either). The gate and the tighten search resolve against
+        `self.snap.claims` only, so a derived result is never prior art and never a search query."""
+        return self.snap.claims.get(cid) or self.derived.get(cid)
+
+    def _add_derived(self, dc: Claim | None) -> None:
+        """Write one of our results back into the graph, by id (a D-confirmed result upgrades an
+        earlier D-explore one for the same change), and store it so the dashboard can render it."""
+        if dc is not None:
+            self.derived[dc.claim_id] = dc
+            self.store.put_claim(dc)
 
     def _t4_holds(self) -> dict[str, list]:
         """Candidates whose hypothesis text is close to an unextracted (T4) abstract."""
@@ -367,7 +389,10 @@ class Session:
             # a result is compared only with claims about exactly this change; a combination has
             # none by construction, so no relation is recorded (it would overclaim)
             key = stats.delta_key(self._hyp(hid).get("config_delta") or {})
-            cited = [c for c in fx.cited_claim_ids if gaps.method_key(self.snap.claims[c]) == key]
+            # relate the result only to LITERATURE claims about this exact change; our own derived
+            # results (ours_…) are in the cited set to shape the graph but are never evidence
+            cited = [c for c in fx.cited_claim_ids
+                     if c in self.snap.claims and gaps.method_key(self.snap.claims[c]) == key]
         for cid in cited:
             ev = stats.relate_to_claim(a, self.snap.claims[cid])
             self.store.put_evidence(ev)
@@ -443,7 +468,8 @@ class Session:
             quote_id = (pa.claim_id if pa.gate != "run" else
                         partial[0] if narrow else (cov_ids[0] if cov_ids else None))
             new_ids = {p.paper_id for p in tr["papers"]}
-            texts = [self.snap.claims[c] for c in fx.cited_claim_ids if gaps.method_key(self.snap.claims[c]) in key.split("+")]
+            texts = [self.snap.claims[c] for c in fx.cited_claim_ids           # literature only: our own
+                     if c in self.snap.claims and gaps.method_key(self.snap.claims[c]) in key.split("+")]  # results are never a search query
             hold = [h for h in t4_overlaps(candidate_text(key.replace("+", " "), "", texts),
                                            list(self.snap.papers.values()), self.cfg["lit_search"]["t4_threshold"])
                     if h[0] in new_ids] if fx.candidate_key not in self.niche.pi_dismissed_holds else []
@@ -531,6 +557,10 @@ class Session:
         self.store.link("decision", did, "measured_by", "run", base.run_id)
         self._link_trigger(did)
         self.explored.append(row)
+        # write the single-seed result back into the graph as a WEAK edge (D-explore). It nudges the
+        # next cycle's gaps but never counts as prior art; a later paired confirmation upgrades it.
+        branch = "promising" if est["improvement_in_noise_sd"] > 0 else "no_improvement"
+        self._add_derived(gaps.derived_claim(delta, branch, tier="D-explore"))
         return Outcome(fx.fixture_id, hid, "explored", None, did)
 
     def _confirm(self, row: dict, select_did: str) -> tuple | None:
@@ -559,9 +589,8 @@ class Session:
         latest = next(x for x in self.store.analyses() if x["analysis_id"] == self._hyp(hid)["latest_analysis_id"])
         final = Analysis(**latest)
         delta = {k: stats.fmt_value(v) for k, v in self.incumbent.diff(cfg).items()}
-        dc = gaps.derived_claim(delta, final.branch)    # write the result back into the gap graph
-        if dc:
-            self.derived.append(dc)
+        # write the paired result back into the gap graph (D-confirmed; upgrades any D-explore)
+        self._add_derived(gaps.derived_claim(delta, final.branch, tier="D-confirmed"))
         n_all = len(self.seeds["paired"]) + len(self.seeds["extra"])
         return (hid, fx, cfg, delta, final, did) if stats.should_promote(final, n_all) else None
 
@@ -620,8 +649,8 @@ class Session:
             if self.exhausted:
                 break
             self.cycle, self.explored = cycle, []
-            self.graph, self.gaps = gaps.find_gaps([*self.frozen_claims, *self.derived])
-            cycles.append({"cycle": cycle, "derived": [c.model_dump() for c in self.derived],
+            self.graph, self.gaps = gaps.find_gaps(self._graph_claims())
+            cycles.append({"cycle": cycle, "derived": [c.model_dump() for c in self._derived_sorted()],
                            "incumbent_delta": dict(self.incumbent_delta),
                            "gaps": [g.model_dump() for g in self.gaps]})
             self.store.set_meta("gap_cycles", cycles)
@@ -672,7 +701,7 @@ class Session:
 
     def _queue(self) -> list[QueueItem]:
         if self.explore:      # ordered by gap_score (NEXT_VERSION conflict 1)
-            return gaps.gap_queue(self.gaps, self.graph, [*self.frozen_claims, *self.derived],
+            return gaps.gap_queue(self.gaps, self.graph, self._graph_claims(),
                                   **self._queue_inputs(), top_n=self.ecfg["top_gaps_for_hypotheses"])
         return stats.candidate_queue(self.baseline, self.snap.claims.values(), **self._queue_inputs())
 
@@ -860,6 +889,14 @@ class Session:
         except (BudgetExceeded, RunBudgetExceeded) as e:
             status = f"budget_exhausted: {e}"
             self.store.add_decision("budget_exhausted", "", {"reason": str(e)})
+        except Exception as e:  # noqa: BLE001 - seal a partial bundle rather than lose completed runs
+            if self.replay:
+                self.store.close()
+                raise
+            import traceback
+            status = f"crashed: {type(e).__name__}: {e}"[:200]
+            self.store.add_decision("crashed", "", {"error": f"{type(e).__name__}: {e}"[:500],
+                                                    "traceback": traceback.format_exc()[-3000:]})
         meta = {"session": self.o.session, "profile": self.profile.name, "llm_mode": self.o.llm_mode,
                 "status": status, "llm_cost_usd": round(self.llm.cost_usd, 4),
                 "llm_calls": self.llm.n_calls, "runs_executed": self.runner.n_executed,

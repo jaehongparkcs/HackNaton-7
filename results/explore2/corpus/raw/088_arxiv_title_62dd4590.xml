@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/BkMyNXjV/h2N/5f+xV7YYR4gS80</id>
+  <title>arXiv Query: search_query=ti:"Tying Word Vectors and Word Classifiers A Loss Framework for Language Modeling"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:48:57Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Tying+Word+Vectors+and+Word+Classifiers+A+Loss+Framework+for+Language+Modeling%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1611.01462v3</id>
+    <title>Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling</title>
+    <updated>2017-03-11T19:13:52Z</updated>
+    <link href="https://arxiv.org/abs/1611.01462v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1611.01462v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recurrent neural networks have been very successful at predicting sequences of words in tasks such as language modeling. However, all such models are based on the conventional classification framework, where the model is trained against one-hot targets, and each word is represented both as an input and as an output in isolation. This causes inefficiencies in learning both in terms of utilizing all of the information and in terms of the number of parameters needed to train. We introduce a novel theoretical framework that facilitates better learning in language modeling, and show that our framework leads to tying together the input embedding and the output projection matrices, greatly reducing the number of trainable variables. Our framework leads to state of the art performance on the Penn Treebank with a variety of network models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-11-04T17:36:20Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hakan Inan</name>
+    </author>
+    <author>
+      <name>Khashayar Khosravi</name>
+    </author>
+    <author>
+      <name>Richard Socher</name>
+    </author>
+  </entry>
+</feed>

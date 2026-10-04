@@ -1,0 +1,23 @@
+{
+  "fixture_id": "gap_activation_relu2_norm_rmsnorm_i1",
+  "round": 0,
+  "delta": {
+    "activation": "relu2",
+    "norm": "rmsnorm"
+  },
+  "queries": [
+    {
+      "q": "\"squared ReLU\" AND \"RMSNorm\" AND \"language model\"",
+      "n_results": 0
+    },
+    {
+      "q": "\"squared ReLU\" AND \"RMSNorm\" AND \"Transformer\"",
+      "n_results": 0
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [],
+  "claims": [],
+  "dropped": [],
+  "degraded": []
+}

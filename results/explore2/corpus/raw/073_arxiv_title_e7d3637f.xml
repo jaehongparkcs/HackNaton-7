@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/yG8ueF9InmSgaYk2U9QsWgHqs9Y</id>
+  <title>arXiv Query: search_query=ti:"ST-MoE Designing Stable and Transferable Sparse Expert Models"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:47:42Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22ST-MoE+Designing+Stable+and+Transferable+Sparse+Expert+Models%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2202.08906v2</id>
+    <title>ST-MoE: Designing Stable and Transferable Sparse Expert Models</title>
+    <updated>2022-04-29T23:24:20Z</updated>
+    <link href="https://arxiv.org/abs/2202.08906v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.08906v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Scale has opened new frontiers in natural language processing -- but at a high cost. In response, Mixture-of-Experts (MoE) and Switch Transformers have been proposed as an energy efficient path to even larger and more capable language models. But advancing the state-of-the-art across a broad set of natural language tasks has been hindered by training instabilities and uncertain quality during fine-tuning. Our work focuses on these issues and acts as a design guide. We conclude by scaling a sparse model to 269B parameters, with a computational cost comparable to a 32B dense encoder-decoder Transformer (Stable and Transferable Mixture-of-Experts or ST-MoE-32B). For the first time, a sparse model achieves state-of-the-art performance in transfer learning, across a diverse set of tasks including reasoning (SuperGLUE, ARC Easy, ARC Challenge), summarization (XSum, CNN-DM), closed book question answering (WebQA, Natural Questions), and adversarially constructed tasks (Winogrande, ANLI R3).</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-17T21:39:10Z</published>
+    <arxiv:comment>25 pages main text, 39 pages overall</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Barret Zoph</name>
+    </author>
+    <author>
+      <name>Irwan Bello</name>
+    </author>
+    <author>
+      <name>Sameer Kumar</name>
+    </author>
+    <author>
+      <name>Nan Du</name>
+    </author>
+    <author>
+      <name>Yanping Huang</name>
+    </author>
+    <author>
+      <name>Jeff Dean</name>
+    </author>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+    <author>
+      <name>William Fedus</name>
+    </author>
+  </entry>
+</feed>

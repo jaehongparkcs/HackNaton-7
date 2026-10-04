@@ -1,0 +1,223 @@
+{
+  "plan": {
+    "dimensions": [
+      {
+        "name": "normalization",
+        "precise": [
+          "\"RMSNorm\" AND \"Transformer\"",
+          "\"pre-layer normalization\" AND \"Transformer\""
+        ],
+        "broad": [
+          "\"layer normalization\" AND \"Transformer language model\""
+        ]
+      },
+      {
+        "name": "activation functions",
+        "precise": [
+          "\"gated linear units\" AND \"Transformer\""
+        ],
+        "broad": [
+          "\"activation functions\" AND \"Transformer language model\""
+        ]
+      },
+      {
+        "name": "positional encoding",
+        "precise": [
+          "\"rotary position embedding\""
+        ],
+        "broad": [
+          "\"positional encoding\" AND \"Transformer language model\""
+        ]
+      },
+      {
+        "name": "optimizers and schedules",
+        "precise": [
+          "\"learning rate warmup\" AND \"Transformer\"",
+          "\"Lion optimizer\""
+        ],
+        "broad": [
+          "\"optimizer\" AND \"learning-rate schedule\" AND \"language model\""
+        ]
+      },
+      {
+        "name": "regularization and small-scale efficiency",
+        "precise": [
+          "\"character-level language model\" AND \"Transformer\""
+        ],
+        "broad": [
+          "\"dropout\" AND \"Transformer language model\""
+        ]
+      }
+    ]
+  },
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "normalization",
+      "n_results": 15
+    },
+    {
+      "q": "\"pre-layer normalization\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "normalization",
+      "n_results": 5
+    },
+    {
+      "q": "\"gated linear units\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "activation functions",
+      "n_results": 15
+    },
+    {
+      "q": "\"rotary position embedding\"",
+      "kind": "precise",
+      "dimension": "positional encoding",
+      "n_results": 15
+    },
+    {
+      "q": "\"learning rate warmup\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "optimizers and schedules",
+      "n_results": 8
+    },
+    {
+      "q": "\"Lion optimizer\"",
+      "kind": "precise",
+      "dimension": "optimizers and schedules",
+      "n_results": 13
+    },
+    {
+      "q": "\"character-level language model\" AND \"Transformer\"",
+      "kind": "precise",
+      "dimension": "regularization and small-scale efficiency",
+      "n_results": 15
+    },
+    {
+      "q": "\"layer normalization\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "normalization",
+      "n_results": 1
+    },
+    {
+      "q": "\"activation functions\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "activation functions",
+      "n_results": 2
+    },
+    {
+      "q": "\"positional encoding\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "positional encoding",
+      "n_results": 9
+    },
+    {
+      "q": "\"optimizer\" AND \"learning-rate schedule\" AND \"language model\"",
+      "kind": "broad",
+      "dimension": "optimizers and schedules",
+      "n_results": 15
+    },
+    {
+      "q": "\"dropout\" AND \"Transformer language model\"",
+      "kind": "broad",
+      "dimension": "regularization and small-scale efficiency",
+      "n_results": 0
+    },
+    {
+      "q": "\"squared ReLU\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "activation=relu2",
+      "n_results": 3
+    },
+    {
+      "q": "\"SwiGLU\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "activation=swiglu",
+      "n_results": 15
+    },
+    {
+      "q": "\"dropout\" AND \"Transformer\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "dropout=0.1",
+      "n_results": 15
+    },
+    {
+      "q": "\"gradient clipping\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "grad_clip=0",
+      "n_results": 15
+    },
+    {
+      "q": "\"initialization\" AND \"Transformer\" AND \"scale\"",
+      "kind": "deterministic",
+      "dimension": "init_scale=0.5, init_scale=2.0",
+      "n_results": 15
+    },
+    {
+      "q": "\"label smoothing\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "label_smoothing=0.1",
+      "n_results": 15
+    },
+    {
+      "q": "\"RMSNorm\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "norm=rmsnorm",
+      "n_results": 15
+    },
+    {
+      "q": "\"Post-LN\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "norm_position=post",
+      "n_results": 12
+    },
+    {
+      "q": "\"Lion\" AND \"optimizer\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "optimizer=lion",
+      "n_results": 9
+    },
+    {
+      "q": "\"SGD\" AND \"Adam\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "optimizer=sgd_momentum",
+      "n_results": 15
+    },
+    {
+      "q": "\"rotary position embedding\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "pos_encoding=rope",
+      "n_results": 15
+    },
+    {
+      "q": "\"QK normalization\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "qk_norm=true",
+      "n_results": 3
+    },
+    {
+      "q": "\"learning rate schedule\" AND \"Transformer\" AND \"constant\"",
+      "kind": "deterministic",
+      "dimension": "schedule=constant",
+      "n_results": 3
+    },
+    {
+      "q": "\"warmup\" AND \"Transformer\" AND \"learning rate\"",
+      "kind": "deterministic",
+      "dimension": "warmup_frac=0, warmup_frac=0.02, warmup_frac=0.1",
+      "n_results": 15
+    },
+    {
+      "q": "\"weight tying\" AND \"language model\"",
+      "kind": "deterministic",
+      "dimension": "weight_tying=true",
+      "n_results": 11
+    },
+    {
+      "q": "\"z-loss\" AND \"Transformer\"",
+      "kind": "deterministic",
+      "dimension": "z_loss_coef=0.0001",
+      "n_results": 3
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "fixture_id": "gap_warmup_frac_0_i1",
+  "round": 0,
+  "delta": {
+    "warmup_frac": "0"
+  },
+  "queries": [
+    {
+      "q": "\"without warmup\" AND \"language model\"",
+      "n_results": 2
+    },
+    {
+      "q": "\"without warmup\" AND \"Transformer\"",
+      "n_results": 2
+    }
+  ],
+  "already_in_corpus": [
+    "2602.13498"
+  ],
+  "papers": [],
+  "claims": [],
+  "dropped": [
+    {
+      "paper_id": "2303.06296",
+      "title": "Stabilizing Transformer Training by Preventing Attention Entropy Collapse",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2210.05956",
+      "title": "Towards Theoretically Inspired Neural Initialization Optimization",
+      "reason": "exclude_term: vision transformer"
+    }
+  ],
+  "degraded": []
+}

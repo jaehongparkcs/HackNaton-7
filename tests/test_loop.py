@@ -67,7 +67,7 @@ def test_our_result_is_written_back_as_a_derived_edge_and_closes_the_coverage_ga
     cs = [claim("a", SWIGLU, "improves", "T3", "none")]
     assert [x.gap_type for x in gaps.find_gaps(cs)[1]] == ["coverage"]
     dc = gaps.derived_claim({"activation": "swiglu"}, "harmful")
-    assert (dc.expected_outcome, dc.tier, dc.coverage, dc.source_span) == ("worse", "T1", "covers", "")
+    assert (dc.expected_outcome, dc.tier, dc.coverage, dc.source_span) == ("worse", "D-confirmed", "covers", "")
     assert gaps.find_gaps([*cs, dc])[1] == []                           # measured in our setting: no longer a gap
     assert gaps.derived_claim({"activation": "swiglu", "dropout": "0.1"}, "promising") is None   # a combination adds no edge
     assert gaps.derived_claim({"dropout": "0.1"}, "no_improvement").expected_outcome == "no_worse"

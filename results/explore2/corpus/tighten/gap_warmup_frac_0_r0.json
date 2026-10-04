@@ -1,0 +1,124 @@
+{
+  "fixture_id": "gap_warmup_frac_0",
+  "round": 0,
+  "delta": {
+    "warmup_frac": "0"
+  },
+  "queries": [
+    {
+      "q": "\"without warmup\" AND \"language model\"",
+      "n_results": 2
+    },
+    {
+      "q": "\"without warmup\" AND \"Transformer\"",
+      "n_results": 2
+    }
+  ],
+  "already_in_corpus": [],
+  "papers": [
+    {
+      "paper_id": "2602.13498",
+      "title": "TrasMuon: Trust-Region Adaptive Scaling for Orthogonalized Momentum Optimizers",
+      "authors": [
+        "Peng Cheng",
+        "Jiucheng Zang",
+        "Qingnan Li",
+        "Liheng Ma",
+        "Yufei Cui",
+        "Yingxue Zhang",
+        "Boxing Chen",
+        "Ming Jian",
+        "Wen Tong"
+      ],
+      "published": "2026-02-13",
+      "url": "https://arxiv.org/abs/2602.13498",
+      "abstract": "Muon-style optimizers leverage Newton-Schulz (NS) iterations to orthogonalize updates, yielding update geometries that often outperform Adam-series methods. However, this orthogonalization discards magnitude information, rendering training sensitive to step-size hyperparameters and vulnerable to high-energy bursts. To mitigate this, we introduce TrasMuon (\\textbf{T}rust \\textbf{R}egion \\textbf{A}daptive \\textbf{S}caling \\textbf{Muon}). TrasMuon preserves the near-isometric geometry of Muon while stabilizing magnitudes through (i) global RMS calibration and (ii) energy-based trust-region clipping. We demonstrate that while reintroducing adaptive scaling improves optimization efficiency, it typically exacerbates instability due to high-energy outliers. TrasMuon addresses this by defining a trust region based on relative energy ratios, confining updates to a stable zone. Empirical experiments on vision and language models demonstrate that TrasMuon converges faster than baselines. Furthermore, experiments without warmup stages confirm TrasMuon's superior stability and robustness.",
+      "abstract_sha256": "1b39f6dc1275ae3653315dfac76fa9dc4b010cf249b256960970ba5a207d59e6",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "queries": [
+        "tighten gap_warmup_frac_0: \"without warmup\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2602_13498_1",
+      "paper_id": "2602.13498",
+      "dimension": "outside_testbed",
+      "method": "TrasMuon optimizer (trust-region adaptive scaling for Muon)",
+      "setting": "unspecified, general, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "TrasMuon converges faster than baseline optimizers on vision and language models.",
+      "source_span": "Empirical experiments on vision and language models demonstrate that TrasMuon converges faster than baselines.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "general",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-02-13",
+      "extraction_event": "unrecorded-d82b6523",
+      "mechanism": "confining updates to a stable zone",
+      "mechanism_category": "gradient_stability"
+    },
+    {
+      "claim_id": "x2602_13498_2",
+      "paper_id": "2602.13498",
+      "dimension": "outside_testbed",
+      "method": "TrasMuon optimizer without warmup",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Experiments without warmup show TrasMuon has superior stability and robustness.",
+      "source_span": "experiments without warmup stages confirm TrasMuon's superior stability and robustness",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-02-13",
+      "extraction_event": "unrecorded-d82b6523",
+      "mechanism": "stabilizing magnitudes through (i) global RMS calibration and (ii) energy-based trust-region clipping",
+      "mechanism_category": "gradient_stability"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2303.06296",
+      "title": "Stabilizing Transformer Training by Preventing Attention Entropy Collapse",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2210.05956",
+      "title": "Towards Theoretically Inspired Neural Initialization Optimization",
+      "reason": "exclude_term: vision transformer"
+    }
+  ],
+  "degraded": []
+}

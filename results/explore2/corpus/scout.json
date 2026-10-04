@@ -1,0 +1,746 @@
+{
+  "directions": [
+    {
+      "direction_id": "dir_01",
+      "origin": "scout",
+      "title": "RMSNorm vs LayerNorm in tiny models",
+      "idea": "Swap LayerNorm for RMSNorm and compare pre-norm vs post-norm placement under the fixed 2k-step budget.",
+      "mechanism": "Normalization type and position change gradient flow and effective learning rate at initialization, which dominates short training runs.",
+      "search_terms": [
+        "RMSNorm",
+        "pre-LN vs post-LN Transformer",
+        "layer normalization placement",
+        "Transformer training stability"
+      ],
+      "building_blocks": [
+        "norm",
+        "norm_position"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"RMSNorm\"",
+          "n_results": 10,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"pre-LN vs post-LN Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"layer normalization placement\"",
+          "n_results": 1,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Root Mean Square Layer Normalization",
+          "status": "found",
+          "paper_id": "1910.07467"
+        },
+        {
+          "title": "On Layer Normalization in the Transformer Architecture",
+          "status": "found",
+          "paper_id": "2002.04745"
+        }
+      ],
+      "paper_ids": [
+        "1910.07467",
+        "2002.04745",
+        "2305.14858",
+        "2503.21708",
+        "2510.09904",
+        "2510.22777",
+        "2603.13180",
+        "2605.14521"
+      ]
+    },
+    {
+      "direction_id": "dir_02",
+      "origin": "scout",
+      "title": "Gated activations (SwiGLU/GeGLU)",
+      "idea": "Replace GELU/ReLU MLP activations with gated variants such as SwiGLU at matched parameter count.",
+      "mechanism": "Gating can improve expressivity per parameter, which may matter when total capacity is under 1M parameters.",
+      "search_terms": [
+        "SwiGLU",
+        "GLU variants Transformer",
+        "GELU activation",
+        "feed-forward activation function"
+      ],
+      "building_blocks": [
+        "activation"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"SwiGLU\"",
+          "n_results": 10,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"GLU variants Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"GELU activation\"",
+          "n_results": 10,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "GLU Variants Improve Transformer",
+          "status": "found",
+          "paper_id": "2002.05202"
+        },
+        {
+          "title": "Gaussian Error Linear Units (GELUs)",
+          "status": "found",
+          "paper_id": "1606.08415"
+        }
+      ],
+      "paper_ids": [
+        "1606.08415",
+        "2002.05202",
+        "2305.12073",
+        "2512.21749",
+        "2605.18106",
+        "2605.25704",
+        "2606.00761",
+        "2607.02521",
+        "2607.15525",
+        "2607.27591",
+        "2608.07323"
+      ]
+    },
+    {
+      "direction_id": "dir_03",
+      "origin": "scout",
+      "title": "Rotary and relative positional encodings",
+      "idea": "Compare learned absolute, sinusoidal, RoPE, ALiBi and NoPE positional schemes for character-level modeling.",
+      "mechanism": "Relative position biases may be easier to learn from few steps than learned absolute embeddings, since local character patterns are translation-invariant.",
+      "search_terms": [
+        "rotary position embedding",
+        "ALiBi attention linear biases",
+        "no positional encoding causal Transformer",
+        "relative position representations"
+      ],
+      "building_blocks": [
+        "pos_encoding"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"rotary position embedding\"",
+          "n_results": 10,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"ALiBi attention linear biases\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"no positional encoding causal Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+          "status": "found",
+          "paper_id": "2104.09864"
+        },
+        {
+          "title": "Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation",
+          "status": "found",
+          "paper_id": "2108.12409"
+        },
+        {
+          "title": "The Impact of Positional Encoding on Length Generalization in Transformers",
+          "status": "found",
+          "paper_id": "2305.19466"
+        }
+      ],
+      "paper_ids": [
+        "2104.09864",
+        "2108.12409",
+        "2305.19466",
+        "2507.23083",
+        "2511.09146",
+        "2608.29715"
+      ]
+    },
+    {
+      "direction_id": "dir_04",
+      "origin": "scout",
+      "title": "Optimizer choice for short budgets",
+      "idea": "Compare AdamW, Lion, Adafactor-like, or sign-based/orthogonalized optimizers at tuned learning rates.",
+      "mechanism": "Different update geometries converge at different speeds early in training, which a fixed small step budget exposes.",
+      "search_terms": [
+        "AdamW decoupled weight decay",
+        "Lion optimizer",
+        "Sophia second-order optimizer language model",
+        "optimizer benchmark Transformer pretraining"
+      ],
+      "building_blocks": [
+        "optimizer"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"AdamW decoupled weight decay\"",
+          "n_results": 1,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"Lion optimizer\"",
+          "n_results": 10,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"Sophia second-order optimizer language model\"",
+          "n_results": 0,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Decoupled Weight Decay Regularization",
+          "status": "found",
+          "paper_id": "1711.05101"
+        },
+        {
+          "title": "Symbolic Discovery of Optimization Algorithms",
+          "status": "found",
+          "paper_id": "2302.06675"
+        }
+      ],
+      "paper_ids": [
+        "1711.05101",
+        "2302.06675",
+        "2508.04707",
+        "2604.14587"
+      ]
+    },
+    {
+      "direction_id": "dir_05",
+      "origin": "scout",
+      "title": "Schedule shape and warmup length",
+      "idea": "Vary cosine, linear decay, warmup-stable-decay and constant schedules jointly with warmup fraction.",
+      "mechanism": "With few steps, the share of steps spent warming up vs annealing directly trades early progress against final loss.",
+      "search_terms": [
+        "learning rate warmup Transformer",
+        "cosine learning rate schedule",
+        "warmup-stable-decay",
+        "learning rate annealing language model"
+      ],
+      "building_blocks": [
+        "schedule",
+        "warmup_frac"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"learning rate warmup Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"cosine learning rate schedule\"",
+          "n_results": 9,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"warmup-stable-decay\"",
+          "n_results": 10,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "SGDR: Stochastic Gradient Descent with Warm Restarts",
+          "status": "found",
+          "paper_id": "1608.03983"
+        },
+        {
+          "title": "On the Variance of the Adaptive Learning Rate and Beyond",
+          "status": "found",
+          "paper_id": "1908.03265"
+        }
+      ],
+      "paper_ids": [
+        "1608.03983",
+        "1908.03265",
+        "2403.08763",
+        "2410.05192",
+        "2503.12811",
+        "2505.24275",
+        "2507.09846",
+        "2507.17634",
+        "2601.09000",
+        "2602.03702",
+        "2602.06797",
+        "2603.02069",
+        "2603.25687",
+        "2605.19095",
+        "2606.30455",
+        "2607.10959",
+        "2608.28308",
+        "2609.27202"
+      ]
+    },
+    {
+      "direction_id": "dir_06",
+      "origin": "scout",
+      "title": "QK-normalization for attention stability",
+      "idea": "Apply normalization to queries and keys before the dot product, possibly allowing higher learning rates.",
+      "mechanism": "Bounding attention logits prevents entropy collapse and logit growth, which can permit more aggressive optimization in short runs.",
+      "search_terms": [
+        "QK normalization",
+        "attention logit growth",
+        "attention entropy collapse",
+        "small-scale proxies training instability"
+      ],
+      "building_blocks": [
+        "qk_norm",
+        "optimizer"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"QK normalization\"",
+          "n_results": 8,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"attention logit growth\"",
+          "n_results": 1,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"attention entropy collapse\"",
+          "n_results": 2,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Query-Key Normalization for Transformers",
+          "status": "found",
+          "paper_id": "2010.04245"
+        },
+        {
+          "title": "Small-scale proxies for large-scale Transformer training instabilities",
+          "status": "found",
+          "paper_id": "2309.14322"
+        }
+      ],
+      "paper_ids": [
+        "2309.14322",
+        "2505.22014",
+        "2607.18363",
+        "2608.02091",
+        "2609.37852"
+      ]
+    },
+    {
+      "direction_id": "dir_07",
+      "origin": "scout",
+      "title": "Z-loss auxiliary regularization",
+      "idea": "Add a z-loss penalty on the log-partition of output logits, sweeping its coefficient.",
+      "mechanism": "Keeping softmax normalizer near zero may stabilize output-layer training and interact with learning rate.",
+      "search_terms": [
+        "z-loss softmax normalizer",
+        "output logit divergence",
+        "PaLM training stability",
+        "auxiliary loss logit regularization"
+      ],
+      "building_blocks": [
+        "z_loss_coef"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"z-loss softmax normalizer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"output logit divergence\"",
+          "n_results": 1,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"PaLM training stability\"",
+          "n_results": 0,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "PaLM: Scaling Language Modeling with Pathways",
+          "status": "found",
+          "paper_id": "2204.02311"
+        },
+        {
+          "title": "ST-MoE: Designing Stable and Transferable Sparse Expert Models",
+          "status": "found",
+          "paper_id": "2202.08906"
+        }
+      ],
+      "paper_ids": [
+        "2202.08906",
+        "2204.02311",
+        "2601.02031"
+      ]
+    },
+    {
+      "direction_id": "dir_08",
+      "origin": "scout",
+      "title": "Dropout in under-trained regimes",
+      "idea": "Sweep dropout including zero, examining whether regularization helps or hurts when training is short.",
+      "mechanism": "Dropout slows fitting; in a short budget the model may be underfitting, while TinyShakespeare is small enough to overfit at longer horizons.",
+      "search_terms": [
+        "dropout Transformer language model",
+        "dropout underfitting early training",
+        "early dropout",
+        "regularization small dataset language model"
+      ],
+      "building_blocks": [
+        "dropout"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"dropout Transformer language model\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"dropout underfitting early training\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"early dropout\"",
+          "n_results": 7,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Dropout Reduces Underfitting",
+          "status": "found",
+          "paper_id": "2303.01500"
+        },
+        {
+          "title": "Dropout: A Simple Way to Prevent Neural Networks from Overfitting",
+          "status": "not_found",
+          "paper_id": null
+        }
+      ],
+      "paper_ids": [
+        "2303.01500",
+        "2505.24788"
+      ]
+    },
+    {
+      "direction_id": "dir_09",
+      "origin": "scout",
+      "title": "Label smoothing for character LM",
+      "idea": "Apply label smoothing to the next-character targets and measure effect on validation cross-entropy.",
+      "mechanism": "Smoothing changes calibration and logit magnitudes, but also biases the cross-entropy metric itself, making the tradeoff informative.",
+      "search_terms": [
+        "label smoothing language model",
+        "label smoothing calibration",
+        "softmax overconfidence regularization"
+      ],
+      "building_blocks": [
+        "label_smoothing"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"label smoothing language model\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"label smoothing calibration\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"softmax overconfidence regularization\"",
+          "n_results": 0,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "When Does Label Smoothing Help?",
+          "status": "found",
+          "paper_id": "1906.02629"
+        },
+        {
+          "title": "Rethinking the Inception Architecture for Computer Vision",
+          "status": "found",
+          "paper_id": "1512.00567"
+        }
+      ],
+      "paper_ids": []
+    },
+    {
+      "direction_id": "dir_10",
+      "origin": "scout",
+      "title": "Weight tying of embeddings and output",
+      "idea": "Tie input embedding and output projection matrices versus untied, in a small-vocabulary character model.",
+      "mechanism": "Tying shares gradient signal and reduces parameters; with a tiny vocabulary the effect on capacity and convergence may differ from word-level models.",
+      "search_terms": [
+        "weight tying language model",
+        "tied input output embeddings",
+        "embedding sharing"
+      ],
+      "building_blocks": [
+        "weight_tying"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"weight tying language model\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"tied input output embeddings\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"embedding sharing\"",
+          "n_results": 10,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Using the Output Embedding to Improve Language Models",
+          "status": "found",
+          "paper_id": "1608.05859"
+        },
+        {
+          "title": "Tying Word Vectors and Word Classifiers: A Loss Framework for Language Modeling",
+          "status": "found",
+          "paper_id": "1611.01462"
+        }
+      ],
+      "paper_ids": [
+        "2111.09543",
+        "2402.14905"
+      ]
+    },
+    {
+      "direction_id": "dir_11",
+      "origin": "scout",
+      "title": "Initialization scale",
+      "idea": "Scale initial weight standard deviation (including depth-scaled residual init) and pair it with normalization choices.",
+      "mechanism": "Init scale sets the early signal propagation and effective learning rate, which matter most when training is brief.",
+      "search_terms": [
+        "Transformer initialization scale",
+        "depth-scaled residual initialization",
+        "signal propagation Transformer",
+        "T-Fixup initialization"
+      ],
+      "building_blocks": [
+        "init_scale",
+        "norm_position"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"Transformer initialization scale\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"depth-scaled residual initialization\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"signal propagation Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Improving Transformer Optimization Through Better Initialization",
+          "status": "not_found",
+          "paper_id": null
+        },
+        {
+          "title": "Tensor Programs V: Tuning Large Neural Networks via Zero-Shot Hyperparameter Transfer",
+          "status": "found",
+          "paper_id": "2203.03466"
+        }
+      ],
+      "paper_ids": []
+    },
+    {
+      "direction_id": "dir_12",
+      "origin": "scout",
+      "title": "Gradient clipping threshold",
+      "idea": "Sweep global gradient-norm clipping thresholds, including none, jointly with optimizer choice.",
+      "mechanism": "Clipping tames early gradient spikes; whether it limits progress depends on the optimizer's own normalization of updates.",
+      "search_terms": [
+        "gradient clipping Transformer",
+        "gradient norm clipping convergence",
+        "adaptive gradient clipping",
+        "loss spikes training"
+      ],
+      "building_blocks": [
+        "grad_clip",
+        "optimizer"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"gradient clipping Transformer\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"gradient norm clipping convergence\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"adaptive gradient clipping\"",
+          "n_results": 10,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Why Gradient Clipping Accelerates Training: A Theoretical Justification for Adaptivity",
+          "status": "found",
+          "paper_id": "1905.11881"
+        }
+      ],
+      "paper_ids": [
+        "2102.06171",
+        "2608.15153"
+      ]
+    },
+    {
+      "direction_id": "dir_13",
+      "origin": "scout",
+      "title": "Normalization-free / identity norm baselines",
+      "idea": "Remove normalization layers and rely on init scaling to see how much normalization contributes in a tiny model.",
+      "mechanism": "Shallow tiny Transformers may not need normalization for stability, isolating its optimization-speed effect.",
+      "search_terms": [
+        "normalization-free Transformer",
+        "ReZero residual",
+        "DeepNorm",
+        "skip init"
+      ],
+      "building_blocks": [
+        "norm",
+        "init_scale"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"normalization-free Transformer\"",
+          "n_results": 3,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"ReZero residual\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"DeepNorm\"",
+          "n_results": 6,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "ReZero is All You Need: Fast Convergence at Large Depth",
+          "status": "found",
+          "paper_id": "2003.04887"
+        },
+        {
+          "title": "Transformers without Tears: Improving the Normalization of Self-Attention",
+          "status": "found",
+          "paper_id": "1910.05895"
+        }
+      ],
+      "paper_ids": [
+        "1910.05895",
+        "2003.04887",
+        "2203.00555",
+        "2504.05356",
+        "2506.22049",
+        "2607.13491"
+      ]
+    },
+    {
+      "direction_id": "dir_14",
+      "origin": "scout",
+      "title": "Speedrun-style recipe transfer",
+      "idea": "Test whether tricks from nanoGPT speedrun efforts (e.g., orthogonalized optimizers, ReLU-squared, QK-norm) transfer to sub-1M character models.",
+      "mechanism": "Recipes tuned for fast convergence at larger scale may or may not carry down to very small widths and vocabularies.",
+      "search_terms": [
+        "Muon optimizer orthogonalized momentum",
+        "squared ReLU activation",
+        "modded nanoGPT speedrun",
+        "compute-efficient language model training"
+      ],
+      "building_blocks": [
+        "optimizer",
+        "activation"
+      ],
+      "dropped_blocks": [],
+      "queries": [
+        {
+          "q": "\"Muon optimizer orthogonalized momentum\"",
+          "n_results": 0,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"squared ReLU activation\"",
+          "n_results": 5,
+          "source": "arxiv"
+        },
+        {
+          "q": "\"modded nanoGPT speedrun\"",
+          "n_results": 3,
+          "source": "arxiv"
+        }
+      ],
+      "title_hints": [
+        {
+          "title": "Primer: Searching for Efficient Transformers for Language Modeling",
+          "status": "found",
+          "paper_id": "2109.08668"
+        }
+      ],
+      "paper_ids": [
+        "2109.08668",
+        "2604.01472",
+        "2605.03667",
+        "2606.27715"
+      ]
+    }
+  ],
+  "error": ""
+}

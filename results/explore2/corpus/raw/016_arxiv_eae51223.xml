@@ -1,0 +1,407 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/MtV18CikgxyuAD2l5fZrk7z82/s</id>
+  <title>arXiv Query: search_query=all:"gradient clipping" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T23:48:03Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22gradient+clipping%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>23</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2404.08624v2</id>
+    <title>Regularized Gradient Clipping Provably Trains Wide and Deep Neural Networks</title>
+    <updated>2025-04-08T12:19:22Z</updated>
+    <link href="https://arxiv.org/abs/2404.08624v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.08624v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present and analyze a novel regularized form of the gradient clipping algorithm, proving that it converges to global minima of the loss surface of deep neural networks under the squared loss, provided that the layers are of sufficient width. The algorithm presented here, dubbed $δ-$GClip, introduces a modification to gradient clipping that leads to a first-of-its-kind example of a step size scheduling for gradient descent that provably minimizes training losses of deep neural nets. We also present empirical evidence that our theoretically founded $δ-$GClip algorithm is competitive with the state-of-the-art deep learning heuristics on various neural architectures including modern transformer based architectures. The modification we do to standard gradient clipping is designed to leverage the PL* condition, a variant of the Polyak-Lojasiewicz inequality which was recently proven to be true for sufficiently wide neural networks at any depth within a neighbourhood of the initialization.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-12T17:37:42Z</published>
+    <arxiv:comment>20 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Matteo Tucat</name>
+    </author>
+    <author>
+      <name>Anirbit Mukherjee</name>
+    </author>
+    <author>
+      <name>Procheta Sen</name>
+    </author>
+    <author>
+      <name>Mingfei Sun</name>
+    </author>
+    <author>
+      <name>Omar Rivasplata</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2305.17633v1</id>
+    <title>DPFormer: Learning Differentially Private Transformer on Long-Tailed Data</title>
+    <updated>2023-05-28T05:00:07Z</updated>
+    <link href="https://arxiv.org/abs/2305.17633v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.17633v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Transformer has emerged as a versatile and effective architecture with broad applications. However, it still remains an open problem how to efficiently train a Transformer model of high utility with differential privacy guarantees. In this paper, we identify two key challenges in learning differentially private Transformers, i.e., heavy computation overhead due to per-sample gradient clipping and unintentional attention distraction within the attention mechanism. In response, we propose DPFormer, equipped with Phantom Clipping and Re-Attention Mechanism, to address these challenges. Our theoretical analysis shows that DPFormer can reduce computational costs during gradient clipping and effectively mitigate attention distraction (which could obstruct the training process and lead to a significant performance drop, especially in the presence of long-tailed data). Such analysis is further corroborated by empirical results on two real-world datasets, demonstrating the efficiency and effectiveness of the proposed DPFormer.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-28T05:00:07Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Youlong Ding</name>
+    </author>
+    <author>
+      <name>Xueyang Wu</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Weike Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.18194v3</id>
+    <title>Delving into Differentially Private Transformer</title>
+    <updated>2024-08-26T09:35:54Z</updated>
+    <link href="https://arxiv.org/abs/2405.18194v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.18194v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Deep learning with differential privacy (DP) has garnered significant attention over the past years, leading to the development of numerous methods aimed at enhancing model accuracy and training efficiency. This paper delves into the problem of training Transformer models with differential privacy. Our treatment is modular: the logic is to `reduce' the problem of training DP Transformer to the more basic problem of training DP vanilla neural nets. The latter is better understood and amenable to many model-agnostic methods. Such `reduction' is done by first identifying the hardness unique to DP Transformer training: the attention distraction phenomenon and a lack of compatibility with existing techniques for efficient gradient clipping. To deal with these two issues, we propose the Re-Attention Mechanism and Phantom Clipping, respectively. We believe that our work not only casts new light on training DP Transformers but also promotes a modular treatment to advance research in the field of differentially private deep learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-28T14:04:09Z</published>
+    <arxiv:comment>ICML 2024</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Youlong Ding</name>
+    </author>
+    <author>
+      <name>Xueyang Wu</name>
+    </author>
+    <author>
+      <name>Yining Meng</name>
+    </author>
+    <author>
+      <name>Yonggang Luo</name>
+    </author>
+    <author>
+      <name>Hao Wang</name>
+    </author>
+    <author>
+      <name>Weike Pan</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2211.09817v1</id>
+    <title>On the Effect of Pre-training for Transformer in Different Modality on Offline Reinforcement Learning</title>
+    <updated>2022-11-17T13:34:08Z</updated>
+    <link href="https://arxiv.org/abs/2211.09817v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2211.09817v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We empirically investigate how pre-training on data of different modalities, such as language and vision, affects fine-tuning of Transformer-based models to Mujoco offline reinforcement learning tasks. Analysis of the internal representation reveals that the pre-trained Transformers acquire largely different representations before and after pre-training, but acquire less information of data in fine-tuning than the randomly initialized one. A closer look at the parameter changes of the pre-trained Transformers reveals that their parameters do not change that much and that the bad performance of the model pre-trained with image data could partially come from large gradients and gradient clipping. To study what information the Transformer pre-trained with language data utilizes, we fine-tune this model with no context provided, finding that the model learns efficiently even without context information. Subsequent follow-up analysis supports the hypothesis that pre-training with language data is likely to make the Transformer get context-like information and utilize it to solve the downstream task.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-11-17T13:34:08Z</published>
+    <arxiv:comment>48 pages. Published in NeurIPS 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Advances in Neural Information Processing Systems 36 (NeurIPS 2022)</arxiv:journal_ref>
+    <author>
+      <name>Shiro Takagi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2601.18702v4</id>
+    <title>From Fuzzy to Exact: The Halo Architecture for Infinite-Depth Reasoning via Rational Arithmetic</title>
+    <updated>2026-02-16T07:24:47Z</updated>
+    <link href="https://arxiv.org/abs/2601.18702v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2601.18702v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The prevailing scaling paradigm of Large Language Models (LLMs) rests on a substrate of "Fuzzy" floating-point arithmetic. To mitigate the inherent instability of this approximate foundation, modern architectures have erected a complex scaffolding of structural and numerical heuristics--Complex Residuals, Pre-RMSNorm, Attention Scaling, and Gradient Clipping--consuming significant compute solely to prevent numerical collapse.
+  We propose a paradigm shift to the "Exact". We introduce the Halo Architecture, grounded in the Rational Field (Q) and powered by a custom Exact Inference Unit (EIU). To resolve the exponential bit-width growth of rational arithmetic, Halo employs a Dual-Ring Topology that unifies two complementary control mechanisms: (1) The Micro-Ring (Continuum Maintenance), which strictly bounds memory complexity via Diophantine Approximation; and (2) The Macro-Ring (Symbolic Alignment), which enforces logical consistency via periodic state collapse.
+  This stable dual-ring substrate allows for the "Great Dismantling" of numerical scaffolding, reducing the Transformer block to its "Clean" algebraic form (Tabula Rasa). Furthermore, we verify the "Efficiency Paradox": the elimination of gradient noise (sigma -&gt; 0) allows for Macro-Learning Rates, potentially reducing the Total Time-to-Convergence by orders of magnitude. Halo demonstrates that General Intelligence requires the hybridization of continuous fields and discrete chains under a rigorous mathematical framework.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-01-26T17:24:34Z</published>
+    <arxiv:comment>Architecture update: Formalizes the Dual-Ring Topology and the Clean Transformer</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Hansheng Ren</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.19352v1</id>
+    <title>ConvXformer: Differentially Private Hybrid ConvNeXt-Transformer for Inertial Navigation</title>
+    <updated>2025-10-22T08:20:31Z</updated>
+    <link href="https://arxiv.org/abs/2510.19352v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.19352v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Data-driven inertial sequence learning has revolutionized navigation in GPS-denied environments, offering superior odometric resolution compared to traditional Bayesian methods. However, deep learning-based inertial tracking systems remain vulnerable to privacy breaches that can expose sensitive training data. \hl{Existing differential privacy solutions often compromise model performance by introducing excessive noise, particularly in high-frequency inertial measurements.} In this article, we propose ConvXformer, a hybrid architecture that fuses ConvNeXt blocks with Transformer encoders in a hierarchical structure for robust inertial navigation. We propose an efficient differential privacy mechanism incorporating adaptive gradient clipping and gradient-aligned noise injection (GANI) to protect sensitive information while ensuring model performance. Our framework leverages truncated singular value decomposition for gradient processing, enabling precise control over the privacy-utility trade-off. Comprehensive performance evaluations on benchmark datasets (OxIOD, RIDI, RoNIN) demonstrate that ConvXformer surpasses state-of-the-art methods, achieving more than 40% improvement in positioning accuracy while ensuring $(ε,δ)$-differential privacy guarantees. To validate real-world performance, we introduce the Mech-IO dataset, collected from the mechanical engineering building at KAIST, where intense magnetic fields from industrial equipment induce significant sensor perturbations. This demonstrated robustness under severe environmental distortions makes our framework well-suited for secure and intelligent navigation in cyber-physical systems.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-22T08:20:31Z</published>
+    <arxiv:comment>14 pages, 8 figures, 3 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Omer Tariq</name>
+    </author>
+    <author>
+      <name>Muhammad Bilal</name>
+    </author>
+    <author>
+      <name>Muneeb Ul Hassan</name>
+    </author>
+    <author>
+      <name>Dongsoo Han</name>
+    </author>
+    <author>
+      <name>Jon Crowcroft</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.06549v3</id>
+    <title>GeoClip: Geometry-Aware Clipping for Differentially Private SGD</title>
+    <updated>2025-10-27T20:00:10Z</updated>
+    <link href="https://arxiv.org/abs/2506.06549v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.06549v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Differentially private stochastic gradient descent (DP-SGD) is the most widely used method for training machine learning models with provable privacy guarantees. A key challenge in DP-SGD is setting the per-sample gradient clipping threshold, which significantly affects the trade-off between privacy and utility. While recent adaptive methods improve performance by adjusting this threshold during training, they operate in the standard coordinate system and fail to account for correlations across the coordinates of the gradient. We propose GeoClip, a geometry-aware framework that clips and perturbs gradients in a transformed basis aligned with the geometry of the gradient distribution. GeoClip adaptively estimates this transformation using only previously released noisy gradients, incurring no additional privacy cost. We provide convergence guarantees for GeoClip and derive a closed-form solution for the optimal transformation that minimizes the amount of noise added while keeping the probability of gradient clipping under control. Experiments on both tabular and image datasets demonstrate that GeoClip consistently outperforms existing adaptive clipping methods under the same privacy budget.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-06T21:41:17Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Atefeh Gilani</name>
+    </author>
+    <author>
+      <name>Naima Tasnim</name>
+    </author>
+    <author>
+      <name>Lalitha Sankar</name>
+    </author>
+    <author>
+      <name>Oliver Kosut</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.00098v4</id>
+    <title>Enabling Differentially Private Federated Learning for Speech Recognition: Benchmarks, Adaptive Optimizers and Gradient Clipping</title>
+    <updated>2025-11-25T19:53:50Z</updated>
+    <link href="https://arxiv.org/abs/2310.00098v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.00098v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>While federated learning (FL) and differential privacy (DP) have been extensively studied, their application to automatic speech recognition (ASR) remains largely unexplored due to the challenges in training large transformer models. Specifically, large models further exacerbate issues in FL as they are particularly susceptible to gradient heterogeneity across layers, unlike the relatively uniform gradient behavior observed in shallow models. As a result, prior works struggle to converge with standard optimization techniques, even in the absence of DP mechanisms. To the best of our knowledge, no existing work establishes a competitive, practical recipe for FL with DP in the context of ASR. To address this gap, we establish \textbf{the first benchmark for FL with DP in end-to-end ASR}. Our approach centers on per-layer clipping and layer-wise gradient normalization: theoretical analysis reveals that these techniques together mitigate clipping bias and gradient heterogeneity across layers in deeper models. Consistent with these theoretical insights, our empirical results show that FL with DP is viable under strong privacy guarantees, provided a population of at least several million users. Specifically, we achieve user-level (7.2, $10^{-9}$)-DP (resp. (4.5, $10^{-9}$)-DP) with only a 1.3% (resp. 4.6%) absolute drop in word error rate when extrapolating to high (resp. low) population scales for FL with DP in ASR. Although our experiments focus on ASR, the underlying principles we uncover - particularly those concerning gradient heterogeneity and layer-wise gradient normalization - offer broader guidance for designing scalable, privacy-preserving FL algorithms for large models across domains. Code of all experiments and benchmarks is available at https://github.com/apple/ml-pfl4asr.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-29T19:11:49Z</published>
+    <arxiv:comment>NeurIPS 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Martin Pelikan</name>
+    </author>
+    <author>
+      <name>Sheikh Shams Azam</name>
+    </author>
+    <author>
+      <name>Vitaly Feldman</name>
+    </author>
+    <author>
+      <name>Jan "Honza" Silovsky</name>
+    </author>
+    <author>
+      <name>Kunal Talwar</name>
+    </author>
+    <author>
+      <name>Christopher G. Brinton</name>
+    </author>
+    <author>
+      <name>Tatiana Likhomanenko</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.12543v1</id>
+    <title>Is your batch size the problem? Revisiting the Adam-SGD gap in language modeling</title>
+    <updated>2025-06-14T15:37:31Z</updated>
+    <link href="https://arxiv.org/abs/2506.12543v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.12543v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adam is known to perform significantly better than Stochastic Gradient Descent (SGD) in language models, a phenomenon for which a number of explanations have been proposed. In this work, we revisit this "optimizer gap" through a series of comprehensively tuned baseline training runs for language modeling with Transformers. We exhaustively study how momentum, gradient clipping, and batch size affect the gap between SGD and Adam. Our empirical findings show that SGD with momentum can actually perform similarly to Adam in small-batch settings, if tuned correctly. We revisit existing explanations for Adam's advantage, including heavy-tailed class imbalance, directional sharpness, and Hessian heterogeneity, which struggle to directly explain this phenomenon. Towards bridging this gap in our understanding, by analyzing our Transformer training runs and simple quadratic settings inspired by the literature, we provide new insights, driven by stochastic differential equation models, into the role of batch size on the training dynamics.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-14T15:37:31Z</published>
+    <arxiv:comment>Short version accepted at the 2025 HiLD Workshop at ICML</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Teodora Srećković</name>
+    </author>
+    <author>
+      <name>Jonas Geiping</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.05036v2</id>
+    <title>Q-DPTS: Quantum Differentially Private Time Series Forecasting via Variational Quantum Circuits</title>
+    <updated>2025-09-23T03:31:38Z</updated>
+    <link href="https://arxiv.org/abs/2508.05036v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.05036v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Time series forecasting is vital in domains where data sensitivity is paramount, such as finance and energy systems. While Differential Privacy (DP) provides theoretical guarantees to protect individual data contributions, its integration especially via DP-SGD often impairs model performance due to injected noise. In this paper, we propose Q-DPTS, a hybrid quantum-classical framework for Quantum Differentially Private Time Series Forecasting. Q-DPTS combines Variational Quantum Circuits (VQCs) with per-sample gradient clipping and Gaussian noise injection, ensuring rigorous $(ε, δ)$-differential privacy. The expressiveness of quantum models enables improved robustness against the utility loss induced by DP mechanisms. We evaluate Q-DPTS on the ETT (Electricity Transformer Temperature) dataset, a standard benchmark for long-term time series forecasting. Our approach is compared against both classical and quantum baselines, including LSTM, QASA, QRWKV, and QLSTM. Results demonstrate that Q-DPTS consistently achieves lower prediction error under the same privacy budget, indicating a favorable privacy-utility trade-off. This work presents one of the first explorations into quantum-enhanced differentially private forecasting, offering promising directions for secure and accurate time series modeling in privacy-critical scenarios.</summary>
+    <category term="quant-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-08-07T05:23:51Z</published>
+    <arxiv:primary_category term="quant-ph"/>
+    <author>
+      <name>Chi-Sheng Chen</name>
+    </author>
+    <author>
+      <name>Samuel Yen-Chi Chen</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.01578v1</id>
+    <title>Gradient Shaping Beyond Clipping: A Functional Perspective on Update Magnitude Control</title>
+    <updated>2025-10-02T01:54:49Z</updated>
+    <link href="https://arxiv.org/abs/2510.01578v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.01578v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gradient clipping is widely used to stabilize deep network training, but its formulation as a hard, fixed threshold limits flexibility and ignores gradient distribution dynamics. We propose SPAMP (Statistical Per-layer Adaptive Modulation and Projection), a unified framework that generalizes clipping into smooth, per-layer gradient shaping. SPAMP tracks local gradient statistics, dynamically estimates thresholds, and applies power-based transformations to modulate update magnitudes in a differentiable manner. This perspective recasts clipping and warmup as dual mechanisms for controlling the effective update scale $η_t \|g_t\|$, offering a principled alternative to rigid heuristics. Extensive experiments across image and language tasks demonstrate that SPAMP improves stability, convergence, and robustness over existing methods.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-02T01:54:49Z</published>
+    <arxiv:comment>Accepted as a conference paper at ACM Multimedia Asia 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Haochen You</name>
+    </author>
+    <author>
+      <name>Baojing Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.01447v2</id>
+    <title>SoftAdaClip: A Smooth Clipping Strategy for Fair and Private Model Training</title>
+    <updated>2025-10-06T20:27:34Z</updated>
+    <link href="https://arxiv.org/abs/2510.01447v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.01447v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Differential privacy (DP) provides strong protection for sensitive data, but often reduces model performance and fairness, especially for underrepresented groups. One major reason is gradient clipping in DP-SGD, which can disproportionately suppress learning signals for minority subpopulations. Although adaptive clipping can enhance utility, it still relies on uniform hard clipping, which may restrict fairness. To address this, we introduce SoftAdaClip, a differentially private training method that replaces hard clipping with a smooth, tanh-based transformation to preserve relative gradient magnitudes while bounding sensitivity. We evaluate SoftAdaClip on various datasets, including MIMIC-III (clinical text), GOSSIS-eICU (structured healthcare), and Adult Income (tabular data). Our results show that SoftAdaClip reduces subgroup disparities by up to 87% compared to DP-SGD and up to 48% compared to Adaptive-DPSGD, and these reductions in subgroup disparities are statistically significant. These findings underscore the importance of integrating smooth transformations with adaptive mechanisms to achieve fair and private model training.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-01T20:38:37Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Dorsa Soleymani</name>
+    </author>
+    <author>
+      <name>Ali Dadsetan</name>
+    </author>
+    <author>
+      <name>Frank Rudzicz</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.13960v1</id>
+    <title>Noise Is Not the Main Factor Behind the Gap Between SGD and Adam on Transformers, but Sign Descent Might Be</title>
+    <updated>2023-04-27T05:41:13Z</updated>
+    <link href="https://arxiv.org/abs/2304.13960v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.13960v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The success of the Adam optimizer on a wide array of architectures has made it the default in settings where stochastic gradient descent (SGD) performs poorly. However, our theoretical understanding of this discrepancy is lagging, preventing the development of significant improvements on either algorithm. Recent work advances the hypothesis that Adam and other heuristics like gradient clipping outperform SGD on language tasks because the distribution of the error induced by sampling has heavy tails. This suggests that Adam outperform SGD because it uses a more robust gradient estimate. We evaluate this hypothesis by varying the batch size, up to the entire dataset, to control for stochasticity. We present evidence that stochasticity and heavy-tailed noise are not major factors in the performance gap between SGD and Adam. Rather, Adam performs better as the batch size increases, while SGD is less effective at taking advantage of the reduction in noise. This raises the question as to why Adam outperforms SGD in the full-batch setting. Through further investigation of simpler variants of SGD, we find that the behavior of Adam with large batches is similar to sign descent with momentum.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-27T05:41:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Frederik Kunstner</name>
+    </author>
+    <author>
+      <name>Jacques Chen</name>
+    </author>
+    <author>
+      <name>Jonathan Wilder Lavington</name>
+    </author>
+    <author>
+      <name>Mark Schmidt</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2502.17055v5</id>
+    <title>GradientStabilizer:Fix the Norm, Not the Gradient</title>
+    <updated>2026-08-03T09:15:30Z</updated>
+    <link href="https://arxiv.org/abs/2502.17055v5" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2502.17055v5" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Training instability in modern deep learning systems is frequently triggered by rare but extreme gradient-norm spikes, which can induce oversized parameter updates, corrupt optimizer state, and lead to slow recovery or divergence. Widely used safeguards such as gradient clipping mitigate these failures but require threshold tuning and indiscriminately truncate large updates. We propose GradientStabilizer, a lightweight, drop-in gradient transform that preserves the instantaneous gradient direction while replacing the update magnitude with a statistically stabilized estimate derived from running gradient-norm statistics. We prove that the resulting stabilized magnitude is uniformly bounded on spike steps, independent of the spike size, and show how this boundedness controls optimizer state evolution in adaptive methods. Across LLM pre-training (FP16), quantization-aware pre-training (FP4), ImageNet classification, reinforcement learning, and time-series forecasting, GradientStabilizer consistently improves training stability, widens stable learning-rate regions, and reduces divergence relative to clipping-based baselines, even substantially reducing Adam's sensitivity to weight-decay strength. Code will be released soon.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-02-24T11:09:15Z</published>
+    <arxiv:comment>Accepted By ICML2026</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tianjin Huang</name>
+    </author>
+    <author>
+      <name>Zhangyang Wang</name>
+    </author>
+    <author>
+      <name>Haotian Hu</name>
+    </author>
+    <author>
+      <name>Zhenyu Zhang</name>
+    </author>
+    <author>
+      <name>Gaojie Jin</name>
+    </author>
+    <author>
+      <name>Xiang Li</name>
+    </author>
+    <author>
+      <name>Li Shen</name>
+    </author>
+    <author>
+      <name>Jiaxing Shang</name>
+    </author>
+    <author>
+      <name>Tianlong Chen</name>
+    </author>
+    <author>
+      <name>Ke Li</name>
+    </author>
+    <author>
+      <name>Lu Liu</name>
+    </author>
+    <author>
+      <name>Qingsong Wen</name>
+    </author>
+    <author>
+      <name>Shiwei Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2510.27504v1</id>
+    <title>DP-FedPGN: Finding Global Flat Minima for Differentially Private Federated Learning via Penalizing Gradient Norm</title>
+    <updated>2025-10-31T14:28:31Z</updated>
+    <link href="https://arxiv.org/abs/2510.27504v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2510.27504v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>To prevent inference attacks in Federated Learning (FL) and reduce the leakage of sensitive information, Client-level Differentially Private Federated Learning (CL-DPFL) is widely used. However, current CL-DPFL methods usually result in sharper loss landscapes, which leads to a decrease in model generalization after differential privacy protection. By using Sharpness Aware Minimization (SAM), the current popular federated learning methods are to find a local flat minimum value to alleviate this problem. However, the local flatness may not reflect the global flatness in CL-DPFL. Therefore, to address this issue and seek global flat minima of models, we propose a new CL-DPFL algorithm, DP-FedPGN, in which we introduce a global gradient norm penalty to the local loss to find the global flat minimum. Moreover, by using our global gradient norm penalty, we not only find a flatter global minimum but also reduce the locally updated norm, which means that we further reduce the error of gradient clipping. From a theoretical perspective, we analyze how DP-FedPGN mitigates the performance degradation caused by DP. Meanwhile, the proposed DP-FedPGN algorithm eliminates the impact of data heterogeneity and achieves fast convergence. We also use Rényi DP to provide strict privacy guarantees and provide sensitivity analysis for local updates. Finally, we conduct effectiveness tests on both ResNet and Transformer models, and achieve significant improvements in six visual and natural language processing tasks compared to existing state-of-the-art algorithms. The code is available at https://github.com/junkangLiu0/DP-FedPGN</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-10-31T14:28:31Z</published>
+    <arxiv:comment>21 pages, 8 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Junkang Liu</name>
+    </author>
+    <author>
+      <name>Yuxuan Tian</name>
+    </author>
+    <author>
+      <name>Fanhua Shang</name>
+    </author>
+    <author>
+      <name>Yuanyuan Liu</name>
+    </author>
+    <author>
+      <name>Hongying Liu</name>
+    </author>
+    <author>
+      <name>Junchao Zhou</name>
+    </author>
+    <author>
+      <name>Daorui Ding</name>
+    </author>
+  </entry>
+</feed>

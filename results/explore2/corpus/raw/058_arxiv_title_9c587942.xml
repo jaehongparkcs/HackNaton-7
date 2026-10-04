@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/dd5ZK8ML8ONCMj326iNABTiC2R4</id>
+  <title>arXiv Query: search_query=ti:"Symbolic Discovery of Optimization Algorithms"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-04T00:46:26Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Symbolic+Discovery+of+Optimization+Algorithms%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2302.06675v4</id>
+    <title>Symbolic Discovery of Optimization Algorithms</title>
+    <updated>2023-05-08T21:49:57Z</updated>
+    <link href="https://arxiv.org/abs/2302.06675v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.06675v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present a method to formulate algorithm discovery as program search, and apply it to discover optimization algorithms for deep neural network training. We leverage efficient search techniques to explore an infinite and sparse program space. To bridge the large generalization gap between proxy and target tasks, we also introduce program selection and simplification strategies. Our method discovers a simple and effective optimization algorithm, $\textbf{Lion}$ ($\textit{Evo$\textbf{L}$ved S$\textbf{i}$gn M$\textbf{o}$me$\textbf{n}$tum}$). It is more memory-efficient than Adam as it only keeps track of the momentum. Different from adaptive optimizers, its update has the same magnitude for each parameter calculated through the sign operation. We compare Lion with widely used optimizers, such as Adam and Adafactor, for training a variety of models on different tasks. On image classification, Lion boosts the accuracy of ViT by up to 2% on ImageNet and saves up to 5x the pre-training compute on JFT. On vision-language contrastive learning, we achieve 88.3% $\textit{zero-shot}$ and 91.1% $\textit{fine-tuning}$ accuracy on ImageNet, surpassing the previous best results by 2% and 0.1%, respectively. On diffusion models, Lion outperforms Adam by achieving a better FID score and reducing the training compute by up to 2.3x. For autoregressive, masked language modeling, and fine-tuning, Lion exhibits a similar or better performance compared to Adam. Our analysis of Lion reveals that its performance gain grows with the training batch size. It also requires a smaller learning rate than Adam due to the larger norm of the update produced by the sign function. Additionally, we examine the limitations of Lion and identify scenarios where its improvements are small or not statistically significant. Lion is also successfully deployed in production systems such as Google search ads CTR model.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-13T20:27:30Z</published>
+    <arxiv:comment>30 pages, Lion is successfully deployed in production systems. We also add comparison with other automatically discovered optimizers</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Xiangning Chen</name>
+    </author>
+    <author>
+      <name>Chen Liang</name>
+    </author>
+    <author>
+      <name>Da Huang</name>
+    </author>
+    <author>
+      <name>Esteban Real</name>
+    </author>
+    <author>
+      <name>Kaiyuan Wang</name>
+    </author>
+    <author>
+      <name>Yao Liu</name>
+    </author>
+    <author>
+      <name>Hieu Pham</name>
+    </author>
+    <author>
+      <name>Xuanyi Dong</name>
+    </author>
+    <author>
+      <name>Thang Luong</name>
+    </author>
+    <author>
+      <name>Cho-Jui Hsieh</name>
+    </author>
+    <author>
+      <name>Yifeng Lu</name>
+    </author>
+    <author>
+      <name>Quoc V. Le</name>
+    </author>
+  </entry>
+</feed>

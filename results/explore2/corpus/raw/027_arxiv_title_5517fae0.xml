@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/Ih3Riqp8OmhpjmCGfYH4/bXYYU8</id>
+  <title>arXiv Query: search_query=ti:"Character-Level Language Modeling with Deeper Self-Attention"&amp;id_list=&amp;start=0&amp;max_results=3</title>
+  <updated>2026-10-03T23:55:36Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=ti:%22Character-Level+Language+Modeling+with+Deeper+Self-Attention%22&amp;start=0&amp;max_results=3&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>3</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1808.04444v2</id>
+    <title>Character-Level Language Modeling with Deeper Self-Attention</title>
+    <updated>2018-12-10T17:08:57Z</updated>
+    <link href="https://arxiv.org/abs/1808.04444v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1808.04444v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>LSTMs and other RNN variants have shown strong performance on character-level language modeling. These models are typically trained using truncated backpropagation through time, and it is common to assume that their success stems from their ability to remember long-term contexts. In this paper, we show that a deep (64-layer) transformer model with fixed context outperforms RNN variants by a large margin, achieving state of the art on two popular benchmarks: 1.13 bits per character on text8 and 1.06 on enwik8. To get good results at this depth, we show that it is important to add auxiliary losses, both at intermediate network layers and intermediate sequence positions.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-08-09T18:44:38Z</published>
+    <arxiv:comment>8 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Rami Al-Rfou</name>
+    </author>
+    <author>
+      <name>Dokook Choe</name>
+    </author>
+    <author>
+      <name>Noah Constant</name>
+    </author>
+    <author>
+      <name>Mandy Guo</name>
+    </author>
+    <author>
+      <name>Llion Jones</name>
+    </author>
+  </entry>
+</feed>

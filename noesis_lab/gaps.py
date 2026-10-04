@@ -19,7 +19,7 @@ from . import stats
 from .schemas import MECHANISMS, Claim, QueueItem
 from .search.coverage import claim_coverage
 
-TIER_WEIGHT = {"T1": 1.0, "T2": 0.8, "T3": 0.6, "T4": 0.0}
+TIER_WEIGHT = {"T1": 1.0, "T2": 0.8, "T3": 0.6, "T4": 0.0, "D-confirmed": 1.0, "D-explore": 0.3}
 SIGN = {"improves": "+", "no_worse": "0", "worse": "-"}        # "context" claims carry no sign
 BUCKETS = ("covers", "partial", "none")
 
@@ -109,6 +109,14 @@ def coverage_tensor(g: GapGraph) -> dict[str, dict[str, dict[str, float]]]:
     return t
 
 
+def strongly_covered(g: GapGraph, method: str) -> bool:
+    """Is this method already covered in our setting by something that closes the gap — a literature
+    claim or our own paired (D-confirmed) result? A single-seed exploration (D-explore) only lowers
+    the gap score (via `coverage_in_our_setting`); it never closes the gap on its own."""
+    return any(e.bucket == "covers" and e.sign and e.tier != "D-explore"
+               for e in g.edges if e.method == method)
+
+
 def coverage_in_our_setting(tensor: dict, method: str) -> float:
     """In [0, 1]: tier-weighted claims that cover our setting (partial counts half), capped at 1."""
     cell = tensor.get(method)
@@ -181,7 +189,7 @@ def coverage_gaps(g: GapGraph, tensor: dict) -> list[Gap]:
     out = []
     for m in g.methods:
         edges = [e for e in g.edges if e.method == m and e.sign]
-        if not edges or sum(tensor[m]["covers"].values()) > 0:
+        if not edges or strongly_covered(g, m):     # a D-explore edge lowers the score but does not close the gap
             continue
         by_sign = {s: sum(e.weight for e in edges if e.sign == s) for s in "+0-"}
         sign = max("+0-", key=lambda s: (by_sign[s], -"+0-".index(s)))
@@ -208,7 +216,7 @@ def abc_gaps(g: GapGraph, tensor: dict) -> list[Gap]:
     method's effect along the path, which with benefit-only edges and a "+" second leg is "+"."""
     out = []
     for m in g.methods:
-        if sum(tensor[m]["covers"].values()) > 0:
+        if strongly_covered(g, m):
             continue
         for k in sorted({e.mechanism_id for e in g.edges if e.method == m and e.mechanism_id}):
             c1 = [e for e in g.edges if e.method == m and e.mechanism_id == k and e.sign in ("+", "0")]
@@ -419,7 +427,7 @@ def novelty_type(delta: dict[str, str], g: GapGraph, tensor: dict) -> str:
         if cell.get("+", 0) > 0 and cell.get("-", 0) > 0:
             return "resolution"
     directional = [e for e in has[m] if e.sign]
-    return "transfer" if directional and sum(tensor[m]["covers"].values()) == 0 else "none"
+    return "transfer" if directional and not strongly_covered(g, m) else "none"
 
 
 def gap_queue(found: Sequence[Gap], g: GapGraph, claims: Sequence[Claim], tested: Sequence[str] = (), *,
@@ -469,16 +477,22 @@ def archive_cell(delta: dict[str, str], g: GapGraph) -> str:
     return "+".join(sorted(delta)) + " | " + (", ".join(mechs) or "no mechanism")
 
 
-def derived_claim(delta: dict[str, str], branch: str) -> Claim | None:
-    """Our own paired result written back as a graph edge (tagged derived, never shown to the gate
-    or quoted as literature). Only a single-field result maps to one method; a combination result
-    adds no edge."""
+DERIVED_PAPER = "noesis_lab_derived"
+
+
+def derived_claim(delta: dict[str, str], branch: str, tier: str = "D-confirmed") -> Claim | None:
+    """Our own result written back as a graph edge. It is tagged derived (tier D-explore for a
+    single-seed exploration, D-confirmed for a paired screening): it shapes the gap graph — once we
+    have measured a change, its cell is less of a gap — but it is NEVER shown to the gate, used as a
+    literature search, or counted as prior art (`counts_as_covered` excludes it). Only a single-field
+    result maps to one method; a combination result adds no edge."""
     if len(delta) != 1:
         return None
     key = stats.delta_key(delta)
+    kind = {"D-explore": "single-seed exploration", "D-confirmed": "paired screening"}.get(tier, "measurement")
     outcome = {"promising": "improves", "harmful": "worse", "no_improvement": "no_worse"}[branch]
-    return Claim(claim_id="ours_" + key.replace("=", "_").replace(".", "_"), paper_id="noesis_lab_derived",
-                 dimension=next(iter(delta)), method=key, setting="our setting (paired screening in this session)",
-                 claim=f"derived: paired screening measured {branch}", source_span="",
-                 expected_outcome=outcome, covers_our_setting=True, coverage="covers", tier="T1",
+    return Claim(claim_id="ours_" + key.replace("=", "_").replace(".", "_"), paper_id=DERIVED_PAPER,
+                 dimension=next(iter(delta)), method=key, setting=f"our setting ({kind} in this session)",
+                 claim=f"derived: {kind} measured {branch}", source_span="",
+                 expected_outcome=outcome, covers_our_setting=True, coverage="covers", tier=tier,
                  config_change=dict(delta))

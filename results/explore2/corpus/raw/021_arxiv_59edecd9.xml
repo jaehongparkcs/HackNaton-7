@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/R3YZfHKEmgt66s7BBU9t+v2M+os</id>
+  <title>arXiv Query: search_query=all:"Lion" AND all:"optimizer" AND all:"Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=15</title>
+  <updated>2026-10-03T23:48:18Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22Lion%22+AND+(all:%22optimizer%22+AND+(all:%22Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)))&amp;start=0&amp;max_results=15&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>15</opensearch:itemsPerPage>
+  <opensearch:totalResults>9</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2411.16085v4</id>
+    <title>Cautious Optimizers: Improving Training with One Line of Code</title>
+    <updated>2026-02-15T02:16:45Z</updated>
+    <link href="https://arxiv.org/abs/2411.16085v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2411.16085v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>AdamW has been the default optimizer for transformer pretraining. For many years, our community searched for faster and more stable optimizers with only constrained positive outcomes. In this work, we propose a \textbf{one-line modification in Pytorch} to any momentum-based optimizer, which we rename cautious optimizer, e.g. C-AdamW and C-Lion. Our theoretical result shows that this modification preserves Adam's Hamiltonian function and it does not break the convergence guarantee under the Lyapunov analysis. In addition, a whole new family of optimizers is revealed by our theoretical insight. Among them, we pick the simplest one for empirical experiments, showing not only consistent speed-up on LLM pretraining, but also image classification, with minimum extra tuning on hyperparameters. Code is available at https://github.com/kyleliang919/C-Optim.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-11-25T04:36:01Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Kaizhao Liang</name>
+    </author>
+    <author>
+      <name>Lizhang Chen</name>
+    </author>
+    <author>
+      <name>Bo Liu</name>
+    </author>
+    <author>
+      <name>Qiang Liu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.16243v1</id>
+    <title>LiFT: Local Search via Linear Programming for Overfitting-Controlled Transformers</title>
+    <updated>2026-06-15T05:42:59Z</updated>
+    <link href="https://arxiv.org/abs/2606.16243v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.16243v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>This paper proposes a Linear Programming (LP)-based local search framework for fine-tuning pretrained transformer models with explicit control against overfitting. The approach formulates transformer fine-tuning as a bilevel optimization-based regularization problem, in which model parameters and regularization hyperparameters are jointly updated. Information collected during initial warm-up iterations, including validation gradients and training Hessian information, is used to construct a local descent direction by solving an LP that minimizes a scaled directional derivative while preserving training optimality. This validation-aware descent direction enables focused local updates of both parameters and regularization hyperparameters, reducing overfitting without requiring repeated full retraining cycles. The resulting method, termed Linear Programming-based Fine-Tuning (LiFT) for transformers, differs from conventional fine-tuning by systematically identifying task-specific updates rather than relying on heuristic or grid-based hyperparameter selection. Experiments on GPT-2 Small fine-tuned on WikiText-2 demonstrate that LiFT enables effective adaptation through selective tuning of transformer blocks and regularization parameters, yielding consistent improvements in test perplexity across multiple layer configurations and regularization settings, with particularly pronounced gains in overfitting-prone scenarios. Beyond empirical performance, LiFT establishes a principled connection between transformer fine-tuning, bilevel optimization, local search, and regularization theory.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-15T05:42:59Z</published>
+    <arxiv:comment>22 pages, 6 figures, published in The 20th Learning and Intelligent Optimization Conference (LION 2026)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Abhishek Shukla</name>
+    </author>
+    <author>
+      <name>Anikeit Khanna</name>
+    </author>
+    <author>
+      <name>Ankur Sinha</name>
+    </author>
+    <author>
+      <name>Faiz Hamid</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.23637v1</id>
+    <title>Muown Implicitly Performs Angular Step-size Decay</title>
+    <updated>2026-06-22T17:28:45Z</updated>
+    <link href="https://arxiv.org/abs/2606.23637v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2606.23637v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Matrix-aware optimizers such as Muon and Muown have recently shown strong empirical performance for pre-training Transformers. In particular, Muown separates each weight matrix into row magnitudes and an un-normalized direction variable, updating the former with Adam and the latter with Muon. We show that the directional update of Muown is equivalent to a Riemannian step on the normalized directions, while the magnitude of the un-normalized parameterization only modulates the angular step size. This explains the step-size stability of Muown and suggests making the angular step size explicit. The resulting method, AngularMuown, optimizes directly over the normalized directions and uses a schedulable angular multiplier decoupled from the radial magnitude update. AngularMuown improves over Muown and, at the time of writing, a preliminary version is leading the per-optimizer category of the modded nanoGPT speedrunning competition. Further experiments on Qwen2-0.5B, and 1.1B parameter mixture-of-experts models confirm the algorithm scales beyond small models. An implementation of the algorithm is available at https://github.com/fhueb/angular-muown</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-22T17:28:45Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Florian Hübler</name>
+    </author>
+    <author>
+      <name>Kai Lion</name>
+    </author>
+    <author>
+      <name>Antonio Orvieto</name>
+    </author>
+    <author>
+      <name>Niao He</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2307.06440v4</id>
+    <title>No Train No Gain: Revisiting Efficient Training Algorithms For Transformer-based Language Models</title>
+    <updated>2023-11-14T13:01:48Z</updated>
+    <link href="https://arxiv.org/abs/2307.06440v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2307.06440v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The computation necessary for training Transformer-based language models has skyrocketed in recent years. This trend has motivated research on efficient training algorithms designed to improve training, validation, and downstream performance faster than standard training. In this work, we revisit three categories of such algorithms: dynamic architectures (layer stacking, layer dropping), batch selection (selective backprop, RHO loss), and efficient optimizers (Lion, Sophia). When pre-training BERT and T5 with a fixed computation budget using such methods, we find that their training, validation, and downstream gains vanish compared to a baseline with a fully-decayed learning rate. We define an evaluation protocol that enables computation to be done on arbitrary machines by mapping all computation time to a reference machine which we call reference system time. We discuss the limitations of our proposed protocol and release our code to encourage rigorous research in efficient training procedures: https://github.com/JeanKaddour/NoTrainNoGain.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.PF" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-07-12T20:10:14Z</published>
+    <arxiv:comment>NeurIPS 2023</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Jean Kaddour</name>
+    </author>
+    <author>
+      <name>Oscar Key</name>
+    </author>
+    <author>
+      <name>Piotr Nawrot</name>
+    </author>
+    <author>
+      <name>Pasquale Minervini</name>
+    </author>
+    <author>
+      <name>Matt J. Kusner</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2607.16268v1</id>
+    <title>PsiLogic: Chaos-Aware Active Cancellation for Adam with a Fair Cross-Domain Benchmark</title>
+    <updated>2026-07-05T14:56:54Z</updated>
+    <link href="https://arxiv.org/abs/2607.16268v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2607.16268v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Adaptive optimizers such as Adam and AdamW apply the same update rule regardless of whether training is in a chaotic early phase or near convergence. We introduce PsiLogic, an optimizer that augments Adam with a dynamic Active Cancellation Term gated by a dual exponential moving average (EMA) of scale-normalized gradient norms. The resulting chaos detector strengthens damping when gradient statistics are unstable and fades to zero as training stabilizes, providing an implicit warmup without a hand-tuned schedule.
+  We evaluate PsiLogic against Adam, AdamW, and Lion using FairBench -- a reproducible benchmark protocol with per-optimizer learning-rate sweeps, identical initialization per seed, and Welch t-tests. On an NVIDIA H100 80GB reference run (4 arenas, 3 seeds, 2000 steps, bf16 AMP), PsiLogic achieves the best validation metric in three of four arenas: NLP perplexity 7.79 +/- 0.18 vs. 8.17 +/- 0.08 (AdamW, p = 0.049), ViT top-1 accuracy 0.244 +/- 0.006 vs. 0.223 +/- 0.002 (AdamW, p = 0.015), and ResNet top-1 accuracy 0.222 +/- 0.001 vs. 0.172 +/- 0.004 (Adam, p = 0.001). On diffusion, validation MSE is statistically tied with Adam/AdamW (p = 0.49). ResNet accuracy vs. AdamW is a numerical tie without significance at three seeds (p = 0.44). Peak GPU memory is comparable across optimizers; PsiLogic incurs 1.2--1.8x wall-clock overhead on transformer-heavy arenas (implementation-bound).
+  We release an open-source PyTorch implementation, the full FairBench harness, and all raw CSV outputs to support independent verification.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-07-05T14:56:54Z</published>
+    <arxiv:comment>9 pages, 4 figures; code at https://github.com/Troxter222/psilogic</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Ali Sultonov</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2302.06165v1</id>
+    <title>Sparse Dimensionality Reduction Revisited</title>
+    <updated>2023-02-13T08:01:25Z</updated>
+    <link href="https://arxiv.org/abs/2302.06165v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2302.06165v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The sparse Johnson-Lindenstrauss transform is one of the central techniques in dimensionality reduction. It supports embedding a set of $n$ points in $\mathbb{R}^d$ into $m=O(\varepsilon^{-2} \lg n)$ dimensions while preserving all pairwise distances to within $1 \pm \varepsilon$. Each input point $x$ is embedded to $Ax$, where $A$ is an $m \times d$ matrix having $s$ non-zeros per column, allowing for an embedding time of $O(s \|x\|_0)$.
+  Since the sparsity of $A$ governs the embedding time, much work has gone into improving the sparsity $s$. The current state-of-the-art by Kane and Nelson (JACM'14) shows that $s = O(\varepsilon ^{-1} \lg n)$ suffices. This is almost matched by a lower bound of $s = Ω(\varepsilon ^{-1} \lg n/\lg(1/\varepsilon))$ by Nelson and Nguyen (STOC'13). Previous work thus suggests that we have near-optimal embeddings.
+  In this work, we revisit sparse embeddings and identify a loophole in the lower bound. Concretely, it requires $d \geq n$, which in many applications is unrealistic. We exploit this loophole to give a sparser embedding when $d = o(n)$, achieving $s = O(\varepsilon^{-1}(\lg n/\lg(1/\varepsilon)+\lg^{2/3}n \lg^{1/3} d))$. We also complement our analysis by strengthening the lower bound of Nelson and Nguyen to hold also when $d \ll n$, thereby matching the first term in our new sparsity upper bound. Finally, we also improve the sparsity of the best oblivious subspace embeddings for optimal embedding dimensionality.</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-02-13T08:01:25Z</published>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Mikael Møller Høgsgaard</name>
+    </author>
+    <author>
+      <name>Lion Kamma</name>
+    </author>
+    <author>
+      <name>Kasper Green Larsen</name>
+    </author>
+    <author>
+      <name>Jelani Nelson</name>
+    </author>
+    <author>
+      <name>Chris Schwiegelshohn</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2412.17107v3</id>
+    <title>Grams: Gradient Descent with Adaptive Momentum Scaling</title>
+    <updated>2025-03-05T07:29:42Z</updated>
+    <link href="https://arxiv.org/abs/2412.17107v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2412.17107v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce $\mathbf{G}$radient Descent with $\mathbf{A}$daptive $\mathbf{M}$omentum $\mathbf{S}$caling ($\mathbf{Grams}$), a novel optimization algorithm that decouples the direction and magnitude of parameter updates in deep learning. Unlike traditional optimizers that directly integrate momentum into updates, Grams separates the update direction, derived from current gradients, from momentum, which is used solely for adaptive magnitude scaling. This approach enables Grams to achieve improved loss descent compared to state-of-the-art cautious and momentum-based optimizers. We theoretically demonstrate that Grams descents faster than other state-of-the-art optimizers and establish a global convergence guarantee for Grams. We also validate its effectiveness through extensive empirical evaluations. The results demonstrate Grams' superior performance, including faster convergence and better generalization, compared to widely-used optimizers such as Adam, Lion, and their cautious variants. Our results highlight Grams' potential as a transformative approach for efficiently training and fine-tuning large language models. Code is available at https://github.com/Gunale0926/Grams.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OC" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-12-22T17:39:32Z</published>
+    <arxiv:comment>SCOPE Workshop @ ICLR 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Yang Cao</name>
+    </author>
+    <author>
+      <name>Xiaoyu Li</name>
+    </author>
+    <author>
+      <name>Zhao Song</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2505.24336v1</id>
+    <title>When Humans Growl and Birds Speak: High-Fidelity Voice Conversion from Human to Animal and Designed Sounds</title>
+    <updated>2025-05-30T08:24:41Z</updated>
+    <link href="https://arxiv.org/abs/2505.24336v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2505.24336v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Human to non-human voice conversion (H2NH-VC) transforms human speech into animal or designed vocalizations. Unlike prior studies focused on dog-sounds and 16 or 22.05kHz audio transformation, this work addresses a broader range of non-speech sounds, including natural sounds (lion-roars, birdsongs) and designed voice (synthetic growls). To accomodate generation of diverse non-speech sounds and 44.1kHz high-quality audio transformation, we introduce a preprocessing pipeline and an improved CVAE-based H2NH-VC model, both optimized for human and non-human voices. Experimental results showed that the proposed method outperformed baselines in quality, naturalness, and similarity MOS, achieving effective voice conversion across diverse non-human timbres. Demo samples are available at https://nc-ai.github.io/speech/publications/nonhuman-vc/</summary>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-05-30T08:24:41Z</published>
+    <arxiv:comment>INTERSPEECH 2025 accepted</arxiv:comment>
+    <arxiv:primary_category term="eess.AS"/>
+    <author>
+      <name>Minsu Kang</name>
+    </author>
+    <author>
+      <name>Seolhee Lee</name>
+    </author>
+    <author>
+      <name>Choonghyeon Lee</name>
+    </author>
+    <author>
+      <name>Namhyun Cho</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2509.07252v2</id>
+    <title>GCond: Gradient Conflict Resolution via Accumulation-based Stabilization for Large-Scale Multi-Task Learning</title>
+    <updated>2026-04-01T20:57:56Z</updated>
+    <link href="https://arxiv.org/abs/2509.07252v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2509.07252v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In multi-task learning (MTL), gradient conflict poses a significant challenge. Effective methods for addressing this problem, including PCGrad, CAGrad, and GradNorm, in their original implementations are computationally demanding, which significantly limits their application in modern large models such as transformers. We propose Gradient Conductor (GCond), a method that builds upon PCGrad principles by combining them with gradient accumulation and an adaptive arbitration mechanism. We evaluated GCond on self-supervised multi-task learning tasks using MobileNetV3-Small and ConvNeXt architectures on the ImageNet 1K dataset and a combined head and neck CT scan dataset, comparing the proposed method against baseline linear combinations and state-of-the-art gradient conflict resolution methods. The classical and stochastic approaches of GCond were analyzed. The stochastic mode of GCond achieved a two-fold computational speedup while maintaining optimization quality, and demonstrated superior performance across all evaluated metrics, achieving lower L1 and SSIM losses compared to other methods on both datasets, and demonstrating superior generalization in heterogeneous scenarios: GCond improved ImageNet Top-1 Accuracy by 4.5% over baselines and prevented confidence overfitting in medical diagnosis tasks. GCond exhibited high scalability, being successfully applied to both compact models: MobileNetV3-Small and ConvNeXt-tiny; and large architecture ConvNeXtV2-Base. It also showed compatibility with modern optimizers such as AdamW and Lion/LARS. Therefore, GCond offers a scalable and efficient solution to the problem of gradient conflicts in multi-task learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-09-08T22:02:22Z</published>
+    <arxiv:comment>Published in IEEE Access. This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 License (CC BY-NC-ND 4.0)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>IEEE Access, vol. 14, pp. 42086-42104, 2026</arxiv:journal_ref>
+    <author>
+      <name>Evgeny Alves Limarenko</name>
+    </author>
+    <author>
+      <name>Anastasiia Studenikina</name>
+    </author>
+    <author>
+      <name>Svetlana Illarionova</name>
+    </author>
+    <author>
+      <name>Maxim Sharaev</name>
+    </author>
+    <arxiv:doi>10.1109/ACCESS.2026.3673372</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1109/ACCESS.2026.3673372" title="doi"/>
+  </entry>
+</feed>

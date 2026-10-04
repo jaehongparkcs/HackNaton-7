@@ -1,0 +1,500 @@
+{
+  "fixture_id": "gap_norm_rmsnorm",
+  "round": 0,
+  "delta": {
+    "norm": "rmsnorm"
+  },
+  "queries": [
+    {
+      "q": "\"RMSNorm\" AND \"language model\"",
+      "n_results": 10
+    },
+    {
+      "q": "\"RMSNorm\" AND \"Transformer\"",
+      "n_results": 10
+    }
+  ],
+  "already_in_corpus": [
+    "2305.14858",
+    "2507.15773",
+    "2510.22777",
+    "2511.17864",
+    "2601.09719",
+    "2605.08504",
+    "2607.04819",
+    "2608.23582"
+  ],
+  "papers": [
+    {
+      "paper_id": "2605.13989",
+      "title": "VectraYX-Nano: A 42M-Parameter Spanish Cybersecurity Language Model with Curriculum Learning and Native Tool Use",
+      "authors": [
+        "Juan S. Santillana"
+      ],
+      "published": "2026-05-13",
+      "url": "https://arxiv.org/abs/2605.13989",
+      "abstract": "We present VectraYX-Nano, a 41.95M-parameter decoder-only language model trained from scratch in Spanish for cybersecurity, with a Latin-American regional focus and native tool invocation via the Model Context Protocol (MCP). The model has four contributions. (i) Corpus: VectraYX-Sec-ES, a 170M-token Spanish corpus assembled by an eight-VM distributed pipeline at ~$25 USD of cloud compute and split into three curriculum phases (conversational 42M, cybersecurity 118M, offensive tooling 10M). (ii) Architecture: a 42M Transformer decoder with GQA, QK-Norm, RMSNorm, SwiGLU, RoPE and z-loss, paired with a domain-balanced 16,384-token byte-fallback BPE. (iii) Curriculum with replay across the three phases yields a monotonic loss descent (9.80 -> 3.17 -> 3.00 -> 2.16); after SFT (loss 1.74) the v2 bootstrap-ablation reference attains a conversational gate of 0.775 +/- 0.043 on B5 over N=4 seeds, and a controlled Phase-2 replay sweep over {0,5,10,25,50}% saturates B5 at >=25% replay. (iv) Two empirical findings, both N=4. A controlled bootstrap-corpus ablation across v2 (OpenSubs), v4 (mC4-ES), and v6 (60/25/15 OpenSubs/mC4/Wiki) exposes a loss-versus-register inversion: lower-perplexity bootstraps yield measurably worse conversational behavior (v2 > v4 > v6 on B5 at every paired seed). The B4 (tool-selection) floor of 0.000 is a corpus-density artifact, not a capacity gate: rebalancing the SFT mixture to tool-use ratio 1:21 yields VectraYX-Nano v7, the released headline configuration, reaching B4 = 0.230 +/- 0.052 at 42M while retaining B1 = 0.332 +/- 0.005 and B5 = 0.725 +/- 0.130; a LoRA replication on a 260M from-scratch mid-tier reaches 0.445 +/- 0.201. The released GGUF is 96 MB in F16, runs sub-second TTFT on commodity hardware under llama.cpp, and is, to our knowledge, the first published Spanish-native cybersecurity LLM with end-to-end MCP integration.",
+      "abstract_sha256": "7261140403ded9b8f33646b1ca8aec5be0f24a845ca21d1f70dab5cfe9f181e5",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2606.24898",
+      "title": "Dense Supervision Is Not Enough: The Readout Blind Spot in Looped Language Models",
+      "authors": [
+        "Rituraj Sharma",
+        "Tu Vu"
+      ],
+      "published": "2026-06-12",
+      "url": "https://arxiv.org/abs/2606.24898",
+      "abstract": "Looped language models turn hidden states into runtime state: each state is decoded for prediction and fed back into future computation. This creates a basic supervision question: which state variables does cross-entropy actually control? We show that dense per-loop cross-entropy controls the variables exposed by the readout, not every variable active in the recurrent transition. Hidden-state scale gives a concrete failure mode. Scale-invariant readouts such as RMSNorm and LayerNorm hide radial scale from the immediate cross-entropy loss, while pre-norm residual recurrence continues to carry and update that same scale. Thus per-loop loss can make early exits usable without controlling recurrent scale. In 44M and 129M looped transformers without inter-loop normalization, per-loop cross-entropy through RMSNorm readouts still drives final hidden-state norms into the thousands or tens of thousands. Scale-visible readouts and explicit norm penalties keep norms in the tens, and scale-removing recurrence is the complementary architectural fix. The resulting design rule is simple: dense supervision trains exits; recurrent scale control requires either making scale visible to a loss or removing it from the loop. Consistent with this rule, scale-controlled variants achieve lower perplexity at matched inference-depth operating points in our variable-depth benchmarks.",
+      "abstract_sha256": "ce06edbde69a8af3daed5c6f36455db43a93dd85f16b480eed5e300cec7bc278",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2503.10251",
+      "title": "Numerical stability analysis of large language models",
+      "authors": [
+        "Stanislav Budzinskiy",
+        "Wenyi Fang",
+        "Longbin Zeng",
+        "Philipp Petersen"
+      ],
+      "published": "2025-03-13",
+      "url": "https://arxiv.org/abs/2503.10251",
+      "abstract": "Transformers are the state-of-the-art architecture for large language models, and a key to their scalability is the strategic usage of low-precision arithmetic. We develop a mixed-precision analysis of transformer inference, deriving bounds for the condition numbers and forward error of the architecture's constituent parts. Notably, we compare the numerical stability of LayerNorm and RMSNorm in the massive-outlier regime, tighten the error bound of softmax in the presence of attention sinks, and quantify the impact of its shifted evaluation on the sensitivity to perturbations. Furthermore, we derive novel sequence-length-independent bounds on the local Lipschitz constant of self-attention. Our worst-case error bound for transformer inference suggests that its numerical stability is determined by the interplay between weight magnitude and the growth of the residual stream. Crucially, and as validated by experiments with GPT-2, our analysis establishes that the scaling of residual-projection weights preserves the propagation of the relative rounding error unless it forces a qualitative transition in the dynamics of the residual stream.",
+      "abstract_sha256": "2611809187c18380f5b1341b86209579c735195ef44e7c7cffc30e11833b3bd3",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "math.NA",
+        "cs.LG",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2506.19697",
+      "title": "Outlier-Safe Pre-Training for Robust 4-Bit Quantization of Large Language Models",
+      "authors": [
+        "Jungwoo Park",
+        "Taewhoo Lee",
+        "Chanwoong Yoon",
+        "Hyeon Hwang",
+        "Jaewoo Kang"
+      ],
+      "published": "2025-06-24",
+      "url": "https://arxiv.org/abs/2506.19697",
+      "abstract": "Extreme activation outliers in Large Language Models (LLMs) critically degrade quantization performance, hindering efficient on-device deployment. While channel-wise operations and adaptive gradient scaling are recognized causes, practical mitigation remains challenging. We introduce Outlier-Safe Pre-Training (OSP), a practical guideline that proactively prevents outlier formation rather than relying on post-hoc mitigation. OSP combines three key innovations: (1) the Muon optimizer, eliminating privileged bases while maintaining training efficiency; (2) Single-Scale RMSNorm, preventing channel-wise amplification; and (3) a learnable embedding projection, redistributing activation magnitudes originating from embedding matrices. We validate OSP by training a 1.4B-parameter model on 1 trillion tokens, which is the first production-scale LLM trained without such outliers. Under aggressive 4-bit quantization, our OSP model achieves a 35.7 average score across 10 benchmarks (compared to 26.5 for an Adam-trained model), with only a 2% training overhead. Remarkably, OSP models exhibit near-zero excess kurtosis (0.04) compared to extreme values (1818.56) in standard models, fundamentally altering LLM quantization behavior. Our work demonstrates that outliers are not inherent to LLMs but are consequences of training strategies, paving the way for more efficient LLM deployment. The source code and pretrained checkpoints are available at https://github.com/dmis-lab/Outlier-Safe-Pre-Training.",
+      "abstract_sha256": "9ccec9b92fdf0cbee7cb13a5da9ed679f7ab99561ea20e71e7c926be11cd94b9",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2607.10137",
+      "title": "RDQ: Residual Distribution Quantization for Large Language Models",
+      "authors": [
+        "Prateek Singh"
+      ],
+      "published": "2026-07-11",
+      "url": "https://arxiv.org/abs/2607.10137",
+      "abstract": "Post-training quantization (PTQ) of large language models degrades sharply below 4-bit precision. We identify the root cause as residual stream distributional drift: quantization noise injected at each transformer layer accumulates in the shared residual representation, causing KL divergence from the FP16 baseline to grow super-linearly with depth (Pearson r=0.999 with log-perplexity, p<0.001, confirmed across all tested methods and bit-widths). We discover that 84% of LLaMA-3-8B layers exhibit non-Gaussian residual distributions (KS test, p<=0.05), and that per-layer residual stream variance grows 6,548x across depth. We propose RDQ (Residual Distribution Quantization), a PTQ framework whose central contribution is Cascaded Error Compensation (CEC): a sequential calibration procedure that captures the actual drifted activations each layer receives (computed by running calibration data through already-quantized upstream layers) and fits per-channel AWQ-style scales against those drifted inputs, with scales folded into preceding RMSNorm weights for exact mathematical equivalence at zero inference overhead. RDQ achieves state-of-the-art results on all three tested architectures: LLaMA-3-8B: 7.55 / 5.62 PPL (W3/W4); Qwen-2.5-7B: 7.46 / 6.38 PPL; Mistral-7B: 6.88 / 5.73 PPL. RDQ beats the best published baseline (LeanQuant/SpinQuant) at every model and bit-width combination, with gains up to -46.4% vs. RTN at W3A16 on LLaMA-3-8B. All output is standard group-128 asymmetric quantization, deployable on Qualcomm AIMET, GGUF, and any standard inference stack at zero runtime overhead.",
+      "abstract_sha256": "168fa84f6fae6005cc4a6833414b428d68177fea3d6b26d4467e16bae18a51bc",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2405.17849",
+      "title": "I-LLM: Efficient Integer-Only Inference for Fully-Quantized Low-Bit Large Language Models",
+      "authors": [
+        "Xing Hu",
+        "Yuan Cheng",
+        "Dawei Yang",
+        "Zhihang Yuan",
+        "Jiangyong Yu",
+        "Chen Xu",
+        "Sifan Zhou"
+      ],
+      "published": "2024-05-28",
+      "url": "https://arxiv.org/abs/2405.17849",
+      "abstract": "Post-training quantization (PTQ) serves as a potent technique to accelerate the inference of large language models (LLMs). Nonetheless, existing works still necessitate a considerable number of floating-point (FP) operations during inference, including additional quantization and de-quantization, as well as non-linear operators such as RMSNorm and Softmax. This limitation hinders the deployment of LLMs on the edge and cloud devices. In this paper, we identify the primary obstacle to integer-only quantization for LLMs lies in the large fluctuation of activations across channels and tokens in both linear and non-linear operations. To address this issue, we propose I-LLM, a novel integer-only fully-quantized PTQ framework tailored for LLMs. Specifically, (1) we develop Fully-Smooth Block-Reconstruction (FSBR) to aggressively smooth inter-channel variations of all activations and weights. (2) to alleviate degradation caused by inter-token variations, we introduce a novel approach called Dynamic Integer-only MatMul (DI-MatMul). This method enables dynamic quantization in full-integer matrix multiplication by dynamically quantizing the input and outputs with integer-only operations. (3) we design DI-ClippedSoftmax, DI-Exp, and DI-Normalization, which utilize bit shift to execute non-linear operators efficiently while maintaining accuracy. The experiment shows that our I-LLM achieves comparable accuracy to the FP baseline and outperforms non-integer quantization methods. For example, I-LLM can operate at W4A4 with negligible loss of accuracy. To our knowledge, we are the first to bridge the gap between integer-only quantization and LLMs. We've published our code on anonymous.4open.science, aiming to contribute to the advancement of this field.",
+      "abstract_sha256": "a4a5b1299029840890677848ccc7662cdc550c5ab725a2c307a70d717fc7a2fa",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2604.14430",
+      "title": "Three-Phase Transformer",
+      "authors": [
+        "Mohammad R. Abu Ayyash"
+      ],
+      "published": "2026-04-15",
+      "url": "https://arxiv.org/abs/2604.14430",
+      "abstract": "We present Three-Phase Transformer (3PT), a residual-stream structural prior for decoder-only Transformers on a standard SwiGLU + RMSNorm + RoPE + GQA backbone. The hidden vector is partitioned into N equally-sized cyclic channels, each maintained by phase-respecting ops: a per-channel RMSNorm, a 2D Givens rotation between attention and FFN that rotates each channel by theta + i*(2*pi/N), and a head-count constraint aligning GQA heads with the partition. The architecture is a self-stabilizing equilibrium between scrambling and re-imposition, not a bolted-on module. The partition carves out a one-dimensional DC subspace orthogonal to the channels, into which we inject a fixed Gabriel's horn profile r(p) = 1/(p+1) as an absolute-position side-channel composing orthogonally with RoPE's relative-position rotation. The canonical N=3 borrows its metaphor from balanced three-phase AC, where three sinusoids 120 degrees apart sum to zero with no anti-correlated pair. At 123M parameters on WikiText-103, 3PT achieves -7.20% perplexity (-2.62% bits-per-byte) over a matched RoPE-Only baseline at +1,536 parameters (0.00124% of total), with 1.93x step-count convergence speedup (1.64x wall-clock). N behaves as a parameter-sharing knob rather than a unique optimum: at 5.5M an N-sweep over {1,2,3,4,6,8,12} is near-monotone with N=1 winning; at 123M a three-seed sweep finds N=3 and N=1 statistically indistinguishable. The load-bearing mechanism is the channel-partitioned residual stream, per-block rotation, per-phase normalization, and horn DC injection. We characterize (a) self-stabilization of the geometry without explicit enforcement, a novel instance of the conservation-law framework for neural networks; (b) a U-shaped depth profile of rotation-angle drift at 12 layers; (c) orthogonal composition with RoPE, attention, and FFN.",
+      "abstract_sha256": "2587004c422daaf7b378337e431f82bfa7740a69272eb954e229617faca3cfbe",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2606.31963",
+      "title": "Signed-Permutation Coordinate Transport for RMSNorm Transformers",
+      "authors": [
+        "John Sweeney"
+      ],
+      "published": "2026-06-30",
+      "url": "https://arxiv.org/abs/2606.31963",
+      "abstract": "Modern LLM workflows move coordinate-indexed objects across checkpoints: steering vectors, sparse autoencoders, top-$k$ neuron sets, attribution lists, and merge alignments. This is only well posed after fixing the model's residual-stream gauge, which we show is architecture-dependent: LayerNorm residual charts have permutation gauge $S_d$ (up to a global sign flip), while RMSNorm charts with generic per-channel gain have signed-permutation gauge $B_d = S_d \\ltimes \\{\\pm 1\\}^d$. Permutation-only alignment is therefore symmetry-incomplete for RMSNorm models. We introduce sign-marginalized Hungarian matching and prove a sharp failure mode: with decorrelated coordinates, raw signed-correlation matching has a structural permutation-accuracy ceiling at the positive-sign fraction of the true gauge, which sign-marginalization removes. We then make coordinate-preserving transport, not function-level merging, the primary object: composing saved-checkpoint local $B_d$ gauges along same-base fine-tuning trajectories recovers 91.1% of cross-run coordinates at 1500 steps versus 60.3% for endpoint matching, and the gain is not explained by merely routing through the base. The recovered gauge transfers tools that permutation-only alignment breaks: TinyLlama SAE reconstruction has NMSE 0.004 under $B_d$ versus 1.08 under $S_d$; Qwen sentiment steering preserves 95.8% of its effect versus 17.2%; refusal steering reverses sign under $S_d$; coordinate-preserving merges behave the same way. The same covariance governs stateful training: signed transport of AdamW state preserves the resumed trajectory, while permutation-only state follows a different one from a functionally identical checkpoint. Finally, gauge-sweep audits show index-level interpretability claims are reproducible only relative to an explicit gauge.",
+      "abstract_sha256": "31093b64a44cca239a7547b1b4cf307dc4a781385f472affe05ce3f9d3f5c910",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.CL",
+        "stat.ML"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T4",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2605.18933",
+      "title": "A Geometric Analysis of Sign-Magnitude Asymmetry in a ReLU + RMSNorm Block under Ternary Quantization",
+      "authors": [
+        "Lei Dong"
+      ],
+      "published": "2026-05-18",
+      "url": "https://arxiv.org/abs/2605.18933",
+      "abstract": "Pre-norm Transformers with RMSNorm tolerate ternary {-1,0,+1} weight quantization with surprisingly small loss (Ma et al., 2024). We give a geometric explanation via sign-magnitude decomposition of weight perturbations. In a two-layer ReLU + RMSNorm model with i.i.d. Gaussian weights, sign-flips produce $π/(π-2) \\approx 2.75$ times more transverse output energy than sign-preserving magnitude perturbations of equal Frobenius norm, as the flip rate $p \\to 0$ (Theorem 3). The mechanism: ReLU creates a hidden-space directional asymmetry between the two perturbation types, which RMSNorm's transverse-projection Fréchet derivative selectively exposes. Sign-quantization error is itself a sign-preserving perturbation with angular alignment $\\cos^2 \\to 2/π$ (Theorem 4); its post-ReLU radial fraction ($0.365$) matches the pre-ReLU value $1-2/π$ within $0.4\\%$, so ReLU is approximately transparent to ternary error. Multi-layer compounding of the $2.75\\times$ factor is not experimentally supported; the gap to real-model sign sensitivity arises from outlier features violating delocalization. For an input dimension with amplitude $α$, a single sign-flip produces post-ReLU energy amplified by $R \\approx nα^2$ relative to a delocalized entry. On TinyLlama-1.1B, at linear response ($p \\leq 0.5\\%$), count-matched NLL leverage stabilizes at $\\sim 10\\times \\approx n\\mathbb{E}[α^2]$, matching the per-entry theory; the all-column NLL ratio of $5.0\\times$ falls within $R_{\\mathrm{col}} \\leq 19$ ($67\\times$ PPL gap reflects metric nonlinearity). Measured outlier $α$ at layer 12 (median $0.024$, max $0.26$) confirms heavy-tailed concentration. The Bussgang constant $2/π$, RMSNorm geometry, and ReLU half-space structure together explain sign-magnitude asymmetry in pre-norm models, with $R \\propto nα^2$ accounting for real-model deviations.",
+      "abstract_sha256": "9ac5ec8c1ae3b9b73f598691ee400ad0368987178b62e3b6c626d0d6911e8fb9",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2407.09577",
+      "title": "FlashNorm: Fast Normalization for Transformers",
+      "authors": [
+        "Nils Graef",
+        "Filip Makraduli",
+        "Andrew Wasielewski",
+        "Matthew Clapp"
+      ],
+      "published": "2024-07-12",
+      "url": "https://arxiv.org/abs/2407.09577",
+      "abstract": "Normalization layers are ubiquitous in large language models (LLMs) yet represent a compute bottleneck: on hardware with distinct vector and matrix execution units, the RMS calculation blocks the subsequent matrix multiplication, preventing parallel execution. We present FlashNorm, an exact reformulation of RMSNorm followed by a linear layer that (i) eliminates the normalization weights by folding them into the subsequent linear layer, and (ii) defers the scalar RMS normalization to the output of the matrix multiplication, enabling the two operations to execute in parallel. Additionally, by the scale invariance of RMS, an RMSNorm followed by a linear layer followed by another RMSNorm allows the first RMSNorm to be eliminated entirely -- a mathematically identical simplification that removes the pre-attention RMSNorm in models using QKV-normalization (e.g., Gemma~4) and in MLA-models with latent normalization (e.g., DeepSeek-V2, Mistral Small 4, and OpenMythos). The same techniques extend to LayerNorm, Dynamic Tanh (DyT), feed-forward networks with GLU variants, and RoPE-based attention. On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale. We verify zero-loss weight folding on three models. Beyond inference speed, FlashNorm simplifies model implementations by reducing parameter tensor count. Watch our explainer video https://youtu.be/GEuJv34_XgU?si and see https://github.com/OpenMachine-ai/transformer-tricks for code.",
+      "abstract_sha256": "c5b5679bf0eb9db49c934e47328cefac34e6c3b4e5645773dbc64fee954cd02f",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_norm_rmsnorm: \"RMSNorm\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2606_24898_1",
+      "paper_id": "2606.24898",
+      "dimension": "outside_testbed",
+      "method": "Scale-visible readouts / explicit norm penalties in looped transformers",
+      "setting": "transformer, language_modeling, scale small, empirical (extracted from the abstract)",
+      "claim": "In looped transformers, per-loop cross-entropy through RMSNorm readouts lets hidden-state norms blow up, while scale-controlled variants achieve lower perplexity at matched inference depth.",
+      "source_span": "scale-controlled variants achieve lower perplexity at matched inference-depth operating points in our variable-depth benchmarks",
+      "expected_outcome": "improves",
+      "covers_our_setting": true,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: covers",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "covers",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "small",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-06-12",
+      "extraction_event": "unrecorded-f6978402",
+      "mechanism": "Scale-invariant readouts such as RMSNorm and LayerNorm hide radial scale from the immediate cross-entropy loss",
+      "mechanism_category": "scale_invariance"
+    },
+    {
+      "claim_id": "x2503_10251_1",
+      "paper_id": "2503.10251",
+      "dimension": "outside_testbed",
+      "method": "Mixed-precision numerical stability analysis comparing LayerNorm and RMSNorm",
+      "setting": "transformer, unspecified, scale unspecified, theoretical (extracted from the abstract)",
+      "claim": "The paper derives bounds comparing the numerical stability of LayerNorm and RMSNorm in the massive-outlier regime.",
+      "source_span": "we compare the numerical stability of LayerNorm and RMSNorm in the massive-outlier regime",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "theoretical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-03-13",
+      "extraction_event": "unrecorded-f6978402"
+    },
+    {
+      "claim_id": "x2506_19697_1",
+      "paper_id": "2506.19697",
+      "dimension": "outside_testbed",
+      "method": "Outlier-Safe Pre-Training (Muon, Single-Scale RMSNorm, learnable embedding projection)",
+      "setting": "unspecified, unspecified, scale large, empirical (extracted from the abstract)",
+      "claim": "OSP-trained 1.4B model achieves much higher 4-bit quantized benchmark scores than an Adam-trained model with only 2% training overhead.",
+      "source_span": "Under aggressive 4-bit quantization, our OSP model achieves a 35.7 average score across 10 benchmarks (compared to 26.5 for an Adam-trained model), with only a 2% training overhead.",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "large",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-06-24",
+      "extraction_event": "unrecorded-f6978402"
+    },
+    {
+      "claim_id": "x2405_17849_1",
+      "paper_id": "2405.17849",
+      "dimension": "outside_testbed",
+      "method": "I-LLM integer-only fully-quantized PTQ",
+      "setting": "unspecified, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "I-LLM achieves accuracy comparable to the FP baseline and outperforms non-integer quantization methods.",
+      "source_span": "The experiment shows that our I-LLM achieves comparable accuracy to the FP baseline and outperforms non-integer quantization methods.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "unspecified",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-05-28",
+      "extraction_event": "unrecorded-8cf06d46"
+    },
+    {
+      "claim_id": "x2604_14430_1",
+      "paper_id": "2604.14430",
+      "dimension": "outside_testbed",
+      "method": "Three-Phase Transformer residual-stream structural prior",
+      "setting": "transformer, language_modeling, scale medium, empirical (extracted from the abstract)",
+      "claim": "At 123M parameters on WikiText-103, 3PT reduces perplexity by 7.20% over a matched RoPE-only baseline with 1.93x step-count convergence speedup.",
+      "source_span": "At 123M parameters on WikiText-103, 3PT achieves -7.20% perplexity (-2.62% bits-per-byte) over a matched RoPE-Only baseline at +1,536 parameters (0.00124% of total), with 1.93x step-count convergence speedup (1.64x wall-clock).",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "medium",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-04-15",
+      "extraction_event": "unrecorded-8cf06d46"
+    },
+    {
+      "claim_id": "x2407_09577_1",
+      "paper_id": "2407.09577",
+      "dimension": "outside_testbed",
+      "method": "FlashNorm exact reformulation of RMSNorm + linear",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "FlashNorm reduces latency of the norm-then-project operation by 33-35% at SmolLM2-135M scale and 12-14% at Llama-7B scale with zero-loss weight folding.",
+      "source_span": "On an NVIDIA T4 GPU, FlashNorm achieves 33 - 35% lower latency on the norm-then-project operation in the compute-bound (prefill) regime at SmolLM2-135M scale, and 12 - 14% at Llama-7B scale.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-07-12",
+      "extraction_event": "unrecorded-8cf06d46",
+      "mechanism": "enabling the two operations to execute in parallel",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2605_18933_1",
+      "paper_id": "2605.18933",
+      "dimension": "outside_testbed",
+      "method": "Pre-norm RMSNorm Transformers under ternary quantization",
+      "setting": "transformer, unspecified, scale unspecified, theoretical (extracted from the abstract)",
+      "claim": "The paper gives a geometric explanation for why pre-norm RMSNorm Transformers tolerate ternary weight quantization, via sign-magnitude asymmetry.",
+      "source_span": "We give a geometric explanation via sign-magnitude decomposition of weight perturbations.",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "theoretical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-05-18",
+      "extraction_event": "unrecorded-8cf06d46"
+    }
+  ],
+  "dropped": [],
+  "degraded": []
+}

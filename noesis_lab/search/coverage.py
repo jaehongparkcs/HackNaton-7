@@ -37,9 +37,19 @@ def claim_coverage(c: Claim) -> Coverage:
     return "covers" if c.covers_our_setting else "none"
 
 
+DERIVED_TIERS = ("D-explore", "D-confirmed")
+
+
+def is_derived(c: Claim) -> bool:
+    """Our own result, written back into the graph. It shapes gap scores but is never literature."""
+    return c.tier in DERIVED_TIERS
+
+
 def counts_as_covered(c: Claim) -> bool:
-    """Overlap / novelty question. Errors lean toward 'covered'."""
-    return claim_coverage(c) in ("covers", "partial")
+    """Overlap / novelty question. Errors lean toward 'covered'. Our own derived results never count
+    as covering a topic: a single run (or even a paired screening) is not prior art against a new
+    candidate, and must not move a gate verdict."""
+    return not is_derived(c) and claim_coverage(c) in ("covers", "partial")
 
 
 def tier_of(*, curated: bool, quote_verified: bool, peer_reviewed: bool | None) -> Tier:

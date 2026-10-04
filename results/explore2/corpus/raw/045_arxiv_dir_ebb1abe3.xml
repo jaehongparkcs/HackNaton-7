@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/87r4pW9lnJTvYAENZFhH/Q+w5l8</id>
+  <title>arXiv Query: search_query=all:"GELU activation" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-04T00:45:21Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22GELU+activation%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>16</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2305.12073v2</id>
+    <title>GELU Activation Function in Deep Learning: A Comprehensive Mathematical Analysis and Performance</title>
+    <updated>2023-08-01T08:47:59Z</updated>
+    <link href="https://arxiv.org/abs/2305.12073v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2305.12073v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Selecting the most suitable activation function is a critical factor in the effectiveness of deep learning models, as it influences their learning capacity, stability, and computational efficiency. In recent years, the Gaussian Error Linear Unit (GELU) activation function has emerged as a dominant method, surpassing traditional functions such as the Rectified Linear Unit (ReLU) in various applications. This study presents a rigorous mathematical investigation of the GELU activation function, exploring its differentiability, boundedness, stationarity, and smoothness properties in detail. Additionally, we conduct an extensive experimental comparison of the GELU function against a broad range of alternative activation functions, utilizing a residual convolutional network trained on the CIFAR-10, CIFAR-100, and STL-10 datasets as the empirical testbed. Our results demonstrate the superior performance of GELU compared to other activation functions, establishing its suitability for a wide range of deep learning applications. This comprehensive study contributes to a more profound understanding of the underlying mathematical properties of GELU and provides valuable insights for practitioners aiming to select activation functions that optimally align with their specific objectives and constraints in deep learning.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-05-20T03:22:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Minhyeok Lee</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2512.21749v1</id>
+    <title>Approximation Capabilities of Feedforward Neural Networks with GELU Activations</title>
+    <updated>2025-12-25T17:56:44Z</updated>
+    <link href="https://arxiv.org/abs/2512.21749v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2512.21749v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We derive an approximation error bound that holds simultaneously for a function and all its derivatives up to any prescribed order. The bounds apply to elementary functions, including multivariate polynomials, the exponential function, and the reciprocal function, and are obtained using feedforward neural networks with the Gaussian Error Linear Unit (GELU) activation. In addition, we report the network size, weight magnitudes, and behavior at infinity. Our analysis begins with a constructive approximation of multiplication, where we prove the simultaneous validity of error bounds over domains of increasing size for a given approximator. Leveraging this result, we obtain approximation guarantees for division and the exponential function, ensuring that all higher-order derivatives of the resulting approximators remain globally bounded.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-12-25T17:56:44Z</published>
+    <arxiv:comment>42 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Konstantin Yakovlev</name>
+    </author>
+    <author>
+      <name>Nikita Puchkin</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2310.14993v1</id>
+    <title>Understanding the Inner Workings of Language Models Through Representation Dissimilarity</title>
+    <updated>2023-10-23T14:46:20Z</updated>
+    <link href="https://arxiv.org/abs/2310.14993v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2310.14993v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>As language models are applied to an increasing number of real-world applications, understanding their inner workings has become an important issue in model trust, interpretability, and transparency. In this work we show that representation dissimilarity measures, which are functions that measure the extent to which two model's internal representations differ, can be a valuable tool for gaining insight into the mechanics of language models. Among our insights are: (i) an apparent asymmetry in the internal representations of model using SoLU and GeLU activation functions, (ii) evidence that dissimilarity measures can identify and locate generalization properties of models that are invisible via in-distribution test set performance, and (iii) new evaluations of how language model features vary as width and depth are increased. Our results suggest that dissimilarity measures are a promising set of tools for shedding light on the inner workings of language models.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-10-23T14:46:20Z</published>
+    <arxiv:comment>EMNLP 2023 (main)</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Davis Brown</name>
+    </author>
+    <author>
+      <name>Charles Godfrey</name>
+    </author>
+    <author>
+      <name>Nicholas Konz</name>
+    </author>
+    <author>
+      <name>Jonathan Tu</name>
+    </author>
+    <author>
+      <name>Henry Kvinge</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2312.01324v2</id>
+    <title>MABViT -- Modified Attention Block Enhances Vision Transformers</title>
+    <updated>2024-01-01T13:27:15Z</updated>
+    <link href="https://arxiv.org/abs/2312.01324v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2312.01324v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Recent studies have demonstrated the effectiveness of Gated Linear Units (GLU) in enhancing transformer models, particularly in Large Language Models (LLMs). Additionally, utilizing a parallel configuration within each Transformer block rather than the conventional serialized method has been revealed to accelerate the training of LLMs without significantly impacting performance. However, when the MLP and attention block were run in parallel for the image classification task, we observed a noticeable decline in performance. We propose a novel transformer variant that integrates non-linearity within the attention block to tackle this problem. We implemented the GLU-based activation function on the Value tensor, and this new technique surpasses the current state-of-the-art S/16 variant of Vision Transformers by 0.6% on the ImageNet-1K dataset while utilizing fewer parameters. It also supersedes the B/16 variant while using only half the parameters. Furthermore, we provide results with the GELU activation function variant to confirm our assertions. Lastly, we showcase that the MABViT variants exhibit greater potential when utilized in deep transformers compared to the standard architecture.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-12-03T09:00:31Z</published>
+    <arxiv:comment>Accepted at Deployable AI Workshop, AAAI Conference</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Mahesh Ramesh</name>
+    </author>
+    <author>
+      <name>Aswinkumar Ramkumar</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2404.06593v1</id>
+    <title>Spatially Optimized Compact Deep Metric Learning Model for Similarity Search</title>
+    <updated>2024-04-09T19:49:01Z</updated>
+    <link href="https://arxiv.org/abs/2404.06593v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.06593v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Spatial optimization is often overlooked in many computer vision tasks. Filters should be able to recognize the features of an object regardless of where it is in the image. Similarity search is a crucial task where spatial features decide an important output. The capacity of convolution to capture visual patterns across various locations is limited. In contrast to convolution, the involution kernel is dynamically created at each pixel based on the pixel value and parameters that have been learned. This study demonstrates that utilizing a single layer of involution feature extractor alongside a compact convolution model significantly enhances the performance of similarity search. Additionally, we improve predictions by using the GELU activation function rather than the ReLU. The negligible amount of weight parameters in involution with a compact model with better performance makes the model very useful in real-world implementations. Our proposed model is below 1 megabyte in size. We have experimented with our proposed methodology and other models on CIFAR-10, FashionMNIST, and MNIST datasets. Our proposed method outperforms across all three datasets.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-09T19:49:01Z</published>
+    <arxiv:comment>5 pages, 3 figures,</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Md. Farhadul Islam</name>
+    </author>
+    <author>
+      <name>Md. Tanzim Reza</name>
+    </author>
+    <author>
+      <name>Meem Arafat Manab</name>
+    </author>
+    <author>
+      <name>Mohammad Rakibul Hasan Mahin</name>
+    </author>
+    <author>
+      <name>Sarah Zabeen</name>
+    </author>
+    <author>
+      <name>Jannatun Noor</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2506.17323v1</id>
+    <title>I Know Which LLM Wrote Your Code Last Summer: LLM generated Code Stylometry for Authorship Attribution</title>
+    <updated>2025-06-18T19:49:41Z</updated>
+    <link href="https://arxiv.org/abs/2506.17323v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2506.17323v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Detecting AI-generated code, deepfakes, and other synthetic content is an emerging research challenge. As code generated by Large Language Models (LLMs) becomes more common, identifying the specific model behind each sample is increasingly important. This paper presents the first systematic study of LLM authorship attribution for C programs. We released CodeT5-Authorship, a novel model that uses only the encoder layers from the original CodeT5 encoder-decoder architecture, discarding the decoder to focus on classification. Our model's encoder output (first token) is passed through a two-layer classification head with GELU activation and dropout, producing a probability distribution over possible authors. To evaluate our approach, we introduce LLM-AuthorBench, a benchmark of 32,000 compilable C programs generated by eight state-of-the-art LLMs across diverse tasks. We compare our model to seven traditional ML classifiers and eight fine-tuned transformer models, including BERT, RoBERTa, CodeBERT, ModernBERT, DistilBERT, DeBERTa-V3, Longformer, and LoRA-fine-tuned Qwen2-1.5B. In binary classification, our model achieves 97.56% accuracy in distinguishing C programs generated by closely related models such as GPT-4.1 and GPT-4o, and 95.40% accuracy for multi-class attribution among five leading LLMs (Gemini 2.5 Flash, Claude 3.5 Haiku, GPT-4.1, Llama 3.3, and DeepSeek-V3). To support open science, we release the CodeT5-Authorship architecture, the LLM-AuthorBench benchmark, and all relevant Google Colab scripts on GitHub: https://github.com/LLMauthorbench/.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-06-18T19:49:41Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Tamas Bisztray</name>
+    </author>
+    <author>
+      <name>Bilel Cherif</name>
+    </author>
+    <author>
+      <name>Richard A. Dubniczky</name>
+    </author>
+    <author>
+      <name>Nils Gruschka</name>
+    </author>
+    <author>
+      <name>Bertalan Borsos</name>
+    </author>
+    <author>
+      <name>Mohamed Amine Ferrag</name>
+    </author>
+    <author>
+      <name>Attila Kovacs</name>
+    </author>
+    <author>
+      <name>Vasileios Mavroeidis</name>
+    </author>
+    <author>
+      <name>Norbert Tihanyi</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.01627v3</id>
+    <title>Non-Vacuous Generalisation Bounds for Shallow Neural Networks</title>
+    <updated>2022-06-15T14:59:42Z</updated>
+    <link href="https://arxiv.org/abs/2202.01627v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.01627v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We focus on a specific class of shallow neural networks with a single hidden layer, namely those with $L_2$-normalised data and either a sigmoid-shaped Gaussian error function ("erf") activation or a Gaussian Error Linear Unit (GELU) activation. For these networks, we derive new generalisation bounds through the PAC-Bayesian theory; unlike most existing such bounds they apply to neural networks with deterministic rather than randomised parameters. Our bounds are empirically non-vacuous when the network is trained with vanilla stochastic gradient descent on MNIST and Fashion-MNIST.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-03T14:59:51Z</published>
+    <arxiv:comment>19 pages, 12 figures</arxiv:comment>
+    <arxiv:primary_category term="cs.LG"/>
+    <arxiv:journal_ref>Proceedings of the 39 th International Conference on Machine Learning, Baltimore, Maryland, USA, PMLR 162, 2022</arxiv:journal_ref>
+    <author>
+      <name>Felix Biggs</name>
+    </author>
+    <author>
+      <name>Benjamin Guedj</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2406.02021v3</id>
+    <title>FFNet: MetaMixer-based Efficient Convolutional Mixer Design</title>
+    <updated>2026-07-28T06:09:43Z</updated>
+    <link href="https://arxiv.org/abs/2406.02021v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2406.02021v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Transformer, composed of self-attention and Feed-Forward Network, has revolutionized the landscape of network design across various vision tasks. While self-attention is extensively explored as a key factor in performance, FFN has received little attention. FFN is a versatile operator seamlessly integrated into nearly all AI models to effectively harness rich representations. Recent works also show that FFN functions like key-value memories. Thus, akin to the query-key-value mechanism within self-attention, FFN can be viewed as a memory network, where the input serves as query and the two projection weights operate as keys and values, respectively. Based on these observations, we hypothesize that the importance lies in query-key-value framework itself for competitive performance. To verify this, we propose converting self-attention into a more FFN-like efficient token mixer with only convolutions while retaining query-key-value framework, namely FFNification. Specifically, FFNification replaces query-key-value interactions with large kernel convolutions and adopts GELU activation function instead of softmax. The derived token mixer, FFNified attention, serves as key-value memories for detecting locally distributed spatial patterns, and operates in the opposite dimension to the ConvNeXt block within each corresponding sub-operation of the query-key-value framework. Building upon the above two modules, we present a family of Fast-Forward Networks (FFNet). Despite being composed of only simple operators, FFNet outperforms sophisticated and highly specialized methods in each domain, with notable efficiency gains. These results validate our hypothesis, leading us to propose MetaMixer, a general mixer architecture that does not specify sub-operations within the query-key-value framework.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-06-04T07:00:14Z</published>
+    <arxiv:comment>Code: https://github.com/ysj9909/FFNet</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Seokju Yun</name>
+    </author>
+    <author>
+      <name>Dongheon Lee</name>
+    </author>
+    <author>
+      <name>Youngmin Ro</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.05202v1</id>
+    <title>GLU Variants Improve Transformer</title>
+    <updated>2020-02-12T19:57:13Z</updated>
+    <link href="https://arxiv.org/abs/2002.05202v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.05202v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Gated Linear Units (arXiv:1612.08083) consist of the component-wise product of two linear projections, one of which is first passed through a sigmoid function. Variations on GLU are possible, using different nonlinear (or even linear) functions in place of sigmoid. We test these variants in the feed-forward sublayers of the Transformer (arXiv:1706.03762) sequence-to-sequence model, and find that some of them yield quality improvements over the typically-used ReLU or GELU activations.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NE" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-12T19:57:13Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Noam Shazeer</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2503.03088v4</id>
+    <title>AHCQ-SAM: Toward Accurate and Hardware-Compatible Post-Training Segment Anything Model Quantization</title>
+    <updated>2026-04-08T13:11:29Z</updated>
+    <link href="https://arxiv.org/abs/2503.03088v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2503.03088v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Segment Anything Model (SAM) has revolutionized image and video segmentation with its powerful zero-shot capabilities. However, its massive parameter scale and high computational demands hinder efficient deployment on resource-constrained edge devices. While Post-Training Quantization (PTQ) offers a practical solution, existing methods still fail to handle four critical quantization challenges: (1) ill-conditioned weights; (2) skewed and long-tailed post-GELU activations; (3) pronounced inter-channel variance in linear projections; and (4) exponentially scaled and heterogeneous attention scores. To mitigate these bottlenecks, we propose AHCQ-SAM, an accurate and hardware-compatible PTQ framework featuring four synergistic components: (1) Activation-aware Condition Number Reduction (ACNR), which regularizes weight matrices via a proximal point algorithm to suppress ill-conditioning; (2) Hybrid Log-Uniform Quantization (HLUQ), which combines power-of-two and uniform quantizers to capture skewed post-GELU activations; (3) Channel-Aware Grouping (CAG), which clusters channels with homogeneous statistics to achieve high accuracy with minimal hardware overhead; and (4) Logarithmic Nonlinear Quantization (LNQ), which utilizes logarithmic transformations to adaptively adjust quantization resolution for exponential and heterogeneous attention scores. Experimental results demonstrate that AHCQ-SAM outperforms current methods on SAM. Compared with the SOTA method, it achieves a 15.2% improvement in mAP for 4-bit SAM-B with Faster R-CNN on the COCO dataset. Furthermore, we establish a PTQ benchmark for SAM2, where AHCQ-SAM yields a 14.01% improvement in J&amp;F for 4-bit SAM2-Tiny on the SA-V Test dataset. Finally, FPGA-based implementation validates the practical utility of AHCQ-SAM, delivering a 7.12x speedup and a 6.62x power efficiency improvement over the floating-point baseline.</summary>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-03-05T01:04:45Z</published>
+    <arxiv:comment>Update to AHCQ-SAM</arxiv:comment>
+    <arxiv:primary_category term="cs.CV"/>
+    <author>
+      <name>Wenlun Zhang</name>
+    </author>
+    <author>
+      <name>Yunshan Zhong</name>
+    </author>
+    <author>
+      <name>Weiqi Yan</name>
+    </author>
+    <author>
+      <name>Shengchuan Zhang</name>
+    </author>
+    <author>
+      <name>Shimpei Ando</name>
+    </author>
+    <author>
+      <name>Kentaro Yoshioka</name>
+    </author>
+  </entry>
+</feed>

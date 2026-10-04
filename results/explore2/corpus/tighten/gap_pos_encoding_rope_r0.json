@@ -1,0 +1,337 @@
+{
+  "fixture_id": "gap_pos_encoding_rope",
+  "round": 0,
+  "delta": {
+    "pos_encoding": "rope"
+  },
+  "queries": [
+    {
+      "q": "\"rotary position embedding\" AND \"language model\"",
+      "n_results": 10
+    },
+    {
+      "q": "\"rotary position embedding\" AND \"Transformer\"",
+      "n_results": 10
+    }
+  ],
+  "already_in_corpus": [
+    "2104.09864",
+    "2506.09507",
+    "2507.11273",
+    "2507.23083",
+    "2511.09146",
+    "2512.07525",
+    "2608.29715",
+    "2609.30576"
+  ],
+  "papers": [
+    {
+      "paper_id": "2511.17388",
+      "title": "Selective Rotary Position Embedding",
+      "authors": [
+        "Sajad Movahedi",
+        "Timur Carstensen",
+        "Arshia Afzal",
+        "Frank Hutter",
+        "Antonio Orvieto",
+        "Volkan Cevher"
+      ],
+      "published": "2025-11-21",
+      "url": "https://arxiv.org/abs/2511.17388",
+      "abstract": "Position information is essential for language modeling. In softmax transformers, Rotary Position Embeddings (\\textit{RoPE}) encode positions through \\textit{fixed-angle} rotations, while in linear transformers, order is handled via input-dependent (selective) gating that decays past key-value associations. Selectivity has generally been shown to improve language-related tasks. Inspired by this, we introduce \\textit{Selective RoPE}, an \\textit{input-dependent} rotary embedding mechanism, that generalizes \\textit{RoPE}, and enables rotation in \\textit{arbitrary angles} for both linear and softmax transformers. We show that softmax attention already performs a hidden form of these rotations on query-key pairs, uncovering an implicit positional structure. We further show that in state-space models and gated linear transformers, the real part manages forgetting while the imaginary part encodes positions through rotations. We validate our method by equipping gated transformers with \\textit{Selective RoPE}, demonstrating that its input-dependent rotations improve performance in language modeling and on difficult sequence tasks like copying, state tracking, and retrieval.",
+      "abstract_sha256": "f6c91e6d78ecd6b6b31072d3f5bde0aec8dc32940c70a3ab98499fbb441eb562",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_pos_encoding_rope: \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2502.11276",
+      "title": "The Rotary Position Embedding May Cause Dimension Inefficiency in Attention Heads for Long-Distance Retrieval",
+      "authors": [
+        "Ting-Rui Chiang",
+        "Dani Yogatama"
+      ],
+      "published": "2025-02-16",
+      "url": "https://arxiv.org/abs/2502.11276",
+      "abstract": "The Rotary Position Embedding (RoPE) is widely used in the attention heads of many large language models (LLM). It rotates dimensions in the query and the key vectors by different angles according to their positions in the input sequence. For long context modeling, the range of positions may vary a lot, and thus RoPE rotates some dimensions by a great range of angles. We hypothesize that the wide range of rotation angles may prevent LLMs from utilizing those dimensions. To validate this hypothesis, we present a controlled experiment showing that applying RoPE causes low utility of certain dimensions. Our analyses on three LLMs also indicate that these dimensions do not help LLMs do long-context question answering.",
+      "abstract_sha256": "38aace1c89588eef253d8267f0f50c31bdf65dfcd1d3cef2a3a6b5f2d53bd8d6",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_pos_encoding_rope: \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2502.12665",
+      "title": "A$^2$ATS: Retrieval-Based KV Cache Reduction via Windowed Rotary Position Embedding and Query-Aware Vector Quantization",
+      "authors": [
+        "Junhui He",
+        "Junna Xing",
+        "Nan Wang",
+        "Rui Xu",
+        "Shangyu Wu",
+        "Peng Zhou",
+        "Qiang Liu",
+        "Chun Jason Xue",
+        "Qingan Li"
+      ],
+      "published": "2025-02-18",
+      "url": "https://arxiv.org/abs/2502.12665",
+      "abstract": "Long context large language models (LLMs) pose significant challenges for efficient serving due to the large memory footprint and high access overhead of KV cache. Retrieval-based KV cache reduction methods can mitigate these challenges, typically by offloading the complete KV cache to CPU and retrieving necessary tokens on demand during inference. However, these methods still suffer from unsatisfactory accuracy degradation and extra retrieval overhead. To address these limitations, this paper proposes A$^2$ATS, a novel retrieval-based KV cache reduction method. A$^2$ATS aims to obtain an accurate approximation of attention scores by applying the vector quantization technique to key states, thereby enabling efficient and precise retrieval of the top-K tokens. First, we propose Windowed Rotary Position Embedding, which decouples the positional dependency from query and key states after position embedding. Then, we propose query-aware vector quantization that optimizes the objective of attention score approximation directly. Finally, we design the heterogeneous inference architecture for KV cache offloading, enabling long context serving with larger batch sizes. Experimental results demonstrate that A$^2$ATS can achieve a lower performance degradation with similar or lower overhead compared to existing methods, thereby increasing long context serving throughput by up to $2.7 \\times$.",
+      "abstract_sha256": "be6d5bb0f42a696650a6d11fbb62e388f333374d12841f05f5af445e9a38faaa",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.CL"
+      ],
+      "queries": [
+        "tighten gap_pos_encoding_rope: \"rotary position embedding\" AND \"language model\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2604.09742",
+      "title": "Efficient Matrix Implementation for Rotary Position Embedding",
+      "authors": [
+        "Chen Minqi",
+        "Zhongqi Yue",
+        "Shihao Zhang",
+        "Yun Xu",
+        "Peng Wu",
+        "kaixiang Xu",
+        "Zeyi Huang",
+        "Hanwang Zhang"
+      ],
+      "published": "2026-04-10",
+      "url": "https://arxiv.org/abs/2604.09742",
+      "abstract": "Rotary Position Embedding (RoPE) has become a core component of modern Transformer architectures across language, vision, and 3D domains. However, existing implementations rely on vector-level split and merge operations that introduce non-negligible computational overhead, often overlooked in attention optimization. The problem is further amplified in multi-dimensional settings (e.g., 2D and 3D RoPE), where additional vector operations and uneven feature partitions degrade hardware utilization. To overcome these limitations, we propose RoME (Rotary Matrix position Embedding), a mathematically equivalent yet computationally efficient reformulation of RoPE that replaces vector operations with unified matrix transformations. RoME eliminates dimension-specific operations, simplifies implementation, and enables fused parallel execution across Cube and Vector units on modern NPUs. Experiments show that RoME delivers substantial acceleration at both the operator and full-model levels. The implementation is available at https://gitcode.com/cann/ops-transformer/blob/master/experimental/posembedding/rope_matrix/README.md.",
+      "abstract_sha256": "f7a9f4e160df51ad3ca29ea954039e0426eaf724bea51e20980e84699047fde3",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "queries": [
+        "tighten gap_pos_encoding_rope: \"rotary position embedding\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    },
+    {
+      "paper_id": "2405.06985",
+      "title": "RoTHP: Rotary Position Embedding-based Transformer Hawkes Process",
+      "authors": [
+        "Anningzhe Gao",
+        "Shan Dai"
+      ],
+      "published": "2024-05-11",
+      "url": "https://arxiv.org/abs/2405.06985",
+      "abstract": "Temporal Point Processes (TPPs), especially Hawkes Process are commonly used for modeling asynchronous event sequences data such as financial transactions and user behaviors in social networks. Due to the strong fitting ability of neural networks, various neural Temporal Point Processes are proposed, among which the Neural Hawkes Processes based on self-attention such as Transformer Hawkes Process (THP) achieve distinct performance improvement. Although the THP has gained increasing studies, it still suffers from the {sequence prediction issue}, i.e., training on history sequences and inferencing about the future, which is a prevalent paradigm in realistic sequence analysis tasks. What's more, conventional THP and its variants simply adopt initial sinusoid embedding in transformers, which shows performance sensitivity to temporal change or noise in sequence data analysis by our empirical study. To deal with the problems, we propose a new Rotary Position Embedding-based THP (RoTHP) architecture in this paper. Notably, we show the translation invariance property and {sequence prediction flexibility} of our RoTHP induced by the {relative time embeddings} when coupled with Hawkes process theoretically. Furthermore, we demonstrate empirically that our RoTHP can be better generalized in sequence data scenarios with timestamp translations and in sequence prediction tasks.",
+      "abstract_sha256": "da7cbc9a571f3e028d3ad29b1307e9c2979424960cbc897ca1575244d8d0e265",
+      "source": "arxiv",
+      "venue": null,
+      "peer_reviewed": null,
+      "cited_by": 0,
+      "doi": null,
+      "categories": [
+        "cs.LG"
+      ],
+      "queries": [
+        "tighten gap_pos_encoding_rope: \"rotary position embedding\" AND \"Transformer\""
+      ],
+      "relevance": null,
+      "relevance_components": {},
+      "tier": "T3",
+      "map_xy": null
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "x2511_17388_1",
+      "paper_id": "2511.17388",
+      "dimension": "outside_testbed",
+      "method": "Selective RoPE (input-dependent rotary embedding) in gated transformers",
+      "setting": "transformer, language_modeling, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Equipping gated transformers with Selective RoPE improves performance in language modeling and on copying, state tracking, and retrieval tasks.",
+      "source_span": "demonstrating that its input-dependent rotations improve performance in language modeling and on difficult sequence tasks like copying, state tracking, and retrieval",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: partial",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "partial",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "language_modeling",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-11-21",
+      "extraction_event": "unrecorded-cf746be3",
+      "mechanism": "enables rotation in \\textit{arbitrary angles}",
+      "mechanism_category": "position_generalization"
+    },
+    {
+      "claim_id": "x2502_11276_1",
+      "paper_id": "2502.11276",
+      "dimension": "outside_testbed",
+      "method": "RoPE in LLM attention heads",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "Applying RoPE causes low utility of certain query/key dimensions, which do not help long-context question answering.",
+      "source_span": "applying RoPE causes low utility of certain dimensions",
+      "expected_outcome": "context",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-02-16",
+      "extraction_event": "unrecorded-cf746be3"
+    },
+    {
+      "claim_id": "x2502_12665_1",
+      "paper_id": "2502.12665",
+      "dimension": "outside_testbed",
+      "method": "A^2ATS retrieval-based KV cache reduction with Windowed RoPE and query-aware vector quantization",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "A^2ATS achieves lower performance degradation at similar or lower overhead than existing methods, increasing long-context serving throughput up to 2.7x.",
+      "source_span": "A$^2$ATS can achieve a lower performance degradation with similar or lower overhead compared to existing methods, thereby increasing long context serving throughput by up to $2.7 \\times$",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2025-02-18",
+      "extraction_event": "unrecorded-cf746be3",
+      "mechanism": "enabling long context serving with larger batch sizes",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2604_09742_1",
+      "paper_id": "2604.09742",
+      "dimension": "outside_testbed",
+      "method": "RoME matrix reformulation of RoPE",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "RoME is a mathematically equivalent reformulation of RoPE that delivers substantial acceleration at operator and full-model levels.",
+      "source_span": "Experiments show that RoME delivers substantial acceleration at both the operator and full-model levels.",
+      "expected_outcome": "no_worse",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2026-04-10",
+      "extraction_event": "unrecorded-cf746be3",
+      "mechanism": "replaces vector operations with unified matrix transformations",
+      "mechanism_category": "computational_efficiency"
+    },
+    {
+      "claim_id": "x2405_06985_1",
+      "paper_id": "2405.06985",
+      "dimension": "outside_testbed",
+      "method": "RoTHP: rotary position embedding in Transformer Hawkes Process",
+      "setting": "transformer, unspecified, scale unspecified, empirical (extracted from the abstract)",
+      "claim": "RoTHP generalizes better than sinusoid-embedding THP under timestamp translations and in sequence prediction tasks.",
+      "source_span": "we demonstrate empirically that our RoTHP can be better generalized in sequence data scenarios with timestamp translations and in sequence prediction tasks",
+      "expected_outcome": "improves",
+      "covers_our_setting": false,
+      "coverage_note": "computed by the coverage rule from the extracted setting fields: none",
+      "config_change": null,
+      "claims_speed": false,
+      "tier": "T3",
+      "coverage": "none",
+      "setting_fields": {
+        "model_family": "transformer",
+        "task": "unspecified",
+        "scale": "unspecified",
+        "evidence": "empirical"
+      },
+      "peer_reviewed": null,
+      "published": "2024-05-11",
+      "extraction_event": "unrecorded-cf746be3",
+      "mechanism": "relative time embeddings",
+      "mechanism_category": "position_generalization"
+    }
+  ],
+  "dropped": [
+    {
+      "paper_id": "2403.13298",
+      "title": "Rotary Position Embedding for Vision Transformer",
+      "reason": "exclude_term: vision transformer"
+    },
+    {
+      "paper_id": "2509.11084",
+      "title": "Length-Aware Rotary Position Embedding for Text-Speech Alignment",
+      "reason": "exclude_term: speech"
+    },
+    {
+      "paper_id": "2107.05907",
+      "title": "Conformer-based End-to-end Speech Recognition With Rotary Position Embedding",
+      "reason": "exclude_term: speech"
+    }
+  ],
+  "degraded": []
+}

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/aMcqdGX9ZOgJL4ECZx4fI7J1prU</id>
+  <title>arXiv Query: search_query=all:"byte-level Transformer" AND (cat:cs.LG OR cat:cs.CL OR cat:cs.NE) AND submittedDate:"201701010000 TO 202610032359"&amp;id_list=&amp;start=0&amp;max_results=10</title>
+  <updated>2026-10-03T23:55:30Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=all:%22byte-level+Transformer%22+AND+((cat:cs.LG+OR+(cat:cs.CL+OR+cat:cs.NE))+AND+submittedDate:%22201701010000+TO+202610032359%22)&amp;start=0&amp;max_results=10&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>4</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2404.14408v3</id>
+    <title>SpaceByte: Towards Deleting Tokenization from Large Language Modeling</title>
+    <updated>2024-10-06T02:17:26Z</updated>
+    <link href="https://arxiv.org/abs/2404.14408v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2404.14408v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Tokenization is widely used in large language models because it significantly improves performance. However, tokenization imposes several disadvantages, such as performance biases, increased adversarial vulnerability, decreased character-level modeling performance, and increased modeling complexity. To address these disadvantages without sacrificing performance, we propose SpaceByte, a novel byte-level decoder architecture that closes the performance gap between byte-level and subword autoregressive language modeling. SpaceByte consists of a byte-level Transformer model, but with extra larger transformer blocks inserted in the middle of the layers. We find that performance is significantly improved by applying these larger blocks only after certain bytes, such as space characters, which typically denote word boundaries. Our experiments show that for a fixed training and inference compute budget, SpaceByte outperforms other byte-level architectures and roughly matches the performance of tokenized Transformer architectures.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-04-22T17:59:29Z</published>
+    <arxiv:comment>9+10 pages, 3+1 figures, 2+4 tables</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Kevin Slagle</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2511.23088v1</id>
+    <title>Accent Placement Models for Rigvedic Sanskrit Text</title>
+    <updated>2025-11-28T11:22:17Z</updated>
+    <link href="https://arxiv.org/abs/2511.23088v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2511.23088v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The Rigveda, among the oldest Indian texts in Vedic Sanskrit, employs a distinctive pitch-accent system : udātta, anudātta, svarita whose marks encode melodic and interpretive cues but are often absent from modern e-texts. This work develops a parallel corpus of accented-unaccented ślokas and conducts a controlled comparison of three strategies for automatic accent placement in Rigvedic verse: (i) full fine-tuning of ByT5, a byte-level Transformer that operates directly on Unicode combining marks, (ii) a from-scratch BiLSTM-CRF sequence-labeling baseline, and (iii) LoRA-based parameter-efficient fine-tuning atop ByT5.
+  Evaluation uses Word Error Rate (WER) and Character Error Rate (CER) for orthographic fidelity, plus a task-specific Diacritic Error Rate (DER) that isolates accent edits. Full ByT5 fine-tuning attains the lowest error across all metrics; LoRA offers strong efficiency-accuracy trade-offs, and BiLSTM-CRF serves as a transparent baseline. The study underscores practical requirements for accent restoration - Unicode-safe preprocessing, mark-aware tokenization, and evaluation that separates grapheme from accent errors - and positions heritage-language technology as an emerging NLP area connecting computational modeling with philological and pedagogical aims. Results establish reproducible baselines for Rigvedic accent restoration and provide guidance for downstream tasks such as accent-aware OCR, ASR/chant synthesis, and digital scholarship.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-11-28T11:22:17Z</published>
+    <arxiv:comment>Submitted to AACL-IJCNLP 2025</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Akhil Rajeev P</name>
+    </author>
+    <author>
+      <name>Annarao Kulkarni</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2105.13626v3</id>
+    <title>ByT5: Towards a token-free future with pre-trained byte-to-byte models</title>
+    <updated>2022-03-08T02:18:51Z</updated>
+    <link href="https://arxiv.org/abs/2105.13626v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2105.13626v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Most widely-used pre-trained language models operate on sequences of tokens corresponding to word or subword units. By comparison, token-free models that operate directly on raw text (bytes or characters) have many benefits: they can process text in any language out of the box, they are more robust to noise, and they minimize technical debt by removing complex and error-prone text preprocessing pipelines. Since byte or character sequences are longer than token sequences, past work on token-free models has often introduced new model architectures designed to amortize the cost of operating directly on raw text. In this paper, we show that a standard Transformer architecture can be used with minimal modifications to process byte sequences. We characterize the trade-offs in terms of parameter count, training FLOPs, and inference speed, and show that byte-level models are competitive with their token-level counterparts. We also demonstrate that byte-level models are significantly more robust to noise and perform better on tasks that are sensitive to spelling and pronunciation. As part of our contribution, we release a new set of pre-trained byte-level Transformer models based on the T5 architecture, as well as all code and data used in our experiments.</summary>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-05-28T07:03:22Z</published>
+    <arxiv:comment>To be published in TACL 2022</arxiv:comment>
+    <arxiv:primary_category term="cs.CL"/>
+    <author>
+      <name>Linting Xue</name>
+    </author>
+    <author>
+      <name>Aditya Barua</name>
+    </author>
+    <author>
+      <name>Noah Constant</name>
+    </author>
+    <author>
+      <name>Rami Al-Rfou</name>
+    </author>
+    <author>
+      <name>Sharan Narang</name>
+    </author>
+    <author>
+      <name>Mihir Kale</name>
+    </author>
+    <author>
+      <name>Adam Roberts</name>
+    </author>
+    <author>
+      <name>Colin Raffel</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.02339v1</id>
+    <title>AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers</title>
+    <updated>2026-09-02T09:15:33Z</updated>
+    <link href="https://arxiv.org/abs/2609.02339v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2609.02339v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>World modeling requires a predictive model to maintain and update an internal state adequate for reasoning about the consequences of actions. We introduce the AGI Maze Prediction Datasets and Benchmark, a lightweight controlled testbed for studying this capability in Transformers and other predictive models. Derived from procedurally generated, stateful grid worlds, the benchmark comprises per-step transition prediction, fixed-horizon state prediction, and sequential textual-observation prediction. Source-maze-disjoint training and validation splits, together with greedy exact-match evaluation, distinguish learning transferable action-conditioned dynamics from memorizing transitions in familiar layouts. We establish from-scratch byte-level Transformer baselines and compare them with two working-memory-augmented architectures. A generic auxiliary latent-memory Transformer can fit some training sets perfectly but does not consistently improve held-out performance. In contrast, a pseudo-video spatial-memory Transformer initializes a two-dimensional latent workspace from the input map and updates it from action history without receiving intermediate maps, positions, or state labels. Under the same data, objectives, and evaluation protocol, this model reaches perfect validation accuracy on selected fixed-horizon tasks where the byte and unstructured-memory baselines do not, and substantially improves sequential text-trace prediction. These results suggest that structured, task-aligned working memory can be more useful than additional latent capacity alone. More broadly, we argue that language grounding is mediated by persistent data structures and computations over them; the benchmark offers a compact setting for testing architectures that couple textual interfaces to learned structured state.</summary>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-02T09:15:33Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+    <author>
+      <name>Alexey Potapov</name>
+    </author>
+  </entry>
+</feed>
