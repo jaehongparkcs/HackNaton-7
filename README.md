@@ -7,7 +7,7 @@ One complete, auditable agentic-science loop: **niche → literature search → 
 **Governing principle.** LLMs propose, extract and interpret. Deterministic code measures, scores, ranks, decides and records.
 **Invariant.** An LLM mistake can waste compute or skip an idea, but it cannot produce a measured result, a score, a label, a rank or a decision. Every number comes from a run or a formula; every decision comes from a rule written before the run.
 
-Design documents, in the order they were built: [BUILD_PLAN.md](BUILD_PLAN.md) (hackathon profile), [FIXES.md](FIXES.md) (step budget, rule on every result, generated queue), [LIT_SEARCH.md](LIT_SEARCH.md) (live search), [NEXT_VERSION.md](NEXT_VERSION.md) with [EXPLORE.md](EXPLORE.md) and [GRAPH_GAPS.md](GRAPH_GAPS.md) (hypothesis engine), [FINAL_FIXES.md](FINAL_FIXES.md) (polish, a sync hazard, speed). [SPEC.md](SPEC.md) is the fuller platform design.
+Design documents, in the order they were built: [BUILD_PLAN.md](docs/design/BUILD_PLAN.md) (hackathon profile), [FIXES.md](docs/design/FIXES.md) (step budget, rule on every result, generated queue), [LIT_SEARCH.md](docs/design/LIT_SEARCH.md) (live search), [NEXT_VERSION.md](docs/design/NEXT_VERSION.md) with [EXPLORE.md](docs/design/EXPLORE.md) and [GRAPH_GAPS.md](docs/design/GRAPH_GAPS.md) (hypothesis engine), [FINAL_FIXES.md](docs/design/FINAL_FIXES.md) (polish, a sync hazard, speed). [SPEC.md](docs/design/SPEC.md) is the fuller platform design.
 
 **Two exhibits.** [`results/golden/`](results/golden/) shows the **core loop** (prior-art rejection, paired runs against the noise floor, the rule on every result). [`results/explore2/`](results/explore2/) shows the **hypothesis engine** (gap graph, explore → confirm → promote, prediction scoring). The dashboard opens on `explore2`, then `golden`.
 
@@ -20,7 +20,7 @@ Design documents, in the order they were built: [BUILD_PLAN.md](BUILD_PLAN.md) (
 | **`results/explore3/`** — exhibit 3, deep read in the loop | Live, same frozen corpus as `explore2` plus the deep read (23 full texts, 55 `deep_read_update` decisions), real MPS training, 20 runs, $0.56 loop + $0.42 gate check. The first session with the Lion learning-rate fix and a full-text recipe (lr × 0.2, wd × 5, quoted from arXiv:2302.06675). ReLU² + RoPE held on paired and extra seeds and was promoted (still a screening result); Lion still lost. Recorded with one limitation: `search_degraded` (`dec_002`). `make verify rederive replay verify-deep` pass. |
 | `results/explore1/` — superseded | Live, 120 papers, 128 claims. The scout failed (a schema bug, since fixed), so only the per-building-block directions were searched. One gap hypothesis ran (dropout: predicted better, measured harmful, a **miss**). It was recorded although the gate check had reported UNSTABLE rows, which is why recording now stops on that. Rule v1, gate v1. Verify, rederive and replay pass. Kept as an exhibit of what went wrong. |
 | Prediction v2 (combination predictions), timestamps, the speed work (FINAL_FIXES B1–B4, B6) | Built and tested with a scripted LLM and recorded API responses. Not yet recorded live. |
-| **Deep read** ([DEEP_READ.md](DEEP_READ.md)): full text of the papers closest to the top hypotheses | Built and tested on HTML fixtures with a scripted LLM. Run live on `corpus-explore2` (23 papers read, 0 unavailable, $2.09). Setting agreement with the human labels: **5/9 with full text, 4/9 abstract only** — below the ≥ 6/9 target, which was mis-set: 2 labels (c03, c06) never match a change, so the ceiling is 7/9 (5/7 on matched); the other 2 misses (c09 SwiGLU, c12 RoPE) are by design, because the human criterion is abstract-scoped ("seq-to-seq", "text classification") while the full text shows Transformer pre-training (C4 524k steps; BookCorpus+Wikipedia 100k steps), which the coverage rule calls `partial`. Curated labels were not changed after seeing this; T1 labels are never overridden. `make deep-read` now prints both denominators and each disagreement. |
+| **Deep read** ([DEEP_READ.md](docs/design/DEEP_READ.md)): full text of the papers closest to the top hypotheses | Built and tested on HTML fixtures with a scripted LLM. Run live on `corpus-explore2` (23 papers read, 0 unavailable, $2.09). Setting agreement with the human labels: **5/9 with full text, 4/9 abstract only** — below the ≥ 6/9 target, which was mis-set: 2 labels (c03, c06) never match a change, so the ceiling is 7/9 (5/7 on matched); the other 2 misses (c09 SwiGLU, c12 RoPE) are by design, because the human criterion is abstract-scoped ("seq-to-seq", "text classification") while the full text shows Transformer pre-training (C4 524k steps; BookCorpus+Wikipedia 100k steps), which the coverage rule calls `partial`. Curated labels were not changed after seeing this; T1 labels are never overridden. `make deep-read` now prints both denominators and each disagreement. |
 | `compare-ideation`, `validate-gaps`, stagnation redirect | Not built. |
 
 Every bundle replays under the config and protocol versions it was recorded with, so the recorded bundles are untouched by everything after them. `make verify` also fails if a bundle holds any file its manifest does not list.
@@ -322,7 +322,7 @@ What differs from the specs, plainly: mechanisms are a closed list of 12 rather 
 
 ## Deep read: the full text of the closest papers
 
-Built and tested, not yet run live ([DEEP_READ.md](DEEP_READ.md)). Abstract-only extraction is the weakest link (setting agreement 3/9, Lion with guessed hyperparameters, 2 shared mechanism nodes, no limitations sections). So, after the search and before any compute, the lab reads the full text of the few papers closest to its top hypotheses and lets code update coverage, verdicts, hypotheses and the queue. Code is in [noesis_lab/deep/](noesis_lab/deep/).
+Built and tested, not yet run live ([DEEP_READ.md](docs/design/DEEP_READ.md)). Abstract-only extraction is the weakest link (setting agreement 3/9, Lion with guessed hyperparameters, 2 shared mechanism nodes, no limitations sections). So, after the search and before any compute, the lab reads the full text of the few papers closest to its top hypotheses and lets code update coverage, verdicts, hypotheses and the queue. Code is in [noesis_lab/deep/](noesis_lab/deep/).
 
 ```
 make deep-read CORPUS=work/corpus-X     # select → fetch → parse → extract → verify → freeze into work/corpus-X/deep/
@@ -415,7 +415,7 @@ Verdict = `stats.prior_art_verdict(same_comparison, coverage)`: same comparison 
 | Kosmos / Edison | Literature + data-analysis agents | Closed, commercial |
 | Agent Laboratory | Literature → experiments → report | LLM reviewers scored it above human reviewers |
 
-Citations and URLs are in [BUILD_PLAN.md](BUILD_PLAN.md) §0 and were taken from there; re-verify each before publishing.
+Citations and URLs are in [BUILD_PLAN.md](docs/design/BUILD_PLAN.md) §0 and were taken from there; re-verify each before publishing.
 
 ## Reproducibility notes
 
