@@ -1,21 +1,21 @@
 {
-  "corpus": "live search, 80 papers retrieved on 2026-10-03 for 20 queries",
+  "corpus": "curated snapshot only",
   "counts": {
-    "analyses": 4,
-    "decisions": 17,
-    "events": 15,
+    "analyses": 3,
+    "decisions": 13,
+    "events": 14,
     "hypotheses": 4,
-    "runs": 16
+    "runs": 14
   },
-  "llm_calls": 15,
-  "llm_cost_usd": 0.2024,
+  "llm_calls": 14,
+  "llm_cost_usd": 0.1815,
   "llm_mode": "live",
   "model": "claude-opus-5-5",
   "profile": "full",
   "runs_avoided": 3,
-  "runs_executed": 16,
-  "search_llm_cost_usd": 0.6437,
+  "runs_executed": 14,
+  "search_llm_cost_usd": 0.0,
   "session": "golden",
-  "state_digest": "a873bb10fccf7bef1e75222f0eb74230efe6a1f671806c7dccb634c5adef6879",
+  "state_digest": "4182c0a9e380245cd587fbe6b5e5dcfed5195f4b9ada1b810f36e136f1d97ae3",
   "status": "complete"
 }

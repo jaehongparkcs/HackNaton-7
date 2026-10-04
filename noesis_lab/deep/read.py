@@ -406,7 +406,7 @@ def build_deep(corpus: Path, llm: LLM, *, fetch: Callable[[str], str] = urllib_f
             "stated_gaps": len([s for s in stated if "delta" in s]), "dropped": extra_dropped,
             "fetch_failures": cache.failures, "llm_calls": llm.n_calls, "llm_cost_usd": round(llm.cost_usd, 4),
             "concrete_rule": CONCRETE_RULE, "validation": validation and {
-                k: validation[k] for k in ("n", "abstract_only", "with_full_text")}}
+                k: validation[k] for k in ("n", "abstract_only", "with_full_text", "rows_after")}}
     (out / "meta.json").write_text(json.dumps(meta, indent=2, sort_keys=True, default=str) + "\n")
     return meta
 

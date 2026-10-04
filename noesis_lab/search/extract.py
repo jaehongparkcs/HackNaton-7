@@ -116,7 +116,7 @@ def extract(llm: LLM, papers: Sequence[RetrievedPaper], *, role: str = "extract"
 def agreement_with_curated(extracted: Sequence[Claim], curated: Sequence[Claim]) -> dict:
     """Validation: extraction on the curated papers vs the human labels. A curated claim with a
     config_change is matched to an extracted claim of the same paper with the same config_change."""
-    from .coverage import counts_as_covered
+    from .coverage import counts_as_covered, claim_coverage
     mapped = [c for c in curated if c.config_change]
     by_paper: dict[str, list[Claim]] = {}
     for c in extracted:
@@ -128,7 +128,6 @@ def agreement_with_curated(extracted: Sequence[Claim], curated: Sequence[Claim])
         d_ok = bool(m) and m.expected_outcome == h.expected_outcome
         s_ok = bool(m) and counts_as_covered(m) == counts_as_covered(h)
         cfg, direction, setting = cfg + bool(m), direction + d_ok, setting + s_ok
-        from .coverage import claim_coverage
         rows.append({"claim_id": h.claim_id, "config_mapping": bool(m), "direction": d_ok, "setting": s_ok,
                      # the human label is abstract-scoped (data/claims.json note); the model's is computed
                      # by the coverage rule from whatever text it read. Shown so a disagreement can be read.
