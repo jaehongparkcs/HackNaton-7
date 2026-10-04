@@ -106,7 +106,7 @@ def analysis_role(h: dict, analysis_id: str, baseline: dict | None) -> str:
 # ----------------------------------------------------------------------------- Lion
 LION_CAVEAT = ("Exploration only; not a test of Lion or of its recipe. This run trained at AdamW's learning rate: the "
                "schedule overwrote Lion's per-group lr (the built-in lr ÷ 5 never took effect; weight decay × 5 did). "
-               "Fixed in the harness on 2026-10-04; the recorded number is left as it is.")
+               "Fixed in commit 51d0751; the recorded number is left as it is.")
 
 
 def is_lion(h: dict) -> bool:
