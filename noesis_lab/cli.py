@@ -115,6 +115,14 @@ def cmd_deep_read(a) -> int:
         b, f = v["abstract_only"]["setting"], v["with_full_text"]["setting"]
         print(f"\nsetting agreement with the human labels: {f}/{v['n']} with full text (abstract only: {b}/{v['n']})"
               + ("" if f > b else "  -- DID NOT IMPROVE: report it (curated T1 labels are never overridden)."))
+        fa, ma = v["with_full_text"].get("setting_of_matched"), v["with_full_text"].get("config_mapping")
+        if fa is not None:
+            print(f"  of the {ma} labels whose change was matched: {fa}/{ma} "
+                  f"(abstract only: {v['abstract_only'].get('setting_of_matched')}/{v['abstract_only']['config_mapping']})")
+        for r in v.get("rows_after", []):
+            if r.get("config_mapping") and not r["setting"]:
+                print(f"  disagree {r['claim_id']}: human label (abstract-scoped) {r.get('label_coverage')}, "
+                      f"full-text rule {r.get('model_coverage')}")
     print(f"\nfrozen deep read: {corpus / 'deep'}")
     return 0
 

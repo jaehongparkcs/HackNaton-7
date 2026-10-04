@@ -129,6 +129,7 @@ deep_read:
 ## 6. Validation (cheap, do first)
 - Run the deep read on the **9 curated papers** that have human labels, and recompute agreement (config mapping / direction / setting).
 - **Target:** setting ≥ 6/9 (from 3/9 with abstracts).
+  - *Post-run note:* this target was mis-specified. The curated labels follow an abstract-only criterion (`data/claims.json` note), so full text can legitimately disagree with them, and 2 of the 9 labels never match a change (ceiling 7/9). Live result: 5/9 (5/7 matched), abstract-only 4/9. The labels were left as they are.
 - Report before/after on the dashboard and in the README whatever the result. If setting agreement does not improve, say so and do not let full-text settings override curated (T1) labels.
 - **Spot-check 5 recipes by hand** against the paper (especially Lion). Record the check in the README.
 

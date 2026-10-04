@@ -385,8 +385,8 @@ def build_deep(corpus: Path, llm: LLM, *, fetch: Callable[[str], str] = urllib_f
                 c = c.model_copy(update={"setting_fields": sf, "coverage": coverage_of(sf)})
             after_claims.append(c)
         after = agreement_with_curated(after_claims, labels)
-        validation = {"n": before["n"], "abstract_only": {k: before[k] for k in ("config_mapping", "direction", "setting")},
-                      "with_full_text": {k: after[k] for k in ("config_mapping", "direction", "setting")},
+        validation = {"n": before["n"], "abstract_only": {k: before[k] for k in ("config_mapping", "direction", "setting", "setting_of_matched")},
+                      "with_full_text": {k: after[k] for k in ("config_mapping", "direction", "setting", "setting_of_matched")},
                       "papers_read": sorted(ovs), "rows_before": before["rows"], "rows_after": after["rows"],
                       "errors": v_err}
 

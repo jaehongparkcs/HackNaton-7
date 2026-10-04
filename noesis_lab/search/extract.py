@@ -128,6 +128,13 @@ def agreement_with_curated(extracted: Sequence[Claim], curated: Sequence[Claim])
         d_ok = bool(m) and m.expected_outcome == h.expected_outcome
         s_ok = bool(m) and counts_as_covered(m) == counts_as_covered(h)
         cfg, direction, setting = cfg + bool(m), direction + d_ok, setting + s_ok
-        rows.append({"claim_id": h.claim_id, "config_mapping": bool(m), "direction": d_ok, "setting": s_ok})
+        from .coverage import claim_coverage
+        rows.append({"claim_id": h.claim_id, "config_mapping": bool(m), "direction": d_ok, "setting": s_ok,
+                     # the human label is abstract-scoped (data/claims.json note); the model's is computed
+                     # by the coverage rule from whatever text it read. Shown so a disagreement can be read.
+                     "label_coverage": claim_coverage(h), "model_coverage": claim_coverage(m) if m else None})
+    # setting is only comparable where the change was matched: an unmatched label counts as a setting miss
+    # in "setting", so "setting_of_matched" is reported beside it (denominator = config_mapping).
+    setting_m = sum(r["setting"] for r in rows if r["config_mapping"])
     return {"n": len(mapped), "config_mapping": cfg, "direction": direction, "setting": setting,
-            "rows": rows}
+            "setting_of_matched": setting_m, "rows": rows}
