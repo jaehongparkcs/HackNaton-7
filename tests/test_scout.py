@@ -58,7 +58,7 @@ def test_targeted_search_records_provenance_and_remembered_titles_are_only_searc
     found = search_directions(RawCache(tmp_path, fake_fetch, 0.0), load_niche(), recs,
                               date_to="2026-10-03", n_queries=3, cap=2)
     a, b = recs
-    assert a.queries == [{"q": '"SwiGLU"', "n_results": 4}]              # per-query count: how hard we looked
+    assert a.queries == [{"q": '"SwiGLU"', "n_results": 4, "source": "arxiv"}]   # per-query count: how hard we looked
     assert [h["status"] for h in a.title_hints] == ["found", "not_found"]
     assert a.title_hints[0]["paper_id"] == "2402.00002" and a.title_hints[1]["paper_id"] is None
     assert len(a.paper_ids) <= 2 and len(b.paper_ids) <= 2                # cap per direction

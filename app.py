@@ -114,6 +114,13 @@ st.write(f"**Objective.** {D['objective']}")
 snap = D["snapshot"] or {}
 corpus, niche = D["corpus"], D["niche"]
 LIVE = corpus.get("mode") == "live_search"
+_v = corpus.get("validation") or {}
+EXTRACT_NOTE = (
+    f"Auto-extracted claims (every T2/T3 claim, and every gap score below) agree with the human labels on "
+    f"**direction {_v['direction']}/{_v['n']}** and **setting {_v['setting']}/{_v['n']}** "
+    f"(config mapping {_v['config_mapping']}/{_v['n']}) in our validation on the curated papers. "
+    "Treat a single soft-reject or gap score as noisy; the measured result still decides."
+) if _v.get("n") else ""
 if LIVE:
     st.write(f"**Literature corpus:** {corpus['label']}. {snap.get('claims', '?')} claims. "
              "Searched live once, then frozen into this bundle; replay reads only the frozen copy. "
@@ -258,6 +265,8 @@ if D["gaps"]:
                "where it is silent or disagrees for our setting. Scores are **structural hints, not probabilities**: the "
                "prior-art gate and the measured result still decide. Hypotheses are transfer / combination / resolution "
                f"questions “not found in {snap.get('papers', '?')} retrieved papers”, never “novel”.")
+    if EXTRACT_NOTE:
+        st.warning(EXTRACT_NOTE)
     shared = D["gap_graph"].get("shared_mechanisms", {})
     need = D["explore"].get("config", {}).get("min_shared_mechanisms", 3)
     line = (f"Mechanism nodes linked to 2 or more runnable methods: **{len(shared)}**"
@@ -304,6 +313,14 @@ if D["gaps"]:
                         + (f" → prediction **{r['outcome'].upper()}**" if r["outcome"] not in ("", "no_prediction") else ""))
         if not measured:
             st.caption("Not measured in this session.")
+        comp = gap["detail"].get("complementarity")
+        if comp is not None:
+            st.caption(f"Complementarity {comp}: "
+                       + ("the two methods act through **different** mechanisms, so their effects may add."
+                          if comp >= 1.0 else
+                          "the two methods share a mechanism, so the combination is **likely redundant** "
+                          "(still worth one run; the measurement decides).") if comp != 0.75 else
+                       "one method's mechanism is unknown, so complementarity is uncertain.")
         st.json(gap["detail"], expanded=False)
         st.caption(f"Not found in {snap.get('papers', '?')} papers retrieved on {corpus.get('search_date', '?')} for "
                    f"{len(corpus.get('queries', []))} niche queries plus {len(D['directions'])} direction searches.")
@@ -436,6 +453,8 @@ for h in D["hyps"]:
                 st.markdown(f"**Covers our setting: {cov}** · _{how}_ · tier `{pa.get('tier') or 'T1'}` — {pa.get('coverage_note') or ''}")
             st.caption(f"LLM judged only “same comparison: {pa.get('same_comparison')}”. {pa['rationale']}")
         if h["status"] == "soft_rejected_prior_art":
+            if EXTRACT_NOTE:
+                st.caption("⚠ " + EXTRACT_NOTE)
             st.info("Not run: covered by an auto-extracted / preprint claim. The PI may override by adding this "
                     f"candidate (`{h.get('candidate_key')}`) to `pi_overrides` in the niche file.")
         if h["status"] == "rejected_prior_art":

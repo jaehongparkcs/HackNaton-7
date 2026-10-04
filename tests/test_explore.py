@@ -276,15 +276,18 @@ def _overlap_on_first_round(claim_id):
 
 
 def test_tighten_overlap_gets_one_revision_and_the_narrowed_hypothesis_runs(session_name, monkeypatch):
-    s = explore_session(session_name, monkeypatch, _overlap_on_first_round("x2402_00002_1"))
+    s = explore_session(session_name, monkeypatch, _overlap_on_first_round("x2401_00001_1"))
     s.noise_floor()
-    fx = _gap_fx(s, {"dropout": "0.1", "norm": "rmsnorm"})
+    fx = _gap_fx(s, {"dropout": "0.1", "pos_encoding": "rope"})           # rope part is covered (T2); dropout part is not
     out = s.evaluate(fx)
     h = s._hyp(out.hypothesis_id)
     assert out.status.startswith("screened_") and h["tighten"]["outcome"] == "narrowed"
     r0, r1 = h["tighten"]["rounds"]
-    assert (r0["gate"], r0["claim_id"], r0["delta_key"]) == ("soft_reject", "x2402_00002_1", "dropout=0.1+norm=rmsnorm")
-    assert r0["passage"] in s.snap.papers["2402.00002"].abstract           # the overlapping quote is shown
+    # the combination itself is not prior art (gate run); the rope claim covers only PART of it, so
+    # it drives the narrowing rather than deciding the verdict
+    assert (r0["gate"], r0["delta_key"]) == ("run", "dropout=0.1+pos_encoding=rope")
+    assert r0["partial_overlap_claim_ids"] == ["x2401_00001_1"] and r0["claim_id"] == "x2401_00001_1"
+    assert r0["passage"] in s.snap.papers["2401.00001"].abstract           # the overlapping quote is shown
     assert (r1["gate"], r1["delta_key"]) == ("run", "dropout=0.1")
     assert h["config_delta"] == {"dropout": "0.1"} and h["novelty_type"] == "transfer"   # relabeled by code
     assert len([e for e in s.store.events() if e["role"] == "scientist_revision"]) == 1  # exactly one revision
@@ -299,7 +302,9 @@ def test_second_overlap_is_rejected_with_the_quote(session_name, monkeypatch):
     out = s.evaluate(fx)
     h = s._hyp(out.hypothesis_id)
     assert out.status == "soft_rejected_prior_art" and h["tighten"]["outcome"] == "rejected"
-    assert [r["gate"] for r in h["tighten"]["rounds"]] == ["soft_reject", "soft_reject"]
+    # round 0: a partial overlap on the swiglu part narrows the combination (gate run); round 1: the
+    # narrowed single change swiglu is covered exactly, so it is soft-rejected -> no untested part left
+    assert [r["gate"] for r in h["tighten"]["rounds"]] == ["run", "soft_reject"]
     dec = [d for d in s.store.decisions() if d["kind"] == "prior_art_soft_rejection"][-1]
     assert dec["passage"] and dec["claim_id"] == "x2402_00002_1" and dec["tighten_rounds"] == 2
     assert s.runner.n_executed == n_runs and "activation=swiglu+dropout=0.1" in s.soft   # no compute spent

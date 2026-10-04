@@ -186,6 +186,13 @@ class Session:
         self.cycle = 0
         if not self.explore:
             return
+        # The gap engine generates norm=rmsnorm from claim c04, so Fixture B (RMSNorm) is redundant
+        # here; its verdict also depended on corpus size (method_known_setting_untested on the
+        # curated snapshot, not_found_in_corpus at 160 papers). Drop it; keep Fixture A as the
+        # guaranteed prior-art demo. (FIXES3 P0-3.) Gated on the v2 protocol so that explore1, an
+        # earlier (v1) session recorded with Fixture B, still replays unchanged.
+        if self.protocol["gate_version"] >= 2:
+            self.fixtures.pop("fixture_b_rmsnorm", None)
         self.ecfg = ecfg
         self.frozen_claims = sorted(self.snap.claims.values(), key=lambda c: c.claim_id)
         self.graph, self.gaps = gaps.find_gaps(self.frozen_claims)
@@ -262,8 +269,10 @@ class Session:
             self.tested.add(fx.candidate_key)
         seeds = seeds or self.seeds["paired"]
 
-        # 1. Prior-art gate (declared LLM channel: verdict shown with the exact passage)
-        pa = self.lit.check(fx)
+        # 1. Prior-art gate (declared LLM channel: verdict shown with the exact passage). For a
+        # generated candidate, only claims that test exactly this change may decide the verdict.
+        require = stats.parse_delta_key(fx.candidate_key) if fx.origin == "generated" and fx.candidate_key else None
+        pa = self.lit.check(fx, require_change=require)
         self.store.link("hypothesis", hid, "gated_by", "event", pa.event_id)
         if pa.claim_id:
             self.store.link("hypothesis", hid, "nearest_claim", "claim", pa.claim_id)
@@ -414,7 +423,7 @@ class Session:
             mine = [c for c in self.frozen_claims if gaps.method_key(c) == key] if len(delta) == 1 else []
             contested_ids = stats.contested_claim_ids(mine)
             pa = self.lit.check(fx, question=prop.statement, extra_claim_ids=tuple(c.claim_id for c in tr["claims"]),
-                                contested_ids=tuple(contested_ids))
+                                contested_ids=tuple(contested_ids), require_change=delta)
             self.store.link("hypothesis", hid, "gated_by", "event", pa.event_id)
             # code-level cover for a narrowed single change (e.g. a curated claim already covers it)
             status, cov_ids, _ = stats.literature_status(key, mine, overrides=self.niche.pi_overrides,
@@ -426,7 +435,13 @@ class Session:
             contested = pa.claim_id in contested_ids
             if gate != "run" and contested and pa.gate == gate:
                 gate = "run"
-            quote_id = pa.claim_id if pa.gate != "run" else (cov_ids[0] if cov_ids else None)
+            # A combination is never rejected by a claim about one of its methods (the verdict above
+            # only sees claims about the WHOLE change). Such a partial-overlap claim instead drives a
+            # narrowing: on the first round of a two-field hypothesis, defer to the tighten revision.
+            partial = list(pa.partial_overlap_claim_ids)
+            narrow = rnd == 0 and len(delta) == 2 and gate == "run" and bool(partial)
+            quote_id = (pa.claim_id if pa.gate != "run" else
+                        partial[0] if narrow else (cov_ids[0] if cov_ids else None))
             new_ids = {p.paper_id for p in tr["papers"]}
             texts = [self.snap.claims[c] for c in fx.cited_claim_ids if gaps.method_key(self.snap.claims[c]) in key.split("+")]
             hold = [h for h in t4_overlaps(candidate_text(key.replace("+", " "), "", texts),
@@ -437,6 +452,8 @@ class Session:
                            "already_in_corpus": len(tr.get("already_in_corpus", [])),
                            "verdict": pa.verdict.value, "gate": gate, "claim_id": quote_id,
                            "contested": contested,
+                           # omitted when empty so bundles recorded before this field replay unchanged
+                           **({"partial_overlap_claim_ids": partial} if partial else {}),
                            "passage": self.snap.claims[quote_id].source_span if quote_id else None,
                            "possible_overlap": [[pid, sc] for pid, sc in hold], "degraded": tr["degraded"]})
             label = gaps.novelty_type(delta, self.graph, tensor)
@@ -444,7 +461,7 @@ class Session:
                           grounded_in=prop.grounded_in, config_delta=delta, config_hash=cfg.config_hash(),
                           candidate_config=cfg.model_dump(),
                           novelty_type=label if label in gaps.NOVELTY_ORDER else fx.novelty_type)
-            if gate == "run" and hold:
+            if gate == "run" and not narrow and hold:
                 self._set_status(hid, fx, "held_pi_review", **common, tighten={"outcome": "held", "rounds": rounds})
                 did = self.store.add_decision("pi_review_hold", hid, self._chained({
                     "candidate_key": key, "status": "held", "possible_overlap": [[p, sc] for p, sc in hold],
@@ -454,13 +471,14 @@ class Session:
                 self.held.add(fx.candidate_key)
                 self.tested.discard(fx.candidate_key)
                 return Outcome(fx.fixture_id, hid, "held_pi_review")
-            if gate == "run":
+            if gate == "run" and not narrow:
                 outcome = "narrowed" if rnd else "passed"
                 self._set_status(hid, fx, "proposed", **common, tighten={"outcome": outcome, "rounds": rounds})
                 if explore_only:
                     return self._explore_run(hid, fx, prop, cfg, delta)
                 return self._screen(hid, fx, prop, cfg, delta, seeds)
-            if rnd == 0 and len(delta) == 2:        # one revision: narrow to the untested part
+            if rnd == 0 and len(delta) == 2:        # one revision: narrow to the untested part.
+                # Triggered by an exact-delta reject (rare) or a partial overlap on one method.
                 revision_of = delta
                 overlap = f'[{quote_id}] "{rounds[-1]["passage"]}"'
                 continue

@@ -341,13 +341,16 @@ def test_too_few_papers_falls_back_to_the_curated_snapshot(tmp_path):
     assert len(Snapshot.from_corpus(out).papers) == 10
 
 
-def test_api_failure_degrades_instead_of_aborting(tmp_path):
+def test_a_badly_degraded_search_aborts_and_freezes_nothing(tmp_path):
     def dead(url):
         raise OSError("network down")
 
+    out = tmp_path / "c"
     llm = LLM("mock", CFG["llm"], mock_fn=make_mock({}))
-    meta = build_corpus(tmp_path / "c", load_niche(), llm, today="2026-10-03", fetch=dead, sleep=lambda s: None)
-    assert meta["mode"] == "curated_only" and any("request failed after retry" in d for d in meta["degraded"])
+    meta = build_corpus(out, load_niche(), llm, today="2026-10-03", fetch=dead, sleep=lambda s: None)
+    assert meta["mode"] == "aborted_degraded" and meta["failure_fraction"] == 1.0 and meta["failed"] >= 1
+    assert not (out / "meta.json").exists() and not (out / "papers.json").exists()   # nothing frozen
+    assert (out / "raw" / "index.json").exists()                                     # but the resume log is kept
 
 
 def test_gate_soft_rejects_on_an_auto_claim_and_the_pi_can_override(corpus):

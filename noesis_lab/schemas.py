@@ -437,7 +437,7 @@ class RunResult(BaseModel):
 
 class PriorArtResult(_OmitEmpty):
     """Verdict + the passage. The passage text comes from the snapshot, never from the LLM."""
-    _omit_if_empty = ("same_comparison_claim_ids", "contested")
+    _omit_if_empty = ("same_comparison_claim_ids", "partial_overlap_claim_ids", "contested")
 
     verdict: PriorArtVerdictKind
     claim_id: str | None
@@ -458,6 +458,10 @@ class PriorArtResult(_OmitEmpty):
     # Gate v2: every retrieved claim the LLM says tests the same comparison; code picked the one
     # above (strongest first). `contested`: the only covering claims disagree in sign.
     same_comparison_claim_ids: list[str] = []
+    # Claims that cover only PART of a combination (a strict-subset change). They never decide the
+    # verdict — a claim about one method is not prior art for two methods tested together — but they
+    # feed the tighten pass, which can narrow the combination to its untested field.
+    partial_overlap_claim_ids: list[str] = []
     contested: bool = False
 
 

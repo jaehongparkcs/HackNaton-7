@@ -82,7 +82,8 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
     freeze. Failures degrade the search and are recorded; they never abort the session."""
     cfg = load_config()["lit_search"]
     out.mkdir(parents=True, exist_ok=True)
-    cache = RawCache(out / "raw", fetch, cfg["arxiv_min_interval_s"], sleep)
+    cache = RawCache(out / "raw", fetch, cfg["arxiv_min_interval_s"], sleep,
+                     max_retries=cfg.get("arxiv_max_retries", 3))
     date_to = niche.date_to or today
     degraded: list[str] = []
     cur_papers, cur_claims, _ = _curated()
@@ -108,13 +109,25 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
             degraded.append(f"scout failed ({scout_err}); deterministic per-block directions only")
         found += search_directions(cache, niche, recs, date_to=date_to,
                                    n_queries=ecfg["per_direction_queries"], cap=ecfg["per_direction_cap"],
-                                   block_cap=ecfg.get("per_block_direction_cap"))
-    degraded += [f"{f['kind']} request failed after retry: {f['error']}" for f in cache.failures]
+                                   block_cap=ecfg.get("per_block_direction_cap"),
+                                   openalex_fallback=cfg.get("openalex_fallback", True))
+    degraded += [f"{f['kind']} request failed after {f.get('status') or 'error'}: {f['error']}" for f in cache.failures]
     plan_doc = {"plan": plan.model_dump() if plan else None, "queries": queries}
     n_retrieved = len({p.paper_id for p in found})
 
     def stats_(**kw) -> dict:
         return {"llm_calls": llm.n_calls, "llm_cost_usd": round(llm.cost_usd, 4), **kw}
+
+    cache.write_index()
+    # A badly degraded search is not frozen: the corpus would be hollow and a recording on it
+    # misleading. The raw/ cache stays, so re-running resumes and only re-fetches what failed.
+    if cache.failure_fraction > cfg.get("max_failed_fraction", 0.1):
+        return {"mode": "aborted_degraded",
+                "label": f"aborted: {len(cache.failures)} of {cache.attempted} requests failed "
+                         f"({cache.failure_fraction:.0%} > {cfg.get('max_failed_fraction', 0.1):.0%}); froze nothing",
+                "attempted": cache.attempted, "failed": len(cache.failures), "reused": cache.reused,
+                "failure_fraction": round(cache.failure_fraction, 4), "failures": cache.failures,
+                "degraded": degraded, **stats_()}
 
     if n_retrieved < cfg["min_papers"]:
         degraded.append(f"only {n_retrieved} papers retrieved (< {cfg['min_papers']}): "
@@ -141,6 +154,9 @@ def build_corpus(out: Path, niche: NicheSpec, llm: LLM, *, today: str,
                "scout_directions": sum(r.origin == "scout" for r in recs),
                "title_hints_found": sum(h["status"] == "found" for h in hints),
                "title_hints_not_found": sum(h["status"] == "not_found" for h in hints),
+               "title_hints_request_failed": sum(h["status"] == "request_failed" for h in hints),
+               "requests_attempted": cache.attempted, "requests_failed": len(cache.failures),
+               "requests_reused": cache.reused, "papers_from_openalex_fallback": sum(1 for p in papers if p.source == "openalex"),
                "papers_from_directions": sum(1 for p in papers if p.directions and p.paper_id in kept_ids)}
 
     auto = [p for p in papers if p.source != "curated"]

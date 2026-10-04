@@ -11,7 +11,7 @@ from ..literature import TESTBED_DESCRIPTION
 from ..llm import LLM
 from ..schemas import Claim, DirectionRecord, NicheSpec, RetrievedPaper, ScoutOutput
 from ..stats import QUEUE_FIELDS
-from . import arxiv
+from . import arxiv, openalex
 from .coverage import claim_coverage
 from .http import RawCache
 from .textsim import cosine, idf, tokens, vector
@@ -111,12 +111,14 @@ def direction_queries(rec: DirectionRecord, n: int) -> list[str]:
 
 
 def search_directions(cache: RawCache, niche: NicheSpec, recs: list[DirectionRecord], *,
-                      date_to: str, n_queries: int, cap: int, block_cap: int | None = None
-                      ) -> list[RetrievedPaper]:
+                      date_to: str, n_queries: int, cap: int, block_cap: int | None = None,
+                      openalex_fallback: bool = True) -> list[RetrievedPaper]:
     """Targeted retrieval per direction, with provenance on every paper. Mutates the records
     (queries with counts, title-hint outcomes, paper ids). Directions tied to a building block
     get `block_cap` papers instead of `cap`: those are the methods the testbed can run, and the
-    combination gaps need claims about them."""
+    combination gaps need claims about them. When an arXiv direction query fails after retries and
+    `openalex_fallback` is on, the same terms are tried on OpenAlex (higher limits); those papers
+    are tagged `source: openalex` and go through the same quote check."""
     found: list[RetrievedPaper] = []
     base_cap = cap
     for rec in recs:
@@ -126,13 +128,24 @@ def search_directions(cache: RawCache, niche: NicheSpec, recs: list[DirectionRec
         per_q = max(cap // max(len(qs), 1), 1)
         for q in qs:
             body = cache.get("arxiv_dir", arxiv.search_url(q, niche, date_to, per_q), "xml")
-            hits = arxiv.parse_feed(body, f"{rec.direction_id}: {q}") if body else []
-            rec.queries.append({"q": q, "n_results": len(hits)})
+            if body is not None:
+                hits = arxiv.parse_feed(body, f"{rec.direction_id}: {q}")
+                source = "arxiv"
+            elif openalex_fallback:          # arXiv threw after retries: fall back to OpenAlex search
+                oa = cache.get("openalex_dir", openalex.search_url(q, niche, date_to, per_q), "json")
+                hits = openalex.parse_search(oa, f"{rec.direction_id}: {q}") if oa else []
+                source = "openalex"
+            else:
+                hits, source = [], "arxiv"
+            rec.queries.append({"q": q, "n_results": len(hits), "source": source})
             for p in hits:
                 mine.setdefault(p.paper_id, p)
         for hint in rec.title_hints:      # remembered titles: search hints only
             body = cache.get("arxiv_title", arxiv.title_url(hint["title"]), "xml")
-            hits = arxiv.parse_feed(body, f"{rec.direction_id}: title hint") if body else []
+            if body is None:              # a failed lookup is NOT evidence the paper does not exist
+                hint["status"], hint["paper_id"] = "request_failed", None
+                continue
+            hits = arxiv.parse_feed(body, f"{rec.direction_id}: title hint")
             match = next((p for p in hits if title_matches(hint["title"], p.title)), None)
             hint["status"], hint["paper_id"] = ("found", match.paper_id) if match else ("not_found", None)
             if match:

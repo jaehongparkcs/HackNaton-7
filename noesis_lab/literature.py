@@ -22,7 +22,7 @@ from .schemas import (
     PriorArtVerdictKind,
     RetrievedPaper,
 )
-from .search.coverage import claim_coverage, review_label
+from .search.coverage import claim_coverage, counts_as_covered, review_label
 from .stats import gate_decision, gate_outcome, prior_art_verdict
 
 PROMPTS = Path(__file__).resolve().parents[1] / "prompts"
@@ -130,6 +130,15 @@ class Snapshot:
         return sorted({c.dimension for c in self.claims.values()})
 
 
+def _sub_change(claim_change: dict | None, required: dict) -> bool:
+    """A claim's `config_change` is part of the candidate's delta: non-empty and every one of its
+    field=value pairs appears in the delta. For a single-field candidate this is exact match; for a
+    combination it also admits a claim about one of the two fields (which is what lets the tighten
+    pass narrow the hypothesis to the untested part). A claim about a different change, or about the
+    same field with a different value, cannot decide the verdict."""
+    return bool(claim_change) and all(required.get(f) == v for f, v in claim_change.items())
+
+
 def _claims_block(hits: list[tuple[Claim, float]], snap: Snapshot) -> str:
     out = []
     for c, _ in hits:
@@ -150,11 +159,16 @@ class LiteratureAgent:
 
     def check(self, fixture: Fixture, *, question: str | None = None,
               role: str = "literature", extra_claim_ids: tuple[str, ...] = (),
-              contested_ids: tuple[str, ...] = ()) -> PriorArtResult:
+              contested_ids: tuple[str, ...] = (), require_change: dict[str, str] | None = None) -> PriorArtResult:
         """Prior-art verdict. `question` overrides the text checked (targeted post-hoc checks).
 
         The LLM judges one thing: does a retrieved claim test the same change? Setting coverage is
-        a human-curated flag on the claim; the verdict is derived by `stats.prior_art_verdict`."""
+        a human-curated flag on the claim; the verdict is derived by `stats.prior_art_verdict`.
+
+        `require_change` (generated candidates only): a claim may decide the verdict only if its
+        `config_change` equals this delta. A claim the LLM lists whose change differs or is null
+        stays as context, so the gate cannot flip on which "nearest" claim the LLM happens to pick
+        (e.g. c01, Pre-LN without warm-up, can no longer reject a Post-LN candidate)."""
         text = question or fixture.statement
         hits = self.snap.search(text, self.top_k)
         have = {c.claim_id for c, _ in hits}
@@ -170,7 +184,7 @@ class LiteratureAgent:
                 f"Curated snapshot: {self.snap.size} papers. Retrieved claims:\n"
                 f"{_claims_block(hits, self.snap)}\n")
 
-        contested = False
+        contested, partial = False, []
         if self.version >= 2:
             def validate2(o: LiteratureOutputV2) -> None:
                 bad = sorted(set(o.same_comparison_claim_ids) - valid_ids)
@@ -179,10 +193,20 @@ class LiteratureAgent:
 
             out, eid = self.llm.call(role, self.system, user, LiteratureOutputV2, validate=validate2)
             ids = sorted(set(out.same_comparison_claim_ids))
+            deciding, partial = ids, []
+            if require_change is not None:
+                # Only a claim about the WHOLE change decides the verdict: a claim about one method
+                # is not prior art for two methods tested together. Claims about a part (strict
+                # subset) that would otherwise be prior art are returned separately; the tighten
+                # pass uses them to narrow the combination to its untested field.
+                deciding = [i for i in ids if self.snap.claims[i].config_change == require_change]
+                partial = sorted(i for i in ids if i not in deciding
+                                 and _sub_change(self.snap.claims[i].config_change, require_change)
+                                 and counts_as_covered(self.snap.claims[i]))
             verdict, claim, gate, contested = gate_decision(
-                [self.snap.claims[i] for i in ids], contested_ids=contested_ids,
+                [self.snap.claims[i] for i in deciding], contested_ids=contested_ids,
                 overridden=fixture.candidate_key in self.overrides)
-            same = bool(ids)
+            same = bool(deciding)
         else:
             def validate(o: LiteratureOutput) -> None:
                 if o.same_comparison and o.claim_id not in valid_ids:
@@ -220,4 +244,4 @@ class LiteratureAgent:
             covers_our_setting=claim.covers_our_setting if claim else None,
             coverage_note=claim.coverage_note if claim else None,
             coverage=cov, tier=claim.tier if claim else None, gate=gate,
-            same_comparison_claim_ids=ids, contested=contested)
+            same_comparison_claim_ids=ids, partial_overlap_claim_ids=partial, contested=contested)

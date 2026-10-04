@@ -64,16 +64,22 @@ def cmd_search(a) -> int:
     cfg = load_config()
     niche = load_niche(a.niche)
     out = Path(a.out) if a.out else ROOT / cfg["paths"]["work"] / ("corpus-" + Path(a.niche).stem)
-    if out.exists():
-        shutil.rmtree(out)
-    out.mkdir(parents=True)
+    out.mkdir(parents=True, exist_ok=True)
+    for child in out.iterdir():          # keep raw/ so a re-run resumes from cache; refresh everything else
+        if child.name != "raw":
+            shutil.rmtree(child) if child.is_dir() else child.unlink()
     llm = LLM(a.llm, cfg["llm"], recordings_path=out / "llm.jsonl",
               mock_fn=make_mock({}) if a.llm == "mock" else None,
               max_cost_usd=cfg["lit_search"]["max_llm_cost_usd"])
     meta = build_corpus(out, niche, llm, today=dt.date.today().isoformat())
     print(json.dumps({k: meta.get(k) for k in ("label", "mode", "papers", "claims", "tiers", "counts", "explore",
                                               "extraction", "validation", "openalex", "degraded",
+                                              "attempted", "failed", "reused", "failure_fraction",
                                               "llm_calls", "llm_cost_usd")}, indent=2, default=str))
+    if meta.get("mode") == "aborted_degraded":
+        print(f"\nSEARCH ABORTED: {meta['label']}. The raw/ cache is kept; wait ~15-30 min and re-run the same "
+              "command to resume (only the failed requests are re-fetched). Nothing was frozen.")
+        return 1
     shared = (meta.get("explore") or {}).get("shared_mechanisms")
     if shared is not None:
         need = cfg["explore"]["min_shared_mechanisms"]
@@ -102,12 +108,16 @@ def cmd_lit_dryrun(a) -> int:
     baseline = baseline_config(get_profile("full"))
     fixtures = {f["fixture_id"]: Fixture(**f) for f in json.loads(path_of("fixtures").read_text())["fixtures"]}
     contested: dict[str, tuple[str, ...]] = {}
+    require: dict[str, dict] = {}
     frozen = sorted(snap.claims.values(), key=lambda c: c.claim_id)
-    if snap.directions and cfg.get("explore", {}).get("enabled"):      # the hypothesis engine's own queue
+    explore_mode = bool(snap.directions) and cfg.get("explore", {}).get("enabled")
+    if explore_mode:                                   # the hypothesis engine's own queue
+        fixtures.pop("fixture_b_rmsnorm", None)        # the engine generates RMSNorm (FIXES3 P0-3)
         graph, found = gaps.find_gaps(frozen)
         for item in gaps.gap_queue(found, graph, frozen, top_n=cfg["explore"]["top_gaps_for_hypotheses"]):
             fx = gap_fixture(item, next(g for g in found if g.gap_id == item.gap_ids[0]), baseline)
             fixtures.setdefault(fx.fixture_id, fx)
+            require[fx.fixture_id] = dict(item.delta)
             if len(item.delta) == 1:
                 contested[fx.fixture_id] = tuple(stats.contested_claim_ids(
                     [c for c in frozen if gaps.method_key(c) == item.key]))
@@ -115,24 +125,30 @@ def cmd_lit_dryrun(a) -> int:
         for item in stats.candidate_queue(baseline, snap.claims.values(), []):
             fx = generate_fixture(item, baseline, snap)
             fixtures.setdefault(fx.fixture_id, fx)
+            require[fx.fixture_id] = stats.parse_delta_key(fx.candidate_key)
     llm = LLM(a.llm, cfg["llm"], mock_fn=make_mock(fixtures) if a.llm == "mock" else None)
     agent, stable = LiteratureAgent(llm, snap), True
     base_agent = LiteratureAgent(llm, curated) if a.corpus else None
     for fid, fx in fixtures.items():
-        runs = [agent.check(fx, contested_ids=contested.get(fid, ())) for _ in range(a.repeat)]
-        outcomes = {(r.verdict.value, r.gate) for r in runs}
+        runs = [agent.check(fx, contested_ids=contested.get(fid, ()), require_change=require.get(fid))
+                for _ in range(a.repeat)]
+        actions = {r.gate for r in runs}
+        verdicts = {r.verdict.value for r in runs}
         cited = sorted({r.claim_id or "-" for r in runs})
-        stable &= len(outcomes) == 1
-        line = (f"{fid:44s} {'STABLE  ' if len(outcomes) == 1 else 'UNSTABLE'} "
-                + " | ".join(f"{v} -> {g}" for v, g in sorted(outcomes)) + f"   cited: {', '.join(cited)}")
+        stable &= len(actions) == 1            # the ACTION must be stable; the cited claim may differ
+        tag = "STABLE  " if len(actions) == 1 else "UNSTABLE"
+        line = (f"{fid:44s} {tag} actions: {', '.join(sorted(actions))}; verdicts: {', '.join(sorted(verdicts))}"
+                + f"   cited: {', '.join(cited)}")
         if base_agent and fx.origin == "fixture":      # leakage check: did the larger corpus change it?
-            before = base_agent.check(fx).verdict.value
-            if {before} != {v for v, _ in outcomes}:
-                line += f"   LEAKAGE: curated-only verdict was {before}. Report it and pick a new fixture."
+            before = base_agent.check(fx)
+            if before.gate not in actions:              # the action changed: real leakage
+                line += f"   LEAKAGE: curated-only action was {before.gate}. Report it and pick a new fixture."
+            elif before.verdict.value not in verdicts:  # only the label changed: report, do not abort
+                line += f"   LEAKAGE (label only): curated-only verdict was {before.verdict.value}; action unchanged."
         print(line)
     print(f"calls={llm.n_calls} cost=${llm.cost_usd:.4f}  "
           + ("every row STABLE" if stable else
-             "GATE UNSTABLE: at least one row changed verdict or action between repeats. Do not record; "
+             "GATE UNSTABLE: at least one row changed its gate action between repeats. Do not record; "
              "fix the gate (or the corpus) first."))
     return 0 if stable else 1
 

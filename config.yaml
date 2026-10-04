@@ -16,8 +16,11 @@ budget:                           # hard budgets (SPEC rule 4)
 lit_search:                       # live literature search (LIT_SEARCH.md). Runs only with --niche.
   max_queries: 12                 # LLM-proposed queries; one deterministic query per runnable change is added
   per_query: 15                   # arXiv results requested per query
-  arxiv_min_interval_s: 3.0       # arXiv asks for ~1 request / 3 s
+  arxiv_min_interval_s: 5.0       # one request at a time; arXiv throttles faster callers with 429
+  arxiv_max_retries: 3            # on 429/503: honor Retry-After, else back off 15s -> 45s -> 120s
+  max_failed_fraction: 0.1        # > this share of attempted requests failing -> abort, freeze nothing (re-run resumes)
   openalex: true                  # venue / peer-review / citations; contact email from OPENALEX_MAILTO
+  openalex_fallback: true         # scout directions: if an arXiv query keeps failing, try OpenAlex search
   min_papers: 10                  # fewer retrieved -> fall back to the curated snapshot only
   t4_threshold: 0.35              # TF-IDF cosine for "possible overlap: unextracted paper"
   validate_extraction: true       # also extract the curated papers and report agreement with the human labels

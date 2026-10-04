@@ -118,7 +118,12 @@ def build_optimizer(model: GPT, c: ExperimentConfig) -> torch.optim.Optimizer:
     if c.optimizer == "adamw":
         return torch.optim.AdamW(groups, lr=c.lr, betas=(0.9, 0.95))
     if c.optimizer == "lion":
-        return Lion(groups, lr=c.lr)
+        # Lion's sign update takes a smaller step and a larger decay than Adam (Chen et al., 2023,
+        # recommend lr/3-10 and wd x3-10). We fix lr/5, wd x5, so a "harmful" result is the method's,
+        # not an artifact of reusing Adam's learning rate. The ratio is held across every Lion run.
+        lion_groups = [{"params": decay, "weight_decay": c.weight_decay * 5},
+                       {"params": no_decay, "weight_decay": 0.0}]
+        return Lion(lion_groups, lr=c.lr / 5)
     return torch.optim.SGD(groups, lr=c.lr, momentum=0.9)
 
 

@@ -17,3 +17,9 @@ For each claim:
 - mechanism: the abstract's own words for that reason, copied character for character as a short phrase (e.g. "stabilizes the gradient norm"). It must be an exact substring of the abstract. Code drops the category if this quote is missing or not verbatim. Use "" when mechanism_category is "none".
 
 "unspecified" is always allowed and is the correct answer whenever the abstract does not say. Use "general" only when the abstract explicitly states the result across tasks or architectures. Do not infer scale from the model's name. If an abstract has no checkable claim, return nothing for it.
+
+Common mistakes to avoid (these mirror where auto-extraction has disagreed with human labels):
+- A theory, analysis or "why training is hard" statement is NOT a result. "We prove the gradients are large at initialization" or "training Transformers requires carefully designed optimizers" is `direction: context`, not improves or worse. A directional label needs a measured comparison of quality (loss/accuracy/perplexity).
+- "comparable performance", "on par with", "matches X while being cheaper" is `direction: no_worse`, NOT improves. Reserve improves for a stated gain in quality.
+- Do not narrow the setting beyond the abstract. If the abstract never states a task, `task: unspecified`; if it never states a model size, `scale: unspecified`. Do not guess "language_modeling" or "medium" from the method's reputation. Conversely, use "general" only when the abstract itself says the finding holds broadly.
+- Faster / cheaper / fewer parameters at equal quality is still `no_worse` for quality; put the speed reason in mechanism_category (computational_efficiency / optimization_speed), not in direction.

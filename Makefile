@@ -29,7 +29,7 @@ smoke:                      ## CPU pipeline check with the MOCK LLM (never a res
 golden:                     ## the real thing: live Claude + real MPS runs, recorded into results/$(SESSION)
 	$(PY) -m noesis_lab session --session $(SESSION) --profile full --llm live $(if $(NICHE),--niche $(NICHE)) $(if $(CORPUS),--corpus $(CORPUS))
 
-record:                     ## search -> gate stability (aborts if UNSTABLE) -> session -> verify -> rederive -> replay
+record:                     ## search (resumes from cache; aborts if >10% requests fail) -> gate stability (aborts if UNSTABLE) -> session -> verify -> rederive -> replay
 	@test -n "$(NICHE)" || (echo "usage: make record SESSION=<name> NICHE=niche.yaml" && exit 2)
 	$(PY) -m noesis_lab search --niche $(NICHE) --out work/corpus-$(SESSION)
 	$(PY) -m noesis_lab lit-dryrun --corpus work/corpus-$(SESSION) --repeat 3 || \
